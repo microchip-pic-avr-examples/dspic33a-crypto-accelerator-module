@@ -39,9 +39,6 @@
          "Cryptographic Accelerator Module",
          "Cryptographic Standard",
          "Cryptography",
-         "Crypto",
-         "ECDSA",
-         "ECDH",
          "Hash",
          "TRNG",
          "AES"
