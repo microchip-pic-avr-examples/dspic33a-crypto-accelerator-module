@@ -7,7 +7,7 @@
       "version":"1.0.0",
       "displayName":"dsPIC33A Crypto Accelerator Module Cryptography Demos",
       "projectName":"dspic33a-crypto-accelerator-module",
-      "shortDescription":"This repository holds MPLABX demo projects for the different cryptographic algorithms supported by the CAM.",
+      "shortDescription":"This repository holds MPLAB® X IDE demo projects for the different cryptographic algorithms supported by the CAM.",
       "ide":{
          "name":"MPLABX",
          "semverRange":">=6.25.0"
