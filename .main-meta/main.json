@@ -38,7 +38,6 @@
          "CAM",
          "Cryptographic Accelerator Module",
          "Cryptographic Standard",
-         "Cryptography",
          "Hash",
          "TRNG",
          "AES"

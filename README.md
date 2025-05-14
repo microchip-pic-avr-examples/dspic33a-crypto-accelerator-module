@@ -4,12 +4,12 @@
     <img alt="Microchip Logo." src="images/microchip_logo_black_red.png">
 </picture>
 
-# dsPIC33A Crypto Accelerator Module Cryptography Demos
+# dsPIC33A Crypto Accelerator Module Demos
 
 Board Image if any.
 
 # Description
-A collection of MPLAB® X projects to demonstrate the usage of the Crypto V4 Library and the integrated Cryptographic Accelerator Module hardware:
+A collection of MPLAB® X projects to demonstrate the usage of the Cryptographic Accelerator Module APIs:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
@@ -31,12 +31,12 @@ Each folder contains a README describing the example application in more detail.
 
 | Folder     | Description                                             |
 | ---        | ---                                                     |
-| dsa        | Example application project for ECDSA with Crypto v4    |
-| hash       | Example application project for Hashing with Crypto v4  |
-| trng       | Example application project for TRNG with Crypto v4     |
-| aes        | Example application project for AES with Crypto v4      |
+| dsa        | Example application project for ECDSA    |
+| hash       | Example application project for Hashing  |
+| trng       | Example application project for TRNG     |
+| aes        | Example application project for AES      |
 
-# Crypto v4 APIs
+# Crypto Accelerator Module APIs
 
 ## AES
 
@@ -323,51 +323,29 @@ The following benchmarking results were obtained while testing the AES driver wi
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
-#### AES-ECB
-|Key Size (bytes)|Plaintext Size (bytes)|AES-ECB EncryptDirect API (µs)|
-|----|----|----|
-|8|128|13.36|
-|24|128|13.76|
-|32|128|14.16|
+#### Symmetric
+|Mode|Key Size (bytes)|Plaintext Size (bytes)|EncryptDirect API (µs)|DecryptDirect API (µs)|
+|----|----|----|----|
+|AES-ECB|8|128|13.36|13.58|
+|AES-ECB|24|128|13.76|14.06|
+|AES-ECB|32|128|14.16|14.54|
+|AES-CTR|8|128|13.76|13.75|
+|AES-CTR|24|128|14.16|14.15|
+|AES-CTR|32|128|14.56|14.55|
 
-|Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB DecryptDirect API (µs)|
-|----|----|----|
-|8|128|13.58|
-|24|128|14.06|
-|32|128|14.54|
-
-#### AES-CTR
-|Key Size (bytes)|Plaintext Size (bytes)|AES-CTR EncryptDirect API (µs)|
-|----|----|----|
-|8|128|13.76|
-|24|128|14.16|
-|32|128|14.56|
-
-|Key Size (bytes)|Ciphertext Size (bytes)|AES-CTR DecryptDirect API (µs)|
-|----|----|----|
-|8|128|13.75|
-|24|128|14.15|
-|32|128|14.55|
-
-#### AES-CMAC
+#### MAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Direct API (µs)|
 |----|----|----|----|
 |8|532|16|235.15|
 |24|532|16|237.87|
 |32|532|16|240.67|
 
-#### AES-GCM
-|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM EncryptAuthDirect API (µs)|
+#### AEAD
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM EncryptAuthDirect API (µs)|AES-GCM DecryptAuthDirect API (µs)|
 |----|----|----|----|----|----|
-|8|12|4|16|16|21.18|
-|24|12|4|16|14|21.88|
-|32|12|4|16|13|21.13|
-
-|Key Size (bytes)|Initialization vector Size (bytes)|Authentication data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM EncryptAuthDirect API (µs)|
-|----|----|----|----|----|----|
-|8|12|4|16|14|23.89|
-|24|12|2|16|14|24.07|
-|32|12|2|16|13|24.30|
+|8|12|4|16|16|21.18|23.89|
+|24|12|4|16|14|21.88|24.07|
+|32|12|4|16|13|21.13|24.30|
 
 ### Size Benchmarking
 The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size will vary based on size of the stored data inputs used with the library. 
