@@ -65,6 +65,9 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-GCM (Encrypt)|29.15 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 13|
 |AES-GCM (Decrypt)|25.35 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 13|
 |AES-CMAC (Direct)|17.66 Mbps|Key Size: 32, Plaintext Size: 532, MAC Size: 16|
+|ECDSA (Verify)|5.14 ms|Curve: P-192|
+|ECDSA (Verify)|9.90 ms|Curve: P-256|
+|ECDSA (Verify)|27.07 ms|Curve: P-384|
 |ECDSA (Verify)|58.35 ms|Curve: P-521|
 |TRNG (Generate)|123.084 ms|Output Size: 521|
 
