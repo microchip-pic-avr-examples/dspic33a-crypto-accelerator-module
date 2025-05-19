@@ -65,9 +65,13 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-GCM (Encrypt)|29.15 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 13|
 |AES-GCM (Decrypt)|25.35 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 13|
 |AES-CMAC (Direct)|17.66 Mbps|Key Size: 32, Plaintext Size: 532, MAC Size: 16|
+|ECDSA (Sign)|3.92 ms|Curve: P-192|
 |ECDSA (Verify)|5.14 ms|Curve: P-192|
+|ECDSA (Sign)|7.40 ms|Curve: P-256|
 |ECDSA (Verify)|9.90 ms|Curve: P-256|
+|ECDSA (Sign)|19.80 ms|Curve: P-384|
 |ECDSA (Verify)|27.07 ms|Curve: P-384|
+|ECDSA (Sign)|42.09 ms|Curve: P-521|
 |ECDSA (Verify)|58.35 ms|Curve: P-521|
 |TRNG (Generate)|123.084 ms|Output Size: 521|
 
@@ -94,5 +98,8 @@ The following results include usage of single step and multi step APIs. Flash si
 |AES-GCM (Init, AddAadData, Cipher, and Final)|780|10,240|
 |AES-CMAC (Direct)|240|8,680|
 |AES-CMAC (Init, Cipher, and Final)|768|8,736|
-|ECDSA (Verify)|4,108|10,536|
+|ECDSA (Sign and Verify (P-192))|4,108|10,424|
+|ECDSA (Sign and Verify (P-256))|4,108|10,468|
+|ECDSA (Sign and Verify (P-384))|4,108|10,532|
+|ECDSA (Sign and Verify (P-521))|4,108|10,600|
 |TRNG (Generate)|12|3,628|
