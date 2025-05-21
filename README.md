@@ -90,15 +90,12 @@ The following results include usage of single step and multi step APIs. Flash si
 |SHA-384 (Init, Update, and Final)|284|9,940|
 |SHA-512 (Digest)|240|9,892|
 |SHA-512 (Init, Update, and Final)|284|9,940|
-
 |AES-ECB (Encrypt and Decrypt)|284|10,008|
 |AES-ECB (Init and Cipher)|2,232|10,072|
 |AES-CTR (Encrypt and Decrypt)|284|10,040|
 |AES-CTR (Init and Cipher)|2,232|10,116|
-
 |AES-GCM (Encrypt and Decrypt)|284|11,032|
 |AES-GCM (Init, AddAadData, Cipher, and Final)|824|11,156|
-
 |AES-CMAC (Direct)|284|9,644|
 |AES-CMAC (Init, Cipher, and Final)|812|9,700|
 |ECDSA (Sign and Verify (P-192))|4,152|11,328|
