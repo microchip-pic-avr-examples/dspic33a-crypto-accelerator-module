@@ -88,7 +88,7 @@ The following results include usage of single step and multi step APIs. Flash si
 |SHA-256 (Init, Update, and Final)|284|9,940|
 |SHA-384 (Digest)|284|9,892|
 |SHA-384 (Init, Update, and Final)|284|9,940|
-|SHA-512 (Digest)|240|9,892|
+|SHA-512 (Digest)|284|9,892|
 |SHA-512 (Init, Update, and Final)|284|9,940|
 |AES-ECB (Encrypt and Decrypt)|284|10,008|
 |AES-ECB (Init and Cipher)|2,232|10,072|
