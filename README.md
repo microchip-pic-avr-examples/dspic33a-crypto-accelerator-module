@@ -80,24 +80,27 @@ The following results include usage of single step and multi step APIs. Flash si
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1 (Digest)|240|8,928|
-|SHA-1 (Init, Update, and Final)|240|8,976|
-|SHA-224 (Digest)|240|8,928|
-|SHA-224 (Init, Update, and Final)|240|8,976|
-|SHA-256 (Digest)|240|8,928|
-|SHA-256 (Init, Update, and Final)|240|8,976|
-|SHA-384 (Digest)|240|8,928|
-|SHA-384 (Init, Update, and Final)|240|8,976|
+|SHA-1 (Digest)|284|9,892|
+|SHA-1 (Init, Update, and Final)|284|9,936|
+|SHA-224 (Digest)|284|9,892|
+|SHA-224 (Init, Update, and Final)|284|9,940|
+|SHA-256 (Digest)|284|9,892|
+|SHA-256 (Init, Update, and Final)|284|9,940|
+|SHA-384 (Digest)|284|9,892|
+|SHA-384 (Init, Update, and Final)|284|9,940|
 |SHA-512 (Digest)|240|9,892|
-|SHA-512 (Init, Update, and Final)|240|9,940|
-|AES-ECB (Encrypt and Decrypt)|284|9,044|
-|AES-ECB (Init and Cipher)|2,188|9,108|
-|AES-CTR (Encrypt and Decrypt)|284|9,076|
-|AES-CTR (Init and Cipher)|2,188|9,152|
-|AES-GCM (Encrypt and Decrypt)|284|10,116|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|780|10,240|
-|AES-CMAC (Direct)|284|8,680|
-|AES-CMAC (Init, Cipher, and Final)|768|8,736|
+|SHA-512 (Init, Update, and Final)|284|9,940|
+
+|AES-ECB (Encrypt and Decrypt)|284|10,008|
+|AES-ECB (Init and Cipher)|2,232|10,072|
+|AES-CTR (Encrypt and Decrypt)|284|10,040|
+|AES-CTR (Init and Cipher)|2,232|10,116|
+
+|AES-GCM (Encrypt and Decrypt)|284|11,032|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|824|11,156|
+
+|AES-CMAC (Direct)|284|9,644|
+|AES-CMAC (Init, Cipher, and Final)|812|9,700|
 |ECDSA (Sign and Verify (P-192))|4,152|11,328|
 |ECDSA (Sign and Verify (P-256))|4,152|11,372|
 |ECDSA (Sign and Verify (P-384))|4,152|11,440|
