@@ -1,0 +1,41 @@
+sourceRoot: .
+outputRoot: ../output
+removeExtensions: ftl
+
+data: {
+    crypto_digisign_cam05346_wrapper_h_ftl_flag: true,
+    crypto_hash_cam05346_wrapper_h_ftl_flag: true,
+    crypto_sym_cam05346_wrapper_h_ftl_flag: true,
+    crypto_aead_cam05346_wrapper_h_ftl_flag: true,
+    crypto_rng_cam05346_wrapper_h_ftl_flag: true,
+	CRYPTO_HW_RNG_TRNG: true,
+    driver_defines: "HAVE_CRYPTO_HW_CAM_05346_DRIVER, \
+		HAVE_CRYPTO_HW_TRNG_05346_DRIVER, \
+        CRYPTO_HASH_SESSION_MAX (1), \
+        CRYPTO_HASH_HW_ALGO_EN, \
+        CRYPTO_HASH_SHA1_EN, \
+        CRYPTO_HASH_SHA2_EN, \
+        CRYPTO_HASH_SHA2_224_EN, \
+        CRYPTO_HASH_HW_SHA2_224_EN, \
+        CRYPTO_HASH_SHA2_256_EN, \
+        CRYPTO_HASH_HW_SHA2_256_EN, \
+        CRYPTO_HASH_SHA2_384_EN, \
+        CRYPTO_HASH_HW_SHA2_384_EN, \
+        CRYPTO_HASH_SHA2_512_EN, \
+        CRYPTO_HASH_HW_SHA2_512_EN, \
+        CRYPTO_HASH_HW_SHA2_EN",
+    CRYPTO_HW_ECDSA: true,
+    core: {
+        COMPILER_CHOICE: "dsPIC33",
+        COVERITY_SUPPRESS_DEVIATION: false
+    },
+    CRYPTO_HW_SHA1: true,
+    CRYPTO_HW_SHA2_224: true,
+    CRYPTO_HW_SHA2_256: true,
+    CRYPTO_HW_SHA2_384: true,
+    CRYPTO_HW_SHA2_512: true,
+    CRYPTO_HW_AES_ECB: true,
+    CRYPTO_HW_AES_CTR: true,
+    CRYPTO_HW_AES_GCM: true,
+    CRYPTO_HW_AES_CMAC: true
+}
