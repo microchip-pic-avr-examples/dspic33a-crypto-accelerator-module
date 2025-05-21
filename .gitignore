@@ -49,7 +49,6 @@ Makefile-genesis.properties
 *.bak
 *.doc
 *.docx
-*.yml
 mchp_private/fmpp/build*
 **/report
 **/motorbench
