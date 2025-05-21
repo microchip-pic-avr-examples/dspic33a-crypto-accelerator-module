@@ -12,7 +12,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
@@ -22,6 +22,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 
 ## Running the Application
 1. Within MPLAB® X IDE, open the aes.x application project in aes/firmware.
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 77 in aes/aes.X/app_aes.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
@@ -286,50 +287,50 @@ The following benchmarking results were obtained while testing the AES driver wi
 Benchmarking parameters: Device clock speed set to 200 MHz
 
 #### AES-ECB
-|Key Size (bytes)|Plaintext Size (bytes)|AES-ECB EncryptDirect API (µs)|
+|Key Size (bytes)|Plaintext Size (bytes)|AES-ECB Crypto_Sym_Aes_EncryptDirect (Mbps)|
 |----|----|----|
-|8|128|13.36|
-|24|128|13.76|
-|32|128|14.16|
+|16|128|110.02|
+|24|128|111.86|
+|32|128|113.17|
 
-|Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB DecryptDirect API (µs)|
+|Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB Crypto_Sym_Aes_DecryptDirect (Mbps)|
 |----|----|----|
-|8|128|13.58|
-|24|128|14.06|
-|32|128|14.54|
+|16|128|106.96|
+|24|128|108.09|
+|32|128|109.12|
 
 #### AES-CTR
-|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR EncryptDirect API (µs)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect(Mbps)|
 |----|----|----|----|
-|8|16|128|13.76|
-|24|16|128|14.16|
-|32|16|128|14.56|
+|16|16|128|111.97|
+|24|16|128|113.88|
+|32|16|128|115.07|
 
-|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR DecryptDirect API (µs)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect (Mbps)|
 |----|----|----|----|
-|8|16|128|13.75|
-|24|16|128|14.15|
-|32|16|128|14.55|
+|16|16|128|112.07|
+|24|16|128|113.78|
+|32|16|128|115.07|
 
 #### AES-CMAC
-|Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Direct API (µs)|
+|Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct (Mbps)|
 |----|----|----|----|
-|8|532|16|235.15|
-|24|532|16|237.87|
-|32|532|16|240.67|
+|16|532|16|30.75|
+|24|532|16|30.89|
+|32|532|16|30.75|
 
 #### AES-GCM
-|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM EncryptAuthDirect API (µs)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect (Mbps)|
 |----|----|----|----|----|----|
-|8|12|4|16|16|21.18|
-|24|12|4|16|14|21.88|
-|32|12|4|16|13|21.13|
+|16|12|4|16|16|34.78|
+|24|12|4|16|14|36.77|
+|32|12|4|16|13|39.82|
 
-|Key Size (bytes)|Initialization vector Size (bytes)|Authentication data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM EncryptAuthDirect API (µs)|
+|Key Size (bytes)|Initialization vector Size (bytes)|Authentication data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_DecryptAuthDirect (Mbps)|
 |----|----|----|----|----|----|
-|8|12|4|16|14|23.89|
-|24|12|2|16|14|24.07|
-|32|12|2|16|13|24.30|
+|16|12|4|16|14|29.83|
+|24|12|2|16|14|32.28|
+|32|12|2|16|13|35.13|
 
 ### Size Benchmarking
 The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size will vary based on size of the stored data inputs used with the library. 
@@ -338,19 +339,19 @@ The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size 
 
 |AES Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-ECB|240|9,044|
-|AES-CTR|240|9,076|
-|AES-CMAC|240|8,680|
-|AES-GCM|240|10,116|
+|AES-ECB|284|10,008|
+|AES-CTR|284|10,040|
+|AES-CMAC|284|9,644|
+|AES-GCM|284|11032|
 
 #### Multi Step
 
 |AES Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-ECB|2,188|9,108|
-|AES-CTR|2,188|9,152|
-|AES-CMAC|768|8,736|
-|AES-GCM|780|10,240|
+|AES-ECB|2,232|10,072|
+|AES-CTR|2,232|10,116|
+|AES-CMAC|812|9,700|
+|AES-GCM|824|11,156|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

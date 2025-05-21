@@ -13,7 +13,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
@@ -23,6 +23,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 
 ## Running the Application
 1. Within MPLAB® X IDE, open the hash.x application project in hash/firmware. 
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 61 in hash/sha.X/app_sha.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
@@ -81,13 +82,13 @@ The following benchmarking results were obtained while testing the hash driver w
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
-|Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest (µs)|
+|Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest (Mbps)|
 |----|----|----|
-|SHA-1|4,096|37.26|
-|SHA-224|4,096|32.07|
-|SHA-256|4,096|31.91|
-|SHA-384|4,096|27.39|
-|SHA-512|4,096|27.38|
+|SHA-1|4,096|928.80|
+|SHA-224|4,096|1084.67|
+|SHA-256|4,096|1091.54|
+|SHA-384|4,096|1294.15|
+|SHA-512|4,096|1293.64|
 
 ### Size Benchmarking
 
@@ -95,21 +96,21 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|240|8,928|
-|SHA-224|240|8,928|
-|SHA-256|240|8,928|
-|SHA-384|240|8,928|
-|SHA-512|240|8,928|
+|SHA-1|284|9,892|
+|SHA-224|284|9,892|
+|SHA-256|284|9,892|
+|SHA-384|284|9,892|
+|SHA-512|284|9,892|
 
 #### Multi Step
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|240|8,976|
-|SHA-224|240|8,976|
-|SHA-256|240|8,976|
-|SHA-384|240|8,976|
-|SHA-512|240|8,976|
+|SHA-1|284|9,936|
+|SHA-224|284|9,940|
+|SHA-256|284|9,940|
+|SHA-384|284|9,940|
+|SHA-512|284|9,940|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

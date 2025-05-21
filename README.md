@@ -23,7 +23,7 @@ A collection of MPLAB® X projects to demonstrate the usage of the Cryptographic
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Hardware Tools
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 # Contents Summary
@@ -38,7 +38,7 @@ Each folder contains a README describing the example application in more detail.
 
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following APIs. (API Reference Link)
+The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
@@ -53,53 +53,53 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Algorithm|Performance|Parameters (sizes are in bytes)|
 |----|----|----|
-|SHA-1 (Digest)|928.80 Mbps|Message Size: 4,096|
-|SHA-224 (Digest)|1084.67 Mbps|Message Size: 4,096|
-|SHA-256 (Digest)|1091.54 Mbps|Message Size: 4,096|
-|SHA-384 (Digest)|1294.15 Mbps|Message Size: 4,096|
-|SHA-512 (Digest)|1293.64 Mbps|Message Size: 4,096|
-|AES-ECB (Encrypt)|113.17 Mbps|Key Size: 32, Plaintext Size: 128|
-|AES-ECB (Decrypt)|109.12 Mbps|Key Size: 32, Ciphertext Size: 128|
-|AES-CTR (Encrypt)|115.07 Mbps|Key Size: 32, Initialization Vector Size: 16, Plaintext Size: 128|
-|AES-CTR (Decrypt)|115.07 Mbps|Key Size: 32, Initialization Vector Size: 16, Ciphertext Size: 128|
-|AES-GCM (Encrypt)|39.82 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 13|
-|AES-GCM (Decrypt)|35.13 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 13|
-|AES-CMAC (Direct)|30.75 Mbps|Key Size: 32, Plaintext Size: 532, MAC Size: 16|
+|SHA-1 (Digest)|879.44 Mbps|Message Size: 4,096|
+|SHA-224 (Digest)|1021.76 Mbps|Message Size: 4,096|
+|SHA-256 (Digest)|1026.88 Mbps|Message Size: 4,096|
+|SHA-384 (Digest)|1196.32 Mbps|Message Size: 4,096|
+|SHA-512 (Digest)|1196.80 Mbps|Message Size: 4,096|
+|AES-ECB (Encrypt)|90.40 Mbps|Key Size: 32, Plaintext Size: 128|
+|AES-ECB (Decrypt)|88.03 Mbps|Key Size: 32, Ciphertext Size: 128|
+|AES-CTR (Encrypt)|96.70 Mbps|Key Size: 32, Initialization Vector Size: 16, Plaintext Size: 128|
+|AES-CTR (Decrypt)|96.77 Mbps|Key Size: 32, Initialization Vector Size: 16, Ciphertext Size: 128|
+|AES-GCM (Encrypt)|29.15 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 13|
+|AES-GCM (Decrypt)|25.35 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 13|
+|AES-CMAC (Direct)|17.66 Mbps|Key Size: 32, Plaintext Size: 532, MAC Size: 16|
 |ECDSA (Sign)|3.92 ms|Curve: P-192|
-|ECDSA (Verify)|5.15 ms|Curve: P-192|
-|ECDSA (Sign)|7.42 ms|Curve: P-256|
-|ECDSA (Verify)|9.92 ms|Curve: P-256|
-|ECDSA (Sign)|19.79 ms|Curve: P-384|
+|ECDSA (Verify)|5.14 ms|Curve: P-192|
+|ECDSA (Sign)|7.40 ms|Curve: P-256|
+|ECDSA (Verify)|9.90 ms|Curve: P-256|
+|ECDSA (Sign)|19.80 ms|Curve: P-384|
 |ECDSA (Verify)|27.07 ms|Curve: P-384|
-|ECDSA (Sign)|42.16 ms|Curve: P-521|
-|ECDSA (Verify)|58.10 ms|Curve: P-521|
-|TRNG (Generate)|123.13 ms|Output Size: 521|
+|ECDSA (Sign)|42.09 ms|Curve: P-521|
+|ECDSA (Verify)|58.35 ms|Curve: P-521|
+|TRNG (Generate)|123.084 ms|Output Size: 521|
 
 ### Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1 (Digest)|284|9,892|
-|SHA-1 (Init, Update, and Final)|284|9,936|
-|SHA-224 (Digest)|284|9,892|
-|SHA-224 (Init, Update, and Final)|284|9,940|
-|SHA-256 (Digest)|284|9,892|
-|SHA-256 (Init, Update, and Final)|284|9,940|
-|SHA-384 (Digest)|284|9,892|
-|SHA-384 (Init, Update, and Final)|284|9,940|
-|SHA-512 (Digest)|284|9,892|
-|SHA-512 (Init, Update, and Final)|284|9,940|
-|AES-ECB (Encrypt and Decrypt)|284|10,008|
-|AES-ECB (Init and Cipher)|2,232|10,072|
-|AES-CTR (Encrypt and Decrypt)|284|10,040|
-|AES-CTR (Init and Cipher)|2,232|10,116|
-|AES-GCM (Encrypt and Decrypt)|284|11,032|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|824|11,156|
-|AES-CMAC (Direct)|284|9,644|
-|AES-CMAC (Init, Cipher, and Final)|812|9,700|
-|ECDSA (Sign and Verify (P-192))|4,152|11,328|
-|ECDSA (Sign and Verify (P-256))|4,152|11,372|
-|ECDSA (Sign and Verify (P-384))|4,152|11,440|
-|ECDSA (Sign and Verify (P-521))|4,152|11,520|
-|TRNG (Generate)|56|4,612|
+|SHA-1 (Digest)|240|8,928|
+|SHA-1 (Init, Update, and Final)|240|8,976|
+|SHA-224 (Digest)|240|8,928|
+|SHA-224 (Init, Update, and Final)|240|8,976|
+|SHA-256 (Digest)|240|8,928|
+|SHA-256 (Init, Update, and Final)|240|8,976|
+|SHA-384 (Digest)|240|8,928|
+|SHA-384 (Init, Update, and Final)|240|8,976|
+|SHA-512 (Digest)|240|8,928|
+|SHA-512 (Init, Update, and Final)|240|8,976|
+|AES-ECB (Encrypt and Decrypt)|240|9,044|
+|AES-ECB (Init and Cipher)|2,188|9,108|
+|AES-CTR (Encrypt and Decrypt)|240|9,076|
+|AES-CTR (Init and Cipher)|2,188|9,152|
+|AES-GCM (Encrypt and Decrypt)|240|10,116|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|780|10,240|
+|AES-CMAC (Direct)|240|8,680|
+|AES-CMAC (Init, Cipher, and Final)|768|8,736|
+|ECDSA (Sign and Verify (P-192))|4,108|10,424|
+|ECDSA (Sign and Verify (P-256))|4,108|10,468|
+|ECDSA (Sign and Verify (P-384))|4,108|10,532|
+|ECDSA (Sign and Verify (P-521))|4,108|10,600|
+|TRNG (Generate)|12|3,628|
