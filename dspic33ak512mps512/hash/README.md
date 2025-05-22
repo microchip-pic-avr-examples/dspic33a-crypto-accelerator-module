@@ -82,7 +82,7 @@ The following benchmarking results were obtained while testing the hash driver w
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
-|Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest (Mbps)|
+|Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
 |SHA-1|4,096|928.80|
 |SHA-224|4,096|1084.67|
