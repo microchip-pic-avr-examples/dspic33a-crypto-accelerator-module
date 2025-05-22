@@ -8,7 +8,7 @@ This example application utilizes a Crypto API that interacts with the Crypto Ac
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
@@ -49,12 +49,12 @@ crypto_Rng_Status_E Crypto_Rng_Prng_Generate(
 
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
-|TRNG Size (bytes)|Crypto_Rng_Generate (ms)|
+|TRNG Size (bytes)|Crypto_Rng_Generate Performance (ms)|
 |---|---|
-|192|66.334|
-|256|77.167|
-|384|98.917|
-|521|123.084|
+|192|66.44|
+|256|77.25|
+|384|98.94|
+|521|123.13|
 
 ### Size Benchmarking
 
@@ -62,4 +62,4 @@ The below sizes are for the process of getting 521 bytes (8-bit words).
 
 |RAM (bytes)|FLASH (bytes)|
 |---|---|
-|12|3,628|
+|56|4,612|
