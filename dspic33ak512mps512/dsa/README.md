@@ -36,7 +36,7 @@ The following information will be printed on the COM port for all supported ECC 
 
 <img src="./images/ecdsa_demo.png" alt="ECDSA Demo Output" width="750"/>
 
-## ECDSA Sign and Verify API Documentation
+## Common Crypto APIs
 crypto_digisign.h defines sign and verify functions
 
 - Inputs to these functions must be **big endian**.
@@ -100,12 +100,15 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |P-384|27.07|
 |P-521|58.10|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results are using P-521. Flash size will vary based on size of the stored data inputs used with the library. 
 
-|ECC Curve||RAM (bytes)|FLASH (bytes)|
+|ECC Curve|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
 |P-192|4,152|11,328|
 |P-256|4,152|11,372|
 |P-384|4,152|11,440|
 |P-521|4,152|11,520|
+
+## ACVP
+The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

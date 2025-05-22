@@ -105,7 +105,7 @@ The following information will be printed on the COM port for the AES AEAD algor
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_aead_demo.png" alt="AES AEAD Demo Output" width="750"/>
 
-## Crypto Accelerator Module Library
+## Common Crypto APIs
 
 ### AES ECB, CTR APIs
 crypto_sym_cipher.h defines Init, Cipher, EncryptDirect, and DecryptDirect APIs.
@@ -332,7 +332,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |24|532|16|30.89|
 |32|532|16|30.75|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 #### Single Step
