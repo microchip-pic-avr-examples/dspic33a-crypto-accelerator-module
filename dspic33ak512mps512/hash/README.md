@@ -90,7 +90,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-384|4,096|1294.15|
 |SHA-512|4,096|1293.64|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 
 #### Single Step
 
