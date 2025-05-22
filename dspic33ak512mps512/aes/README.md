@@ -332,7 +332,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |24|532|16|30.89|
 |32|532|16|30.75|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 #### Single Step

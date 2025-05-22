@@ -7,7 +7,7 @@
 # dsPIC33A Crypto Accelerator Module Demos
 
 # Description
-A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module operations:
+A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module (CAM) operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
@@ -34,22 +34,23 @@ Each folder contains a README describing the example application in more detail.
 | trng       | Example application project for TRNG     |
 | aes        | Example application project for AES      |
 
+All projects have the following compiler options:
+- Optimization for size (Os)
+- Common Include dir: The relate path for each project (Example: ../mplabxProjectName.X)
+    - This is added in the project properties under XC-DSC -> Common include dirs 
+
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
+The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
-A MISRA scan has been conducted on the source library files. The source library files were found to be Misra compliant for Required and Manditory rules. 
-
-## ACVP
-
-The AES, Hash and ECDSA Sign Crypto APIs has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
+A MISRA scan has been conducted on the Crypto Accelerator Module library source files. The source files are Misra compliant for Required and Mandatory rules. 
 
 # Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the Crypto APIs that utilize the Crypto Accelerator Module library.
+The following benchmarking results were obtained while testing the Common Crypto APIs that utilize the Crypto Accelerator Module library.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
@@ -77,7 +78,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Verify)|58.10 ms|Curve: P-521|
 |TRNG (Generate)|123.13 ms|Output Size: 521|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|

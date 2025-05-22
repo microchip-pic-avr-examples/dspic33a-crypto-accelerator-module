@@ -56,7 +56,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |384|98.94|
 |521|123.13|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 
 The below sizes are for the process of getting 521 bytes (8-bit words).
 

@@ -100,7 +100,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |P-384|27.07|
 |P-521|58.10|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results are using P-521. Flash size will vary based on size of the stored data inputs used with the library. 
 
 |ECC Curve|RAM (bytes)|FLASH (bytes)|
