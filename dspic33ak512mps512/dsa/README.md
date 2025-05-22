@@ -86,17 +86,17 @@ Hash values used in this demo are from NIST [Cryptographic Standards and Guideli
 ### Performance Benchmarking
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
-|ECC Curve|Crypto_DigiSign_Ecdsa_Sign (ms)|
+|ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
 |P-192|3.92|
 |P-256|7.42|
 |P-384|19.79|
 |P-521|42.16|
 
-|ECC Curve|Crypto_DigiSign_Ecdsa_Verify (ms)|
+|ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
 |P-192|5.15|
-|P-256|9.91|
+|P-256|9.92|
 |P-384|27.07|
 |P-521|58.10|
 
