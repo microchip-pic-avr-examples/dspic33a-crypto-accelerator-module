@@ -7,7 +7,7 @@
 # dsPIC33A Crypto Accelerator Module Demos
 
 # Description
-A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module operations:
+A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module (CAM) operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
@@ -36,16 +36,18 @@ Each folder contains a README describing the example application in more detail.
 
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
+The included demonstration projects provide examples of the various Crypto Accelerator Module features. The application project needs to include the Common Crypto driver in the crypto/common_crypto folder. The Common Crypto API and associated hardware wrappers invoke the Crypto Accelerator Module library files. 
+
+The Crypto Accelerator Module library can function independently by utilizing the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
-A MISRA scan has been conducted on the source library file. Results can be found [here](./misra_report/).
+A MISRA scan has been conducted on the Crypto Accelerator Module library source files. The source files are Misra compliant for Required and Mandatory rules.
 
 # Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the Crypto Accelerator Module library used with Common Crypto.
+The following benchmarking results were obtained while testing the Common Crypto APIs that utilize the Crypto Accelerator Module library.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
@@ -73,8 +75,13 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Verify)|58.10 ms|Curve: P-521|
 |TRNG (Generate)|123.13 ms|Output Size: 521|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
+
+All projects have the following compiler options:
+- Optimization for size (-Os)
+- Isolate each function in a section - unchecked
+- Remove unused sections - unchecked
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|

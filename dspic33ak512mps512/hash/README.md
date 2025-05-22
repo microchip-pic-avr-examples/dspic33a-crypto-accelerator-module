@@ -37,7 +37,7 @@ The following information will be printed on the COM port for all supported SHA 
 
 <img src="./images/sha_demo.png" alt="SHA Demo Output" width="750"/>
 
-## Hash API Documentation
+## Common Crypto APIs
 crypto_hash.h defines Digest, Init, Update, Final, and GetHashAndHashSize APIs.
 
 ```c
@@ -90,7 +90,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-384|4,096|1294.15|
 |SHA-512|4,096|1293.64|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 
 #### Single Step
 

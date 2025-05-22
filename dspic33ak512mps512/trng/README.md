@@ -29,7 +29,7 @@ The following information will be printed on the COM port:
 
 <img src=".\images\trng_demo.jpg" alt="TRNG Demo Output" height="750">
 
-## TRNG API Documentation
+## Common Crypto APIs
 crypto_rng.h defines the Generate API.
 
 ```c
@@ -56,7 +56,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |384|98.94|
 |521|123.13|
 
-### Size Benchmarking
+### Memory Size Benchmarking
 
 The below sizes are for the process of getting 521 bytes (8-bit words).
 
