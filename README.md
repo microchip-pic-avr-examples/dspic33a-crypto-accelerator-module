@@ -79,7 +79,9 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 All projects have the following compiler options:
-- Optimization for size (Os)
+- Optimization for size (-Os)
+- Isolate each function in a section - unchecked
+- Remove unused sections - unchecked
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
