@@ -37,7 +37,7 @@ The following information will be printed on the COM port for all supported SHA 
 
 <img src="./images/sha_demo.png" alt="SHA Demo Output" width="750"/>
 
-## Hash API Documentation
+## Common Crypto APIs
 crypto_hash.h defines Digest, Init, Update, Final, and GetHashAndHashSize APIs.
 
 ```c

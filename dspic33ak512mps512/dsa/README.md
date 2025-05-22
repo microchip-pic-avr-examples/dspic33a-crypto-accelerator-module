@@ -36,7 +36,7 @@ The following information will be printed on the COM port for all supported ECC 
 
 <img src="./images/ecdsa_demo.png" alt="ECDSA Demo Output" width="750"/>
 
-## ECDSA Sign and Verify API Documentation
+## Common Crypto APIs
 crypto_digisign.h defines sign and verify functions
 
 - Inputs to these functions must be **big endian**.

@@ -105,7 +105,7 @@ The following information will be printed on the COM port for the AES AEAD algor
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_aead_demo.png" alt="AES AEAD Demo Output" width="750"/>
 
-## Crypto Accelerator Module Library
+## Common Crypto APIs
 
 ### AES ECB, CTR APIs
 crypto_sym_cipher.h defines Init, Cipher, EncryptDirect, and DecryptDirect APIs.

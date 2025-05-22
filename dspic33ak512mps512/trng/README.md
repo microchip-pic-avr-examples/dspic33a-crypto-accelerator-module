@@ -29,7 +29,7 @@ The following information will be printed on the COM port:
 
 <img src=".\images\trng_demo.jpg" alt="TRNG Demo Output" height="750">
 
-## TRNG API Documentation
+## Common Crypto APIs
 crypto_rng.h defines the Generate API.
 
 ```c
