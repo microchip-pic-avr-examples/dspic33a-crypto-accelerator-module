@@ -36,16 +36,20 @@ Each folder contains a README describing the example application in more detail.
 
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
+The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
-A MISRA scan has been conducted on the source library file. Results can be found [here](./misra_report/).
+A MISRA scan has been conducted on the source library files. The source library files were found to be Misra compliant for Required and Manditory rules. 
+
+## ACVP
+
+The AES, Hash and ECDSA Sign Crypto APIs has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
 
 # Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the Crypto Accelerator Module library used with Common Crypto.
+The following benchmarking results were obtained while testing the Crypto APIs that utilize the Crypto Accelerator Module library.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 

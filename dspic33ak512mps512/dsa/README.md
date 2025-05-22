@@ -103,9 +103,12 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 ### Size Benchmarking
 The following results are using P-521. Flash size will vary based on size of the stored data inputs used with the library. 
 
-|ECC Curve||RAM (bytes)|FLASH (bytes)|
+|ECC Curve|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
 |P-192|4,152|11,328|
 |P-256|4,152|11,372|
 |P-384|4,152|11,440|
 |P-521|4,152|11,520|
+
+## ACVP
+The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
