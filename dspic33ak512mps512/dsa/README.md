@@ -14,7 +14,7 @@ The ECDSA Sign and Verify operations use NIST defined public and private keys fo
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
@@ -86,16 +86,26 @@ Hash values used in this demo are from NIST [Cryptographic Standards and Guideli
 ### Performance Benchmarking
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
-|ECC Curve|Crypto_DigiSign_Ecdsa_Verify (ms)|
+|ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|5.14|
-|P-256|9.90|
+|P-192|3.92|
+|P-256|7.42|
+|P-384|19.79|
+|P-521|42.16|
+
+|ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
+|----|----|
+|P-192|5.15|
+|P-256|9.92|
 |P-384|27.07|
-|P-521|58.35|
+|P-521|58.10|
 
 ### Size Benchmarking
 The following results are using P-521. Flash size will vary based on size of the stored data inputs used with the library. 
 
-|RAM (bytes)|FLASH (bytes)|
-|----|----|
-|4,108|10,536|
+|ECC Curve||RAM (bytes)|FLASH (bytes)|
+|----|----|----|
+|P-192|4,152|11,328|
+|P-256|4,152|11,372|
+|P-384|4,152|11,440|
+|P-521|4,152|11,520|

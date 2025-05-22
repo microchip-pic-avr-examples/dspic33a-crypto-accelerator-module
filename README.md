@@ -6,10 +6,8 @@
 
 # dsPIC33A Crypto Accelerator Module Demos
 
-Board Image if any.
-
 # Description
-A collection of MPLAB® X projects to demonstrate the usage of the Cryptographic Accelerator Module APIs:
+A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
@@ -18,12 +16,12 @@ A collection of MPLAB® X projects to demonstrate the usage of the Cryptographic
 # Prerequisites
 
 ## Software Tools
-- dsPIC33AK-MP_DFP v1.0.81 ([ATPACK Installation Instructions](https://microchip.my.site.com/s/article/MPLAB-X---Manual-Install-DFP--Device-Family-Pack))
+- dsPIC33AK-MP_DFP v1.0.81
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
 - MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
 
 ## Hardware Tools
-- dsPIC33AK512MPS512 Curiosity GP DIM (EV80L65A)
+- dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 # Contents Summary
@@ -38,7 +36,7 @@ Each folder contains a README describing the example application in more detail.
 
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following APIs. (API Reference Link)
+The included demonstration projects provide examples of the various Crypto Accelerator Module features. They display usage of the Crypto Accelerator Module library being consumed by the Common Crypto API and associated hardware wrappers. The Crypto Accelerator Module library can also be used externally by using the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
