@@ -9,7 +9,8 @@
 Board Image if any.
 
 # Description
-A collection of MPLAB® X projects to demonstrate the usage of the Cryptographic Accelerator Module APIs:
+```suggestion
+A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
