@@ -4,7 +4,7 @@
     <img alt="Microchip Logo." src="images/microchip_logo_black_red.png">
 </picture>
 
-# dsPIC33A Crypto Accelerator Module Library Demos
+# dsPIC33A Crypto Accelerator Module Library and Demos
 - Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
     
 # Description
