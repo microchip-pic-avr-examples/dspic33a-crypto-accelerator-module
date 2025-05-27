@@ -42,7 +42,6 @@
          "Hash",
          "TRNG",
          "AES",
-         "ECDH",
          "ECDSA"
       ]
    }
