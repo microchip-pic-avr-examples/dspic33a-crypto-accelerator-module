@@ -41,7 +41,9 @@
          "Cryptography",
          "Hash",
          "TRNG",
-         "AES"
+         "AES",
+         "ECDH",
+         "ECDSA"
       ]
    }
 }
