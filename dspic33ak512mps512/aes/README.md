@@ -5,8 +5,10 @@
 </picture>
 
 # Crypto Accelerator Module AES Example Application
+- Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
+
 ## Description
-This example application utilizes the Crypto Accelerator Module Library to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
+This example application utilizes the Crypto Library to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
 - ECB
 - CTR
 - CMAC
@@ -111,7 +113,7 @@ The following information will be printed on the COM port for the AES AEAD algor
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_aead_demo.png" alt="AES AEAD Demo Output" width="750"/>
 
-## Common Crypto APIs
+## Crypto Library APIs
 
 ### AES ECB, CTR APIs
 crypto_sym_cipher.h defines Init, Cipher, EncryptDirect, and DecryptDirect APIs.

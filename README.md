@@ -4,10 +4,11 @@
     <img alt="Microchip Logo." src="images/microchip_logo_black_red.png">
 </picture>
 
-# dsPIC33A Crypto Accelerator Module Demos
-
+# dsPIC33A Crypto Accelerator Module Library Demos
+- Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
+    
 # Description
-A collection of MPLAB® X IDE projects to demonstrate the Cryptographic Accelerator Module (CAM) operations:
+A collection of MPLAB® X IDE projects to demonstrate the CAM operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
@@ -34,20 +35,20 @@ Each folder contains a README describing the example application in more detail.
 | trng       | Example application project for TRNG     |
 | aes        | Example application project for AES      |
 
-# Crypto Accelerator Module APIs
+# CAM APIs
 
-The included demonstration projects provide examples of the various Crypto Accelerator Module features. The application project needs to include the Common Crypto driver in the crypto/common_crypto folder. The Common Crypto API and associated hardware wrappers invoke the Crypto Accelerator Module library files. 
+The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM driver files. 
 
-The Crypto Accelerator Module library can function independently by utilizing the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
+The pre-compiled CAM driver files can function independently by utilizing the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
-A MISRA scan has been conducted on the Crypto Accelerator Module library source files. The source files are Misra compliant for Required and Mandatory rules.
+A MISRA scan has been conducted on the pre-compiled CAM driver source files. The source files are Misra compliant for Required and Mandatory rules.
 
 # Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the Common Crypto APIs that utilize the Crypto Accelerator Module library.
+The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled CAM driver files.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
