@@ -7,7 +7,7 @@
       "version":"1.0.0",
       "displayName":"dsPIC33A Crypto Accelerator Module Library and Demos",
       "projectName":"dspic33a-crypto-accelerator-module",
-      "shortDescription":"These MPLAB® X IDE demo projects contain the Crypto Library and examples using the APIs for different cryptographic algorithms supported by the CAM.",
+      "shortDescription":"These MPLAB® X IDE demo projects showcase applications built with the Crypto Library which leverages the pre-compiled Crypto Accelerator Module(CAM) Hardware Drivers to demonstrate various cryptographic algorithms supported by the CAM",
       "ide":{
          "name":"MPLABX",
          "semverRange":">=6.25.0"
