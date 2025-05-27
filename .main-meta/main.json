@@ -5,9 +5,9 @@
       "metaDataVersion":"1.3.0",
       "name":"com.microchip.mplabx.project.dspic33a-crypto-accelerator-module",
       "version":"1.0.0",
-      "displayName":"dsPIC33A Crypto Accelerator Module Demos",
+      "displayName":"dsPIC33A Crypto Accelerator Module Library and Demos",
       "projectName":"dspic33a-crypto-accelerator-module",
-      "shortDescription":"This repository holds MPLAB® X IDE demo projects for the different cryptographic algorithms supported by the CAM.",
+      "shortDescription":"These MPLAB® X IDE demo projects contain the Crypto Library and examples using the APIs for different cryptographic algorithms supported by the CAM.",
       "ide":{
          "name":"MPLABX",
          "semverRange":">=6.25.0"
