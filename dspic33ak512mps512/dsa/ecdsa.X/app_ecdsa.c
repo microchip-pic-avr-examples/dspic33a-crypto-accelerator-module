@@ -106,14 +106,14 @@ static inline void runHardwareTest(uint8_t *hash, uint32_t hashLength,
     int8_t hashStatus = 0;   
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     
-    ////Common Crypto ECDSA SIGN***********************************************************************************************************************
+    ////Crypto Library ECDSA SIGN***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, privateKey, privateKeyLength, eccCurveType, SESSION_ID);
     
     printStatus(status, signing);
     
     printHexArray(signaturePrint, signature, signatureLength);
     
-    ////Common Crypto ECDSA VERIFY*********************************************************************************************************************
+    ////Crypto Library ECDSA VERIFY*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, publicKey, publicKeyLength, &hashStatus, eccCurveType, SESSION_ID);
     
     printStatus(status, verifying);
