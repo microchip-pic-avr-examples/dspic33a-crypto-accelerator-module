@@ -8,7 +8,7 @@
 - Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
     
 # Description
-A collection of MPLAB® X IDE projects to demonstrate the CAM operations:
+dsPIC33A Precompiled CAM Hardware Drivers and Demos are a collection of MPLAB® X IDE projects to demonstrate the CAM operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
