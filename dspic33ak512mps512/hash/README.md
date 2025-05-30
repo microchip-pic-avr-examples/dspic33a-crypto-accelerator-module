@@ -8,7 +8,7 @@
 - Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
 
 ## Description
-This example application utilizes the Crypto Library to perform SHA hash operations using different sized input vectors. The following hash algorithms are supported:
+This example application utilizes the Crypto Library that interact with the pre-compiled CAM hardware driver to perform SHA hash operations using different sized input vectors. The following hash algorithms are supported:
 - SHA-1
 - SHA-224
 - SHA-256
