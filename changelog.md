@@ -1,6 +1,6 @@
 # dspic33a-crypto-accelerator-module v1.0.1
 ### Release Highlights
-- Updated readmes and project titles
+- Updated keywords, readmes and demo titles
 
 ### Features Added\Updated
 - None
