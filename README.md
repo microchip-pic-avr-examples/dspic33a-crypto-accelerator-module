@@ -8,11 +8,13 @@
 - Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
     
 # Description
-dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE projects to demonstrate the CAM operations:
+dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE projects to demonstrate the following CAM operations:
 - ECDSA Sign/Verify
 - Hashing
 - TRNG
 - AES
+
+The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver. 
 
 # Prerequisites
 
@@ -37,18 +39,16 @@ Each folder contains a README describing the example application in more detail.
 
 # Crypto Accelerator Module APIs
 
-The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM hardware drivers. 
-
-The pre-compiled CAM hardware driver can function independently by utilizing the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
+The Pre-compiled CAM Hardware Driver can function independently by utilizing the following [APIs](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=CAM&redirect=true).
 
 # MISRA
 
-A MISRA scan has been conducted on the pre-compiled CAM hardware driver source files. The source files are Misra compliant for Required and Mandatory rules.
+A MISRA scan has been conducted on the Pre-compiled CAM Hardware Driver source files. The source files are Misra compliant for Required and Mandatory rules.
 
 # Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled CAM hardware driver files.
+The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the Pre-compiled Hardware Driver files.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 

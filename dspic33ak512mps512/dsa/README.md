@@ -8,7 +8,7 @@
 - Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
 
 ## Description
-This example application utilizes Crypto Library that interact with the pre-compiled CAM hardware driver to perform ECDSA Sign and Verify operations.
+This example application utilizes Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform ECDSA Sign and Verify operations.
 
 The ECDSA Sign and Verify operations use NIST defined public and private keys for the following ECC curves:
 - P-192
