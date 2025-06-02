@@ -5,10 +5,10 @@
 </picture>
 
 # Crypto Accelerator Module TRNG Application
-- Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
 
 ## Description
-This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM driver files to perform TRNG.
+This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
 
 ## Software Tool Versions
 - dsPIC33AK-MP_DEV_DFP v1.0.81

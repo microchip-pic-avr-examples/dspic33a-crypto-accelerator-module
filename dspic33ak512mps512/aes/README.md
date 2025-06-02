@@ -5,7 +5,7 @@
 </picture>
 
 # Crypto Accelerator Module AES Example Application
-- Crypto Accelerator Module will be refered to as CAM throughout the remainder of the document. 
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
 
 ## Description
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
