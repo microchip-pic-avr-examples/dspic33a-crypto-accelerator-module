@@ -5,7 +5,7 @@
 </picture>
 
 # dsPIC33A Crypto Accelerator Module Hardware Driver and Demos
-- Crypto Accelerator Module will be referred  to as CAM throughout the remainder of the document. 
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
     
 # Description
 dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE projects to demonstrate the following CAM operations:
