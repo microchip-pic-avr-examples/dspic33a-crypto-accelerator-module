@@ -5,8 +5,10 @@
 </picture>
 
 # Crypto Accelerator Module TRNG Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
 ## Description
-This example application utilizes a Crypto API that interacts with the Crypto Accelerator Module pre-compiled library to perform TRNG.
+This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
 
 ## Software Tool Versions
 - dsPIC33AK-MP_DEV_DFP v1.0.81
@@ -35,7 +37,7 @@ The following information will be printed on the COM port:
 
 <img src=".\images\trng_demo.jpg" alt="TRNG Demo Output" height="750">
 
-## Common Crypto APIs
+## Crypto Library APIs
 crypto_rng.h defines the Generate API.
 
 ```c
