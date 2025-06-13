@@ -5,8 +5,10 @@
 </picture>
 
 # Crypto Accelerator Module ECDSA Sign and Verify Example Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
 ## Description
-This example application utilizes Crypto APIs that interact with the Crypto Accelerator Module pre-compiled library to perform ECDSA Sign and Verify operations.
+This example application utilizes Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform ECDSA Sign and Verify operations.
 
 The ECDSA Sign and Verify operations use NIST defined public and private keys for the following ECC curves:
 - P-192
@@ -42,7 +44,7 @@ The following information will be printed on the COM port for all supported ECC 
 
 <img src="./images/ecdsa_demo.png" alt="ECDSA Demo Output" width="750"/>
 
-## Common Crypto APIs
+## Crypto Library APIs
 crypto_digisign.h defines sign and verify functions
 
 - Inputs to these functions must be **big endian**.

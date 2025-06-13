@@ -5,8 +5,10 @@
 </picture>
 
 # Crypto Accelerator Module Hash Example Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
 ## Description
-This example application utilizes the Crypto Accelerator Module Library to perform SHA hash operations using different sized input vectors. The following hash algorithms are supported:
+This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform SHA hash operations using different sized input vectors. The following hash algorithms are supported:
 - SHA-1
 - SHA-224
 - SHA-256
@@ -43,7 +45,7 @@ The following information will be printed on the COM port for all supported SHA 
 
 <img src="./images/sha_demo.png" alt="SHA Demo Output" width="750"/>
 
-## Common Crypto APIs
+## Crypto Library APIs
 crypto_hash.h defines Digest, Init, Update, Final, and GetHashAndHashSize APIs.
 
 ```c

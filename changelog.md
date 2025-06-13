@@ -1,3 +1,10 @@
+# dspic33a-crypto-accelerator-module v1.0.2
+### Release Highlights
+- Updated keywords, readmes and demo title
+
+### Features Added\Updated
+- None
+
 # dspic33a-crypto-accelerator-module v1.0.0
 ### Release Highlights
 - Initial Release - Refer to README.md for summary of the demos included
@@ -20,5 +27,3 @@
 		- SHA-384
 		- SHA-512
 	- TRNG
-
-
