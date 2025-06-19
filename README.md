@@ -13,6 +13,7 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - Hashing
 - TRNG
 - AES
+- ECDH Shared Secret
 
 The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver. 
 
@@ -36,6 +37,7 @@ Each folder contains a README describing the example application in more detail.
 | hash       | Example application project for Hashing  |
 | trng       | Example application project for TRNG     |
 | aes        | Example application project for AES      |
+| ecdh       | Example application project for ECDH     |
 
 # Crypto Accelerator Module APIs
 
@@ -75,6 +77,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Sign)|42.16 ms|Curve: P-521|
 |ECDSA (Verify)|58.10 ms|Curve: P-521|
 |TRNG (Generate)|123.13 ms|Output Size: 521|
+|ECDH (Shared Secret Generate)|3.78 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.23 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.45 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.56 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
@@ -109,3 +115,7 @@ All projects have the following compiler options:
 |ECDSA (Sign and Verify (P-384))|4,152|11,440|
 |ECDSA (Sign and Verify (P-521))|4,152|11,520|
 |TRNG (Generate)|56|4,612|
+|ECDH (Shared Secret (P-192))|4,108|9,816|
+|ECDH (Shared Secret (P-256))|4,108|9,860|
+|ECDH (Shared Secret (P-384))|4,108|9,924|
+|ECDH (Shared Secret (P-521))|4,108|9,996|
