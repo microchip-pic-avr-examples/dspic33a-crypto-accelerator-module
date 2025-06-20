@@ -3,8 +3,10 @@
 - Support for ECDH Shared Secret Generation
 
 ### Features Added\Updated
-- Crypto Accelerator Module Demo and support added:
-	- ECDH Shared Secret Generation
+- Crypto Accelerator Module Demos
+- Crypto Algorithms added in this release:
+	- ECDH
+		- ECDH Shared Secret Generation
 
 # dspic33a-crypto-accelerator-module v1.0.2
 ### Release Highlights
