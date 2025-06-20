@@ -1,6 +1,7 @@
 # dspic33a-crypto-accelerator-module v1.1.0
 ### Release Highlights
 - Support for ECDH Shared Secret Generation
+- Remove device.h and crypto_config.h files from all projects
 
 ### Features Added\Updated
 - Crypto Accelerator Module Demos
