@@ -1,15 +1,14 @@
 /**
- * PINS Generated Driver Header File 
+ * RESET Generated Driver Types Header File
  * 
- * @file      pins.h
+ * @file      reset_types.h
  *            
- * @defgroup  pinsdriver Pins Driver
+ * @ingroup   resetdriver
  *            
- * @brief     The Pin Driver directs the operation and function of 
- *            the selected device pins using dsPIC MCUs.
+ * @brief     This is the generated driver types header file for the RESET driver
  *
  * @skipline @version   PLIB Version 1.0.1
- *
+ *            
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
@@ -34,21 +33,24 @@
     THIS SOFTWARE.
 */
 
-#ifndef PINS_H
-#define PINS_H
-// Section: Includes
-#include <xc.h>
-
-// Section: Device Pin Macros
+#ifndef RESET_TYPES_H
+#define    RESET_TYPES_H
 
 /**
- * @ingroup  pinsdriver
- * @brief    Initializes the PINS module
- * @param    none
- * @return   none  
- */
-void PINS_Initialize(void);
+ @ingroup  resetdriver
+ @enum     RESET_MASKS
+ @brief    Defines the RESET cause mask location   
+*/
+enum RESET_MASKS
+{ 
+  RESET_MASK_WDTO      = 0x00000010,   /**< Defines the watchdog timeout reset flag mask location */
+  RESET_MASK_SWR       = 0x00000040,   /**< Defines the software reset mask location */
+  RESET_MASK_EXTR      = 0x00000080,   /**< Defines the external reset mask location */
+  RESET_MASK_CM        = 0x00000200,   /**< Defines the configuration mismatch reset mask location */
+};
 
+#endif    /* RESET_TYPES_H */
 
-
-#endif
+/**
+ End of File
+*/

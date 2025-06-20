@@ -10,7 +10,7 @@
  * @skipline  Device : dsPIC33AK512MPS512
 */
 /*
-ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -33,7 +33,8 @@
 #include "../system.h"
 #include "../clock.h"
 #include "../pins.h"
-#include "mcc_generated_files/uart/uart1.h"
+#include "../dmt.h"
+#include "../../uart/uart1.h"
 #include "../interrupt.h"
 
 
@@ -41,6 +42,7 @@ void SYSTEM_Initialize(void)
 {
     CLOCK_Initialize();
     PINS_Initialize();
+    DMT_Initialize();
     UART1_Initialize();
     INTERRUPT_GlobalEnable();
     INTERRUPT_Initialize();

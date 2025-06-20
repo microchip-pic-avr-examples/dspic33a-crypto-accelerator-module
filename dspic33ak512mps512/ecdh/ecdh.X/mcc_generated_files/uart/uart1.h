@@ -7,13 +7,13 @@
  *            
  * @brief     This is the generated driver header file for the UART1 driver
  *
- * @skipline @version   PLIB Version 1.0.2-rc.1
+ * @skipline @version   PLIB Version 1.0.2
  *            
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -55,145 +55,145 @@
            using the 'Custom Name' field. Application specific name allows the 
            API Portability.
 */
-extern const struct UART_INTERFACE UART;
+extern const struct UART_INTERFACE UART1_Drv;
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_Initialize API
  */
-#define UART_Initialize UART1_Initialize
+#define UART1_Drv_Initialize UART1_Initialize
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_Deinitialize API
  */
-#define UART_Deinitialize UART1_Deinitialize
+#define UART1_Drv_Deinitialize UART1_Deinitialize
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_Read API
  */
-#define UART_Read UART1_Read
+#define UART1_Drv_Read UART1_Read
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_Write API
  */
-#define UART_Write UART1_Write
+#define UART1_Drv_Write UART1_Write
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_IsRxReady API
  */
-#define UART_IsRxReady UART1_IsRxReady
+#define UART1_Drv_IsRxReady UART1_IsRxReady
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_IsTxReady API
  */
-#define UART_IsTxReady UART1_IsTxReady
+#define UART1_Drv_IsTxReady UART1_IsTxReady
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_IsTxDone API
  */
-#define UART_IsTxDone UART1_IsTxDone
+#define UART1_Drv_IsTxDone UART1_IsTxDone
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_TransmitEnable API
  */
-#define UART_TransmitEnable UART1_TransmitEnable
+#define UART1_Drv_TransmitEnable UART1_TransmitEnable
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_TransmitDisable API
  */
-#define UART_TransmitDisable UART1_TransmitDisable
+#define UART1_Drv_TransmitDisable UART1_TransmitDisable
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_AutoBaudSet API
  */
-#define UART_AutoBaudSet UART1_AutoBaudSet
+#define UART1_Drv_AutoBaudSet UART1_AutoBaudSet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_AutoBaudQuery API
  */
-#define UART_AutoBaudQuery UART1_AutoBaudQuery
+#define UART1_Drv_AutoBaudQuery UART1_AutoBaudQuery
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_AutoBaudEventEnableGet API
  */
-#define UART_AutoBaudEventEnableGet UART1_AutoBaudEventEnableGet
+#define UART1_Drv_AutoBaudEventEnableGet UART1_AutoBaudEventEnableGet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_ErrorGet API
  */
-#define UART_ErrorGet UART1_ErrorGet
+#define UART1_Drv_ErrorGet UART1_ErrorGet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_BRGCountSet API
  */
-#define UART_BRGCountSet UART1_BRGCountSet
+#define UART1_Drv_BRGCountSet UART1_BRGCountSet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_BRGCountGet API
  */
-#define UART_BRGCountGet UART1_BRGCountGet
+#define UART1_Drv_BRGCountGet UART1_BRGCountGet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_BaudRateSet API
  */
-#define UART_BaudRateSet UART1_BaudRateSet
+#define UART1_Drv_BaudRateSet UART1_BaudRateSet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_BaudRateGet API
  */
-#define UART_BaudRateGet UART1_BaudRateGet
+#define UART1_Drv_BaudRateGet UART1_BaudRateGet
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_RxCompleteCallbackRegister API
  */
-#define UART_RxCompleteCallbackRegister  UART1_RxCompleteCallbackRegister
+#define UART1_Drv_RxCompleteCallbackRegister  UART1_RxCompleteCallbackRegister
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_TxCompleteCallbackRegister API
  */
-#define UART_TxCompleteCallbackRegister  UART1_TxCompleteCallbackRegister
+#define UART1_Drv_TxCompleteCallbackRegister  UART1_TxCompleteCallbackRegister
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_TxCollisionCallbackRegister API
  */
-#define UART_TxCollisionCallbackRegister  UART1_TxCollisionCallbackRegister
+#define UART1_Drv_TxCollisionCallbackRegister  UART1_TxCollisionCallbackRegister
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_FramingErrorCallbackRegister API
  */
-#define UART_FramingErrorCallbackRegister  UART1_FramingErrorCallbackRegister
+#define UART1_Drv_FramingErrorCallbackRegister  UART1_FramingErrorCallbackRegister
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_OverrunErrorCallbackRegister API
  */
-#define UART_OverrunErrorCallbackRegister  UART1_OverrunErrorCallbackRegister
+#define UART1_Drv_OverrunErrorCallbackRegister  UART1_OverrunErrorCallbackRegister
 
 /**
  * @ingroup  uartdriver
  * @brief    This macro defines the Custom Name for \ref UART1_ParityErrorCallbackRegister API
  */
-#define UART_ParityErrorCallbackRegister  UART1_ParityErrorCallbackRegister
+#define UART1_Drv_ParityErrorCallbackRegister  UART1_ParityErrorCallbackRegister
 
 // Section: UART1 Driver Routines
 

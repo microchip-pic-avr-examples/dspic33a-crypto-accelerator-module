@@ -1,15 +1,14 @@
 /**
- * PINS Generated Driver Header File 
+ * TRAPS Generated Driver Header File 
  * 
- * @file      pins.h
+ * @file      traps.h
  *            
- * @defgroup  pinsdriver Pins Driver
+ * @defgroup  trapsdriver Traps Driver
  *            
- * @brief     The Pin Driver directs the operation and function of 
- *            the selected device pins using dsPIC MCUs.
+ * @brief     Traps driver with handler for all types of traps using dsPIC MCUs.           
  *
- * @skipline @version   PLIB Version 1.0.1
- *
+ * @skipline @version   PLIB Version 1.1.0
+ *            
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
@@ -34,21 +33,40 @@
     THIS SOFTWARE.
 */
 
-#ifndef PINS_H
-#define PINS_H
-// Section: Includes
-#include <xc.h>
+#ifndef TRAPS_H
+#define TRAPS_H
 
-// Section: Device Pin Macros
+// Section: Included Files
+#include <stdint.h>
+
+// Section: Data Type Definitions
 
 /**
- * @ingroup  pinsdriver
- * @brief    Initializes the PINS module
- * @param    none
- * @return   none  
+ @ingroup  trapsdriver
+ @enum     TRAPS_ERROR_CODE
+ @brief    Defines the TRAPS error codes
+*/
+enum TRAPS_ERROR_CODE 
+{
+// Traps
+    TRAPS_ILLEGALINSTRUCTION = 1, /**< Illegal instruction trap */
+    TRAPS_ADDRESS_ERR = 2, /**< Address error trap */
+    TRAPS_STACK_ERR = 3, /**< Stack error trap */
+    TRAPS_DIV0_ERR = 4, /**< Math error trap */
+    TRAPS_GEN_ERR = 7, /**< General error trap */
+};
+
+// Section: Driver Interface Function
+
+/**
+ * @ingroup    trapsdriver
+ * @brief      Stores the trap error code and waits forever.
+ *             This is a weak attribute function. The user can 
+ *             override and implement the same function without weak attribute.
+ * @param[in]  code - trap error code
+ * @return     none  
  */
-void PINS_Initialize(void);
-
-
+void TRAPS_halt_on_error(uint16_t code);
 
 #endif
+
