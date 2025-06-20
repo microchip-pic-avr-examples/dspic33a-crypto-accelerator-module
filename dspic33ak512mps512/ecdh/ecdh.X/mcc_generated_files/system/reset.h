@@ -1,15 +1,14 @@
 /**
- * PINS Generated Driver Header File 
+ * RESET Generated Driver Header File
  * 
- * @file      pins.h
+ * @file      reset.h
  *            
- * @defgroup  pinsdriver Pins Driver
+ * @defgroup  resetdriver Reset Driver
  *            
- * @brief     The Pin Driver directs the operation and function of 
- *            the selected device pins using dsPIC MCUs.
+ * @brief     This is the generated driver header file for the RESET driver
  *
  * @skipline @version   PLIB Version 1.0.1
- *
+ *            
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
@@ -34,21 +33,39 @@
     THIS SOFTWARE.
 */
 
-#ifndef PINS_H
-#define PINS_H
-// Section: Includes
-#include <xc.h>
+#ifndef RESET_H
+#define    RESET_H
 
-// Section: Device Pin Macros
+#include <stdint.h>
+#include "reset_types.h"
 
 /**
- * @ingroup  pinsdriver
- * @brief    Initializes the PINS module
- * @param    none
+ * @ingroup  resetdriver
+ * @brief    Returns the cause of previous reset
+ * @pre      This function should be called before any use of CLRWDT
+ *           since it has a side-effect of clearing the appropriate bits in the
+ *           register showing reset cause (see DS70602B page 8-10)
  * @return   none  
  */
-void PINS_Initialize(void);
+uint32_t RESET_CauseGet(void);
 
+/**
+ * @ingroup  resetdriver
+ * @brief    It handles the reset cause by clearing the cause register values.
+ *           This is a weak attribute function. The user can 
+ *           override and implement the same function without weak attribute.
+ * @return   none  
+ */
+void RESET_CauseHandler(void);
 
+/**
+ * @ingroup  resetdriver
+ * @brief    Clears the Reset Cause register
+ * @return   none  
+ */
+void RESET_CauseClearAll(void);
 
-#endif
+#endif    /* RESET_H */
+/**
+ End of File
+*/

@@ -48,7 +48,7 @@ Microchip or any third party.
 // *****************************************************************************
 #include <stdint.h>
 #include "crypto/drivers/wrapper/crypto_kas_cam05346_wrapper.h"
-#include "crypto/drivers/wrapper/crypto_common_cam05346_wrapper.h"
+#include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 #include "crypto/drivers/library/cam_ecdh.h"
 
 static void lDRV_CRYPTO_ECC_InterruptSetup(void)

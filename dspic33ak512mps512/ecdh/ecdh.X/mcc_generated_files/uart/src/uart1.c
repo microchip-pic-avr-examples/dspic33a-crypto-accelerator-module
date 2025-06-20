@@ -7,13 +7,13 @@
  *  
  * @brief       This is the generated driver source file for the UART1 driver
  *
- * @skipline @version     PLIB Version 1.0.2-rc.1
+ * @skipline @version     PLIB Version 1.0.2
  *
  * @skipline    Device : dsPIC33AK512MPS512
 */
 
 /*
-ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -54,7 +54,7 @@
 
 // Section: Driver Interface
 
-const struct UART_INTERFACE UART = {
+const struct UART_INTERFACE UART1_Drv = {
     .Initialize = &UART1_Initialize,
     .Deinitialize = &UART1_Deinitialize,
     .Read = &UART1_Read,
@@ -123,8 +123,8 @@ static bool volatile rxOverflowed;
  * when head == tail.  So full will result in head/tail being off by one due to
  * the extra byte.
  */
-#define UART1_CONFIG_TX_BYTEQ_LENGTH (256+1)
-#define UART1_CONFIG_RX_BYTEQ_LENGTH (256+1)
+#define UART1_CONFIG_TX_BYTEQ_LENGTH (8+1)
+#define UART1_CONFIG_RX_BYTEQ_LENGTH (8+1)
 
 /**
  @ingroup  uartdriver
@@ -585,4 +585,19 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1EVTInterrupt(void)
 {
     U1UIRbits.ABDIF = false;
     IFS3bits.U1EVTIF = false;
+}
+
+int __attribute__((__section__(".libc.write"))) write(int handle, void *buffer, unsigned int len) {
+    unsigned int numBytesWritten = 0 ;
+    while(!UART1_IsTxDone())
+    {
+    }
+    while(numBytesWritten<len)
+    {
+        while(!UART1_IsTxReady())
+        {
+        }
+        UART1_Write(*((uint8_t *)buffer + numBytesWritten++));
+    }
+    return numBytesWritten;
 }

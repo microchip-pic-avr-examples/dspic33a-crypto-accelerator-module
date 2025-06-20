@@ -13,7 +13,7 @@
 */
 
 /*
-ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -76,10 +76,10 @@ void PINS_Initialize(void)
     TRISB = 0xFFFFUL;
     TRISC = 0xFFFFUL;
     TRISD = 0xFFFFUL;
-    TRISE = 0xFFFFUL;
-    TRISF = 0xFFFFUL;
-    TRISG = 0xFFFFUL;
-    TRISH = 0xFFFDUL;
+    TRISE = 0x07FFUL;
+    TRISF = 0x0FEFUL;
+    TRISG = 0x03F7UL;
+    TRISH = 0x0005UL;
 
 
     /****************************************************************************
@@ -121,12 +121,8 @@ void PINS_Initialize(void)
      ***************************************************************************/
     ANSELA = 0xFFFFUL;
     ANSELB = 0xFFFFUL;
-    ANSELC = 0xFFFFUL;
-    ANSELD = 0xFFFDUL;
-    ANSELE = 0xFFFFUL;
-    ANSELF = 0xFFFFUL;
-    ANSELG = 0xFFFFUL;
-    ANSELH = 0xFFFDUL;
+    ANSELE = 0x0003UL;
+    ANSELF = 0x0001UL;
 
     /****************************************************************************
      * Set the PPS

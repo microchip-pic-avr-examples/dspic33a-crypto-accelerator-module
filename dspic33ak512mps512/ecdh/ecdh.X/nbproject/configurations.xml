@@ -8,10 +8,7 @@
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
                        projectFiles="true">
-          <logicalFolder name="src" displayName="src" projectFiles="true">
-          </logicalFolder>
           <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_config.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_kas.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
@@ -21,32 +18,31 @@
             <itemPath>crypto/drivers/library/cam_version.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
-            <logicalFolder name="src" displayName="src" projectFiles="true">
-            </logicalFolder>
-            <itemPath>crypto/drivers/wrapper/crypto_common_cam05346_wrapper.h</itemPath>
             <itemPath>crypto/drivers/wrapper/crypto_kas_cam05346_wrapper.h</itemPath>
+            <itemPath>crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="mcc_generated_files"
-                     displayName="mcc_generated_files"
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
                      projectFiles="true">
         <logicalFolder name="system" displayName="system" projectFiles="true">
-          <logicalFolder name="src" displayName="src" projectFiles="true">
-          </logicalFolder>
-          <itemPath>mcc_generated_files/system/clock.h</itemPath>
-          <itemPath>mcc_generated_files/system/clock_types.h</itemPath>
-          <itemPath>mcc_generated_files/system/interrupt.h</itemPath>
+          <itemPath>mcc_generated_files/system/reset_types.h</itemPath>
+          <itemPath>mcc_generated_files/system/reset.h</itemPath>
+          <itemPath>mcc_generated_files/system/dmt.h</itemPath>
+          <itemPath>mcc_generated_files/system/watchdog.h</itemPath>
+          <itemPath>mcc_generated_files/system/traps.h</itemPath>
           <itemPath>mcc_generated_files/system/interrupt_types.h</itemPath>
-          <itemPath>mcc_generated_files/system/pins.h</itemPath>
+          <itemPath>mcc_generated_files/system/clock.h</itemPath>
           <itemPath>mcc_generated_files/system/system.h</itemPath>
+          <itemPath>mcc_generated_files/system/pins.h</itemPath>
+          <itemPath>mcc_generated_files/system/interrupt.h</itemPath>
+          <itemPath>mcc_generated_files/system/clock_types.h</itemPath>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
-          <logicalFolder name="src" displayName="src" projectFiles="true">
-          </logicalFolder>
           <itemPath>mcc_generated_files/uart/uart1.h</itemPath>
-          <itemPath>mcc_generated_files/uart/uart_interface.h</itemPath>
           <itemPath>mcc_generated_files/uart/uart_types.h</itemPath>
+          <itemPath>mcc_generated_files/uart/uart_interface.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>app_ecdh.h</itemPath>
@@ -55,6 +51,7 @@
                    displayName="Important Files"
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
+      <itemPath>ecdh.mc3</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -72,24 +69,27 @@
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-          <logicalFolder name="library" displayName="library" projectFiles="true">
-          </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
-              <itemPath>crypto/drivers/wrapper/src/crypto_common_cam05346_wrapper.c</itemPath>
+              <itemPath>crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
               <itemPath>crypto/drivers/wrapper/src/crypto_kas_cam05346_wrapper.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="mcc_generated_files"
-                     displayName="mcc_generated_files"
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
                      projectFiles="true">
         <logicalFolder name="system" displayName="system" projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
+            <itemPath>mcc_generated_files/system/src/reset.c</itemPath>
+            <itemPath>mcc_generated_files/system/src/where_was_i.s</itemPath>
+            <itemPath>mcc_generated_files/system/src/dmt_asm.s</itemPath>
+            <itemPath>mcc_generated_files/system/src/dmt.c</itemPath>
+            <itemPath>mcc_generated_files/system/src/traps.c</itemPath>
+            <itemPath>mcc_generated_files/system/src/interrupt.c</itemPath>
             <itemPath>mcc_generated_files/system/src/clock.c</itemPath>
             <itemPath>mcc_generated_files/system/src/config_bits.c</itemPath>
-            <itemPath>mcc_generated_files/system/src/interrupt.c</itemPath>
             <itemPath>mcc_generated_files/system/src/pins.c</itemPath>
             <itemPath>mcc_generated_files/system/src/system.c</itemPath>
           </logicalFolder>

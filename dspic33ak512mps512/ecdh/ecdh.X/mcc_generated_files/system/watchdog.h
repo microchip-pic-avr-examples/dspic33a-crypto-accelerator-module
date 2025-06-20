@@ -1,18 +1,16 @@
 /**
- * PINS Generated Driver Header File 
+ * WATCHDOG Generated Driver Header File
  * 
- * @file      pins.h
- *            
- * @defgroup  pinsdriver Pins Driver
- *            
- * @brief     The Pin Driver directs the operation and function of 
- *            the selected device pins using dsPIC MCUs.
+ * @file      watchdog.h
+ * 
+ * @defgroup  watchdogdriver WDT Driver
+ * 
+ * @brief     Watchdog Timer Driver using dsPIC MCUs.
  *
  * @skipline @version   PLIB Version 1.0.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
-
 /*
 © [2025] Microchip Technology Inc. and its subsidiaries.
 
@@ -34,21 +32,50 @@
     THIS SOFTWARE.
 */
 
-#ifndef PINS_H
-#define PINS_H
-// Section: Includes
+#ifndef WATCHDOG_H
+#define WATCHDOG_H
+
 #include <xc.h>
 
-// Section: Device Pin Macros
+// Section: Type defines
+ 
 
 /**
- * @ingroup  pinsdriver
- * @brief    Initializes the PINS module
+ * @ingroup  watchdogdriver
+ * @brief    This inline function is used to enable the Watchdog Timer (WDT) using the software bit
  * @param    none
  * @return   none  
  */
-void PINS_Initialize(void);
+inline static void WATCHDOG_TimerSoftwareEnable(void)
+{
+    WDTCONbits.ON = 1;
+}
+
+/**
+ * @ingroup  watchdogdriver
+ * @brief    This inline function is used to disable the Watchdog Timer (WDT) using the software bit
+ * @param    none
+ * @return   none  
+ */
+inline static void WATCHDOG_TimerSoftwareDisable(void)
+{
+    WDTCONbits.ON = 0;
+}
+
+/**
+ * @ingroup  watchdogdriver
+ * @brief    This inline function is used to clear the Watchdog Timer (WDT)
+ * @param    none
+ * @return   none  
+ */
+inline static void WATCHDOG_TimerClear(void)
+{
+    ClrWdt();
+}
+
+#endif /* WATCHDOG_H */
+/**
+ End of File
+*/
 
 
-
-#endif
