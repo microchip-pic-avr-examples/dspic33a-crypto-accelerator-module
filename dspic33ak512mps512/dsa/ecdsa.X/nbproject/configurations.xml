@@ -9,9 +9,7 @@
                        displayName="common_crypto"
                        projectFiles="true">
           <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_config.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_digsign.h</itemPath>
-          <itemPath>crypto/common_crypto/device.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="library" displayName="library" projectFiles="true">
