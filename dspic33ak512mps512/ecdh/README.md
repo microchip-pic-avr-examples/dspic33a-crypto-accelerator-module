@@ -79,20 +79,20 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |ECC Curve|Crypto_Kas_Ecdh_SharedSecret Performance (ms)|
 |----|----|
-|P-192|3.78|
-|P-256|7.23|
-|P-384|19.45|
-|P-521|41.56|
+|P-192|3.75|
+|P-256|7.19|
+|P-384|19.40|
+|P-521|41.50|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
 |ECC Curve|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|P-192|4,108|9,816|
-|P-256|4,108|9,860|
-|P-384|4,108|9,924|
-|P-521|4,108|9,996|
+|P-192|4,152|10,744|
+|P-256|4,152|10,788|
+|P-384|4,152|10,856|
+|P-521|4,152|10,928|
 
 ## ACVP
 The ECDH Shared Secret API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
