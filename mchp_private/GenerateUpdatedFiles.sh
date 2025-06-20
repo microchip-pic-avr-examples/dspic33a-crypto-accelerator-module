@@ -54,6 +54,7 @@ TEMPLATE_DIR="$INPUT_DIR/templates"
 HASH_CRYPTO_DIR="$DEMO_BASE_DIR"/hash/sha.X/crypto
 AES_CRYPTO_DIR="$DEMO_BASE_DIR"/aes/aes.X/crypto
 DSA_CRYPTO_DIR="$DEMO_BASE_DIR"/dsa/ecdsa.X/crypto
+ECDH_CRYPTO_DIR="$DEMO_BASE_DIR"/ecdh/ecdh.X/crypto
 TRNG_CRYPTO_DIR="$DEMO_BASE_DIR"/trng/trng.X/crypto
 
 verifyPreviousCommandExitStatus()
@@ -156,6 +157,14 @@ if [ -d $DSA_CRYPTO_DIR ]; then
     copyCommonFiles $DSA_CRYPTO_DIR digsign
     copySpecificFiles $DSA_CRYPTO_DIR digisign_cam $IP_VALUE
     copySpecificFiles $DSA_CRYPTO_DIR cam $IP_VALUE
+fi
+
+if [ -d $ECDH_CRYPTO_DIR ]; then
+    printf "Copying ECDH files\n"
+    makeTargetDirectories $ECDH_CRYPTO_DIR
+    copyCommonFiles $ECDH_CRYPTO_DIR kas
+    copySpecificFiles $ECDH_CRYPTO_DIR kas_cam $IP_VALUE
+    copySpecificFiles $ECDH_CRYPTO_DIR cam $IP_VALUE
 fi
 
 if [ -d $TRNG_CRYPTO_DIR ]; then
