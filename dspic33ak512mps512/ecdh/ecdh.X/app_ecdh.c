@@ -9,7 +9,7 @@
     app_ecdh.c
 
   Summary:
-    This source file handles the running of the ECDSA examples.
+    This source file handles the running of the ECDH examples.
 *******************************************************************************/
 
 /*
