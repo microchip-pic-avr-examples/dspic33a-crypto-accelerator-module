@@ -77,10 +77,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Sign)|42.16 ms|Curve: P-521|
 |ECDSA (Verify)|58.10 ms|Curve: P-521|
 |TRNG (Generate)|123.13 ms|Output Size: 521|
-|ECDH (Shared Secret Generate)|3.78 ms|Curve: P-192|
-|ECDH (Shared Secret Generate)|7.23 ms|Curve: P-256|
-|ECDH (Shared Secret Generate)|19.45 ms|Curve: P-384|
-|ECDH (Shared Secret Generate)|41.56 ms|Curve: P-521|
+|ECDH (Shared Secret Generate)|3.75 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.19 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.40 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.50 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
@@ -115,7 +115,7 @@ All projects have the following compiler options:
 |ECDSA (Sign and Verify (P-384))|4,152|11,440|
 |ECDSA (Sign and Verify (P-521))|4,152|11,520|
 |TRNG (Generate)|56|4,612|
-|ECDH (Shared Secret (P-192))|4,108|9,816|
-|ECDH (Shared Secret (P-256))|4,108|9,860|
-|ECDH (Shared Secret (P-384))|4,108|9,924|
-|ECDH (Shared Secret (P-521))|4,108|9,996|
+|ECDH (Shared Secret (P-192))|4,152|10,744|
+|ECDH (Shared Secret (P-256))|4,152|10,788|
+|ECDH (Shared Secret (P-384))|4,152|10,856|
+|ECDH (Shared Secret (P-521))|4,152|10,928|
