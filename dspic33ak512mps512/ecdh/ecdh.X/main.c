@@ -8,7 +8,7 @@
     main.c
 
   Summary:
-    This source file starts the application to demonstrate ECDSA sign and verify.
+    This source file starts the application to demonstrate ECDH Shared Secret Generation.
  *******************************************************************************/
 
 /*
