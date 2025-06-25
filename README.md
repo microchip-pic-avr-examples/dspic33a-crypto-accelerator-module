@@ -77,10 +77,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Sign)|42.16 ms|Curve: P-521|
 |ECDSA (Verify)|58.10 ms|Curve: P-521|
 |TRNG (Generate)|123.13 ms|Output Size: 521|
-|ECDH (Shared Secret Generate)|3.75 ms|Curve: P-192|
-|ECDH (Shared Secret Generate)|7.19 ms|Curve: P-256|
-|ECDH (Shared Secret Generate)|19.40 ms|Curve: P-384|
-|ECDH (Shared Secret Generate)|41.50 ms|Curve: P-521|
+|ECDH (Shared Secret Generate)|3.78 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.22 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.44 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.55 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
