@@ -1,22 +1,21 @@
 /*******************************************************************************
-  Secure Project System Configuration Header
+  MPLAB Harmony Application Header File
+
+  Company:
+    Microchip Technology Inc.
 
   File Name:
-    configuration.h
+    crypto_kas.h
 
   Summary:
-    Build-time configuration header for the TrustZone secure system defined by 
-    this project.
+    This header file provides prototypes and definitions for the application.
 
   Description:
-    An MPLAB Project may have multiple configurations.  This file defines the
-    build-time options for a single configuration.
-
-  Remarks:
-    This configuration header must not define any prototypes or data
-    definitions (or include any files that do).  It only provides macro
-    definitions for build-time configuration options
-
+    This header file provides function prototypes and data type definitions for
+    the application.  Some of these are required by the system (such as the
+    "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "APP_STATES" definition).  Both
+    are defined here for convenience.
 *******************************************************************************/
 
 /*******************************************************************************
@@ -42,36 +41,33 @@
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
 
-#ifndef CRYPTO_CONFIG_H
-#define CRYPTO_CONFIG_H
+#ifndef CRYPTO_KAS_H
+#define CRYPTO_KAS_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
+#include "crypto_common.h"
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+typedef enum
+{
+    CRYPTO_KAS_ERROR_ALGONOTSUPPTD = -127,
+    CRYPTO_KAS_ERROR_PUBKEY = -126,
+    CRYPTO_KAS_ERROR_PRIVKEY = -125,
+    CRYPTO_KAS_ERROR_HDLR = -124,
+    CRYPTO_KAS_ERROR_SID = -123,  ////session ID Error
+    CRYPTO_KAS_ERROR_CURVE = -122,
+    CRYPTO_KAS_ERROR_ARG = -121,
+    CRYPTO_KAS_ERROR_FAIL = -120,
+    CRYPTO_KAS_SUCCESS = 0,        
+}crypto_Kas_Status_E;
 
-/* Crypto v4 API */
+crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(crypto_HandlerType_E ecdhHandlerType_en, uint8_t *ptr_privKey, uint32_t privKeyLen, uint8_t *ptr_pubKey, uint32_t pubKeyLen,
+                                                    uint8_t *ptr_sharedSecret, uint32_t sharedSecretLen, crypto_EccCurveType_E eccCurveType_en, uint32_t ecdhSessionId);
 
-#include "device.h"
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-    extern "C" {
-
-#endif
-// DOM-IGNORE-END
-
- 
-
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
-}
-#endif
-//DOM-IGNORE-END
-
-#endif // CRYPTO_HW_CONFIG_H
-/*******************************************************************************
- End of File
-*/
+#endif /* CRYPTO_KAS_H */
