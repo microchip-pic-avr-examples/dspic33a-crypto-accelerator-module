@@ -8,8 +8,7 @@
     app_ecdh.h
 
   Summary:
-    This header file provides prototypes and definitions for ECDH Sign and 
-    verify examples.
+    This header file provides prototypes and definitions for ECDH Shared Secret Generation.
 *******************************************************************************/
 
 /*
