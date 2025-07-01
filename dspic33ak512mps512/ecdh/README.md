@@ -31,7 +31,7 @@ The ECDH Shared Secret Generation use NIST defined public and private keys for t
 <img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running The Application
-1. Within MPLAB® X IDE, open the dsa.x application project in dsa/firmware.
+1. Within MPLAB® X IDE, open the ecdh.x application project in ecdh/firmware.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
