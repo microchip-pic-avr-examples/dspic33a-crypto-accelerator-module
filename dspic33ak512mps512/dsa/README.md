@@ -98,25 +98,25 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |----|----|
 |P-192|3.92|
 |P-256|7.42|
-|P-384|19.79|
-|P-521|42.16|
+|P-384|19.80|
+|P-521|42.15|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.15|
-|P-256|9.92|
-|P-384|27.07|
-|P-521|58.10|
+|P-192|5.14|
+|P-256|9.91|
+|P-384|27.06|
+|P-521|58.41|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
 |ECC Curve|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|P-192|4,152|11,328|
-|P-256|4,152|11,372|
-|P-384|4,152|11,440|
-|P-521|4,152|11,520|
+|P-192|4,152|11,360|
+|P-256|4,152|11,404|
+|P-384|4,152|11,472|
+|P-521|4,152|11,552|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
