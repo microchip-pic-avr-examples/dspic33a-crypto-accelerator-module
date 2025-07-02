@@ -92,11 +92,11 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|4,096|928.80|
-|SHA-224|4,096|1084.67|
-|SHA-256|4,096|1091.54|
-|SHA-384|4,096|1294.15|
-|SHA-512|4,096|1293.64|
+|SHA-1|4,096|934.09|
+|SHA-224|4,096|1090.45|
+|SHA-256|4,096|1094.46|
+|SHA-384|4,096|1302.90|
+|SHA-512|4,096|1299.29|
 
 ### Memory Size Benchmarking
 
@@ -114,7 +114,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|284|9,936|
+|SHA-1|284|9,940|
 |SHA-224|284|9,940|
 |SHA-256|284|9,940|
 |SHA-384|284|9,940|

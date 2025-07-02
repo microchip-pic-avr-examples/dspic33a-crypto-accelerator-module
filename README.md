@@ -13,6 +13,7 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - Hashing
 - TRNG
 - AES
+- ECDH Shared Secret
 
 The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver. 
 
@@ -36,6 +37,7 @@ Each folder contains a README describing the example application in more detail.
 | hash       | Example application project for Hashing  |
 | trng       | Example application project for TRNG     |
 | aes        | Example application project for AES      |
+| ecdh       | Example application project for ECDH     |
 
 # Crypto Accelerator Module APIs
 
@@ -54,27 +56,31 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Algorithm|Performance|Parameters (sizes are in bytes)|
 |----|----|----|
-|SHA-1 (Digest)|928.80 Mbps|Message Size: 4,096|
-|SHA-224 (Digest)|1084.67 Mbps|Message Size: 4,096|
-|SHA-256 (Digest)|1091.54 Mbps|Message Size: 4,096|
-|SHA-384 (Digest)|1294.15 Mbps|Message Size: 4,096|
-|SHA-512 (Digest)|1293.64 Mbps|Message Size: 4,096|
-|AES-ECB (Encrypt)|113.17 Mbps|Key Size: 32, Plaintext Size: 128|
-|AES-ECB (Decrypt)|109.12 Mbps|Key Size: 32, Ciphertext Size: 128|
-|AES-CTR (Encrypt)|115.07 Mbps|Key Size: 32, Initialization Vector Size: 16, Plaintext Size: 128|
-|AES-CTR (Decrypt)|115.07 Mbps|Key Size: 32, Initialization Vector Size: 16, Ciphertext Size: 128|
-|AES-GCM (Encrypt)|39.82 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 13|
-|AES-GCM (Decrypt)|35.13 Mbps|Key Size: 32, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 13|
-|AES-CMAC (Direct)|30.75 Mbps|Key Size: 32, Plaintext Size: 532, MAC Size: 16|
+|SHA-1 (Digest)|934.09 Mbps|Message Size: 4,096|
+|SHA-224 (Digest)|1090.45 Mbps|Message Size: 4,096|
+|SHA-256 (Digest)|1094.46 Mbps|Message Size: 4,096|
+|SHA-384 (Digest)|1302.90 Mbps|Message Size: 4,096|
+|SHA-512 (Digest)|1299.29 Mbps|Message Size: 4,096|
+|AES-ECB (Encrypt)|104.25 Mbps|Key Size: 128, Plaintext Size: 128|
+|AES-ECB (Decrypt)|101.59 Mbps|Key Size: 128, Ciphertext Size: 128|
+|AES-CTR (Encrypt)|112.78 Mbps|Key Size: 128, Initialization Vector Size: 16, Plaintext Size: 128|
+|AES-CTR (Decrypt)|112.48 Mbps|Key Size: 128, Initialization Vector Size: 16, Ciphertext Size: 128|
+|AES-GCM (Encrypt)|33.71 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 16|
+|AES-GCM (Decrypt)|28.87 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 16|
+|AES-CMAC (Direct)|28.07 Mbps|Key Size: 128, Plaintext Size: 532, MAC Size: 16|
 |ECDSA (Sign)|3.92 ms|Curve: P-192|
-|ECDSA (Verify)|5.15 ms|Curve: P-192|
+|ECDSA (Verify)|5.14 ms|Curve: P-192|
 |ECDSA (Sign)|7.42 ms|Curve: P-256|
-|ECDSA (Verify)|9.92 ms|Curve: P-256|
-|ECDSA (Sign)|19.79 ms|Curve: P-384|
-|ECDSA (Verify)|27.07 ms|Curve: P-384|
-|ECDSA (Sign)|42.16 ms|Curve: P-521|
-|ECDSA (Verify)|58.10 ms|Curve: P-521|
-|TRNG (Generate)|123.13 ms|Output Size: 521|
+|ECDSA (Verify)|9.91 ms|Curve: P-256|
+|ECDSA (Sign)|19.80 ms|Curve: P-384|
+|ECDSA (Verify)|27.06 ms|Curve: P-384|
+|ECDSA (Sign)|42.15 ms|Curve: P-521|
+|ECDSA (Verify)|58.41 ms|Curve: P-521|
+|TRNG (Generate)|122.75 ms|Output Size: 521|
+|ECDH (Shared Secret Generate)|3.78 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.22 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.44 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.55 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
@@ -87,7 +93,7 @@ All projects have the following compiler options:
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
 |SHA-1 (Digest)|284|9,892|
-|SHA-1 (Init, Update, and Final)|284|9,936|
+|SHA-1 (Init, Update, and Final)|284|9,940|
 |SHA-224 (Digest)|284|9,892|
 |SHA-224 (Init, Update, and Final)|284|9,940|
 |SHA-256 (Digest)|284|9,892|
@@ -104,8 +110,12 @@ All projects have the following compiler options:
 |AES-GCM (Init, AddAadData, Cipher, and Final)|824|11,156|
 |AES-CMAC (Direct)|284|9,644|
 |AES-CMAC (Init, Cipher, and Final)|812|9,700|
-|ECDSA (Sign and Verify (P-192))|4,152|11,328|
-|ECDSA (Sign and Verify (P-256))|4,152|11,372|
-|ECDSA (Sign and Verify (P-384))|4,152|11,440|
-|ECDSA (Sign and Verify (P-521))|4,152|11,520|
+|ECDSA (Sign and Verify (P-192))|4,152|11,360|
+|ECDSA (Sign and Verify (P-256))|4,152|11,404|
+|ECDSA (Sign and Verify (P-384))|4,152|11,472|
+|ECDSA (Sign and Verify (P-521))|4,152|11,552|
 |TRNG (Generate)|56|4,612|
+|ECDH (Shared Secret (P-192))|4,152|10,744|
+|ECDH (Shared Secret (P-256))|4,152|10,788|
+|ECDH (Shared Secret (P-384))|4,152|10,856|
+|ECDH (Shared Secret (P-521))|4,152|10,928|
