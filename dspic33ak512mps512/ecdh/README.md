@@ -40,7 +40,7 @@ The following information will be printed on the COM port for all supported ECC 
 1. A header section with the ECC curve type name is printed.
 2. The Shared Secret is generated.
 3. Generated Shared Secret is printed out.
-4. This Shared Secret is compared to the expected output from **NIST** and the status is printed out.
+4. This Shared Secret X point value is compared to the expected output from **NIST** and the status is printed out.
 
 <img src="./images/dspic33ak512mps512_ecdh_demo.png" alt="ECDH Demo Output" width="750"/>
 
@@ -52,9 +52,9 @@ crypto_kas.h defines the Shared Secret Generation function
 ```c
 crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(
     crypto_HandlerType_E ecdhHandlerType_en,    // The type of crypto implementation to use (CRYPTO_HANDLER_HW_INTERNAL is the only supported input for this implementation)
-    uint8_t *ptr_privKey,                       // Private Key to sign the message with
+    uint8_t *ptr_privKey,                       // Private Key to perform ECDH operation with
     uint32_t privKeyLen,                        // Length of the Private Key
-    uint8_t *ptr_pubKey,                        // Public Key to sign the message with (An prepended KeyType is not implemented, Uncompressed key format is required)
+    uint8_t *ptr_pubKey,                        // Public Key to perform ECDH operation with (An prepended KeyType is not implemented, Uncompressed key format is required)
     uint32_t pubKeyLen,                         // Length of the Public Key
     uint8_t *ptr_sharedSecret,                  // Shared Secret output X component.
     uint32_t sharedSecretLen,                   // Length of the Shared Secret (Typically twice the size of the private key)
