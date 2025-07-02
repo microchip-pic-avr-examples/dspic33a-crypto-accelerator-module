@@ -4,7 +4,7 @@
    "content":{
       "metaDataVersion":"1.3.0",
       "name":"com.microchip.mplabx.project.dspic33a-crypto-accelerator-module",
-      "version":"1.0.2",
+      "version":"1.1.1",
       "displayName":"dsPIC33A Crypto Accelerator Module Hardware Driver and Demos",
       "projectName":"dspic33a-crypto-accelerator-module",
       "shortDescription":"These MPLAB® X IDE demo projects showcase applications built with the Crypto Library which leverages the Pre-compiled Crypto Accelerator Module(CAM) Hardware Driver to demonstrate various cryptographic algorithms supported by the CAM",
@@ -42,7 +42,8 @@
          "Hash",
          "TRNG",
          "AES",
-         "ECDSA"
+         "ECDSA",
+         "ECDH"
       ]
    }
 }
