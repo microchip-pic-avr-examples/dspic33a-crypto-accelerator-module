@@ -6,7 +6,7 @@
 
 # Crypto Accelerator Module AES/HASH Concurrent Execution Example Application
 ## Description
-This example application utilizes the Crypto Accelerator Module Library to perform concurrent AES and HASh operations to demonstrate context safety of the Crypto Accelerator Module Library.  AES and HASH operations using different sized input vectors are executed in parallel as multi-step (init/cipher/finalize)operations. As this application is not intended to demonstrate complete cryptographic compliance, a limited set of test vectors and algorithms are used.  The following AES and HASH algorithms are used:
+This example application utilizes the Crypto Accelerator Module Library to perform concurrent AES and HASH operations to demonstrate context safety of the Crypto Accelerator Module Library.  AES and HASH operations using different sized input vectors are executed in parallel as multi-step (init/cipher/finalize) operations. As this application is not intended to demonstrate complete cryptographic compliance, a limited set of test vectors and algorithms are used.  The following AES and HASH algorithms are used:
 - AES-ECB
 - AES-CTR
 - AES-CMAC
@@ -47,5 +47,5 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 3. The main application executes one step from each algorithm at a time, interleaving calls to each operation context.
 4. Because each operation has a different number of steps, execution changes which algorithm's operation happens in relation to others.
 5. As each operation completes its step, it indicates if the step was executed succesfully.  For the finalization step, a comparison against expected results is performed and the pass/fail message reflects that comparison.
-6. Each algorithm executes all defines test cases for that algorithm, one step at a time, until the test data indicates there are no more steps.
+6. Each algorithm executes all defined test cases for that algorithm, one step at a time, until the test data indicates there are no more steps.
 7. The application executes a number of iterations of steps 1-6 (defined as `7`, and controlled with the `TEST_ITERATIONS` definition in `app_aes_hash.c`).

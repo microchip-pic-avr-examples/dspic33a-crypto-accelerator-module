@@ -16,10 +16,8 @@
                        projectFiles="true">
           <itemPath>crypto/common_crypto/crypto_aead_cipher.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_config.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_mac_cipher.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_sym_cipher.h</itemPath>
-          <itemPath>crypto/common_crypto/device.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_hash.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">

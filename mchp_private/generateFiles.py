@@ -248,7 +248,7 @@ def copy_generated_files(options):
                     os.makedirs(d)
 
             print(YELLOW + "  Copying files..." + NORMAL)
-            FILES = [(os.path.join(curdir, OUTPUT_ROOT, 'templates', 'crypto_config.h'), CRYPTO_DIR),
+            FILES = [(os.path.join(curdir, OUTPUT_ROOT, 'templates'), CRYPTO_DIR),
                      (os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'crypto_common.h'), CRYPTO_DIR),
                     ]
 
