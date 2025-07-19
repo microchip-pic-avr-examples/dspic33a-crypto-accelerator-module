@@ -8,7 +8,7 @@
     app_aes_hash.c
 
   Summary:
-    This source file handles the running of a aes_hash-operation example to intersperse
+    This source file handles the running of a multi-operation example to intersperse
     AES and HASH operations to show context safety of the CAM library.
 *******************************************************************************/
 
@@ -73,7 +73,7 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-/* Test aes_hashple iterations of incremental hashing with different block sizes
+/* Test multiple iterations of incremental hashing with different block sizes
  * to show that arbitrary sizes are accepted. */
 #define BLOCK_SIZE_128              128UL
 #define BLOCK_SIZE_64               64UL
@@ -115,33 +115,33 @@ bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 
 const char *getTestMode(TEST_MODE testMode)
 {
-    const char *testModeStr = "???";
+    const char *testModeString = "???";
 
     switch (testMode)
     {
         case TEST_MODE_ENCRYPT:
-            testModeStr = "ENCRYPT";
+            testModeString = "ENCRYPT";
             break;
 
         case TEST_MODE_DECRYPT:
-            testModeStr = "DECRYPT";
+            testModeString = "DECRYPT";
             break;
 
         case TEST_MODE_HASH:
-            testModeStr = "HASH";
+            testModeString = "HASH";
             break;
 
         default:
             break;
     }
 
-    return testModeStr;
+    return testModeString;
 }
 
 
 typedef struct TEST_MODE_ERROR_STRING {
-    TEST_RESULT val;
-    const char * str;
+    TEST_RESULT value;
+    const char *string;
 } TEST_MODE_ERROR_STRING;
 
 static TEST_MODE_ERROR_STRING testModeErrorStrings[] = {
@@ -160,21 +160,21 @@ static TEST_MODE_ERROR_STRING testModeErrorStrings[] = {
 
 const char * getTestError(TEST_RESULT result)
 {
-    const char *testErrorStr = "UNKNOWN";
+    const char *testErrorString = "UNKNOWN";
     TEST_MODE_ERROR_STRING *err = testModeErrorStrings;
 
     do
     {
-        if (result == err->val)
+        if (result == err->value)
         {
-            testErrorStr = err->str;
+            testErrorString = err->string;
             break;
         }
 
         err++;
-    } while (NULL != err->str);
+    } while (NULL != err->string);
 
-    return testErrorStr;
+    return testErrorString;
 }
 
 

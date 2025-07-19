@@ -448,8 +448,6 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="800000-87ffff"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/workspace/crypto/cryptov4/crypto_apps_dspic33a/dspic33ak512mps512/aes_hash/aes_hash.X/debug/default/aes_hash_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>
@@ -905,8 +903,6 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="800000-87ffff"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/workspace/crypto/cryptov4/crypto_apps_dspic33a/dspic33ak512mps512/aes_hash/aes_hash.X/debug/default/aes_hash_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>
