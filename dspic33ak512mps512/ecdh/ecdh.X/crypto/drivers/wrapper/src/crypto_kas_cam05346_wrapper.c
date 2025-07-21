@@ -67,60 +67,59 @@ static CRYPTO_PKE_RESULT lCrypto_Kas_Ecdh_Hw_GetCurve(
         case CRYPTO_ECC_CURVE_P192:
             *hwEccCurve = P192;
             break;
-        
+
         case CRYPTO_ECC_CURVE_P256:
             *hwEccCurve = P256;
             break;
-        
+
         case CRYPTO_ECC_CURVE_P384:
             *hwEccCurve = P384;
             break;
-        
+
         case CRYPTO_ECC_CURVE_P521:
             *hwEccCurve = P521;
             break;
-            
+
         default:
             eccStatus = CRYPTO_PKE_RESULT_ERROR_CURVE;
             break;
     }
-    
+
     return eccStatus;
-}   
+}
 
 static crypto_Kas_Status_E lCrypto_Kas_Ecdh_Hw_MapResult(CRYPTO_PKE_RESULT result)
 {
     crypto_Kas_Status_E kasStatus;
-    
-    switch (result) 
+
+    switch (result)
     {
         case CRYPTO_PKE_RESULT_SUCCESS:
             kasStatus = CRYPTO_KAS_SUCCESS;
             break;
-            
+
         case CRYPTO_PKE_ERROR_PUBKEYCOMPRESS:
             kasStatus = CRYPTO_KAS_ERROR_PUBKEY;
             break;
-            
+
         case CRYPTO_PKE_RESULT_ERROR_CURVE:
             kasStatus = CRYPTO_KAS_ERROR_CURVE;
             break;
-        
+
         case CRYPTO_PKE_RESULT_INIT_FAIL:
         case CRYPTO_PKE_RESULT_ERROR_FAIL:
             kasStatus = CRYPTO_KAS_ERROR_FAIL;
             break;
-            
         default:
             kasStatus = CRYPTO_KAS_ERROR_FAIL;
             break;
     }
-    
+
     return kasStatus;
 }
 
-crypto_Kas_Status_E Crypto_Kas_Ecdh_Hw_SharedSecret(uint8_t *privKey, 
-    uint32_t privKeyLen, uint8_t *pubKey, uint32_t pubKeyLen, 
+crypto_Kas_Status_E Crypto_Kas_Ecdh_Hw_SharedSecret(uint8_t *privKey,
+    uint32_t privKeyLen, uint8_t *pubKey, uint32_t pubKeyLen,
     uint8_t *secret, uint32_t secretLen, crypto_EccCurveType_E eccCurveType_en)
 {
     CRYPTO_PKE_RESULT hwResult;
@@ -129,19 +128,18 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_Hw_SharedSecret(uint8_t *privKey,
 
     /* Get curve */
     hwResult = lCrypto_Kas_Ecdh_Hw_GetCurve(eccCurveType_en, &hwEccCurve);
-    
     if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
     {
         hwResult = DRV_CRYPTO_ECDH_InitEccParams(&eccData, privKey, privKeyLen,
                                              pubKey, pubKeyLen, hwEccCurve);
     }
-     
+
     lDRV_CRYPTO_ECC_InterruptSetup();
-    
+
     if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
     {
         /* Get shared key */
         hwResult = DRV_CRYPTO_ECDH_GetSharedSecret(&eccData, secret, secretLen);
     }
-    return lCrypto_Kas_Ecdh_Hw_MapResult(hwResult);     
+    return lCrypto_Kas_Ecdh_Hw_MapResult(hwResult);
 }
