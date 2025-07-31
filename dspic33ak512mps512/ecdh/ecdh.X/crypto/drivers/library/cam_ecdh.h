@@ -78,7 +78,7 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_InitEccParams(PKE_CONFIG *eccData, uint8_t *pr
  *  @brief Generate the Shared Secret.
  *  @param eccData Configuration structure for ECDH information.
  *  @param secret Ouput to store the Shared Secret to.
- *  @param secretLen Length of the Shared Secret.
+ *  @param secretLength Length of the Shared Secret.
  *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
  **/
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_GetSharedSecret(PKE_CONFIG *eccData, uint8_t *secret, uint32_t secretLength);
