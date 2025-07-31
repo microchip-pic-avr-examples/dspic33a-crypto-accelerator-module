@@ -41,13 +41,13 @@ Microchip or any third party.
 
  #ifndef CAM_VERSION_H
  #define CAM_VERSION_H
- 
- // Version date format yyyymmdd
- #define CAM_LIBRARY_VERSION_DATE   "20250617"
 
- // Version format semver 
+ // Version date format yyyymmdd
+ #define CAM_LIBRARY_VERSION_DATE   "20250731"
+
+ // Version format semver
  #define CAM_LIBRARY_VERSION_MAJOR  1
  #define CAM_LIBRARY_VERSION_MINOR  1
- #define CAM_LIBRARY_VERSION_PATCH  0
- 
+ #define CAM_LIBRARY_VERSION_PATCH  1
+
  #endif /* CAM_VERSION_H */
