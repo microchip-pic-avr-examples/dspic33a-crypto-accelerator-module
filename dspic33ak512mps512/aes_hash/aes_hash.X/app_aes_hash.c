@@ -558,7 +558,11 @@ void test_concurrent(void)
                 {
                     // Flip symmetric test mode and operations mode.
                     symTestMode = TEST_MODE_ENCRYPT;
-                    if (++symOperMode == SYM_OPER_MODE_COUNT) symOperMode = 0;
+                    symOperMode++;
+                    if (symOperMode == SYM_OPER_MODE_COUNT)
+                    {
+                        symOperMode = 0;
+                    }
                 }
 
                 (void)sym_test_init(&symContext, symTestMode, symOperMode);
