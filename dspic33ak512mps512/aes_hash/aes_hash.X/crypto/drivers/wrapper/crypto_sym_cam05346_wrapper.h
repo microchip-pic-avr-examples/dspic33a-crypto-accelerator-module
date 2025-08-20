@@ -88,6 +88,9 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Init(void *aesInitCtx, crypto_CipherOper_E
 crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Cipher(void *aesCipherCtx, uint8_t *inputData,
     uint32_t dataLen, uint8_t *outData);
 
+crypto_Sym_Status_E Crypto_Sym_Hw_AesXts_Cipher(void *aesCipherCtx,
+    uint8_t *inputData, uint32_t dataLen, uint8_t *outData, uint8_t* tweak);
+
 crypto_Sym_Status_E Crypto_Sym_Hw_Aes_EncryptDirect(crypto_Sym_OpModes_E opMode_en,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData,
     uint8_t *key, uint32_t keyLen, uint8_t *initVect);

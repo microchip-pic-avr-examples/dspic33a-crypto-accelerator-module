@@ -133,6 +133,10 @@ static const char *getTestOpMode(crypto_Sym_OpModes_E opMode)
             opModeStr = "AES-CTR";
             break;
 
+        case CRYPTO_SYM_OPMODE_XTS:
+            opModeStr = "AES-XTS";
+            break;
+
         default:
             break;
     }
@@ -201,7 +205,15 @@ static TEST_RESULT aes_sym_test_final(void *context)
     (void) printf(CYAN);
     printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Sym_Aes_Cipher(&aesCtx, data, test->dataLength, testContext->dataResult);
+    if (test->mode == CRYPTO_SYM_OPMODE_XTS)
+    {
+        status = Crypto_Sym_AesXts_Cipher(&aesCtx, data, test->dataLength, testContext->dataResult, test->tweak);
+    }
+    else
+    {
+        status = Crypto_Sym_Aes_Cipher(&aesCtx, data, test->dataLength, testContext->dataResult);
+    }
+
     result = (status == CRYPTO_SYM_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
 
     printCryptoResult(result, status);
@@ -284,6 +296,15 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
             context->tests = (uint8_t *)get_ctr_test_vectors();
             context->testCount = get_ctr_test_vector_count();
             testContext->opMode = CRYPTO_SYM_OPMODE_CTR;
+        }
+        break;
+
+        case SYM_OPER_MODE_AES_XTS:
+        {
+            context->states = sym_test_states;
+            context->tests = (uint8_t *)get_xts_test_vectors();
+            context->testCount = get_xts_test_vector_count();
+            testContext->opMode = CRYPTO_SYM_OPMODE_XTS;
         }
         break;
 

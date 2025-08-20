@@ -1,17 +1,3 @@
-/*******************************************************************************
-  Application Header File
-
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    app_sym.h
-
-  Summary:
-    This header file provides prototypes and definitions for symmetric AES
-    algorithms in the application.
-*******************************************************************************/
-
 //DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
@@ -37,41 +23,40 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef APP_SYM_H
-#define	APP_SYM_H
+#ifndef XTS_TEST_VECTOR_H
+#define	XTS_TEST_VECTOR_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Configuration Options
-// *****************************************************************************
-// *****************************************************************************
+#include <stdint.h>
 
-#define RUN_SYM_ECB_TEST
-#define RUN_SYM_CTR_TEST
-#define RUN_SYM_XTS_TEST
+// Maximum test vector data size.
+#define XTS_TEST_VECTOR_SIZE    (96u)
+#define XTS_TWEAK_SIZE          (16u)
 
-#define DATA_SIZE 48
-#define INIT_VECTOR_SIZE 16
+#define KEY_TYPE_AES128_SIZE    (16UL)
+#define KEY_TYPE_AES256_SIZE    (32UL)
+#define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Function Definitions
-// *****************************************************************************
-// *****************************************************************************
+typedef struct XTS_TEST_VECTOR {
+    uint8_t key[KEY_TYPE_MAX_SIZE];
+    uint8_t key2[KEY_TYPE_MAX_SIZE];
+    uint8_t plaintext[XTS_TEST_VECTOR_SIZE];
+    uint8_t ciphertext[XTS_TEST_VECTOR_SIZE];
+    uint8_t tweak[XTS_TWEAK_SIZE];
 
-void aes_sym_ecb_test(void);
+    uint32_t keyLength;
+    uint32_t textLength;
 
-void aes_sym_ctr_test(void);
+} XTS_TEST_VECTOR;
 
-void aes_sym_xts_test(void);
+XTS_TEST_VECTOR * get_xts_test_vectors(void);
+uint32_t get_xts_test_count(void);
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* APP_SYM_H */
-
+#endif	/* GCM_TEST_VECTOR_H */

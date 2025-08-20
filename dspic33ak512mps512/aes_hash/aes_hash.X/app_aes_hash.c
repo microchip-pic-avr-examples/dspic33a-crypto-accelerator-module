@@ -331,6 +331,38 @@ void aes_test_ctr(void)
 }
 #endif
 
+#ifdef RUN_SYM_XTS_TEST
+void aes_test_xts(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-XTS mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_XTS);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_XTS);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
 void aes_test_sym(void)
 {
 #ifdef RUN_SYM_ECB_TEST
@@ -339,6 +371,10 @@ void aes_test_sym(void)
 
 #ifdef RUN_SYM_CTR_TEST
     aes_test_ctr();
+#endif
+
+#ifdef RUN_SYM_XTS_TEST
+    aes_test_xts();
 #endif
 }
 
@@ -522,7 +558,7 @@ void test_concurrent(void)
                 {
                     // Flip symmetric test mode and operations mode.
                     symTestMode = TEST_MODE_ENCRYPT;
-                    symOperMode = (symOperMode == SYM_OPER_MODE_AES_ECB) ? SYM_OPER_MODE_AES_CTR : SYM_OPER_MODE_AES_ECB;
+                    if (++symOperMode == SYM_OPER_MODE_COUNT) symOperMode = 0;
                 }
 
                 (void)sym_test_init(&symContext, symTestMode, symOperMode);

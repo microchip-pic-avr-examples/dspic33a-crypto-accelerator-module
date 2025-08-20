@@ -59,6 +59,7 @@ Microchip or any third party.
 // *****************************************************************************
 
 #define AES_SYM_INIT_VECTOR_LENGTH (16U)
+#define AES_SYM_XTS_TWEAK_LENGTH   (16U)
 
 // *****************************************************************************
 // *****************************************************************************
@@ -85,6 +86,10 @@ static crypto_Sym_Status_E lCrypto_Sym_Hw_Aes_GetCipherMode(crypto_Sym_OpModes_E
             break;
         case CRYPTO_SYM_OPMODE_CTR:
             *mode = MODE_CTR;
+            status = CRYPTO_SYM_CIPHER_SUCCESS;
+            break;
+        case CRYPTO_SYM_OPMODE_XTS:
+            *mode = MODE_XTS;
             status = CRYPTO_SYM_CIPHER_SUCCESS;
             break;
         default:
@@ -197,6 +202,53 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Cipher(void *aesCipherCtx,
         if(aesStatus == AES_NO_ERROR)
         {
             aesStatus = DRV_CRYPTO_AES_AddOutputData(aesCtx->contextData, outData, fullBlockLen);
+        }
+
+        if(aesStatus == AES_NO_ERROR)
+        {
+            aesStatus = DRV_CRYPTO_AES_Execute(aesCtx->contextData);
+        }
+
+        if(aesStatus == AES_NO_ERROR)
+        {
+            status = CRYPTO_SYM_CIPHER_SUCCESS;
+        }
+    }
+
+    return status;
+}
+
+crypto_Sym_Status_E Crypto_Sym_Hw_AesXts_Cipher(void *aesCipherCtx,
+    uint8_t *inputData, uint32_t dataLen, uint8_t *outData, uint8_t* tweakData)
+{
+    CRYPTO_AES_HW_CONTEXT *aesCtx = (CRYPTO_AES_HW_CONTEXT*) aesCipherCtx;
+    crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
+    AES_ERROR aesStatus;
+    AES_ERROR aesActive;
+
+    aesStatus = DRV_CRYPTO_AES_IsActive(aesCtx->contextData, &aesActive);
+    if ((aesStatus == AES_NO_ERROR) && (aesActive == AES_OPERATION_IS_ACTIVE))
+    {
+        aesStatus = DRV_CRYPTO_AES_AddTweakData(aesCtx->contextData, tweakData, AES_SYM_XTS_TWEAK_LENGTH);
+
+        if(aesStatus == AES_NO_ERROR)
+        {
+            /* XTS block cipher accepts the given input data length and the AES driver
+             * automatically pads to the next block size, marking the extra bytes as
+             * invalid. */
+            aesStatus = DRV_CRYPTO_AES_AddInputData(aesCtx->contextData, inputData, dataLen);
+        }
+
+        if(aesStatus == AES_NO_ERROR)
+        {
+            aesStatus = DRV_CRYPTO_AES_AddOutputData(aesCtx->contextData, outData, dataLen);
+        }
+
+        if(aesStatus == AES_NO_ERROR)
+        {
+            /* For XTS ciphers, the extra bytes in the output stream must be discarded. */
+            uint32_t numOfDiscardBytes = lCrypto_Sym_Hw_Aes_GetNumOfInvalidBytes(dataLen);
+            aesStatus = DRV_CRYPTO_AES_DiscardData(aesCtx->contextData, numOfDiscardBytes);
         }
 
         if(aesStatus == AES_NO_ERROR)

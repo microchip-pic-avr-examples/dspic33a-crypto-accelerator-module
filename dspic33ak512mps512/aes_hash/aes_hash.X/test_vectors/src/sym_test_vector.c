@@ -77,6 +77,8 @@ static uint8_t keyData[32] = {
     35,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
@@ -89,6 +91,8 @@ static uint8_t keyData[32] = {
     41,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
@@ -101,6 +105,8 @@ static uint8_t keyData[32] = {
     48,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
@@ -136,6 +142,8 @@ uint32_t get_ecb_test_vector_count(void)
     35,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
@@ -148,6 +156,8 @@ uint32_t get_ecb_test_vector_count(void)
     41,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
@@ -160,6 +170,8 @@ uint32_t get_ecb_test_vector_count(void)
     48,
     keyData,
     CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
     initializationVector,
     INIT_VECTOR_SIZE
 };
