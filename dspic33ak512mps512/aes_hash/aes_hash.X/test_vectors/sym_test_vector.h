@@ -43,6 +43,9 @@ typedef struct TEST_VECTOR {
     uint8_t *   key;
     uint32_t    keyLength;
 
+    uint8_t *   tweak;
+    uint32_t    tweakLength;
+
     uint8_t *   initializationVector;
     uint32_t    initializationVectorLength;
 } TEST_VECTOR;
@@ -52,6 +55,9 @@ uint32_t get_ecb_test_vector_count(void);
 
 TEST_VECTOR * get_ctr_test_vectors(void);
 uint32_t get_ctr_test_vector_count(void);
+
+TEST_VECTOR * get_xts_test_vectors(void);
+uint32_t get_xts_test_vector_count(void);
 
 #ifdef	__cplusplus
 }

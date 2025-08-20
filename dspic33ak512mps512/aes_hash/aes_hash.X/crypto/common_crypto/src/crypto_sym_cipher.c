@@ -87,9 +87,19 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Init(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, c
         ret_aesStatus_en = CRYPTO_SYM_ERROR_OPMODE;
     }
     else if(
+            (opMode_en != CRYPTO_SYM_OPMODE_XTS) &&
             ( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256) )  ) //key length check other than XTS mode
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
+    }
+    else if( (opMode_en == CRYPTO_SYM_OPMODE_XTS) &&
+                (   (ptr_key == NULL)
+                    ||  ( (keyLen != (uint32_t) (((uint32_t)CRYPTO_AESKEYSIZE_128)*2UL))
+                            && (keyLen != (uint32_t)(((uint32_t)CRYPTO_AESKEYSIZE_256)*2UL)) )
+                )
+            )//key length check for XTS mode
+    {
+        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
     }
     else if( (sessionID == 0u) || (sessionID > (uint32_t)CRYPTO_SYM_SESSION_MAX) )
     {
@@ -97,6 +107,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Init(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, c
     }
     else if( ptr_initVect == NULL
             && (opMode_en != CRYPTO_SYM_OPMODE_ECB)
+            && (opMode_en != CRYPTO_SYM_OPMODE_XTS)
             )
     {
         ret_aesStatus_en = CRYPTO_SYM_ERROR_IV;
@@ -157,6 +168,41 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Cipher(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st,
     return ret_aesStatus_en;
 }
 
+crypto_Sym_Status_E Crypto_Sym_AesXts_Cipher(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData, uint8_t *ptr_tweak)
+{
+    crypto_Sym_Status_E ret_aesXtsStat_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
+
+    if(ptr_aesCtx_st == NULL)
+    {
+        ret_aesXtsStat_en = CRYPTO_SYM_ERROR_CTX;
+    }
+    else if( (ptr_inputData == NULL) || (dataLen == 0u) )
+    {
+        ret_aesXtsStat_en = CRYPTO_SYM_ERROR_INPUTDATA;
+    }
+    else if( (ptr_outData == NULL) )
+    {
+        ret_aesXtsStat_en = CRYPTO_SYM_ERROR_OUTPUTDATA;
+    }
+    else if(ptr_tweak == NULL)
+    {
+        ret_aesXtsStat_en = CRYPTO_SYM_ERROR_ARG;
+    }
+    else
+    {
+        switch(ptr_aesCtx_st->symHandlerType_en)
+        {
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_aesXtsStat_en = Crypto_Sym_Hw_AesXts_Cipher(ptr_aesCtx_st->arr_symDataCtx, ptr_inputData, dataLen, ptr_outData, ptr_tweak);
+                break;
+            default:
+                ret_aesXtsStat_en = CRYPTO_SYM_ERROR_HDLR;
+                break;
+        }
+    }
+    return ret_aesXtsStat_en;
+}
+
 crypto_Sym_Status_E Crypto_Sym_Aes_EncryptDirect(crypto_HandlerType_E handlerType_en, crypto_Sym_OpModes_E opMode_en, uint8_t *ptr_inputData,
                                                         uint32_t dataLen, uint8_t *ptr_outData, uint8_t *ptr_key, uint32_t keyLen, uint8_t *ptr_initVect, uint32_t sessionID)
 {
@@ -179,9 +225,17 @@ crypto_Sym_Status_E Crypto_Sym_Aes_EncryptDirect(crypto_HandlerType_E handlerTyp
 		ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
 	}
 	else if(
+            (opMode_en != CRYPTO_SYM_OPMODE_XTS) &&
             ((keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256) ) ) //key length check other than XTS mode
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
+    }
+    else if( (opMode_en == CRYPTO_SYM_OPMODE_XTS) &&
+							(keyLen != (uint32_t) (((uint32_t)CRYPTO_AESKEYSIZE_128)*2UL))
+                            && (keyLen != (uint32_t)(((uint32_t)CRYPTO_AESKEYSIZE_256)*2UL))
+            )//key length check for XTS mode
+    {
+        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
     }
     else if( (sessionID == 0u ) || (sessionID > (uint32_t)CRYPTO_SYM_SESSION_MAX) )
     {
@@ -226,9 +280,19 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(crypto_HandlerType_E handlerTyp
         ret_aesStatus_en = CRYPTO_SYM_ERROR_OPMODE;
     }
     else if(
+            (opMode_en != CRYPTO_SYM_OPMODE_XTS) &&
             ( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256) )  ) //key length check other than XTS mode
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
+    }
+    else if( (opMode_en == CRYPTO_SYM_OPMODE_XTS) &&
+                (   (ptr_key == NULL)
+                    ||  ( (keyLen != (uint32_t) (((uint32_t)CRYPTO_AESKEYSIZE_128)*2UL))
+                            && (keyLen != (uint32_t)(((uint32_t)CRYPTO_AESKEYSIZE_256)*2UL)) )
+                )
+            )//key length check for XTS mode
+    {
+        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
     }
     else if( (sessionID == 0u) || (sessionID > (uint32_t)CRYPTO_SYM_SESSION_MAX) )
     {

@@ -124,6 +124,10 @@ void aes_test_sym(void)
     #ifdef RUN_SYM_CTR_TEST
     aes_sym_ctr_test();
     #endif
+
+    #ifdef RUN_SYM_XTS_TEST
+    aes_sym_xts_test();
+    #endif
 }
 
 void aes_test_mac(void)
