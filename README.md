@@ -5,8 +5,8 @@
 </picture>
 
 # dsPIC33A Crypto Accelerator Module Hardware Driver and Demos
-- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
-    
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document.
+
 # Description
 dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE projects to demonstrate the following CAM operations:
 - ECDSA Sign/Verify
@@ -15,7 +15,7 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - AES
 - ECDH Shared Secret
 
-The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver. 
+The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver.
 
 # Prerequisites
 
@@ -38,6 +38,7 @@ Each folder contains a README describing the example application in more detail.
 | trng       | Example application project for TRNG     |
 | aes        | Example application project for AES      |
 | ecdh       | Example application project for ECDH     |
+| aes_hash   | Example concurrent AES+HASH project      |
 
 # Crypto Accelerator Module APIs
 
@@ -83,7 +84,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDH (Shared Secret Generate)|41.55 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
-The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library. 
+The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
 
 All projects have the following compiler options:
 - Optimization for size (-Os)

@@ -57,7 +57,8 @@ Microchip or any third party.
 // This is too large to put on the stack.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 
-static crypto_Sym_Status_E sym_xts_test(crypto_CipherOper_E encrypt,
+
+static crypto_Sym_Status_E aes_sym_xts_test_direct(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
         uint8_t* tweak, uint8_t* result)
 {
@@ -65,7 +66,54 @@ static crypto_Sym_Status_E sym_xts_test(crypto_CipherOper_E encrypt,
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
-        (void) printf("\r\n\r\n ENCRYPTING...");
+        (void) printf("\r\n\r\n ENCRYPTING (DIRECT)...");
+
+        if (dataLength != 0UL)
+        {
+            printHexArray("Data (Input)         ", data, dataLength);
+        }
+        else
+        {
+            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf("\r\n%s", " Data (Input)           :  None");
+        }
+
+        status = Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_SYM_OPMODE_XTS, data, dataLength, result, key, keyLength, tweak, TEST_SESSION_ID);
+
+        if (status == CRYPTO_SYM_CIPHER_SUCCESS)
+        {
+            printHexArray("Data (Encrypted)     ", result, dataLength);
+        }
+    }
+    else
+    {
+        (void) printf("\r\n\r\n DECRYPTING (DIRECT)...");
+
+        printHexArray("Data (Input)         ", data, dataLength);
+
+        status = Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_SYM_OPMODE_XTS, data, dataLength, result, key, keyLength, tweak, TEST_SESSION_ID);
+
+        if (status == CRYPTO_SYM_CIPHER_SUCCESS)
+        {
+            printHexArray("Data (Decrypted)     ", result, dataLength);
+        }
+    }
+
+    return status;
+}
+
+
+static crypto_Sym_Status_E aes_sym_xts_test_steps(crypto_CipherOper_E encrypt,
+        uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
+        uint8_t* tweak, uint8_t* result)
+{
+    crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
+
+    if (encrypt == CRYPTO_CIOP_ENCRYPT)
+    {
+        (void) printf("\r\n\r\n ENCRYPTING (STEPS)...");
 
         if (dataLength != 0UL)
         {
@@ -91,7 +139,7 @@ static crypto_Sym_Status_E sym_xts_test(crypto_CipherOper_E encrypt,
     }
     else
     {
-        (void) printf("\r\n\r\n DECRYPTING...");
+        (void) printf("\r\n\r\n DECRYPTING (STEPS)...");
 
         printHexArray("Data (Input)         ", data, dataLength);
 
@@ -110,6 +158,7 @@ static crypto_Sym_Status_E sym_xts_test(crypto_CipherOper_E encrypt,
 
     return status;
 }
+
 
 static void checkEncryption(uint8_t *text, uint8_t *result, uint32_t length)
 {
@@ -139,8 +188,12 @@ void aes_sym_xts_test(void)
 {
     crypto_Sym_Status_E status;
 
-    uint8_t encryptedResult[XTS_TEST_VECTOR_SIZE];
-    uint8_t decryptedResult[XTS_TEST_VECTOR_SIZE];
+    uint8_t encryptedDirectResult[XTS_TEST_VECTOR_SIZE];
+    uint8_t decryptedDirectResult[XTS_TEST_VECTOR_SIZE];
+
+    uint8_t encryptedStepsResult[XTS_TEST_VECTOR_SIZE];
+    uint8_t decryptedStepsResult[XTS_TEST_VECTOR_SIZE];
+
     uint8_t xtsKey[KEY_TYPE_MAX_SIZE * 2UL];
 
     const char* testWrapper = "SYMMETRIC";
@@ -158,16 +211,15 @@ void aes_sym_xts_test(void)
 
         printHexArray("Key                  ", test->key, test->keyLength);
         printHexArray("Key2                 ", &test->key2, test->keyLength);
+        printHexArray("Tweak                ", &test->tweak, XTS_TWEAK_SIZE);
 
         (void)memcpy(xtsKey, test->key, test->keyLength);
         (void)memcpy(&xtsKey[test->keyLength], test->key2, test->keyLength);
 
         plaintext = (test->textLength > 0UL) ? test->plaintext : NULL;
-        ciphertext = (test->textLength > 0UL) ? encryptedResult : NULL;
+        ciphertext = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = sym_xts_test(CRYPTO_CIOP_ENCRYPT, plaintext, test->textLength, xtsKey,
-                              (test->keyLength * 2U), test->tweak, encryptedResult);
-
+        status = aes_sym_xts_test_direct(CRYPTO_CIOP_ENCRYPT, plaintext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, encryptedDirectResult);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
             printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
@@ -178,8 +230,7 @@ void aes_sym_xts_test(void)
 
             if (test->textLength > 0UL)
             {
-                status = sym_xts_test(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey,
-                                     (test->keyLength * 2), test->tweak, decryptedResult);
+                status = aes_sym_xts_test_direct(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedDirectResult);
                 if (status != CRYPTO_SYM_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
@@ -187,17 +238,49 @@ void aes_sym_xts_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEquality(test->plaintext, decryptedResult, test->textLength);
+                    checkArrayEquality(test->plaintext, decryptedDirectResult, test->textLength);
                 }
             }
         }
 
         (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
         (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+
+        ciphertext = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
+
+        status = aes_sym_xts_test_steps(CRYPTO_CIOP_ENCRYPT, plaintext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, encryptedStepsResult);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            (void) printf(RED"\r\nTEST FAILED"RESET_COLOR);
+            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
         }
+        else
+        {
+            checkEncryption(test->ciphertext, ciphertext, test->textLength);
+
+            if (test->textLength > 0UL)
+            {
+                status = aes_sym_xts_test_direct(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedStepsResult);
+                if (status != CRYPTO_SYM_CIPHER_SUCCESS)
+                {
+                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
+                }
+                else
+                {
+                    (void) printf("\r\n\r\n VERIFYING...");
+                    checkArrayEquality(test->plaintext, decryptedStepsResult, test->textLength);
+                }
+            }
+        }
+
+        (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf("\r\n\r\n COMPARING TESTS...");
+
+        // Verify the direct and stepwise tests generate the same result.
+        printHexArray("Direct Encryption    ", encryptedDirectResult, test->textLength);
+        printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->textLength);
+
+        checkArrayEquality(encryptedDirectResult, encryptedStepsResult, test->textLength);
 
         test++;
     }

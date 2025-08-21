@@ -276,7 +276,15 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_EncryptDirect(crypto_Sym_OpModes_E opMode_
 
     if (status == CRYPTO_SYM_CIPHER_SUCCESS)
     {
-        status = Crypto_Sym_Hw_Aes_Cipher(&aesCtx, inputData, dataLen, outData);
+        if (opMode_en == CRYPTO_SYM_OPMODE_XTS)
+        {
+            // CryptoV4 uses the 'initVect' parameter for the XTS tweak data.
+            status = Crypto_Sym_Hw_AesXts_Cipher(&aesCtx, inputData, dataLen, outData, initVect);
+        }
+        else
+        {
+            status = Crypto_Sym_Hw_Aes_Cipher(&aesCtx, inputData, dataLen, outData);
+        }
     }
 
     return status;
@@ -293,7 +301,15 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_DecryptDirect(crypto_Sym_OpModes_E opMode_
 
     if (status == CRYPTO_SYM_CIPHER_SUCCESS)
     {
-        status = Crypto_Sym_Hw_Aes_Cipher(&aesCtx, inputData, dataLen, outData);
+        if (opMode_en == CRYPTO_SYM_OPMODE_XTS)
+        {
+            // CryptoV4 uses the 'initVect' parameter for the XTS tweak data.
+            status = Crypto_Sym_Hw_AesXts_Cipher(&aesCtx, inputData, dataLen, outData, initVect);
+        }
+        else
+        {
+            status = Crypto_Sym_Hw_Aes_Cipher(&aesCtx, inputData, dataLen, outData);
+        }
     }
 
     return status;
