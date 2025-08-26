@@ -56,7 +56,7 @@ extern "C" {
 // *****************************************************************************
 
 // The minimum size to store a CAM library AES-CMAC context data block.
-#define MINIMUM_CMAC_CONTEXT_DATA_SIZE  (236UL)
+#define MINIMUM_CMAC_CONTEXT_DATA_SIZE  (240UL)
 
 typedef struct
 {

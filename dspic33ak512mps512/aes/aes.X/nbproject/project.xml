@@ -11,6 +11,7 @@
             <sourceRootList>
                 <sourceRootElem>../src</sourceRootElem>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../../../../crypto_cam_src/driver</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
