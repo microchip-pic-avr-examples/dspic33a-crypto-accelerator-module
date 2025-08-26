@@ -58,6 +58,9 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Initialize the CAM library's AES interrupt handlers.
+ */
 static void lDRV_CRYPTO_AES_InterruptSetup(void)
 {
     (void)Crypto_Int_Hw_Register_Handler(CRYPTO1_INT, DRV_CRYPTO_AES_IsrHelper);
@@ -150,19 +153,35 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t d
                                               uint8_t *ptr_key, uint32_t keyLen)
 {
     CRYPTO_CMAC_HW_CONTEXT cmacCtx;
+    register uint8_t *cmacContext = cmacCtx.contextData;
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPFAIL;
+    AES_ERROR aesStatus = AES_INITIALIZE_ERROR;
 
-    status = Crypto_Sym_Hw_Cmac_Init(&cmacCtx, ptr_key, keyLen);
+    // Context data must be cleared.
+    (void)memset(cmacContext, 0, sizeof(cmacCtx.contextData));
 
-    if(status == CRYPTO_MAC_CIPHER_SUCCESS)
+    aesStatus = DRV_CRYPTO_AES_Initialize(cmacContext, MODE_CMAC, OP_ENCRYPT, ptr_key, keyLen, NULL, 0U);
+    if(aesStatus == AES_NO_ERROR)
     {
-        status = Crypto_Sym_Hw_Cmac_Cipher(&cmacCtx, ptr_inputData, dataLen);
+        lDRV_CRYPTO_AES_InterruptSetup();
+        aesStatus = DRV_CRYPTO_AES_AddInputData(cmacContext, ptr_inputData, dataLen);
     }
 
-    if(status == CRYPTO_MAC_CIPHER_SUCCESS)
+    if(aesStatus == AES_NO_ERROR)
     {
-        status = Crypto_Sym_Hw_Cmac_Final(&cmacCtx, ptr_outMac, macLen);
+        if ((NULL != ptr_outMac) && (0UL != macLen))
+        {
+            aesStatus = DRV_CRYPTO_AES_AddOutputData(cmacContext, ptr_outMac, macLen);
+            if(aesStatus == AES_NO_ERROR)
+            {
+                aesStatus = DRV_CRYPTO_AES_Execute(cmacContext);
+            }
+        }
     }
 
+    if (aesStatus == AES_NO_ERROR)
+    {
+        status = CRYPTO_MAC_CIPHER_SUCCESS;
+    }
     return status;
 }

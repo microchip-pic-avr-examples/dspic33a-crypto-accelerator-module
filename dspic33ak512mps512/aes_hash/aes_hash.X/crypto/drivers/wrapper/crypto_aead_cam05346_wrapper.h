@@ -66,7 +66,7 @@
 // *****************************************************************************
 
 // The minimum size to store a CAM library AEAD context data block.
-#define MINIMUM_AEAD_CONTEXT_DATA_SIZE  (252U)
+#define MINIMUM_AEAD_CONTEXT_DATA_SIZE  (256U)
 
 // The size of the AES-GCM authentication tag.
 #define AES_GCM_AUTHTAG_SIZE            (16U)
