@@ -66,7 +66,7 @@ Microchip or any third party.
 // *****************************************************************************
 
 // The minimum size to store a CAM library AES context data block.
-#define MINIMUM_AES_CONTEXT_DATA_SIZE  (252UL)
+#define MINIMUM_AES_CONTEXT_DATA_SIZE  (256UL)
 
 typedef struct
 {
@@ -87,6 +87,9 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Init(void *aesInitCtx, crypto_CipherOper_E
 
 crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Cipher(void *aesCipherCtx, uint8_t *inputData,
     uint32_t dataLen, uint8_t *outData);
+
+crypto_Sym_Status_E Crypto_Sym_Hw_AesXts_Cipher(void *aesCipherCtx,
+    uint8_t *inputData, uint32_t dataLen, uint8_t *outData, uint8_t* tweak);
 
 crypto_Sym_Status_E Crypto_Sym_Hw_Aes_EncryptDirect(crypto_Sym_OpModes_E opMode_en,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData,

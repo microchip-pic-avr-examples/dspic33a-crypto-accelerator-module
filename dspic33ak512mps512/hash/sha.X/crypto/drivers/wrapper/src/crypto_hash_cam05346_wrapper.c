@@ -58,12 +58,21 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Initialize the CAM library's AES interrupt handlers.
+ */
 static void lDRV_CRYPTO_HASH_InterruptSetup(void)
 {
     (void)Crypto_Int_Hw_Register_Handler(CRYPTO1_INT, DRV_CRYPTO_HASH_IsrHelper);
     (void)Crypto_Int_Hw_Enable(CRYPTO1_INT);
 }
 
+/**
+ * @brief Get the equivalent CAM library hash algorithm (operation mode).
+ * @param shaAlgorithm The crypto SHA algorithm.
+ * @param mode Pointer to a value to hold the equivalent CAM library hash operation mode.
+ * @return CRYPTO_HASH_SUCCESS on success, CRYPTO_HASH_ERROR_FAIL on failure.
+ */
 static crypto_Hash_Status_E lCrypto_Hash_Hw_Sha_GetAlgorithm(crypto_Hash_Algo_E shaAlgorithm,
         HASHCON_MODE* mode)
 {
@@ -99,6 +108,12 @@ static crypto_Hash_Status_E lCrypto_Hash_Hw_Sha_GetAlgorithm(crypto_Hash_Algo_E 
     return status;
 }
 
+/**
+ * @brief Get the length of the SHA digest for the given algorithm.
+ * @param shaAlgorithm The crypto SHA algorithm.
+ * @param digestLength Pointer to a value to hold the length of the SHA digest.
+ * @return CRYPTO_HASH_SUCCESS on success, CRYPTO_HASH_ERROR_FAIL on failure.
+ */
 static crypto_Hash_Status_E lCrypto_Hash_Hw_Sha_GetDigestLength(crypto_Hash_Algo_E shaAlgorithm, uint32_t *digestLength)
 {
     crypto_Hash_Status_E status = CRYPTO_HASH_SUCCESS;

@@ -144,6 +144,7 @@
           <itemPath>test_vectors/src/mac_test_vector.c</itemPath>
           <itemPath>test_vectors/src/test_vectors_sha512.c</itemPath>
           <itemPath>test_vectors/src/sym_test_vector.c</itemPath>
+          <itemPath>test_vectors/src/xts_test_vector.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
