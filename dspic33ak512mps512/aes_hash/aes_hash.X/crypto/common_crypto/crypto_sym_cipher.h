@@ -79,6 +79,7 @@ typedef enum
     CRYPTO_SYM_OPMODE_INVALID = 0,
     CRYPTO_SYM_OPMODE_ECB = 1,
     CRYPTO_SYM_OPMODE_CTR = 10, 
+    CRYPTO_SYM_OPMODE_XTS = 11,
     CRYPTO_SYM_OPMODE_MAX
 }crypto_Sym_OpModes_E;
     
@@ -104,5 +105,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(crypto_HandlerType_E handlerTyp
                                                         uint32_t dataLen, uint8_t *ptr_outData, uint8_t *ptr_key, uint32_t keyLen, uint8_t *ptr_initVect, uint32_t sessionID);                                                
 
 crypto_Sym_Status_E Crypto_Sym_Aes_Cipher(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData);
+
+crypto_Sym_Status_E Crypto_Sym_AesXts_Cipher(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData, uint8_t *ptr_tweak);
 
 #endif //CRYPTO_SYM_CIPHER_H

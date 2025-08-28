@@ -56,12 +56,21 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Initialize the CAM library's AES interrupt handler.
+ */
 static void lCrypto_Aead_Hw_Aes_InterruptSetup(void)
 {
     (void)Crypto_Int_Hw_Register_Handler(CRYPTO1_INT, DRV_CRYPTO_AES_IsrHelper);
     (void)Crypto_Int_Hw_Enable(CRYPTO1_INT);
 }
 
+/**
+ * @brief Determine the AES operation type to pass to the CAM library.
+ * @param cipherOpType Crypto operation type.
+ * @param operation Pointer to a value to hold the equivalent CAM library operation type.
+ * @return CRYPTO_AEAD_CIPHER_SUCCESS on success, CRYPTO_AEAD_ERROR_CIPOPER on failure.
+ */
 static crypto_Aead_Status_E lCrypto_Aead_Hw_Aes_GetOperation
     (crypto_CipherOper_E cipherOpType, AESCON_OPERATION* operation)
 {
@@ -85,6 +94,11 @@ static crypto_Aead_Status_E lCrypto_Aead_Hw_Aes_GetOperation
     return status;
 }
 
+/**
+ * @brief Calculate the number of pad bytes for an AES block.
+ * @param dataLen Size of the data.
+ * @return Number of pad bytes to complete the AES block.
+ */
 static uint32_t lCrypto_Aead_Hw_Aes_GetPadBytes(uint32_t dataLen)
 {
     uint32_t mask = (AES_BLOCK_SIZE - 1UL);
@@ -93,6 +107,13 @@ static uint32_t lCrypto_Aead_Hw_Aes_GetPadBytes(uint32_t dataLen)
     return pad;
 }
 
+/**
+ * @brief Direct byte-compare function.
+ * @param cmp1 Pointer to first byte stream.
+ * @param cmp2 Pointer to second byte stream.
+ * @param cmpLen Number of bytes to compare.
+ * @return 0 on success, 1 on failure.
+ */
 static uint32_t lCrypto_Aead_Hw_CompareAsBytes(uint8_t *cmp1, uint8_t *cmp2, uint32_t cmpLen)
 {
     register uint8_t* c1 = cmp1;
@@ -113,6 +134,86 @@ static uint32_t lCrypto_Aead_Hw_CompareAsBytes(uint8_t *cmp1, uint8_t *cmp2, uin
             c1++;
             c2++;
         }
+    }
+    return result;
+}
+/**
+ * @brief Common AES-GCM direct-cipher function.
+ * @param mode The cipher mode.
+ * @param operation The operation type.
+ * @param inputData Pointer to input data.
+ * @param dataLen Length of the input/output data.
+ * @param outData Pointer to a buffer to hold the output data.
+ * @param key Pointer to the key.
+ * @param keyLen Length of the key.
+ * @param initVect Pointer to the initialization vector data.
+ * @param initVectLen Length of the initialization vector.
+ * @param aad Pointer to the additional authentication data.
+ * @param aadLen Length of the AAD.
+ * @param authTag Pointer to a buffer to hold the authentication tag.
+ * @param authTagLen Length of the authentication tag.
+ * @return CRYPTO_AEAD_CIPHER_SUCCESS on success, other on failure.
+ */
+static crypto_Aead_Status_E lCrypto_Aead_Hw_AesGcm_Direct(AESCON_MODE mode, AESCON_OPERATION operation,
+    uint8_t *inputData, uint32_t dataLen, uint8_t *outData, uint8_t *key, uint32_t keyLen,
+    uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
+    uint8_t *authTag, uint32_t authTagLen)
+{
+    CRYPTO_AEAD_HW_CONTEXT aeadCtx;
+    register uint8_t *aesContext = aeadCtx.contextData;
+    AES_ERROR aesStatus;
+    crypto_Aead_Status_E result = CRYPTO_AEAD_ERROR_CIPFAIL;
+    // Context data must be cleared.
+    (void)memset(aesContext, 0, sizeof(aeadCtx.contextData));
+    aesStatus = DRV_CRYPTO_AES_Initialize(aesContext, mode, operation, key, keyLen, initVect, initVectLen);
+    if (aesStatus == AES_NO_ERROR)
+    {
+        lCrypto_Aead_Hw_Aes_InterruptSetup();
+        if (aadLen > 0UL)
+        {
+            aesStatus = DRV_CRYPTO_AES_AddHeader(aesContext, aad, aadLen);
+            if(aesStatus == AES_NO_ERROR)
+            {
+                /* AES-GCM hardware includes the authentication data in its output.  This data needs to be
+                 * discarded from the output stream.  The data is padded to a block size. */
+                uint32_t pad = lCrypto_Aead_Hw_Aes_GetPadBytes(aadLen);
+                aesStatus = DRV_CRYPTO_AES_DiscardData(aesContext, (aadLen + pad));
+            }
+        }
+    }
+    if(aesStatus == AES_NO_ERROR)
+    {
+        /* AES GCM cipher/decipher accepts the actual number of bytes, and the library will
+         * automatically pad to a block size and configure the descriptor to ignore the pad bytes.*/
+        aesStatus = DRV_CRYPTO_AES_AddInputData(aesContext, inputData, dataLen);
+        if(aesStatus == AES_NO_ERROR)
+        {
+            aesStatus = DRV_CRYPTO_AES_AddOutputData(aesContext, outData, dataLen);
+        }
+        if((aesStatus == AES_NO_ERROR) && (dataLen > 0UL))
+        {
+            /* AES-GCM hardware operates on block size boundaries.  When data size is not aligned to
+             * a block size boundary, the excess must be discarded from the output stream.
+             * When data is not specified, this is skipped. */
+            uint32_t pad = lCrypto_Aead_Hw_Aes_GetPadBytes(dataLen);
+            aesStatus = DRV_CRYPTO_AES_DiscardData(aesContext, pad);
+        }
+    }
+    if(aesStatus == AES_NO_ERROR)
+    {
+        aesStatus = DRV_CRYPTO_AES_AddOutputData(aesContext, authTag, authTagLen);
+        if(aesStatus == AES_NO_ERROR)
+        {
+            aesStatus = DRV_CRYPTO_AES_AddLenALenC(aesContext);
+        }
+        if(aesStatus == AES_NO_ERROR)
+        {
+            aesStatus = DRV_CRYPTO_AES_Execute(aesContext);
+        }
+    }
+    if (aesStatus == AES_NO_ERROR)
+    {
+        result = CRYPTO_AEAD_CIPHER_SUCCESS;
     }
 
     return result;
@@ -269,24 +370,13 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_EncryptAuthDirect(uint8_t *inputData,
     uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
     uint8_t *authTag, uint32_t authTagLen)
 {
-    CRYPTO_AEAD_HW_CONTEXT aeadCtx;
-    crypto_Aead_Status_E result;
 
-    result = Crypto_Aead_Hw_AesGcm_Init(&aeadCtx, CRYPTO_CIOP_ENCRYPT, key, keyLen, initVect, initVectLen);
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
-        result = Crypto_Aead_Hw_AesGcm_AddAadData(&aeadCtx, aad, aadLen);
-    }
+    crypto_Aead_Status_E result = lCrypto_Aead_Hw_AesGcm_Direct(MODE_GCM, OP_ENCRYPT,
+                                                                inputData, dataLen, outData,
+                                                                key, keyLen, initVect, initVectLen,
 
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
-        result = Crypto_Aead_Hw_AesGcm_Cipher(&aeadCtx, inputData, dataLen, outData);
-    }
 
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
-        result = Crypto_Aead_Hw_AesGcm_Final(&aeadCtx, authTag, authTagLen);
-    }
+                                                                aad, aadLen, authTag, authTagLen);
 
     return result;
 }
@@ -296,25 +386,15 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(uint8_t *inputData,
     uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
     uint8_t *authTag, uint32_t authTagLen)
 {
-    CRYPTO_AEAD_HW_CONTEXT aeadCtx;
-    crypto_Aead_Status_E result;
 
-    result = Crypto_Aead_Hw_AesGcm_Init(&aeadCtx, CRYPTO_CIOP_DECRYPT, key, keyLen, initVect, initVectLen);
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
-        result = Crypto_Aead_Hw_AesGcm_AddAadData(&aeadCtx, aad, aadLen);
-    }
 
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
-        result = Crypto_Aead_Hw_AesGcm_Cipher(&aeadCtx, inputData, dataLen, outData);
-    }
 
-    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
-    {
         uint8_t generatedAuthTag[AES_GCM_AUTHTAG_SIZE];
 
-        result = Crypto_Aead_Hw_AesGcm_Final(&aeadCtx, generatedAuthTag, authTagLen);
+    crypto_Aead_Status_E result = lCrypto_Aead_Hw_AesGcm_Direct(MODE_GCM, OP_DECRYPT,
+                                                                inputData, dataLen, outData,
+                                                                key, keyLen, initVect, initVectLen,
+                                                                aad, aadLen, generatedAuthTag, authTagLen);
 
         if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -324,7 +404,6 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(uint8_t *inputData,
                 result = CRYPTO_AEAD_ERROR_AUTHFAIL;
             }
         }
-    }
 
     return result;
 }

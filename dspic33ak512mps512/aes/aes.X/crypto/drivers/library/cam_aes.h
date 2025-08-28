@@ -93,6 +93,7 @@ typedef enum AESCON_MODE
     MODE_ECB  = 0,   // Electronic Codebook (ECB)
     MODE_CTR  = 2,   // Counter (CTR)
     MODE_GCM  = 6,   // Galois Counter Mode (GCM)
+    MODE_XTS  = 7,   // XEX Tweakable Block Cipher (XTS) with Ciphertext Stealing (XTS-CS)
     MODE_CMAC = 8,   // Cipher-based Message Authentication Code (CMAC)
 } AESCON_MODE;
 
@@ -140,6 +141,16 @@ AES_ERROR DRV_CRYPTO_AES_Initialize(void *contextData, AESCON_MODE mode, AESCON_
  *  @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
  **/
 AES_ERROR DRV_CRYPTO_AES_AddHeader(void *contextData, void * headerData, uint32_t headerLength);
+
+/**
+ *  @brief Initialize the tweak value for AES XTS support.
+ *  @param contextData The context data for this operation.
+ *  @param tweakData The tweak data to use.
+ *  @param tweakLength The length of the tweak data.
+ *  @return AES_NO_ERROR on success, AES_STATE_ERROR/AES_WRITE_ERROR on failure.
+ *  @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
+ **/
+AES_ERROR DRV_CRYPTO_AES_AddTweakData(void *contextData, const void *tweakData, uint32_t tweakLength);
 
 /**
  *  @brief Add data to an AES operation.
