@@ -4,7 +4,7 @@
 # dsPIC33A Application Demos File Generation
 
 # Description
-This README describes how to generate the required CryptoV4 API and wrapper files and install the required Crypto Accelerator Module (CAM) library files.
+This README describes how to generate the required Commmon Crypto API and wrapper files and install the required Crypto Accelerator Module (CAM) library files.
 
 ## Generating the CryptoV4 wrapper files
 To generate the files for the CryptoV4 module's source code, the following must be installed:
