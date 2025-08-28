@@ -43,7 +43,7 @@ Microchip or any third party.
  #define CAM_VERSION_H
 
  // Version date format yyyymmdd
- #define CAM_LIBRARY_VERSION_DATE   "20250826"
+ #define CAM_LIBRARY_VERSION_DATE   "20250828"
 
  // Version format semver
  #define CAM_LIBRARY_VERSION_MAJOR  1

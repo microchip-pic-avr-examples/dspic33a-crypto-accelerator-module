@@ -1,8 +1,10 @@
 ![Microchip logo](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_logo.png)
 ![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
 
-# Crypto Accelerator Module Automated Cryptographic Validation protocol (ACVP) Repository
-This repository contains source files for the dsPIC33AK512MPS512 ACVP and benchmarking applications for HASH, ECDSA, AES and TRNG operations using the CryptoV4 module and the dsPIC33A Crypto Accelerator Module library.
+# dsPIC33A Application Demos File Generation
+
+# Description
+This README describes how to generate the required CryptoV4 API and wrapper files and install the required Crypto Accelerator Module (CAM) library files.
 
 ## Generating the CryptoV4 wrapper files
 To generate the files for the CryptoV4 module's source code, the following must be installed:
@@ -67,10 +69,10 @@ The script will copy the CAM header and library files to the appropriate locatio
     python generateFiles.py -c -b dev -i CAM_05346
 
 ### Generating Using an Existing Repository
-    python generateFiles.py -r ..\..\..\crypto_v4 -i CAM_05346
+    python generateFiles.py -r ..\..\crypto_v4 -i CAM_05346
 
 ### Fetching the CAM Library Files From an Existing Repository
-    python fetchLibrary.py -i ..\..\..\crypto_cam_src
+    python fetchLibrary.py -i ..\..\crypto_cam_src
 
 ### Fetching the CAM Library Files with Cloning the crypto_cam_src Repository, With Branch 'dev'
     python fetchLibrary.py -c -b dev

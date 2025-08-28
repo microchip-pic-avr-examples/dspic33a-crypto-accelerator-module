@@ -14,6 +14,7 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - TRNG
 - AES
 - ECDH Shared Secret
+- Concurrent AES+HASH (to demonstrate context safety)
 
 The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the Pre-compiled CAM Hardware Driver.
 
@@ -31,14 +32,14 @@ The included demonstration projects provide examples of the various CAM features
 # Contents Summary
 Each folder contains a README describing the example application in more detail.
 
-| Folder     | Description                              |
-| ---        | ---                                      |
-| dsa        | Example application project for ECDSA    |
-| hash       | Example application project for Hashing  |
-| trng       | Example application project for TRNG     |
-| aes        | Example application project for AES      |
-| ecdh       | Example application project for ECDH     |
-| aes_hash   | Example concurrent AES+HASH project      |
+| Folder     | Description                                         |
+| ---        | ---                                                 |
+| dsa        | Example application project for ECDSA               |
+| hash       | Example application project for Hashing             |
+| trng       | Example application project for TRNG                |
+| aes        | Example application project for AES                 |
+| ecdh       | Example application project for ECDH                |
+| aes_hash   | Example application project for concurrent AES+HASH |
 
 # Crypto Accelerator Module APIs
 
