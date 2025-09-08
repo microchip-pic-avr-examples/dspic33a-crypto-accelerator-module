@@ -186,13 +186,31 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
     return status;
 }
 
+static uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+{
+	uint8_t result = 0;
+
+    if (size > 0U)
+    {
+        const uint8_t *tempa = a;
+        const uint8_t *tempb = b;
+
+        for (unsigned int i = 0; i < size; i++)
+        {
+            result |= tempa[i] ^ tempb[i];
+        }
+
+    }
+    return result;
+}
+
 static void checkEncryptionAndTag(uint8_t *ct, uint8_t *result, uint32_t length, uint8_t *tag, uint8_t *tagResult)
 {
     (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
 
     if (length > 0UL)
     {
-        if (0 == memcmp(result, ct, length))
+        if (0u == checkArrayEquality(result, ct, length))
         {
             (void)printf(GREEN"\r\n Encryption: PASS    "RESET_COLOR );
         }
@@ -202,7 +220,7 @@ static void checkEncryptionAndTag(uint8_t *ct, uint8_t *result, uint32_t length,
         }
     }
 
-    if (0 == memcmp(tagResult, tag, AES_GCM_TAG_LENGTH))
+    if (0u == checkArrayEquality(tagResult, tag, AES_GCM_TAG_LENGTH))
     {
         (void)printf(GREEN"\r\n Authentication Tag: PASS"RESET_COLOR);
     }
