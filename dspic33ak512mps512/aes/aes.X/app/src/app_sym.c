@@ -223,7 +223,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            checkArrayEqualityPrintResult(data, decryptedDirectResult, dataLen);
+            printArrayEqualityResult(data, decryptedDirectResult, dataLen);
         }
     }
 
@@ -245,7 +245,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            checkArrayEqualityPrintResult(data, decryptedStepsResult, dataLen);
+            printArrayEqualityResult(data, decryptedStepsResult, dataLen);
         }
     }
 
@@ -257,7 +257,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
     printHexArray("Direct Encryption    ", encryptedDirectResult, dataLen);
     printHexArray("Stepwise Encryption  ", encryptedStepsResult, dataLen);
 
-    checkArrayEqualityPrintResult(encryptedDirectResult, encryptedStepsResult, dataLen);
+    printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, dataLen);
 
 }
 

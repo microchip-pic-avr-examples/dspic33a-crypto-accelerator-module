@@ -299,7 +299,7 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEqualityPrintResult(test->pt, decryptedDirectResult, test->ptlength);
+                    printArrayEqualityResult(test->pt, decryptedDirectResult, test->ptlength);
                 }
             }
         }
@@ -332,7 +332,7 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEqualityPrintResult(test->pt, decryptedStepsResult, test->ptlength);
+                    printArrayEqualityResult(test->pt, decryptedStepsResult, test->ptlength);
                 }
             }
         }
@@ -348,12 +348,12 @@ void aes_aead_gcm_test(void)
             {
                 printHexArray("Direct Encryption    ", encryptedDirectResult, test->ptlength);
                 printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->ptlength);
-                checkArrayEqualityPrintResult(encryptedDirectResult, encryptedStepsResult, test->ptlength);
+                printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->ptlength);
             }
 
             printHexArray("Direct Tag           ", tagDirectResult, AES_GCM_TAG_LENGTH);
             printHexArray("Stepwise Tag         ", tagStepsResult, AES_GCM_TAG_LENGTH);
-            checkArrayEqualityPrintResult(tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
+            printArrayEqualityResult(tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
         }
         else
         {

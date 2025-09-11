@@ -84,7 +84,7 @@ extern "C" {
 
 uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
 
-void checkArrayEqualityPrintResult(const uint8_t *a, const uint8_t *b, size_t size);
+void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
 
 void printHexArray(const char* label, void* data, uint32_t size);
 
