@@ -49,9 +49,9 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app_aes.h"
 
-void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
-	uint8_t result = 0;
+    uint8_t result = 0;
 
     if (size > 0U)
     {
@@ -63,16 +63,26 @@ void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
             result |= tempa[i] ^ tempb[i];
         }
 
-        if(result == 0U)
-        {
-            (void) printf(GREEN" \r\n\r\n PASS "RESET_COLOR);
-        }
-        else
-        {
-            (void) printf(RED" \r\n\r\n FAIL - Data Mismatch"RESET_COLOR);
-        }
+    }
+    return result;
+}
+
+
+
+void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
+{
+	uint8_t result = checkArrayEquality(a, b, size);
+
+    if(result == 0U)
+    {
+        (void) printf(GREEN" \r\n\r\n PASS "RESET_COLOR);
+    }
+    else
+    {
+        (void) printf(RED" \r\n\r\n FAIL - Data Mismatch"RESET_COLOR);
     }
 }
+
 
 void printHexArray(const char* label, void* data, uint32_t size)
 {
