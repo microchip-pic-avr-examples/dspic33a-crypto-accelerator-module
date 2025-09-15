@@ -82,7 +82,7 @@ static void aes_cmac_direct_test(TEST_VECTOR* testVector)
     if(status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
         printHexArray("CMAC Output          ", generatedCmac, testVector->expectedMacLen);
-        checkArrayEquality(generatedCmac, testVector->expectedMac, testVector->expectedMacLen);
+        printArrayEqualityResult(generatedCmac, testVector->expectedMac, testVector->expectedMacLen);
     }
     else
     {
@@ -128,7 +128,7 @@ static void aes_cmac_step_test(TEST_VECTOR* testVector)
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
         printHexArray("CMAC Output          ", generatedCmac, testVector->expectedMacLen);
-        checkArrayEquality(generatedCmac, testVector->expectedMac, testVector->expectedMacLen);
+        printArrayEqualityResult(generatedCmac, testVector->expectedMac, testVector->expectedMacLen);
     }
     else
     {
