@@ -1,3 +1,17 @@
+# dspic33a-crypto-accelerator-module v1.2.0
+### Release Highlights
+- Support for AES-XTS Encrypt and Decrypt operations
+
+### Features Added\Updated
+- Crypto Algorithms added in this release:
+	- AES
+		- AES-XTS Encrypt and Decrypt
+- Updates to AES driver: 
+	- Context Safe DMA
+	- Optimizations
+- Restrict precompiled library to support specific devices 
+- Project Readme updates
+
 # dspic33a-crypto-accelerator-module v1.1.1
 ### Release Highlights
 - Support for ECDH Shared Secret Generation
