@@ -57,6 +57,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -64,6 +65,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief This enum represents the result of the TRNG generation.
+ */
 typedef enum TRNG_ERROR
 {
     TRNG_NO_ERROR = 0,
@@ -107,6 +111,21 @@ TRNG_ERROR DRV_CRYPTO_TRNG_Setup(void);
  *  @note This function reads the specified amount of 4-bit words from the designated read address.
 */
 TRNG_ERROR DRV_CRYPTO_TRNG_ReadData(uint8_t* data, uint32_t size) ;
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: TRNG CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+void MPROTO(DRV_CRYPTO_TRNG_IsrHelper)(void);
+#define DRV_CRYPTO_TRNG_IsrHelper MPROTO(DRV_CRYPTO_TRNG_IsrHelper)
+
+TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_Setup)(void);
+#define DRV_CRYPTO_TRNG_Setup MPROTO(DRV_CRYPTO_TRNG_Setup)
+
+TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_ReadData)(uint8_t* data, uint32_t size);
+#define DRV_CRYPTO_TRNG_ReadData MPROTO(DRV_CRYPTO_TRNG_ReadData)
 
 #ifdef	__cplusplus
 }

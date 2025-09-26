@@ -105,7 +105,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Init(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, c
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_SID;
     }
-    else if( ptr_initVect == NULL
+    else if( (ptr_initVect == NULL)
             && (opMode_en != CRYPTO_SYM_OPMODE_ECB)
             && (opMode_en != CRYPTO_SYM_OPMODE_XTS)
             )

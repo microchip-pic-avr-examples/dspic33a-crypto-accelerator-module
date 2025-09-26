@@ -53,6 +53,7 @@ extern "C" {
 #include <stdint.h>
 #include "cam_pke.h"
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -83,9 +84,21 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_InitEccParams(PKE_CONFIG *eccData, uint8_t *pr
  **/
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_GetSharedSecret(PKE_CONFIG *eccData, uint8_t *secret, uint32_t secretLength);
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: ECDH CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDH_InitEccParams)(PKE_CONFIG *eccData, uint8_t *privateKey, 
+        uint32_t privateKeyLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE hwEccCurve);
+#define DRV_CRYPTO_ECDH_InitEccParams MPROTO(DRV_CRYPTO_ECDH_InitEccParams)
+
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)(PKE_CONFIG *eccData, uint8_t *secret, uint32_t secretLength);
+#define DRV_CRYPTO_ECDH_GetSharedSecret MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)
+
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* CAM_ECDH_H */
-

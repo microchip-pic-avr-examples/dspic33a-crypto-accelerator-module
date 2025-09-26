@@ -321,6 +321,9 @@ if __name__ == "__main__":
 
             if not os.path.exists(os.path.join(options.repository, '.git')):
                 parser.error(f"Unable to locate repository at '{options.repository}'")
+        
+            if not os.path.exists(options.repository):
+                parser.error(f"No repository found at {options.repository}")
         else:
             options.repository = CRYPTO_V4_REPOSITORY_DEFAULT_PATH
 
@@ -330,8 +333,6 @@ if __name__ == "__main__":
         else:
              options.git = CRYPTO_V4_REPOSITORY_DEFAULT_GIT
 
-        if not os.path.exists(options.repository):
-            parser.error(f"No repository found at {options.repository}")
 
         result = True
 
