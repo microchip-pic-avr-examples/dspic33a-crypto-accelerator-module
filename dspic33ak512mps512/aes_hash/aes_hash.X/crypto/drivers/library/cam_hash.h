@@ -56,6 +56,7 @@ extern "C" {
 
 #include <stdint.h>
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -168,6 +169,34 @@ HASH_ERROR DRV_CRYPTO_HASH_IsActive(void *contextData, HASH_ERROR *active);
  *  @note A NULL \p contextData pointer will return the maximum context block size.
  **/
 uint32_t DRV_CRYPTO_HASH_GetContextSize(void *contextData);
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: SHA CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+void MPROTO(DRV_CRYPTO_HASH_IsrHelper)(void);
+#define DRV_CRYPTO_HASH_IsrHelper MPROTO(DRV_CRYPTO_HASH_IsrHelper)
+
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Initialize)(void *contextData, HASHCON_MODE mode);
+#define DRV_CRYPTO_HASH_Initialize MPROTO(DRV_CRYPTO_HASH_Initialize)
+
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Update)(void *contextData, uint8_t *data, uint32_t dataLength);
+#define DRV_CRYPTO_HASH_Update MPROTO(DRV_CRYPTO_HASH_Update)
+
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Final)(void *contextData, uint8_t * digest, uint32_t digestLength);
+#define DRV_CRYPTO_HASH_Final MPROTO(DRV_CRYPTO_HASH_Final)
+
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Digest)(void *contextData, HASHCON_MODE mode, uint8_t *data, uint32_t dataLength, 
+        uint8_t * digest, uint32_t digestLength);
+#define DRV_CRYPTO_HASH_Digest MPROTO(DRV_CRYPTO_HASH_Digest)
+
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_IsActive)(void *contextData, HASH_ERROR *active);
+#define DRV_CRYPTO_HASH_IsActive MPROTO(DRV_CRYPTO_HASH_IsActive)
+
+uint32_t MPROTO(DRV_CRYPTO_HASH_GetContextSize)(void *contextData);
+#define DRV_CRYPTO_HASH_GetContextSize MPROTO(DRV_CRYPTO_HASH_GetContextSize)
 
 #ifdef	__cplusplus
 }

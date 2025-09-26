@@ -229,6 +229,13 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Init(void *aeadInitCtx,
     crypto_CipherOper_E cipherOper_en, uint8_t *key, uint32_t keyLen,
     uint8_t *initVect, uint32_t initVectLen)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AEAD context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AEAD_HW_CONTEXT *aeadCtx = (CRYPTO_AEAD_HW_CONTEXT*) aeadInitCtx;
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     AES_ERROR aesStatus = AES_INITIALIZE_ERROR;
@@ -261,6 +268,13 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Init(void *aeadInitCtx,
 crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_AddAadData(void *aeadCipherCtx,
     uint8_t *aad, uint32_t aadLen)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AEAD context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AEAD_HW_CONTEXT *aeadCtx = (CRYPTO_AEAD_HW_CONTEXT*) aeadCipherCtx;
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     AES_ERROR aesStatus;
@@ -299,6 +313,13 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_AddAadData(void *aeadCipherCtx,
 crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Cipher(void *aeadCipherCtx,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AEAD context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AEAD_HW_CONTEXT *aeadCtx = (CRYPTO_AEAD_HW_CONTEXT*) aeadCipherCtx;
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     AES_ERROR aesStatus;
@@ -337,6 +358,13 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Cipher(void *aeadCipherCtx,
 crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Final(void *aeadFinalCtx,
     uint8_t *authTag, uint32_t authTagLen)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AEAD context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AEAD_HW_CONTEXT *aeadCtx = (CRYPTO_AEAD_HW_CONTEXT*) aeadFinalCtx;
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     AES_ERROR aesStatus;
