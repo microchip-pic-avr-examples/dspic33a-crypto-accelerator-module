@@ -11,20 +11,21 @@ BLUE    = "\x1B""[1;34m"
 MAGENTA = "\x1B""[1;35m"
 CYAN    = "\x1B""[1;36m"
 
+FMPP_ROOT = 'fmpp'
+BUILD_ROOT = os.path.join(FMPP_ROOT, 'build')
+
 # Default library path root
-LIBRARY_REPOSITORY_ROOT = os.path.join('lib')
+LIBRARY_REPOSITORY_ROOT = os.path.join(BUILD_ROOT, 'lib')
 
 # Source library root path.
-LIBRARIES_ROOT = "libraries"
-
-INCLUDE_ROOT = os.path.join("driver", "include")
+LIBRARIES_ROOT = "lib"
 
 LIBRARY_NAME = 'libcam05346-dspic33a.a'
 
 # Default CAM repo name and path.
-CRYPTO_CAM_LIBRARY_REPOSITORY_NAME = 'crypto_cam_src'
+CRYPTO_CAM_LIBRARY_REPOSITORY_NAME = 'msec-driver-hsm-lite-cam'
 CRYPTO_CAM_LIBRARY_REPOSITORY_DEFAULT_PATH = os.path.join(LIBRARY_REPOSITORY_ROOT, CRYPTO_CAM_LIBRARY_REPOSITORY_NAME)
-CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/mh3/%s.git' % CRYPTO_CAM_LIBRARY_REPOSITORY_NAME
+CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/msec/msec-driver-hsm-lite-cam.git' 
 
 APPS_ROOT = os.path.join('..', 'dspic33ak512mps512')
 CRYPTO_LIBRARY_PATH = os.path.join('crypto', 'drivers', 'library')
@@ -37,12 +38,12 @@ TRNG_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'trng', 'trng.X', CRYPTO_LIBRARY_PA
 AES_HASH_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'aes_hash', 'aes_hash.X', CRYPTO_LIBRARY_PATH)
 
 # Header files associated with each project.
-LIB_COPIES = [('sha', HASH_CRYPTO_LIBDIR, ['version', 'hash']),
-              ('aes', AES_CRYPTO_LIBDIR, ['version', 'aes']),
-              ('dsa', ECDSA_CRYPTO_LIBDIR, ['version', 'ecdsa', 'pke']),
-              ('ecdh', ECDH_CRYPTO_LIBDIR, ['version', 'ecdh', 'pke']),
-              ('trng', TRNG_CRYPTO_LIBDIR, ['version', 'trng']),
-              ('aes_hash', AES_HASH_CRYPTO_LIBDIR, ['version', 'hash', 'aes']),
+LIB_COPIES = [('sha', HASH_CRYPTO_LIBDIR, ['version', 'hash', 'device']),
+              ('aes', AES_CRYPTO_LIBDIR, ['version', 'aes', 'device']),
+              ('dsa', ECDSA_CRYPTO_LIBDIR, ['version', 'ecdsa', 'pke', 'device']),
+              ('ecdh', ECDH_CRYPTO_LIBDIR, ['version', 'ecdh', 'pke', 'device']),
+              ('trng', TRNG_CRYPTO_LIBDIR, ['version', 'trng', 'device']),
+              ('aes_hash', AES_HASH_CRYPTO_LIBDIR, ['version', 'hash', 'aes', 'device']),
              ]
 
 SHOW_COMMANDS = True
