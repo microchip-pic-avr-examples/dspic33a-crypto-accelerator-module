@@ -243,6 +243,13 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Init(void *aesInitCtx,
     crypto_Sym_OpModes_E opMode_en, uint8_t *key, uint32_t keyLen,
     uint8_t *initVect)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AES context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AES_HW_CONTEXT *aesCtx = (CRYPTO_AES_HW_CONTEXT*) aesInitCtx;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
     AES_ERROR aesStatus = AES_INITIALIZE_ERROR;
@@ -280,6 +287,13 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Init(void *aesInitCtx,
 crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Cipher(void *aesCipherCtx,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AES context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AES_HW_CONTEXT *aesCtx = (CRYPTO_AES_HW_CONTEXT*) aesCipherCtx;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
     AES_ERROR aesStatus;
@@ -317,6 +331,13 @@ crypto_Sym_Status_E Crypto_Sym_Hw_Aes_Cipher(void *aesCipherCtx,
 crypto_Sym_Status_E Crypto_Sym_Hw_AesXts_Cipher(void *aesCipherCtx,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData, uint8_t* tweakData)
 {
+    /* MISRA C:2012 Rule 11.5 deviation:
+    * Reason: Conversion from void* to the AES context defined by the 
+    *         CAM Hardware Driver pre-compiled library is required since 
+    *         the library does not have access to the upper context structures 
+    *         defined by the Crypto APIs.
+    */
+    /* cppcheck-suppress misra-c2012-11.5 */
     CRYPTO_AES_HW_CONTEXT *aesCtx = (CRYPTO_AES_HW_CONTEXT*) aesCipherCtx;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
     AES_ERROR aesStatus;

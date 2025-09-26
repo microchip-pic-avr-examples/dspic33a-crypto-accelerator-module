@@ -55,6 +55,7 @@ extern "C" {
 
 #include <stdint.h>
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -213,6 +214,46 @@ AES_ERROR DRV_CRYPTO_AES_IsActive(void *contextData, AES_ERROR *active);
  *  @return Size of the AES context block in bytes.
  **/
 uint32_t DRV_CRYPTO_AES_GetContextSize(void *contextData);
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: AES CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+void MPROTO(DRV_CRYPTO_AES_IsrHelper)(void);
+#define DRV_CRYPTO_AES_IsrHelper MPROTO(DRV_CRYPTO_AES_IsrHelper)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_Initialize)(void *contextData, AESCON_MODE mode, AESCON_OPERATION operation, 
+        void* key, uint32_t keyLength, void *initVector, uint32_t initVectorLength);
+#define DRV_CRYPTO_AES_Initialize MPROTO(DRV_CRYPTO_AES_Initialize)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddHeader)(void *contextData, void * headerData, uint32_t headerLength);
+#define DRV_CRYPTO_AES_AddHeader MPROTO(DRV_CRYPTO_AES_AddHeader)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddTweakData)(void *contextData, const void *tweakData, uint32_t tweakLength);
+#define DRV_CRYPTO_AES_AddTweakData MPROTO(DRV_CRYPTO_AES_AddTweakData)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddInputData)(void *contextData, void * data, uint32_t dataLength);
+#define DRV_CRYPTO_AES_AddInputData MPROTO(DRV_CRYPTO_AES_AddInputData)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddOutputData)(void *contextData, void * data, uint32_t dataLength);
+#define DRV_CRYPTO_AES_AddOutputData MPROTO(DRV_CRYPTO_AES_AddOutputData)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_DiscardData)(void *contextData, uint32_t discardLength);
+#define DRV_CRYPTO_AES_DiscardData MPROTO(DRV_CRYPTO_AES_DiscardData)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddLenALenC)(void *contextData);
+#define DRV_CRYPTO_AES_AddLenALenC MPROTO(DRV_CRYPTO_AES_AddLenALenC)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_Execute)(void *contextData);
+#define DRV_CRYPTO_AES_Execute MPROTO(DRV_CRYPTO_AES_Execute)
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_IsActive)(void *contextData, AES_ERROR *active);
+#define DRV_CRYPTO_AES_IsActive MPROTO(DRV_CRYPTO_AES_IsActive)
+
+uint32_t MPROTO(DRV_CRYPTO_AES_GetContextSize)(void *contextData);
+#define DRV_CRYPTO_AES_GetContextSize MPROTO(DRV_CRYPTO_AES_GetContextSize)
 
 #ifdef	__cplusplus
 }

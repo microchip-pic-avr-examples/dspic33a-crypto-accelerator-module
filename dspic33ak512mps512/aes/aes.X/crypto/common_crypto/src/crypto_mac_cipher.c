@@ -140,7 +140,7 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(st_Crypto_Mac_Aes_ctx *ptr_aesCmacC
     {
         ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CTX;
     }
-    else if(ptr_outMac == NULL || macLen == 0U)
+    else if((ptr_outMac == NULL) || (macLen == 0U))
     {
         ret_aesCmacStat_en = CRYPTO_MAC_ERROR_MACDATA;
     }
