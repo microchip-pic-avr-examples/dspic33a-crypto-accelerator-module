@@ -57,7 +57,7 @@ crypto_Rng_Status_E Crypto_Rng_Prng_Generate(
 
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
-|TRNG Size (bytes)|Crypto_Rng_Generate Performance (ms)|
+|TRNG Size (bytes)|Crypto_Rng_Generate Performance (µs)|
 |---|---|
 |192|66.250|
 |256|76.917|
