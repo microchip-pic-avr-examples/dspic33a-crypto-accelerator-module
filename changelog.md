@@ -1,16 +1,18 @@
 # dspic33a-crypto-accelerator-module v1.2.0
 ### Release Highlights
 - Support for AES-XTS Encrypt and Decrypt operations
+- Added new AES and Hash demo 
 
 ### Features Added\Updated
 - Crypto Algorithms added in this release:
 	- AES
 		- AES-XTS Encrypt and Decrypt
-- Updates to AES driver: 
-	- Context Safe DMA
-	- Optimizations
-- Restrict precompiled library to support specific devices 
-- Project Readme updates
+- Features added to CAM Hardware Driver:
+	- Updates to AES driver: 
+		- Context Safe DMA
+		- Optimizations
+	- The CAM Hardware Driver now throws warnings when used with an unintended device.
+	- Support for short-double or no-short double
 
 # dspic33a-crypto-accelerator-module v1.1.1
 ### Release Highlights
