@@ -78,7 +78,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Verify)|27.006 ms|Curve: P-384|
 |ECDSA (Sign)|42.057 ms|Curve: P-521|
 |ECDSA (Verify)|58.281 ms|Curve: P-521|
-|TRNG (Generate)|122.667 ms|Output Size: 521|
+|TRNG (Generate)|122.667 µs|Output Size: 521|
 |ECDH (Shared Secret Generate)|3.770 ms|Curve: P-192|
 |ECDH (Shared Secret Generate)|7.207 ms|Curve: P-256|
 |ECDH (Shared Secret Generate)|19.400 ms|Curve: P-384|
