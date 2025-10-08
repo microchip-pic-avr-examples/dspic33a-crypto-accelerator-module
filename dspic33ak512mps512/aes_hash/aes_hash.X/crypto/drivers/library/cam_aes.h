@@ -68,7 +68,7 @@ extern "C" {
 
 /**
  * @brief Defines AES error codes.
- */
+ **/
 typedef enum AES_ERROR
 {
     AES_NO_ERROR = 0,
@@ -88,7 +88,7 @@ typedef enum AES_ERROR
 
 /**
  * @brief Defines allowed AES modes.
- */
+ **/
 typedef enum AESCON_MODE
 {
     MODE_ECB  = 0,   // Electronic Codebook (ECB)
@@ -100,7 +100,7 @@ typedef enum AESCON_MODE
 
 /**
  * @brief Defines allowed AES operations.
- */
+ **/
 typedef enum AESCON_OPERATION
 {
     OP_ENCRYPT = 0,
@@ -221,6 +221,7 @@ uint32_t DRV_CRYPTO_AES_GetContextSize(void *contextData);
 // *****************************************************************************
 // *****************************************************************************
 
+/** @cond INTERNAL **/
 void MPROTO(DRV_CRYPTO_AES_IsrHelper)(void);
 #define DRV_CRYPTO_AES_IsrHelper MPROTO(DRV_CRYPTO_AES_IsrHelper)
 
@@ -254,6 +255,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_IsActive)(void *contextData, AES_ERROR *active);
 
 uint32_t MPROTO(DRV_CRYPTO_AES_GetContextSize)(void *contextData);
 #define DRV_CRYPTO_AES_GetContextSize MPROTO(DRV_CRYPTO_AES_GetContextSize)
+/** @endcond **/
 
 #ifdef	__cplusplus
 }

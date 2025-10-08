@@ -48,6 +48,7 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
+/** @cond INTERNAL **/
 #if defined(GENERIC_TARGET_CAM_05346) \
     || defined(__dsPIC33AK256MPS505__) || defined(__dsPIC33AK256MPS506__) \
     || defined(__dsPIC33AK256MPS508__) || defined(__dsPIC33AK256MPS510__) \
@@ -75,5 +76,6 @@ Microchip or any third party.
     #define MPROTO(x) JOIN(x, JOIN(_, no_implementation_available))
     #error "This CAM library version does not support the selected device. Verify that the device has a CAM peripheral and you are using the latest CAM library release."
 #endif
+/** @endcond **/
 
 #endif /* CAM_DEVICE_H */
