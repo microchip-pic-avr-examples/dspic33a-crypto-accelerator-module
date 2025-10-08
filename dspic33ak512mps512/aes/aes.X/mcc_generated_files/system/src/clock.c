@@ -109,7 +109,7 @@ void CLOCK_Initialize(void)
     
     // NOSC PLL1 Out output; OE enabled; SIDL disabled; ON enabled; BOSC Backup FRC Oscillator; FSCMEN enabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL External clock fail detection module #1; EXTCFEN disabled; RIS disabled; SLEEPDLY 8 sys_clk delay; 
     CLK1CON = 0x129580UL;
-    // FRACDIV 0x0; INTDIV 0x0; 
+    // FRACDIV 0; INTDIV 0; 
     CLK1DIV = 0x0UL;
     //enable clock switching
     CLK1CONbits.OSWEN = 1U;

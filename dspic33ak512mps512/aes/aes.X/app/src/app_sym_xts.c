@@ -238,7 +238,7 @@ void aes_sym_xts_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEquality(test->plaintext, decryptedDirectResult, test->textLength);
+                    printArrayEqualityResult(test->plaintext, decryptedDirectResult, test->textLength);
                 }
             }
         }
@@ -259,7 +259,7 @@ void aes_sym_xts_test(void)
 
             if (test->textLength > 0UL)
             {
-                status = aes_sym_xts_test_direct(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedStepsResult);
+                status = aes_sym_xts_test_steps(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedStepsResult);
                 if (status != CRYPTO_SYM_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
@@ -267,7 +267,7 @@ void aes_sym_xts_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEquality(test->plaintext, decryptedStepsResult, test->textLength);
+                    printArrayEqualityResult(test->plaintext, decryptedStepsResult, test->textLength);
                 }
             }
         }
@@ -280,7 +280,7 @@ void aes_sym_xts_test(void)
         printHexArray("Direct Encryption    ", encryptedDirectResult, test->textLength);
         printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->textLength);
 
-        checkArrayEquality(encryptedDirectResult, encryptedStepsResult, test->textLength);
+        printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->textLength);
 
         test++;
     }
