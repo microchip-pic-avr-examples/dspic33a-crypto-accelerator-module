@@ -63,7 +63,7 @@ extern "C" {
 
 /**
  * @brief This enum represents the result of the CAM PKE operation.
- */
+ **/
 typedef enum {
     CRYPTO_PKE_RESULT_SUCCESS,
     CRYPTO_PKE_RESULT_INIT_FAIL,
@@ -75,7 +75,7 @@ typedef enum {
 
 /**
  * @brief This enum represents the ECC curves supported by the CAM PKE driver.
- */
+ **/
 typedef enum
 {
   NO_CURVE = 0,
@@ -87,7 +87,7 @@ typedef enum
 
 /**
  * @brief This enum represents the type of operation the PKE engine must complete.
- */
+ **/
 typedef enum
 {
     DEFAULT,
@@ -99,7 +99,7 @@ typedef enum
 
 /**
  * @brief This struct is used to store input/output values.
- */
+ **/
 typedef struct
 {
     uint8_t* data; /**< @brief List of values used as an input or output.*/
@@ -108,7 +108,7 @@ typedef struct
 
 /**
  * @brief This struct is used to store key data.
- */
+ **/
 typedef struct
 {
     uint8_t* x;    /**< @brief X component of the public key.*/
@@ -118,7 +118,7 @@ typedef struct
 
 /**
  * @brief This struct stores the inputs and configuration options for the PKE.
- */
+ **/
 typedef struct
 {
     PKE_OPERATIONS operation; /**< @brief Operation the PKE needs to compute.*/
@@ -148,8 +148,10 @@ void DRV_CRYPTO_PKE_IsrHelper(void);
 // *****************************************************************************
 // *****************************************************************************
 
+/** @cond INTERNAL **/
 void MPROTO(DRV_CRYPTO_PKE_IsrHelper)(void);
 #define DRV_CRYPTO_PKE_IsrHelper MPROTO(DRV_CRYPTO_PKE_IsrHelper)
+/** @endcond **/
 
 #ifdef	__cplusplus
 }

@@ -66,7 +66,7 @@ extern "C" {
 
 /**
  * @brief Defines HASH error codes.
- */
+ **/
 typedef enum HASH_ERROR
 {
     HASH_NO_ERROR = 0,
@@ -84,7 +84,7 @@ typedef enum HASH_ERROR
 
 /**
  * @brief Defines the allowed HASH modes.
- */
+ **/
 typedef enum HASHCON_MODE
 {
     MODE_SHA1   = 1,
@@ -176,6 +176,7 @@ uint32_t DRV_CRYPTO_HASH_GetContextSize(void *contextData);
 // *****************************************************************************
 // *****************************************************************************
 
+/** @cond INTERNAL **/
 void MPROTO(DRV_CRYPTO_HASH_IsrHelper)(void);
 #define DRV_CRYPTO_HASH_IsrHelper MPROTO(DRV_CRYPTO_HASH_IsrHelper)
 
@@ -197,7 +198,8 @@ HASH_ERROR MPROTO(DRV_CRYPTO_HASH_IsActive)(void *contextData, HASH_ERROR *activ
 
 uint32_t MPROTO(DRV_CRYPTO_HASH_GetContextSize)(void *contextData);
 #define DRV_CRYPTO_HASH_GetContextSize MPROTO(DRV_CRYPTO_HASH_GetContextSize)
-
+/** @endcond **/
+  
 #ifdef	__cplusplus
 }
 #endif
