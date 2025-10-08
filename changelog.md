@@ -11,8 +11,8 @@
 	- Updates to AES driver: 
 		- Context Safe DMA
 		- Optimizations
-	- The CAM Hardware Driver now throws warnings when used with an unintended device.
-	- Support for short-double or no-short double
+	- The CAM Hardware Driver throws warnings when used with an unintended device
+	- Library built to support 64-bit double and short-double types to switch per compiler setting for -fno-short-double
 
 # dspic33a-crypto-accelerator-module v1.1.1
 ### Release Highlights
