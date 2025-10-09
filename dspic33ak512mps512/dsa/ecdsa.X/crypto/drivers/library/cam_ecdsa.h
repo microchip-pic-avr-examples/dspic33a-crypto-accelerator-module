@@ -116,6 +116,7 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify(PKE_CONFIG *eccData);
 // *****************************************************************************
 // *****************************************************************************
 
+/** @cond INTERNAL **/
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsSign)(PKE_CONFIG *eccData, uint8_t *inputHash, uint32_t hashLength, 
         uint8_t * privateKey, uint32_t privateKeyLength, PKE_ECC_CURVE eccCurve);
 #define DRV_CRYPTO_ECDSA_InitEccParamsSign MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsSign)
@@ -129,6 +130,7 @@ CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsVerify)(PKE_CONFIG *eccDa
 
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify)(PKE_CONFIG *eccData);
 #define DRV_CRYPTO_ECDSA_Verify MPROTO(DRV_CRYPTO_ECDSA_Verify)
+/** @endcond **/
 
 #ifdef	__cplusplus
 }
