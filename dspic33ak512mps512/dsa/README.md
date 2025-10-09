@@ -96,17 +96,17 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|3.92|
-|P-256|7.42|
-|P-384|19.80|
-|P-521|42.15|
+|P-192|3.913|
+|P-256|7.396|
+|P-384|19.756|
+|P-521|42.057|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.14|
-|P-256|9.91|
-|P-384|27.06|
-|P-521|58.41|
+|P-192|5.129|
+|P-256|9.882|
+|P-384|27.006|
+|P-521|58.281|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
