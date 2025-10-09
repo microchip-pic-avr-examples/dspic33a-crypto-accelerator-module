@@ -70,19 +70,19 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-GCM (Encrypt)|33.71 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 16|
 |AES-GCM (Decrypt)|28.87 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 16|
 |AES-CMAC (Direct)|28.07 Mbps|Key Size: 128, Plaintext Size: 532, MAC Size: 16|
-|ECDSA (Sign)|3.92 ms|Curve: P-192|
-|ECDSA (Verify)|5.14 ms|Curve: P-192|
-|ECDSA (Sign)|7.42 ms|Curve: P-256|
-|ECDSA (Verify)|9.91 ms|Curve: P-256|
-|ECDSA (Sign)|19.80 ms|Curve: P-384|
-|ECDSA (Verify)|27.06 ms|Curve: P-384|
-|ECDSA (Sign)|42.15 ms|Curve: P-521|
-|ECDSA (Verify)|58.41 ms|Curve: P-521|
-|TRNG (Generate)|122.75 ms|Output Size: 521|
-|ECDH (Shared Secret Generate)|3.78 ms|Curve: P-192|
-|ECDH (Shared Secret Generate)|7.22 ms|Curve: P-256|
-|ECDH (Shared Secret Generate)|19.44 ms|Curve: P-384|
-|ECDH (Shared Secret Generate)|41.55 ms|Curve: P-521|
+|ECDSA (Sign)|3.913 ms|Curve: P-192|
+|ECDSA (Verify)|5.129 ms|Curve: P-192|
+|ECDSA (Sign)|7.396 ms|Curve: P-256|
+|ECDSA (Verify)|9.882 ms|Curve: P-256|
+|ECDSA (Sign)|19.759 ms|Curve: P-384|
+|ECDSA (Verify)|27.006 ms|Curve: P-384|
+|ECDSA (Sign)|42.057 ms|Curve: P-521|
+|ECDSA (Verify)|58.281 ms|Curve: P-521|
+|TRNG (Generate)|122.667 µs|Output Size: 521|
+|ECDH (Shared Secret Generate)|3.770 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.207 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.400 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.473 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
