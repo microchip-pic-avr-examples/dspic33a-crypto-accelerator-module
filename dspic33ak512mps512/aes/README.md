@@ -13,6 +13,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - CTR
 - CMAC
 - GCM
+- XTS
 
 ## Software Tool Versions
 - dsPIC33AK-MP_DEV_DFP v1.0.81
@@ -113,9 +114,38 @@ The following information will be printed on the COM port for the AES AEAD algor
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_aead_demo.png" alt="AES AEAD Demo Output" width="750"/>
 
+### AES XTS Results
+The following information will be printed on the COM port for symmetric AES XTS algorithm:
+1. A header is displayed showing the used AES algorithm and input data length.
+2. The key data is printed out.
+3. The key 2 data is printed out.
+4. The tweak data is printed out.
+4. The data is encrypted using the single-step API.
+    1. The input data is printed out
+    2. The encrypted data is printed out.
+    3. The encrypted data is compared to an expected value.
+5. The data is decrypted using the single-step API.
+    1. The encrypted input data is printed out.
+    2. The decrypted data is printed out.
+    3. The decrypted data and original input data are compared.
+    4. Pass or Fail is printed out depending on the comparison result.
+6. The data is encrypted using the multi-step API.
+    1. The input data is printed out.
+    2. The encrypted data is printed out.
+    4. The encrypted data is compared to an expected value.
+7. The data is decrypted using the multi-step API.
+    1. The encrypted input data is printed out.
+    3. The decrypted data is printed out.
+    5. The decrypted data and original input data are compared.
+    6. Pass or Fail is printed out depending on the comparison result.
+8. The single-step and multi-step encrypted data results are compared.
+    1. Pass or Fail is printed out depending on the comparison result.
+
+<img src="./images/dspic33ak512mps512_ccv4_aes_sym_xts_demo.png" alt="AES XTS Demo Output" width="750"/>
+
 ## Crypto Library APIs
 
-### AES ECB, CTR APIs
+### AES ECB, CTR, XTS APIs
 crypto_sym_cipher.h defines Init, Cipher, EncryptDirect, and DecryptDirect APIs.
 
 Inputs to these functions must be **little endian**.
@@ -139,6 +169,16 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Cipher(
     uint8_t *ptr_inputData,                // pointer to the input data array to be encrypted/decrypted
     uint32_t dataLen,                      // length of the input message array
     uint8_t *ptr_outData                   // pointer to the data array for encrypted/decrypted output to be stored
+);
+```
+
+```c
+crypto_Sym_Status_E Crypto_Sym_AesXts_Cipher(
+    st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, // configuration context for AES support
+    uint8_t *ptr_inputData,                // pointer to the input data array to be encrypted/decrypted
+    uint32_t dataLen,                      // length of the input message array
+    uint8_t *ptr_outData,                  // pointer to the data array for encrypted/decrypted output to be stored
+    uint8_t *ptr_tweak                     // pointer to the tweak array used to adjust the result ciphertext
 );
 ```
 
@@ -169,6 +209,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(
     uint32_t sessionID                     // session ID for use by Crypto API (maximum of 1)
 );      
 ```
+
 
 ### AES MAC APIs
 crypto_mac_cipher.h defines Init, Cipher, Final, and Direct APIs.
