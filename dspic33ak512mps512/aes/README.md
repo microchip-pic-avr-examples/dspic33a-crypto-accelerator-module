@@ -331,66 +331,64 @@ crypto_Aead_Status_E Crypto_Aead_AesGcm_DecryptAuthDirect(
 ## Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the AES driver with NIST provided test vectors.
-
-Benchmarking parameters: Device clock speed set to 200 MHz
+The following benchmarking results were obtained with the device clock speed set to 200MHz.
 
 #### AES-ECB
 |Key Size (bytes)|Plaintext Size (bytes)|AES-ECB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|
-|16|8192|435.51|
-|24|8192|372.07|
-|32|8192|324.79|
+|16|8,192|435.51|
+|24|8,192|372.07|
+|32|8,192|324.79|
 
 |Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|
-|16|8192|434.36|
-|24|8192|371.27|
-|32|8192|324.11|
+|16|8,192|434.36|
+|24|8,192|371.27|
+|32|8,192|324.11|
 
 #### AES-CTR
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8192|435.26|
-|24|16|8192|372.08|
-|32|16|8192|324.94|
+|16|16|8,192|435.26|
+|24|16|8,192|372.08|
+|32|16|8,192|324.94|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8192|435.35|
-|24|16|8192|372.18|
-|32|16|8192|324.96|
+|16|16|8,192|435.35|
+|24|16|8,192|372.18|
+|32|16|8,192|324.96|
 
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8192|420.99|
-|24|12|4|16|8192|361.49|
-|32|12|4|16|8192|316.61|
+|16|12|4|16|8,192|420.99|
+|24|12|4|16|8,192|361.49|
+|32|12|4|16|8,192|316.61|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_DecryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8192|417.59|
-|24|12|2|16|8192|358.91|
-|32|12|2|16|8192|314.69|
+|16|12|4|16|8,192|417.59|
+|24|12|2|16|8,192|358.91|
+|32|12|2|16|8,192|314.69|
 
 #### AES-XTS
 |Key Size (bytes)|Tweak Size (bytes)|Plaintext Size (bytes)|AES-XTS Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8192|429.99|
-|32|16|8192|321.66|
+|16|16|8,192|429.99|
+|32|16|8,192|321.66|
 
 |Key Size (bytes)|Tweak Size (bytes)|Ciphertext Size (bytes)|AES-XTS Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8192|429.20|
-|32|16|8192|321.13|
+|16|16|8,192|429.20|
+|32|16|8,192|321.13|
 
 #### AES-CMAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|16|8192|16|21.56|
-|24|8192|16|21.41|
-|32|8192|16|21.13|
+|16|8,192|16|21.56|
+|24|8,192|16|21.41|
+|32|8,192|16|21.13|
 
 ### Memory Size Benchmarking
 The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash size will vary based on size of the stored data inputs used with the library. 
