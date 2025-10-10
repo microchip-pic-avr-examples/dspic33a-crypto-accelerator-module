@@ -86,7 +86,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Final(
 ## Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained with the device running at 200MHz.
+The following benchmarking results were obtained with the device clock speed set to 200MHz.
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
