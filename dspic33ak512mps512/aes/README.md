@@ -286,9 +286,9 @@ crypto_Aead_Status_E Crypto_Aead_AesGcm_Cipher(
 
 ```c
 crypto_Aead_Status_E Crypto_Aead_AesGcm_Final(
-    st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st,    // configuration context for AES GCM support
-    uint8_t *ptr_authTag,                           // pointer to the authentication tag data array to be used
-    uint8_t authTagLen                              // length of the authentication tag data array
+    st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st,     // configuration context for AES GCM support
+    uint8_t *ptr_authTag,                            // pointer to the authentication tag data array to be used
+    uint8_t authTagLen                               // length of the authentication tag data array
 );
 ```
 
@@ -338,69 +338,82 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 #### AES-ECB
 |Key Size (bytes)|Plaintext Size (bytes)|AES-ECB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|
-|16|128|104.25|
-|24|128|106.11|
-|32|128|107.93|
+|16|8192|435.51|
+|24|8192|372.07|
+|32|8192|324.79|
 
 |Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|
-|16|128|101.59|
-|24|128|102.88|
-|32|128|104.40|
+|16|8192|434.36|
+|24|8192|371.27|
+|32|8192|324.11|
 
 #### AES-CTR
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|128|112.78|
-|24|16|128|114.38|
-|32|16|128|115.50|
+|16|16|8192|435.26|
+|24|16|8192|372.08|
+|32|16|8192|324.94|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|128|112.48|
-|24|16|128|114.09|
-|32|16|128|115.60|
+|16|16|8192|435.35|
+|24|16|8192|372.18|
+|32|16|8192|324.96|
 
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|16|33.71|
-|24|12|4|16|14|35.29|
-|32|12|4|16|13|38.36|
+|16|12|4|16|8192|420.99|
+|24|12|4|16|8192|361.49|
+|32|12|4|16|8192|316.61|
 
-|Key Size (bytes)|Initialization vector Size (bytes)|Authentication data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_DecryptAuthDirect Performance (Mbps)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_DecryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|14|28.87|
-|24|12|2|16|14|31.34|
-|32|12|2|16|13|34.09|
+|16|12|4|16|8192|417.59|
+|24|12|2|16|8192|358.91|
+|32|12|2|16|8192|314.69|
+
+#### AES-XTS
+|Key Size (bytes)|Tweak Size (bytes)|Plaintext Size (bytes)|AES-XTS Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8192|429.99|
+|32|16|8192|321.66|
+
+|Key Size (bytes)|Tweak Size (bytes)|Ciphertext Size (bytes)|AES-XTS Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8192|429.20|
+|32|16|8192|321.13|
 
 #### AES-CMAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|16|532|16|28.07|
-|24|532|16|27.99|
-|32|532|16|28.14|
+|16|8192|16|21.56|
+|24|8192|16|21.41|
+|32|8192|16|21.13|
 
 ### Memory Size Benchmarking
-The following results include usage of ECB, CTR, CMAC, and GCM APIs. Flash size will vary based on size of the stored data inputs used with the library. 
+The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash size will vary based on size of the stored data inputs used with the library. 
 
 #### Single Step
 
 |AES Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-ECB|284|10,008|
-|AES-CTR|284|10,040|
-|AES-GCM|284|11,032|
-|AES-CMAC|284|9,644|
+|AES-ECB|58|11,788|
+|AES-CTR|58|11,828|
+|AES-GCM|58|12,204|
+|AES-XTS|58|11,828|
+|AES-CMAC|58|10,736|
 
 #### Multi Step
 
 |AES Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-ECB|2,232|10,072|
-|AES-CTR|2,232|10,116|
-|AES-GCM|824|11,156|
-|AES-CMAC|812|9,700|
+|AES-ECB|2,006|11,852|
+|AES-CTR|2,006|11,896|
+|AES-GCM|598|12,328|
+|AES-XTS|2,006|11,896|
+|AES-CMAC|586|10,792|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
