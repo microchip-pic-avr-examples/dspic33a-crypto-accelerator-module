@@ -45,7 +45,7 @@ Microchip or any third party.
  /**
  * @brief Version date format (yyyymmdd).
  **/
- #define CAM_LIBRARY_VERSION_DATE   "20251008"
+ #define CAM_LIBRARY_VERSION_DATE   "20251014"
 
 /**
  * @brief This number represents the Major version in SemVer format.
@@ -56,7 +56,7 @@ Microchip or any third party.
  * @brief This number represents the Minor version in SemVer format.
  **/
  #define CAM_LIBRARY_VERSION_MINOR  2
- 
+
  /**
  * @brief This number represents the Patch version in SemVer format.
  **/
