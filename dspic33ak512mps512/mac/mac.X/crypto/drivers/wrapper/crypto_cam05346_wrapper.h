@@ -5,14 +5,14 @@
     Microchip Technology Inc.
 
   File Name:
-    crypto_mac_cam05346_wrapper.h
+    crypto_cam05346_wrapper.h
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware AES MAC.
+    Crypto Framework Library wrapper file for common CAM hardware management.
 
   Description:
-    This header file contains the wrapper interface to access the
-    AES MAC algorithms in the AES hardware driver for Microchip microcontrollers.
+    This header file contains the wrapper interface to manage common CAM hardware
+    interactions for Microchip microcontrollers.
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -40,14 +40,22 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef CRYPTO_MAC_CAM05346_WRAPPER_H
-#define	CRYPTO_MAC_CAM05346_WRAPPER_H
+#ifndef MCHP_CRYPTO_CAM05346_WRAPPER_H
+#define MCHP_CRYPTO_CAM05346_WRAPPER_H
 
-#include "crypto/common_crypto/crypto_mac_cipher.h"
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
 
-#ifdef	__cplusplus
-extern "C" {
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    extern "C" {
+
 #endif
+// DOM-IGNORE-END
 
 // *****************************************************************************
 // *****************************************************************************
@@ -55,36 +63,39 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-// The minimum size to store a CAM library AES-CMAC context data block.
-#define MINIMUM_CMAC_CONTEXT_DATA_SIZE  (240UL)
+typedef enum crypto_Int_Status_E {
+    CRYPTO_INT_SUCCESS = 0,
+    CRYPTO_INT_INVALID_ID = -1,
+    CRYPTO_INT_ALREADY_REGISTERED = -2,
+    CRYPTO_INT_GENERAL_FAIL = -127
 
-typedef struct
-{
-  // This is used to store the CAM library context data.
-  uint8_t contextData[MINIMUM_CMAC_CONTEXT_DATA_SIZE];
+} crypto_Int_Status_E;
 
-} CRYPTO_CMAC_HW_CONTEXT;
+typedef enum crypto_Int_Handler_Id {
+    CRYPTO1_INT = 0,
+    CRYPTO2_INT = 1,
+    CRYPTO3_INT = 2,
+} crypto_Int_Handler_Id;
 
+typedef void (*crypto_Int_Handler)(void);
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: MAC Algorithms Common Interface
+// Section: Interrupts Common Interface
 // *****************************************************************************
 // *****************************************************************************
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Init(void *contextData, uint8_t *key, uint32_t keyLen);
+crypto_Int_Status_E Crypto_Int_Hw_Register_Handler(crypto_Int_Handler_Id handlerID, crypto_Int_Handler handler);
+crypto_Int_Status_E Crypto_Int_Hw_Enable(crypto_Int_Handler_Id handlerID);
+crypto_Int_Status_E Crypto_Int_Hw_Disable(crypto_Int_Handler_Id handlerID);
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Cipher(void *contextData, uint8_t *inputData, uint32_t dataLen);
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Final(void *contextData, uint8_t *outputMac, uint32_t macLen);
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t dataLen,
-                                              uint8_t *ptr_outMac, uint32_t macLen,
-                                              uint8_t *ptr_key, uint32_t keyLen);
+    }
 
-#ifdef	__cplusplus
-}
 #endif
+// DOM-IGNORE-END
 
-#endif	/* CRYPTO_MAC_CAM05346_WRAPPER_H */
-
+#endif /* MCHP_CRYPTO_CAM05346_WRAPPER_H */
