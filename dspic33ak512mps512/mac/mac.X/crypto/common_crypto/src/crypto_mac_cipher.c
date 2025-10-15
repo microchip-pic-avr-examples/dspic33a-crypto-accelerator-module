@@ -194,4 +194,135 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(crypto_HandlerType_E macHandlerTyp
     return ret_aesCmacStat_en;
 }
 
+crypto_Mac_Status_E Crypto_Mac_Hmac_Init(st_Crypto_Mac_Hmac_ctx *ptr_hmacCtx_st, crypto_HandlerType_E handlerType_en, uint8_t *ptr_key, uint32_t keyLen,
+                                         crypto_Hash_Algo_E hashType_en, uint32_t sessionID)
+{
+	crypto_Mac_Status_E ret_hmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+	if(ptr_hmacCtx_st == NULL)
+    {
+        ret_hmacStat_en = CRYPTO_MAC_ERROR_CTX;
+    }
+    else if( (ptr_key == NULL) || (keyLen == 0UL) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_KEY;
+    }
+	else if( (hashType_en <= CRYPTO_HASH_INVALID) || (hashType_en >= CRYPTO_HASH_MAX))
+    {
+        ret_hmacStat_en = CRYPTO_MAC_ERROR_HASHTYPE;
+    }
+    else if( (sessionID == 0U) || (sessionID > (uint32_t)CRYPTO_MAC_SESSION_MAX) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_SID;
+    }
+	else
+    {
+        ptr_hmacCtx_st->cryptoSessionID =  sessionID;
+        ptr_hmacCtx_st->macHandlerType_en = handlerType_en;
+
+        switch(ptr_hmacCtx_st->macHandlerType_en)
+        {
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                    ret_hmacStat_en = Crypto_Mac_Hw_Hmac_Init((void*)ptr_hmacCtx_st->arr_macDataCtx, ptr_key, keyLen, hashType_en);
+                break;
+            default:
+                ret_hmacStat_en = CRYPTO_MAC_ERROR_HDLR;
+                break;
+        }
+    }
+	return ret_hmacStat_en;
+}
+
+
+crypto_Mac_Status_E Crypto_Mac_Hmac_Cipher(st_Crypto_Mac_Hmac_ctx *ptr_hmacCtx_st, uint8_t *ptr_inputData, uint32_t dataLen)
+{
+	crypto_Mac_Status_E ret_hmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+	if(ptr_hmacCtx_st == NULL)
+    {
+        ret_hmacStat_en = CRYPTO_MAC_ERROR_CTX;
+    }
+    else if( (ptr_inputData == NULL) && (dataLen != 0UL) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_INPUTDATA;
+    }
+	else
+    {
+        switch(ptr_hmacCtx_st->macHandlerType_en)
+        {
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                    ret_hmacStat_en = Crypto_Mac_Hw_Hmac_Cipher((void*)ptr_hmacCtx_st->arr_macDataCtx, ptr_inputData, dataLen);
+                break;
+            default:
+                ret_hmacStat_en = CRYPTO_MAC_ERROR_HDLR;
+                break;
+        }
+    }
+	return ret_hmacStat_en;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Hmac_Final(st_Crypto_Mac_Hmac_ctx *ptr_hmacCtx_st, uint8_t *ptr_outMac)
+{
+	crypto_Mac_Status_E ret_hmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+	if(ptr_hmacCtx_st == NULL)
+    {
+        ret_hmacStat_en = CRYPTO_MAC_ERROR_CTX;
+    }
+    else if(ptr_outMac == NULL)
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_MACDATA;
+    }
+	else
+    {
+        switch(ptr_hmacCtx_st->macHandlerType_en)
+        {
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                    ret_hmacStat_en = Crypto_Mac_Hw_Hmac_Final((void*)ptr_hmacCtx_st->arr_macDataCtx, ptr_outMac);
+                break;
+            default:
+                ret_hmacStat_en = CRYPTO_MAC_ERROR_HDLR;
+                break;
+        }
+    }
+	return ret_hmacStat_en;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Hmac_Direct(crypto_HandlerType_E handlerType_en, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outMac, uint8_t *ptr_key,
+                                           uint32_t keyLen, crypto_Hash_Algo_E hashType_en, uint32_t sessionID)
+{
+	crypto_Mac_Status_E ret_hmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+
+    if( (ptr_inputData == NULL) && (dataLen != 0UL) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_INPUTDATA;
+    }
+	else if(ptr_outMac == NULL)
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_MACDATA;
+    }
+	else if( (ptr_key == NULL) || (keyLen == 0UL) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_KEY;
+    }
+	else if( (hashType_en <= CRYPTO_HASH_INVALID) || (hashType_en >= CRYPTO_HASH_MAX))
+    {
+        ret_hmacStat_en = CRYPTO_MAC_ERROR_HASHTYPE;
+    }
+    else if( (sessionID == 0U) || (sessionID > (uint32_t)CRYPTO_MAC_SESSION_MAX) )
+    {
+       ret_hmacStat_en =  CRYPTO_MAC_ERROR_SID;
+    }
+	else
+	{
+		switch(handlerType_en)
+        {
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                    ret_hmacStat_en = Crypto_Mac_Hw_Hmac_Direct(ptr_inputData, dataLen, ptr_outMac, ptr_key, keyLen, hashType_en);
+                break;
+            default:
+                ret_hmacStat_en = CRYPTO_MAC_ERROR_HDLR;
+                break;
+        }
+	}
+
+	return ret_hmacStat_en;
+}
 // *****************************************************************************

@@ -1,16 +1,18 @@
-/*******************************************************************************
-  Application Header File
+/**************************************************************************
+  Crypto Framework Library Source
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    app_mac.h
+    cam_version.h
 
   Summary:
-    This header file provides prototypes and definitions for AES
-    MAC algorithms for the application.
-*******************************************************************************/
+    CAM Hardware Driver Version.
+
+  Description:
+    This header file contains version information on the CAM Hardware Driver.
+**************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
@@ -37,20 +39,27 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef APP_MAC_H
-#define	APP_MAC_H
+ #ifndef CAM_VERSION_H
+ #define CAM_VERSION_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+ /**
+ * @brief Version date format (yyyymmdd).
+ **/
+ #define CAM_LIBRARY_VERSION_DATE   "20251014"
 
-#define RUN_MAC_CMAC_TEST
+/**
+ * @brief This number represents the Major version in SemVer format.
+ **/
+ #define CAM_LIBRARY_VERSION_MAJOR  1
 
-void aes_mac_cmac_test(void);
+/**
+ * @brief This number represents the Minor version in SemVer format.
+ **/
+ #define CAM_LIBRARY_VERSION_MINOR  2
 
-#ifdef	__cplusplus
-}
-#endif
+ /**
+ * @brief This number represents the Patch version in SemVer format.
+ **/
+ #define CAM_LIBRARY_VERSION_PATCH  0
 
-#endif	/* APP_MAC_H */
-
+ #endif /* CAM_VERSION_H */
