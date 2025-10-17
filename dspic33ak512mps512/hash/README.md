@@ -50,12 +50,12 @@ crypto_hash.h defines Digest, Init, Update, Final, and GetHashAndHashSize APIs.
 
 ```c
 crypto_Hash_Status_E Crypto_Hash_Sha_Digest(
-    crypto_HandlerType_E shaHandler_en, // configure Crypto API to use hardware acceleration
-    uint8_t *ptr_data,                  // pointer to the input data array to be hashed
-    uint32_t dataLen,                   // length of the input data array
-    uint8_t *ptr_digest,                // pointer to the data array for result hash to be stored
-    crypto_Hash_Algo_E shaAlgorithm_en, // configure Crypto API for desired SHA algorithm
-    uint32_t shaSessionId               // session ID for use by Crypto API (maximum of 1)
+    crypto_HandlerType_E shaHandler_en,    // configure Crypto API to use hardware acceleration
+    uint8_t *ptr_data,                     // pointer to the input data array to be hashed
+    uint32_t dataLen,                      // length of the input data array
+    uint8_t *ptr_digest,                   // pointer to the data array for result hash to be stored
+    crypto_Hash_Algo_E shaAlgorithm_en,    // configure Crypto API for desired SHA algorithm
+    uint32_t shaSessionId                  // session ID for use by Crypto API (maximum of 1)
 );
 ```
 
@@ -86,17 +86,15 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Final(
 ## Benchmarking
 
 ### Performance Benchmarking
-The following benchmarking results were obtained while testing the hash driver with NIST provided test vectors.
-
-Benchmarking parameters: Device clock speed set to 200 MHz
+The following benchmarking results were obtained with the device clock speed set to 200MHz.
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|4,096|934.09|
-|SHA-224|4,096|1090.45|
-|SHA-256|4,096|1094.46|
-|SHA-384|4,096|1302.90|
-|SHA-512|4,096|1299.29|
+|SHA-1|8,192|982.99|
+|SHA-224|8,192|1160.75|
+|SHA-256|8,192|1160.55|
+|SHA-384|8,192|1394.09|
+|SHA-512|8,192|1395.27|
 
 ### Memory Size Benchmarking
 
@@ -104,21 +102,21 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|284|9,892|
-|SHA-224|284|9,892|
-|SHA-256|284|9,892|
-|SHA-384|284|9,892|
-|SHA-512|284|9,892|
+|SHA-1|58|10,708|
+|SHA-224|58|10,708|
+|SHA-256|58|10,708|
+|SHA-384|58|10,708|
+|SHA-512|58|10,708|
 
 #### Multi Step
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|284|9,940|
-|SHA-224|284|9,940|
-|SHA-256|284|9,940|
-|SHA-384|284|9,940|
-|SHA-512|284|9,940|
+|SHA-1|58|10,756|
+|SHA-224|58|10,756|
+|SHA-256|58|10,756|
+|SHA-384|58|10,756|
+|SHA-512|58|10,756|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
