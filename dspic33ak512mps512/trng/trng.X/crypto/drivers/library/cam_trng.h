@@ -57,6 +57,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -64,6 +65,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief This enum represents the result of the TRNG generation.
+ **/
 typedef enum TRNG_ERROR
 {
     TRNG_NO_ERROR = 0,
@@ -83,30 +87,47 @@ typedef enum TRNG_ERROR
 // *****************************************************************************
 // *****************************************************************************
 
-/*
+/**
  *  @brief Resets TRNG error bits whenever an interrupt occurs.
  *  @return none
  *  @note This function is called when one of the error bits is 1. This function resets the built-in error bits so that future errors can be caught.
-*/
+ **/
 void DRV_CRYPTO_TRNG_IsrHelper(void);
 
-/*
+/**
  *  @brief Creates and sets the key for True Random Number Generation.
  *  @return Returns TRNG_NO_ERROR on success. Returns one of the TRNG_FAILED_TO_GENERATE / TRNG_EXEC_FIFO / TRNG_EXEC_STARTUP 
  *          TRNG_EXEC_PROP / TRNG_EXEC_REP on fail. 
  *  @note This function performs a read of the FIFO to get the key and then stores it for use in the generation of the TRNG values.
-*/
+ **/
 TRNG_ERROR DRV_CRYPTO_TRNG_Setup(void);
 
-/*
+/**
  *  @brief Reads generated true random number and stores it in the provided buffer.
  *  @param data Buffer to store the TRNG data.
  *  @param size Number of 4-bit words to read and store.
  *  @return Returns TRNG_NO_ERROR on success. Returns one of the TRNG_FAILED_TO_GENERATE / TRNG_EXEC_FIFO / TRNG_EXEC_STARTUP 
  *          TRNG_EXEC_PROP / TRNG_EXEC_REP on fail. 
  *  @note This function reads the specified amount of 4-bit words from the designated read address.
-*/
+ **/
 TRNG_ERROR DRV_CRYPTO_TRNG_ReadData(uint8_t* data, uint32_t size) ;
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: TRNG CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+/** @cond INTERNAL **/
+void MPROTO(DRV_CRYPTO_TRNG_IsrHelper)(void);
+#define DRV_CRYPTO_TRNG_IsrHelper MPROTO(DRV_CRYPTO_TRNG_IsrHelper)
+
+TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_Setup)(void);
+#define DRV_CRYPTO_TRNG_Setup MPROTO(DRV_CRYPTO_TRNG_Setup)
+
+TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_ReadData)(uint8_t* data, uint32_t size);
+#define DRV_CRYPTO_TRNG_ReadData MPROTO(DRV_CRYPTO_TRNG_ReadData)
+/** @endcond **/
 
 #ifdef	__cplusplus
 }

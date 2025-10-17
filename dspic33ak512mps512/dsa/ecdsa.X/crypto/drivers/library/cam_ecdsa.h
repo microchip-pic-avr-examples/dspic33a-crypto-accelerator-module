@@ -51,10 +51,10 @@ extern "C" {
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include <stdint.h>
 #include "cam_pke.h"
 #include "cam_version.h"
+#include "cam_device.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -109,6 +109,28 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_InitEccParamsVerify(PKE_CONFIG *eccData, uint
  *  @note DRV_CRYPTO_ECDSA_InitEccParamsVerify must be called before this function can be called.
  **/
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify(PKE_CONFIG *eccData);
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: ECDSA CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+/** @cond INTERNAL **/
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsSign)(PKE_CONFIG *eccData, uint8_t *inputHash, uint32_t hashLength, 
+        uint8_t * privateKey, uint32_t privateKeyLength, PKE_ECC_CURVE eccCurve);
+#define DRV_CRYPTO_ECDSA_InitEccParamsSign MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsSign)
+
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Sign)(PKE_CONFIG *eccData, uint8_t * outputSignature, uint32_t signatureLength);
+#define DRV_CRYPTO_ECDSA_Sign MPROTO(DRV_CRYPTO_ECDSA_Sign)
+
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsVerify)(PKE_CONFIG *eccData, uint8_t *inputHash, uint32_t hashLength, 
+        uint8_t *inputSignature, uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE eccCurve);
+#define DRV_CRYPTO_ECDSA_InitEccParamsVerify MPROTO(DRV_CRYPTO_ECDSA_InitEccParamsVerify)
+
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify)(PKE_CONFIG *eccData);
+#define DRV_CRYPTO_ECDSA_Verify MPROTO(DRV_CRYPTO_ECDSA_Verify)
+/** @endcond **/
 
 #ifdef	__cplusplus
 }

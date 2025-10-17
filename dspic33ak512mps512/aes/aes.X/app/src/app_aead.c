@@ -192,7 +192,7 @@ static void checkEncryptionAndTag(uint8_t *ct, uint8_t *result, uint32_t length,
 
     if (length > 0UL)
     {
-        if (0 == memcmp(result, ct, length))
+        if (0u == checkArrayEquality(result, ct, length))
         {
             (void)printf(GREEN"\r\n Encryption: PASS    "RESET_COLOR );
         }
@@ -202,7 +202,7 @@ static void checkEncryptionAndTag(uint8_t *ct, uint8_t *result, uint32_t length,
         }
     }
 
-    if (0 == memcmp(tagResult, tag, AES_GCM_TAG_LENGTH))
+    if (0u == checkArrayEquality(tagResult, tag, AES_GCM_TAG_LENGTH))
     {
         (void)printf(GREEN"\r\n Authentication Tag: PASS"RESET_COLOR);
     }
@@ -299,7 +299,7 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEquality(test->pt, decryptedDirectResult, test->ptlength);
+                    printArrayEqualityResult(test->pt, decryptedDirectResult, test->ptlength);
                 }
             }
         }
@@ -332,7 +332,7 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    checkArrayEquality(test->pt, decryptedStepsResult, test->ptlength);
+                    printArrayEqualityResult(test->pt, decryptedStepsResult, test->ptlength);
                 }
             }
         }
@@ -348,12 +348,12 @@ void aes_aead_gcm_test(void)
             {
                 printHexArray("Direct Encryption    ", encryptedDirectResult, test->ptlength);
                 printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->ptlength);
-                checkArrayEquality(encryptedDirectResult, encryptedStepsResult, test->ptlength);
+                printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->ptlength);
             }
 
             printHexArray("Direct Tag           ", tagDirectResult, AES_GCM_TAG_LENGTH);
             printHexArray("Stepwise Tag         ", tagStepsResult, AES_GCM_TAG_LENGTH);
-            checkArrayEquality(tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
+            printArrayEqualityResult(tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
         }
         else
         {

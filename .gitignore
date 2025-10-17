@@ -26,6 +26,7 @@ nbproject/build/
 nbproject/dist/
 nbproject/private/
 nbproject/disassembly/
+debug/
 build/
 dist/
 private/
@@ -52,4 +53,4 @@ Makefile-genesis.properties
 mchp_private/fmpp/build*
 **/report
 **/motorbench
-
+*.yml

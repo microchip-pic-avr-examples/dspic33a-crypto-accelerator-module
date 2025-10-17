@@ -39,5 +39,6 @@ data: {
     CRYPTO_HW_AES_CTR: true,
     CRYPTO_HW_AES_GCM: true,
     CRYPTO_HW_AES_CMAC: true,
-    CRYPTO_HW_ECDH: true
+    CRYPTO_HW_ECDH: true,
+    CRYPTO_HW_AES_XTS: true
 }
