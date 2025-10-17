@@ -92,8 +92,8 @@ The following benchmarking results were obtained with the device clock speed set
 |----|----|----|
 |SHA-1|8,192|982.99|
 |SHA-224|8,192|1160.75|
-|SHA-256|8,192|1160.55
-|SHA-384|8,192|1391.42|
+|SHA-256|8,192|1160.55|
+|SHA-384|8,192|1394.09|
 |SHA-512|8,192|1395.27|
 
 ### Memory Size Benchmarking
