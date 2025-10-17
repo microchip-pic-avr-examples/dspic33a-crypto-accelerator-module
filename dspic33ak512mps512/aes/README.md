@@ -336,9 +336,9 @@ The following benchmarking results were obtained with the device clock speed set
 #### AES-ECB
 |Key Size (bytes)|Plaintext Size (bytes)|AES-ECB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|
-|16|8,192|435.51|
+|16|8,192|435.48|
 |24|8,192|372.07|
-|32|8,192|324.79|
+|32|8,192|324.77|
 
 |Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|

@@ -61,9 +61,9 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-1 (Digest)|982.99 Mbps|Message Size: 8,192|
 |SHA-224 (Digest)|1160.75 Mbps|Message Size: 8,192|
 |SHA-256 (Digest)|1160.55 Mbps|Message Size: 8,192|
-|SHA-384 (Digest)|1391.42 Mbps|Message Size: 8,192|
+|SHA-384 (Digest)|1394.09 Mbps|Message Size: 8,192|
 |SHA-512 (Digest)|1395.27 Mbps|Message Size: 8,192|
-|AES-ECB (Encrypt)|435.51 Mbps|Key Size: 128, Plaintext Size: 8,192|
+|AES-ECB (Encrypt)|435.48 Mbps|Key Size: 128, Plaintext Size: 8,192|
 |AES-ECB (Decrypt)|434.36 Mbps|Key Size: 128, Ciphertext Size: 8,192|
 |AES-CTR (Encrypt)|435.26 Mbps|Key Size: 128, Initialization Vector Size: 16, Plaintext Size: 8,192|
 |AES-CTR (Decrypt)|435.35 Mbps|Key Size: 128, Initialization Vector Size: 16, Ciphertext Size: 8,192|
