@@ -20,7 +20,6 @@
 - Benchmarking improvements
 	- Larger vectors for SHA and AES have been used to better demonstrate CAM performance
 
-
 # dspic33a-crypto-accelerator-module v1.1.1
 ### Release Highlights
 - Support for ECDH Shared Secret Generation
