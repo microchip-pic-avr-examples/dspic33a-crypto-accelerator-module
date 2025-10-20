@@ -53,4 +53,3 @@ Makefile-genesis.properties
 mchp_private/fmpp/build*
 **/report
 **/motorbench
-*.yml
