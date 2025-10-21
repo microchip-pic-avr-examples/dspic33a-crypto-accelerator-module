@@ -15,6 +15,7 @@
           <logicalFolder name="library" displayName="library" projectFiles="true">
             <itemPath>crypto/drivers/library/cam_hash.h</itemPath>
             <itemPath>crypto/drivers/library/cam_version.h</itemPath>
+            <itemPath>crypto/drivers/library/cam_device.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <itemPath>crypto/drivers/wrapper/crypto_hash_cam05346_wrapper.h</itemPath>
