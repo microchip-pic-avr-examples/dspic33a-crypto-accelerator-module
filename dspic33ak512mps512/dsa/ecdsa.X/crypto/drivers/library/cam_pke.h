@@ -48,9 +48,22 @@ extern "C" {
 
 // *****************************************************************************
 // *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
+
+#include "cam_version.h"
+#include "cam_device.h"
+
+// *****************************************************************************
+// *****************************************************************************
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
+
+/**
+ * @brief This enum represents the result of the CAM PKE operation.
+ **/
 typedef enum {
     CRYPTO_PKE_RESULT_SUCCESS,
     CRYPTO_PKE_RESULT_INIT_FAIL,
@@ -60,6 +73,9 @@ typedef enum {
     CRYPTO_PKE_RESULT_ERROR_FAIL
 } CRYPTO_PKE_RESULT;
 
+/**
+ * @brief This enum represents the ECC curves supported by the CAM PKE driver.
+ **/
 typedef enum
 {
   NO_CURVE = 0,
@@ -69,12 +85,9 @@ typedef enum
   P192 = 4,
 } PKE_ECC_CURVE;
 
-typedef struct
-{
-    uint8_t* data;
-    uint32_t size;
-} PKE_DATA;
-
+/**
+ * @brief This enum represents the type of operation the PKE engine must complete.
+ **/
 typedef enum
 {
     DEFAULT,
@@ -84,22 +97,37 @@ typedef enum
     ECDH_ECC_MULTIPLY,
 } PKE_OPERATIONS;
 
+/**
+ * @brief This struct is used to store input/output values.
+ **/
 typedef struct
 {
-    uint8_t* x;
-    uint8_t* y;
-    uint32_t size;
+    uint8_t* data; /**< @brief List of values used as an input or output.*/
+    uint32_t size; /**< @brief Size of the list being stored.*/
+} PKE_DATA;
+
+/**
+ * @brief This struct is used to store key data.
+ **/
+typedef struct
+{
+    uint8_t* x;    /**< @brief X component of the public key.*/
+    uint8_t* y;    /**< @brief Y component of the public key.*/
+    uint32_t size; /**< @brief Size of an individual key component.*/
 } PKE_KEY_DATA;
 
+/**
+ * @brief This struct stores the inputs and configuration options for the PKE.
+ **/
 typedef struct
 {
-    PKE_OPERATIONS operation;
-    PKE_DATA operand1;
-    PKE_DATA operand2;
-    PKE_DATA operand3;
-    PKE_KEY_DATA publicKey;
-    uint8_t operandSize;
-    PKE_ECC_CURVE curve;
+    PKE_OPERATIONS operation; /**< @brief Operation the PKE needs to compute.*/
+    PKE_DATA operand1;        /**< @brief PKE_DATA Input/output value storage for operand 1.*/
+    PKE_DATA operand2;        /**< @brief PKE_DATA Input/output value storage for operand 2.*/
+    PKE_DATA operand3;        /**< @brief PKE_DATA Input/output value storage for operand 3.*/
+    PKE_KEY_DATA publicKey;   /**< @brief PKE_KEY_DATA Public key storage.*/
+    uint8_t operandSize;      /**< @brief Size of the input/output operands being used.*/
+    PKE_ECC_CURVE curve;      /**< @brief Enum for the curve type being used.*/
 } PKE_CONFIG;
 
 
@@ -114,9 +142,19 @@ typedef struct
  **/
 void DRV_CRYPTO_PKE_IsrHelper(void);
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: PKE CAM Device Support
+// *****************************************************************************
+// *****************************************************************************
+
+/** @cond INTERNAL **/
+void MPROTO(DRV_CRYPTO_PKE_IsrHelper)(void);
+#define DRV_CRYPTO_PKE_IsrHelper MPROTO(DRV_CRYPTO_PKE_IsrHelper)
+/** @endcond **/
+
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* CAM_PKE_H */
-

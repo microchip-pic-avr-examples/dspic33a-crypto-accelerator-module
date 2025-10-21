@@ -52,6 +52,7 @@ extern "C" {
 
 #define RUN_SYM_ECB_TEST
 #define RUN_SYM_CTR_TEST
+#define RUN_SYM_XTS_TEST
 
 #define DATA_SIZE 48
 #define INIT_VECTOR_SIZE 16
@@ -65,6 +66,8 @@ extern "C" {
 void aes_sym_ecb_test(void);
 
 void aes_sym_ctr_test(void);
+
+void aes_sym_xts_test(void);
 
 #ifdef	__cplusplus
 }
