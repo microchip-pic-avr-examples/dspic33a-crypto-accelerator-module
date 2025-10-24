@@ -52,6 +52,7 @@ Microchip or any third party.
 #include <stdint.h>
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_hash.h"
+#include "crypto/drivers/library/cam_hash.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -97,6 +98,10 @@ typedef struct
 // Section: Hash Algorithms Common Interface
 // *****************************************************************************
 // *****************************************************************************
+
+crypto_Hash_Status_E Crypto_Hash_Hw_Sha_GetAlgorithm(crypto_Hash_Algo_E shaAlgorithm, HASHCON_MODE *mode);
+
+crypto_Hash_Status_E Crypto_Hash_Hw_Sha_GetDigestLength(crypto_Hash_Algo_E shaAlgorithm, uint32_t *digestLength);
 
 crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Digest(uint8_t *data, uint32_t dataLen,
     uint8_t *digest, crypto_Hash_Algo_E shaAlgorithm_en);

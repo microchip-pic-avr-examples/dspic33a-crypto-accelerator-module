@@ -140,13 +140,6 @@ void aes_test_sym(void)
     #endif
 }
 
-void aes_test_mac(void)
-{
-    #ifdef RUN_MAC_CMAC_TEST
-    aes_mac_cmac_test();
-    #endif
-}
-
 void aes_test_aead(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
