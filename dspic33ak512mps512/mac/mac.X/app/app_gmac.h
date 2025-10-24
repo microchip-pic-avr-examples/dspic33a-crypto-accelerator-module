@@ -1,3 +1,17 @@
+/*******************************************************************************
+  Application Header File
+
+  Company:
+    Microchip Technology Inc.
+
+  File Name:
+    app_gmac.h
+
+  Summary:
+    This header file provides prototypes and definitions for AES
+    GMAC algorithms for the application.
+*******************************************************************************/
+
 //DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
@@ -23,33 +37,18 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef MAC_TEST_VECTOR_H
-#define	MAC_TEST_VECTOR_H
+#ifndef APP_GMAC_H
+#define	APP_GMAC_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
-    
-#include <stdint.h>
-    
-typedef struct 
-{
-    uint8_t* inputData;
-    uint32_t inputDataLen;
-    uint8_t* inputKey;
-    uint32_t inputKeyLen;
-    uint8_t* expectedMac;
-    uint32_t expectedMacLen;
-} TEST_VECTOR;
 
-#define NUMBER_OF_CMAC_VECTORS 4
-
-extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
+void mac_gmac_test(void);
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* MAC_TEST_VECTOR_H */
+#endif	/* APP_GMAC_H */
+
