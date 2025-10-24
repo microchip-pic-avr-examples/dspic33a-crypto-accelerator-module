@@ -25,10 +25,6 @@ Microchip or any third party.
 
 #include "test_vectors/mac_test_vector.h"
 
-/*
- The following test vectors were pulled from NIST's Block Cipher Modes SP 800-38B test vectors:
- https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/cavp-testing-block-cipher-modes
-*/
 
 uint8_t hmac_1_3_bytes_key[] = {0x26, 0xB2, 0xDA, 0xCE, 0x3C, 0xB0, 0x68, 0x02, 0x8B, 0x31, 0xB5, 0x35, 0x20, 0x5C, 0xC9, 0xB5,
                                 0xA8, 0x55, 0x4E, 0x18, 0x18, 0x8C, 0xCA};
