@@ -12,7 +12,7 @@
 
   Description:
     This source file contains the wrapper interface to access the
-    MAC (CMAC/HMAC/GMAC) algorithms in the AES hardware driver for
+    MAC algorithms in the AES hardware driver for
     Microchip microcontrollers.
 **************************************************************************/
 
