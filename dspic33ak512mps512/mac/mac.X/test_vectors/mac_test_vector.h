@@ -41,18 +41,21 @@ typedef struct
     uint32_t inputKeyLen;
     uint8_t* expectedMac;
     uint32_t expectedMacLen;
+    uint8_t* initVect;
+    uint32_t initVectLen;
     crypto_Hash_Algo_E hashAlgorithm;
 } TEST_VECTOR;
 
 #define NUMBER_OF_CMAC_VECTORS 4
-
 extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
 extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
 extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
 
 #define NUMBER_OF_HMAC_VECTORS 2
-
 extern TEST_VECTOR hmac_256_test_vectors[NUMBER_OF_HMAC_VECTORS];
+
+#define NUMBER_OF_GMAC_VECTORS 4
+extern TEST_VECTOR gmac_test_vectors[NUMBER_OF_GMAC_VECTORS];
 
 #ifdef	__cplusplus
 }

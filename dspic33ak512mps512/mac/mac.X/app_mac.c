@@ -50,6 +50,7 @@ Microchip or any third party.
 #include "app_mac.h"
 #include "app/app_cmac.h"
 #include "app/app_hmac.h"
+#include "app/app_gmac.h"
 
 uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
@@ -107,6 +108,7 @@ void printHexArray(const char* label, void* data, uint32_t size)
     }
 }
 
+#ifdef RUN_MAC_CMAC_TEST
 void printCmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
@@ -126,7 +128,9 @@ void printCmacCryptoError(unsigned long keyBitLen, const char* testType, const c
 {
     (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
 }
+#endif
 
+#ifdef RUN_MAC_HMAC_TEST
 void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, const char *shaType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
@@ -146,6 +150,29 @@ void printHmacCryptoError(const char* testType, const char* description, int sta
 {
     (void) printf(RED"\r\nCrypto v4 %s %s Result: %d\r\n"RESET_COLOR, testType, description, status);
 }
+#endif
+
+#ifdef RUN_MAC_GMAC_TEST
+void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
+{
+    char header[94];
+    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, dataLen, additionalInfo);
+    int headerLen = strlen(header);
+    int padding = (94 - headerLen) / 2;
+
+    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
+    (void) printf(CYAN"\r\n ");
+    (void) printf("%*c", padding, ' ');
+    (void) printf("%s", header);
+    (void) printf("%*c", padding, ' ');
+    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+}
+
+void printGmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status)
+{
+    (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
+}
+#endif
 
 #ifdef RUN_MAC_CMAC_TEST
 void mac_test_cmac(void)
@@ -158,5 +185,12 @@ void mac_test_cmac(void)
 void mac_test_hmac(void)
 {
     mac_hmac_test();
+}
+#endif
+
+#ifdef RUN_MAC_GMAC_TEST
+void mac_test_gmac(void)
+{
+    mac_gmac_test();
 }
 #endif

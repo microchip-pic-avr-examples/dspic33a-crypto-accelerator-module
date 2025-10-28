@@ -149,6 +149,8 @@ static const TEST_VECTOR hmac_1_3_bytes_vector = {
     sizeof(hmac_1_3_bytes_key),
     (uint8_t*) &hmac_1_3_bytes_mac,
     sizeof(hmac_1_3_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA1
 };
 
@@ -159,6 +161,8 @@ static const TEST_VECTOR hmac_1_85_bytes_vector = {
     sizeof(hmac_1_85_bytes_key),
     (uint8_t*) &hmac_1_85_bytes_mac,
     sizeof(hmac_1_85_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA1
 };
 
@@ -169,6 +173,8 @@ static const TEST_VECTOR hmac_224_6_bytes_vector = {
     sizeof(hmac_224_6_bytes_key),
     (uint8_t*) &hmac_224_6_bytes_mac,
     sizeof(hmac_224_6_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_224
 };
 
@@ -179,6 +185,8 @@ static const TEST_VECTOR hmac_224_0_bytes_vector = {
     sizeof(hmac_224_0_bytes_key),
     (uint8_t*) &hmac_224_0_bytes_mac,
     sizeof(hmac_224_0_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_224
 };
 
@@ -189,6 +197,8 @@ static const TEST_VECTOR hmac_256_46_bytes_vector = {
     sizeof(hmac_256_46_bytes_key),
     (uint8_t*) &hmac_256_46_bytes_mac,
     sizeof(hmac_256_46_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_256
 };
 
@@ -199,6 +209,8 @@ static const TEST_VECTOR hmac_256_115_bytes_vector = {
     sizeof(hmac_256_115_bytes_key),
     (uint8_t*) &hmac_256_115_bytes_mac,
     sizeof(hmac_256_115_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_256
 };
 
@@ -209,6 +221,8 @@ static const TEST_VECTOR hmac_384_69_bytes_vector = {
     sizeof(hmac_384_69_bytes_key),
     (uint8_t*) &hmac_384_69_bytes_mac,
     sizeof(hmac_384_69_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_384
 };
 
@@ -219,6 +233,8 @@ static const TEST_VECTOR hmac_384_117_bytes_vector = {
     sizeof(hmac_384_117_bytes_key),
     (uint8_t*) &hmac_384_117_bytes_mac,
     sizeof(hmac_384_117_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_384
 };
 
@@ -229,6 +245,8 @@ static const TEST_VECTOR hmac_512_92_bytes_vector = {
     sizeof(hmac_512_92_bytes_key),
     (uint8_t*) &hmac_512_92_bytes_mac,
     sizeof(hmac_512_92_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_512
 };
 
@@ -239,6 +257,8 @@ static const TEST_VECTOR hmac_512_60_bytes_vector = {
     sizeof(hmac_512_60_bytes_key),
     (uint8_t*) &hmac_512_60_bytes_mac,
     sizeof(hmac_512_60_bytes_mac),
+    NULL,
+    0,
     CRYPTO_HASH_SHA2_512
 };
 
