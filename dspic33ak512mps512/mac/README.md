@@ -51,7 +51,7 @@ The following information will be printed on the COM port for AES-CMAC algorithm
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_mac_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
+<img src="./images/dspic33ak512mps512_mac_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
 
 ### HMAC
 The following information will be printed on the COM port for HMAC algorithms:
@@ -69,7 +69,7 @@ The following information will be printed on the COM port for HMAC algorithms:
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_mac_hmac_demo.png" alt="HMAC Demo Output" width="750"/>
+<img src="./images/dspic33ak512mps512_mac_hmac_demo.png" alt="HMAC Demo Output" width="750"/>
 
 ### AES-GMAC
 The following information will be printed on the COM port for GMAC algorithms:
@@ -87,7 +87,7 @@ The following information will be printed on the COM port for GMAC algorithms:
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_mac_gmac_demo.png" alt="AES-GMAC Demo Output" width="750"/>
+<img src="./images/dspic33ak512mps512_mac_gmac_demo.png" alt="AES-GMAC Demo Output" width="750"/>
 
 ## Crypto Library APIs
 ### AES MAC APIs
