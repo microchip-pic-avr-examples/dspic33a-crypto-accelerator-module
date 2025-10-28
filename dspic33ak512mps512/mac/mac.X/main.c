@@ -76,6 +76,9 @@ int main(void)
     #ifdef RUN_MAC_HMAC_TEST
     mac_test_hmac();
     #endif
+    #ifdef RUN_MAC_GMAC_TEST
+    mac_test_gmac();
+    #endif
 
     (void) printf("\n\n\n\r\n ");
     (void) printf("______________________________________________________________________________________________________ \r\n");

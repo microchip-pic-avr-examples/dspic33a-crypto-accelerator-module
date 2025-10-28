@@ -70,251 +70,251 @@
 
 
 
-crypto_Aead_Status_E Crypto_Aead_AesGcm_Init(st_Crypto_Aead_AesGcm_ctx *ptr_macGcmCtx_st, crypto_HandlerType_E handlerType_en, crypto_CipherOper_E cipherOper_en,
+crypto_Aead_Status_E Crypto_Aead_AesGcm_Init(st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st, crypto_HandlerType_E handlerType_en, crypto_CipherOper_E cipherOper_en,
                                                               uint8_t *ptr_key, uint32_t keyLen, uint8_t *ptr_initVect, uint32_t initVectLen, uint32_t sessionID)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
 
-    if(ptr_macGcmCtx_st == NULL)
+    if(ptr_aesGcmCtx_st == NULL)
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
     }
     else if( (ptr_key == NULL) ||
                     ( (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_128)
                         && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_192)
                         && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_256) ) )
     {
-       ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
+       ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
     }
     else if((ptr_initVect == NULL) || (initVectLen == 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
     }
     else if((cipherOper_en != CRYPTO_CIOP_ENCRYPT) && (cipherOper_en != CRYPTO_CIOP_DECRYPT))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
     }
     else if( (sessionID == 0u) || (sessionID > (uint32_t)CRYPTO_AEAD_SESSION_MAX) )
     {
-       ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
+       ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
     }
     else
     {
-        ptr_macGcmCtx_st->cryptoSessionID =  sessionID;
-        ptr_macGcmCtx_st->aeadHandlerType_en = handlerType_en;
-        ptr_macGcmCtx_st->ptr_key = ptr_key;
-        ptr_macGcmCtx_st->aeadKeySize = keyLen;
-        ptr_macGcmCtx_st->aeadCipherOper_en = cipherOper_en;
-        ptr_macGcmCtx_st->ptr_initVect = ptr_initVect;
-        ptr_macGcmCtx_st->initVectLen = initVectLen;
+        ptr_aesGcmCtx_st->cryptoSessionID =  sessionID;
+        ptr_aesGcmCtx_st->aeadHandlerType_en = handlerType_en;
+        ptr_aesGcmCtx_st->ptr_key = ptr_key;
+        ptr_aesGcmCtx_st->aeadKeySize = keyLen;
+        ptr_aesGcmCtx_st->aeadCipherOper_en = cipherOper_en;
+        ptr_aesGcmCtx_st->ptr_initVect = ptr_initVect;
+        ptr_aesGcmCtx_st->initVectLen = initVectLen;
 
-        switch(ptr_macGcmCtx_st->aeadHandlerType_en)
+        switch(ptr_aesGcmCtx_st->aeadHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_Init((void*)ptr_macGcmCtx_st->arr_aeadDataCtx,
-                    cipherOper_en, ptr_macGcmCtx_st->ptr_key, ptr_macGcmCtx_st->aeadKeySize, ptr_initVect, initVectLen);
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_Init((void*)ptr_aesGcmCtx_st->arr_aeadDataCtx,
+                    cipherOper_en, ptr_aesGcmCtx_st->ptr_key, ptr_aesGcmCtx_st->aeadKeySize, ptr_initVect, initVectLen);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
 
     }
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 
-crypto_Aead_Status_E Crypto_Aead_AesGcm_AddAadData(st_Crypto_Aead_AesGcm_ctx *ptr_macGcmCtx_st, uint8_t *ptr_aad, uint32_t aadLen)
+crypto_Aead_Status_E Crypto_Aead_AesGcm_AddAadData(st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st, uint8_t *ptr_aad, uint32_t aadLen)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
-    if(ptr_macGcmCtx_st == NULL)
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    if(ptr_aesGcmCtx_st == NULL)
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
     }
     else if( ((ptr_aad == NULL) && (aadLen > 0u)) || ((ptr_aad != NULL) && (aadLen == 0u)) )
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
     }
     else
     {
-        switch(ptr_macGcmCtx_st->aeadHandlerType_en)
+        switch(ptr_aesGcmCtx_st->aeadHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_AddAadData((void*)ptr_macGcmCtx_st->arr_aeadDataCtx, ptr_aad, aadLen);
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_AddAadData((void*)ptr_aesGcmCtx_st->arr_aeadDataCtx, ptr_aad, aadLen);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
     }
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 
-crypto_Aead_Status_E Crypto_Aead_AesGcm_Cipher(st_Crypto_Aead_AesGcm_ctx *ptr_macGcmCtx_st, uint8_t *ptr_inputData, uint32_t dataLen,
+crypto_Aead_Status_E Crypto_Aead_AesGcm_Cipher(st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st, uint8_t *ptr_inputData, uint32_t dataLen,
                                                     uint8_t *ptr_outData)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
-    if(ptr_macGcmCtx_st == NULL)
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    if(ptr_aesGcmCtx_st == NULL)
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
     }
     if( ((ptr_inputData == NULL) && (dataLen > 0u))
                 || ((ptr_inputData != NULL) && (dataLen == 0u)) )
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
     }
     else if( ((ptr_inputData != NULL) && (ptr_outData == NULL))
                 || ((ptr_inputData == NULL) && (ptr_outData != NULL)) )
     {
-        ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
+        ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
     }
     else
     {
-        switch(ptr_macGcmCtx_st->aeadHandlerType_en)
+        switch(ptr_aesGcmCtx_st->aeadHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_Cipher((void*)ptr_macGcmCtx_st->arr_aeadDataCtx,
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_Cipher((void*)ptr_aesGcmCtx_st->arr_aeadDataCtx,
                     ptr_inputData, dataLen, ptr_outData);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
     }
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 
-crypto_Aead_Status_E Crypto_Aead_AesGcm_Final(st_Crypto_Aead_AesGcm_ctx *ptr_macGcmCtx_st, uint8_t *ptr_authTag, uint8_t authTagLen)
+crypto_Aead_Status_E Crypto_Aead_AesGcm_Final(st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st, uint8_t *ptr_authTag, uint8_t authTagLen)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
-    if(ptr_macGcmCtx_st == NULL)
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    if(ptr_aesGcmCtx_st == NULL)
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
     }
     else if((ptr_authTag == NULL) || (authTagLen > 16u) || (authTagLen < 4u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
     }
     else
     {
-        switch(ptr_macGcmCtx_st->aeadHandlerType_en)
+        switch(ptr_aesGcmCtx_st->aeadHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_Final((void*)ptr_macGcmCtx_st->arr_aeadDataCtx,
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_Final((void*)ptr_aesGcmCtx_st->arr_aeadDataCtx,
                     ptr_authTag, authTagLen);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
     }
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 
 crypto_Aead_Status_E Crypto_Aead_AesGcm_EncryptAuthDirect(crypto_HandlerType_E handlerType_en, uint8_t *ptr_inputData, uint32_t dataLen,
                                                             uint8_t *ptr_outData, uint8_t *ptr_key, uint32_t keyLen, uint8_t *ptr_initVect,
                                                             uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen, uint8_t *ptr_authTag, uint8_t authTagLen, uint32_t sessionID)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
 
     if ((ptr_inputData == NULL) == (dataLen > 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
     }
     else if ((ptr_inputData == NULL) != (ptr_outData == NULL))
     {
-        ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
+        ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
     }
     else if( (ptr_key == NULL) ||
                 ( (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_128)
                     && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_192)
                     && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_256) ) )
     {
-        ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
+        ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
     }
     else if((ptr_initVect == NULL) || (initVectLen == 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
     }
     else if ((ptr_aad == NULL) == (aadLen > 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
     }
     else if((ptr_authTag == NULL) || (authTagLen > 16u) || (authTagLen < 4u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
     }
     else if( (sessionID == 0u) || (sessionID > (uint32_t)CRYPTO_AEAD_SESSION_MAX) )
     {
-       ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
+       ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
     }
     else
     {
         switch(handlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_EncryptAuthDirect(ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen,
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_EncryptAuthDirect(ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen,
                                                                         ptr_initVect, initVectLen, ptr_aad, aadLen, ptr_authTag, authTagLen);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
     }
 
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 
 crypto_Aead_Status_E Crypto_Aead_AesGcm_DecryptAuthDirect(crypto_HandlerType_E handlerType_en, uint8_t *ptr_inputData, uint32_t dataLen,
                                                             uint8_t *ptr_outData, uint8_t *ptr_key, uint32_t keyLen, uint8_t *ptr_initVect,
                                                             uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen, uint8_t *ptr_authTag, uint8_t authTagLen, uint32_t sessionID)
 {
-    crypto_Aead_Status_E ret_macGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
 
     if ((ptr_inputData == NULL) == (dataLen > 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_INPUTDATA;
     }
     else if ((ptr_inputData == NULL) != (ptr_outData == NULL))
     {
-        ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
+        ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_OUTPUTDATA;
     }
     else if( (ptr_key == NULL) ||
                 ( (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_128)
                     && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_192)
                     && (keyLen != (uint32_t)CRYPTO_AESKEYSIZE_256) ) )
     {
-        ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
+        ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_KEY;
     }
     else if((ptr_initVect == NULL) || (initVectLen == 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_NONCE;
     }
     else if ((ptr_aad == NULL) == (aadLen > 0u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AAD;
     }
     else if((ptr_authTag == NULL) || (authTagLen > 16u) || (authTagLen < 4u))
     {
-        ret_macGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
     }
     else if( (sessionID == 0u) || (sessionID > (uint32_t)CRYPTO_AEAD_SESSION_MAX) )
     {
-       ret_macGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
+       ret_aesGcmStat_en =  CRYPTO_AEAD_ERROR_SID;
     }
     else
     {
         switch(handlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_macGcmStat_en = Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen,
+                ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen,
                                                             ptr_initVect, initVectLen, ptr_aad, aadLen, ptr_authTag, authTagLen);
                 break;
             default:
-                ret_macGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_HDLR;
                 break;
         }
     }
 
-    return ret_macGcmStat_en;
+    return ret_aesGcmStat_en;
 }
 // *****************************************************************************

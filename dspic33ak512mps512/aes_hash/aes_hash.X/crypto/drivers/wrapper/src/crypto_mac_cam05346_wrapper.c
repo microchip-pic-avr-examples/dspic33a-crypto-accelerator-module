@@ -8,11 +8,12 @@
     crypto_mac_cam05346_wrapper.c
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware MAC.
+    Crypto Framework Library wrapper file for CAM hardware MAC operations.
 
   Description:
     This source file contains the wrapper interface to access the
-    MAC (CMAC/HMAC) algorithms in the AES hardware driver for Microchip microcontrollers.
+    MAC algorithms in the AES hardware driver for
+    Microchip microcontrollers.
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -447,4 +448,78 @@ crypto_Mac_Status_E Crypto_Mac_Hw_Hmac_Direct(uint8_t *ptr_inputData, uint32_t d
 
     return status;
 }
+ 
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Init(void *ptr_aesGmacCtx, uint8_t *ptr_key, uint32_t keySize)
+{
+    CRYPTO_GMAC_HW_CONTEXT *gmacCtx = (CRYPTO_GMAC_HW_CONTEXT*) ptr_aesGmacCtx;
+    crypto_Mac_Status_E status = CRYPTO_MAC_CIPHER_SUCCESS;
 
+    // Save the key and length, to be used during the cipher operation.
+    (void)memcpy(gmacCtx->keyData, ptr_key, keySize);
+    gmacCtx->keyLength = keySize;
+
+    return status;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Cipher(void *ptr_aesGmacCtx, uint8_t *ptr_initVect,
+                                                 uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen,
+                                                 uint8_t *ptr_outMac, uint32_t macLen)
+{
+    CRYPTO_GMAC_HW_CONTEXT *gmacCtx = (CRYPTO_GMAC_HW_CONTEXT*) ptr_aesGmacCtx;
+    crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPFAIL;
+
+    /* Initialization is the same as for GCM, but always set to decrypt.
+     * Use the key data stored during the initi call. */
+    crypto_Aead_Status_E aeadStatus = Crypto_Aead_Hw_AesGcm_Init(&gmacCtx->aeadContext, CRYPTO_CIOP_DECRYPT,
+                                                                 gmacCtx->keyData, gmacCtx->keyLength, ptr_initVect, initVectLen);
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        // Add the AAD data.  There is no encipherment data (this is an authentication only operation).
+        aeadStatus = Crypto_Aead_Hw_AesGcm_AddAadData(&gmacCtx->aeadContext, ptr_aad, aadLen);
+    }
+
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        // Finalize the operation to generate the GMAC.
+        aeadStatus = Crypto_Aead_Hw_AesGcm_Final(&gmacCtx->aeadContext, ptr_outMac, macLen);
+    }
+
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        status = CRYPTO_MAC_CIPHER_SUCCESS;
+    }
+
+    return status;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Direct(uint8_t *ptr_initVect, uint32_t initVectLen,
+                                                 uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key,
+                                                 uint32_t keyLen, uint8_t *ptr_aad, uint32_t aadLen)
+{
+    CRYPTO_AEAD_HW_CONTEXT aeadContext;
+    crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPFAIL;
+
+    /* The AEAD context can be used directly.
+     * Initialization is the same as for GCM, but always set to decrypt. */
+    crypto_Aead_Status_E aeadStatus = Crypto_Aead_Hw_AesGcm_Init(&aeadContext, CRYPTO_CIOP_DECRYPT,
+                                                                 ptr_key, keyLen, ptr_initVect, initVectLen);
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        // Add the AAD data.  There is no encipherment data (this is an authentication only operation).
+        aeadStatus = Crypto_Aead_Hw_AesGcm_AddAadData(&aeadContext, ptr_aad, aadLen);
+    }
+
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        // Finalize the operation to generate the GMAC.
+        aeadStatus = Crypto_Aead_Hw_AesGcm_Final(&aeadContext, ptr_outMac, macLen);
+    }
+
+    if (aeadStatus == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        status = CRYPTO_MAC_CIPHER_SUCCESS;
+    }
+
+    return status;
+}
+ 

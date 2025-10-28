@@ -68,6 +68,7 @@ extern "C" {
 
 #define RUN_MAC_CMAC_TEST
 #define RUN_MAC_HMAC_TEST
+#define RUN_MAC_GMAC_TEST
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
 #define RUN_ALL_VECTORS
@@ -92,12 +93,20 @@ void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const
 
 void printHmacCryptoError(const char* testType, const char* description, int status);
 
+void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* dataInfo);
+
+void printGmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status);
+
 #ifdef RUN_MAC_CMAC_TEST
 void mac_test_cmac(void);
 #endif
 
 #ifdef RUN_MAC_HMAC_TEST
 void mac_test_hmac(void);
+#endif
+
+#ifdef RUN_MAC_GMAC_TEST
+void mac_test_gmac(void);
 #endif
 
 #ifdef	__cplusplus

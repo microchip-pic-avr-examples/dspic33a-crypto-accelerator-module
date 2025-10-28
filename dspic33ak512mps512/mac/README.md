@@ -11,6 +11,7 @@
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform MAC operations using different sized input vectors. The following MAC algorithms are supported:
 - AES-CMAC
 - HMAC
+- AES-GMAC
 
 ## Software Tool Versions
 - dsPIC33AK-MP_DEV_DFP v1.0.81
@@ -50,7 +51,7 @@ The following information will be printed on the COM port for AES-CMAC algorithm
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_mac_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
+<img src="./images/dspic33ak512mps512_mac_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
 
 ### HMAC
 The following information will be printed on the COM port for HMAC algorithms:
@@ -68,7 +69,25 @@ The following information will be printed on the COM port for HMAC algorithms:
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_mac_hmac_demo.png" alt="HMAC Demo Output" width="750"/>
+<img src="./images/dspic33ak512mps512_mac_hmac_demo.png" alt="HMAC Demo Output" width="750"/>
+
+### AES-GMAC
+The following information will be printed on the COM port for GMAC algorithms:
+1. A header is displayed showing the key size and input message length.
+2. The MAC is generated using the single-step API.
+    1. The key data is printed out.
+    2. The input data is printed out.
+    3. The MAC is printed out.
+    4. The result MAC and expected MAC are compared.
+    5. Pass or Fail is printed out depending on the comparison result.
+3. The MAC is generated using the multi-step API.
+    1. The key data is printed out.
+    2. The input data is printed out.
+    3. The MAC is printed out.
+    4. The result MAC and expected MAC are compared.
+    5. Pass or Fail is printed out depending on the comparison result.
+
+<img src="./images/dspic33ak512mps512_mac_gmac_demo.png" alt="AES-GMAC Demo Output" width="750"/>
 
 ## Crypto Library APIs
 ### AES MAC APIs
@@ -134,7 +153,6 @@ crypto_Mac_Status_E Crypto_Mac_Hmac_Cipher(
     uint8_t *ptr_inputData,                     // pointer to the input message to generate HMAC with
     uint32_t dataLen                            // length of the input message
 );
-```
 
 ```c
 crypto_Mac_Status_E Crypto_Mac_Hmac_Final(
@@ -152,6 +170,45 @@ crypto_Mac_Status_E Crypto_Mac_Hmac_Direct(
     uint8_t *ptr_key,                           // pointer to the key data array to be used
     uint32_t keyLen,                            // length of the key data array
     crypto_Hash_Algo_E hashType_en,             // hash algorithm to use for hashing
+    uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
+);
+
+### AES-GMAC APIs
+crypto_mac_cipher.h defines Init, Cipher, and Direct APIs.
+
+```c
+crypto_Mac_Status_E Crypto_Mac_AesGmac_Init(
+    st_Crypto_Mac_Aes_ctx *ptr_aesGmacCtx_st,   // GMAC context structure used to store values
+    crypto_HandlerType_E handlerType_en,        // configure Crypto API to use hardware acceleration
+    uint8_t *ptr_key,                           // pointer to the key data array to be used
+    uint32_t keyLen,                            // length of the key data array
+    uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
+);
+```
+
+```
+crypto_Mac_Status_E Crypto_Mac_AesGmac_Cipher(
+    st_Crypto_Mac_Aes_ctx *ptr_aesGmacCtx_st,   // GMAC context structure used to store values
+    uint8_t *ptr_initVect,                      // pointer to the initialization vector data to be used
+    uint32_t initVectLen,                       // length of the initialization vector data array
+    uint8_t *ptr_aad,                           // pointer to the Additional Authentication Data to be used
+    uint32_t aadLen,                            // length of the AAD array
+    uint8_t *ptr_outMac,                        // output pointer to generate the CMAC to
+    uint32_t macLen,                            // length of the requested CMAC
+);
+```
+
+```
+crypto_Mac_Status_E Crypto_Mac_AesGmac_Direct(
+    crypto_HandlerType_E macHandlerType_en,     // configure Crypto API to use hardware acceleration
+    uint8_t *ptr_initVect,                      // pointer to the initialization vector data to be used
+    uint32_t initVectLen,                       // length of the initialization vector data array
+    uint8_t *ptr_outMac,                        // output pointer to generate the CMAC to
+    uint32_t macLen,                            // length of the requested CMAC
+    uint8_t *ptr_key,                           // pointer to the key data array to be used
+    uint32_t keyLen,                            // length of the key data array
+    uint8_t *ptr_aad,                           // pointer to the Additional Authentication Data to be used
+    uint32_t aadLen,                            // length of the AAD array
     uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
 );
 ```
