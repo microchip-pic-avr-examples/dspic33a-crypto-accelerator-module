@@ -156,11 +156,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
-        <languageToolchainVersion>3.21</languageToolchainVersion>
+        <languageToolchainVersion>3.30</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.2.130"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.0.81"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
