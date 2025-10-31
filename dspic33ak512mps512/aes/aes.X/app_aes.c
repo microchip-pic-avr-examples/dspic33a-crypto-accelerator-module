@@ -135,6 +135,10 @@ void aes_test_sym(void)
     aes_sym_ctr_test();
     #endif
 
+    #ifdef RUN_SYM_CBC_TEST
+    aes_sym_cbc_test();
+    #endif
+
     #ifdef RUN_SYM_XTS_TEST
     aes_sym_xts_test();
     #endif

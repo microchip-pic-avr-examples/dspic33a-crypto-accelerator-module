@@ -189,6 +189,9 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
         case CRYPTO_SYM_OPMODE_CTR:
             testType = "CTR";
             break;
+        case CRYPTO_SYM_OPMODE_CBC:
+            testType = "CBC";
+            break;
         default:
             testType = "???";
             break;
@@ -308,3 +311,9 @@ void aes_sym_ctr_test(void)
     aes_sym_256_test(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
 }
 
+void aes_sym_cbc_test(void)
+{
+    aes_sym_128_test(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+    aes_sym_192_test(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+    aes_sym_256_test(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+}
