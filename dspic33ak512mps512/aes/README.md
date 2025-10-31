@@ -11,6 +11,7 @@
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
 - ECB
 - CTR
+- CBC
 - CMAC
 - GCM
 - XTS
@@ -36,7 +37,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
 ## Application Results
-### AES ECB, CTR Results
+### AES ECB, CTR, CBC Results
 The following information will be printed on the COM port for symmetric AES algorithms:
 1. A header is displayed showing the used AES algorithm and input data length.
 2. The key data is printed out.
