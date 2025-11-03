@@ -67,6 +67,8 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-ECB (Decrypt)|434.36 Mbps|Key Size: 128, Ciphertext Size: 8,192|
 |AES-CTR (Encrypt)|435.26 Mbps|Key Size: 128, Initialization Vector Size: 16, Plaintext Size: 8,192|
 |AES-CTR (Decrypt)|435.35 Mbps|Key Size: 128, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-CBC (Encrypt)|430.53 Mbps|Key Size: 128, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CBC (Decrypt)|429.63 Mbps|Key Size: 128, Initialization Vector Size: 16, Ciphertext Size: 8,192|
 |AES-GCM (Encrypt)|420.99 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
 |AES-GCM (Decrypt)|417.59 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
 |AES-XTS (Encrypt)|429.99 Mbps|Key Size: 128, Tweak Size: 16, Plaintext Size: 8,192|
@@ -110,6 +112,8 @@ All projects have the following compiler options:
 |AES-ECB (Init and Cipher)|2,006|11,852|
 |AES-CTR (Encrypt and Decrypt)|58|11,828|
 |AES-CTR (Init and Cipher)|2,006|11,896|
+|AES-CBC (Encrypt and Decrypt)|58|11,832|
+|AES-CBC (Init and Cipher)|2,006|11,900|
 |AES-GCM (Encrypt and Decrypt)|58|12,204|
 |AES-GCM (Init, AddAadData, Cipher, and Final)|598|12,328|
 |AES-XTS (Encrypt and Decrypt)|58|11,828|
