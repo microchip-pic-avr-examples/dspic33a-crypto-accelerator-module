@@ -360,6 +360,19 @@ The following benchmarking results were obtained with the device clock speed set
 |24|16|8,192|372.18|
 |32|16|8,192|324.96|
 
+#### AES-CBC
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|430.53|
+|24|16|8,192|368.65|
+|32|16|8,192|322.26|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|429.63|
+|24|16|8,192|367.91|
+|32|16|8,192|321.63|
+
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
@@ -400,6 +413,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|58|11,788|
 |AES-CTR|58|11,828|
+|AES-CBC|58|11,832|
 |AES-GCM|58|12,204|
 |AES-XTS|58|11,828|
 |AES-CMAC|58|10,736|
@@ -410,6 +424,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|2,006|11,852|
 |AES-CTR|2,006|11,896|
+|AES-CBC|2,006|11,900|
 |AES-GCM|598|12,328|
 |AES-XTS|2,006|11,896|
 |AES-CMAC|586|10,792|
