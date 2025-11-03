@@ -50,10 +50,10 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-//#define RUN_SYM_ECB_TEST
-//#define RUN_SYM_CTR_TEST
+#define RUN_SYM_ECB_TEST
+#define RUN_SYM_CTR_TEST
 #define RUN_SYM_CBC_TEST
-//#define RUN_SYM_XTS_TEST
+#define RUN_SYM_XTS_TEST
 
 #define DATA_SIZE 48
 #define INIT_VECTOR_SIZE 16
