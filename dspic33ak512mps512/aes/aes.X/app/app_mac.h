@@ -44,7 +44,7 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-//#define RUN_MAC_CMAC_TEST
+#define RUN_MAC_CMAC_TEST
 
 void aes_mac_cmac_test(void);
 
