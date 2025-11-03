@@ -11,14 +11,15 @@
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
 - ECB
 - CTR
+- CBC
 - CMAC
 - GCM
 - XTS
 
 ## Software Tool Versions
-- dsPIC33AK-MP_DEV_DFP v1.0.81
+- dsPIC33AK-MP_DEV_DFP v1.1.124
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+- MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -36,7 +37,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
 ## Application Results
-### AES ECB, CTR Results
+### AES ECB, CTR, CBC Results
 The following information will be printed on the COM port for symmetric AES algorithms:
 1. A header is displayed showing the used AES algorithm and input data length.
 2. The key data is printed out.
@@ -359,6 +360,19 @@ The following benchmarking results were obtained with the device clock speed set
 |24|16|8,192|372.18|
 |32|16|8,192|324.96|
 
+#### AES-CBC
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|430.53|
+|24|16|8,192|368.65|
+|32|16|8,192|322.26|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|429.63|
+|24|16|8,192|367.91|
+|32|16|8,192|321.63|
+
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
@@ -399,6 +413,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|58|11,788|
 |AES-CTR|58|11,828|
+|AES-CBC|58|11,832|
 |AES-GCM|58|12,204|
 |AES-XTS|58|11,828|
 |AES-CMAC|58|10,736|
@@ -409,6 +424,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|2,006|11,852|
 |AES-CTR|2,006|11,896|
+|AES-CBC|2,006|11,900|
 |AES-GCM|598|12,328|
 |AES-XTS|2,006|11,896|
 |AES-CMAC|586|10,792|
