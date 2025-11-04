@@ -77,7 +77,16 @@ Microchip or any third party.
          * This macro is defined for the dsPIC33AK256MPSXXX and dsPIC33AK512MPSXXX families
          * that support CAN FD and Crypto Accelerator.
          */
-        #define CAM_HW_VERSION CAM_05346  
+        #define CAM_HW_VERSION CAM_05346
+#elif defined(GENERIC_TARGET_HSM_04777) || defined(__PIC32CM5112SG00100__)
+         /**
+         * @ingroup device
+         * @def CAM_HW_VERSION
+         * @brief Defines the hardware version for the HSM 04777 target.
+         * 
+         * This macro is defined for the generic target of the HSM 04777 library.
+         */
+        #define CAM_HW_VERSION HSM_04777  
 #elif __has_include("cam_device_ea.h")
     #include "cam_device_ea.h"   
 #endif
