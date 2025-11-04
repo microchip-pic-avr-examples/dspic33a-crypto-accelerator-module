@@ -139,6 +139,14 @@ void aes_test_sym(void)
     aes_sym_cbc_test();
     #endif
 
+    #ifdef RUN_SYM_CFB_TEST
+    aes_sym_cfb_test();
+    #endif
+
+    #ifdef RUN_SYM_OFB_TEST
+    aes_sym_ofb_test();
+    #endif
+
     #ifdef RUN_SYM_XTS_TEST
     aes_sym_xts_test();
     #endif
