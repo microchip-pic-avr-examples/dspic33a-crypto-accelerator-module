@@ -54,6 +54,7 @@
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 #include "crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h"
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -139,6 +140,7 @@ crypto_Aead_Status_E Crypto_Aead_AesGcm_AddAadData(st_Crypto_Aead_AesGcm_ctx *pt
         switch(ptr_aesGcmCtx_st->aeadHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
+
                 ret_aesGcmStat_en = Crypto_Aead_Hw_AesGcm_AddAadData((void*)ptr_aesGcmCtx_st->arr_aeadDataCtx, ptr_aad, aadLen);
                 break;
             default:
