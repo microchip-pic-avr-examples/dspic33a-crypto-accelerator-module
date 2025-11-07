@@ -56,6 +56,23 @@ static uint8_t ctr_ctdata[DATA_SIZE] = {
     0x52, 0xad, 0x6c, 0xad, 0x07, 0x5b, 0x8d, 0xdf, 0x5c, 0xc0, 0xc1, 0x0d, 0x40, 0xaa, 0x3a, 0x7f
 };
 
+static uint8_t cbc_ctdata[DATA_SIZE] = {
+    0x93, 0x42, 0x96, 0x03, 0x06, 0x68, 0x7b, 0xe0, 0xe6, 0x3b, 0x9e, 0x85, 0x79, 0xaa, 0x11, 0xcb,
+    0x0e, 0x0e, 0xb8, 0xfe, 0x09, 0x8d, 0x14, 0xef, 0xaf, 0x64, 0x24, 0x4e, 0x07, 0xa9, 0x9f, 0x7b,
+    0x33, 0x54, 0x19, 0x06, 0xcc, 0x6e, 0xfd, 0x41, 0xe8, 0x89, 0xaf, 0xf5, 0x10, 0x59, 0x4e, 0x9a
+};
+
+static uint8_t cfb128_ctdata[DATA_SIZE] = {
+    0x8c, 0xa9, 0x4d, 0xa3, 0xbf, 0x7f, 0x40, 0xe1, 0x75, 0x0d, 0xa8, 0x22, 0x40, 0x48, 0xfe, 0xf3,
+    0x84, 0xe5, 0x23, 0x03, 0x8a, 0x5a, 0x47, 0x75, 0x4b, 0x1a, 0x47, 0x2d, 0x8a, 0xe0, 0xb8, 0x3d,
+    0x7c, 0x2b, 0xf7, 0xce, 0x83, 0xac, 0x22, 0x85, 0xc0, 0xd8, 0xfd, 0x43, 0x7f, 0x9b, 0x31, 0x5b
+};
+
+static uint8_t ofb_ctdata[DATA_SIZE] = {
+    0x8c, 0xa9, 0x4d, 0xa3, 0xbf, 0x7f, 0x40, 0xe1, 0x75, 0x0d, 0xa8, 0x22, 0x40, 0x48, 0xfe, 0xf3,
+    0x0f, 0x6a, 0xc0, 0x35, 0xfa, 0x11, 0xc9, 0x69, 0xf6, 0xdd, 0xda, 0x8d, 0x1a, 0x2e, 0x05, 0x86,
+    0x10, 0x8c, 0xc6, 0x9d, 0xb2, 0xa7, 0x03, 0x50, 0x70, 0xff, 0x57, 0xb6, 0x6a, 0xcd, 0xdb, 0x0c
+};
 static uint8_t initializationVector[INIT_VECTOR_SIZE] = {
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10,
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10
@@ -196,4 +213,196 @@ TEST_VECTOR * get_ctr_test_vectors(void)
 uint32_t get_ctr_test_vector_count(void)
 {
     return sizeof(ctr_test_vectors) / sizeof(ctr_test_vectors[0]);
+}
+
+ static const TEST_VECTOR cbc_256_35_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CBC,
+    ptdata,
+    cbc_ctdata,
+    35,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR cbc_256_41_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CBC,
+    ptdata,
+    cbc_ctdata,
+    41,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR cbc_256_48_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CBC,
+    ptdata,
+    cbc_ctdata,
+    48,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+TEST_VECTOR cbc_test_vectors[] = {
+    cbc_256_35_bytes_vector,
+    cbc_256_41_bytes_vector,
+    cbc_256_48_bytes_vector,
+};
+
+TEST_VECTOR * get_cbc_test_vectors(void)
+{
+    // Set test IDs.
+    for (uint32_t i = 0; i < get_cbc_test_vector_count(); i++)
+    {
+        cbc_test_vectors[i].id = (i + 1UL);
+    }
+
+    return cbc_test_vectors;
+}
+
+uint32_t get_cbc_test_vector_count(void)
+{
+    return sizeof(cbc_test_vectors) / sizeof(cbc_test_vectors[0]);
+}
+
+ static const TEST_VECTOR cfb128_256_35_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CFB128,
+    ptdata,
+    cfb128_ctdata,
+    35,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR cfb128_256_41_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CFB128,
+    ptdata,
+    cfb128_ctdata,
+    41,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR cfb128_256_48_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_CFB128,
+    ptdata,
+    cfb128_ctdata,
+    48,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+TEST_VECTOR cfb128_test_vectors[] = {
+    cfb128_256_35_bytes_vector,
+    cfb128_256_41_bytes_vector,
+    cfb128_256_48_bytes_vector,
+};
+
+TEST_VECTOR * get_cfb128_test_vectors(void)
+{
+    // Set test IDs.
+    for (uint32_t i = 0; i < get_cfb128_test_vector_count(); i++)
+    {
+        cfb128_test_vectors[i].id = (i + 1UL);
+    }
+
+    return cfb128_test_vectors;
+}
+
+uint32_t get_cfb128_test_vector_count(void)
+{
+    return sizeof(cfb128_test_vectors) / sizeof(cfb128_test_vectors[0]);
+}
+
+ static const TEST_VECTOR ofb_256_35_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_OFB,
+    ptdata,
+    ofb_ctdata,
+    35,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR ofb_256_41_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_OFB,
+    ptdata,
+    ofb_ctdata,
+    41,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+ static const TEST_VECTOR ofb_256_48_bytes_vector = {
+    0,
+    CRYPTO_SYM_OPMODE_OFB,
+    ptdata,
+    ofb_ctdata,
+    48,
+    keyData,
+    CRYPTO_AESKEYSIZE_256,
+    NULL,
+    0,
+    initializationVector,
+    INIT_VECTOR_SIZE
+};
+
+TEST_VECTOR ofb_test_vectors[] = {
+    ofb_256_35_bytes_vector,
+    ofb_256_41_bytes_vector,
+    ofb_256_48_bytes_vector,
+};
+
+TEST_VECTOR * get_ofb_test_vectors(void)
+{
+    // Set test IDs.
+    for (uint32_t i = 0; i < get_ofb_test_vector_count(); i++)
+    {
+        ofb_test_vectors[i].id = (i + 1UL);
+    }
+
+    return ofb_test_vectors;
+}
+
+uint32_t get_ofb_test_vector_count(void)
+{
+    return sizeof(ofb_test_vectors) / sizeof(ofb_test_vectors[0]);
 }
