@@ -39,27 +39,47 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
- #ifndef CAM_VERSION_H
- #define CAM_VERSION_H
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_version.h
+ * @ingroup CAM_HSM_LITE 
+ * @defgroup  version VERSION
+ * @ingroup CAM_HSM_LITE 
+ *
+ * @brief This header file contains version information on the CAM Hardware driver.
+ *
+ */
 
- /**
+#ifndef CAM_VERSION_H
+#define CAM_VERSION_H
+
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_DATE
  * @brief Version date format (yyyymmdd).
  **/
  #define CAM_LIBRARY_VERSION_DATE   "20251014"
 
 /**
- * @brief This number represents the Major version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_MAJOR  1
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MAJOR
+ * @brief This number represents the major version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MAJOR  1
 
 /**
- * @brief This number represents the Minor version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_MINOR  2
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MINOR
+ * @brief This number represents the minor version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MINOR  2
+ 
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_PATCH
+ * @brief This number represents the patch version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_PATCH  0
 
- /**
- * @brief This number represents the Patch version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_PATCH  0
-
- #endif /* CAM_VERSION_H */
+#endif /* CAM_VERSION_H */
