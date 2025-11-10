@@ -42,8 +42,11 @@ Microchip or any third party.
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
+#include <xc.h>
 #include "app_ecdsa.h"
 #include "crypto/common_crypto/crypto_digsign.h"
+#include "crypto/drivers/wrapper/crypto_digisign_cam05346_wrapper.h"
+#include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 
 #define RESET_COLOR     "\033""[0m"
 #define RED             "\033""[1;31m"
@@ -57,10 +60,11 @@ Microchip or any third party.
 static const char * signaturePrint = "Signature : \t";
 static const char * signing = "SIGN";
 static const char * verifying = "VERIFY";
+uint8_t signature[132] = {0};
 
 static inline void printStatus(crypto_DigiSign_Status_E status, const char *type)
 {
-    if(status != CRYPTO_DIGISIGN_SUCCESS)
+    if (status != CRYPTO_DIGISIGN_SUCCESS)
     {
         (void)printf(RED" \r\n ECDSA %s FAIL:: ErrorCode = 0x%X"RESET_COLOR, type, (unsigned int) status);
     }
@@ -75,54 +79,84 @@ static inline void printSplitter(void)
     (void)printf("\r\n\n ______________________________________________________________________________________________________ \r\n");
 }
 
-static inline void printTestHeader(const char* label)
+static inline void printTestHeader(const char* curve, const char* blocking)
 {
     (void)printf(MAG"\r\n\r\n ************************************************************************************");
-    (void)printf(CYAN"\r\n\t\t ******************** %s ********************", label);
+    (void)printf(CYAN"\r\n\t ******************** %s ECDSA %s ********************", curve, blocking);
     (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
 }
 
 static inline void printHexArray(const char* label, void* Data, uint32_t size) 
 {
-    (void)printf(BLUE"\r\n --------------------------------------------------------------------------------------------------"RESET_COLOR);
     uint8_t *ldata = (uint8_t *) Data;
-    (void)printf("\r\n %s", label);
+    (void)printf("\r\n\r\n\t%s", label);
     for (uint32_t i = 0; i < size; i++) 
     {
         if (0U == i % 16U && 0U != i) 
         {
-            (void)printf("\r\n\t\t");
+            (void)printf("\r\n\t\t\t");
         }
         
         (void)printf(" 0x%02X", ldata[i]);
     }
 }
 
-static inline void runHardwareTest(uint8_t *hash, uint32_t hashLength, 
-        uint8_t *signature, uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength,
-        uint8_t *privateKey, uint32_t privateKeyLength, crypto_EccCurveType_E eccCurveType)
+static void runBlockingHardwareTest(uint8_t *hash, uint32_t hashLength, 
+        uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength,
+        uint8_t *privateKey, uint32_t privateKeyLength, crypto_EccCurveType_E eccCurveType, const char * curve)
 {
-    
-    int8_t hashStatus = 0;   
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
+    printTestHeader(curve, "BLOCKING");
+    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     
-    ////Crypto Library ECDSA SIGN***********************************************************************************************************************
+    ////Crypto Library ECDSA SIGN API***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, privateKey, privateKeyLength, eccCurveType, SESSION_ID);
-    
-    printStatus(status, signing);
-    
+ 
     printHexArray(signaturePrint, signature, signatureLength);
+    printStatus(status, signing);
+    printSplitter();
+    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
     
-    ////Crypto Library ECDSA VERIFY*********************************************************************************************************************
+    int8_t hashStatus = 0;         
+    ////Crypto Library ECDSA VERIFY API*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, publicKey, publicKeyLength, &hashStatus, eccCurveType, SESSION_ID);
     
     printStatus(status, verifying);
 }
 
+static void runNonBlockingHardwareTest(uint8_t *hash, uint32_t hashLength, 
+        uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength,
+        uint8_t *privateKey, uint32_t privateKeyLength, crypto_EccCurveType_E eccCurveType, const char * curve)
+{
+    crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
+    printTestHeader(curve, "NON-BLOCKING");
+    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    
+    //Crypto Library ECDSA SIGN Non-Blocking API***********************************************************************************************************************
+    status = Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, privateKey, privateKeyLength, eccCurveType, SESSION_ID);
+    while(Crypto_DigiSign_Ecdsa_Sign_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
+    {
+    }
+    status = Crypto_DigiSign_Ecdsa_Sign_GetResult(signature, signatureLength);
+
+    printHexArray(signaturePrint, signature, signatureLength);
+    printStatus(status, signing);
+    printSplitter();
+    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
+    
+    ////Crypto Library ECDSA VERIFY Non-Blocking API*********************************************************************************************************************
+    status = Crypto_DigiSign_Ecdsa_Verify_Start(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, publicKey, publicKeyLength, eccCurveType, SESSION_ID);
+    while(Crypto_DigiSign_Ecdsa_Verify_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
+    {
+    }
+    status = Crypto_DigiSign_Ecdsa_Verify_GetResult();
+ 
+    printStatus(status, verifying);
+}
+        
+
 static void TEST_ECDSA_p192(void) 
 {
-    printTestHeader("P-192 ECDSA");
-
      ////NIST Defined Private Key********************************************************************************************
     uint8_t testPrivateKey[24] = {
         0xe5, 0xce, 0x89, 0xa3, 0x4a, 0xdd, 0xdf, 0x25, 0xff, 0x3b, 0xf1, 0xff, 
@@ -138,21 +172,18 @@ static void TEST_ECDSA_p192(void)
         0x45
     };
 
-    uint8_t signature[48] = {0};
-
     uint8_t hash[32] = {
         0xba, 0x78, 0x16, 0xbf, 0x8f, 0x01, 0xcf, 0xea, 0x41, 0x41, 0x40, 0xde,
         0x5d, 0xae, 0x22, 0x23, 0xb0, 0x03, 0x61, 0xa3, 0x96, 0x17, 0x7a, 0x9c,
         0xb4, 0x10, 0xff, 0x61, 0xf2, 0x00, 0x15, 0xad
     };
     
-    runHardwareTest(hash, sizeof(hash), signature, sizeof(signature), testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P192);
+    runBlockingHardwareTest(hash, sizeof(hash), 48, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P192, "P-192");
+    runNonBlockingHardwareTest(hash, sizeof(hash), 48, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P192, "P-192");
 }
 
 static void TEST_ECDSA_p256(void) 
-{
-    printTestHeader("P-256 ECDSA");
-    
+{    
     ////NIST Defined Private Key********************************************************************************************
     uint8_t testPrivateKey[32] = {
         0xc9, 0x80, 0x68, 0x98, 0xa0, 0x33, 0x49, 0x16, 0xc8, 0x60, 0x74, 0x88, 
@@ -170,21 +201,18 @@ static void TEST_ECDSA_p256(void)
         0x50, 0x93, 0xdc, 0x27, 0x5f
     };
 
-    uint8_t signature[64] = {0};
-
     uint8_t hash[32] = {
         0xba, 0x78, 0x16, 0xbf, 0x8f, 0x01, 0xcf, 0xea, 0x41, 0x41, 0x40, 0xde,
         0x5d, 0xae, 0x22, 0x23, 0xb0, 0x03, 0x61, 0xa3, 0x96, 0x17, 0x7a, 0x9c,
         0xb4, 0x10, 0xff, 0x61, 0xf2, 0x00, 0x15, 0xad
     };
     
-    runHardwareTest(hash, sizeof(hash), signature, sizeof(signature), testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P256);
+    runBlockingHardwareTest(hash, sizeof(hash), 64, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P256, "P-256");
+    runNonBlockingHardwareTest(hash, sizeof(hash), 64, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P256, "P-256");
 }
 
 static void TEST_ECDSA_p384(void) 
 {
-    printTestHeader("P-384 ECDSA");
-    
     ////NIST Defined Private Key********************************************************************************************
     uint8_t testPrivateKey[48] = {
         0x53, 0x94, 0xf7, 0x97, 0x3e, 0xa8, 0x68, 0xc5, 0x2b, 0xf3, 0xff, 0x8d, 
@@ -206,8 +234,6 @@ static void TEST_ECDSA_p384(void)
         0xa0
     };
 
-    uint8_t signature[96] = {0};
-
     uint8_t hash[48] = {
         0xcb, 0x00, 0x75, 0x3f, 0x45, 0xa3, 0x5e, 0x8b, 0xb5, 0xa0, 0x3d, 0x69,
         0x9a, 0xc6, 0x50, 0x07, 0x27, 0x2c, 0x32, 0xab, 0x0e, 0xde, 0xd1, 0x63,
@@ -215,13 +241,12 @@ static void TEST_ECDSA_p384(void)
         0xa1, 0xe7, 0xcc, 0x23, 0x58, 0xba, 0xec, 0xa1, 0x34, 0xc8, 0x25, 0xa7
     };
     
-    runHardwareTest(hash, sizeof(hash), signature, sizeof(signature), testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P384);
+    runBlockingHardwareTest(hash, sizeof(hash), 96, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P384, "P-384");
+    runNonBlockingHardwareTest(hash, sizeof(hash), 96, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P384, "P-384");
 }
 
 static void TEST_ECDSA_p521(void) 
-{
-    printTestHeader("P-521 ECDSA");
-    
+{    
     ////NIST Defined Private Key********************************************************************************************
     uint8_t testPrivateKey[66] = {
         0x01, 0x84, 0x25, 0x8e, 0xa6, 0x67, 0xab, 0x99, 0xd0, 0x9d, 0x43, 0x63, 
@@ -248,8 +273,6 @@ static void TEST_ECDSA_p521(void)
         0xf7
     };
 
-    uint8_t signature[132] = {0};
-
     uint8_t hash[64] = {
         0xdd, 0xaf, 0x35, 0xa1, 0x93, 0x61, 0x7a, 0xba, 0xcc, 0x41, 0x73, 0x49,
         0xae, 0x20, 0x41, 0x31, 0x12, 0xe6, 0xfa, 0x4e, 0x89, 0xa9, 0x7e, 0xa2,
@@ -259,7 +282,8 @@ static void TEST_ECDSA_p521(void)
         0xa5, 0x4c, 0xa4, 0x9f
     };
     
-    runHardwareTest(hash, sizeof(hash), signature, sizeof(signature), testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P521);
+    runBlockingHardwareTest(hash, sizeof(hash), 132, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P521, "P-521");
+    runNonBlockingHardwareTest(hash, sizeof(hash), 132, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P521, "P-521");
 }
 
 void test_ecdsa(void)

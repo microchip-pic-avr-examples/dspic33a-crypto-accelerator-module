@@ -70,7 +70,13 @@ typedef enum
     CRYPTO_DIGISIGN_ERROR_FAIL = -113,
     CRYPTO_DIGISIGN_ERROR_RSAPADDING = -112,
     CRYPTO_DIGISIGN_ERROR_INPUTDATA = -111,
-    CRYPTO_DIGISIGN_SUCCESS = 0,        
+    CRYPTO_DIGISIGN_ERROR_MEMORY = -110,
+    CRYPTO_DIGISIGN_ERROR_PKE_UNAVAILABLE = -109,
+    CRYPTO_DIGISIGN_ERROR_OPERATION_INCOMPLETE = -108,
+    CRYPTO_DIGISIGN_ERROR_NO_OPERATION_REQUESTED = -107,
+    CRYPTO_DIGISIGN_SUCCESS = 0,
+    CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS = 1,
+    CRYPTO_DIGISIGN_OPERATION_COMPLETED = 2,
 }crypto_DigiSign_Status_E;
 
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_outSig, 
@@ -81,6 +87,65 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify(crypto_HandlerType_E ecdsa
                                                         uint8_t *ptr_inputSig, uint32_t sigLen, uint8_t *ptr_pubKey, uint32_t pubKeyLen,
                                                         int8_t *ptr_sigVerifyStat, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId);
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Non-Blocking Crypto APIS
+// *****************************************************************************
+// *****************************************************************************
 
+/**
+ * @brief
+ * @param ecdsaHandlerType_en
+ * @param ptr_inputHash
+ * @param hashLen
+ * @param ptr_privKey
+ * @param privKeyLen
+ * @param eccCurveType_En
+ * @param ecdsaSessionId
+ * @return 
+ */
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_Start(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_privKey, 
+                                                            uint32_t privKeyLen, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId);
+
+/**
+ * @brief
+ * @param ecdsaHandlerType_en
+ * @param ptr_inputHash
+ * @param hashLen
+ * @param ptr_inputSig
+ * @param sigLen
+ * @param ptr_pubKey
+ * @param pubKeyLen
+ * @param eccCurveType_En
+ * @param ecdsaSessionId
+ * @return 
+ */
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_Start(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_inputSig, 
+                                                           uint32_t sigLen, uint8_t *ptr_pubKey, uint32_t pubKeyLen, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId);
+/**
+ * @brief
+ * @return 
+ */
+crypto_DigiSign_Status_E  Crypto_DigiSign_Ecdsa_Sign_GetStatus(void);
+
+/**
+ * @brief
+ * @return 
+ */
+crypto_DigiSign_Status_E  Crypto_DigiSign_Ecdsa_Verify_GetStatus(void);
+
+/**
+ * @brief
+ * @param ptr_outputSig
+ * @param sigLen
+ * @return 
+ */
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_GetResult(uint8_t *ptr_outputSig, uint32_t sigLen);
+
+/**
+ * @brief
+ * @return 
+ */
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void);
 
 #endif /* CRYPTO_DIGSIGN_H */
