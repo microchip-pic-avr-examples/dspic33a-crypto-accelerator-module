@@ -253,7 +253,7 @@ crypto_Mac_Status_E Crypto_Mac_AesGmac_Cipher(st_Crypto_Mac_Aes_ctx *ptr_aesGmac
             case CRYPTO_HANDLER_HW_INTERNAL:
                 ret_aesGmacStat_en = Crypto_Mac_Hw_AesGmac_Cipher((void*)ptr_aesGmacCtx_st->arr_macDataCtx, ptr_initVect, initVectLen, ptr_aad, aadLen,
                                                                                                                                     ptr_outMac, macLen);
-				break;
+                break;
             default:
                 ret_aesGmacStat_en = CRYPTO_MAC_ERROR_HDLR;
 				break;
@@ -292,7 +292,7 @@ crypto_Mac_Status_E Crypto_Mac_AesGmac_Direct(crypto_HandlerType_E macHandlerTyp
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
                 ret_aesGmacStat_en = Crypto_Mac_Hw_AesGmac_Direct(ptr_initVect, initVectLen, ptr_outMac, macLen, ptr_key, keyLen, ptr_aad, aadLen);
-				break;
+                break;
             default:
                 ret_aesGmacStat_en = CRYPTO_MAC_ERROR_HDLR;
 				break;
