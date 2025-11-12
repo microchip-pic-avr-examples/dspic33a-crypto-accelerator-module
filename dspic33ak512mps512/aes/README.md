@@ -12,6 +12,8 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - ECB
 - CTR
 - CBC
+- CFB128
+- OFB
 - CMAC
 - GCM
 - XTS
@@ -37,7 +39,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
 ## Application Results
-### AES ECB, CTR, CBC Results
+### AES ECB, CTR, CBC, CFB128, OFB Results
 The following information will be printed on the COM port for symmetric AES algorithms:
 1. A header is displayed showing the used AES algorithm and input data length.
 2. The key data is printed out.
@@ -361,17 +363,43 @@ The following benchmarking results were obtained with the device clock speed set
 |32|16|8,192|324.96|
 
 #### AES-CBC
-|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CBC Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|430.53|
-|24|16|8,192|368.65|
-|32|16|8,192|322.26|
+|16|16|8,192|435.64|
+|24|16|8,192|372.27|
+|32|16|8,192|325.02|
 
-|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CBC Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|429.63|
-|24|16|8,192|367.91|
-|32|16|8,192|321.63|
+|16|16|8,192|434.49|
+|24|16|8,192|371.47|
+|32|16|8,192|324.35|
+
+#### AES-CFB128
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.29|
+|24|16|8,192|372.14|
+|32|16|8,192|324.92|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.24|
+|24|16|8,192|372.10|
+|32|16|8,192|324.89|
+
+#### AES-OFB
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-OFB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.29|
+|24|16|8,192|372.14|
+|32|16|8,192|324.92|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-OFB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.24|
+|24|16|8,192|372.10|
+|32|16|8,192|324.89|
 
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
@@ -413,7 +441,9 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|58|11,788|
 |AES-CTR|58|11,828|
-|AES-CBC|58|11,832|
+|AES-CBC|62|12,312|
+|AES-CFB128|62|12,312|
+|AES-OFB|62|12,312|
 |AES-GCM|58|12,204|
 |AES-XTS|58|11,828|
 |AES-CMAC|58|10,736|
@@ -424,7 +454,9 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|2,006|11,852|
 |AES-CTR|2,006|11,896|
-|AES-CBC|2,006|11,900|
+|AES-CBC|2,010|12,380|
+|AES-CFB128|2,010|12,380|
+|AES-OFB|2,010|12,380|
 |AES-GCM|598|12,328|
 |AES-XTS|2,006|11,896|
 |AES-CMAC|586|10,792|
