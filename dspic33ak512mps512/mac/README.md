@@ -153,6 +153,7 @@ crypto_Mac_Status_E Crypto_Mac_Hmac_Cipher(
     uint8_t *ptr_inputData,                     // pointer to the input message to generate HMAC with
     uint32_t dataLen                            // length of the input message
 );
+```
 
 ```c
 crypto_Mac_Status_E Crypto_Mac_Hmac_Final(
@@ -172,6 +173,7 @@ crypto_Mac_Status_E Crypto_Mac_Hmac_Direct(
     crypto_Hash_Algo_E hashType_en,             // hash algorithm to use for hashing
     uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
 );
+```
 
 ### AES-GMAC APIs
 crypto_mac_cipher.h defines Init, Cipher, and Direct APIs.
