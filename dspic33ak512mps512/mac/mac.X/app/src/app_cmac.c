@@ -44,11 +44,14 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include "./app_aes.h"
+#include "./app_mac.h"
+
+#ifdef RUN_MAC_CMAC_TEST
+
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 #include "crypto/common_crypto/crypto_common.h"
 #include "test_vectors/mac_test_vector.h"
-#include "app/app_mac.h"
+#include "app/app_cmac.h"
 
 #define TEST_SESSION_ID     0x1
 #define MAC_TEST_VECTOR_3   3
@@ -62,7 +65,7 @@ extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
 extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
 extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
 
-static void aes_cmac_direct_test(TEST_VECTOR* testVector)
+static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 {
     uint8_t generatedCmac[16] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
@@ -71,10 +74,10 @@ static void aes_cmac_direct_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", CMAC: %lu BYTES", testVector->expectedMacLen);
 
-    printTestHeader(testWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
-    printHexArray("Data (Original)      ", testVector->inputData, testVector->inputDataLen);
+    printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
 
     status = Crypto_Mac_AesCmac_Direct(CRYPTO_HANDLER_HW_INTERNAL, testVector->inputData, testVector->inputDataLen,
             generatedCmac, testVector->expectedMacLen, testVector->inputKey, testVector->inputKeyLen, TEST_SESSION_ID);
@@ -86,11 +89,11 @@ static void aes_cmac_direct_test(TEST_VECTOR* testVector)
     }
     else
     {
-        printCryptoError(keyBitLen, "CMAC", "Generation", status);
+        printCmacCryptoError(keyBitLen, "CMAC", "Generation", status);
     }
 }
 
-static void aes_cmac_step_test(TEST_VECTOR* testVector)
+static void mac_cmac_step_test(TEST_VECTOR* testVector)
 {
     uint8_t generatedCmac[16] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
@@ -100,10 +103,10 @@ static void aes_cmac_step_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", CMAC: %lu BYTES", testVector->expectedMacLen);
 
-    printTestHeader(testWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
-    printHexArray("Data (Original)      ", testVector->inputData, testVector->inputDataLen);
+    printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
 
     status = Crypto_Mac_AesCmac_Init(&macCtx, CRYPTO_HANDLER_HW_INTERNAL, testVector->inputKey, testVector->inputKeyLen, TEST_SESSION_ID);
 
@@ -113,7 +116,7 @@ static void aes_cmac_step_test(TEST_VECTOR* testVector)
     }
     else
     {
-        printCryptoError(keyBitLen, "CMAC", "Initialization", status);
+        printCmacCryptoError(keyBitLen, "CMAC", "Initialization", status);
     }
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
@@ -122,7 +125,7 @@ static void aes_cmac_step_test(TEST_VECTOR* testVector)
     }
     else
     {
-        printCryptoError(keyBitLen, "CMAC", "Cipher", status);
+        printCmacCryptoError(keyBitLen, "CMAC", "Cipher", status);
     }
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
@@ -132,74 +135,75 @@ static void aes_cmac_step_test(TEST_VECTOR* testVector)
     }
     else
     {
-        printCryptoError(keyBitLen, "CMAC", "Generation", status);
+        printCmacCryptoError(keyBitLen, "CMAC", "Generation", status);
     }
 }
 
-static void aes_mac_cmac_128_test(void)
+static void mac_cmac_128_test(void)
 {
 #ifdef RUN_ALL_VECTORS
     TEST_VECTOR* vectorArrayPtr = &cmac_128_test_vectors[0];
 
     while(vectorArrayPtr < &cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS])
     {
-        aes_cmac_direct_test(vectorArrayPtr);
-        aes_cmac_step_test(vectorArrayPtr);
+        mac_cmac_direct_test(vectorArrayPtr);
+        mac_cmac_step_test(vectorArrayPtr);
         vectorArrayPtr++;
     }
 #else
     TEST_VECTOR* vectorArrayPtr = &cmac_128_test_vectors[MAC_TEST_VECTOR_3];
-    aes_cmac_direct_test(vectorArrayPtr);
-    aes_cmac_step_test(vectorArrayPtr);
+    mac_cmac_direct_test(vectorArrayPtr);
+    mac_cmac_step_test(vectorArrayPtr);
 #endif
 }
 
-static void aes_mac_cmac_192_test(void)
+static void mac_cmac_192_test(void)
 {
 #ifdef RUN_ALL_VECTORS
     TEST_VECTOR* vectorArrayPtr = &cmac_192_test_vectors[0];
 
     while(vectorArrayPtr < &cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS])
     {
-       aes_cmac_direct_test(vectorArrayPtr);
-       aes_cmac_step_test(vectorArrayPtr);
+       mac_cmac_direct_test(vectorArrayPtr);
+       mac_cmac_step_test(vectorArrayPtr);
        vectorArrayPtr++;
     }
 #else
     TEST_VECTOR* vectorArrayPtr = &cmac_192_test_vectors[MAC_TEST_VECTOR_3];
-    aes_cmac_direct_test(vectorArrayPtr);
-    aes_cmac_step_test(vectorArrayPtr);
+    mac_cmac_direct_test(vectorArrayPtr);
+    mac_cmac_step_test(vectorArrayPtr);
 #endif
 }
 
-static void aes_mac_cmac_256_test(void)
+static void mac_cmac_256_test(void)
 {
 #ifdef RUN_ALL_VECTORS
     TEST_VECTOR* vectorArrayPtr = &cmac_256_test_vectors[0];
-    
+
     while(vectorArrayPtr < &cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS])
     {
-        aes_cmac_direct_test(vectorArrayPtr);
-        aes_cmac_step_test(vectorArrayPtr);
+        mac_cmac_direct_test(vectorArrayPtr);
+        mac_cmac_step_test(vectorArrayPtr);
         vectorArrayPtr++;
     }
 #else
     TEST_VECTOR* vectorArrayPtr = &cmac_256_test_vectors[MAC_TEST_VECTOR_3];
-    aes_cmac_direct_test(vectorArrayPtr);
-    aes_cmac_step_test(vectorArrayPtr);
+    mac_cmac_direct_test(vectorArrayPtr);
+    mac_cmac_step_test(vectorArrayPtr);
 #endif
 }
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES MAC Test Functions
+// Section: AES CMAC Test Functions
 // *****************************************************************************
 // *****************************************************************************
 
-void aes_mac_cmac_test(void)
+void mac_cmac_test(void)
 {
-    aes_mac_cmac_128_test();
-    aes_mac_cmac_192_test();
-    aes_mac_cmac_256_test();
+    mac_cmac_128_test();
+    mac_cmac_192_test();
+    mac_cmac_256_test();
 }
 
+#endif // RUN_MAC_CMAC_TEST
