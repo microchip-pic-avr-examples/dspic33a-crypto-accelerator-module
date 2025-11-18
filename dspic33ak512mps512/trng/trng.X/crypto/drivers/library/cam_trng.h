@@ -11,12 +11,9 @@
     Crypto Framework Library interface file for CAM TRNG.
 
   Description:
-    This header file contains the interface that make up the CAM TRNG hardware 
-    driver for the following families of Microchip microcontrollers:
-    dsPIC33AK with Crypto Accelerator Module.
+    This header file contains the interface that make up the CAM True Random Number Generation (TRNG) hardware 
+    driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
-
-//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -39,8 +36,17 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-//DOM-IGNORE-END
 
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_trng.h
+ * @defgroup  trng TRNG
+ * 
+ * @brief This header file contains the interface that make up the CAM True Random Number Generation (TRNG) hardware 
+ *  driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
+ *
+ */
 #ifndef CAM_TRNG_H
 #define	CAM_TRNG_H
 
@@ -66,19 +72,22 @@ extern "C" {
 // *****************************************************************************
 
 /**
- * @brief This enum represents the result of the TRNG generation.
- **/
+ * @ingroup trng
+ * @enum TRNG_ERROR
+ * @brief This enumeration represents the possible error codes for the TRNG operations.
+ * 
+ */
 typedef enum TRNG_ERROR
 {
-    TRNG_NO_ERROR = 0,
-    TRNG_FAILED_TO_GENERATE = 1,
-    TRNG_INVALID_OPERATION = 3,
-    TRNG_KEY_SETUP = 4,
-    TRNG_EXEC_FIFO = 5,
-    TRNG_EXEC_STARTUP = 6,
-    TRNG_EXEC_PROP = 7,
-    TRNG_EXEC_REP = 8,
-    TRNG_EXEC_FAIL
+    TRNG_NO_ERROR = 0,               /**< No error occurred  */
+    TRNG_FAILED_TO_GENERATE = 1,     /**< Failed to generate random numbers  */
+    TRNG_INVALID_OPERATION = 3,       /**< Invalid operation attempted  */
+    TRNG_KEY_SETUP = 4,               /**< Error during key setup  */
+    TRNG_EXEC_FIFO = 5,               /**< FIFO execution error  */
+    TRNG_EXEC_STARTUP = 6,            /**< Start-up execution error  */
+    TRNG_EXEC_PROP = 7,               /**< Property execution error  */
+    TRNG_EXEC_REP = 8,                /**< Repetition execution error  */
+    TRNG_EXEC_FAIL                     /**< General execution failure  */
 } TRNG_ERROR;
 
 // *****************************************************************************
@@ -88,28 +97,57 @@ typedef enum TRNG_ERROR
 // *****************************************************************************
 
 /**
- *  @brief Resets TRNG error bits whenever an interrupt occurs.
- *  @return none
- *  @note This function is called when one of the error bits is 1. This function resets the built-in error bits so that future errors can be caught.
- **/
+ * @ingroup trng
+ * 
+ * This function is called when one of the TRNG error bits is set. It resets
+ * the built-in error bits to allow for the detection of future errors.
+ * 
+ * @return None.
+ */
 void DRV_CRYPTO_TRNG_IsrHelper(void);
 
 /**
- *  @brief Creates and sets the key for True Random Number Generation.
- *  @return Returns TRNG_NO_ERROR on success. Returns one of the TRNG_FAILED_TO_GENERATE / TRNG_EXEC_FIFO / TRNG_EXEC_STARTUP 
- *          TRNG_EXEC_PROP / TRNG_EXEC_REP on fail. 
- *  @note This function performs a read of the FIFO to get the key and then stores it for use in the generation of the TRNG values.
- **/
+ * @ingroup trng
+ * 
+ * This function performs a read of the FIFO to obtain the key and stores it
+ * for use in generating TRNG values.
+ * 
+ * @retval TRNG_NO_ERROR          Successful completion.
+ * @retval TRNG_FAILED_TO_GENERATE Failed to generate random data.
+ * @retval TRNG_EXEC_FIFO          FIFO error occurred.
+ * @retval TRNG_EXEC_STARTUP       Start-up test failure.
+ * @retval TRNG_EXEC_PROP          Propagation test failure.
+ * @retval TRNG_EXEC_REP           Repetition count test failure.
+ */
 TRNG_ERROR DRV_CRYPTO_TRNG_Setup(void);
 
 /**
- *  @brief Reads generated true random number and stores it in the provided buffer.
- *  @param data Buffer to store the TRNG data.
- *  @param size Number of 4-bit words to read and store.
- *  @return Returns TRNG_NO_ERROR on success. Returns one of the TRNG_FAILED_TO_GENERATE / TRNG_EXEC_FIFO / TRNG_EXEC_STARTUP 
- *          TRNG_EXEC_PROP / TRNG_EXEC_REP on fail. 
- *  @note This function reads the specified amount of 4-bit words from the designated read address.
- **/
+ * @ingroup trng
+ * 
+ * This function reads the specified number of 4-bit words from the TRNG and
+ * stores them in the provided buffer. It enables the random number generation
+ * and waits for the FIFO to fill with the data. If the FIFO is full, it reads the
+ * data and splits it into 8-bit values to store in the output buffer.
+ * 
+ * @param data Buffer to store the TRNG data. The buffer size should be at least
+ *             size * 4 bits to accommodate the generated random numbers.
+ * @param size Number of 4-bit words to read and store.
+ * 
+ * @retval TRNG_NO_ERROR           Success.
+ * @retval TRNG_FAILED_TO_GENERATE Failed to generate random data.
+ * @retval TRNG_EXEC_FIFO          FIFO execution error.
+ * @retval TRNG_EXEC_STARTUP       Start-up execution error.
+ * @retval TRNG_EXEC_PROP          Propagation test error.
+ * @retval TRNG_EXEC_REP           Repetition test error.
+ * 
+ * @note The function will time-out if the requested random numbers
+ *       cannot be generated within the specified time-out period. If the time-out
+ *       occurs, the function will return an error indicating that the generation
+ *       failed. After reading, the TRNG module is reset to ensure that it is ready
+ *       for the next operation.
+ */
+
+
 TRNG_ERROR DRV_CRYPTO_TRNG_ReadData(uint8_t* data, uint32_t size) ;
 
 // *****************************************************************************
@@ -118,16 +156,64 @@ TRNG_ERROR DRV_CRYPTO_TRNG_ReadData(uint8_t* data, uint32_t size) ;
 // *****************************************************************************
 // *****************************************************************************
 
-/** @cond INTERNAL **/
+/** @cond INTERNAL */
+/**
+ * @ingroup trng
+ * @brief Function prototype for the TRNG ISR helper.
+ *
+ * This function is specific to the currently defined hardware version for handling
+ * TRNG interrupt states.
+ */
 void MPROTO(DRV_CRYPTO_TRNG_IsrHelper)(void);
+
+/**
+ * @ingroup trng
+ * @def DRV_CRYPTO_TRNG_IsrHelper
+ * @brief Macro alias for the device-specific TRNG ISR helper.
+ *
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for the TRNG interrupt service routine.
+ */
 #define DRV_CRYPTO_TRNG_IsrHelper MPROTO(DRV_CRYPTO_TRNG_IsrHelper)
 
+/**
+ * @ingroup trng
+ * @brief Function prototype for TRNG initialization.
+ *
+ * This function is specific to the currently defined hardware version for setting
+ * up the TRNG.
+ */
 TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_Setup)(void);
+
+/**
+ * @ingroup trng
+ * @def DRV_CRYPTO_TRNG_Setup
+ * @brief Macro alias for the device-specific TRNG setup function.
+ *
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for initializing the TRNG hardware.
+ */
 #define DRV_CRYPTO_TRNG_Setup MPROTO(DRV_CRYPTO_TRNG_Setup)
 
+/**
+ * @ingroup trng
+ * @brief Function prototype for reading random data from the TRNG.
+ *
+ * This function is specific to the currently defined hardware version for retrieving
+ * random data from the TRNG hardware.
+ */
 TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_ReadData)(uint8_t* data, uint32_t size);
+
+/**
+ * @ingroup trng
+ * @def DRV_CRYPTO_TRNG_ReadData
+ * @brief Macro alias for the device-specific TRNG read function.
+ *
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for reading random data from the TRNG.
+ */
 #define DRV_CRYPTO_TRNG_ReadData MPROTO(DRV_CRYPTO_TRNG_ReadData)
-/** @endcond **/
+/** @endcond */
 
 #ifdef	__cplusplus
 }

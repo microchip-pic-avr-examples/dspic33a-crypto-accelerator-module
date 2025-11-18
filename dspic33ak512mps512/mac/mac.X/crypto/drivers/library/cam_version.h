@@ -1,18 +1,18 @@
-/*******************************************************************************
-  Application Header File
+/**************************************************************************
+  Crypto Framework Library Source
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    app_mac.h
+    cam_version.h
 
   Summary:
-    This header file provides prototypes and definitions for AES
-    MAC algorithms for the application.
-*******************************************************************************/
+    CAM Hardware Driver Version.
 
-//DOM-IGNORE-BEGIN
+  Description:
+    This header file contains version information on the CAM Hardware Driver.
+**************************************************************************/
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -35,22 +35,48 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-//DOM-IGNORE-END
 
-#ifndef APP_MAC_H
-#define	APP_MAC_H
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_version.h
+ * @ingroup CAM_HSM_LITE 
+ * @defgroup  version VERSION
+ * @ingroup CAM_HSM_LITE 
+ *
+ * @brief This header file contains version information on the CAM Hardware driver.
+ *
+ */
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+#ifndef CAM_VERSION_H
+#define CAM_VERSION_H
 
-#define RUN_MAC_CMAC_TEST
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_DATE
+ * @brief Version date format (yyyymmdd).
+ **/
+ #define CAM_LIBRARY_VERSION_DATE   "20251014"
 
-void aes_mac_cmac_test(void);
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MAJOR
+ * @brief This number represents the major version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MAJOR  1
 
-#ifdef	__cplusplus
-}
-#endif
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MINOR
+ * @brief This number represents the minor version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MINOR  2
+ 
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_PATCH
+ * @brief This number represents the patch version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_PATCH  0
 
-#endif	/* APP_MAC_H */
-
+#endif /* CAM_VERSION_H */
