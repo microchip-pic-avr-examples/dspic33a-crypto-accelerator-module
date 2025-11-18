@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver types header file for the CLOCK driver
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.2.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
@@ -40,6 +40,14 @@
  @ingroup  clockdriver
  @enum     CLOCK_GENERATOR
  @brief    CLOCK generator instances
+*/
+/* cppcheck-suppress misra-c2012-8.12
+*
+* (Rule 8.12) REQUIRED: Within an enumerator list, the value of an implicitly-specified 
+* enumeration constant shall be unique
+*
+* Reasoning: Enum members are created to reflect the hardware settings and to provide 
+* clear usage of API without impacting the functionality.
 */
 enum CLOCK_GENERATOR
 {
