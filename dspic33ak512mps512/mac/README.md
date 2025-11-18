@@ -188,7 +188,7 @@ crypto_Mac_Status_E Crypto_Mac_AesGmac_Init(
 );
 ```
 
-```
+```c
 crypto_Mac_Status_E Crypto_Mac_AesGmac_Cipher(
     st_Crypto_Mac_Aes_ctx *ptr_aesGmacCtx_st,   // GMAC context structure used to store values
     uint8_t *ptr_initVect,                      // pointer to the initialization vector data to be used
@@ -200,7 +200,7 @@ crypto_Mac_Status_E Crypto_Mac_AesGmac_Cipher(
 );
 ```
 
-```
+```c
 crypto_Mac_Status_E Crypto_Mac_AesGmac_Direct(
     crypto_HandlerType_E macHandlerType_en,     // configure Crypto API to use hardware acceleration
     uint8_t *ptr_initVect,                      // pointer to the initialization vector data to be used
