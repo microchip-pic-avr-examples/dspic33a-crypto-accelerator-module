@@ -79,4 +79,11 @@ Microchip or any third party.
  */
 #define CAM_LIBRARY_VERSION_PATCH  0
 
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_PRERELEASE
+ * @brief This field represents the prerelease version of the library.
+ */
+#define CAM_LIBRARY_VERSION_PRERELEASE  2128ddd6b16
+
 #endif /* CAM_VERSION_H */
