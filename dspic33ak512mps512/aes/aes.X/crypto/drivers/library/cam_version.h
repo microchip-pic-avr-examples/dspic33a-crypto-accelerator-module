@@ -77,6 +77,6 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_PATCH
  * @brief This number represents the patch version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_PATCH  1
+#define CAM_LIBRARY_VERSION_PATCH  0
 
 #endif /* CAM_VERSION_H */
