@@ -139,13 +139,14 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_MapResult(CRYPTO_PKE_RE
 }
 
 static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_Status(void)
-{
+{    
     if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-        DRV_CRYPTO_PKE_SetupEngine();
+            DRV_CRYPTO_PKE_SetupEngine();
     }
     
     CRYPTO_PKE_RESULT hwStatus = DRV_CRYPTO_ECDSA_GetStatus();
     crypto_DigiSign_Status_E status;
+    
     switch(hwStatus)
     {
         case CRYPTO_PKE_STATUS_BUSY:
@@ -257,18 +258,28 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign_Start(uint8_t *inputHash,
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
-    if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-        DRV_CRYPTO_PKE_SetupEngine();
+    if(currentState == CRYPTO_PROCESS_STARTED){
+       hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;
     }
-    
-    /* Get curve */
-    hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
-    lDRV_CRYPTO_ECDSA_InterruptSetup();
-
-    if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
+    else
     {
-        /* Initialize the hardware library for ECDSA signature */
-        hwResult = DRV_CRYPTO_ECDSA_Sign_Start(inputHash, hashLen, privKey, privKeyLen, hwEccCurve);
+        if (!DRV_CRYPTO_PKE_IsEngineSetup()){
+            DRV_CRYPTO_PKE_SetupEngine();
+        }
+
+        /* Get curve */
+        hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
+        lDRV_CRYPTO_ECDSA_InterruptSetup();
+
+        if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
+        {
+            /* Initialize the hardware library for ECDSA signature */
+            hwResult = DRV_CRYPTO_ECDSA_Sign_Start(inputHash, hashLen, privKey, privKeyLen, hwEccCurve);
+        }
+        
+        if(hwResult == CRYPTO_PKE_RESULT_SUCCESS){
+            currentState = CRYPTO_PROCESS_STARTED;
+        }
     }
     
     return lCrypto_DigSign_Ecdsa_Hw_MapResult(hwResult);
@@ -281,18 +292,28 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify_Start(uint8_t * inputHa
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
-    if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-        DRV_CRYPTO_PKE_SetupEngine();
+    if(currentState == CRYPTO_PROCESS_STARTED){
+       hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;
     }
-    
-    /* Get curve */
-    hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
-    lDRV_CRYPTO_ECDSA_InterruptSetup();
-    
-    if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
+    else
     {
-        /* Initialize the hardware library for ECDSA signature */
-        hwResult = DRV_CRYPTO_ECDSA_Verify_Start(inputHash, hashLen, inputSig, sigLen, pubKey, pubKeyLen, hwEccCurve);
+        if (!DRV_CRYPTO_PKE_IsEngineSetup()){
+            DRV_CRYPTO_PKE_SetupEngine();
+        }
+
+        /* Get curve */
+        hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
+        lDRV_CRYPTO_ECDSA_InterruptSetup();
+
+        if (hwResult == CRYPTO_PKE_RESULT_SUCCESS)
+        {
+            /* Initialize the hardware library for ECDSA signature */
+            hwResult = DRV_CRYPTO_ECDSA_Verify_Start(inputHash, hashLen, inputSig, sigLen, pubKey, pubKeyLen, hwEccCurve);
+        }
+        
+        if(hwResult == CRYPTO_PKE_RESULT_SUCCESS){
+            currentState = CRYPTO_PROCESS_STARTED;
+        }
     }
     
     return lCrypto_DigSign_Ecdsa_Hw_MapResult(hwResult);

@@ -93,8 +93,8 @@ typedef enum
  * @brief Start the ECDSA signing process using non-blocking functions.
  * @param inputHash       Pointer to the input hash.
  * @param hashLen         Length of the input hash.
- * @param privKey         pointer to the private key.
- * @param privKeyLen      length of the private key.
+ * @param privKey         Pointer to the private key.
+ * @param privKeyLen      Length of the private key.
  * @param eccCurveType_En Curve type.
  * @return CRYPTO_DIGISIGN_SUCCESS on successful start. Any other Error on failure.
  */
@@ -139,7 +139,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign_GetResult(uint8_t *output
 /**
  * @brief Gets the results of the verification operation.
  * @return CRYPTO_DIGISIGN_SUCCESS on successful verification. 
- *         Any other error Error code on failure.
+ *         Any other Error code on failure.
  */
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify_GetResult(void);
 
