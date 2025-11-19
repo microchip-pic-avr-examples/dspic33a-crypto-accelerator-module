@@ -66,10 +66,10 @@ static void printTestHeader(const char* label)
     (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
 }
 
-static void printHexArray(const char* label, void* data, uint32_t size)
+static void printHexArray(const char* label, uint8_t* data, uint32_t size)
 {
     (void)printf(BLUE"\r\n --------------------------------------------------------------------------------------------------"RESET_COLOR);
-    uint8_t *ldata = (uint8_t *) data;
+    const uint8_t *ldata = data;
     (void)printf("\r\n %s", label);
     for (uint32_t index = 0; index < size; index++)
     {
@@ -84,10 +84,10 @@ static void printHexArray(const char* label, void* data, uint32_t size)
 
 static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
-	uint8_t result = 0;
-
     if (size > 0U)
     {
+        uint8_t result = 0;
+
         const uint8_t *tempA = a;
         const uint8_t *tempB = b;
 
@@ -110,7 +110,7 @@ static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 
 static inline void runHardwareTest(uint8_t *publicKey, uint32_t publicKeyLength,
         uint8_t *privateKey, uint32_t privateKeyLength,
-        uint8_t *sharedSecret, uint8_t *expectedOutput, uint32_t expectedOutputLength,
+        uint8_t *sharedSecret, const uint8_t *expectedOutput, uint32_t expectedOutputLength,
         crypto_EccCurveType_E eccCurveType)
 {
     crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(CRYPTO_HANDLER_HW_INTERNAL,
