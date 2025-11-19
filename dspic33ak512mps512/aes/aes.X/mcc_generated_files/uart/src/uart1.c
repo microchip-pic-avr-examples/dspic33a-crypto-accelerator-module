@@ -7,7 +7,7 @@
  *  
  * @brief       This is the generated driver source file for the UART1 driver
  *
- * @skipline @version     PLIB Version 1.0.2
+ * @skipline @version     PLIB Version 1.1.0
  *
  * @skipline    Device : dsPIC33AK512MPS512
 */
@@ -493,7 +493,7 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1TXInterrupt(void)
 
 void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1RXInterrupt(void)
 {
-    size_t rxQueueSize = 0;
+    size_t rxQueueSize;
     uint8_t *rxTailPtr = NULL;
     
     IFS3bits.U1RXIF = 0;
