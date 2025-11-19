@@ -45,8 +45,9 @@ Microchip or any third party.
 #include <xc.h>
 #include "app_ecdsa.h"
 #include "crypto/common_crypto/crypto_digsign.h"
-#include "crypto/drivers/wrapper/crypto_digisign_cam05346_wrapper.h"
 #include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
+#include "mcc_generated_files/system/clock.h"
+#include "mcc_generated_files/system/pins.h"
 
 #define RESET_COLOR     "\033""[0m"
 #define RED             "\033""[1;31m"
@@ -61,6 +62,8 @@ static const char * signaturePrint = "Signature : \t";
 static const char * signing = "SIGN";
 static const char * verifying = "VERIFY";
 uint8_t signature[132] = {0};
+volatile bool signComplete = false;
+volatile bool verifyComplete = false;
 
 static inline void printStatus(crypto_DigiSign_Status_E status, const char *type)
 {
@@ -86,13 +89,13 @@ static inline void printTestHeader(const char* curve, const char* blocking)
     (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
 }
 
-static inline void printHexArray(const char* label, void* Data, uint32_t size) 
+static inline void printHexArray(const char* label, uint8_t* data, uint32_t size) 
 {
-    uint8_t *ldata = (uint8_t *) Data;
+    uint8_t const *ldata = data;
     (void)printf("\r\n\r\n\t%s", label);
     for (uint32_t i = 0; i < size; i++) 
     {
-        if (0U == i % 16U && 0U != i) 
+        if ((0U == (i % 16U)) && (0U != i)) 
         {
             (void)printf("\r\n\t\t\t");
         }
@@ -100,6 +103,12 @@ static inline void printHexArray(const char* label, void* Data, uint32_t size)
         (void)printf(" 0x%02X", ldata[i]);
     }
 }
+
+static void clearCompleteStates(void)
+{
+    signComplete = false;
+    verifyComplete = false;
+}   
 
 static void runBlockingHardwareTest(uint8_t *hash, uint32_t hashLength, 
         uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength,
@@ -109,6 +118,7 @@ static void runBlockingHardwareTest(uint8_t *hash, uint32_t hashLength,
     printTestHeader(curve, "BLOCKING");
     printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     
+    clearCompleteStates();
     ////Crypto Library ECDSA SIGN API***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, privateKey, privateKeyLength, eccCurveType, SESSION_ID);
  
@@ -117,7 +127,8 @@ static void runBlockingHardwareTest(uint8_t *hash, uint32_t hashLength,
     printSplitter();
     printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
     
-    int8_t hashStatus = 0;         
+    int8_t hashStatus = 0;   
+    clearCompleteStates();          
     ////Crypto Library ECDSA VERIFY API*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, publicKey, publicKeyLength, &hashStatus, eccCurveType, SESSION_ID);
     
@@ -130,27 +141,31 @@ static void runNonBlockingHardwareTest(uint8_t *hash, uint32_t hashLength,
 {
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     printTestHeader(curve, "NON-BLOCKING");
-    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     
     //Crypto Library ECDSA SIGN Non-Blocking API***********************************************************************************************************************
+    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    clearCompleteStates();  
     status = Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, privateKey, privateKeyLength, eccCurveType, SESSION_ID);
-    while(Crypto_DigiSign_Ecdsa_Sign_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
-    {
+    if(status == CRYPTO_DIGISIGN_SUCCESS){
+        while(!signComplete)
+        {
+        }
+        status = Crypto_DigiSign_Ecdsa_Sign_GetResult(signature, signatureLength);
     }
-    status = Crypto_DigiSign_Ecdsa_Sign_GetResult(signature, signatureLength);
-
     printHexArray(signaturePrint, signature, signatureLength);
     printStatus(status, signing);
     printSplitter();
-    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
     
     ////Crypto Library ECDSA VERIFY Non-Blocking API*********************************************************************************************************************
+    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
+    clearCompleteStates();
     status = Crypto_DigiSign_Ecdsa_Verify_Start(CRYPTO_HANDLER_HW_INTERNAL, hash, hashLength, signature, signatureLength, publicKey, publicKeyLength, eccCurveType, SESSION_ID);
-    while(Crypto_DigiSign_Ecdsa_Verify_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
-    {
+    if(status == CRYPTO_DIGISIGN_SUCCESS){
+        while(!verifyComplete)
+        {
+        }
+        status = Crypto_DigiSign_Ecdsa_Verify_GetResult();
     }
-    status = Crypto_DigiSign_Ecdsa_Verify_GetResult();
- 
     printStatus(status, verifying);
 }
         
@@ -286,8 +301,20 @@ static void TEST_ECDSA_p521(void)
     runNonBlockingHardwareTest(hash, sizeof(hash), 132, testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey), CRYPTO_ECC_CURVE_P521, "P-521");
 }
 
+void signOperationComplete(void)
+{
+    signComplete = true;
+}
+
+void verifyOperationComplete(void)
+{
+    verifyComplete = true;
+}
+
 void test_ecdsa(void)
 {
+    CRYPTO3_SignOperationCompleteCallbackRegister(&signOperationComplete);
+    CRYPTO3_VerifyOperationCompleteCallbackRegister(&verifyOperationComplete);
     printSplitter();
     (void)printf("\r\n Starting CRYPTO ECDSA Verify Sign program \r\n");
     TEST_ECDSA_p192();

@@ -11,9 +11,8 @@
     Common enums and structures used with PKE operations.
 
   Description:
-    This header file defined the enums and structures for the ECDSA and ECDH  
-    hardware drivers for the following families of Microchip microcontrollers:
-    dsPIC33AK with Crypto Accelerator Module.
+    This header file defines the enumerations and structures for the ECDSA and ECDH  
+    hardware drivers for Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
 
 /*
@@ -55,7 +54,7 @@ Microchip or any third party.
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
@@ -101,6 +100,18 @@ typedef enum
   P521 = 3,    /**< P-521 curve  */
   P192 = 4,    /**< P-192 curve  */
 } PKE_ECC_CURVE;
+
+/**
+ * @ingroup pke
+ * @typedef PKE_OPERATION_TYPE
+ * @brief This enumeration represents the operation that triggered an interrupt.
+ */
+typedef enum
+{
+    CRYPTO_PKE_OPERATION_VERIFY,
+    CRYPTO_PKE_OPERATION_SIGN,
+    CRYPTO_PKE_OPERATION_UNKNOWN,
+} PKE_OPERATION_TYPE;
 
 /**
  * @ingroup pke
@@ -192,6 +203,11 @@ bool DRV_CRYPTO_PKE_IsEngineSetup(void);
  **/
 void DRV_CRYPTO_PKE_ClearMemory_NoWait(void);
 
+/**
+ *  @brief Gets the operation type that was previously set.
+ *  @return returns CRYPTO_PKE_OPERATION_VERIFY or CRYPTO_PKE_OPERATION_SIGN based on the operation completed.
+ **/
+PKE_OPERATION_TYPE DRV_CRYPTO_PKE_GetOperationCompleted(void);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -306,9 +322,9 @@ void MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)(void);
 #define DRV_CRYPTO_PKE_ClearMemory_NoWait MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)
 
 /** @endcond **/
-
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* CAM_PKE_H */
+

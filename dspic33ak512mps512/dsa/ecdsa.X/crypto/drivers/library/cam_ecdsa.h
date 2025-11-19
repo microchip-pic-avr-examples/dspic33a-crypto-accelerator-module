@@ -11,9 +11,8 @@
     Hardware abstraction layer header.
 
   Description:
-    This header file defined the functions and structures for the CAM ECDSA
-    hardware driver for the following families of Microchip microcontrollers:
-    dsPIC33AK with Crypto Accelerator Module.
+    This header file defines the functions and structures for the CAM ECDSA
+    hardware driver for Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
 
 /*
