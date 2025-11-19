@@ -53,13 +53,6 @@ Microchip or any third party.
 
 /**
  * @ingroup version 
- * @def CAM_LIBRARY_VERSION_DATE
- * @brief Version date format (yyyymmdd).
- **/
- #define CAM_LIBRARY_VERSION_DATE   "20251110"
-
-/**
- * @ingroup version 
  * @def CAM_LIBRARY_VERSION_MAJOR
  * @brief This number represents the major version in SemVer format.
  */
@@ -81,9 +74,9 @@ Microchip or any third party.
 
 /**
  * @ingroup version 
- * @def CAM_LIBRARY_VERSION_PRERELEASE
- * @brief This field represents the prerelease version of the library.
+ * @def CAM_LIBRARY_IDENTIFIER
+ * @brief This field represents the hexidecimal identifier of the library.
  */
-#define CAM_LIBRARY_VERSION_PRERELEASE  2128ddd6b16
+#define CAM_LIBRARY_IDENTIFIER  2128ddd6b16
 
 #endif /* CAM_VERSION_H */
