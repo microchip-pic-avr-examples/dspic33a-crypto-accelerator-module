@@ -122,7 +122,6 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
-
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
         (void) printf("\r\n\r\n ENCRYPTING (STEPS)...");
