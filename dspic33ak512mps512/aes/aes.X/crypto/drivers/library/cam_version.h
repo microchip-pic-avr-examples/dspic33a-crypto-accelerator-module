@@ -72,11 +72,13 @@ Microchip or any third party.
  */
 #define CAM_LIBRARY_VERSION_PATCH  0
 
+/** @cond INTERNAL **/
 /**
  * @ingroup version 
  * @def CAM_LIBRARY_IDENTIFIER
  * @brief This field represents the hexidecimal identifier of the library.
  */
 #define CAM_LIBRARY_IDENTIFIER  2128ddd6b16
+/** @endcond **/
 
 #endif /* CAM_VERSION_H */
