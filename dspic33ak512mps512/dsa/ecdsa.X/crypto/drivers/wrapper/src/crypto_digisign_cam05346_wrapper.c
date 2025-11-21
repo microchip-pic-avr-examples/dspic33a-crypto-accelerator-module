@@ -53,7 +53,7 @@ Microchip or any third party.
 #include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 #include "crypto/drivers/library/cam_ecdsa.h"
 
-crypto_DigiSignState_E currentState = CRYPTO_PROCESS_COMPLETE;
+volatile crypto_DigiSignState_E currentState = CRYPTO_PROCESS_COMPLETE;
 
 // *****************************************************************************
 // *****************************************************************************
