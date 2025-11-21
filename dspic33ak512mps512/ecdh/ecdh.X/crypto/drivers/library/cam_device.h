@@ -13,8 +13,6 @@
   Description:
     This header file defines supported devices by the CAM Hardware Driver.
 **************************************************************************/
-
-//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -37,7 +35,16 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-//DOM-IGNORE-END
+
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_device.h
+ * @defgroup  device DEVICE
+ * 
+ * @brief This header file defines supported devices by the CAM Hardware Driver.
+ *
+ */
 
 #ifndef CAM_DEVICE_H
 #define CAM_DEVICE_H
@@ -62,17 +69,68 @@ Microchip or any third party.
     || defined(__dsPIC33AK512MPS205__) || defined(__dsPIC33AK512MPS206__) \
     || defined(__dsPIC33AK512MPS208__) || defined(__dsPIC33AK512MPS210__) \
     || defined(__dsPIC33AK512MPS212__) /* dsPIC33AK512MPSXXX Families with Crypto Accelerator */
+         /** 
+         * @ingroup device
+         * @def CAM_HW_VERSION
+         * @brief Defines the hardware version for dsPIC33AK256MPS and dsPIC33AK512MPS families.
+         * 
+         * This macro is defined for the dsPIC33AK256MPSXXX and dsPIC33AK512MPSXXX families
+         * that support CAN FD and Crypto Accelerator.
+         */
         #define CAM_HW_VERSION CAM_05346
+#elif defined(GENERIC_TARGET_HSM_04777) || defined(__PIC32CM5112SG00100__)
+         /**
+         * @ingroup device
+         * @def CAM_HW_VERSION
+         * @brief Defines the hardware version for the HSM 04777 target.
+         * 
+         * This macro is defined for the generic target of the HSM 04777 library.
+         */
+        #define CAM_HW_VERSION HSM_04777  
 #elif __has_include("cam_device_ea.h")
-    #include "cam_device_ea.h"
+    #include "cam_device_ea.h"   
 #endif
 
+/* MISRA C:2012 Rule 20.10 deviation:
+ * Justification: The ## operator is required here to concatenate tokens
+ * when generating device-specific symbol names (e.g., Foo_CAM_05346).
+ * This usage is controlled, limited in scope, and necessary for supporting
+ * multiple device variants in a single code base.
+ */
+/* cppcheck-suppress misra-c2012-20.10 */
+/**
+ * @def JOIN2
+ * @brief Macro to concatenate two tokens.
+ * 
+ * This macro is used to concatenate two tokens together.
+ */
 #define JOIN2(A,B) A##B
+
+/**
+ * @def JOIN
+ * @brief Macro to concatenate two tokens using JOIN2.
+ * 
+ * This macro is a wrapper for JOIN2 to facilitate token concatenation.
+ */
 #define JOIN(A,B) JOIN2(A,B)
 
 #ifdef CAM_HW_VERSION
+    /**
+     * @def MPROTO
+     * @brief Macro to create a device-specific function prototype.
+     * 
+     * This macro generates a function prototype that is specific to the
+     * currently defined hardware version.
+     */
     #define MPROTO(x) JOIN(x, JOIN(_, CAM_HW_VERSION))
 #else
+    /**
+     * @def MPROTO
+     * @brief Macro to create a placeholder for unavailable implementations.
+     * 
+     * This macro generates a function prototype indicating that the
+     * implementation is not available for the selected device.
+     */
     #define MPROTO(x) JOIN(x, JOIN(_, no_implementation_available))
     #error "This CAM library version does not support the selected device. Verify that the device has a CAM peripheral and you are using the latest CAM library release."
 #endif
