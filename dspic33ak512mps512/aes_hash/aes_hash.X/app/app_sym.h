@@ -55,14 +55,20 @@ extern "C" {
 
 #define RUN_SYM_ECB_TEST
 #define RUN_SYM_CTR_TEST
+#define RUN_SYM_CBC_TEST
+#define RUN_SYM_CFB128_TEST
+#define RUN_SYM_OFB_TEST
 #define RUN_SYM_XTS_TEST
 
 typedef enum SYM_OPER_MODE
 {
   SYM_OPER_MODE_AES_ECB = 0,
   SYM_OPER_MODE_AES_CTR = 1,
-  SYM_OPER_MODE_AES_XTS = 2,
-  SYM_OPER_MODE_COUNT = 3
+  SYM_OPER_MODE_AES_CBC = 2,
+  SYM_OPER_MODE_AES_CFB128 = 3,
+  SYM_OPER_MODE_AES_OFB = 4,
+  SYM_OPER_MODE_AES_XTS = 5,
+  SYM_OPER_MODE_COUNT = 6
 } SYM_OPER_MODE;
 
 // *****************************************************************************

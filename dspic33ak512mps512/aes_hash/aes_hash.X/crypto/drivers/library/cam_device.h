@@ -1,5 +1,5 @@
-  /**************************************************************************
-  Crypto Framework Library Source
+/**************************************************************************
+  Crypto Library Device Support Header
 
   Company:
     Microchip Technology Inc.
@@ -8,10 +8,12 @@
     cam_device.h
 
   Summary:
-    CAM Hardware Driver Device Support.
+    CAM/HSM-Lite Hardware Driver Device Support.
 
   Description:
-    This header file defines supported devices by the CAM Hardware Driver.
+    This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
+
+  File created on 2025-11-19t14:02:58
 **************************************************************************/
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
@@ -46,6 +48,16 @@ Microchip or any third party.
  *
  */
 
+/**
+ * Crypto Framework Library Source
+ *
+ * @file cam_device.h
+ * @defgroup  device DEVICE
+ *
+ * @brief This header file defines supported devices by the CAM Hardware Driver.
+ *
+ */
+
 #ifndef CAM_DEVICE_H
 #define CAM_DEVICE_H
 
@@ -57,36 +69,46 @@ Microchip or any third party.
 
 /** @cond INTERNAL **/
 #if defined(GENERIC_TARGET_CAM_05346) \
-    || defined(__dsPIC33AK256MPS505__) || defined(__dsPIC33AK256MPS506__) \
-    || defined(__dsPIC33AK256MPS508__) || defined(__dsPIC33AK256MPS510__) \
-    || defined(__dsPIC33AK256MPS512__) /* dsPIC33AK256MPSXXX Families with CAN FD and Crypto Accelerator */ \
-    || defined(__dsPIC33AK512MPS505__) || defined(__dsPIC33AK512MPS506__) \
-    || defined(__dsPIC33AK512MPS508__) || defined(__dsPIC33AK512MPS510__) \
-    || defined(__dsPIC33AK512MPS512__) /* dsPIC33AK512MPSXXX Families with CAN FD and Crypto Accelerator */ \
-    || defined(__dsPIC33AK256MPS205__) || defined(__dsPIC33AK256MPS206__) \
-    || defined(__dsPIC33AK256MPS208__) || defined(__dsPIC33AK256MPS210__) \
-    || defined(__dsPIC33AK256MPS212__) /* dsPIC33AK256MPSXXX Families with Crypto Accelerator */ \
-    || defined(__dsPIC33AK512MPS205__) || defined(__dsPIC33AK512MPS206__) \
-    || defined(__dsPIC33AK512MPS208__) || defined(__dsPIC33AK512MPS210__) \
-    || defined(__dsPIC33AK512MPS212__) /* dsPIC33AK512MPSXXX Families with Crypto Accelerator */
-         /** 
-         * @ingroup device
-         * @def CAM_HW_VERSION
-         * @brief Defines the hardware version for dsPIC33AK256MPS and dsPIC33AK512MPS families.
-         * 
-         * This macro is defined for the dsPIC33AK256MPSXXX and dsPIC33AK512MPSXXX families
-         * that support CAN FD and Crypto Accelerator.
-         */
-        #define CAM_HW_VERSION CAM_05346
-#elif defined(GENERIC_TARGET_HSM_04777) || defined(__PIC32CM5112SG00100__)
+    || defined (__dsPIC33AK256MPS505__) \
+    || defined (__dsPIC33AK256MPS506__) \
+    || defined (__dsPIC33AK256MPS508__) \
+    || defined (__dsPIC33AK256MPS510__) \
+    || defined (__dsPIC33AK256MPS512__) \
+    || defined (__dsPIC33AK512MPS505__) \
+    || defined (__dsPIC33AK512MPS506__) \
+    || defined (__dsPIC33AK512MPS508__) \
+    || defined (__dsPIC33AK512MPS510__) \
+    || defined (__dsPIC33AK512MPS512__) \
+    || defined (__dsPIC33AK256MPS205__) \
+    || defined (__dsPIC33AK256MPS206__) \
+    || defined (__dsPIC33AK256MPS208__) \
+    || defined (__dsPIC33AK256MPS210__) \
+    || defined (__dsPIC33AK256MPS212__) \
+    || defined (__dsPIC33AK512MPS205__) \
+    || defined (__dsPIC33AK512MPS206__) \
+    || defined (__dsPIC33AK512MPS208__) \
+    || defined (__dsPIC33AK512MPS210__) \
+    || defined (__dsPIC33AK512MPS212__)
          /**
          * @ingroup device
          * @def CAM_HW_VERSION
-         * @brief Defines the hardware version for the HSM 04777 target.
-         * 
-         * This macro is defined for the generic target of the HSM 04777 library.
+         * @brief Defines the hardware version for the CAM 05346 target.
+         *
+         * This macro is defined for supported CAM 05346 device families.
          */
-        #define CAM_HW_VERSION HSM_04777  
+        #define CAM_HW_VERSION CAM_05346
+#elif defined(GENERIC_TARGET_HSM_LITE_04777) \
+    || defined (__PIC32CM5112SG00048__) \
+    || defined (__PIC32CM5112SG00064__) \
+    || defined (__PIC32CM5112SG00100__)
+         /**
+         * @ingroup device
+         * @def CAM_HW_VERSION
+         * @brief Defines the hardware version for the HSM-Lite 04777 target.
+         *
+         * This macro is defined for supported HSM-Lite 04777 device families.
+         */
+        #define CAM_HW_VERSION HSM_LITE_04777
 #elif __has_include("cam_device_ea.h")
     #include "cam_device_ea.h"   
 #endif
@@ -101,7 +123,7 @@ Microchip or any third party.
 /**
  * @def JOIN2
  * @brief Macro to concatenate two tokens.
- * 
+ *
  * This macro is used to concatenate two tokens together.
  */
 #define JOIN2(A,B) A##B
@@ -109,7 +131,7 @@ Microchip or any third party.
 /**
  * @def JOIN
  * @brief Macro to concatenate two tokens using JOIN2.
- * 
+ *
  * This macro is a wrapper for JOIN2 to facilitate token concatenation.
  */
 #define JOIN(A,B) JOIN2(A,B)
@@ -118,7 +140,7 @@ Microchip or any third party.
     /**
      * @def MPROTO
      * @brief Macro to create a device-specific function prototype.
-     * 
+     *
      * This macro generates a function prototype that is specific to the
      * currently defined hardware version.
      */
@@ -127,7 +149,7 @@ Microchip or any third party.
     /**
      * @def MPROTO
      * @brief Macro to create a placeholder for unavailable implementations.
-     * 
+     *
      * This macro generates a function prototype indicating that the
      * implementation is not available for the selected device.
      */
@@ -136,4 +158,8 @@ Microchip or any third party.
 #endif
 /** @endcond **/
 
-#endif /* CAM_DEVICE_H */
+#endif // CAM_DEVICE_H
+
+/**
+ End of File
+*/

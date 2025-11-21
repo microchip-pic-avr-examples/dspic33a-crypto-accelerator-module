@@ -117,7 +117,10 @@ typedef enum AES_ERROR
 typedef enum AESCON_MODE
 {
     MODE_ECB  = 0,   /**< Electronic Codebook (ECB) mode */
+    MODE_CBC  = 1,   /**< Cipher Block Chaining (CBC) */
     MODE_CTR  = 2,   /**< Counter (CTR) mode */
+    MODE_CFB  = 3,   /**< Cipher Feedback (CFB) */
+    MODE_OFB  = 4,   /**< Output Feedback (OFB) */
     MODE_GCM  = 6,   /**< Galois Counter Mode (GCM) */
     MODE_XTS  = 7,   /**< XEX Tweakable Block Cipher (XTS) with Ciphertext Stealing (XTS-CS) */
     MODE_CMAC = 8,   /**< Cipher-based Message Authentication Code (CMAC) */
