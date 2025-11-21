@@ -15,8 +15,6 @@
 
   File created on 2025-11-19t14:02:58
 **************************************************************************/
-
-//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -39,7 +37,16 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-//DOM-IGNORE-END
+
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_device.h
+ * @defgroup  device DEVICE
+ * 
+ * @brief This header file defines supported devices by the CAM Hardware Driver.
+ *
+ */
 
 /**
  * Crypto Framework Library Source
@@ -103,7 +110,7 @@ Microchip or any third party.
          */
         #define CAM_HW_VERSION HSM_LITE_04777
 #elif __has_include("cam_device_ea.h")
-    #include "cam_device_ea.h"
+    #include "cam_device_ea.h"   
 #endif
 
 /* MISRA C:2012 Rule 20.10 deviation:
