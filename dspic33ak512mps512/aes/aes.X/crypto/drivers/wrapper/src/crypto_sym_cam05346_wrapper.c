@@ -97,6 +97,18 @@ static crypto_Sym_Status_E lCrypto_Sym_Hw_Aes_GetCipherMode(crypto_Sym_OpModes_E
             *mode = MODE_CTR;
             status = CRYPTO_SYM_CIPHER_SUCCESS;
             break;
+        case CRYPTO_SYM_OPMODE_CBC:
+            *mode = MODE_CBC;
+            status = CRYPTO_SYM_CIPHER_SUCCESS;
+            break;
+        case CRYPTO_SYM_OPMODE_CFB128:
+            *mode = MODE_CFB;
+            status = CRYPTO_SYM_CIPHER_SUCCESS;
+            break;
+        case CRYPTO_SYM_OPMODE_OFB:
+            *mode = MODE_OFB;
+            status = CRYPTO_SYM_CIPHER_SUCCESS;
+            break;
         case CRYPTO_SYM_OPMODE_XTS:
             *mode = MODE_XTS;
             status = CRYPTO_SYM_CIPHER_SUCCESS;
