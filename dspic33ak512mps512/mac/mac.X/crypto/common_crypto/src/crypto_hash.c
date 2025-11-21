@@ -68,15 +68,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
-<<<<<<< HEAD:dspic33ak512mps512/aes/aes.X/crypto/common_crypto/src/crypto_mac_cipher.c
-
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, crypto_HandlerType_E handlerType_en,
-                                              uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID)
-=======
 //SHA-1, SHA-2 and SHA-3 except SHAKE Algorithm
 crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, uint8_t *ptr_data, uint32_t dataLen,
                                                 uint8_t *ptr_digest, crypto_Hash_Algo_E shaAlgorithm_en,  uint32_t shaSessionId)
->>>>>>> f4082cc74a96711a7dedeaadcfc709a002d913e4:dspic33ak512mps512/mac/mac.X/crypto/common_crypto/src/crypto_hash.c
 {
  	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
 
@@ -101,11 +95,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, 
         switch(shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-<<<<<<< HEAD:dspic33ak512mps512/aes/aes.X/crypto/common_crypto/src/crypto_mac_cipher.c
-                ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Init((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_aesCmacCtx_st->ptr_key, keyLen);
-=======
                 ret_shaStat_en = Crypto_Hash_Hw_Sha_Digest((void*)ptr_data, dataLen, ptr_digest, shaAlgorithm_en);
->>>>>>> f4082cc74a96711a7dedeaadcfc709a002d913e4:dspic33ak512mps512/mac/mac.X/crypto/common_crypto/src/crypto_hash.c
                 break;
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
@@ -143,11 +133,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Init(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st,
                 ret_shaStat_en = Crypto_Hash_Hw_Sha_Init((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_shaCtx_st->shaAlgo_en);
                 break;
             default:
-<<<<<<< HEAD:dspic33ak512mps512/aes/aes.X/crypto/common_crypto/src/crypto_mac_cipher.c
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-=======
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
->>>>>>> f4082cc74a96711a7dedeaadcfc709a002d913e4:dspic33ak512mps512/mac/mac.X/crypto/common_crypto/src/crypto_hash.c
                 break;
         }
     }
@@ -174,11 +160,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Update(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_s
                 ret_shaStat_en = Crypto_Hash_Hw_Sha_Update((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_data, dataLen);
                 break;
             default:
-<<<<<<< HEAD:dspic33ak512mps512/aes/aes.X/crypto/common_crypto/src/crypto_mac_cipher.c
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-=======
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
->>>>>>> f4082cc74a96711a7dedeaadcfc709a002d913e4:dspic33ak512mps512/mac/mac.X/crypto/common_crypto/src/crypto_hash.c
                 break;
         }
     }
