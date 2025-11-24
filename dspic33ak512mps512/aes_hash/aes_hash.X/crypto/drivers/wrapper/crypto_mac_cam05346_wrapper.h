@@ -8,11 +8,11 @@
     crypto_mac_cam05346_wrapper.h
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware AES MAC.
+    Crypto Framework Library wrapper file for CAM hardware MAC.
 
   Description:
     This header file contains the wrapper interface to access the
-    AES MAC algorithms in the AES hardware driver for Microchip microcontrollers.
+    MAC (CMAC/HMAC) algorithms in the AES hardware driver for Microchip microcontrollers.
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -43,8 +43,13 @@ Microchip or any third party.
 #ifndef CRYPTO_MAC_CAM05346_WRAPPER_H
 #define	CRYPTO_MAC_CAM05346_WRAPPER_H
 
+#include <stdint.h>
+
+#include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 
+ 
+ 
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -65,7 +70,7 @@ typedef struct
 
 } CRYPTO_CMAC_HW_CONTEXT;
 
-
+ 
 // *****************************************************************************
 // *****************************************************************************
 // Section: MAC Algorithms Common Interface
@@ -82,6 +87,7 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t d
                                               uint8_t *ptr_outMac, uint32_t macLen,
                                               uint8_t *ptr_key, uint32_t keyLen);
 
+ 
 #ifdef	__cplusplus
 }
 #endif

@@ -77,6 +77,12 @@ typedef enum crypto_Int_Handler_Id {
     CRYPTO3_INT = 2,
 } crypto_Int_Handler_Id;
 
+typedef enum crypto_operation_Id {
+    ECDSA_SIGN = 0,
+    ECDSA_VERIFY = 1,
+    UNKNOWN_OPERATION = 2,
+} crypto_operation_Id;
+
 typedef void (*crypto_Int_Handler)(void);
 
 // *****************************************************************************
@@ -90,7 +96,7 @@ crypto_Int_Status_E Crypto_Int_Hw_Enable(crypto_Int_Handler_Id handlerID);
 crypto_Int_Status_E Crypto_Int_Hw_Disable(crypto_Int_Handler_Id handlerID);
 void CRYPTO3_SignOperationCompleteCallbackRegister(void (*handler)(void));
 void CRYPTO3_VerifyOperationCompleteCallbackRegister(void (*handler)(void));
-
+void CRYPTO3_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void));
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 

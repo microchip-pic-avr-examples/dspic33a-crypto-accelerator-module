@@ -8,11 +8,12 @@
     crypto_mac_cam05346_wrapper.c
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware AES MAC.
+    Crypto Framework Library wrapper file for CAM hardware MAC operations.
 
   Description:
     This source file contains the wrapper interface to access the
-    AES MAC algorithms in the AES hardware driver for Microchip microcontrollers.
+    MAC algorithms in the AES hardware driver for
+    Microchip microcontrollers.
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -67,6 +68,7 @@ static void lDRV_CRYPTO_AES_InterruptSetup(void)
     (void)Crypto_Int_Hw_Enable(CRYPTO1_INT);
 }
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: MAC Common Interface Implementation
@@ -76,9 +78,9 @@ static void lDRV_CRYPTO_AES_InterruptSetup(void)
 crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Init(void *cmacInitCtx, uint8_t *key, uint32_t keyLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the CMAC context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the CMAC context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -110,9 +112,9 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Init(void *cmacInitCtx, uint8_t *key, uin
 crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Cipher(void *cmacCipherCtx, uint8_t *inputData, uint32_t dataLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the CMAC context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the CMAC context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -137,9 +139,9 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Cipher(void *cmacCipherCtx, uint8_t *inpu
 crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Final(void *cmacFinalCtx, uint8_t *outputMac, uint32_t macLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the CMAC context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the CMAC context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -206,3 +208,5 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t d
     }
     return status;
 }
+ 
+ 

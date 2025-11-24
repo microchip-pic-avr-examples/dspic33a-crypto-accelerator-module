@@ -82,14 +82,15 @@ typedef struct
     uint32_t mackeyLen;
     uint8_t arr_macDataCtx[512]__attribute__((aligned (4)));
 }st_Crypto_Mac_Aes_ctx;
+
 // *****************************************************************************
 crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, crypto_HandlerType_E handlerType_en,
-                                              uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
+                                            uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
 crypto_Mac_Status_E Crypto_Mac_AesCmac_Cipher(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_inputData, uint32_t dataLen);
 
 crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_outMac, uint32_t macLen);
 
 crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(crypto_HandlerType_E macHandlerType_en, uint8_t *ptr_inputData, uint32_t dataLen,
-                                                uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
+                                              uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
 
 #endif /* CRYPTO_MAC_CIPHER_H */

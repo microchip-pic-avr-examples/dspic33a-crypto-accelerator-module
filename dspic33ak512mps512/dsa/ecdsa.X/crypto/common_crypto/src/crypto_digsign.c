@@ -210,7 +210,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_Start(crypto_HandlerType_E
 {
     crypto_DigiSign_Status_E ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_ALGONOTSUPPTD;
         
-    if(Crypto_DigiSign_Ecdsa_Sign_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
+    if(Crypto_DigiSign_Ecdsa_Verify_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS)
     {
         ret_ecdsaStat_en = CRYPTO_DIGISIGN_PKE_BUSY;
     }

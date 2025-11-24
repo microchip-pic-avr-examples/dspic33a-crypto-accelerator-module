@@ -25,7 +25,7 @@ LIBRARY_NAME = 'libcam05346-dspic33a.a'
 # Default CAM repo name and path.
 CRYPTO_CAM_LIBRARY_REPOSITORY_NAME = 'msec-driver-hsm-lite-cam'
 CRYPTO_CAM_LIBRARY_REPOSITORY_DEFAULT_PATH = os.path.join(LIBRARY_REPOSITORY_ROOT, CRYPTO_CAM_LIBRARY_REPOSITORY_NAME)
-CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/msec/msec-driver-hsm-lite-cam.git' 
+CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/~c71887/msec-driver-hsm-lite-cam.git' 
 
 APPS_ROOT = os.path.join('..', 'dspic33ak512mps512')
 CRYPTO_LIBRARY_PATH = os.path.join('crypto', 'drivers', 'library')

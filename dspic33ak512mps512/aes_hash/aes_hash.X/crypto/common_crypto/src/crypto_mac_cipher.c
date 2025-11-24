@@ -68,6 +68,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
 crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, crypto_HandlerType_E handlerType_en,
                                               uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID)
 {
@@ -95,7 +96,7 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCt
         switch(ptr_aesCmacCtx_st->macHandlerType_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-            	ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Init((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_aesCmacCtx_st->ptr_key, keyLen);
+                ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Init((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_aesCmacCtx_st->ptr_key, keyLen);
                 break;
             default:
                 ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
@@ -127,7 +128,7 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Cipher(st_Crypto_Mac_Aes_ctx *ptr_aesCmac
                 break;
             default:
                 ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-				break;
+                break;
         }
     }
     return ret_aesCmacStat_en;
@@ -153,7 +154,7 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(st_Crypto_Mac_Aes_ctx *ptr_aesCmacC
                 break;
             default:
                 ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-				break;
+                break;
         }
     }
     return ret_aesCmacStat_en;

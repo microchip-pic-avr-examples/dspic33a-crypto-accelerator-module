@@ -11,9 +11,9 @@
     Hardware abstraction layer header.
 
   Description:
-    This header file defined the functions and structures for the CAM ECDH
-    hardware driver for the following families of Microchip microcontrollers:
-    dsPIC33AK with Crypto Accelerator Module.
+    This header file defines the functions and structures for the CAM ECDH
+    driver for Microchip microcontrollers equipped with a Crypto Accelerator Module.
+
 **************************************************************************/
 
 /*
@@ -38,11 +38,22 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
+
+/**
+ * Crypto Framework Library Source
+ * 
+ * @file cam_ecdh.h
+ * @defgroup  ecdh ECDH
+ * 
+ * @brief This header file defines the functions and structures for the CAM ECDH driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
+ *
+ */
+ 
 #ifndef CAM_ECDH_H
 #define	CAM_ECDH_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -61,27 +72,36 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
     
+
 /**
- *  @brief Initialize the ECDH parameters used for Shared Secret generation.
- *  @param eccData Configuration structure to store ECDH information.
- *  @param privateKey Private Key input for Shared Secret generation.
- *  @param privateKeyLength Length of the private key.
- *  @param publicKey Public key input for Shared Secret generation.
- *  @param publicKeyLength Length of the private key.
- *  @param hwEccCurve ECC Curve used for generation.
- *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
- *  @note This function initializes eccData with ECDH parameters and sets up the Hardware Crypto Engine.
- **/
+ * @ingroup ecdh
+ * 
+ * This function initializes the ECDH parameters and sets up the Hardware Crypto Engine
+ * for the shared secret generation.
+ * 
+ * @param eccData Configuration structure to store ECDH information.
+ * @param privateKey Private key input for the shared secret generation.
+ * @param privateKeyLength Length of the private key.
+ * @param publicKey Public key input for the shared secret generation.
+ * @param publicKeyLength Length of the public key.
+ * @param hwEccCurve ECC curve used for the generation.
+ * @retval CRYPTO_PKE_RESULT_SUCCESS   Success.
+ * @retval CRYPTO_PKE_RESULT_ERROR_FAIL  ECC initialization failure.
+ */
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_InitEccParams(PKE_CONFIG *eccData, uint8_t *privateKey, 
         uint32_t privateKeyLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE hwEccCurve);
 
 /**
- *  @brief Generate the Shared Secret.
- *  @param eccData Configuration structure for ECDH information.
- *  @param secret Ouput to store the Shared Secret to.
- *  @param secretLength Length of the Shared Secret.
- *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
- **/
+ * @ingroup ecdh
+ * 
+ * This function generates the shared secret based on the initialized ECDH parameters.
+ * 
+ * @param eccData Configuration structure for the ECDH information.
+ * @param secret Output to store the shared secret.
+ * @param secretLength Length of the shared secret.
+ * @retval CRYPTO_PKE_RESULT_SUCCESS   Success.
+ * @retval CRYPTO_PKE_RESULT_ERROR_FAIL  Shared secret generation failure.
+ */
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_GetSharedSecret(PKE_CONFIG *eccData, uint8_t *secret, uint32_t secretLength);
 
 // *****************************************************************************
@@ -90,17 +110,49 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_GetSharedSecret(PKE_CONFIG *eccData, uint8_t *
 // *****************************************************************************
 // *****************************************************************************
 
-/** @cond INTERNAL **/
+/** @cond INTERNAL */
+/**
+ * @ingroup ecdh
+ * @brief Function prototype for initializing ECDH parameters.
+ * 
+ * This function is specific to the currently defined hardware version for initializing ECDH parameters for the shared secret generation.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDH_InitEccParams)(PKE_CONFIG *eccData, uint8_t *privateKey, 
-          uint32_t privateKeyLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE hwEccCurve);
+        uint32_t privateKeyLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE hwEccCurve);
+
+/**
+ * @ingroup ecdh
+ * @def DRV_CRYPTO_ECDH_InitEccParams
+ * @brief Macro to create a device-specific function prototype for initializing ECDH parameters.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for initializing ECDH parameters for the shared secret generation.
+ */
 #define DRV_CRYPTO_ECDH_InitEccParams MPROTO(DRV_CRYPTO_ECDH_InitEccParams)
 
+/**
+ * @ingroup ecdh
+ * @brief Function prototype for generating shared secret.
+ * 
+ * This function is specific to the currently defined hardware version for generating the shared secret.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)(PKE_CONFIG *eccData, uint8_t *secret, uint32_t secretLength);
+
+/**
+ * @ingroup ecdh
+ * @def DRV_CRYPTO_ECDH_GetSharedSecret
+ * @brief Macro to create a device-specific function prototype for generating shared secret.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for generating the shared secret.
+ */
 #define DRV_CRYPTO_ECDH_GetSharedSecret MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)
-/** @endcond **/
-  
-#ifdef	__cplusplus
-}
+/** @endcond */
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_ECDH_H */

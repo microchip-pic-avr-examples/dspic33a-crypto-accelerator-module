@@ -51,8 +51,8 @@ Microchip or any third party.
 #ifndef CAM_PKE_H
 #define	CAM_PKE_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
     
 // *****************************************************************************
@@ -193,12 +193,6 @@ void DRV_CRYPTO_PKE_ClearMemory(void);
 void DRV_CRYPTO_PKE_SetupEngine(void);
 
 /**
- *  @brief Returns status if the engine has been setup.
- *  @return returns true if the engine is setup, false if it is not.
- **/
-bool DRV_CRYPTO_PKE_IsEngineSetup(void);
-
-/**
  *  @brief Non-blocking of the clear memory function.
  **/
 void DRV_CRYPTO_PKE_ClearMemory_NoWait(void);
@@ -207,7 +201,7 @@ void DRV_CRYPTO_PKE_ClearMemory_NoWait(void);
  *  @brief Gets the operation type that was previously set.
  *  @return returns CRYPTO_PKE_OPERATION_VERIFY or CRYPTO_PKE_OPERATION_SIGN based on the operation completed.
  **/
-PKE_OPERATION_TYPE DRV_CRYPTO_PKE_GetOperationCompleted(void);
+PKE_OPERATION_TYPE DRV_CRYPTO_PKE_OperationCompleteGet(void);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -281,27 +275,6 @@ void MPROTO(DRV_CRYPTO_PKE_SetupEngine)(void);
 
 /**
  * @ingroup pke
- * @brief Function prototype for the PKE Is Engine Setup.
- * 
- * This function is specific to the currently defined hardware version for the PKE is engine setup.
- * If the hardware version is not defined, this function will not be available.
- */
-bool MPROTO(DRV_CRYPTO_PKE_IsEngineSetup)(void);
-
-/**
- * @ingroup pke
- * @def DRV_CRYPTO_PKE_IsEngineSetup
- * @brief Macro to create a device-specific function prototype.
- * 
- * This macro generates a function prototype that is specific to the
- * currently defined hardware version. It allows the creation of
- * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
- */
-#define DRV_CRYPTO_PKE_IsEngineSetup MPROTO(DRV_CRYPTO_PKE_IsEngineSetup)
-
-/**
- * @ingroup pke
  * @brief Function prototype for the PKE Clear Memory No Wait.
  * 
  * This function is specific to the currently defined hardware version for the PKE clear memory no wait.
@@ -321,10 +294,30 @@ void MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)(void);
  */
 #define DRV_CRYPTO_PKE_ClearMemory_NoWait MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)
 
-/** @endcond **/
-#ifdef	__cplusplus
-}
+/**
+ * @ingroup pke
+ * @brief Function prototype for the PKE Clear Memory No Wait.
+ * 
+ * This function is specific to the currently defined hardware version for the PKE clear memory no wait.
+ * If the hardware version is not defined, this function will not be available.
+ */
+PKE_OPERATION_TYPE MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)(void);
+
+/**
+ * @ingroup pke
+ * @def DRV_CRYPTO_PKE_OperationCompleteGet
+ * @brief Macro to create a device-specific function prototype.
+ * 
+ * This macro generates a function prototype that is specific to the
+ * currently defined hardware version. It allows the creation of
+ * device-specific implementations of the PKE functions based on the
+ * defined CAM hardware version.
+ */
+#define DRV_CRYPTO_PKE_OperationCompleteGet MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)
+/** @endcond */
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_PKE_H */
-
