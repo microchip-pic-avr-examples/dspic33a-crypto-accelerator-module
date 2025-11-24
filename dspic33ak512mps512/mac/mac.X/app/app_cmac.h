@@ -37,20 +37,18 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef APP_MAC_H
-#define	APP_MAC_H
+#ifndef APP_CMAC_H
+#define	APP_CMAC_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-#define RUN_MAC_CMAC_TEST
-
-void aes_mac_cmac_test(void);
+void mac_cmac_test(void);
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* APP_MAC_H */
+#endif	/* APP_CMAC_H */
 

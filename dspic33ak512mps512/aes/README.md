@@ -5,20 +5,23 @@
 </picture>
 
 # Crypto Accelerator Module AES Example Application
-- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document.
 
 ## Description
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform AES encryption operations using different sized input vectors. The following AES algorithms are supported:
 - ECB
 - CTR
+- CBC
+- CFB128
+- OFB
 - CMAC
 - GCM
 - XTS
 
 ## Software Tool Versions
-- dsPIC33AK-MP_DEV_DFP v1.0.81
+- dsPIC33AK-MP_DEV_DFP v1.1.124
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+- MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -36,7 +39,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
 ## Application Results
-### AES ECB, CTR Results
+### AES ECB, CTR, CBC, CFB128, OFB Results
 The following information will be printed on the COM port for symmetric AES algorithms:
 1. A header is displayed showing the used AES algorithm and input data length.
 2. The key data is printed out.
@@ -61,24 +64,6 @@ The following information will be printed on the COM port for symmetric AES algo
     1. Pass or Fail is printed out depending on the comparison result.
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_sym_demo.png" alt="AES Symmetric Demo Output" width="750"/>
-
-### AES MAC
-The following information will be printed on the COM port for AES MAC algorithms:
-1. A header is displayed showing the used AES MAC algorithm and input message length.
-2. The MAC is generated using the single-step API.
-    1. The key data is printed out.
-    2. The input data is printed out.
-    3. The MAC is printed out.
-    4. The result MAC and expected MAC are compared.
-    5. Pass or Fail is printed out depending on the comparison result.
-3. The MAC is generated using the multi-step API.
-    1. The key data is printed out.
-    2. The input data is printed out.
-    3. The MAC is printed out.
-    4. The result MAC and expected MAC are compared.
-    5. Pass or Fail is printed out depending on the comparison result.
-
-<img src="./images/dspic33ak512mps512_ccv4_aes_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
 
 ### AES GCM Results
 The following information will be printed on the COM port for the AES AEAD algorithms:
@@ -199,7 +184,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_EncryptDirect(
 ```c
 crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(
     crypto_HandlerType_E handlerType_en,   // configure Crypto API to use hardware acceleration
-    crypto_Sym_OpModes_E opMode_en,        // configure type of AES algorithm 
+    crypto_Sym_OpModes_E opMode_en,        // configure type of AES algorithm
     uint8_t *ptr_inputData,                // pointer to the encrypted input data array to be decrypted
     uint32_t dataLen,                      // length of the encrypted input data array
     uint8_t *ptr_outData,                  // pointer to the data array for decrypted output to be stored
@@ -207,49 +192,6 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(
     uint32_t keyLen,                       // length of the key data array
     uint8_t *ptr_initVect,                 // pointer to the initialization vector data array to be used
     uint32_t sessionID                     // session ID for use by Crypto API (maximum of 1)
-);      
-```
-
-
-### AES MAC APIs
-crypto_mac_cipher.h defines Init, Cipher, Final, and Direct APIs.
-
-```c
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(
-    st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st,   // CMAC context structure used to store values
-    crypto_HandlerType_E handlerType_en,        // configure Crypto API to use hardware acceleration
-    uint8_t *ptr_key,                           // pointer to the key data array to be used
-    uint32_t keyLen,                            // length of the key data array
-    uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
-);
-```    
-
-```c
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Cipher(
-    st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st,   // CMAC context structure used to store values
-    uint8_t *ptr_inputData,                     // pointer to the input message to generate CMAC with
-    uint32_t dataLen                            // length of the input message
-);
-```
-
-```c
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(
-    st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st,   // CMAC context structure used to store values
-    uint8_t *ptr_outMac,                        // output pointer to generate the CMAC to
-    uint32_t macLen                             // length of the requested CMAC
-);
-```
-
-```c
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(
-    crypto_HandlerType_E macHandlerType_en,     // configure Crypto API to use hardware acceleration
-    uint8_t *ptr_inputData,                     // pointer to the input message to generate CMAC with
-    uint32_t dataLen,                           // length of the input message
-    uint8_t *ptr_outMac,                        // output pointer to generate the CMAC to
-    uint32_t macLen,                            // length of the requested CMAC
-    uint8_t *ptr_key,                           // pointer to the key data array to be used
-    uint32_t keyLen,                            // length of the key data array
-    uint32_t sessionID                          // session ID for use by the Crypto API (maximum of 1)
 );
 ```
 
@@ -359,6 +301,45 @@ The following benchmarking results were obtained with the device clock speed set
 |24|16|8,192|372.18|
 |32|16|8,192|324.96|
 
+#### AES-CBC
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CBC Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.64|
+|24|16|8,192|372.27|
+|32|16|8,192|325.02|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CBC Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|434.49|
+|24|16|8,192|371.47|
+|32|16|8,192|324.35|
+
+#### AES-CFB128
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.29|
+|24|16|8,192|372.14|
+|32|16|8,192|324.92|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.24|
+|24|16|8,192|372.10|
+|32|16|8,192|324.89|
+
+#### AES-OFB
+|Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-OFB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.29|
+|24|16|8,192|372.14|
+|32|16|8,192|324.92|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-OFB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
+|----|----|----|----|
+|16|16|8,192|435.24|
+|24|16|8,192|372.10|
+|32|16|8,192|324.89|
+
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
@@ -383,15 +364,8 @@ The following benchmarking results were obtained with the device clock speed set
 |16|16|8,192|429.20|
 |32|16|8,192|321.13|
 
-#### AES-CMAC
-|Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
-|----|----|----|----|
-|16|8,192|16|21.56|
-|24|8,192|16|21.41|
-|32|8,192|16|21.13|
-
 ### Memory Size Benchmarking
-The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash size will vary based on size of the stored data inputs used with the library. 
+The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.
 
 #### Single Step
 
@@ -399,9 +373,11 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|58|11,788|
 |AES-CTR|58|11,828|
+|AES-CBC|62|12,312|
+|AES-CFB128|62|12,312|
+|AES-OFB|62|12,312|
 |AES-GCM|58|12,204|
 |AES-XTS|58|11,828|
-|AES-CMAC|58|10,736|
 
 #### Multi Step
 
@@ -409,9 +385,11 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |----|----|----|
 |AES-ECB|2,006|11,852|
 |AES-CTR|2,006|11,896|
+|AES-CBC|2,010|12,380|
+|AES-CFB128|2,010|12,380|
+|AES-OFB|2,010|12,380|
 |AES-GCM|598|12,328|
 |AES-XTS|2,006|11,896|
-|AES-CMAC|586|10,792|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

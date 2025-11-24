@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    crypto_mac_cipher.h
+    crypto_common.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -41,56 +41,79 @@
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
 
-#ifndef CRYPTO_MAC_CIPHER_H
-#define CRYPTO_MAC_CIPHER_H
+#ifndef CRYPTO_COMMON_H
+#define CRYPTO_COMMON_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-#include "crypto_common.h"
 
-typedef enum
-{
-    CRYPTO_MAC_ERROR_CIPNOTSUPPTD = -127,
-    CRYPTO_MAC_ERROR_CTX = -126,
-    CRYPTO_MAC_ERROR_KEY = -125,
-    CRYPTO_MAC_ERROR_HDLR = -124,
-    CRYPTO_MAC_ERROR_INPUTDATA = -123,
-    CRYPTO_MAC_ERROR_MACDATA = -122,
-    CRYPTO_MAC_ERROR_CIPOPER = -121,
-    CRYPTO_MAC_ERROR_SID = -120,  ////session ID Error
-    CRYPTO_MAC_ERROR_ARG = -119,
-    CRYPTO_MAC_ERROR_CIPFAIL = -118,
-    CRYPTO_MAC_ERROR_IV = -117,
-    CRYPTO_MAC_ERROR_AAD = -116,
-    CRYPTO_MAC_ERROR_HASHTYPE = -115,
-    CRYPTO_MAC_CIPHER_SUCCESS = 0,
-}crypto_Mac_Status_E;
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+//******************************************************************************
+#define CRYPTO_ECC_MAX_KEY_LENGTH (66) //Max size of Private key; Public Key will be double of it for ECC
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-typedef struct
+typedef enum {
+	CRYPTO_HANDLER_INVALID = 0,
+	CRYPTO_HANDLER_HW_INTERNAL = 1,     //Enum used when HW crypto engine is used
+#ifdef CRYPTO_WOLFCRYPT_SUPPORT_ENABLE            
+	CRYPTO_HANDLER_SW_WOLFCRYPT = 2,    //Enum used when SW library Wolfssl is used
+#endif /* CRYPTO_WOLFCRYPT_SUPPORTED */            
+	CRYPTO_HANDLER_MAX
+}crypto_HandlerType_E;
+
+//This needs to be taken care when no using any AES algorithm variant
+typedef enum
 {
-    uint32_t cryptoSessionID;
-    crypto_HandlerType_E macHandlerType_en;
-    uint8_t *ptr_key;
-    uint32_t mackeyLen;
-    uint8_t arr_macDataCtx[512]__attribute__((aligned (4)));
-}st_Crypto_Mac_Aes_ctx;
+    CRYPTO_AESKEYSIZE_128 = 16, //Enum used for AES key size of 128 bits
+    CRYPTO_AESKEYSIZE_192 = 24, //Enum used for AES key size of 192 bits
+    CRYPTO_AESKEYSIZE_256 = 32  //Enum used for AES key size of 256 bits        
+}crypto_AesKeySize_E;
+
+//This needs to be taken care when no using any Sym or Asym algorithm variant
+typedef enum
+{
+    CRYPTO_CIOP_INVALID = 0,    //INVALID to define Min. range for Enum
+    CRYPTO_CIOP_ENCRYPT = 1,    //Enum used for Encryption cipher operation
+    CRYPTO_CIOP_DECRYPT = 2,    //Enum used for Decryption cipher operation
+    CRYPTO_CIOP_MAX,            //Max. to check Enum value range
+}crypto_CipherOper_E;
+
+/* Curve Types */
+typedef enum 
+{
+    CRYPTO_ECC_CURVE_INVALID = 0,
+
+    /* Prime Curves */
+    
+    //Weierstrass Curves
+    CRYPTO_ECC_CURVE_P192 = 1,        
+    CRYPTO_ECC_CURVE_SECP192R1 = 1, //also called as NIST P-192 or prime192v1 
+    
+    CRYPTO_ECC_CURVE_P224 = 2,
+    CRYPTO_ECC_CURVE_SECP224R1 = 2,
+     
+    CRYPTO_ECC_CURVE_P256 = 3,        
+    CRYPTO_ECC_CURVE_SECP256R1 = 3, //also called as NIST P-256 or prime256v1
+
+    CRYPTO_ECC_CURVE_P384 = 4,
+    CRYPTO_ECC_CURVE_SECP384R1 = 4, //also called as NIST P-384
+            
+    CRYPTO_ECC_CURVE_P521 = 5,
+    CRYPTO_ECC_CURVE_SECP521R1 = 5,        
+          
+    /* Twisted Edwards Curves */
+
+    CRYPTO_ECC_CURVE_MAX
+}crypto_EccCurveType_E;
 
 // *****************************************************************************
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, crypto_HandlerType_E handlerType_en,
-                                            uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Cipher(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_inputData, uint32_t dataLen);
-
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_outMac, uint32_t macLen);
-
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(crypto_HandlerType_E macHandlerType_en, uint8_t *ptr_inputData, uint32_t dataLen,
-                                              uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
-
-#endif /* CRYPTO_MAC_CIPHER_H */
+#endif //CRYPTO_COMMON_H

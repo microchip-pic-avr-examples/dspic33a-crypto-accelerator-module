@@ -25,13 +25,14 @@ LIBRARY_NAME = 'libcam05346-dspic33a.a'
 # Default CAM repo name and path.
 CRYPTO_CAM_LIBRARY_REPOSITORY_NAME = 'msec-driver-hsm-lite-cam'
 CRYPTO_CAM_LIBRARY_REPOSITORY_DEFAULT_PATH = os.path.join(LIBRARY_REPOSITORY_ROOT, CRYPTO_CAM_LIBRARY_REPOSITORY_NAME)
-CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/~c71887/msec-driver-hsm-lite-cam.git' 
+CRYPTO_CAM_LIBRARY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/msec/msec-driver-hsm-lite-cam.git'
 
 APPS_ROOT = os.path.join('..', 'dspic33ak512mps512')
 CRYPTO_LIBRARY_PATH = os.path.join('crypto', 'drivers', 'library')
 
 HASH_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'hash', 'sha.X', CRYPTO_LIBRARY_PATH)
 AES_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'aes', 'aes.X', CRYPTO_LIBRARY_PATH)
+MAC_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'mac', 'mac.X', CRYPTO_LIBRARY_PATH)
 ECDSA_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'dsa', 'ecdsa.X', CRYPTO_LIBRARY_PATH)
 ECDH_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'ecdh', 'ecdh.X', CRYPTO_LIBRARY_PATH)
 TRNG_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'trng', 'trng.X', CRYPTO_LIBRARY_PATH)
@@ -40,6 +41,7 @@ AES_HASH_CRYPTO_LIBDIR = os.path.join(APPS_ROOT, 'aes_hash', 'aes_hash.X', CRYPT
 # Header files associated with each project.
 LIB_COPIES = [('sha', HASH_CRYPTO_LIBDIR, ['version', 'hash', 'device']),
               ('aes', AES_CRYPTO_LIBDIR, ['version', 'aes', 'device']),
+              ('mac', MAC_CRYPTO_LIBDIR, ['version', 'aes', 'hash', 'device']),
               ('dsa', ECDSA_CRYPTO_LIBDIR, ['version', 'ecdsa', 'pke', 'device']),
               ('ecdh', ECDH_CRYPTO_LIBDIR, ['version', 'ecdh', 'pke', 'device']),
               ('trng', TRNG_CRYPTO_LIBDIR, ['version', 'trng', 'device']),

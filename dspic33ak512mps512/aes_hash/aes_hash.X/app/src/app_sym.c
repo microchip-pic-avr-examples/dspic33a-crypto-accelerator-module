@@ -132,6 +132,18 @@ static const char *getTestOpMode(crypto_Sym_OpModes_E opMode)
         case CRYPTO_SYM_OPMODE_CTR:
             opModeStr = "AES-CTR";
             break;
+            
+        case CRYPTO_SYM_OPMODE_CBC:
+            opModeStr = "AES-CBC";
+            break;
+            
+        case CRYPTO_SYM_OPMODE_CFB128:
+            opModeStr = "AES-CFB128";
+            break;
+            
+        case CRYPTO_SYM_OPMODE_OFB:
+            opModeStr = "AES-OFB";
+            break;
 
         case CRYPTO_SYM_OPMODE_XTS:
             opModeStr = "AES-XTS";
@@ -296,6 +308,33 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
             context->tests = (uint8_t *)get_ctr_test_vectors();
             context->testCount = get_ctr_test_vector_count();
             testContext->opMode = CRYPTO_SYM_OPMODE_CTR;
+        }
+        break;
+        
+        case SYM_OPER_MODE_AES_CBC:
+        {
+            context->states = sym_test_states;
+            context->tests = (uint8_t *)get_cbc_test_vectors();
+            context->testCount = get_cbc_test_vector_count();
+            testContext->opMode = CRYPTO_SYM_OPMODE_CBC;
+        }
+        break;
+        
+        case SYM_OPER_MODE_AES_CFB128:
+        {
+            context->states = sym_test_states;
+            context->tests = (uint8_t *)get_cfb128_test_vectors();
+            context->testCount = get_cfb128_test_vector_count();
+            testContext->opMode = CRYPTO_SYM_OPMODE_CFB128;
+        }
+        break;
+        
+        case SYM_OPER_MODE_AES_OFB:
+        {
+            context->states = sym_test_states;
+            context->tests = (uint8_t *)get_ofb_test_vectors();
+            context->testCount = get_ofb_test_vector_count();
+            testContext->opMode = CRYPTO_SYM_OPMODE_OFB;
         }
         break;
 

@@ -7,7 +7,7 @@
  *
  * @brief     This is the generated driver source file for TRAPS driver
  *
- * @skipline @version   PLIB Version 1.1.0
+ * @skipline @version   PLIB Version 1.1.2
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
@@ -99,7 +99,107 @@ inline static void use_failsafe_stack(void)
     /* Controls where the stack pointer limit is, relative to the end of the
      * failsafe stack
      */
+    /* cppcheck-suppress misra-c2012-11.4
+    * Assigning stack pointer address location
+    */
+    /* cppcheck-suppress misra-c2012-18.4
+    * Assigning stack pointer address location
+    */
     SPLIM = (uint32_t)(((uint8_t *)failsafe_stack) + sizeof(failsafe_stack) - (uint32_t) FAILSAFE_STACK_GUARDSIZE);
+}
+
+/** Bus error trap**/
+void ERROR_HANDLER _BusErrorTrap(void)
+{
+    if(INTCON3bits.CPUBET == 1)
+    {
+      INTCON3bits.CPUBET = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_CPU_BUS_ERR);
+    }
+
+    if(INTCON3bits.XRAMBET == 1)
+    {
+      INTCON3bits.XRAMBET = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_XRAM_BUS_ERR);
+    }
+
+    if(INTCON3bits.DMABET == 1)
+    {
+      INTCON3bits.DMABET = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_DMA_BUS_ERR);
+    }
+
+    if(INTCON3bits.YRAMBET == 1)
+    {
+      INTCON3bits.YRAMBET = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_YRAM_BUS_ERR);
+    }
+
+    while(1)
+    {
+    }
+}
+
+/** Math error trap**/
+void ERROR_HANDLER _MathErrorTrap(void)
+{
+    if(INTCON4bits.OVATE == 1)
+    {
+      INTCON4bits.OVATE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_OVAT_ERR);
+    }
+
+    if(INTCON4bits.SFTACERR == 1)
+    {
+      INTCON4bits.SFTACERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_SFTAC_ERR);
+    }
+
+    if(INTCON4bits.OVBERR == 1)
+    {
+      INTCON4bits.OVBERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_OVB_ERR);
+    }
+
+    if(INTCON4bits.DIV0ERR == 1)
+    {
+      INTCON4bits.DIV0ERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_DIV0_ERR);
+    }
+
+    if(INTCON4bits.COVBERR == 1)
+    {
+      INTCON4bits.COVBERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_COVB_ERR);
+    }
+
+    if(INTCON4bits.COVTE == 1)
+    {
+      INTCON4bits.COVTE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_COVT_ERR);
+    }
+
+    if(INTCON4bits.OVBTE == 1)
+    {
+      INTCON4bits.OVBTE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_OVBT_ERR);
+    }
+
+    if(INTCON4bits.OVAERR == 1)
+    {
+      INTCON4bits.OVAERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_OVA_ERR);
+    }
+
+    if(INTCON4bits.COVAERR == 1)
+    {
+      INTCON4bits.COVAERR = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_COVA_ERR);
+    }
+
+    while(1)
+    {
+    }
 }
 
 /** Address error trap**/
@@ -112,15 +212,39 @@ void ERROR_HANDLER _AddressErrorTrap(void)
 /** General error trap**/
 void ERROR_HANDLER _GeneralTrap(void)
 {
-    INTCON5bits.SOFT = 0;  //Clear the trap flag
-    TRAPS_halt_on_error(TRAPS_GEN_ERR);
-}
+    if(INTCON5bits.XPWBDED == 1)
+    {
+      INTCON5bits.XPWBDED = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_XPWBDED_ERR);
+    }
 
-/** Math error trap**/
-void ERROR_HANDLER _MathErrorTrap(void)
-{
-    INTCON4bits.DIV0ERR = 0;  //Clear the trap flag
-    TRAPS_halt_on_error(TRAPS_DIV0_ERR);
+    if(INTCON5bits.DMTE == 1)
+    {
+      INTCON5bits.DMTE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_DMT_ERR);
+    }
+
+    if(INTCON5bits.SOFT == 1)
+    {
+      INTCON5bits.SOFT = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_GEN_ERR);
+    }
+
+    if(INTCON5bits.YPWBDED == 1)
+    {
+      INTCON5bits.YPWBDED = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_YPWBDED_ERR);
+    }
+
+    if(INTCON5bits.WDTE == 1)
+    {
+      INTCON5bits.WDTE = 0;  //Clear the trap flag
+      TRAPS_halt_on_error(TRAPS_WDT_ERR);
+    }
+
+    while(1)
+    {
+    }
 }
 
 /** Stack error trap**/

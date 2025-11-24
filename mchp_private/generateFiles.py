@@ -32,6 +32,7 @@ CRYPTO_FIRMWARE_PATH = os.path.join('crypto')
 
 HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'hash', 'sha.X', CRYPTO_FIRMWARE_PATH)
 AES_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes', 'aes.X', CRYPTO_FIRMWARE_PATH)
+MAC_CRYPTO_DIR = os.path.join(APPS_ROOT, 'mac', 'mac.X', CRYPTO_FIRMWARE_PATH)
 ECDSA_CRYPTO_DIR = os.path.join(APPS_ROOT, 'dsa', 'ecdsa.X', CRYPTO_FIRMWARE_PATH)
 ECDH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'ecdh', 'ecdh.X', CRYPTO_FIRMWARE_PATH)
 TRNG_CRYPTO_DIR = os.path.join(APPS_ROOT, 'trng', 'trng.X', CRYPTO_FIRMWARE_PATH)
@@ -39,7 +40,8 @@ AES_HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes_hash', 'aes_hash.X', CRYPTO_F
 
 # Format of each entry is a quadruple: (project-name, target-dir, [list-of-common-crypto-files], [list-of-cam-files])
 FILE_COPIES = [('hash', HASH_CRYPTO_DIR, ['hash'], ['hash_cam', 'cam']),
-               ('aes', AES_CRYPTO_DIR, ['sym_cipher', 'mac_cipher', 'aead_cipher'], ['sym_cam', 'mac_cam', 'aead_cam', 'cam']),
+               ('aes', AES_CRYPTO_DIR, ['sym_cipher', 'aead_cipher'], ['sym_cam', 'aead_cam', 'cam']),
+               ('mac', MAC_CRYPTO_DIR, ['hash', 'aead_cipher', 'mac_cipher'], ['hash_cam', 'aead_cam', 'mac_cam', 'cam']),
                ('dsa', ECDSA_CRYPTO_DIR, ['digsign'], ['digisign_cam', 'cam']),
                ('ecdh', ECDH_CRYPTO_DIR, ['kas'], ['kas_cam', 'cam']),
                ('trng', TRNG_CRYPTO_DIR, ['rng'], ['rng_cam', 'cam']),
@@ -216,7 +218,11 @@ def generate_files(options):
                         '-O', os.path.join(curdir, OUTPUT_ROOT)]
                     ]
 
-            run_commands(FMPP_CMD)
+            try:
+                run_commands(FMPP_CMD)
+            except Exception as e:
+                print(str(e))
+                result = False
 
     except Exception as ex:
         print(RED + f"\nFailed to clone repository: {str(ex)}" + NORMAL)
@@ -321,7 +327,7 @@ if __name__ == "__main__":
 
             if not os.path.exists(os.path.join(options.repository, '.git')):
                 parser.error(f"Unable to locate repository at '{options.repository}'")
-        
+
             if not os.path.exists(options.repository):
                 parser.error(f"No repository found at {options.repository}")
         else:
