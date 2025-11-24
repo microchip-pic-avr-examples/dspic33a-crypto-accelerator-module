@@ -50,7 +50,7 @@ Microchip or any third party.
 #include <stddef.h>
 #include <xc.h>
 #include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
-#include "crypto/drivers/library/cam_pke.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Functions
@@ -96,6 +96,7 @@ void __attribute__((interrupt)) _CRYPTO2Interrupt(void)
 
 static void (*CRYPTO3_SignOperationCompleteHandler)(void);
 static void (*CRYPTO3_VerifyOperationCompleteHandler)(void);
+static crypto_operation_Id (*CRYPTO3_OperationTypeHandler)(void);
 
 void __attribute__((interrupt)) _CRYPTO3Interrupt(void)
 {
@@ -103,15 +104,17 @@ void __attribute__((interrupt)) _CRYPTO3Interrupt(void)
     {
         cryptoIntHandlers.handlers[CRYPTO3_INT]();
     }
-    
-    if (CRYPTO3_SignOperationCompleteHandler != NULL && DRV_CRYPTO_PKE_GetOperationCompleted() == CRYPTO_PKE_OPERATION_SIGN)
+    if(CRYPTO3_OperationTypeHandler != NULL)
     {
-        (*CRYPTO3_SignOperationCompleteHandler)();
-    }
-    
-    if (CRYPTO3_VerifyOperationCompleteHandler != NULL && DRV_CRYPTO_PKE_GetOperationCompleted() == CRYPTO_PKE_OPERATION_VERIFY)
-    {
-        (*CRYPTO3_VerifyOperationCompleteHandler)();
+        if ((CRYPTO3_SignOperationCompleteHandler != NULL) && (CRYPTO3_OperationTypeHandler() == ECDSA_SIGN))
+        {
+            (*CRYPTO3_SignOperationCompleteHandler)();
+        }
+
+        if ((CRYPTO3_VerifyOperationCompleteHandler != NULL) && (CRYPTO3_OperationTypeHandler() == ECDSA_VERIFY))
+        {
+            (*CRYPTO3_VerifyOperationCompleteHandler)();
+        }
     }
     
     _CRYPT3IF = 0;
@@ -130,6 +133,14 @@ void CRYPTO3_VerifyOperationCompleteCallbackRegister(void (*handler)(void))
     if (NULL != handler)
     {
        CRYPTO3_VerifyOperationCompleteHandler = handler;
+    }
+}
+
+void CRYPTO3_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void))
+{
+    if (NULL != handler)
+    {
+       CRYPTO3_OperationTypeHandler  = handler;
     }
 }
 

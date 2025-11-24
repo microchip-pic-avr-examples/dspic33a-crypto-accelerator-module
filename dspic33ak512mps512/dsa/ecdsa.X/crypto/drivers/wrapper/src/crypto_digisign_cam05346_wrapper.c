@@ -140,9 +140,7 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_MapResult(CRYPTO_PKE_RE
 
 static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_Status(void)
 {    
-    if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-            DRV_CRYPTO_PKE_SetupEngine();
-    }
+    DRV_CRYPTO_PKE_SetupEngine();
     
     CRYPTO_PKE_RESULT hwStatus = DRV_CRYPTO_ECDSA_GetStatus();
     crypto_DigiSign_Status_E status;
@@ -163,6 +161,27 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_Status(void)
     return status;
 }
 
+crypto_operation_Id Crypto_DigSign_Ecdsa_Operation(void)
+{    
+    PKE_OPERATION_TYPE operationType = DRV_CRYPTO_PKE_OperationCompleteGet();
+    crypto_operation_Id output = UNKNOWN_OPERATION;
+    
+    switch(operationType)
+    {
+        case CRYPTO_PKE_OPERATION_VERIFY:
+            output = ECDSA_VERIFY;
+            break;
+        case CRYPTO_PKE_OPERATION_SIGN:
+            output = ECDSA_SIGN;
+            break;
+        default:
+            output = UNKNOWN_OPERATION;
+            break;
+    }
+
+    return output;
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: DigSign Common Interface Implementation
@@ -176,6 +195,8 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign(uint8_t *inputHash,
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     PKE_CONFIG eccData;
+    
+    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
 
     /* Get curve */
     hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
@@ -206,6 +227,8 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify(uint8_t *inputHash,
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     PKE_CONFIG eccData;
+    
+    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
 
     /* Get curve */
     hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
@@ -258,14 +281,14 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign_Start(uint8_t *inputHash,
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
+    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    
     if(currentState == CRYPTO_PROCESS_STARTED){
        hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;
     }
     else
     {
-        if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-            DRV_CRYPTO_PKE_SetupEngine();
-        }
+        DRV_CRYPTO_PKE_SetupEngine();
 
         /* Get curve */
         hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
@@ -292,14 +315,14 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify_Start(uint8_t * inputHa
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
+    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    
     if(currentState == CRYPTO_PROCESS_STARTED){
        hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;
     }
     else
     {
-        if (!DRV_CRYPTO_PKE_IsEngineSetup()){
-            DRV_CRYPTO_PKE_SetupEngine();
-        }
+        DRV_CRYPTO_PKE_SetupEngine();
 
         /* Get curve */
         hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);

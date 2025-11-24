@@ -50,8 +50,8 @@ Microchip or any third party.
 #ifndef CAM_ECDSA_H
 #define	CAM_ECDSA_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -274,27 +274,107 @@ CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify)(PKE_CONFIG *eccData);
  */
 #define DRV_CRYPTO_ECDSA_Verify MPROTO(DRV_CRYPTO_ECDSA_Verify)
 
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for generating ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Sign_Start)(uint8_t *inputHash, uint32_t hashLength, uint8_t *privateKey, uint32_t privateKeyLength, 
         PKE_ECC_CURVE eccCurve);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Sign_Start
+ * @brief Macro to create a device-specific function prototype for signing ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
 #define DRV_CRYPTO_ECDSA_Sign_Start MPROTO(DRV_CRYPTO_ECDSA_Sign_Start)
 
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for verifying ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify_Start)(uint8_t *inputHash, uint32_t hashLength, uint8_t *inputSignature,
         uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE eccCurve);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Verify_Start
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
 #define DRV_CRYPTO_ECDSA_Verify_Start MPROTO(DRV_CRYPTO_ECDSA_Verify_Start)
 
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for generating ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Sign_GetResult)(uint8_t *outputSignature, uint32_t signatureLength);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Sign_GetResult
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
 #define DRV_CRYPTO_ECDSA_Sign_GetResult MPROTO(DRV_CRYPTO_ECDSA_Sign_GetResult)
 
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for verifying ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify_GetResult)(void);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Verify_GetResult
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
 #define DRV_CRYPTO_ECDSA_Verify_GetResult MPROTO(DRV_CRYPTO_ECDSA_Verify_GetResult)
 
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for ECDSA status.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
 CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_GetStatus)(void);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_GetStatus
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
 #define DRV_CRYPTO_ECDSA_GetStatus MPROTO(DRV_CRYPTO_ECDSA_GetStatus)
 
 /** @endcond **/
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_ECDSA_H */
