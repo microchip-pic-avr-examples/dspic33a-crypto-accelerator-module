@@ -1,19 +1,15 @@
-/**************************************************************************
-  Crypto Framework Library Source
+/*******************************************************************************
+  Main Source File
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    crypto_mac_cam05346_wrapper.h
+    main.c
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware MAC.
-
-  Description:
-    This header file contains the wrapper interface to access the
-    MAC (CMAC/HMAC) algorithms in the AES hardware driver for Microchip microcontrollers.
-**************************************************************************/
+    This source file starts the application to demonstrate AES encryption.
+ *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
@@ -40,57 +36,56 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef CRYPTO_MAC_CAM05346_WRAPPER_H
-#define	CRYPTO_MAC_CAM05346_WRAPPER_H
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
 
+/* cppcheck-suppress misra-c2012-21.6
+*
+*  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
+*
+*  Reasoning: printf is required for printing to the terminal in this code example
+*/
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
+#include "mcc_generated_files/system/system.h"
+#include "app_mac.h"
 
-#include "crypto/common_crypto/crypto_common.h"
-#include "crypto/common_crypto/crypto_mac_cipher.h"
-
- 
- 
-#ifdef	__cplusplus
-extern "C" {
-#endif
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Data Types
+// Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
 
-// The minimum size to store a CAM library AES-CMAC context data block.
-#define MINIMUM_CMAC_CONTEXT_DATA_SIZE  (240UL)
-
-typedef struct
+int main(void)
 {
-  // This is used to store the CAM library context data.
-  uint8_t contextData[MINIMUM_CMAC_CONTEXT_DATA_SIZE];
+    SYSTEM_Initialize();
 
-} CRYPTO_CMAC_HW_CONTEXT;
+    (void) printf("\n\n\n\r\n ");
+    (void) printf("______________________________________________________________________________________________________ \r\n");
+    (void )printf("\r\n\n\n\n Starting CRYPTO MAC program \r\n");
 
- 
-// *****************************************************************************
-// *****************************************************************************
-// Section: MAC Algorithms Common Interface
-// *****************************************************************************
-// *****************************************************************************
+    #ifdef RUN_MAC_CMAC_TEST
+    mac_test_cmac();
+    #endif
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Init(void *contextData, uint8_t *key, uint32_t keyLen);
+    #ifdef RUN_MAC_HMAC_TEST
+    mac_test_hmac();
+    #endif
+    #ifdef RUN_MAC_GMAC_TEST
+    mac_test_gmac();
+    #endif
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Cipher(void *contextData, uint8_t *inputData, uint32_t dataLen);
+    (void) printf("\n\n\n\r\n ");
+    (void) printf("______________________________________________________________________________________________________ \r\n");
+    while(1)
+    {
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Final(void *contextData, uint8_t *outputMac, uint32_t macLen);
+    };
 
-crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t dataLen,
-                                              uint8_t *ptr_outMac, uint32_t macLen,
-                                              uint8_t *ptr_key, uint32_t keyLen);
-
- 
-#ifdef	__cplusplus
+    return EXIT_SUCCESS;
 }
-#endif
-
-#endif	/* CRYPTO_MAC_CAM05346_WRAPPER_H */
-
