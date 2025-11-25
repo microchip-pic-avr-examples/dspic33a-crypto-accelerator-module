@@ -52,8 +52,8 @@ Microchip or any third party.
 #ifndef CAM_ECDH_H
 #define	CAM_ECDH_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -151,8 +151,8 @@ CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)(PKE_CONFIG *eccData, u
 #define DRV_CRYPTO_ECDH_GetSharedSecret MPROTO(DRV_CRYPTO_ECDH_GetSharedSecret)
 /** @endcond */
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_ECDH_H */

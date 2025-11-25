@@ -50,8 +50,8 @@ Microchip or any third party.
 #ifndef CAM_TRNG_H
 #define	CAM_TRNG_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -215,8 +215,8 @@ TRNG_ERROR MPROTO(DRV_CRYPTO_TRNG_ReadData)(uint8_t* data, uint32_t size);
 #define DRV_CRYPTO_TRNG_ReadData MPROTO(DRV_CRYPTO_TRNG_ReadData)
 /** @endcond */
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_TRNG_H */
