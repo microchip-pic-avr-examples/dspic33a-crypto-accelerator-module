@@ -51,8 +51,8 @@ Microchip or any third party.
 #ifndef CAM_PKE_H
 #define	CAM_PKE_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -195,8 +195,8 @@ void MPROTO(DRV_CRYPTO_PKE_IsrHelper)(void);
 #define DRV_CRYPTO_PKE_IsrHelper MPROTO(DRV_CRYPTO_PKE_IsrHelper)
 /** @endcond */
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_PKE_H */

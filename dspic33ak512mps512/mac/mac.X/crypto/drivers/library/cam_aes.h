@@ -50,8 +50,8 @@ Microchip or any third party.
 #ifndef CAM_AES_H
 #define	CAM_AES_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -117,7 +117,10 @@ typedef enum AES_ERROR
 typedef enum AESCON_MODE
 {
     MODE_ECB  = 0,   /**< Electronic Codebook (ECB) mode */
+    MODE_CBC  = 1,   /**< Cipher Block Chaining (CBC) */
     MODE_CTR  = 2,   /**< Counter (CTR) mode */
+    MODE_CFB  = 3,   /**< Cipher Feedback (CFB) */
+    MODE_OFB  = 4,   /**< Output Feedback (OFB) */
     MODE_GCM  = 6,   /**< Galois Counter Mode (GCM) */
     MODE_XTS  = 7,   /**< XEX Tweakable Block Cipher (XTS) with Ciphertext Stealing (XTS-CS) */
     MODE_CMAC = 8,   /**< Cipher-based Message Authentication Code (CMAC) */
@@ -482,8 +485,8 @@ uint32_t MPROTO(DRV_CRYPTO_AES_GetContextSize)(void *contextData);
 #define DRV_CRYPTO_AES_GetContextSize MPROTO(DRV_CRYPTO_AES_GetContextSize)
 /** @endcond */
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_AES_H */
