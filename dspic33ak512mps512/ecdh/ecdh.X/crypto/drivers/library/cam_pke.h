@@ -77,14 +77,14 @@ Microchip or any third party.
  * @brief This enumeration represents the result of the CAM PKE operation.
  */
 typedef enum {
-    CRYPTO_PKE_STATUS_IDLE = 0U,           /**< PKE is ready for a new operation */
-    CRYPTO_PKE_STATUS_BUSY = 1U,           /**< PKE operation is in progress */
-    CRYPTO_PKE_RESULT_SUCCESS = 2U,        /**< Operation successful  */
-    CRYPTO_PKE_RESULT_INIT_FAIL = 3U,      /**< Initialization failed  */
-    CRYPTO_PKE_ERROR_PUBKEYCOMPRESS = 4U,  /**< Public key compression error  */
-    CRYPTO_PKE_RESULT_ERROR_CURVE = 5U,    /**< Curve error  */
-    CRYPTO_PKE_RESULT_ERROR_RNG = 6U,      /**< RNG error  */
-    CRYPTO_PKE_RESULT_ERROR_FAIL = 7U      /**< General operation failure  */
+    CRYPTO_PKE_RESULT_SUCCESS = 0U,             /**< Operation successful  */
+    CRYPTO_PKE_RESULT_INIT_FAIL = 1U,           /**< Initialization failed  */
+    CRYPTO_PKE_ERROR_PUBKEYCOMPRESS = 2U,       /**< Public key compression error  */
+    CRYPTO_PKE_RESULT_ERROR_CURVE = 3U,         /**< Curve error  */
+    CRYPTO_PKE_RESULT_ERROR_RNG = 4U,           /**< RNG error  */
+    CRYPTO_PKE_RESULT_ERROR_FAIL = 5U,          /**< General operation failure  */
+    CRYPTO_PKE_RESULT_IDLE = 6U,                /**< PKE is ready for a new operation */
+    CRYPTO_PKE_RESULT_BUSY = 7U,                /**< PKE operation is in progress */
 } CRYPTO_PKE_RESULT;
 
 /**

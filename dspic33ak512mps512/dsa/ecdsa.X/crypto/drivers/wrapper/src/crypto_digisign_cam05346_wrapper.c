@@ -124,10 +124,10 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_MapResult(CRYPTO_PKE_RE
         case CRYPTO_PKE_RESULT_ERROR_FAIL:
             digiSignStatus = CRYPTO_DIGISIGN_ERROR_FAIL;
             break;
-        case CRYPTO_PKE_STATUS_IDLE:
+        case CRYPTO_PKE_RESULT_IDLE:
             digiSignStatus = CRYPTO_DIGISIGN_OPERATION_COMPLETED;
             break;
-        case CRYPTO_PKE_STATUS_BUSY:
+        case CRYPTO_PKE_RESULT_BUSY:
             digiSignStatus = CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS;
             break;
         default:
@@ -147,10 +147,10 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_Status(void)
     
     switch(hwStatus)
     {
-        case CRYPTO_PKE_STATUS_BUSY:
+        case CRYPTO_PKE_RESULT_BUSY:
             status = CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS;
             break;
-        case CRYPTO_PKE_STATUS_IDLE:
+        case CRYPTO_PKE_RESULT_IDLE:
             status = CRYPTO_DIGISIGN_OPERATION_COMPLETED;
             break;
         default:
