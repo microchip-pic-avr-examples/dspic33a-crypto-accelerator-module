@@ -13,8 +13,6 @@
   Description:
     This header file contains version information on the CAM Hardware Driver.
 **************************************************************************/
-
-//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -37,29 +35,57 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-//DOM-IGNORE-END
-
- #ifndef CAM_VERSION_H
- #define CAM_VERSION_H
-
- /**
- * @brief Version date format (yyyymmdd).
- **/
- #define CAM_LIBRARY_VERSION_DATE   "20251014"
 
 /**
- * @brief This number represents the Major version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_MAJOR  1
+ * Crypto Framework Library Source
+ * 
+ * @file cam_version.h
+ * @ingroup CAM_HSM_LITE 
+ * @defgroup  version VERSION
+ * @ingroup CAM_HSM_LITE 
+ *
+ * @brief This header file contains version information on the CAM Hardware driver.
+ *
+ */
+
+#ifndef CAM_VERSION_H
+#define CAM_VERSION_H
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
 
 /**
- * @brief This number represents the Minor version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_MINOR  2
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MAJOR
+ * @brief This number represents the major version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MAJOR  1
 
- /**
- * @brief This number represents the Patch version in SemVer format.
- **/
- #define CAM_LIBRARY_VERSION_PATCH  0
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_MINOR
+ * @brief This number represents the minor version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_MINOR  2
+ 
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_VERSION_PATCH
+ * @brief This number represents the patch version in SemVer format.
+ */
+#define CAM_LIBRARY_VERSION_PATCH  0
+/** @cond INTERNAL **/
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_IDENTIFIER
+ * @brief This field represents a build identifier of the CAM library.
+ */
+#define CAM_LIBRARY_IDENTIFIER  k3b9x2wq8z1m4n7p
+/** @endcond **/
 
- #endif /* CAM_VERSION_H */
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
+#endif
+
+#endif /* CAM_VERSION_H */

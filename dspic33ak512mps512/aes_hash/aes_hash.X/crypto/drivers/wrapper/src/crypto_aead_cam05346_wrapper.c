@@ -230,9 +230,9 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Init(void *aeadInitCtx,
     uint8_t *initVect, uint32_t initVectLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the AEAD context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the AEAD context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -269,9 +269,9 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_AddAadData(void *aeadCipherCtx,
     uint8_t *aad, uint32_t aadLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the AEAD context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the AEAD context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -314,9 +314,9 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Cipher(void *aeadCipherCtx,
     uint8_t *inputData, uint32_t dataLen, uint8_t *outData)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the AEAD context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the AEAD context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -359,9 +359,9 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Final(void *aeadFinalCtx,
     uint8_t *authTag, uint32_t authTagLen)
 {
     /* MISRA C:2012 Rule 11.5 deviation:
-    * Reason: Conversion from void* to the AEAD context defined by the 
-    *         CAM Hardware Driver pre-compiled library is required since 
-    *         the library does not have access to the upper context structures 
+    * Reason: Conversion from void* to the AEAD context defined by the
+    *         CAM Hardware Driver pre-compiled library is required since
+    *         the library does not have access to the upper context structures
     *         defined by the Crypto APIs.
     */
     /* cppcheck-suppress misra-c2012-11.5 */
@@ -398,12 +398,9 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_EncryptAuthDirect(uint8_t *inputData,
     uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
     uint8_t *authTag, uint32_t authTagLen)
 {
-
     crypto_Aead_Status_E result = lCrypto_Aead_Hw_AesGcm_Direct(MODE_GCM, OP_ENCRYPT,
                                                                 inputData, dataLen, outData,
                                                                 key, keyLen, initVect, initVectLen,
-
-
                                                                 aad, aadLen, authTag, authTagLen);
 
     return result;
@@ -414,24 +411,19 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(uint8_t *inputData,
     uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
     uint8_t *authTag, uint32_t authTagLen)
 {
-
-
-
-        uint8_t generatedAuthTag[AES_GCM_AUTHTAG_SIZE];
-
+    uint8_t generatedAuthTag[AES_GCM_AUTHTAG_SIZE];
     crypto_Aead_Status_E result = lCrypto_Aead_Hw_AesGcm_Direct(MODE_GCM, OP_DECRYPT,
                                                                 inputData, dataLen, outData,
                                                                 key, keyLen, initVect, initVectLen,
                                                                 aad, aadLen, generatedAuthTag, authTagLen);
-
-        if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
+    if (result == CRYPTO_AEAD_CIPHER_SUCCESS)
+    {
+        // The tag must be verified against what was calculated.
+        if (0UL != lCrypto_Aead_Hw_CompareAsBytes(generatedAuthTag, authTag, authTagLen))
         {
-            // The tag must be verified against what was calculated.
-            if (0UL != lCrypto_Aead_Hw_CompareAsBytes(generatedAuthTag, authTag, authTagLen))
-            {
-                result = CRYPTO_AEAD_ERROR_AUTHFAIL;
-            }
+            result = CRYPTO_AEAD_ERROR_AUTHFAIL;
         }
+    }
 
     return result;
 }

@@ -73,10 +73,6 @@ int main(void)
     aes_test_sym();
     #endif
 
-    #ifdef RUN_MAC_TEST
-    aes_test_mac();
-    #endif
-
     #ifdef RUN_AEAD_TEST
     aes_test_aead();
     #endif

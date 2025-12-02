@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    crypto_mac_cipher.c
+    crypto_hash.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -51,8 +51,8 @@
 // *****************************************************************************
 
 #include "crypto/common_crypto/crypto_common.h"
-#include "crypto/common_crypto/crypto_mac_cipher.h"
-#include "crypto/drivers/wrapper/crypto_mac_cam05346_wrapper.h"
+#include "crypto/common_crypto/crypto_hash.h"
+#include "crypto/drivers/wrapper/crypto_hash_cam05346_wrapper.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -60,7 +60,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define CRYPTO_MAC_SESSION_MAX (1)
+#define CRYPTO_HASH_SESSION_MAX (1)
 
 // *****************************************************************************
 // *****************************************************************************
@@ -68,130 +68,129 @@
 // *****************************************************************************
 // *****************************************************************************
 
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, crypto_HandlerType_E handlerType_en,
-                                              uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID)
+//SHA-1, SHA-2 and SHA-3 except SHAKE Algorithm
+crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, uint8_t *ptr_data, uint32_t dataLen,
+                                                uint8_t *ptr_digest, crypto_Hash_Algo_E shaAlgorithm_en,  uint32_t shaSessionId)
 {
-    crypto_Mac_Status_E ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+ 	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
 
-    if(ptr_aesCmacCtx_st == NULL)
+    if( (ptr_data == NULL) && (dataLen != 0u) )
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CTX;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_INPUTDATA;
     }
-    else if( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256)  )
+    else if(ptr_digest == NULL)
     {
-       ret_aesCmacStat_en =  CRYPTO_MAC_ERROR_KEY;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_OUTPUTDATA;
     }
-    else if( (sessionID == 0U) || (sessionID > (uint32_t)CRYPTO_MAC_SESSION_MAX) )
+    else if( (shaAlgorithm_en <= CRYPTO_HASH_INVALID) || (shaAlgorithm_en >= CRYPTO_HASH_MAX))
     {
-       ret_aesCmacStat_en =  CRYPTO_MAC_ERROR_SID;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_ALGO;
+    }
+    else if( (shaSessionId == 0u) || (shaSessionId > (uint32_t)CRYPTO_HASH_SESSION_MAX) )
+    {
+        ret_shaStat_en = CRYPTO_HASH_ERROR_SID;
     }
     else
     {
-        ptr_aesCmacCtx_st->cryptoSessionID =  sessionID;
-        ptr_aesCmacCtx_st->macHandlerType_en = handlerType_en;
-        ptr_aesCmacCtx_st->ptr_key = ptr_key;
-        ptr_aesCmacCtx_st->mackeyLen = keyLen;
-
-        switch(ptr_aesCmacCtx_st->macHandlerType_en)
+        switch(shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-            	ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Init((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_aesCmacCtx_st->ptr_key, keyLen);
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Digest((void*)ptr_data, dataLen, ptr_digest, shaAlgorithm_en);
                 break;
             default:
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
+                ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
                 break;
         }
-
     }
-    return ret_aesCmacStat_en;
+    return ret_shaStat_en;
 }
 
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Cipher(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_inputData, uint32_t dataLen)
+crypto_Hash_Status_E Crypto_Hash_Sha_Init(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st, crypto_Hash_Algo_E shaAlgorithm_en, crypto_HandlerType_E shaHandler_en, uint32_t shaSessionId)
 {
-    crypto_Mac_Status_E ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+ 	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
 
-    if(ptr_aesCmacCtx_st == NULL)
+    if(ptr_shaCtx_st == NULL)
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CTX;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_CTX;
     }
-    else if( (ptr_inputData == NULL) && (dataLen != 0UL) )
+    else if( (shaAlgorithm_en <= CRYPTO_HASH_INVALID) || (shaAlgorithm_en >= CRYPTO_HASH_MAX))
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_INPUTDATA;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_ALGO;
+    }
+    else if( (shaSessionId == 0u) || (shaSessionId > (uint32_t)CRYPTO_HASH_SESSION_MAX) )
+    {
+        ret_shaStat_en = CRYPTO_HASH_ERROR_SID;
     }
     else
     {
-        switch(ptr_aesCmacCtx_st->macHandlerType_en)
+        ptr_shaCtx_st->shaSessionId = shaSessionId;
+        ptr_shaCtx_st->shaAlgo_en = shaAlgorithm_en;
+        ptr_shaCtx_st->shaHandler_en = shaHandler_en;
+
+        switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Cipher((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_inputData, dataLen);
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Init((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_shaCtx_st->shaAlgo_en);
                 break;
             default:
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-				break;
+                ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
+                break;
         }
     }
-    return ret_aesCmacStat_en;
+    return ret_shaStat_en;
 }
 
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Final(st_Crypto_Mac_Aes_ctx *ptr_aesCmacCtx_st, uint8_t *ptr_outMac, uint32_t macLen)
+crypto_Hash_Status_E Crypto_Hash_Sha_Update(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st, uint8_t *ptr_data, uint32_t dataLen)
 {
-    crypto_Mac_Status_E ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    if(ptr_aesCmacCtx_st == NULL)
+	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
+
+    if(ptr_shaCtx_st == NULL)
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CTX;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_CTX;
     }
-    else if((ptr_outMac == NULL) || (macLen == 0U))
+    else if( (ptr_data == NULL) && (dataLen != 0u) )
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_MACDATA;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_INPUTDATA;
     }
     else
     {
-        switch(ptr_aesCmacCtx_st->macHandlerType_en)
+        switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Final((void*)ptr_aesCmacCtx_st->arr_macDataCtx, ptr_outMac, macLen);
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Update((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_data, dataLen);
                 break;
             default:
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-				break;
+                ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
+                break;
         }
     }
-    return ret_aesCmacStat_en;
+    return ret_shaStat_en;
 }
 
-crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(crypto_HandlerType_E macHandlerType_en, uint8_t *ptr_inputData, uint32_t dataLen,
-                                                uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID)
+crypto_Hash_Status_E Crypto_Hash_Sha_Final(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st, uint8_t *ptr_digest)
 {
-    crypto_Mac_Status_E ret_aesCmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    if( (ptr_inputData == NULL) && (dataLen != 0UL) )
+	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
+
+    if(ptr_shaCtx_st == NULL)
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_INPUTDATA;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_CTX;
     }
-    else if( (ptr_outMac == NULL) || (macLen == 0UL) )
+    else if(ptr_digest == NULL)
     {
-        ret_aesCmacStat_en = CRYPTO_MAC_ERROR_MACDATA;
-    }
-    else if( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256)  )
-    {
-       ret_aesCmacStat_en =  CRYPTO_MAC_ERROR_KEY;
-    }
-    else if( (sessionID == 0U) || (sessionID > (uint32_t)CRYPTO_MAC_SESSION_MAX) )
-    {
-       ret_aesCmacStat_en =  CRYPTO_MAC_ERROR_SID;
+        ret_shaStat_en = CRYPTO_HASH_ERROR_OUTPUTDATA;
     }
     else
     {
-        switch(macHandlerType_en)
+        switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
-                ret_aesCmacStat_en = Crypto_Sym_Hw_Cmac_Direct(ptr_inputData, dataLen, ptr_outMac, macLen, ptr_key, keyLen);
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Final((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_digest);
                 break;
             default:
-                ret_aesCmacStat_en = CRYPTO_MAC_ERROR_HDLR;
-				break;
+                ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
+                break;
         }
     }
-    return ret_aesCmacStat_en;
+    return ret_shaStat_en;
 }
 
-// *****************************************************************************

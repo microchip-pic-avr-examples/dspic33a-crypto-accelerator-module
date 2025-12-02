@@ -8,11 +8,11 @@
     crypto_mac_cam05346_wrapper.h
 
   Summary:
-    Crypto Framework Library wrapper file for CAM hardware AES MAC.
+    Crypto Framework Library wrapper file for CAM hardware MAC.
 
   Description:
     This header file contains the wrapper interface to access the
-    AES MAC algorithms in the AES hardware driver for Microchip microcontrollers.
+    MAC (CMAC/HMAC) algorithms in the AES hardware driver for Microchip microcontrollers.
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -43,8 +43,15 @@ Microchip or any third party.
 #ifndef CRYPTO_MAC_CAM05346_WRAPPER_H
 #define	CRYPTO_MAC_CAM05346_WRAPPER_H
 
+#include <stdint.h>
+
+#include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 
+#include "crypto/drivers/wrapper/crypto_hash_cam05346_wrapper.h"
+ 
+#include "crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h"
+ 
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -65,7 +72,35 @@ typedef struct
 
 } CRYPTO_CMAC_HW_CONTEXT;
 
+// The maximum size of an HMAC data block.  This size is dependent on the SHA algorithm in use.
+#define HMAC_MAX_BLOCK_SIZE (128U)
 
+typedef struct
+{
+    // Stores the ipad_key / opad_key as used during the HMAC operation.
+    uint8_t hmacKeyData[HMAC_MAX_BLOCK_SIZE];
+
+    // Stores the HMAC block size to use for the HMAC operation.
+    uint32_t hmacBlockSize;
+
+    // Stores the HASH context to use when performing HMAC HASH operations.
+    CRYPTO_HASH_HW_CONTEXT shaContext;
+
+} CRYPTO_HMAC_HW_CONTEXT;
+
+typedef struct
+{
+    // Key data, provided during init and used during cipher.
+    uint8_t keyData[CRYPTO_AESKEYSIZE_256];
+    // Length of the key data.
+    uint32_t keyLength;
+
+    // GMAC uses GCM with all the data provided as Additional Authentication Data (AAD).
+    CRYPTO_AEAD_HW_CONTEXT aeadContext;
+
+} CRYPTO_GMAC_HW_CONTEXT;
+
+ 
 // *****************************************************************************
 // *****************************************************************************
 // Section: MAC Algorithms Common Interface
@@ -82,6 +117,27 @@ crypto_Mac_Status_E Crypto_Sym_Hw_Cmac_Direct(uint8_t *ptr_inputData, uint32_t d
                                               uint8_t *ptr_outMac, uint32_t macLen,
                                               uint8_t *ptr_key, uint32_t keyLen);
 
+crypto_Mac_Status_E Crypto_Mac_Hw_Hmac_Init(void *contextData, uint8_t *key, uint32_t keyLength, crypto_Hash_Algo_E shaAlgorithm);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_Hmac_Cipher(void *contextData, uint8_t *inputData, uint32_t dataLength);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_Hmac_Final(void *contextData, uint8_t *outputMac);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_Hmac_Direct(uint8_t *ptr_inputData, uint32_t dataLength,
+                                              uint8_t *ptr_outMac,
+                                              uint8_t *ptr_key, uint32_t keyLength, crypto_Hash_Algo_E shaAlgorithm);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Init(void *ptr_aesGmacCtx, uint8_t *ptr_key, uint32_t keySize);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Cipher(void *ptr_aesGmacCtx, uint8_t *ptr_initVect,
+                                                 uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen,
+                                                 uint8_t *ptr_outMac, uint32_t macLen);
+
+crypto_Mac_Status_E Crypto_Mac_Hw_AesGmac_Direct(uint8_t *ptr_initVect, uint32_t initVectLen,
+                                                 uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key,
+                                                 uint32_t keyLen, uint8_t *ptr_aad, uint32_t aadLen);
+
+ 
 #ifdef	__cplusplus
 }
 #endif

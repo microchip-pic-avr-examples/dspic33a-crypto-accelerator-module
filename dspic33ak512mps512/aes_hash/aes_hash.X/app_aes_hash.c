@@ -331,6 +331,102 @@ void aes_test_ctr(void)
 }
 #endif
 
+#ifdef RUN_SYM_CBC_TEST
+void aes_test_cbc(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CBC);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CBC);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
+#ifdef RUN_SYM_CTR_TEST
+void aes_test_cfb128(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CFB128 mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CFB128);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CFB128);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
+#ifdef RUN_SYM_CTR_TEST
+void aes_test_ofb(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-OFB mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_OFB);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_OFB);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
 #ifdef RUN_SYM_XTS_TEST
 void aes_test_xts(void)
 {
@@ -371,6 +467,18 @@ void aes_test_sym(void)
 
 #ifdef RUN_SYM_CTR_TEST
     aes_test_ctr();
+#endif
+    
+#ifdef RUN_SYM_CBC_TEST
+    aes_test_cbc();
+#endif
+    
+#ifdef RUN_SYM_CFB128_TEST
+    aes_test_cfb128();
+#endif
+    
+#ifdef RUN_SYM_OFB_TEST
+    aes_test_ofb();
 #endif
 
 #ifdef RUN_SYM_XTS_TEST
