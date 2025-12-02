@@ -49,6 +49,7 @@ crypto_digisign.h defines sign and verify functions
 
 - Inputs to these functions must be **big endian**.
 
+### Blocking API implementations
 ```c
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(
     crypto_HandlerType_E ecdsaHandlerType_en,   // The type of crypto implementation to use 
@@ -76,6 +77,53 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify(
     crypto_EccCurveType_E eccCurveType_En,      // Type of curve being used(described below)
     uint32_t ecdsaSessionId                     // Session ID (This is set to 1)
 );
+```
+
+### Non-Blocking API implementations
+
+```c
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_Start(
+    crypto_HandlerType_E ecdsaHandlerType_en,   // The type of crypto implementation to use  
+    uint8_t *ptr_inputHash,                     // A pointer to a Hash output generated with SHA
+    uint32_t hashLen,                           // Length of the generated Hash 
+    uint8_t *ptr_privKey,                       // Private Key to sign the message with 
+    uint32_t privKeyLen,                        // Length of the Private Key 
+    crypto_EccCurveType_E eccCurveType_En,      // Type of curve being used (described below) 
+    uint32_t ecdsaSessionId                     // Session ID (This is set to 1)
+);
+```
+
+```c
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_Start(
+    crypto_HandlerType_E ecdsaHandlerType_en,   // The type of crypto implementation to use
+    uint8_t *ptr_inputHash,                     // A pointer to a Hash output generated with SHA 
+    uint32_t hashLen,                           // Length of the generated Hash 
+    uint8_t *ptr_inputSig,                      // A pointer given Signature 
+    uint32_t sigLen,                            // Length of the Signature 
+    uint8_t *ptr_pubKey,                        //  Public Key to verify the signature 
+    uint32_t pubKeyLen,                         // Length of the Public Key 
+    crypto_EccCurveType_E eccCurveType_En,      // Type of curve being used(described below) 
+    uint32_t ecdsaSessionId                     // Session ID (This is set to 1)
+);
+```
+
+```c
+crypto_DigiSign_Status_E  Crypto_DigiSign_Ecdsa_Sign_GetStatus(void);
+```
+
+```c
+crypto_DigiSign_Status_E  Crypto_DigiSign_Ecdsa_Verify_GetStatus(void);
+```
+
+```c
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_GetResult(
+    uint8_t *ptr_outputSig,                     // A pointer to store the output Signature 
+    uint32_t sigLen                             // Length of the expected Signature
+);
+```
+
+```c
+crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void);
 ```
 
 ### crypto_EccCurveType_E can be any of the following enum values:
