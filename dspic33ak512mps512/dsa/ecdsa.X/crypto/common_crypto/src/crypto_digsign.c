@@ -53,6 +53,7 @@
 #include "crypto/common_crypto/crypto_digsign.h"
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/drivers/wrapper/crypto_digisign_cam05346_wrapper.h"
+#include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -316,4 +317,14 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void)
     }
     
     return ret_ecdsaStat_en;
+}
+
+void Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(void (*handler)(void))
+{
+    CRYPTO_Int_Hw_SignComplete_CallbackRegister(handler);
+}
+
+void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(void (*handler)(void))
+{
+    CRYPTO_Int_Hw_VerifyComplete_CallbackRegister(handler);
 }
