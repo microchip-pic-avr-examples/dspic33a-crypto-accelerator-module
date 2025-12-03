@@ -157,4 +157,8 @@ void aes_test_aead(void)
     #ifdef RUN_AEAD_GCM_TEST
     aes_aead_gcm_test();
     #endif
+
+    #ifdef RUN_AEAD_CCM_TEST
+    aes_aead_ccm_test();
+    #endif
 }

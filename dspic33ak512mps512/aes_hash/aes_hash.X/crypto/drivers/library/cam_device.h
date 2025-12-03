@@ -13,8 +13,10 @@
   Description:
     This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
 
-  File created on 2025-11-19t14:02:58
+  File created on 2025-11-21t11:23:02
 **************************************************************************/
+
+//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -37,16 +39,7 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
-
-/**
- * Crypto Framework Library Source
- * 
- * @file cam_device.h
- * @defgroup  device DEVICE
- * 
- * @brief This header file defines supported devices by the CAM Hardware Driver.
- *
- */
+//DOM-IGNORE-END
 
 /**
  * Crypto Framework Library Source
@@ -60,6 +53,10 @@ Microchip or any third party.
 
 #ifndef CAM_DEVICE_H
 #define CAM_DEVICE_H
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -110,7 +107,7 @@ Microchip or any third party.
          */
         #define CAM_HW_VERSION HSM_LITE_04777
 #elif __has_include("cam_device_ea.h")
-    #include "cam_device_ea.h"   
+    #include "cam_device_ea.h"
 #endif
 
 /* MISRA C:2012 Rule 20.10 deviation:
@@ -157,6 +154,10 @@ Microchip or any third party.
     #error "This CAM library version does not support the selected device. Verify that the device has a CAM peripheral and you are using the latest CAM library release."
 #endif
 /** @endcond **/
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
+#endif
 
 #endif // CAM_DEVICE_H
 

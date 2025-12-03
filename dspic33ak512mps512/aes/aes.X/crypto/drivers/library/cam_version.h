@@ -51,6 +51,10 @@ Microchip or any third party.
 #ifndef CAM_VERSION_H
 #define CAM_VERSION_H
 
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
+
 /**
  * @ingroup version 
  * @def CAM_LIBRARY_VERSION_MAJOR
@@ -77,7 +81,11 @@ Microchip or any third party.
  * @def CAM_LIBRARY_IDENTIFIER
  * @brief This field represents a build identifier of the CAM library.
  */
-#define CAM_LIBRARY_IDENTIFIER  2128ddd6b16
+#define CAM_LIBRARY_IDENTIFIER  k3b9x2wq8z1m4n7p
 /** @endcond **/
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
+#endif
 
 #endif /* CAM_VERSION_H */

@@ -52,14 +52,15 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 
-#include "test_vectors/gcm_test_vector.h"
+#include "test_vectors/aead_test_vector.h"
 
 // Only one test context at a time is supported.
 #define TEST_SESSION_ID         (0x1)
 
 
 // Context for AES calculations.
-static st_Crypto_Aead_AesGcm_ctx aesCtx __attribute__((aligned(4)));
+static st_Crypto_Aead_AesGcm_ctx aeadGcmCtx __attribute__((aligned(4)));
+static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
 
 /**
  * @brief test context data for AES AEAD tests.
@@ -69,10 +70,10 @@ typedef struct AEAD_TEST_CONTEXT {
     TEST_VECTOR *   test;
 
     // Contains the data result.
-    uint8_t         dataResult[GCM_TEST_VECTOR_SZ];
+    uint8_t         dataResult[AEAD_TEST_VECTOR_SZ];
 
     // Contains the authTag result.
-    uint8_t         authTagResult[AES_GCM_TAG_LENGTH];
+    uint8_t         authTagResult[AES_AEAD_TAG_LENGTH];
 
     // The test mode (encrypt/decrypt).
     TEST_MODE       testMode;
@@ -196,6 +197,10 @@ static const char *getTestOpMode(AEAD_OPER_MODE opMode)
             opModeStr = "AES-GCM";
             break;
 
+        case AEAD_OPER_MODE_AES_CCM:
+            opModeStr = "AES-CCM";
+            break;
+
         default:
             break;
     }
@@ -215,7 +220,7 @@ static const char *getTestOpMode(AEAD_OPER_MODE opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static TEST_RESULT aes_aead_gcm_test_init(void *context)
+static TEST_RESULT aes_aead_test_init(void *context)
 {
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
     TEST_VECTOR *test = testContext->test;
@@ -249,8 +254,27 @@ static TEST_RESULT aes_aead_gcm_test_init(void *context)
     (void) printf(YELLOW);
     printOperationStep("INITIALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_Init(&aesCtx, CRYPTO_HANDLER_HW_INTERNAL, ((testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT),
-                                    test->inputKey, test->inputKeyLength, test->initializationVector, test->initializationVectorLength, TEST_SESSION_ID);
+    switch(testContext->opMode)
+    {
+        case AEAD_OPER_MODE_AES_GCM:
+        {
+            crypto_CipherOper_E oper = (testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
+            status = Crypto_Aead_AesGcm_Init(&aeadGcmCtx, CRYPTO_HANDLER_HW_INTERNAL, oper,
+                                            test->inputKey, test->inputKeyLength, test->initializationVector, test->initializationVectorLength, TEST_SESSION_ID);
+        }
+        break;
+
+        case AEAD_OPER_MODE_AES_CCM:
+        {
+            status = Crypto_Aead_AesCcm_Init(&aeadCcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                                            test->inputKey, test->inputKeyLength, TEST_SESSION_ID);
+        }
+        break;
+
+        default:
+            break;
+    }
+
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     printCryptoResult(result, status);
@@ -264,7 +288,7 @@ static TEST_RESULT aes_aead_gcm_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_ADD_AAD_FAILED on failure.
  */
-static TEST_RESULT aes_aead_gcm_test_add_aad(void *context)
+static TEST_RESULT aes_aead_test_add_aad(void *context)
 {
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
     TEST_VECTOR *test = testContext->test;
@@ -276,7 +300,7 @@ static TEST_RESULT aes_aead_gcm_test_add_aad(void *context)
     (void) printf(YELLOW);
     printOperationStep("ADDING AAD", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_AddAadData(&aesCtx, aad, test->aadLength);
+    status = Crypto_Aead_AesGcm_AddAadData(&aeadGcmCtx, aad, test->aadLength);
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_ADD_AAD_FAILED;
 
     printCryptoResult(result, status);
@@ -290,7 +314,7 @@ static TEST_RESULT aes_aead_gcm_test_add_aad(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static TEST_RESULT aes_aead_gcm_test_cipher(void *context)
+static TEST_RESULT aes_aead_test_cipher(void *context)
 {
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
     TEST_VECTOR *test = testContext->test;
@@ -304,7 +328,7 @@ static TEST_RESULT aes_aead_gcm_test_cipher(void *context)
     (void) printf(YELLOW);
     printOperationStep("CIPHERING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_Cipher(&aesCtx, data, test->dataLength, resultData);
+    status = Crypto_Aead_AesGcm_Cipher(&aeadGcmCtx, data, test->dataLength, resultData);
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
     printCryptoResult(result, status);
@@ -319,7 +343,7 @@ static TEST_RESULT aes_aead_gcm_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static TEST_RESULT aes_aead_gcm_test_final(void *context)
+static TEST_RESULT aes_aead_test_final(void *context)
 {
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
     TEST_VECTOR *test = testContext->test;
@@ -330,7 +354,32 @@ static TEST_RESULT aes_aead_gcm_test_final(void *context)
     (void) printf(YELLOW);
     printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_Final(&aesCtx, testContext->authTagResult, test->authTagLength);
+    switch(testContext->opMode)
+    {
+        case AEAD_OPER_MODE_AES_GCM:
+        {
+            status = Crypto_Aead_AesGcm_Final(&aeadGcmCtx, testContext->authTagResult, test->authTagLength);
+        }
+        break;
+
+        case AEAD_OPER_MODE_AES_CCM:
+        {
+            crypto_CipherOper_E oper = (testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
+            uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
+            uint8_t *resultData = (test->dataLength > 0) ? testContext->dataResult : NULL;
+
+            status = Crypto_Aead_AesCcm_Cipher(&aeadCcmCtx, oper,
+                                                data, test->dataLength, resultData,
+                                                test->initializationVector, test->initializationVectorLength,
+                                                testContext->authTagResult, test->authTagLength,
+                                                test->aad, test->aadLength);
+        }
+        break;
+
+        default:
+            break;
+    }
+
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
 
     printCryptoResult(result, status);
@@ -380,16 +429,15 @@ typedef enum AEAD_TEST_STEPS {
 } AEAD_TEST_STEPS;
 
 /**
- * @brief Defines the state functions for an AES AEAD test.
+ * @brief Defines the state functions for AEAD tests.
  */
-static TEST_STATE_FN gcm_test_states[] =
+static TEST_STATE_FN aead_test_states[] =
 {
-    aes_aead_gcm_test_init,
-    aes_aead_gcm_test_add_aad,
-    aes_aead_gcm_test_cipher,
-    aes_aead_gcm_test_final,
+    aes_aead_test_init,
+    aes_aead_test_add_aad,
+    aes_aead_test_cipher,
+    aes_aead_test_final,
 };
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -410,10 +458,20 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
         case AEAD_OPER_MODE_AES_GCM:
         {
             context->tests = (uint8_t *)get_gcm_test_vectors();
-            context->states = gcm_test_states;
+            context->states = aead_test_states;
 
             context->testCount = get_gcm_test_vector_count();
-            context->stepCount = sizeof(gcm_test_states) / sizeof(gcm_test_states[0]);
+            context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
+        }
+        break;
+
+        case AEAD_OPER_MODE_AES_CCM:
+        {
+            context->tests = (uint8_t *)get_ccm_test_vectors();
+            context->states = aead_test_states;
+
+            context->testCount = get_ccm_test_vector_count();
+            context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
         }
         break;
 
@@ -463,6 +521,10 @@ TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
                 if (testContext->opMode == AEAD_OPER_MODE_AES_GCM)
                 {
                     context->step = AEAD_TEST_STEP_ADD_AAD;
+                }
+                else if (testContext->opMode == AEAD_OPER_MODE_AES_CCM)
+                {
+                    context->step = AEAD_TEST_STEP_FINAL;
                 }
                 else
                 {
