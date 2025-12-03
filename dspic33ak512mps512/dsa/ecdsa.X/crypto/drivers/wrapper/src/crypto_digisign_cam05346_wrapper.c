@@ -196,7 +196,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign(uint8_t *inputHash,
     PKE_ECC_CURVE hwEccCurve;
     PKE_CONFIG eccData;
     
-    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    CRYPTO_Int_Hw_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
 
     /* Get curve */
     hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
@@ -228,7 +228,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify(uint8_t *inputHash,
     PKE_ECC_CURVE hwEccCurve;
     PKE_CONFIG eccData;
     
-    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    CRYPTO_Int_Hw_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
 
     /* Get curve */
     hwResult = lCrypto_DigSign_Ecdsa_Hw_GetCurve(eccCurveType_En, &hwEccCurve);
@@ -281,7 +281,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign_Start(uint8_t *inputHash,
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
-    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    CRYPTO_Int_Hw_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
     
     if(currentState == CRYPTO_PROCESS_STARTED){
        hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;
@@ -315,7 +315,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify_Start(uint8_t * inputHa
     CRYPTO_PKE_RESULT hwResult;
     PKE_ECC_CURVE hwEccCurve;
     
-    CRYPTO3_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
+    CRYPTO_Int_Hw_OperationTypeHandlerRegister(&Crypto_DigSign_Ecdsa_Operation);
     
     if(currentState == CRYPTO_PROCESS_STARTED){
        hwResult = CRYPTO_DIGISIGN_ERROR_MEMORY;

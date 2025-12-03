@@ -45,7 +45,6 @@ Microchip or any third party.
 #include <xc.h>
 #include "app_ecdsa.h"
 #include "crypto/common_crypto/crypto_digsign.h"
-#include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 #include "mcc_generated_files/system/clock.h"
 #include "mcc_generated_files/system/pins.h"
 #include "test_vectors/test_vector.h"
@@ -158,8 +157,8 @@ static void TEST_ECDSA_p521(void)
 
 void test_ecdsa(void)
 {
-    CRYPTO3_SignOperationCompleteCallbackRegister(&signOperationComplete);
-    CRYPTO3_VerifyOperationCompleteCallbackRegister(&verifyOperationComplete);
+    Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(&signOperationComplete);
+    Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(&verifyOperationComplete);
     printSplitter();
     (void)printf("\r\n Starting CRYPTO ECDSA Verify Sign program \r\n");
     TEST_ECDSA_p192();

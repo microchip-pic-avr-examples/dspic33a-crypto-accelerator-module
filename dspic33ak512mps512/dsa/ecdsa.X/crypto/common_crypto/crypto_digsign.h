@@ -169,4 +169,14 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_GetResult(uint8_t *ptr_outpu
  *         CRYPTO_DIGISIGN_ERROR_OPERATION_INCOMPLETE if operation in progress still.
  */
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void);
+
+/**
+ * @brief Sets the callback function to be called when signature generation is complete.
+ */
+void Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(void (*handler)(void));
+
+/**
+ * @brief Sets the callback function to be called when the verification is complete.
+ */
+void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(void (*handler)(void));
 #endif /* CRYPTO_DIGSIGN_H */
