@@ -33,7 +33,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 0
+        .ptlength = 0,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
@@ -44,7 +45,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 16
+        .ptlength = 16,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c, 0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08},
@@ -61,7 +63,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 64
+        .ptlength = 64,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c, 0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08},
@@ -80,7 +83,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 20,
         .ivlength = 12,
-        .ptlength = 60
+        .ptlength = 60,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xd4, 0x80, 0x42, 0x96, 0x66, 0xd4, 0x8b, 0x40, 0x06, 0x33, 0x92, 0x1c, 0x54, 0x07, 0xd1, 0xd1},
@@ -102,7 +106,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 20,
         .ivlength = 12,
-        .ptlength = 14
+        .ptlength = 14,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x38, 0x81, 0xe7, 0xbe, 0x1b, 0xb3, 0xbb, 0xca, 0xff, 0x20, 0xbd, 0xb7, 0x8e, 0x5d, 0x1b, 0x67},
@@ -114,7 +119,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 5,
         .ivlength = 12,
-        .ptlength = 5
+        .ptlength = 5,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xea, 0x4f, 0x6f, 0x3c, 0x2f, 0xed, 0x2b, 0x9d, 0xd9, 0x70, 0x8c, 0x2e, 0x72, 0x1a, 0xe0, 0x0f},
@@ -126,7 +132,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 10,
         .ivlength = 12,
-        .ptlength = 10
+        .ptlength = 10,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xcd, 0xbc, 0x90, 0xe6, 0x0a, 0xab, 0x79, 0x05, 0xbd, 0xff, 0xdf, 0xd8, 0xd1, 0x3c, 0x01, 0x38},
@@ -138,7 +145,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 15,
         .ivlength = 12,
-        .ptlength = 15
+        .ptlength = 15,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x81, 0x9b, 0xc8, 0xd2, 0xf4, 0x19, 0x96, 0xba, 0xca, 0x69, 0x74, 0x41, 0xf9, 0x82, 0xad, 0x37},
@@ -153,7 +161,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 20,
         .ivlength = 12,
-        .ptlength = 20
+        .ptlength = 20,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x68, 0x27, 0x69, 0xd5, 0x2f, 0xa0, 0xbf, 0xea, 0xeb, 0xe0, 0xd0, 0xc8, 0x98, 0xd3, 0xcd, 0xa7},
@@ -168,7 +177,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 25,
         .ivlength = 12,
-        .ptlength = 25
+        .ptlength = 25,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xe2, 0xb3, 0x0b, 0x9b, 0x04, 0x0b, 0xce, 0x79, 0x02, 0xc5, 0x4c, 0xa7, 0xee, 0xc0, 0x0d, 0x09},
@@ -183,7 +193,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 30,
         .ivlength = 12,
-        .ptlength = 30
+        .ptlength = 30,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xea, 0xaf, 0xa9, 0x92, 0xef, 0x6d, 0xbc, 0xc2, 0x9c, 0xc5, 0x8b, 0x6b, 0x86, 0x84, 0xf7, 0xc7},
@@ -201,7 +212,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 35,
         .ivlength = 12,
-        .ptlength = 35
+        .ptlength = 35,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xa4, 0x38, 0x59, 0x04, 0x9b, 0x27, 0x02, 0xe8, 0x80, 0x7a, 0xc5, 0x5b, 0x0a, 0xd2, 0x7b, 0x0e},
@@ -219,7 +231,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 40,
         .ivlength = 12,
-        .ptlength = 40
+        .ptlength = 40,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x68, 0xfd, 0x60, 0x8c, 0x86, 0x97, 0x24, 0x3d, 0x30, 0xbd, 0x3f, 0x1f, 0x02, 0x8c, 0x5b, 0x74},
@@ -237,7 +250,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 45,
         .ivlength = 12,
-        .ptlength = 45
+        .ptlength = 45,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x6e, 0xdd, 0x3b, 0xd2, 0xaa, 0x31, 0x8f, 0x78, 0xb4, 0xa5, 0x11, 0x03, 0xcb, 0x08, 0xd4, 0x89},
@@ -258,7 +272,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 50,
         .ivlength = 12,
-        .ptlength = 50
+        .ptlength = 50,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xf7, 0x04, 0x82, 0xd5, 0x3d, 0x3e, 0xf7, 0x0c, 0xdc, 0x3c, 0xd3, 0xc4, 0xa3, 0x7a, 0xeb, 0x2b},
@@ -279,7 +294,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 55,
         .ivlength = 12,
-        .ptlength = 55
+        .ptlength = 55,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x98, 0xa1, 0x2f, 0xe1, 0x6a, 0x02, 0xec, 0x2a, 0x4b, 0x3a, 0x45, 0xc8, 0x21, 0x38, 0xae, 0x82},
@@ -300,7 +316,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 60,
         .ivlength = 12,
-        .ptlength = 60
+        .ptlength = 60,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x65, 0x38, 0xe8, 0xc8, 0x75, 0x39, 0x28, 0x96, 0x0f, 0xfc, 0x93, 0x56, 0xd4, 0x33, 0x06, 0xb6},
@@ -324,7 +341,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 65,
         .ivlength = 12,
-        .ptlength = 65
+        .ptlength = 65,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xca, 0xbd, 0xcf, 0x54, 0x1a, 0xeb, 0xf9, 0x17, 0xba, 0xc0, 0x19, 0xf1, 0x39, 0x25, 0xd2, 0x67},
@@ -348,7 +366,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES128_SIZE,
         .aadlength = 70,
         .ivlength = 12,
-        .ptlength = 70
+        .ptlength = 70,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -358,7 +377,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES256_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 0
+        .ptlength = 0,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -370,7 +390,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES256_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 16
+        .ptlength = 16,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c, 0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
@@ -388,7 +409,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES256_SIZE,
         .aadlength = 0,
         .ivlength = 12,
-        .ptlength = 64
+        .ptlength = 64,
+        .taglength = AES_GCM_TAG_LENGTH
     },
     {
         .key = {0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c, 0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
@@ -408,7 +430,8 @@ TEST_VECTOR gcm_test_vectors[] = {
         .keylength = KEY_TYPE_AES256_SIZE,
         .aadlength = 20,
         .ivlength = 12,
-        .ptlength = 60
+        .ptlength = 60,
+        .taglength = AES_GCM_TAG_LENGTH
     },
 };
 

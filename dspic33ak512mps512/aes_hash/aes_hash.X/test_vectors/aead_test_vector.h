@@ -23,8 +23,8 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef GCM_TEST_VECTOR_H
-#define	GCM_TEST_VECTOR_H
+#ifndef AEAD_TEST_VECTOR_H
+#define	AEAD_TEST_VECTOR_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -36,15 +36,15 @@ extern "C" {
 #include "app_aes_hash.h"
 
 // Maximum test vector data size.
-#define GCM_TEST_VECTOR_SZ      (96u)
+#define AEAD_TEST_VECTOR_SZ     (96U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
 #define KEY_TYPE_AES192_SIZE    (24UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)
 #define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 
-#define AES_GCM_IV_LENGTH       (12UL)
-#define AES_GCM_TAG_LENGTH      (16UL)
+#define AES_AEAD_IV_LENGTH      (12UL)
+#define AES_AEAD_TAG_LENGTH     (16UL)
 
 typedef struct TEST_VECTOR {
     uint32_t    id;
@@ -70,8 +70,11 @@ typedef struct TEST_VECTOR {
 TEST_VECTOR * get_gcm_test_vectors(void);
 uint32_t get_gcm_test_vector_count(void);
 
+TEST_VECTOR * get_ccm_test_vectors(void);
+uint32_t get_ccm_test_vector_count(void);
+
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* GCM_TEST_VECTOR_H */
+#endif	/* AEAD_TEST_VECTOR_H */
