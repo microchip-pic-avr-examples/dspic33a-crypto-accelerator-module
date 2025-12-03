@@ -50,8 +50,8 @@ Microchip or any third party.
 #ifndef CAM_ECDSA_H
 #define	CAM_ECDSA_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -220,8 +220,8 @@ CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify)(PKE_CONFIG *eccData);
 #define DRV_CRYPTO_ECDSA_Verify MPROTO(DRV_CRYPTO_ECDSA_Verify)
 /** @endcond **/
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_ECDSA_H */

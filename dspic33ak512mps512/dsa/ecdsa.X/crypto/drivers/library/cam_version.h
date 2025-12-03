@@ -51,12 +51,9 @@ Microchip or any third party.
 #ifndef CAM_VERSION_H
 #define CAM_VERSION_H
 
-/**
- * @ingroup version 
- * @def CAM_LIBRARY_VERSION_DATE
- * @brief Version date format (yyyymmdd).
- **/
- #define CAM_LIBRARY_VERSION_DATE   "20251014"
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
 
 /**
  * @ingroup version 
@@ -78,5 +75,17 @@ Microchip or any third party.
  * @brief This number represents the patch version in SemVer format.
  */
 #define CAM_LIBRARY_VERSION_PATCH  0
+/** @cond INTERNAL **/
+/**
+ * @ingroup version 
+ * @def CAM_LIBRARY_IDENTIFIER
+ * @brief This field represents a build identifier of the CAM library.
+ */
+#define CAM_LIBRARY_IDENTIFIER  m4t7s2q9b6w1x8z3
+/** @endcond **/
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
+#endif
 
 #endif /* CAM_VERSION_H */

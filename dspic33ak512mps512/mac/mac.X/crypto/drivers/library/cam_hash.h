@@ -49,8 +49,8 @@ Microchip or any third party.
 #ifndef CAM_HASH_H
 #define	CAM_HASH_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
 #endif
 
 // *****************************************************************************
@@ -361,8 +361,8 @@ uint32_t MPROTO(DRV_CRYPTO_HASH_GetContextSize)(void *contextData);
 #define DRV_CRYPTO_HASH_GetContextSize MPROTO(DRV_CRYPTO_HASH_GetContextSize)
 /** @endcond */
 
-#ifdef	__cplusplus
-}
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
 
 #endif	/* CAM_HASH_H */
