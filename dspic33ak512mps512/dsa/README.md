@@ -36,7 +36,7 @@ The ECDSA Sign and Verify operations use NIST defined public and private keys fo
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
 ### Application Results
-The following information will be printed on the COM port for all supported ECC Curve types:
+The following information will be printed on the COM port for all supported ECC Curve types using the blocking then non-blocking API calls:
 1. A header Section with the ECC curve type name is printed.
 2. The signature is generated. (A status of the Crypto Device will be returned and printed)
 3. Generated signature is printed out.
@@ -126,11 +126,35 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign_GetResult(
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void);
 ```
 
+```c
+void Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(
+    void (*handler)(void)                      // A pointer to a function call 
+);
+```
+
+```c
+void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(
+    void (*handler)(void)                      // A pointer to a function call 
+);
+```
+
 ### crypto_EccCurveType_E can be any of the following enum values:
 - CRYPTO_ECC_CURVE_P192
 - CRYPTO_ECC_CURVE_P256
 - CRYPTO_ECC_CURVE_P384
 - CRYPTO_ECC_CURVE_P521
+
+## Non-blocking API usages guide
+1. Call the Start function (ex: Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, &inputHash, sizeof(inputHash), &privKey, sizeof(privKeyLen), CRYPTO_ECC_CURVE_P256, 1))
+2. Wait for the operation to complete. There are two options to do so:
+    - Poll the GetStatus function(Crypto_DigiSign_Ecdsa_Sign_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS) 
+    - use SignOperationCompleteCallbackRegister(handler) within wrapper file.
+3. When the operation is complete call the GetResult function (ex: Crypto_DigiSign_Ecdsa_Sign_GetResult(&outputSig, {expected size of the signature})
+  
+**Disclaimers**: 
+- Call GetResult after the Start function otherwise the Crypto_DigiSign_Ecdsa_Hw_ClearMemory(void) function within the digisign wrapper will need to be called.
+    - Crypto_DigiSign_Ecdsa_Hw_ClearMemory_GetStatus(void) can be used to check the status of the clear memory operation. 
+- If the start APIs return CRYPTO_DIGISIGN_PKE_BUSY This means there is an operation in progress.
 
 ## NIST Vectors
 The input test vectors used in this demo are from NIST Publication: [FIPS 186-4 ECDSA Algorithm Test Vectors](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/digital-signatures)
@@ -142,29 +166,64 @@ Hash values used in this demo are from NIST [Cryptographic Standards and Guideli
 ### Performance Benchmarking
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
+### BMX RAM access and performance
+The Crypto Accelerator Module has a lower priority on the BMX RAM access. 
+
+If an empty polling loop is used with the Non-blocking API's there will be an increase in time.
+- The empty polling loop causes the CPU to over-utilize the BMX blocking the Crypto Accelerator Module from accessing RAM.
+
+A possible workaround will be to change the Crypto BMX access to have priority over the CPU. **Disclaimer: This is not recommended.**
+
+Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
+
+#### Blocking API Performance:
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|3.913|
-|P-256|7.396|
-|P-384|19.756|
-|P-521|42.057|
+|P-192|3.88|
+|P-256|7.36|
+|P-384|19.64|
+|P-521|41.88|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.129|
-|P-256|9.882|
-|P-384|27.006|
-|P-521|58.281|
+|P-192|5.12|
+|P-256|9.84|
+|P-384|26.92|
+|P-521|58.08|
+
+#### Non-blocking API Performance:
+|ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
+|----|----|
+|P-192|3.88|
+|P-256|7.24|
+|P-384|19.56|
+|P-521|41.88|
+
+|ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
+|----|----|
+|P-192|5.00|
+|P-256|9.76|
+|P-384|26.8|
+|P-521|57.72|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
+#### Blocking Memory Usage:
 |ECC Curve|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|P-192|4,152|11,360|
-|P-256|4,152|11,404|
-|P-384|4,152|11,472|
-|P-521|4,152|11,552|
+|P-192|4,168|13,380|
+|P-256|4,168|13,424|
+|P-384|4,168|13,492|
+|P-521|4,168|13,572|
+
+#### Non-blocking Memory Usage:
+|ECC Curve|RAM (bytes)|FLASH (bytes)|
+|----|----|----|
+|P-192|4,168|13,428|
+|P-256|4,168|13,468|
+|P-384|4,168|13,536|
+|P-521|4,168|13,608|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
