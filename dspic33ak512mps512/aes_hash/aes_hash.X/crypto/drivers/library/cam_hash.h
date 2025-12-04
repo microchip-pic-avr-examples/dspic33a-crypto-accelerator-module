@@ -169,7 +169,7 @@ HASH_ERROR DRV_CRYPTO_HASH_Update(void *contextData, uint8_t *data, uint32_t dat
  * @retval HASH_EXECUTE_ERROR     Failure during hash execution.
  * @note A hash operation must be in progress (initialized by DRV_HASH_CRYPTO_Initialize()).
  */
-HASH_ERROR DRV_CRYPTO_HASH_Final(void *contextData, uint8_t * digest, uint32_t digestLength);
+HASH_ERROR DRV_CRYPTO_HASH_Final(void *contextData, const uint8_t * digest, uint32_t digestLength);
 
 /**
  * @ingroup hash
@@ -190,8 +190,8 @@ HASH_ERROR DRV_CRYPTO_HASH_Final(void *contextData, uint8_t * digest, uint32_t d
  * @note A hash operation must be in progress (initialized by DRV_HASH_CRYPTO_Initialize()).
  */
 HASH_ERROR DRV_CRYPTO_HASH_Digest(void *contextData, HASHCON_MODE mode,
-    uint8_t *data, uint32_t dataLength,
-    uint8_t * digest, uint32_t digestLength);
+    const uint8_t *data, uint32_t dataLength,
+    const uint8_t * digest, uint32_t digestLength);
 
 /**
  * @ingroup hash
@@ -290,7 +290,7 @@ HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Update)(void *contextData, uint8_t *data, uint
  * This function is specific to the currently defined hardware version for finalizing a hash operation.
  * If the hardware version is not defined, this function will not be available.
  */
-HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Final)(void *contextData, uint8_t * digest, uint32_t digestLength);
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Final)(void *contextData, const uint8_t * digest, uint32_t digestLength);
 
 /**
  * @ingroup hash
@@ -309,8 +309,8 @@ HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Final)(void *contextData, uint8_t * digest, ui
  * This function is specific to the currently defined hardware version for generating a hash digest.
  * If the hardware version is not defined, this function will not be available.
  */
-HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Digest)(void *contextData, HASHCON_MODE mode, uint8_t *data, uint32_t dataLength, 
-        uint8_t * digest, uint32_t digestLength);
+HASH_ERROR MPROTO(DRV_CRYPTO_HASH_Digest)(void *contextData, HASHCON_MODE mode, const uint8_t *data, 
+    uint32_t dataLength, const uint8_t * digest, uint32_t digestLength);
 
 /**
  * @ingroup hash

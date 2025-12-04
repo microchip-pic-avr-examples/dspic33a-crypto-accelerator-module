@@ -112,12 +112,8 @@ void DRV_CRYPTO_TRNG_IsrHelper(void);
  * This function performs a read of the FIFO to obtain the key and stores it
  * for use in generating TRNG values.
  * 
- * @retval TRNG_NO_ERROR          Successful completion.
- * @retval TRNG_FAILED_TO_GENERATE Failed to generate random data.
- * @retval TRNG_EXEC_FIFO          FIFO error occurred.
- * @retval TRNG_EXEC_STARTUP       Start-up test failure.
- * @retval TRNG_EXEC_PROP          Propagation test failure.
- * @retval TRNG_EXEC_REP           Repetition count test failure.
+ * @retval TRNG_NO_ERROR           Successful completion.
+ * @retval TRNG_KEY_SETUP          Error during key setup.
  */
 TRNG_ERROR DRV_CRYPTO_TRNG_Setup(void);
 
