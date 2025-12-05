@@ -228,13 +228,13 @@ The following benchmarking results were obtained with the device clock speed set
 |32|8,192|16|26.13|
 
 #### HMAC
-|Hash Algorithm|Key Size (bytes)|Message Size (bytes)|MAC Size (bytes)|HMAC Crypto_Mac_Hmac_Direct Performance (Mbps)|
-|----|----|----|----|----|
-|SHA-1|16|8,192|20|139.04|
-|SHA2-224|16|8,192|28|140.54|
-|SHA2-256|16|8,192|32|140.51|
-|SHA2-384|16|8,192|48|230.78|
-|SHA2-512|16|8,192|64|230.96|
+|Hash Algorithm|Key Size (bytes)|Message Size (bytes)|HMAC Crypto_Mac_Hmac_Direct Performance (Mbps)|
+|----|----|----|----|
+|SHA-1|16|8,192|139.04|
+|SHA2-224|16|8,192|140.54|
+|SHA2-256|16|8,192|140.51|
+|SHA2-384|16|8,192|230.78|
+|SHA2-512|16|8,192|230.96|
 
 #### AES-GMAC
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
