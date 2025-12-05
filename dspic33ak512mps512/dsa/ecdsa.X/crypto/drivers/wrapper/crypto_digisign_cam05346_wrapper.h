@@ -53,6 +53,7 @@ Microchip or any third party.
 #include <stdint.h>
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_digsign.h"
+#include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -168,6 +169,11 @@ void Crypto_DigiSign_Ecdsa_Hw_ClearMemory(void);
  */
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_ClearMemory_GetStatus(void);
 
+/**
+ * @brief Returns the operation type that was completed.
+ * @return ECDSA_SIGN or ECDSA_VERIFY or UNKNOWN_OPERATION.
+ */
+crypto_operation_Id Crypto_DigSign_Ecdsa_Operation(void);
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
