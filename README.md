@@ -63,11 +63,11 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-256 (Digest)|1160.55 Mbps|Message Size: 8,192|
 |SHA-384 (Digest)|1394.09 Mbps|Message Size: 8,192|
 |SHA-512 (Digest)|1395.27 Mbps|Message Size: 8,192|
-|HMAC SHA-1 (Direct)|139.04 Mbps|Key Size: 16, Message Size: 8,192, MAC Size: 16|
-|HMAC SHA-224 (Direct)|140.54 Mbps|Key Size: 16, Message Size: 8,192, MAC Size: 16|
-|HMAC SHA-256 (Direct)|140.51 Mbps|Key Size: 16, Message Size: 8,192, MAC Size: 16|
-|HMAC SHA-384 (Direct)|230.78 Mbps|Key Size: 16, Message Size: 8,192, MAC Size: 16|
-|HMAC SHA-512 (Direct)|230.96 Mbps|Key Size: 16, Message Size: 8,192, MAC Size: 16|
+|HMAC SHA-1 (Direct)|139.04 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-224 (Direct)|140.54 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-256 (Direct)|140.51 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-384 (Direct)|230.78 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-512 (Direct)|230.96 Mbps|Key Size: 16, Message Size: 8,192|
 |AES-ECB (Encrypt)|435.48 Mbps|Key Size: 16, Plaintext Size: 8,192|
 |AES-ECB (Decrypt)|434.36 Mbps|Key Size: 16, Ciphertext Size: 8,192|
 |AES-CTR (Encrypt)|435.26 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
