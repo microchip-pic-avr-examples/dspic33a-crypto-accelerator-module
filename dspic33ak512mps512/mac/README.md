@@ -237,11 +237,11 @@ The following benchmarking results were obtained with the device clock speed set
 |SHA2-512|16|8,192|64|230.96|
 
 #### AES-GMAC
-|Key Size (bytes)|Plaintext Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
-|----|----|----|----|----|----|
-|16|0|12|4|16|9.20|
-|24|0|12|4|16|9.09|
-|32|0|12|4|16|8.96|
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
+|----|----|----|----|----|
+|16|12|8,192|16|154.28|
+|24|12|8,192|16|180.01|
+|32|12|8,192|16|205.77|
 
 ### Memory Size Benchmarking
 The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.
