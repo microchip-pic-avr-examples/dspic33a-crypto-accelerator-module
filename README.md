@@ -83,7 +83,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-XTS (Encrypt)|429.99 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
 |AES-XTS (Decrypt)|429.20 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
 |AES-CMAC (Direct)|26.79 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
-|AES-GMAC (Direct)|154.28 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, MAC Size: 16|
+|AES-GMAC (Direct)|154.28 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
 |ECDSA (Sign)|3.913 ms|Curve: P-192|
 |ECDSA (Verify)|5.129 ms|Curve: P-192|
 |ECDSA (Sign)|7.396 ms|Curve: P-256|
