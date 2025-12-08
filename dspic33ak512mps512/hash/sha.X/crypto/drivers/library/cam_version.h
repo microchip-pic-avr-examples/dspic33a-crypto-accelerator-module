@@ -67,7 +67,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_MINOR  2
+#define CAM_LIBRARY_VERSION_MINOR  3
  
 /**
  * @ingroup version 
@@ -81,7 +81,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_IDENTIFIER
  * @brief This field represents a build identifier of the CAM library.
  */
-#define CAM_LIBRARY_IDENTIFIER  k1u7z5pa4b3s6x
+#define CAM_LIBRARY_IDENTIFIER  a9f3b2c8e1d6g4h7
 /** @endcond **/
 
 #ifdef __cplusplus  // Provide C++ Compatibility
