@@ -51,6 +51,8 @@ Microchip or any third party.
 #include "crypto/drivers/wrapper/crypto_cam05346_wrapper.h"
 #include "crypto/drivers/library/cam_ecdh.h"
 
+#define UNCOMPRESSED_KEY_TYPE       0x04U
+
 static void lDRV_CRYPTO_ECC_InterruptSetup(void)
 {
     (void)Crypto_Int_Hw_Register_Handler(CRYPTO3_INT, DRV_CRYPTO_PKE_IsrHelper);
@@ -126,7 +128,7 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_Hw_SharedSecret(uint8_t *privKey,
     PKE_CONFIG eccData;
     PKE_ECC_CURVE hwEccCurve;
 
-    if (pubKey[0] == 0x04U)
+    if (pubKey[0] == UNCOMPRESSED_KEY_TYPE)
     {
         /* Get curve */
         hwResult = lCrypto_Kas_Ecdh_Hw_GetCurve(eccCurveType_en, &hwEccCurve);
