@@ -100,7 +100,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_Start(
     uint32_t hashLen,                           // Length of the generated Hash 
     uint8_t *ptr_inputSig,                      // A pointer given Signature 
     uint32_t sigLen,                            // Length of the Signature 
-    uint8_t *ptr_pubKey,                        //  Public Key to verify the signature 
+    uint8_t *ptr_pubKey,                        // Public Key to verify the signature 
     uint32_t pubKeyLen,                         // Length of the Public Key 
     crypto_EccCurveType_E eccCurveType_En,      // Type of curve being used(described below) 
     uint32_t ecdsaSessionId                     // Session ID (This is set to 1)
@@ -147,12 +147,12 @@ void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(
 ## Non-blocking API usages guide
 1. Call the Start function (ex: Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, &inputHash, sizeof(inputHash), &privKey, sizeof(privKeyLen), CRYPTO_ECC_CURVE_P256, 1))
 2. Wait for the operation to complete. There are two options to do so:
-    - Poll the GetStatus function(Crypto_DigiSign_Ecdsa_Sign_GetStatus() == CRYPTO_DIGISIGN_OPERATION_IN_PROGRESS) 
-    - use SignOperationCompleteCallbackRegister(handler) within wrapper file.
+    - Poll Crypto_DigiSign_Ecdsa_Sign_GetStatus()  
+    - Use SignOperationCompleteCallbackRegister(handler) within wrapper file.
 3. When the operation is complete call the GetResult function (ex: Crypto_DigiSign_Ecdsa_Sign_GetResult(&outputSig, {expected size of the signature})
   
 **Disclaimers**: 
-- Call GetResult after the Start function otherwise the Crypto_DigiSign_Ecdsa_Hw_ClearMemory(void) function within the digisign wrapper will need to be called.
+- If result is not fetched after the completion of an operation, Crypto_DigiSign_Ecdsa_Hw_ClearMemory(void) function within the digisign wrapper will need to be called.
     - Crypto_DigiSign_Ecdsa_Hw_ClearMemory_GetStatus(void) can be used to check the status of the clear memory operation. 
 - If the start APIs return CRYPTO_DIGISIGN_PKE_BUSY This means there is an operation in progress.
 
@@ -170,9 +170,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 The Crypto Accelerator Module has a lower priority on the BMX RAM access. 
 
 If an empty polling loop is used with the Non-blocking API's there will be an increase in time.
-- The empty polling loop causes the CPU to over-utilize the BMX blocking the Crypto Accelerator Module from accessing RAM.
+- The empty polling loop causes the CPU to over-utilize the BMX and thus blocking the Crypto Accelerator Module from accessing RAM.
 
-A possible workaround will be to change the Crypto BMX access to have priority over the CPU. **Disclaimer: This is not recommended.**
+A possible workaround will be to change the Crypto BMX access to have priority over the CPU. 
+- **Disclaimer: This is not recommended as the crypto operations may restrict critical system functions and cause unexpected behavior.**
 
 Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
 
