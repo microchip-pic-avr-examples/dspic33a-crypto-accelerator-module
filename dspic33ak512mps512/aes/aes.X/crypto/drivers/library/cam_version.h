@@ -67,7 +67,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_MINOR  3
+#define CAM_LIBRARY_VERSION_MINOR  2
  
 /**
  * @ingroup version 
