@@ -170,7 +170,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 The Crypto Accelerator Module has a lower priority on the BMX RAM access. 
 
 If an empty polling loop is used with the Non-blocking API's there will be an increase in time.
-- The empty polling loop causes the CPU to over-utilize the BMX and thus blocking the Crypto Accelerator Module from accessing RAM.
+- The empty polling loop causes the CPU to over-utilize the BMX thereby blocking the Crypto Accelerator Module from accessing RAM.
 
 A possible workaround will be to change the Crypto BMX access to have priority over the CPU. 
 - **Disclaimer: This is not recommended as the crypto operations may restrict critical system functions and cause unexpected behavior.**
