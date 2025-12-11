@@ -73,7 +73,7 @@ Microchip or any third party.
 /**
  * @ingroup ecdsa
  * 
- * This function initializes the ECDSA parameters and sets up the Hardware Crypto Engine
+ * This function initializes the ECDSA parameters and sets up the hardware crypto engine
  * for the signature generation.
  * 
  * @param eccData Configuration structure to store ECDSA information.
@@ -95,7 +95,7 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_InitEccParamsSign(PKE_CONFIG *eccData, uint8_
  * @param eccData Configuration structure to store ECDSA information.
  * @param outputSignature Buffer to contain the signature.
  * @param signatureLength Length of the signature.
- * @retval CRYPTO_PKE_RESULT_SUCCESS   Success.
+ * @retval CRYPTO_PKE_RESULT_SUCCESS  Success.
  * @retval CRYPTO_PKE_RESULT_ERROR_FAIL  Sign operation failure.
  * @note DRV_CRYPTO_ECDSA_InitEccParamsSign must be called before this function can be called.
  */
@@ -104,12 +104,12 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Sign(PKE_CONFIG *eccData, uint8_t * outputSig
 /**
  * @ingroup ecdsa
  * 
- * This function initializes the ECDSA parameters and sets up the Hardware Crypto Engine
+ * This function initializes the ECDSA parameters and sets up the hardware crypto engine
  * for the signature verification.
  * 
  * @param eccData Configuration structure to store ECDSA information.
  * @param inputHash Hash input to use for the signature verification.
- * @param hashLength Length of the Hash input.
+ * @param hashLength Length of the hash input.
  * @param inputSignature Signature input to verify.
  * @param signatureLength Length of the signature.
  * @param publicKey Public key input for the signature verification.
@@ -128,11 +128,66 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_InitEccParamsVerify(PKE_CONFIG *eccData, uint
  * This function verifies the signature based on the initialized ECDSA parameters.
  * 
  * @param eccData Configuration structure to store ECDSA information.
- * @retval CRYPTO_PKE_RESULT_SUCCESS   Success.
+ * @retval CRYPTO_PKE_RESULT_SUCCESS  Success.
  * @retval CRYPTO_PKE_RESULT_ERROR_FAIL  Verify operation failure.
  * @note DRV_CRYPTO_ECDSA_InitEccParamsVerify must be called before this function can be called.
  */
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify(PKE_CONFIG *eccData);
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Non-Blocking ECDSA Common Interface
+// *****************************************************************************
+// *****************************************************************************
+
+/**
+ *  @brief Initialize and start the non-blocking ECDSA signature generation process.
+ *  @param inputHash Hash input to use for the signature generation.
+ *  @param hashLength Length of the hash input.
+ *  @param privateKey Public key input for signature generation.
+ *  @param privateKeyLength Length of the public key.
+ *  @param eccCurve ECC curve used for generation.
+ *  @return CRYPTO_PKE_RESULT_SUCCESS on success. CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
+ *  @note This function initializes the hardware crypto engine with ECDSA parameters.
+ **/
+CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Sign_Start(uint8_t *inputHash, 
+    uint32_t hashLength, uint8_t *privateKey, uint32_t privateKeyLength, 
+    PKE_ECC_CURVE eccCurve);
+
+/**
+ *  @brief Initialize and start the non-blocking ECDSA verification process.
+ *  @param inputHash Hash input to use for the signature verification.
+ *  @param hashLength Length of the hash input.
+ *  @param inputSignature Signature input to verify.
+ *  @param signatureLength Length of the signature.
+ *  @param publicKey Public key input for signature verification.
+ *  @param publicKeyLength Length of the public key.
+ *  @param eccCurve ECC curve used for verification.
+ *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
+ **/
+CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify_Start(uint8_t *inputHash, 
+        uint32_t hashLength, uint8_t *inputSignature, uint32_t signatureLength,
+        uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE eccCurve);
+
+/**
+ *  @brief Returns the signing result.
+ *  @param outputSignature Buffer to contain the signature.
+ *  @param signatureLength Length of the signature
+ *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
+ **/
+CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Sign_GetResult(uint8_t *outputSignature, uint32_t signatureLength);
+
+/**
+ *  @brief Returns the verification result.
+ *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
+ **/
+CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify_GetResult(void);
+
+/**
+ *  @brief Returns the status of the hardware crypto engine.
+ *  @return CRYPTO_PKE_STATUS_IDLE when the operation is complete.  CRYPTO_PKE_STATUS_BUSY when an operation is running.
+ **/
+CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_GetStatus(void);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -218,6 +273,104 @@ CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify)(PKE_CONFIG *eccData);
  * hardware version for verifying ECDSA signatures.
  */
 #define DRV_CRYPTO_ECDSA_Verify MPROTO(DRV_CRYPTO_ECDSA_Verify)
+
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for generating ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Sign_Start)(uint8_t *inputHash, uint32_t hashLength, uint8_t *privateKey, uint32_t privateKeyLength, 
+        PKE_ECC_CURVE eccCurve);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Sign_Start
+ * @brief Macro to create a device-specific function prototype for signing ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
+#define DRV_CRYPTO_ECDSA_Sign_Start MPROTO(DRV_CRYPTO_ECDSA_Sign_Start)
+
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for verifying ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify_Start)(uint8_t *inputHash, uint32_t hashLength, uint8_t *inputSignature,
+        uint32_t signatureLength, uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE eccCurve);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Verify_Start
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
+#define DRV_CRYPTO_ECDSA_Verify_Start MPROTO(DRV_CRYPTO_ECDSA_Verify_Start)
+
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for generating ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Sign_GetResult)(uint8_t *outputSignature, uint32_t signatureLength);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Sign_GetResult
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
+#define DRV_CRYPTO_ECDSA_Sign_GetResult MPROTO(DRV_CRYPTO_ECDSA_Sign_GetResult)
+
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for verifying ECDSA signatures.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_Verify_GetResult)(void);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_Verify_GetResult
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
+#define DRV_CRYPTO_ECDSA_Verify_GetResult MPROTO(DRV_CRYPTO_ECDSA_Verify_GetResult)
+
+/**
+ * @ingroup ecdsa
+ * @brief Function prototype for ECDSA status.
+ * 
+ * This function is specific to the currently defined hardware version for verifying ECDSA signatures.
+ * If the hardware version is not defined, this function will not be available.
+ */
+CRYPTO_PKE_RESULT MPROTO(DRV_CRYPTO_ECDSA_GetStatus)(void);
+
+/**
+ * @ingroup ecdsa
+ * @def DRV_CRYPTO_ECDSA_GetStatus
+ * @brief Macro to create a device-specific function prototype for verifying ECDSA signatures.
+ * 
+ * This macro generates a function prototype specific to the currently defined
+ * hardware version for verifying ECDSA signatures.
+ */
+#define DRV_CRYPTO_ECDSA_GetStatus MPROTO(DRV_CRYPTO_ECDSA_GetStatus)
+
 /** @endcond **/
 
 #ifdef __cplusplus  // Provide C++ Compatibility

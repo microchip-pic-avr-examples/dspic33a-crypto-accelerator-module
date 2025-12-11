@@ -13,7 +13,7 @@
   Description:
     This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
 
-  File created on 2025-11-19t14:02:58
+  File created on 2025-11-21t11:23:02
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -53,6 +53,10 @@ Microchip or any third party.
 
 #ifndef CAM_DEVICE_H
 #define CAM_DEVICE_H
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -150,6 +154,10 @@ Microchip or any third party.
     #error "This CAM library version does not support the selected device. Verify that the device has a CAM peripheral and you are using the latest CAM library release."
 #endif
 /** @endcond **/
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
+#endif
 
 #endif // CAM_DEVICE_H
 

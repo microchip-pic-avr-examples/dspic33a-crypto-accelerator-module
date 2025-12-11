@@ -54,7 +54,7 @@ Microchip or any third party.
 #ifdef __cplusplus  // Provide C++ Compatibility
     extern "C" {
 #endif
-
+    
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
@@ -63,7 +63,8 @@ Microchip or any third party.
 
 #include "cam_version.h"
 #include "cam_device.h"
-
+#include <stdbool.h>
+    
 // *****************************************************************************
 // *****************************************************************************
 // Section: Type Definitions
@@ -76,12 +77,14 @@ Microchip or any third party.
  * @brief This enumeration represents the result of the CAM PKE operation.
  */
 typedef enum {
-    CRYPTO_PKE_RESULT_SUCCESS,         /**< Operation successful  */
-    CRYPTO_PKE_RESULT_INIT_FAIL,       /**< Initialization failed  */
-    CRYPTO_PKE_ERROR_PUBKEYCOMPRESS,  /**< Public key compression error  */
-    CRYPTO_PKE_RESULT_ERROR_CURVE,     /**< Curve error  */
-    CRYPTO_PKE_RESULT_ERROR_RNG,       /**< RNG error  */
-    CRYPTO_PKE_RESULT_ERROR_FAIL        /**< General operation failure  */
+    CRYPTO_PKE_RESULT_SUCCESS = 0U,             /**< Operation successful  */
+    CRYPTO_PKE_RESULT_INIT_FAIL = 1U,           /**< Initialization failed  */
+    CRYPTO_PKE_ERROR_PUBKEYCOMPRESS = 2U,       /**< Public key compression error  */
+    CRYPTO_PKE_RESULT_ERROR_CURVE = 3U,         /**< Curve error  */
+    CRYPTO_PKE_RESULT_ERROR_RNG = 4U,           /**< RNG error  */
+    CRYPTO_PKE_RESULT_ERROR_FAIL = 5U,          /**< General operation failure  */
+    CRYPTO_PKE_RESULT_IDLE = 6U,                /**< PKE is ready for a new operation */
+    CRYPTO_PKE_RESULT_BUSY = 7U,                /**< PKE operation is in progress */
 } CRYPTO_PKE_RESULT;
 
 /**
@@ -97,6 +100,18 @@ typedef enum
   P521 = 3,    /**< P-521 curve  */
   P192 = 4,    /**< P-192 curve  */
 } PKE_ECC_CURVE;
+
+/**
+ * @ingroup pke
+ * @typedef PKE_OPERATION_TYPE
+ * @brief This enumeration represents the operation that triggered an interrupt.
+ */
+typedef enum
+{
+    CRYPTO_PKE_OPERATION_VERIFY,
+    CRYPTO_PKE_OPERATION_SIGN,
+    CRYPTO_PKE_OPERATION_UNKNOWN,
+} PKE_OPERATION_TYPE;
 
 /**
  * @ingroup pke
@@ -166,6 +181,28 @@ typedef struct
  */
 void DRV_CRYPTO_PKE_IsrHelper(void);
 
+/**
+ *  @brief Clear the memory stored by the PKE engine.
+ **/
+void DRV_CRYPTO_PKE_ClearMemory(void);
+
+/**
+ *  @brief Sets up the PKE engine to default starting settings.
+ *  @note Sets the pkeRam, microcode, memory offsets and additional modulus locations used by the engine.
+ **/
+void DRV_CRYPTO_PKE_SetupEngine(void);
+
+/**
+ *  @brief Non-blocking of the clear memory function.
+ **/
+void DRV_CRYPTO_PKE_ClearMemory_NoWait(void);
+
+/**
+ *  @brief Gets the operation type that was previously set.
+ *  @return returns CRYPTO_PKE_OPERATION_VERIFY or CRYPTO_PKE_OPERATION_SIGN based on the operation completed.
+ **/
+PKE_OPERATION_TYPE DRV_CRYPTO_PKE_OperationCompleteGet(void);
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: PKE CAM Device Support
@@ -193,6 +230,90 @@ void MPROTO(DRV_CRYPTO_PKE_IsrHelper)(void);
  * defined CAM hardware version.
  */
 #define DRV_CRYPTO_PKE_IsrHelper MPROTO(DRV_CRYPTO_PKE_IsrHelper)
+
+/**
+ * @ingroup pke
+ * @brief Function prototype for the PKE clear memory.
+ * 
+ * This function is specific to the currently defined hardware version for the PKE Clear Memory.
+ * If the hardware version is not defined, this function will not be available.
+ */
+void MPROTO(DRV_CRYPTO_PKE_ClearMemory)(void);
+
+/**
+ * @ingroup pke
+ * @def DRV_CRYPTO_PKE_ClearMemory
+ * @brief Macro to create a device-specific function prototype.
+ * 
+ * This macro generates a function prototype that is specific to the
+ * currently defined hardware version. It allows the creation of
+ * device-specific implementations of the PKE functions based on the
+ * defined CAM hardware version.
+ */
+#define DRV_CRYPTO_PKE_ClearMemory MPROTO(DRV_CRYPTO_PKE_ClearMemory)
+
+/**
+ * @ingroup pke
+ * @brief Function prototype for the PKE setup engine.
+ * 
+ * This function is specific to the currently defined hardware version for the PKE setup engine.
+ * If the hardware version is not defined, this function will not be available.
+ */
+void MPROTO(DRV_CRYPTO_PKE_SetupEngine)(void);
+
+/**
+ * @ingroup pke
+ * @def DRV_CRYPTO_PKE_SetupEngine
+ * @brief Macro to create a device-specific function prototype.
+ * 
+ * This macro generates a function prototype that is specific to the
+ * currently defined hardware version. It allows the creation of
+ * device-specific implementations of the PKE functions based on the
+ * defined CAM hardware version.
+ */
+#define DRV_CRYPTO_PKE_SetupEngine MPROTO(DRV_CRYPTO_PKE_SetupEngine)
+
+/**
+ * @ingroup pke
+ * @brief Function prototype for the PKE Clear Memory No Wait.
+ * 
+ * This function is specific to the currently defined hardware version for the PKE clear memory no wait.
+ * If the hardware version is not defined, this function will not be available.
+ */
+void MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)(void);
+
+/**
+ * @ingroup pke
+ * @def DRV_CRYPTO_PKE_ClearMemory_NoWait
+ * @brief Macro to create a device-specific function prototype.
+ * 
+ * This macro generates a function prototype that is specific to the
+ * currently defined hardware version. It allows the creation of
+ * device-specific implementations of the PKE functions based on the
+ * defined CAM hardware version.
+ */
+#define DRV_CRYPTO_PKE_ClearMemory_NoWait MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)
+
+/**
+ * @ingroup pke
+ * @brief Function prototype for the PKE Clear Memory No Wait.
+ * 
+ * This function is specific to the currently defined hardware version for the PKE clear memory no wait.
+ * If the hardware version is not defined, this function will not be available.
+ */
+PKE_OPERATION_TYPE MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)(void);
+
+/**
+ * @ingroup pke
+ * @def DRV_CRYPTO_PKE_OperationCompleteGet
+ * @brief Macro to create a device-specific function prototype.
+ * 
+ * This macro generates a function prototype that is specific to the
+ * currently defined hardware version. It allows the creation of
+ * device-specific implementations of the PKE functions based on the
+ * defined CAM hardware version.
+ */
+#define DRV_CRYPTO_PKE_OperationCompleteGet MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)
 /** @endcond */
 
 #ifdef __cplusplus  // Provide C++ Compatibility
