@@ -309,9 +309,9 @@ void aes_aead_gcm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->ptlength, emptyString);
+        printTestHeader(testWrapper, (test->keylength * 8UL), testType, test->ptlength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keyLength);
+        printHexArray("Key                  ", test->key, test->keylength);
 
         if(test->ivlength != 0UL)
         {
@@ -323,9 +323,9 @@ void aes_aead_gcm_test(void)
             (void) printf("\r\n%s", " Initialization Vector  :  None");
         }
 
-        if(test->aadLength != 0UL)
+        if(test->aadlength != 0UL)
         {
-            printHexArray("Authentication Data  ", test->aad, test->aadLength);
+            printHexArray("Authentication Data  ", test->aad, test->aadlength);
         }
         else
         {
@@ -334,15 +334,15 @@ void aes_aead_gcm_test(void)
         }
 
         pt = (test->ptlength > 0UL) ? test->pt : NULL;
-        aad = (test->aadLength > 0UL) ? test->aad : NULL;
+        aad = (test->aadlength > 0UL) ? test->aad : NULL;
         ct = (test->ptlength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = aead_gcm_test_direct(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keyLength,
-                                      test->iv, test->ivlength, aad, test->aadLength, ct, tagDirectResult);
+        status = aead_gcm_test_direct(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keylength,
+                                      test->iv, test->ivlength, aad, test->aadlength, ct, tagDirectResult);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
+            printCryptoError((test->keylength * 8UL), testType, "Encrypt", status);
         }
         else
         {
@@ -350,11 +350,11 @@ void aes_aead_gcm_test(void)
 
             if (test->ptlength > 0UL)
             {
-                status = aead_gcm_test_direct(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keyLength,
-                                              test->iv, test->ivlength, aad, test->aadLength, decryptedDirectResult, tagDirectResult);
+                status = aead_gcm_test_direct(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keylength,
+                                              test->iv, test->ivlength, aad, test->aadlength, decryptedDirectResult, tagDirectResult);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
+                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", status);
                 }
                 else
                 {
@@ -369,12 +369,12 @@ void aes_aead_gcm_test(void)
 
         ct = (test->ptlength > 0UL) ? encryptedStepsResult : NULL;
 
-        statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keyLength,
-                                          test->iv, test->ivlength, aad, test->aadLength, ct, tagStepsResult);
+        statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keylength,
+                                          test->iv, test->ivlength, aad, test->aadlength, ct, tagStepsResult);
 
         if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", statusSteps);
+            printCryptoError((test->keylength * 8UL), testType, "Encrypt", statusSteps);
         }
         else
         {
@@ -382,12 +382,12 @@ void aes_aead_gcm_test(void)
 
             if (test->ptlength > 0UL)
             {
-                statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keyLength,
-                                                  test->iv, test->ivlength, aad, test->aadLength, decryptedStepsResult, tagStepsResult);
+                statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keylength,
+                                                  test->iv, test->ivlength, aad, test->aadlength, decryptedStepsResult, tagStepsResult);
 
                 if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", statusSteps);
+                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", statusSteps);
                 }
                 else
                 {
@@ -445,9 +445,9 @@ void aes_aead_ccm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textlength, emptyString);
+        printTestHeader(testWrapper, (test->keylength * 8UL), testType, test->textlength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keyLength);
+        printHexArray("Key                  ", test->key, test->keylength);
 
         if(test->noncelength != 0UL)
         {
@@ -459,9 +459,9 @@ void aes_aead_ccm_test(void)
             (void) printf("\r\n%s", " Nonce                  :  None");
         }
 
-        if(test->aadLength != 0UL)
+        if(test->aadlength != 0UL)
         {
-            printHexArray("Authentication Data  ", test->aad, test->aadLength);
+            printHexArray("Authentication Data  ", test->aad, test->aadlength);
         }
         else
         {
@@ -470,15 +470,15 @@ void aes_aead_ccm_test(void)
         }
 
         pt = (test->textlength > 0UL) ? test->pt : NULL;
-        aad = (test->aadLength > 0UL) ? test->aad : NULL;
+        aad = (test->aadlength > 0UL) ? test->aad : NULL;
         ct = (test->textlength > 0UL) ? encryptedResult : NULL;
 
-        status = aead_ccm_test(CRYPTO_CIOP_ENCRYPT, pt, test->textlength, test->key, test->keyLength,
-                               test->nonce, test->noncelength, aad, test->aadLength, ct, tagResult, test->taglength);
+        status = aead_ccm_test(CRYPTO_CIOP_ENCRYPT, pt, test->textlength, test->key, test->keylength,
+                               test->nonce, test->noncelength, aad, test->aadlength, ct, tagResult, test->taglength);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
+            printCryptoError((test->keylength * 8UL), testType, "Encrypt", status);
         }
         else
         {
@@ -486,11 +486,11 @@ void aes_aead_ccm_test(void)
 
             if (test->textlength > 0UL)
             {
-                status = aead_ccm_test(CRYPTO_CIOP_DECRYPT, ct, test->textlength, test->key, test->keyLength,
-                                       test->nonce, test->noncelength, aad, test->aadLength, decryptedResult, tagResult, test->taglength);
+                status = aead_ccm_test(CRYPTO_CIOP_DECRYPT, ct, test->textlength, test->key, test->keylength,
+                                       test->nonce, test->noncelength, aad, test->aadlength, decryptedResult, tagResult, test->taglength);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
+                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", status);
                 }
                 else
                 {
