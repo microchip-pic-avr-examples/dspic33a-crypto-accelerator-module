@@ -190,8 +190,8 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
 
 static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
-        uint8_t* nonce, uint32_t noncelength, uint8_t *aad, uint32_t aadLength,
-        uint8_t* result, uint8_t* tag, uint32_t taglength)
+        uint8_t* nonce, uint32_t nonceLength, uint8_t *aad, uint32_t aadLength,
+        uint8_t* result, uint8_t* tag, uint32_t tagLength)
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
 
@@ -213,14 +213,14 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
             status = Crypto_Aead_AesCcm_Cipher(&aesCcmCtx, encrypt,
-                                                data, dataLength, result, nonce, noncelength,
-                                                tag, taglength, aad, aadLength);
+                                                data, dataLength, result, nonce, nonceLength,
+                                                tag, tagLength, aad, aadLength);
         }
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
             printHexArray("Data (Encrypted)     ", result, dataLength);
-            printHexArray("Authentication Tag   ", tag, taglength);
+            printHexArray("Authentication Tag   ", tag, tagLength);
         }
     }
     else
@@ -233,8 +233,8 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
             status = Crypto_Aead_AesCcm_Cipher(&aesCcmCtx, encrypt,
-                                                data, dataLength, result, nonce, noncelength,
-                                                tag, taglength, aad, aadLength);
+                                                data, dataLength, result, nonce, nonceLength,
+                                                tag, tagLength, aad, aadLength);
         }
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
@@ -246,7 +246,7 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void checkEncryptionAndTag(uint8_t *text, uint8_t *result, uint32_t length, uint8_t *tag, uint8_t *tagResult, uint32_t taglength)
+static void checkEncryptionAndTag(uint8_t *text, uint8_t *result, uint32_t length, uint8_t *tag, uint8_t *tagResult, uint32_t tagLength)
 {
     (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
 
@@ -262,7 +262,7 @@ static void checkEncryptionAndTag(uint8_t *text, uint8_t *result, uint32_t lengt
         }
     }
 
-    if (0u == checkArrayEquality(tagResult, tag, taglength))
+    if (0u == checkArrayEquality(tagResult, tag, tagLength))
     {
         (void)printf(GREEN"\r\n Authentication Tag: PASS"RESET_COLOR);
     }
