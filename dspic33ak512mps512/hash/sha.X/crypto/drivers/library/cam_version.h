@@ -81,7 +81,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_IDENTIFIER
  * @brief This field represents a build identifier of the CAM library.
  */
-#define CAM_LIBRARY_IDENTIFIER  m4t7s2q9b6w1x8z3
+#define CAM_LIBRARY_IDENTIFIER  a9f3b2c8e1d6g4h7
 /** @endcond **/
 
 #ifdef __cplusplus  // Provide C++ Compatibility

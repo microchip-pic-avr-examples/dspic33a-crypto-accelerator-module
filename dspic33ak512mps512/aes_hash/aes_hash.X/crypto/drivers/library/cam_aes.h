@@ -172,7 +172,7 @@ void DRV_CRYPTO_AES_IsrHelper(void);
  * @note Reinitializing an AES operation in progress will void the previous operation.
  */
 AES_ERROR DRV_CRYPTO_AES_Initialize(void *contextData, AESCON_MODE mode, AESCON_OPERATION operation,
-        void* key, uint32_t keyLength, void *initVector, uint32_t initVectorLength);
+        void* key, uint32_t keyLength, const void *initVector, uint32_t initVectorLength);
 
 /**
  * @ingroup aes
@@ -187,7 +187,7 @@ AES_ERROR DRV_CRYPTO_AES_Initialize(void *contextData, AESCON_MODE mode, AESCON_
  * @retval AES_WRITE_ERROR  Failure while writing header data.
  * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
  */
-AES_ERROR DRV_CRYPTO_AES_AddHeader(void *contextData, void * headerData, uint32_t headerLength);
+AES_ERROR DRV_CRYPTO_AES_AddHeader(void *contextData, const void * headerData, uint32_t headerLength);
 
 /**
  * @ingroup aes
@@ -232,7 +232,7 @@ AES_ERROR DRV_CRYPTO_AES_AddInputData(void *contextData, void * data, uint32_t d
  * @retval AES_WRITE_ERROR  Failure while writing output data.
  * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
  */
-AES_ERROR DRV_CRYPTO_AES_AddOutputData(void *contextData, void * data, uint32_t dataLength);
+AES_ERROR DRV_CRYPTO_AES_AddOutputData(void *contextData, const void * data, uint32_t dataLength);
 
 /**
  * @ingroup aes
@@ -330,8 +330,8 @@ void MPROTO(DRV_CRYPTO_AES_IsrHelper)(void);
  * This function is specific to the currently defined hardware version for initializing an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
-AES_ERROR MPROTO(DRV_CRYPTO_AES_Initialize)(void *contextData, AESCON_MODE mode, AESCON_OPERATION operation, 
-        void* key, uint32_t keyLength, void *initVector, uint32_t initVectorLength);
+AES_ERROR MPROTO(DRV_CRYPTO_AES_Initialize)(void *contextData, AESCON_MODE mode, AESCON_OPERATION operation,
+        void* key, uint32_t keyLength, const void *initVector, uint32_t initVectorLength);
 
 /**
  * @ingroup aes
@@ -347,7 +347,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_Initialize)(void *contextData, AESCON_MODE mode,
  * This function is specific to the currently defined hardware version for adding header data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
-AES_ERROR MPROTO(DRV_CRYPTO_AES_AddHeader)(void *contextData, void * headerData, uint32_t headerLength);
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddHeader)(void *contextData, const void * headerData, uint32_t headerLength);
 
 /**
  * @ingroup aes
@@ -395,7 +395,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddInputData)(void *contextData, void * data, ui
  * This function is specific to the currently defined hardware version for adding output data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
-AES_ERROR MPROTO(DRV_CRYPTO_AES_AddOutputData)(void *contextData, void * data, uint32_t dataLength);
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddOutputData)(void *contextData, const void * data, uint32_t dataLength);
 
 /**
  * @ingroup aes
