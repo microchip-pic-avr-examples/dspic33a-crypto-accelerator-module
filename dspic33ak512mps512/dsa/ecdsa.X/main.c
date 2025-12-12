@@ -41,8 +41,7 @@ Microchip or any third party.
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
-#include "app_ecdsa.h"
-#include "mcc_generated_files/uart/uart1.h"
+#include "app/app_ecdsa.h"
 #include "mcc_generated_files/system/system.h"
 
 int main( void ) {
