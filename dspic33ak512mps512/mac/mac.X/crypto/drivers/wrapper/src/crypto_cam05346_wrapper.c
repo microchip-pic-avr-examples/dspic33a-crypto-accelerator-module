@@ -120,7 +120,7 @@ void __attribute__((interrupt)) _CRYPTO3Interrupt(void)
     _CRYPT3IF = 0;
 }
 
-void CRYPTO3_SignOperationCompleteCallbackRegister(void (*handler)(void))
+void CRYPTO_Int_Hw_SignComplete_CallbackRegister(void (*handler)(void))
 {
     if (NULL != handler)
     {
@@ -128,7 +128,7 @@ void CRYPTO3_SignOperationCompleteCallbackRegister(void (*handler)(void))
     }
 }
 
-void CRYPTO3_VerifyOperationCompleteCallbackRegister(void (*handler)(void))
+void CRYPTO_Int_Hw_VerifyComplete_CallbackRegister(void (*handler)(void))
 {
     if (NULL != handler)
     {
@@ -136,7 +136,7 @@ void CRYPTO3_VerifyOperationCompleteCallbackRegister(void (*handler)(void))
     }
 }
 
-void CRYPTO3_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void))
+void CRYPTO_Int_Hw_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void))
 {
     if (NULL != handler)
     {

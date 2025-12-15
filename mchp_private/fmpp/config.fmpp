@@ -41,6 +41,7 @@ data: {
     CRYPTO_HW_AES_CFB128: true,
     CRYPTO_HW_AES_OFB: true,
     CRYPTO_HW_AES_GCM: true,
+    CRYPTO_HW_AES_CCM: true,
     CRYPTO_HW_AES_CMAC: true,
     CRYPTO_HW_HMAC: true,
     CRYPTO_HW_AES_GMAC: true,

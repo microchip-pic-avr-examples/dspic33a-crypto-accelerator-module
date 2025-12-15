@@ -68,8 +68,9 @@
 // The minimum size to store a CAM library AEAD context data block.
 #define MINIMUM_AEAD_CONTEXT_DATA_SIZE  (256U)
 
-// The size of the AES-GCM authentication tag.
+// The size of the AES authentication tags.
 #define AES_GCM_AUTHTAG_SIZE            (16U)
+#define AES_CCM_AUTHTAG_SIZE            (16U)
 
 typedef struct
 {
@@ -105,6 +106,15 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_EncryptAuthDirect(uint8_t *inputData,
 crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_DecryptAuthDirect(uint8_t *inputData,
     uint32_t dataLen, uint8_t *outData, uint8_t *key, uint32_t keyLen,
     uint8_t *initVect, uint32_t initVectLen, uint8_t *aad, uint32_t aadLen,
+    uint8_t *authTag, uint32_t authTagLen);
+
+crypto_Aead_Status_E Crypto_Aead_Hw_AesCcm_Init(void *aeadInitCtx,
+    uint8_t *key, uint32_t keyLen);
+
+crypto_Aead_Status_E Crypto_Aead_Hw_AesCcm_Cipher(void *aeadCipherCtx,
+    crypto_CipherOper_E cipherOper_en,
+    uint8_t *inputData, uint32_t dataLen, uint8_t *outData,
+    uint8_t *nonce, uint32_t nonceLen, uint8_t *aad, uint32_t aadLen,
     uint8_t *authTag, uint32_t authTagLen);
 
 // DOM-IGNORE-BEGIN
