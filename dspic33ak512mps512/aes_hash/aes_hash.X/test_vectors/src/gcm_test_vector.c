@@ -23,7 +23,7 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#include "../gcm_test_vector.h"
+#include "../aead_test_vector.h"
 
 static uint8_t aes_gcm_empty_key[KEY_TYPE_AES256_SIZE] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -36,11 +36,11 @@ static uint8_t aes_gcm_key[KEY_TYPE_AES256_SIZE] = {
 };
 
 
-static uint8_t aes_gcm_empty_iv[AES_GCM_IV_LENGTH] = {
+static uint8_t aes_gcm_empty_iv[AES_AEAD_IV_LENGTH] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-static uint8_t aes_gcm_iv[AES_GCM_IV_LENGTH] = {
+static uint8_t aes_gcm_iv[AES_AEAD_IV_LENGTH] = {
     0xca, 0xfe, 0xba, 0xbe, 0xfa, 0xce, 0xdb, 0xad, 0xde, 0xca, 0xf8, 0x88
 };
 
@@ -73,19 +73,19 @@ static uint8_t aes_gcm_128_ciphertext_data_64_bytes[64] = {
     0x1b, 0xa3, 0x0b, 0x39, 0x6a, 0x0a, 0xac, 0x97, 0x3d, 0x58, 0xe0, 0x91, 0x47, 0x3f, 0x59, 0x85
 };
 
-static uint8_t aes_gcm_128_tag_0_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_128_tag_0_bytes[AES_AEAD_TAG_LENGTH] = {
     0x58, 0xe2, 0xfc, 0xce, 0xfa, 0x7e, 0x30, 0x61, 0x36, 0x7f, 0x1d, 0x57, 0xa4, 0xe7, 0x45, 0x5a
 };
 
-static uint8_t aes_gcm_128_tag_16_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_128_tag_16_bytes[AES_AEAD_TAG_LENGTH] = {
     0xab, 0x6e, 0x47, 0xd4, 0x2c, 0xec, 0x13, 0xbd, 0xf5, 0x3a, 0x67, 0xb2, 0x12, 0x57, 0xbd, 0xdf
 };
 
-static uint8_t aes_gcm_128_tag_60_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_128_tag_60_bytes[AES_AEAD_TAG_LENGTH] = {
     0x5b, 0xc9, 0x4f, 0xbc, 0x32, 0x21, 0xa5, 0xdb, 0x94, 0xfa, 0xe9, 0x5a, 0xe7, 0x12, 0x1a, 0x47
 };
 
-static uint8_t aes_gcm_128_tag_64_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_128_tag_64_bytes[AES_AEAD_TAG_LENGTH] = {
     0x4d, 0x5c, 0x2a, 0xf3, 0x27, 0xcd, 0x64, 0xa6, 0x2c, 0xf3, 0x5a, 0xbd, 0x2b, 0xa6, 0xfa, 0xb4
 };
 
@@ -100,19 +100,19 @@ static uint8_t aes_gcm_256_ciphertext_data_64_bytes[64] = {
     0xc5, 0xf6, 0x1e, 0x63, 0x93, 0xba, 0x7a, 0x0a, 0xbc, 0xc9, 0xf6, 0x62, 0x89, 0x80, 0x15, 0xad
 };
 
-static uint8_t aes_gcm_256_tag_0_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_256_tag_0_bytes[AES_AEAD_TAG_LENGTH] = {
     0x53, 0x0f, 0x8a, 0xfb, 0xc7, 0x45, 0x36, 0xb9, 0xa9, 0x63, 0xb4, 0xf1, 0xc4, 0xcb, 0x73, 0x8b
 };
 
-static uint8_t aes_gcm_256_tag_16_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_256_tag_16_bytes[AES_AEAD_TAG_LENGTH] = {
     0xd0, 0xd1, 0xc8, 0xa7, 0x99, 0x99, 0x6b, 0xf0, 0x26, 0x5b, 0x98, 0xb5, 0xd4, 0x8a, 0xb9, 0x19
 };
 
-static uint8_t aes_gcm_256_tag_60_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_256_tag_60_bytes[AES_AEAD_TAG_LENGTH] = {
     0x76, 0xfc, 0x6e, 0xce, 0x0f, 0x4e, 0x17, 0x68, 0xcd, 0xdf, 0x88, 0x53, 0xbb, 0x2d, 0x55, 0x1b
 };
 
-static uint8_t aes_gcm_256_tag_64_bytes[AES_GCM_TAG_LENGTH] = {
+static uint8_t aes_gcm_256_tag_64_bytes[AES_AEAD_TAG_LENGTH] = {
     0xb0, 0x94, 0xda, 0xc5, 0xd9, 0x34, 0x71, 0xbd, 0xec, 0x1a, 0x50, 0x22, 0x70, 0xe3, 0xcc, 0x6c
 };
 
@@ -122,14 +122,14 @@ static const TEST_VECTOR aes_gcm_128_0_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_empty_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_empty_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = NULL,
     .ciphertextData = NULL,
     .dataLength = 0,
     .authTag = (uint8_t *)aes_gcm_128_tag_0_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_128_16_bytes_vector = {
@@ -137,14 +137,14 @@ static const TEST_VECTOR aes_gcm_128_16_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_empty_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_empty_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_16_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_128_ciphertext_data_16_bytes,
     .dataLength = 16,
     .authTag = (uint8_t *)&aes_gcm_128_tag_16_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_128_60_bytes_vector = {
@@ -152,14 +152,14 @@ static const TEST_VECTOR aes_gcm_128_60_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = (uint8_t *)&aes_gcm_aad_20_bytes,
     .aadLength = 20,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_64_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_128_ciphertext_data_64_bytes,
     .dataLength = 60,
     .authTag = (uint8_t *)&aes_gcm_128_tag_60_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_128_64_bytes_vector = {
@@ -167,14 +167,14 @@ static const TEST_VECTOR aes_gcm_128_64_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_64_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_128_ciphertext_data_64_bytes,
     .dataLength = 64,
     .authTag = (uint8_t *)&aes_gcm_128_tag_64_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 
@@ -183,14 +183,14 @@ static const TEST_VECTOR aes_gcm_256_0_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_empty_key,
     .inputKeyLength = KEY_TYPE_AES256_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_empty_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = NULL,
     .ciphertextData = NULL,
     .dataLength = 0,
     .authTag = (uint8_t *)aes_gcm_256_tag_0_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_256_16_bytes_vector = {
@@ -198,14 +198,14 @@ static const TEST_VECTOR aes_gcm_256_16_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_empty_key,
     .inputKeyLength = KEY_TYPE_AES256_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_empty_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_16_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_256_ciphertext_data_16_bytes,
     .dataLength = 16,
     .authTag = (uint8_t *)&aes_gcm_256_tag_16_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_256_60_bytes_vector = {
@@ -213,14 +213,14 @@ static const TEST_VECTOR aes_gcm_256_60_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_key,
     .inputKeyLength = KEY_TYPE_AES256_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = (uint8_t *)&aes_gcm_aad_20_bytes,
     .aadLength = 20,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_64_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_256_ciphertext_data_64_bytes,
     .dataLength = 60,
     .authTag = (uint8_t *)&aes_gcm_256_tag_60_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 static const TEST_VECTOR aes_gcm_256_64_bytes_vector = {
@@ -228,14 +228,14 @@ static const TEST_VECTOR aes_gcm_256_64_bytes_vector = {
     .inputKey = (uint8_t *)&aes_gcm_key,
     .inputKeyLength = KEY_TYPE_AES256_SIZE,
     .initializationVector = (uint8_t *)&aes_gcm_iv,
-    .initializationVectorLength = AES_GCM_IV_LENGTH,
+    .initializationVectorLength = AES_AEAD_IV_LENGTH,
     .aad = NULL,
     .aadLength = 0,
     .plaintextData = (uint8_t *)&aes_gcm_plaintext_data_64_bytes,
     .ciphertextData = (uint8_t *)&aes_gcm_256_ciphertext_data_64_bytes,
     .dataLength = 64,
     .authTag = (uint8_t *)&aes_gcm_256_tag_64_bytes,
-    .authTagLength = AES_GCM_TAG_LENGTH
+    .authTagLength = AES_AEAD_TAG_LENGTH
 };
 
 TEST_VECTOR aes_gcm_test_vectors[] = {

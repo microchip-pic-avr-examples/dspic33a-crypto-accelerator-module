@@ -94,9 +94,10 @@ typedef void (*crypto_Int_Handler)(void);
 crypto_Int_Status_E Crypto_Int_Hw_Register_Handler(crypto_Int_Handler_Id handlerID, crypto_Int_Handler handler);
 crypto_Int_Status_E Crypto_Int_Hw_Enable(crypto_Int_Handler_Id handlerID);
 crypto_Int_Status_E Crypto_Int_Hw_Disable(crypto_Int_Handler_Id handlerID);
-void CRYPTO3_SignOperationCompleteCallbackRegister(void (*handler)(void));
-void CRYPTO3_VerifyOperationCompleteCallbackRegister(void (*handler)(void));
-void CRYPTO3_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void));
+void CRYPTO_Int_Hw_SignComplete_CallbackRegister(void (*handler)(void));
+void CRYPTO_Int_Hw_VerifyComplete_CallbackRegister(void (*handler)(void));
+void CRYPTO_Int_Hw_OperationTypeHandlerRegister(crypto_operation_Id (*handler)(void));
+
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
