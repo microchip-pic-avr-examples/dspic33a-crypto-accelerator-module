@@ -54,6 +54,7 @@ typedef struct TEST_VECTOR {
     uint32_t ptlength;
     uint32_t ivlength;
     uint32_t aadlength;
+    uint32_t taglength;
 
 } TEST_VECTOR;
 
