@@ -39,14 +39,14 @@ Microchip or any third party.
 
 /**
  * Crypto Framework Library Source
- * 
+ *
  * @file cam_aes.h
  * @defgroup  aes AES
- * 
+ *
  * @brief This header file contains the interface that make up the CAM AES hardware driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
  *
  */
- 
+
 #ifndef CAM_AES_H
 #define	CAM_AES_H
 
@@ -86,8 +86,22 @@ Microchip or any third party.
 
 /**
  * @ingroup aes
+ * @def AES_HEADER_DO_NOT_ALIGN
+ * @brief This macro defines a mask for header alignment, when indicated to ignore descriptor data alignment.
+ */
+#define AES_HEADER_DO_NOT_ALIGN (0x00000000UL)
+
+/**
+ * @ingroup aes
+ * @def AES_HEADER_ALIGN
+ * @brief this macro defines a mask for header alignment, when indicated to align the descriptor data.
+ */
+#define AES_HEADER_ALIGN        (0x00000001UL)
+
+/**
+ * @ingroup aes
  * @enum AES_ERROR
- * 
+ *
  * This enumeration defines the various error states that can occur during
  * AES operations.
  */
@@ -111,7 +125,7 @@ typedef enum AES_ERROR
 /**
  * @ingroup aes
  * @enum AESCON_MODE
- * 
+ *
  * This enumeration defines the various modes of operation supported by the AES driver.
  */
 typedef enum AESCON_MODE
@@ -121,6 +135,7 @@ typedef enum AESCON_MODE
     MODE_CTR  = 2,   /**< Counter (CTR) mode */
     MODE_CFB  = 3,   /**< Cipher Feedback (CFB) */
     MODE_OFB  = 4,   /**< Output Feedback (OFB) */
+    MODE_CCM  = 5,   /**< Cipher block chaining Counter Mode (CCM) */
     MODE_GCM  = 6,   /**< Galois Counter Mode (GCM) */
     MODE_XTS  = 7,   /**< XEX Tweakable Block Cipher (XTS) with Ciphertext Stealing (XTS-CS) */
     MODE_CMAC = 8,   /**< Cipher-based Message Authentication Code (CMAC) */
@@ -129,7 +144,7 @@ typedef enum AESCON_MODE
 /**
  * @ingroup aes
  * @enum AESCON_OPERATION
- * 
+ *
  * This enumeration defines the operations that can be performed using the AES driver.
  */
 typedef enum AESCON_OPERATION
@@ -147,7 +162,7 @@ typedef enum AESCON_OPERATION
 
 /**
  * @ingroup aes
- * 
+ *
  * This function handles the interrupt service routine for the AES operations.
  * @return None.
  */
@@ -156,9 +171,9 @@ void DRV_CRYPTO_AES_IsrHelper(void);
 
 /**
  * @ingroup aes
- * 
+ *
  * This function initializes a new AES operation with the specified mode and operation type.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param mode The AESCON_MODE mode to use.
  * @param operation The AESCON_OPERATION operation to perform.
@@ -168,17 +183,48 @@ void DRV_CRYPTO_AES_IsrHelper(void);
  * @param initVectorLength The length of the IV data.
  * @retval AES_NO_ERROR         Success.
  * @retval AES_STATE_ERROR      Invalid or unexpected AES state.
- * @retval AES_INITIALIZE_ERROR Failure during AES initialization. 
+ * @retval AES_INITIALIZE_ERROR Failure during AES initialization.
  * @note Reinitializing an AES operation in progress will void the previous operation.
  */
 AES_ERROR DRV_CRYPTO_AES_Initialize(void *contextData, AESCON_MODE mode, AESCON_OPERATION operation,
         void* key, uint32_t keyLength, const void *initVector, uint32_t initVectorLength);
 
+
 /**
  * @ingroup aes
- * 
+ *
+ * Set the AES operation mode.
+ *
+ * @param contextData The context data for this operation.
+ * @param operation The AESCON_OPERATION operation to perform.
+ * @retval AES_NO_ERROR         Success.
+ * @retval AES_STATE_ERROR      Invalid or unexpected AES state.
+ * @retval AES_INITIALIZE_ERROR Failure during AES initialization.
+ * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
+ **/
+AES_ERROR DRV_CRYPTO_AES_SetOperation(void *contextData, AESCON_OPERATION operation);
+
+/**
+ * @ingroup aes
+ *
+ *  Add 'raw' (unaligned) header data (such as CCM header data) to an AES operation.
+ *
+ * @param contextData The context data for this operation.
+ * @param headerData The header data to add to the operation.
+ * @param headerLength The length of the header data.
+ * @param align A flag indicating how the data should be aligned.
+ * @retval AES_NO_ERROR         Success.
+ * @retval AES_STATE_ERROR      Invalid or unexpected AES state.
+ * @retval AES_WRITE_ERROR      Failed to write the header data.
+ * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
+ **/
+AES_ERROR DRV_CRYPTO_AES_AddRawHeader(void *contextData, void *headerData, uint32_t headerLength, uint32_t align);
+
+/**
+ * @ingroup aes
+ *
  * This function adds header data (such as Additional Authentication Data) to an AES operation.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param headerData The header data to add to the operation.
  * @param headerLength The length of the header data.
@@ -191,9 +237,9 @@ AES_ERROR DRV_CRYPTO_AES_AddHeader(void *contextData, const void * headerData, u
 
 /**
  * @ingroup aes
- * 
+ *
  * This function initializes the tweak value for use in AES XTS mode.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param tweakData The tweak data to use.
  * @param tweakLength The length of the tweak data.
@@ -206,24 +252,24 @@ AES_ERROR DRV_CRYPTO_AES_AddTweakData(void *contextData, const void *tweakData, 
 
 /**
  * @ingroup aes
- * 
+ *
  * This function adds input data to the ongoing AES operation.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param data The data to add to the operation.
  * @param dataLength The length of the data.
  * @retval AES_NO_ERROR     Success.
  * @retval AES_STATE_ERROR  Invalid or unexpected AES state.
- * @retval AES_WRITE_ERROR  Failure while writing input data. 
+ * @retval AES_WRITE_ERROR  Failure while writing input data.
  * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
  */
 AES_ERROR DRV_CRYPTO_AES_AddInputData(void *contextData, void * data, uint32_t dataLength);
 
 /**
  * @ingroup aes
- * 
+ *
  * This function specifies the output buffer for the AES operation.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param data The data buffer to add to the operation.
  * @param dataLength The length of the data buffer.
@@ -236,9 +282,9 @@ AES_ERROR DRV_CRYPTO_AES_AddOutputData(void *contextData, const void * data, uin
 
 /**
  * @ingroup aes
- * 
+ *
  * This function discards a specified number of bytes from the output stream of the AES operation.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param discardLength The number of bytes to discard from the output stream.
  * @retval AES_NO_ERROR     Success.
@@ -249,10 +295,19 @@ AES_ERROR DRV_CRYPTO_AES_AddOutputData(void *contextData, const void * data, uin
 AES_ERROR DRV_CRYPTO_AES_DiscardData(void *contextData, uint32_t discardLength);
 
 /**
+ *  @brief Tell the AES operation to ignore (invalidate) a number of bytes in the input stream.
+ *  @param contextData The context data for this operation.
+ *  @param ignoreLength The number of bytes to ignore in the input stream.
+ *  @return AES_NO_ERROR on success, AES_STATE_ERROR/AES_WRITE_ERROR on failure.
+ *  @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
+ **/
+AES_ERROR DRV_CRYPTO_AES_IgnoreData(void *contextData, uint32_t ignoreLength);
+
+/**
  * @ingroup aes
- * 
+ *
  * This function calculates the LenALenC input for the AES-GCM and adds it to the operation.
- * 
+ *
  * @param contextData The context data for this operation.
  * @retval AES_NO_ERROR     Success.
  * @retval AES_STATE_ERROR  Invalid or unexpected AES state.
@@ -263,9 +318,9 @@ AES_ERROR DRV_CRYPTO_AES_AddLenALenC(void *contextData);
 
 /**
  * @ingroup aes
- * 
+ *
  * This function executes an AES operation to generate the final result (such as a CMAC or a cipher).
- * 
+ *
  * @param contextData The context data for this operation.
  * @retval AES_NO_ERROR      Success.
  * @retval AES_STATE_ERROR   Invalid or unexpected AES state.
@@ -276,9 +331,9 @@ AES_ERROR DRV_CRYPTO_AES_Execute(void *contextData);
 
 /**
  * @ingroup aes
- * 
+ *
  * This function checks if an AES operation is currently active.
- * 
+ *
  * @param contextData The context data for this operation.
  * @param active Pointer to value to contain the active/inactive status.
  * @retval AES_NO_ERROR        Success. The value pointed to by active is set to
@@ -292,9 +347,9 @@ AES_ERROR DRV_CRYPTO_AES_IsActive(void *contextData, AES_ERROR *active);
 
 /**
  * @ingroup aes
- * 
+ *
  * This function returns the size of an AES context block based on the AES mode in use.
- * 
+ *
  * @param contextData The context data for this operation.
  * @return Size of the AES context block in bytes.
  */
@@ -310,7 +365,7 @@ uint32_t DRV_CRYPTO_AES_GetContextSize(void *contextData);
 /**
  * @ingroup aes
  * @brief Function prototype for the AES ISR helper.
- * 
+ *
  * This function is specific to the currently defined hardware version for the AES ISR helper.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -326,7 +381,7 @@ void MPROTO(DRV_CRYPTO_AES_IsrHelper)(void);
 /**
  * @ingroup aes
  * @brief Function prototype for initializing AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for initializing an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -342,8 +397,42 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_Initialize)(void *contextData, AESCON_MODE mode,
 
 /**
  * @ingroup aes
+ * @brief Function prototype for setting the AES operation mode.
+ *
+ * This function is specific to the currently defined hardware version for initializing an AES operation.
+ * If the hardware version is not defined, this function will not be available.
+ */
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_SetOperation)(void *contextData, AESCON_OPERATION operation);
+
+/**
+ * @ingroup aes
+ * @def DRV_CRYPTO_AES_SetOperation
+ * @brief Macro to create a device-specific function prototype for setting the AES operation mode.
+ */
+#define DRV_CRYPTO_AES_SetOperation MPROTO(DRV_CRYPTO_AES_SetOperation)
+
+/**
+ * @ingroup aes
+ * @brief Function prototype for adding raw (unaligned) descriptor header data.
+ *
+ * This function is specific to the currently defined hardware version for initializing an AES operation.
+ * If the hardware version is not defined, this function will not be available.
+ */
+
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddRawHeader)(void *contextData, void *headerData, uint32_t headerLength, uint32_t align);
+
+/**
+ * @ingroup aes
+ * @def DRV_CRYPTO_AES_AddRawHeader
+ * @brief Macro to create a device-specific function prototype for adding raw (unaigned) descriptor header data.
+ */
+#define DRV_CRYPTO_AES_AddRawHeader MPROTO(DRV_CRYPTO_AES_AddRawHeader)
+
+/**
+ * @ingroup aes
  * @brief Function prototype for adding header data to AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for adding header data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -359,7 +448,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddHeader)(void *contextData, const void * heade
 /**
  * @ingroup aes
  * @brief Function prototype for adding tweak data to AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for adding tweak data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -375,7 +464,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddTweakData)(void *contextData, const void *twe
 /**
  * @ingroup aes
  * @brief Function prototype for adding input data to AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for adding input data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -391,7 +480,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddInputData)(void *contextData, void * data, ui
 /**
  * @ingroup aes
  * @brief Function prototype for adding output data to AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for adding output data to an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -407,7 +496,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddOutputData)(void *contextData, const void * d
 /**
  * @ingroup aes
  * @brief Function prototype for discarding data in AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for discarding data from an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -422,8 +511,24 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_DiscardData)(void *contextData, uint32_t discard
 
 /**
  * @ingroup aes
+ * @brief Function prototype for ignoring (invalidating) a number of bytes in the input stream.
+ *
+ * This function is specific to the currently defined hardware version for discarding data from an AES operation.
+ * If the hardware version is not defined, this function will not be available.
+ */
+AES_ERROR MPROTO(DRV_CRYPTO_AES_IgnoreData)(void *contextData, uint32_t ignoreLength);
+
+/**
+ * @ingroup aes
+ * @def DRV_CRYPTO_AES_IgnoreData
+ * @brief Macro to create a device-specific function prototype for ignoring (invalidating) a number of bytes in the input stream.
+ */
+#define DRV_CRYPTO_AES_IgnoreData MPROTO(DRV_CRYPTO_AES_IgnoreData)
+
+/**
+ * @ingroup aes
  * @brief Function prototype for adding LenALenC in AES-GCM.
- * 
+ *
  * This function is specific to the currently defined hardware version for adding LenALenC input to an AES-GCM operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -439,7 +544,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_AddLenALenC)(void *contextData);
 /**
  * @ingroup aes
  * @brief Function prototype for executing AES.
- * 
+ *
  * This function is specific to the currently defined hardware version for executing an AES operation.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -455,7 +560,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_Execute)(void *contextData);
 /**
  * @ingroup aes
  * @brief Function prototype for checking AES activity.
- * 
+ *
  * This function is specific to the currently defined hardware version for checking if an AES operation is active.
  * If the hardware version is not defined, this function will not be available.
  */
@@ -471,7 +576,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_IsActive)(void *contextData, AES_ERROR *active);
 /**
  * @ingroup aes
  * @brief Function prototype for getting AES context size.
- * 
+ *
  * This function is specific to the currently defined hardware version for retrieving the size of the AES context block.
  * If the hardware version is not defined, this function will not be available.
  */

@@ -124,7 +124,7 @@ def install(sourcepath):
             headerfiles = glob.glob(os.path.join(srcdir, '*.h'))
             if len(list(headerfiles)) == 0:
                 print(RED + "  *** No header files in libraries folder - copying from repo location" + NORMAL)
-                srcdir = os.path.join(curdir, sourcepath, 'driver', 'include')
+                srcdir = os.path.join(curdir, sourcepath, 'inc')
 
             for p in path:
                 headerfile = 'cam_%s.h' % p

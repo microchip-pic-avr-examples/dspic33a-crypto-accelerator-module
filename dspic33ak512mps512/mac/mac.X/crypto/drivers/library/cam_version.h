@@ -38,11 +38,11 @@ Microchip or any third party.
 
 /**
  * Crypto Framework Library Source
- * 
+ *
  * @file cam_version.h
- * @ingroup CAM_HSM_LITE 
+ * @ingroup CAM_HSM_LITE
  * @defgroup  version VERSION
- * @ingroup CAM_HSM_LITE 
+ * @ingroup CAM_HSM_LITE
  *
  * @brief This header file contains version information on the CAM Hardware driver.
  *
@@ -56,32 +56,32 @@ Microchip or any third party.
 #endif
 
 /**
- * @ingroup version 
+ * @ingroup version
  * @def CAM_LIBRARY_VERSION_MAJOR
  * @brief This number represents the major version in SemVer format.
  */
 #define CAM_LIBRARY_VERSION_MAJOR  1
 
 /**
- * @ingroup version 
+ * @ingroup version
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
 #define CAM_LIBRARY_VERSION_MINOR  2
- 
+
 /**
- * @ingroup version 
+ * @ingroup version
  * @def CAM_LIBRARY_VERSION_PATCH
  * @brief This number represents the patch version in SemVer format.
  */
 #define CAM_LIBRARY_VERSION_PATCH  0
 /** @cond INTERNAL **/
 /**
- * @ingroup version 
+ * @ingroup version
  * @def CAM_LIBRARY_IDENTIFIER
  * @brief This field represents a build identifier of the CAM library.
  */
-#define CAM_LIBRARY_IDENTIFIER  a9f3b2c8e1d6g4h7
+#define CAM_LIBRARY_IDENTIFIER  7e2b8c1f4d3a9e0b
 /** @endcond **/
 
 #ifdef __cplusplus  // Provide C++ Compatibility
