@@ -1,3 +1,35 @@
+# dspic33a-crypto-accelerator-module v1.3.0
+### Release Highlights
+- Support for AES-CBC Encrypt and Decrypt operations
+- Support for AES-CFB128 Encrypt and Decrypt operations
+- Support for AES-OFB Encrypt and Decrypt operations
+- Support for AES-CCM Encrypt and Decrypt operations
+- Support for HMAC-SHA2
+- Support for AES-GMAC
+- Added ECDSA non-blocking APIs
+- Multi-step hash performance improvements
+
+### Features Added\Updated
+- Crypto Algorithms added in this release:
+	- AES
+		- AES-CBC Encrypt and Decrypt
+		- AES-CFB128 Encrypt and Decrypt
+		- AES-OFB Encrypt and Decrypt
+		- AES-CCM Encrypt and Decrypt
+	- MAC
+		- HMAC-SHA-1
+		- HMAC-SHA2-224
+		- HMAC-SHA2-256
+		- HMAC-SHA2-384
+		- HMAC-SHA2-512
+		- AES-GMAC
+- Features added to the CAM Hardware Driver:
+	- Updates to ECDSA driver:
+		- Support for non-blocking implementations
+	- Updates to Hash driver:
+		- Optimizations
+			- Multi-step: Average ~15% performance improvement
+
 # dspic33a-crypto-accelerator-module v1.2.0
 ### Release Highlights
 - Support for AES-XTS Encrypt and Decrypt operations
