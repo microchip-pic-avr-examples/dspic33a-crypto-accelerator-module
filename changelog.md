@@ -4,7 +4,7 @@
 - Support for AES-CFB128 Encrypt and Decrypt operations
 - Support for AES-OFB Encrypt and Decrypt operations
 - Support for AES-CCM Encrypt and Decrypt operations
-- Support for HMAC-SHA2
+- Support for HMAC-SHA
 - Support for AES-GMAC
 - Added ECDSA non-blocking APIs
 - Multi-step hash performance improvements
