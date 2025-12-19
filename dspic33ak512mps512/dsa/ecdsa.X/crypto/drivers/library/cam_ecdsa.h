@@ -141,6 +141,8 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify(PKE_CONFIG *eccData);
 // *****************************************************************************
 
 /**
+ *  @ingroup ecdsa
+ * 
  *  @brief Initialize and start the non-blocking ECDSA signature generation process.
  *  @param inputHash Hash input to use for the signature generation.
  *  @param hashLength Length of the hash input.
@@ -155,6 +157,8 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Sign_Start(uint8_t *inputHash,
     PKE_ECC_CURVE eccCurve);
 
 /**
+ *  @ingroup ecdsa
+ * 
  *  @brief Initialize and start the non-blocking ECDSA verification process.
  *  @param inputHash Hash input to use for the signature verification.
  *  @param hashLength Length of the hash input.
@@ -170,6 +174,8 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify_Start(uint8_t *inputHash,
         uint8_t *publicKey, uint32_t publicKeyLength, PKE_ECC_CURVE eccCurve);
 
 /**
+ *  @ingroup ecdsa
+ * 
  *  @brief Returns the signing result.
  *  @param outputSignature Buffer to contain the signature.
  *  @param signatureLength Length of the signature
@@ -178,12 +184,16 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify_Start(uint8_t *inputHash,
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Sign_GetResult(uint8_t *outputSignature, uint32_t signatureLength);
 
 /**
+ *  @ingroup ecdsa
+ * 
  *  @brief Returns the verification result.
  *  @return CRYPTO_PKE_RESULT_SUCCESS on success.  CRYPTO_PKE_RESULT_ERROR_FAIL on failure.
  **/
 CRYPTO_PKE_RESULT DRV_CRYPTO_ECDSA_Verify_GetResult(void);
 
 /**
+ *  @ingroup ecdsa
+ * 
  *  @brief Returns the status of the hardware crypto engine.
  *  @return CRYPTO_PKE_STATUS_IDLE when the operation is complete.  CRYPTO_PKE_STATUS_BUSY when an operation is running.
  **/

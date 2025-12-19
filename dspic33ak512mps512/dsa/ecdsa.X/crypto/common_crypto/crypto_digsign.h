@@ -172,11 +172,15 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify_GetResult(void);
 
 /**
  * @brief Sets the callback function to be called when signature generation is complete.
+ * @param handler Pointer to a function with no arguments that will be called when a signature
+ *                generation complete interrupt occurs.
  */
 void Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(void (*handler)(void));
 
 /**
  * @brief Sets the callback function to be called when the verification is complete.
+ * @param handler Pointer to a function with no arguments that will be called when a verification
+ *                operation complete interrupt occurs.
  */
 void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(void (*handler)(void));
 #endif /* CRYPTO_DIGSIGN_H */
