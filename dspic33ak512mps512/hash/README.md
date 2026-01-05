@@ -90,11 +90,11 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|8,192|982.99|
-|SHA-224|8,192|1160.75|
-|SHA-256|8,192|1160.55|
-|SHA-384|8,192|1394.09|
-|SHA-512|8,192|1395.27|
+|SHA-1|8,192|1056.69|
+|SHA-224|8,192|1263.71|
+|SHA-256|8,192|1264.69|
+|SHA-384|8,192|1524.80|
+|SHA-512|8,192|1525.16|
 
 ### Memory Size Benchmarking
 
@@ -102,21 +102,21 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|58|10,708|
-|SHA-224|58|10,708|
-|SHA-256|58|10,708|
-|SHA-384|58|10,708|
-|SHA-512|58|10,708|
+|SHA-1|62|10,344|
+|SHA-224|62|10,344|
+|SHA-256|62|10,344|
+|SHA-384|62|10,344|
+|SHA-512|62|10,344|
 
 #### Multi Step
 
 |Hash Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1|58|10,756|
-|SHA-224|58|10,756|
-|SHA-256|58|10,756|
-|SHA-384|58|10,756|
-|SHA-512|58|10,756|
+|SHA-1|62|10,392|
+|SHA-224|62|10,392|
+|SHA-256|62|10,392|
+|SHA-384|62|10,392|
+|SHA-512|62|10,392|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
