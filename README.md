@@ -84,19 +84,27 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-XTS (Decrypt)|429.20 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
 |AES-CMAC (Direct)|26.79 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
 |AES-GMAC (Direct)|154.28 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
-|ECDSA (Sign)|3.913 ms|Curve: P-192|
-|ECDSA (Verify)|5.129 ms|Curve: P-192|
-|ECDSA (Sign)|7.396 ms|Curve: P-256|
-|ECDSA (Verify)|9.882 ms|Curve: P-256|
-|ECDSA (Sign)|19.759 ms|Curve: P-384|
-|ECDSA (Verify)|27.006 ms|Curve: P-384|
-|ECDSA (Sign)|42.057 ms|Curve: P-521|
-|ECDSA (Verify)|58.281 ms|Curve: P-521|
+|ECDSA Sign   (Blocking)|3.88 ms|Curve: P-192|
+|ECDSA Verify (Blocking)|5.12 ms|Curve: P-192|
+|ECDSA Sign   (Blocking)|7.36 ms|Curve: P-256|
+|ECDSA Verify (Blocking)|9.84 ms|Curve: P-256|
+|ECDSA Sign   (Blocking)|19.64 ms|Curve: P-384|
+|ECDSA Verify (Blocking)|26.92 ms|Curve: P-384|
+|ECDSA Sign   (Blocking)|41.88 ms|Curve: P-521|
+|ECDSA Verify (Blocking)|58.08 ms|Curve: P-521|
+|ECDSA Sign   (Non-blocking)|3.88 ms|Curve: P-192|
+|ECDSA Verify (Non-blocking)|5.00 ms|Curve: P-192|
+|ECDSA Sign   (Non-blocking)|7.24 ms|Curve: P-256|
+|ECDSA Verify (Non-blocking)|9.76 ms|Curve: P-256|
+|ECDSA Sign   (Non-blocking)|19.56 ms|Curve: P-384|
+|ECDSA Verify (Non-blocking)|26.80 ms|Curve: P-384|
+|ECDSA Sign   (Non-blocking)|41.88 ms|Curve: P-521|
+|ECDSA Verify (Non-blocking)|57.72 ms|Curve: P-521|
 |TRNG (Generate)|122.667 µs|Output Size: 521|
-|ECDH (Shared Secret Generate)|3.770 ms|Curve: P-192|
-|ECDH (Shared Secret Generate)|7.207 ms|Curve: P-256|
-|ECDH (Shared Secret Generate)|19.400 ms|Curve: P-384|
-|ECDH (Shared Secret Generate)|41.473 ms|Curve: P-521|
+|ECDH (Shared Secret Generate)|3.760 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.160 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.360 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.400 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
@@ -146,12 +154,16 @@ All projects have the following compiler options:
 |AES-CMAC (Init, Cipher, and Final)|590|17,800|
 |AES-GMAC (Direct)|62|17,196|
 |AES-GMAC (Init and Cipher)|590|17,236|
-|ECDSA (Sign and Verify (P-192))|4,152|11,360|
-|ECDSA (Sign and Verify (P-256))|4,152|11,404|
-|ECDSA (Sign and Verify (P-384))|4,152|11,472|
-|ECDSA (Sign and Verify (P-521))|4,152|11,552|
+|ECDSA Blocking (Sign and Verify (P-192))|4,168|13,380|
+|ECDSA Blocking (Sign and Verify (P-256))|4,168|13,424|
+|ECDSA Blocking (Sign and Verify (P-384))|4,168|13,492|
+|ECDSA Blocking (Sign and Verify (P-521))|4,168|13,572|
+|ECDSA Non-blocking (Sign and Verify (P-192))|4,168|13,428|
+|ECDSA Non-blocking (Sign and Verify (P-256))|4,168|13,468|
+|ECDSA Non-blocking (Sign and Verify (P-384))|4,168|13,536|
+|ECDSA Non-blocking (Sign and Verify (P-521))|4,168|13,572|
 |TRNG (Generate)|56|4,612|
-|ECDH (Shared Secret (P-192))|4,152|10,744|
-|ECDH (Shared Secret (P-256))|4,152|10,788|
-|ECDH (Shared Secret (P-384))|4,152|10,856|
-|ECDH (Shared Secret (P-521))|4,152|10,928|
+|ECDH (Shared Secret (P-192))|4,164|11,536|
+|ECDH (Shared Secret (P-256))|4,164|11,576|
+|ECDH (Shared Secret (P-384))|4,164|11,648|
+|ECDH (Shared Secret (P-521))|4,164|11,728|
