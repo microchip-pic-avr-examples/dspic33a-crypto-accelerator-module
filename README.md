@@ -68,20 +68,20 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |HMAC SHA-256 (Direct)|140.51 Mbps|Key Size: 16, Message Size: 8,192|
 |HMAC SHA-384 (Direct)|230.78 Mbps|Key Size: 16, Message Size: 8,192|
 |HMAC SHA-512 (Direct)|230.96 Mbps|Key Size: 16, Message Size: 8,192|
-|AES-ECB (Encrypt)|435.48 Mbps|Key Size: 16, Plaintext Size: 8,192|
-|AES-ECB (Decrypt)|434.36 Mbps|Key Size: 16, Ciphertext Size: 8,192|
-|AES-CTR (Encrypt)|435.26 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CTR (Decrypt)|435.35 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-CBC (Encrypt)|435.64 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CBC (Decrypt)|434.49 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-CFB128 (Encrypt)|435.29 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CFB128 (Decrypt)|435.24 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-OFB (Encrypt)|435.29 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-OFB (Decrypt)|435.24 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-GCM (Encrypt)|420.99 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
-|AES-GCM (Decrypt)|417.59 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
-|AES-XTS (Encrypt)|429.99 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
-|AES-XTS (Decrypt)|429.20 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
+|AES-ECB (Encrypt)|436.88 Mbps|Key Size: 16, Plaintext Size: 8,192|
+|AES-ECB (Decrypt)|436.24 Mbps|Key Size: 16, Ciphertext Size: 8,192|
+|AES-CTR (Encrypt)|436.94 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CTR (Decrypt)|437.09 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-CBC (Encrypt)|436.94 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CBC (Decrypt)|436.16 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-CFB128 (Encrypt)|436.74 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CFB128 (Decrypt)|436.89 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-OFB (Encrypt)|437.00 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-OFB (Decrypt)|437.21 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-GCM (Encrypt)|423.29 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
+|AES-GCM (Decrypt)|421.18 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
+|AES-XTS (Encrypt)|431.77 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
+|AES-XTS (Decrypt)|430.98 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
 |AES-CMAC (Direct)|26.79 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
 |AES-GMAC (Direct)|154.28 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
 |ECDSA (Sign)|3.913 ms|Curve: P-192|
@@ -128,20 +128,20 @@ All projects have the following compiler options:
 |HMAC SHA-384 (Init, Cipher, and Final)|838|17,160|
 |HMAC SHA-512 (Direct)|62|17,112|
 |HMAC SHA-512 (Init, Cipher, and Final)|838|17,160|
-|AES-ECB (Encrypt and Decrypt)|58|11,788|
-|AES-ECB (Init and Cipher)|2,006|11,852|
-|AES-CTR (Encrypt and Decrypt)|58|11,828|
-|AES-CTR (Init and Cipher)|2,006|11,896|
-|AES-CBC (Encrypt and Decrypt)|62|12,312|
-|AES-CBC (Init and Cipher)|2,010|12,380|
-|AES-CFB128 (Encrypt and Decrypt)|62|12,312|
-|AES-CFB128 (Init and Cipher)|2,010|12,380|
-|AES-OFB (Encrypt and Decrypt)|62|12,312|
-|AES-OFB (Init and Cipher)|2,010|12,380|
-|AES-GCM (Encrypt and Decrypt)|58|12,204|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|598|12,328|
-|AES-XTS (Encrypt and Decrypt)|58|11,828|
-|AES-XTS (Init and Cipher)|2,006|11,896|
+|AES-ECB (Encrypt and Decrypt)|74|11,840|
+|AES-ECB (Init and Cipher)|2,022|11,904|
+|AES-CTR (Encrypt and Decrypt)|74|11,880|
+|AES-CTR (Init and Cipher)|2,022|11,948|
+|AES-CBC (Encrypt and Decrypt)|74|12,208|
+|AES-CBC (Init and Cipher)|2,022|12,276|
+|AES-CFB128 (Encrypt and Decrypt)|74|12,208|
+|AES-CFB128 (Init and Cipher)|2,022|12,276|
+|AES-OFB (Encrypt and Decrypt)|74|12,208|
+|AES-OFB (Init and Cipher)|2,022|12,276|
+|AES-GCM (Encrypt and Decrypt)|74|13,324|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|614|13,448|
+|AES-XTS (Encrypt and Decrypt)|62|11,684|
+|AES-XTS (Init and Cipher)|2,010|11,752|
 |AES-CMAC (Direct)|62|17,752|
 |AES-CMAC (Init, Cipher, and Final)|590|17,800|
 |AES-GMAC (Direct)|62|17,196|
