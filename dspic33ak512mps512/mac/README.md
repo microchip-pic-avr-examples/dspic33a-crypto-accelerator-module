@@ -223,25 +223,25 @@ The following benchmarking results were obtained with the device clock speed set
 #### AES-CMAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|16|8,192|16|26.79|
-|24|8,192|16|26.56|
-|32|8,192|16|26.13|
+|16|8,192|16|26.76|
+|24|8,192|16|26.32|
+|32|8,192|16|25.89|
 
 #### HMAC
 |Hash Algorithm|Key Size (bytes)|Message Size (bytes)|HMAC Crypto_Mac_Hmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|SHA-1|16|8,192|139.04|
-|SHA2-224|16|8,192|140.54|
-|SHA2-256|16|8,192|140.51|
-|SHA2-384|16|8,192|230.78|
-|SHA2-512|16|8,192|230.96|
+|SHA-1|16|8,192|139.77|
+|SHA2-224|16|8,192|140.49|
+|SHA2-256|16|8,192|140.50|
+|SHA2-384|16|8,192|230.63|
+|SHA2-512|16|8,192|230.70|
 
 #### AES-GMAC
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
 |----|----|----|----|----|
-|16|12|8,192|16|154.28|
-|24|12|8,192|16|180.01|
-|32|12|8,192|16|205.77|
+|16|12|8,192|16|424.89|
+|24|12|8,192|16|364.32|
+|32|12|8,192|16|318.80|
 
 ### Memory Size Benchmarking
 The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.
@@ -250,25 +250,25 @@ The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash 
 
 |Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-CMAC|62|17,752|
-|HMAC SHA-1|62|17,112|
-|HMAC SHA-224|62|17,112|
-|HMAC SHA-256|62|17,112|
-|HMAC SHA-384|62|17,112|
-|HMAC SHA-512|62|17,112|
-|AES-GMAC|62|17,196|
+|AES-CMAC|74|18,764|
+|HMAC SHA-1|74|18,716|
+|HMAC SHA-224|74|18,716|
+|HMAC SHA-256|74|18,716|
+|HMAC SHA-384|74|18,716|
+|HMAC SHA-512|74|18,716|
+|AES-GMAC|74|18,800|
 
 #### Multi Step
 
 |Mode|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|AES-CMAC|590|17,800|
-|HMAC SHA-1|838|17,160|
-|HMAC SHA-224|838|17,160|
-|HMAC SHA-256|838|17,160|
-|HMAC SHA-384|838|17,160|
-|HMAC SHA-512|838|17,160|
-|AES-GMAC|590|17,236|
+|AES-CMAC|602|18,812|
+|HMAC SHA-1|850|18,764|
+|HMAC SHA-224|850|18,764|
+|HMAC SHA-256|850|18,764|
+|HMAC SHA-384|850|18,764|
+|HMAC SHA-512|850|18,764|
+|AES-GMAC|602|18,840|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
