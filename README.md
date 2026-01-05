@@ -92,7 +92,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA (Verify)|27.006 ms|Curve: P-384|
 |ECDSA (Sign)|42.057 ms|Curve: P-521|
 |ECDSA (Verify)|58.281 ms|Curve: P-521|
-|TRNG (Generate)|122.667 µs|Output Size: 521|
+|TRNG (Generate)|122.750 µs|Output Size: 521|
 |ECDH (Shared Secret Generate)|3.770 ms|Curve: P-192|
 |ECDH (Shared Secret Generate)|7.207 ms|Curve: P-256|
 |ECDH (Shared Secret Generate)|19.400 ms|Curve: P-384|
@@ -150,7 +150,7 @@ All projects have the following compiler options:
 |ECDSA (Sign and Verify (P-256))|4,152|11,404|
 |ECDSA (Sign and Verify (P-384))|4,152|11,472|
 |ECDSA (Sign and Verify (P-521))|4,152|11,552|
-|TRNG (Generate)|56|4,612|
+|TRNG (Generate)|56|4,596|
 |ECDH (Shared Secret (P-192))|4,152|10,744|
 |ECDH (Shared Secret (P-256))|4,152|10,788|
 |ECDH (Shared Secret (P-384))|4,152|10,856|
