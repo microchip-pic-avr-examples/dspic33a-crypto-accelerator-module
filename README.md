@@ -80,6 +80,8 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-OFB (Decrypt)|437.21 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
 |AES-GCM (Encrypt)|423.29 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
 |AES-GCM (Decrypt)|421.18 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
+|AES-CCM (Encrypt)|303.17 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
+|AES-CCM (Decrypt)|304.32 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
 |AES-XTS (Encrypt)|431.77 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
 |AES-XTS (Decrypt)|430.98 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
 |AES-CMAC (Direct)|26.79 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
@@ -140,6 +142,7 @@ All projects have the following compiler options:
 |AES-OFB (Init and Cipher)|2,022|12,276|
 |AES-GCM (Encrypt and Decrypt)|74|13,324|
 |AES-GCM (Init, AddAadData, Cipher, and Final)|614|13,448|
+|AES-GCM (Init and Cipher)|590|13,272|
 |AES-XTS (Encrypt and Decrypt)|62|11,684|
 |AES-XTS (Init and Cipher)|2,010|11,752|
 |AES-CMAC (Direct)|62|17,752|
