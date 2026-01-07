@@ -340,6 +340,19 @@ The following benchmarking results were obtained with the device clock speed set
 |24|16|8,192|373.54|
 |32|16|8,192|325.99|
 
+#### AES-CCM
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-CCM Crypto_Aead_AesCcm_EncryptAuthDirect Performance (Mbps)|
+|----|----|----|----|----|----|
+|16|12|4|16|8,192|217.01|
+|24|12|4|16|8,192|185.59|
+|32|12|4|16|8,192|162.10|
+
+|Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-CCM Crypto_Aead_AesCcm_DecryptAuthDirect Performance (Mbps)|
+|----|----|----|----|----|----|
+|16|12|4|16|8,192|216.19|
+|24|12|2|16|8,192|184.98|
+|32|12|2|16|8,192|161.63|
+
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
@@ -389,6 +402,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |AES-CFB128|2,022|12,276|
 |AES-OFB|2,022|12,276|
 |AES-GCM|614|13,448|
+|AES-CCM|590|13,272|
 |AES-XTS|2,010|11,752|
 
 ## ACVP
