@@ -44,7 +44,7 @@ Microchip or any third party.
  * @defgroup  version VERSION
  * @ingroup CAM_HSM_LITE
  *
- * @brief This header file contains version information on the CAM Hardware driver.
+ * @brief This header file contains version information of the CAM Hardware driver.
  *
  */
 
@@ -54,6 +54,13 @@ Microchip or any third party.
 #ifdef __cplusplus  // Provide C++ Compatibility
     extern "C" {
 #endif
+
+/**
+ * @ingroup version
+ * @def CAM_LIBRARY_VERSION_DATE
+ * @brief This is the date the library was built on.
+ */
+#define CAM_LIBRARY_DATE "20251219"
 
 /**
  * @ingroup version
@@ -67,7 +74,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_MINOR  2
+#define CAM_LIBRARY_VERSION_MINOR  3
 
 /**
  * @ingroup version
@@ -75,14 +82,6 @@ Microchip or any third party.
  * @brief This number represents the patch version in SemVer format.
  */
 #define CAM_LIBRARY_VERSION_PATCH  0
-/** @cond INTERNAL **/
-/**
- * @ingroup version
- * @def CAM_LIBRARY_IDENTIFIER
- * @brief This field represents a build identifier of the CAM library.
- */
-#define CAM_LIBRARY_IDENTIFIER  7e2b8c1f4d3a9e0b
-/** @endcond **/
 
 #ifdef __cplusplus  // Provide C++ Compatibility
     }
