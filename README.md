@@ -59,7 +59,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |Algorithm|Performance|Parameters (sizes are in bytes)|
 |----|----|----|
 |SHA-1 (Digest)|1056.69 Mbps|Message Size: 8,192|
-|SHA-224 (Digest)|1263.71 Mbps|Message Size: 8,192|
+|SHA-224 (Digest)|1264.44 Mbps|Message Size: 8,192|
 |SHA-256 (Digest)|1264.69 Mbps|Message Size: 8,192|
 |SHA-384 (Digest)|1524.80 Mbps|Message Size: 8,192|
 |SHA-512 (Digest)|1525.16 Mbps|Message Size: 8,192|
