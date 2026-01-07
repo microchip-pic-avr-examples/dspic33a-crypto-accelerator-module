@@ -58,11 +58,11 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Algorithm|Performance|Parameters (sizes are in bytes)|
 |----|----|----|
-|SHA-1 (Digest)|982.99 Mbps|Message Size: 8,192|
-|SHA-224 (Digest)|1160.75 Mbps|Message Size: 8,192|
-|SHA-256 (Digest)|1160.55 Mbps|Message Size: 8,192|
-|SHA-384 (Digest)|1394.09 Mbps|Message Size: 8,192|
-|SHA-512 (Digest)|1395.27 Mbps|Message Size: 8,192|
+|SHA-1 (Digest)|1056.69 Mbps|Message Size: 8,192|
+|SHA-224 (Digest)|1264.44 Mbps|Message Size: 8,192|
+|SHA-256 (Digest)|1264.69 Mbps|Message Size: 8,192|
+|SHA-384 (Digest)|1524.80 Mbps|Message Size: 8,192|
+|SHA-512 (Digest)|1525.16 Mbps|Message Size: 8,192|
 |HMAC SHA-1 (Direct)|139.04 Mbps|Key Size: 16, Message Size: 8,192|
 |HMAC SHA-224 (Direct)|140.54 Mbps|Key Size: 16, Message Size: 8,192|
 |HMAC SHA-256 (Direct)|140.51 Mbps|Key Size: 16, Message Size: 8,192|
@@ -118,16 +118,16 @@ All projects have the following compiler options:
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|
 |----|----|----|
-|SHA-1 (Digest)|58|10,708|
-|SHA-1 (Init, Update, and Final)|58|10,756|
-|SHA-224 (Digest)|58|10,708|
-|SHA-224 (Init, Update, and Final)|58|10,756|
-|SHA-256 (Digest)|58|10,708|
-|SHA-256 (Init, Update, and Final)|58|10,756|
-|SHA-384 (Digest)|58|10,708|
-|SHA-384 (Init, Update, and Final)|58|10,756|
-|SHA-512 (Digest)|58|10,708|
-|SHA-512 (Init, Update, and Final)|58|10,756|
+|SHA-1 (Digest)|62|10,344|
+|SHA-1 (Init, Update, and Final)|62|10,392|
+|SHA-224 (Digest)|62|10,344|
+|SHA-224 (Init, Update, and Final)|62|10,392|
+|SHA-256 (Digest)|62|10,344|
+|SHA-256 (Init, Update, and Final)|62|10,392|
+|SHA-384 (Digest)|62|10,344|
+|SHA-384 (Init, Update, and Final)|62|10,392|
+|SHA-512 (Digest)|62|10,344|
+|SHA-512 (Init, Update, and Final)|62|10,392|
 |HMAC SHA-1 (Direct)|62|17,112|
 |HMAC SHA-1 (Init, Cipher, and Final)|838|17,160|
 |HMAC SHA-224 (Direct)|62|17,112|
