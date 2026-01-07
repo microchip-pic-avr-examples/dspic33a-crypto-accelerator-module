@@ -15,15 +15,16 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - AES
 - ECDH Shared Secret
 - Concurrent AES+HASH (to demonstrate context safety)
+- MAC generation 
 
 The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM Hardware Driver.
 
 # Prerequisites
 
 ## Software Tools
-- dsPIC33AK-MP_DFP v1.0.81
+- dsPIC33AK-MP_DFP v1.2.135
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+- MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
 
 ## Hardware Tools
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -40,6 +41,7 @@ Each folder contains a README describing the example application in more detail.
 | aes        | Example application project for AES                 |
 | ecdh       | Example application project for ECDH                |
 | aes_hash   | Example application project for concurrent AES+HASH |
+| mac        | Example application project for CMAC, HMAC and GMAC |
 
 # Crypto Accelerator Module APIs
 
