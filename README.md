@@ -65,11 +65,11 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-256 (Digest)|1264.69 Mbps|Message Size: 8,192|
 |SHA-384 (Digest)|1524.80 Mbps|Message Size: 8,192|
 |SHA-512 (Digest)|1525.16 Mbps|Message Size: 8,192|
-|HMAC SHA-1 (Direct)|139.04 Mbps|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-224 (Direct)|140.54 Mbps|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-256 (Direct)|140.51 Mbps|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-384 (Direct)|230.78 Mbps|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-512 (Direct)|230.96 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-1 (Direct)|139.77 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-224 (Direct)|140.49 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-256 (Direct)|140.50 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-384 (Direct)|230.63 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-512 (Direct)|230.70 Mbps|Key Size: 16, Message Size: 8,192|
 |AES-ECB (Encrypt)|436.88 Mbps|Key Size: 16, Plaintext Size: 8,192|
 |AES-ECB (Decrypt)|436.24 Mbps|Key Size: 16, Ciphertext Size: 8,192|
 |AES-CTR (Encrypt)|436.94 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
@@ -86,8 +86,8 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |AES-CCM (Decrypt)|304.32 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
 |AES-XTS (Encrypt)|431.77 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
 |AES-XTS (Decrypt)|430.98 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
-|AES-CMAC (Direct)|26.79 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
-|AES-GMAC (Direct)|154.28 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
+|AES-CMAC (Direct)|26.76 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
+|AES-GMAC (Direct)|424.89 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
 |ECDSA Sign   (Blocking)|3.88 ms|Curve: P-192|
 |ECDSA Verify (Blocking)|5.12 ms|Curve: P-192|
 |ECDSA Sign   (Blocking)|7.36 ms|Curve: P-256|
@@ -130,16 +130,16 @@ All projects have the following compiler options:
 |SHA-384 (Init, Update, and Final)|62|10,392|
 |SHA-512 (Digest)|62|10,344|
 |SHA-512 (Init, Update, and Final)|62|10,392|
-|HMAC SHA-1 (Direct)|62|17,112|
-|HMAC SHA-1 (Init, Cipher, and Final)|838|17,160|
-|HMAC SHA-224 (Direct)|62|17,112|
-|HMAC SHA-224 (Init, Cipher, and Final)|838|17,160|
-|HMAC SHA-256 (Direct)|62|17,112|
-|HMAC SHA-256 (Init, Cipher, and Final)|838|17,160|
-|HMAC SHA-384 (Direct)|62|17,112|
-|HMAC SHA-384 (Init, Cipher, and Final)|838|17,160|
-|HMAC SHA-512 (Direct)|62|17,112|
-|HMAC SHA-512 (Init, Cipher, and Final)|838|17,160|
+|HMAC SHA-1 (Direct)|74|18,716|
+|HMAC SHA-1 (Init, Cipher, and Final)|850|18,764|
+|HMAC SHA-224 (Direct)|74|18,716|
+|HMAC SHA-224 (Init, Cipher, and Final)|850|18,764|
+|HMAC SHA-256 (Direct)|74|18,716|
+|HMAC SHA-256 (Init, Cipher, and Final)|850|18,764|
+|HMAC SHA-384 (Direct)|74|18,716|
+|HMAC SHA-384 (Init, Cipher, and Final)|850|18,764|
+|HMAC SHA-512 (Direct)|74|18,716|
+|HMAC SHA-512 (Init, Cipher, and Final)|850|18,764|
 |AES-ECB (Encrypt and Decrypt)|74|11,840|
 |AES-ECB (Init and Cipher)|2,022|11,904|
 |AES-CTR (Encrypt and Decrypt)|74|11,880|
@@ -155,10 +155,10 @@ All projects have the following compiler options:
 |AES-GCM (Init and Cipher)|590|13,272|
 |AES-XTS (Encrypt and Decrypt)|62|11,684|
 |AES-XTS (Init and Cipher)|2,010|11,752|
-|AES-CMAC (Direct)|62|17,752|
-|AES-CMAC (Init, Cipher, and Final)|590|17,800|
-|AES-GMAC (Direct)|62|17,196|
-|AES-GMAC (Init and Cipher)|590|17,236|
+|AES-CMAC (Direct)|74|18,764|
+|AES-CMAC (Init, Cipher, and Final)|602|18,812|
+|AES-GMAC (Direct)|74|18,800|
+|AES-GMAC (Init and Cipher)|602|18,840|
 |ECDSA Blocking (Sign and Verify (P-192))|4,168|13,380|
 |ECDSA Blocking (Sign and Verify (P-256))|4,168|13,424|
 |ECDSA Blocking (Sign and Verify (P-384))|4,168|13,492|
