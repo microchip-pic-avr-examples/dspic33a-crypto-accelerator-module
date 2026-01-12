@@ -140,7 +140,7 @@
         <targetDevice>dsPIC33AK512MPS512</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>pkob4hybrid</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
         <languageToolchainVersion>3.30</languageToolchainVersion>
         <platform>3</platform>

@@ -168,7 +168,7 @@ All projects have the following compiler options:
 |ECDSA Non-blocking (Sign and Verify (P-384))|4,168|13,536|
 |ECDSA Non-blocking (Sign and Verify (P-521))|4,168|13,572|
 |TRNG (Generate)|56|4,612|
-|ECDH (Shared Secret (P-192))|4,164|11,536|
-|ECDH (Shared Secret (P-256))|4,164|11,576|
-|ECDH (Shared Secret (P-384))|4,164|11,648|
-|ECDH (Shared Secret (P-521))|4,164|11,728|
+|ECDH (Shared Secret (P-192))|4,164|11,536|460|0|
+|ECDH (Shared Secret (P-256))|4,164|11,576|476|0|
+|ECDH (Shared Secret (P-384))|4,164|11,648|556|0|
+|ECDH (Shared Secret (P-521))|4,164|11,728|644|0|

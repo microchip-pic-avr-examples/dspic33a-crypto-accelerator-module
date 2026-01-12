@@ -211,20 +211,20 @@ Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
 Flash size will vary based on size of the stored data inputs used with the library. 
 
 #### Blocking Memory Usage:
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,168|13,380|
-|P-256|4,168|13,424|
-|P-384|4,168|13,492|
-|P-521|4,168|13,572|
+|ECC Curve|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|----|----|----|----|----|
+|P-192|4,168|13,380|476|0|
+|P-256|4,168|13,424|516|0|
+|P-384|4,168|13,492|612|0|
+|P-521|4,168|13,572|716|0|
 
 #### Non-blocking Memory Usage:
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,168|13,428|
-|P-256|4,168|13,468|
-|P-384|4,168|13,536|
-|P-521|4,168|13,608|
+|ECC Curve|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|----|----|----|----|----|
+|P-192|4,168|13,428|476|0|
+|P-256|4,168|13,468|516|0|
+|P-384|4,168|13,536|612|0|
+|P-521|4,168|13,608|716|0|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

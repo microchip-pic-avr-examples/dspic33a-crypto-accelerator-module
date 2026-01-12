@@ -87,12 +87,12 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,164|11,536|
-|P-256|4,164|11,576|
-|P-384|4,164|11,648|
-|P-521|4,164|11,728|
+|ECC Curve|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|----|----|----|----|----|
+|P-192|4,164|11,536|460|0|
+|P-256|4,164|11,576|476|0|
+|P-384|4,164|11,648|556|0|
+|P-521|4,164|11,728|644|0|
 
 ## ACVP
 The ECDH Shared Secret API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
