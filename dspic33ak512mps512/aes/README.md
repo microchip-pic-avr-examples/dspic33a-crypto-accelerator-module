@@ -382,28 +382,28 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 
 #### Single Step
 
-|AES Mode|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|AES-ECB|74|11,840|
-|AES-CTR|74|11,880|
-|AES-CBC|74|12,208|
-|AES-CFB128|74|12,208|
-|AES-OFB|74|12,208|
-|AES-GCM|74|13,324|
-|AES-XTS|62|11,684|
+|AES Mode|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|----|----|----|----|----|
+|AES-ECB|74|11,840|408|0|
+|AES-CTR|74|11,880|424|0|
+|AES-CBC|74|12,208|424|0|
+|AES-CFB128|74|12,208|424|0|
+|AES-OFB|74|12,208|424|0|
+|AES-GCM|74|13,324|468|0|
+|AES-XTS|62|11,684|424|0|
 
 #### Multi Step
 
-|AES Mode|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|AES-ECB|2,022|11,904|
-|AES-CTR|2,022|11,948|
-|AES-CBC|2,022|12,276|
-|AES-CFB128|2,022|12,276|
-|AES-OFB|2,022|12,276|
-|AES-GCM|614|13,448|
-|AES-CCM|590|13,272|
-|AES-XTS|2,010|11,752|
+|AES Mode|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|----|----|----|----|----|
+|AES-ECB|2,022|11,904|140|0|
+|AES-CTR|2,022|11,948|156|0|
+|AES-CBC|2,022|12,276|156|0|
+|AES-CFB128|2,022|12,276|156|0|
+|AES-OFB|2,022|12,276|156|0|
+|AES-GCM|614|13,448|188|0|
+|AES-CCM|590|13,272|308|0|
+|AES-XTS|2,010|11,752|156|0|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
