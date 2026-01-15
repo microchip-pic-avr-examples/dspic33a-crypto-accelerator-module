@@ -248,7 +248,7 @@ The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash 
 
 #### Single Step
 
-|Mode|FLASH (bytes)|RAM (bytes)|Stack Usage (bytes)|
+|Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
 |AES-CMAC|18,744|74|292|
 |HMAC SHA-1|18,728|74|856|
@@ -260,7 +260,7 @@ The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash 
 
 #### Multi Step
 
-|Mode|FLASH (bytes)|RAM (bytes)|Stack Usage (bytes)|
+|Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
 |AES-CMAC|19,308|74|56|
 |HMAC SHA-1|19,540|74|128|
