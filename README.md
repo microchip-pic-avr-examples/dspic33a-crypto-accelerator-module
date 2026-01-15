@@ -118,9 +118,8 @@ All projects have the following compiler options:
 - Isolate each function in a section - unchecked
 - Remove unused sections - unchecked
 
-| Algorithm | FLASH (bytes) | RAM (bytes) | |
-|:----|:----|:----|----|
-|           |             | Static (bytes) | Stack (bytes) |
+| Algorithm | FLASH (bytes) | RAM Static (bytes) | RAM Stack (bytes)|
+|----|----|----|----|
 |SHA-1 (Digest)|10,476|74|308|
 |SHA-1 (Init, Update, and Final)|10,520|74|700|
 |SHA-224 (Digest)|10,476|74|316|
@@ -173,7 +172,3 @@ All projects have the following compiler options:
 |ECDH (Shared Secret (P-256))|11,576|4,164|476|
 |ECDH (Shared Secret (P-384))|11,648|4,164|556|
 |ECDH (Shared Secret (P-521))|11,728|4,164|644|
-
-
-
-<tr><td>SHA-1 (Digest)</td><td>10,476</td><td>74</td><td>308</td></tr>
