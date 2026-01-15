@@ -120,16 +120,16 @@ All projects have the following compiler options:
 
 |Algorithm|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
 |----|----|----|----|----|
-|SHA-1 (Digest)|74|10,476|308|0|
-|SHA-1 (Init, Update, and Final)|74|10,520|700|0|
-|SHA-224 (Digest)|74|10,476|316|0|
-|SHA-224 (Init, Update, and Final)|74|10,524|708|0|
-|SHA-256 (Digest)|74|10,476|320|0|
-|SHA-256 (Init, Update, and Final)|74|10,524|712|0|
-|SHA-384 (Digest)|74|10,476|336|0|
-|SHA-384 (Init, Update, and Final)|74|10,524|728|0|
-|SHA-512 (Digest)|74|10,476|352|0|
-|SHA-512 (Init, Update, and Final)|74|10,524|744|0|
+|SHA-1 (Digest)|10,492|74|280|
+|SHA-1 (Init, Update, and Final)|11,144|74|52|
+|SHA-224 (Digest)|10,500|74|280|
+|SHA-224 (Init, Update, and Final)|11,156|74|52|
+|SHA-256 (Digest)|10,504|74|280|
+|SHA-256 (Init, Update, and Final)|11,160|74|52|
+|SHA-384 (Digest)|10,520|74|280|
+|SHA-384 (Init, Update, and Final)|11,176|74|52|
+|SHA-512 (Digest)|10,536|74|280|
+|SHA-512 (Init, Update, and Final)|11,192|74|52|
 |HMAC SHA-1 (Direct)|74|18,716|884|0|
 |HMAC SHA-1 (Init, Cipher, and Final)|850|18,764|156|0|
 |HMAC SHA-224 (Direct)|74|18,716|892|0|
