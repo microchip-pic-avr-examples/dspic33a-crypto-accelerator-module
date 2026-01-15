@@ -118,47 +118,47 @@ All projects have the following compiler options:
 - Isolate each function in a section - unchecked
 - Remove unused sections - unchecked
 
-|Algorithm|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
-|----|----|----|----|----|
-|SHA-1 (Digest)|74|10,476|308|0|
-|SHA-1 (Init, Update, and Final)|74|10,520|700|0|
-|SHA-224 (Digest)|74|10,476|316|0|
-|SHA-224 (Init, Update, and Final)|74|10,524|708|0|
-|SHA-256 (Digest)|74|10,476|320|0|
-|SHA-256 (Init, Update, and Final)|74|10,524|712|0|
-|SHA-384 (Digest)|74|10,476|336|0|
-|SHA-384 (Init, Update, and Final)|74|10,524|728|0|
-|SHA-512 (Digest)|74|10,476|352|0|
-|SHA-512 (Init, Update, and Final)|74|10,524|744|0|
-|HMAC SHA-1 (Direct)|74|18,716|884|0|
-|HMAC SHA-1 (Init, Cipher, and Final)|850|18,764|156|0|
-|HMAC SHA-224 (Direct)|74|18,716|892|0|
-|HMAC SHA-224 (Init, Cipher, and Final)|850|18,764|164|0|
-|HMAC SHA-256 (Direct)|74|18,716|896|0|
-|HMAC SHA-256 (Init, Cipher, and Final)|850|18,764|168|0|
-|HMAC SHA-384 (Direct)|74|18,716|912|0|
-|HMAC SHA-384 (Init, Cipher, and Final)|850|18,764|184|0|
-|HMAC SHA-512 (Direct)|74|18,716|928|0|
-|HMAC SHA-512 (Init, Cipher, and Final)|850|18,764|200|0|
-|AES-ECB (Encrypt and Decrypt)|74|11,840|408|0|
-|AES-ECB (Init and Cipher)|2,022|11,904|140|0|
-|AES-CTR (Encrypt and Decrypt)|74|11,880|424|0|
-|AES-CTR (Init and Cipher)|2,022|11,948|156|0|
-|AES-CBC (Encrypt and Decrypt)|74|12,208|424|0|
-|AES-CBC (Init and Cipher)|2,022|12,276|156|0|
-|AES-CFB128 (Encrypt and Decrypt)|74|12,208|424|0|
-|AES-CFB128 (Init and Cipher)|2,022|12,276|156|0|
-|AES-OFB (Encrypt and Decrypt)|74|12,208|424|0|
-|AES-OFB (Init and Cipher)|2,022|12,276|156|0|
-|AES-GCM (Encrypt and Decrypt)|74|13,324|468|0|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|614|13,448|188|0|
-|AES-CCM (Init and Cipher)|590|13,272|308|0|
-|AES-XTS (Encrypt and Decrypt)|62|11,684|424|0|
-|AES-XTS (Init and Cipher)|2,010|11,752|156|0|
-|AES-CMAC (Direct)|74|18,764|340|0|
-|AES-CMAC (Init, Cipher, and Final)|602|18,812|104|0|
-|AES-GMAC (Direct)|74|18,800|380|0|
-|AES-GMAC (Init and Cipher)|602|18,840|112|0|
+| Algorithm | FLASH (bytes) | RAM Static (bytes) | RAM Stack (bytes)|
+|----|----|----|----|
+|SHA-1 (Digest)|10,476|74|308|
+|SHA-1 (Init, Update, and Final)|10,520|74|700|
+|SHA-224 (Digest)|10,476|74|316|
+|SHA-224 (Init, Update, and Final)|10,524|74|708|
+|SHA-256 (Digest)|10,476|74|320|
+|SHA-256 (Init, Update, and Final)|10,524|74|712|
+|SHA-384 (Digest)|10,476|74|336|
+|SHA-384 (Init, Update, and Final)|10,524|74|728|
+|SHA-512 (Digest)|10,476|74|352|
+|SHA-512 (Init, Update, and Final)|10,524|74|744|
+|HMAC SHA-1 (Direct)|18,716|74|884|
+|HMAC SHA-1 (Init, Cipher, and Final)|18,764|850|156|
+|HMAC SHA-224 (Direct)|18,716|74|892|
+|HMAC SHA-224 (Init, Cipher, and Final)|18,764|850|164|
+|HMAC SHA-256 (Direct)|18,716|74|896|
+|HMAC SHA-256 (Init, Cipher, and Final)|18,764|850|168|
+|HMAC SHA-384 (Direct)|18,716|74|912|
+|HMAC SHA-384 (Init, Cipher, and Final)|18,764|850|184|
+|HMAC SHA-512 (Direct)|18,716|74|928|
+|HMAC SHA-512 (Init, Cipher, and Final)|18,764|850|200|
+|AES-ECB (Encrypt and Decrypt)|11,840|74|408|
+|AES-ECB (Init and Cipher)|11,904|2,022|140|
+|AES-CTR (Encrypt and Decrypt)|11,880|74|424|
+|AES-CTR (Init and Cipher)|11,948|2,022|156|
+|AES-CBC (Encrypt and Decrypt)|12,208|74|424|
+|AES-CBC (Init and Cipher)|12,276|2,022|156|
+|AES-CFB128 (Encrypt and Decrypt)|12,208|74|424|
+|AES-CFB128 (Init and Cipher)|12,276|2,022|156|
+|AES-OFB (Encrypt and Decrypt)|12,208|74|424|
+|AES-OFB (Init and Cipher)|12,276|2,022|156|
+|AES-GCM (Encrypt and Decrypt)|13,324|74|468|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|13,448|614|188|
+|AES-CCM (Init and Cipher)|13,272|590|308|
+|AES-XTS (Encrypt and Decrypt)|11,684|62|424|
+|AES-XTS (Init and Cipher)|11,752|2,010|156|
+|AES-CMAC (Direct)|18,764|74|340|
+|AES-CMAC (Init, Cipher, and Final)|18,812|602|104|
+|AES-GMAC (Direct)|18,800|74|380|
+|AES-GMAC (Init and Cipher)|18,840|602|112|
 |ECDSA Blocking (Sign and Verify (P-192))|13,440|4,172|324|
 |ECDSA Blocking (Sign and Verify (P-256))|13,492|4,172|324|
 |ECDSA Blocking (Sign and Verify (P-384))|13,588|4,172|324|
@@ -167,7 +167,7 @@ All projects have the following compiler options:
 |ECDSA Non-blocking (Sign and Verify (P-256))|13,520|4,172|316|
 |ECDSA Non-blocking (Sign and Verify (P-384))|13,616|4,172|316|
 |ECDSA Non-blocking (Sign and Verify (P-521))|13,724|4,172|316|
-|TRNG (Generate)|56|4,612|356|0|
+|TRNG (Generate)|4,840|594|160|
 |ECDH (Shared Secret (P-192))|11,588|4,168|308|
 |ECDH (Shared Secret (P-256))|11,604|4,168|308|
 |ECDH (Shared Secret (P-384))|11,684|4,168|308|
