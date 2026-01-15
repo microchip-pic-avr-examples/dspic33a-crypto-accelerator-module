@@ -130,16 +130,16 @@ All projects have the following compiler options:
 |SHA-384 (Init, Update, and Final)|74|10,524|728|0|
 |SHA-512 (Digest)|74|10,476|352|0|
 |SHA-512 (Init, Update, and Final)|74|10,524|744|0|
-|HMAC SHA-1 (Direct)|74|18,716|884|0|
-|HMAC SHA-1 (Init, Cipher, and Final)|850|18,764|156|0|
-|HMAC SHA-224 (Direct)|74|18,716|892|0|
-|HMAC SHA-224 (Init, Cipher, and Final)|850|18,764|164|0|
-|HMAC SHA-256 (Direct)|74|18,716|896|0|
-|HMAC SHA-256 (Init, Cipher, and Final)|850|18,764|168|0|
-|HMAC SHA-384 (Direct)|74|18,716|912|0|
-|HMAC SHA-384 (Init, Cipher, and Final)|850|18,764|184|0|
-|HMAC SHA-512 (Direct)|74|18,716|928|0|
-|HMAC SHA-512 (Init, Cipher, and Final)|850|18,764|200|0|
+|HMAC SHA-1 (Direct)|18,728|74|856|
+|HMAC SHA-1 (Init, Cipher, and Final)|19,540|74|128|
+|HMAC SHA-224 (Direct)|18,736|74|856|
+|HMAC SHA-224 (Init, Cipher, and Final)|19,548|74|128|
+|HMAC SHA-256 (Direct)|18,740|74|856|
+|HMAC SHA-256 (Init, Cipher, and Final)|19,552|74|128|
+|HMAC SHA-384 (Direct)|18,756|74|856|
+|HMAC SHA-384 (Init, Cipher, and Final)|19,568|74|128|
+|HMAC SHA-512 (Direct)|18,772|74|856|
+|HMAC SHA-512 (Init, Cipher, and Final)|19,584|74|128|
 |AES-ECB (Encrypt and Decrypt)|74|11,840|408|0|
 |AES-ECB (Init and Cipher)|2,022|11,904|140|0|
 |AES-CTR (Encrypt and Decrypt)|74|11,880|424|0|
@@ -155,10 +155,10 @@ All projects have the following compiler options:
 |AES-CCM (Init and Cipher)|590|13,272|308|0|
 |AES-XTS (Encrypt and Decrypt)|62|11,684|424|0|
 |AES-XTS (Init and Cipher)|2,010|11,752|156|0|
-|AES-CMAC (Direct)|74|18,764|340|0|
-|AES-CMAC (Init, Cipher, and Final)|602|18,812|104|0|
-|AES-GMAC (Direct)|74|18,800|380|0|
-|AES-GMAC (Init and Cipher)|602|18,840|112|0|
+|AES-CMAC (Direct)|18,744|74|292|
+|AES-CMAC (Init, Cipher, and Final)|19,308|74|56|
+|AES-GMAC (Direct)|18,772|74|312|
+|AES-GMAC (Init and Cipher)|19,320|74|44|
 |ECDSA Blocking (Sign and Verify (P-192))|4,168|13,380|476|0|
 |ECDSA Blocking (Sign and Verify (P-256))|4,168|13,424|516|0|
 |ECDSA Blocking (Sign and Verify (P-384))|4,168|13,492|612|0|
