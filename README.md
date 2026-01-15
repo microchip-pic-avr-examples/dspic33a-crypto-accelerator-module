@@ -159,16 +159,16 @@ All projects have the following compiler options:
 |AES-CMAC (Init, Cipher, and Final)|602|18,812|104|0|
 |AES-GMAC (Direct)|74|18,800|380|0|
 |AES-GMAC (Init and Cipher)|602|18,840|112|0|
-|ECDSA Blocking (Sign and Verify (P-192))|4,168|13,380|476|0|
-|ECDSA Blocking (Sign and Verify (P-256))|4,168|13,424|516|0|
-|ECDSA Blocking (Sign and Verify (P-384))|4,168|13,492|612|0|
-|ECDSA Blocking (Sign and Verify (P-521))|4,168|13,572|716|0|
-|ECDSA Non-blocking (Sign and Verify (P-192))|4,168|13,428|476|0|
-|ECDSA Non-blocking (Sign and Verify (P-256))|4,168|13,468|516|0|
-|ECDSA Non-blocking (Sign and Verify (P-384))|4,168|13,536|612|0|
-|ECDSA Non-blocking (Sign and Verify (P-521))|4,168|13,572|716|0|
+|ECDSA Blocking (Sign and Verify (P-192))|13,440|4,172|324|
+|ECDSA Blocking (Sign and Verify (P-256))|13,492|4,172|324|
+|ECDSA Blocking (Sign and Verify (P-384))|13,588|4,172|324|
+|ECDSA Blocking (Sign and Verify (P-521))|13,696|4,172|324|
+|ECDSA Non-blocking (Sign and Verify (P-192))|13,480|4,480|316|
+|ECDSA Non-blocking (Sign and Verify (P-256))|13,520|4,172|316|
+|ECDSA Non-blocking (Sign and Verify (P-384))|13,616|4,172|316|
+|ECDSA Non-blocking (Sign and Verify (P-521))|13,724|4,172|316|
 |TRNG (Generate)|56|4,612|356|0|
-|ECDH (Shared Secret (P-192))|4,164|11,536|460|0|
-|ECDH (Shared Secret (P-256))|4,164|11,576|476|0|
-|ECDH (Shared Secret (P-384))|4,164|11,648|556|0|
-|ECDH (Shared Secret (P-521))|4,164|11,728|644|0|
+|ECDH (Shared Secret (P-192))|11,588|4,168|308|
+|ECDH (Shared Secret (P-256))|11,604|4,168|308|
+|ECDH (Shared Secret (P-384))|11,684|4,168|308|
+|ECDH (Shared Secret (P-521))|11,780|4,168|308|
