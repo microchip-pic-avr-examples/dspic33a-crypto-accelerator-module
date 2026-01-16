@@ -96,14 +96,14 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA Verify (Blocking)|26.92 ms|Curve: P-384|
 |ECDSA Sign   (Blocking)|41.88 ms|Curve: P-521|
 |ECDSA Verify (Blocking)|58.08 ms|Curve: P-521|
-|ECDSA Sign   (Non-blocking)|3.88 ms|Curve: P-192|
-|ECDSA Verify (Non-blocking)|5.00 ms|Curve: P-192|
-|ECDSA Sign   (Non-blocking)|7.24 ms|Curve: P-256|
-|ECDSA Verify (Non-blocking)|9.76 ms|Curve: P-256|
-|ECDSA Sign   (Non-blocking)|19.56 ms|Curve: P-384|
-|ECDSA Verify (Non-blocking)|26.80 ms|Curve: P-384|
-|ECDSA Sign   (Non-blocking)|41.88 ms|Curve: P-521|
-|ECDSA Verify (Non-blocking)|57.72 ms|Curve: P-521|
+|ECDSA Sign   (Non-blocking)|3.92 ms|Curve: P-192|
+|ECDSA Verify (Non-blocking)|5.20 ms|Curve: P-192|
+|ECDSA Sign   (Non-blocking)|7.48 ms|Curve: P-256|
+|ECDSA Verify (Non-blocking)|10.12 ms|Curve: P-256|
+|ECDSA Sign   (Non-blocking)|20.24 ms|Curve: P-384|
+|ECDSA Verify (Non-blocking)|27.52 ms|Curve: P-384|
+|ECDSA Sign   (Non-blocking)|43.16 ms|Curve: P-521|
+|ECDSA Verify (Non-blocking)|59.92 ms|Curve: P-521|
 |TRNG (Generate)|122.667 µs|Output Size: 521|
 |ECDH (Shared Secret Generate)|3.760 ms|Curve: P-192|
 |ECDH (Shared Secret Generate)|7.160 ms|Curve: P-256|
@@ -159,14 +159,14 @@ All projects have the following compiler options:
 |AES-CMAC (Init, Cipher, and Final)|18,812|602|104|
 |AES-GMAC (Direct)|18,800|74|380|
 |AES-GMAC (Init and Cipher)|18,840|602|112|
-|ECDSA Blocking (Sign and Verify (P-192))|13,440|4,172|324|
-|ECDSA Blocking (Sign and Verify (P-256))|13,492|4,172|324|
-|ECDSA Blocking (Sign and Verify (P-384))|13,588|4,172|324|
-|ECDSA Blocking (Sign and Verify (P-521))|13,696|4,172|324|
-|ECDSA Non-blocking (Sign and Verify (P-192))|13,480|4,480|316|
-|ECDSA Non-blocking (Sign and Verify (P-256))|13,520|4,172|316|
-|ECDSA Non-blocking (Sign and Verify (P-384))|13,616|4,172|316|
-|ECDSA Non-blocking (Sign and Verify (P-521))|13,724|4,172|316|
+|ECDSA Blocking (Sign and Verify (P-192))|13,404|4,220|324|
+|ECDSA Blocking (Sign and Verify (P-256))|13,440|4,236|324|
+|ECDSA Blocking (Sign and Verify (P-384))|13,504|4,268|324|
+|ECDSA Blocking (Sign and Verify (P-521))|13,576|4,304|324|
+|ECDSA Non-blocking (Sign and Verify (P-192))|13,444|4,220|316|
+|ECDSA Non-blocking (Sign and Verify (P-256))|13,468|4,236|316|
+|ECDSA Non-blocking (Sign and Verify (P-384))|13,532|4,268|316|
+|ECDSA Non-blocking (Sign and Verify (P-521))|13,604|4,304|316|
 |TRNG (Generate)|4,840|594|160|
 |ECDH (Shared Secret (P-192))|11,588|4,168|308|
 |ECDH (Shared Secret (P-256))|11,604|4,168|308|
