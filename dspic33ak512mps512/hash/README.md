@@ -100,23 +100,23 @@ The following benchmarking results were obtained with the device clock speed set
 
 #### Single Step
 
-|Hash Algorithm|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|----|
-|SHA-1|74|10,476|308|0|
-|SHA-224|74|10,476|316|0|
-|SHA-256|74|10,476|320|0|
-|SHA-384|74|10,476|336|0|
-|SHA-512|74|10,476|352|0|
+|SHA-1|10,492|74|280|
+|SHA-224|10,500|74|280|
+|SHA-256|10,504|74|280|
+|SHA-384|10,520|74|280|
+|SHA-512|10,536|74|280|
 
 #### Multi Step
 
-|Hash Algorithm|RAM (bytes)|FLASH (bytes)|Stack Usage (bytes)|Heap Usage (bytes)|
+|Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|----|
-|SHA-1|74|10,520|700|0|
-|SHA-224|74|10,524|708|0|
-|SHA-256|74|10,524|712|0|
-|SHA-384|74|10,524|728|0|
-|SHA-512|74|10,524|744|0|
+|SHA-1|11,144|74|52|
+|SHA-224|11,156|74|52|
+|SHA-256|11,160|74|52|
+|SHA-384|11,176|74|52|
+|SHA-512|11,192|74|52|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
