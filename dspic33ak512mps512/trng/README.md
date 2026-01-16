@@ -59,15 +59,15 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |TRNG Size (bytes)|Crypto_Rng_Generate Performance (µs)|
 |---|---|
-|192|66.167|
-|256|77.000|
-|384|98.583|
-|521|122.750|
+|192|66.250|
+|256|77.083|
+|384|98.750|
+|521|122.833|
 
 ### Memory Size Benchmarking
 
 The below sizes are for the process of getting 521 bytes (8-bit words).
 
-|RAM (bytes)|FLASH (bytes)|Stack (bytes)|Heap (bytes)|
-|---|---|---|---|
-|56|4,596|356|0|
+|FLASH (bytes)|RAM (bytes)|Stack (bytes)|
+|---|---|---|
+|4,840|594|160|
