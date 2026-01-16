@@ -68,6 +68,6 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 The below sizes are for the process of getting 521 bytes (8-bit words).
 
-|FLASH (bytes)|RAM (bytes)|Stack (bytes)|
+|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |---|---|---|
 |4,840|594|160|
