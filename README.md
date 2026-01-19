@@ -130,16 +130,16 @@ All projects have the following compiler options:
 |SHA-384 (Init, Update, and Final)|11,176|74|52|
 |SHA-512 (Digest)|10,536|74|280|
 |SHA-512 (Init, Update, and Final)|11,192|74|52|
-|HMAC SHA-1 (Direct)|18,716|74|884|
-|HMAC SHA-1 (Init, Cipher, and Final)|18,764|850|156|
-|HMAC SHA-224 (Direct)|18,716|74|892|
-|HMAC SHA-224 (Init, Cipher, and Final)|18,764|850|164|
-|HMAC SHA-256 (Direct)|18,716|74|896|
-|HMAC SHA-256 (Init, Cipher, and Final)|18,764|850|168|
-|HMAC SHA-384 (Direct)|18,716|74|912|
-|HMAC SHA-384 (Init, Cipher, and Final)|18,764|850|184|
-|HMAC SHA-512 (Direct)|18,716|74|928|
-|HMAC SHA-512 (Init, Cipher, and Final)|18,764|850|200|
+|HMAC SHA-1 (Direct)|18,728|74|856|
+|HMAC SHA-1 (Init, Cipher, and Final)|19,540|74|128|
+|HMAC SHA-224 (Direct)|18,736|74|856|
+|HMAC SHA-224 (Init, Cipher, and Final)|19,548|74|128|
+|HMAC SHA-256 (Direct)|18,740|74|856|
+|HMAC SHA-256 (Init, Cipher, and Final)|19,552|74|128|
+|HMAC SHA-384 (Direct)|18,756|74|856|
+|HMAC SHA-384 (Init, Cipher, and Final)|19,568|74|128|
+|HMAC SHA-512 (Direct)|18,772|74|856|
+|HMAC SHA-512 (Init, Cipher, and Final)|19,584|74|128|
 |AES-ECB (Encrypt and Decrypt)|11,780|154|324|
 |AES-ECB (Init and Cipher)|11,386|2,102|56|
 |AES-CTR (Encrypt and Decrypt)|11,804|170|324|
@@ -155,10 +155,10 @@ All projects have the following compiler options:
 |AES-CCM (Init and Cipher)|13,156|776|116|
 |AES-XTS (Encrypt and Decrypt)|11,608|158|324|
 |AES-XTS (Init and Cipher)|11,668|2,106|56|
-|AES-CMAC (Direct)|18,764|74|340|
-|AES-CMAC (Init, Cipher, and Final)|18,812|602|104|
-|AES-GMAC (Direct)|18,800|74|380|
-|AES-GMAC (Init and Cipher)|18,840|602|112|
+|AES-CMAC (Direct)|18,744|74|292|
+|AES-CMAC (Init, Cipher, and Final)|19,308|74|56|
+|AES-GMAC (Direct)|18,772|74|312|
+|AES-GMAC (Init and Cipher)|19,320|74|44|
 |ECDSA Blocking (Sign and Verify (P-192))|13,404|4,220|324|
 |ECDSA Blocking (Sign and Verify (P-256))|13,440|4,236|324|
 |ECDSA Blocking (Sign and Verify (P-384))|13,504|4,268|324|
