@@ -218,7 +218,7 @@ AES_ERROR DRV_CRYPTO_AES_SetOperation(void *contextData, AESCON_OPERATION operat
  * @retval AES_WRITE_ERROR      Failed to write the header data.
  * @note An AES operation must be in progress (initialized by DRV_CRYPTO_AES_Initialize()).
  **/
-AES_ERROR DRV_CRYPTO_AES_AddRawHeader(void *contextData, void *headerData, uint32_t headerLength, uint32_t align);
+AES_ERROR DRV_CRYPTO_AES_AddRawHeader(void *contextData, const void *headerData, uint32_t headerLength, uint32_t align);
 
 /**
  * @ingroup aes
@@ -420,7 +420,7 @@ AES_ERROR MPROTO(DRV_CRYPTO_AES_SetOperation)(void *contextData, AESCON_OPERATIO
  * If the hardware version is not defined, this function will not be available.
  */
 
-AES_ERROR MPROTO(DRV_CRYPTO_AES_AddRawHeader)(void *contextData, void *headerData, uint32_t headerLength, uint32_t align);
+AES_ERROR MPROTO(DRV_CRYPTO_AES_AddRawHeader)(void *contextData, const void *headerData, uint32_t headerLength, uint32_t align);
 
 /**
  * @ingroup aes
