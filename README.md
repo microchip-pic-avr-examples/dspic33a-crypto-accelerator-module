@@ -53,10 +53,10 @@ A MISRA scan has been conducted on the pre-compiled CAM Hardware Driver source f
 
 # Benchmarking
 ## Benchmarking Setup
-All benchmarking results in the following sections are obtained using the demo projects with the following edits:
-- Removal of the uart and print outs.
-- Reformat to isolate only one algorithm at a time.
-- Input data were stored in flash memory.
+The benchmarking results are obtained by modifying the demo projects to ensure the benchmarking numbers remove any overhead. Changes include:
+- Removal of the UART and print out statement.
+- Isolation to use one algorithm at a time.
+- Store input data in flash memory to benchmark RAM usage for CAM Hardware Driver
 
 ### Performance Benchmarking
 The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled Hardware Driver.
