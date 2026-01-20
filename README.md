@@ -52,6 +52,16 @@ The pre-compiled CAM Hardware Driver can function independently by utilizing the
 A MISRA scan has been conducted on the pre-compiled CAM Hardware Driver source files. The source files are MISRA compliant for Required and Mandatory rules.
 
 # Benchmarking
+## Benchmarking Setup
+The benchmarking results are obtained by modifying the demo projects to remove overheads such as:
+- UART peripheral and print out statements.
+- Isolation to use one algorithm at a time.
+- Store input data in flash memory to benchmark RAM usage for CAM Hardware Driver
+
+The benchmarking projects are configured to use the following:
+- Optimization level -Os
+- Tools and versions as listed in the Software Tools section above
+
 
 ### Performance Benchmarking
 The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled Hardware Driver.
