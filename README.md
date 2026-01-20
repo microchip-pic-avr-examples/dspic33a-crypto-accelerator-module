@@ -54,13 +54,13 @@ A MISRA scan has been conducted on the pre-compiled CAM Hardware Driver source f
 # Benchmarking
 ## Benchmarking Setup
 The benchmarking results are obtained by modifying the demo projects to remove overheads such as:
-- Removal of UART and print out statements.
+- UART peripheral and print out statements.
 - Isolation to use one algorithm at a time.
 - Store input data in flash memory to benchmark RAM usage for CAM Hardware Driver
 
-The benchmarkingprojects are configured to use the following:
+The benchmarking projects are configured to use the following:
 - Optimization level -Os
-- Tools and versions are listed in the Software Tools section above
+- Tools and versions as listed in the Software Tools section above
 
 
 ### Performance Benchmarking
