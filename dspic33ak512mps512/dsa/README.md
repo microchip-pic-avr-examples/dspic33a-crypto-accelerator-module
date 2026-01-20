@@ -195,36 +195,36 @@ Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
 #### Non-blocking API Performance:
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|3.88|
-|P-256|7.24|
-|P-384|19.56|
-|P-521|41.88|
+|P-192|3.92|
+|P-256|7.48|
+|P-384|20.24|
+|P-521|43.16|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.00|
-|P-256|9.76|
-|P-384|26.8|
-|P-521|57.72|
+|P-192|5.20|
+|P-256|10.12|
+|P-384|27.52|
+|P-521|59.92|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
 #### Blocking Memory Usage:
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,168|13,380|
-|P-256|4,168|13,424|
-|P-384|4,168|13,492|
-|P-521|4,168|13,572|
+|ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|----|----|----|----|
+|P-192|13,404|4,220|324|
+|P-256|13,440|4,236|324|
+|P-384|13,504|4,268|324|
+|P-521|13,576|4,304|324|
 
 #### Non-blocking Memory Usage:
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,168|13,428|
-|P-256|4,168|13,468|
-|P-384|4,168|13,536|
-|P-521|4,168|13,608|
+|ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|----|----|----|----|
+|P-192|13,444|4,220|316|
+|P-256|13,468|4,236|316|
+|P-384|13,532|4,268|316|
+|P-521|13,604|4,304|316|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
