@@ -150,21 +150,21 @@ All projects have the following compiler options:
 |HMAC SHA-384 (Init, Cipher, and Final)|19,568|74|128|
 |HMAC SHA-512 (Direct)|18,772|74|856|
 |HMAC SHA-512 (Init, Cipher, and Final)|19,584|74|128|
-|AES-ECB (Encrypt and Decrypt)|11,780|154|324|
-|AES-ECB (Init and Cipher)|11,386|2,102|56|
-|AES-CTR (Encrypt and Decrypt)|11,804|170|324|
-|AES-CTR (Init and Cipher)|11,856|2,118|56|
-|AES-CBC (Encrypt and Decrypt)|12,132|170|324|
-|AES-CBC (Init and Cipher)|12,184|2,118|56|
-|AES-CFB128 (Encrypt and Decrypt)|12,132|170|324|
-|AES-CFB128 (Init and Cipher)|12,184|2,118|56|
-|AES-OFB (Encrypt and Decrypt)|12,132|170|324|
-|AES-OFB (Init and Cipher)|12,184|2,118|56|
-|AES-GCM (Encrypt and Decrypt)|13,212|202|336|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|13,304|742|56|
-|AES-CCM (Init and Cipher)|13,156|776|116|
-|AES-XTS (Encrypt and Decrypt)|11,608|158|324|
-|AES-XTS (Init and Cipher)|11,668|2,106|56|
+|AES-ECB (Encrypt and Decrypt)|11,788|74|324|
+|AES-ECB (Init and Cipher)|11,844|2,022|56|
+|AES-CTR (Encrypt and Decrypt)|11,812|74|324|
+|AES-CTR (Init and Cipher)|11,864|2,022|56|
+|AES-CBC (Encrypt and Decrypt)|12,140|74|324|
+|AES-CBC (Init and Cipher)|12,192|2,022|56|
+|AES-CFB128 (Encrypt and Decrypt)|12,140|74|324|
+|AES-CFB128 (Init and Cipher)|12,192|2,022|56|
+|AES-OFB (Encrypt and Decrypt)|12,140|74|324|
+|AES-OFB (Init and Cipher)|12,192|2,022|56|
+|AES-GCM (Encrypt and Decrypt)|13,232|106|336|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|13,324|646|56|
+|AES-CCM (Init and Cipher)|13,196|590|116|
+|AES-XTS (Encrypt and Decrypt)|11,616|62|324|
+|AES-XTS (Init and Cipher)|11,676|2,010|56|
 |AES-CMAC (Direct)|18,744|74|292|
 |AES-CMAC (Init, Cipher, and Final)|19,308|74|56|
 |AES-GMAC (Direct)|18,772|74|312|
