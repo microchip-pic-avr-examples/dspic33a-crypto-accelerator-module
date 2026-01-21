@@ -6,19 +6,7 @@
                 "hash/sha",
                 "aes/aes",
                 "mac/mac",
-                "dsa/dsa",
-                "ecdh/ecdh",
-                "trng/trng",
-                "aes_hash/aes_hash"
-            ]
-        },
-        "dspic33akv512gms510": {
-            "ip": "CAM_05346",
-            "project_paths": [
-                "hash/sha",
-                "aes/aes",
-                "mac/mac",
-                "dsa/dsa",
+                "dsa/ecdsa",
                 "ecdh/ecdh",
                 "trng/trng",
                 "aes_hash/aes_hash"
@@ -41,15 +29,14 @@
         ],
         "mac": [
             "hash",
-            "aead_cipher"
-        ],
-        "dsa": [
-            "hash",
             "aead_cipher",
             "mac_cipher"
         ],
-        "ecdh": [
+        "dsa": [
             "digsign"
+        ],
+        "ecdh": [
+            "kas"
         ],
         "trng": [
             "rng"
