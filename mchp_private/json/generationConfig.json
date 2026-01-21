@@ -1,0 +1,100 @@
+{
+    "devices": {
+        "dspic33ak512mps512": {
+            "ip": "CAM_05346",
+            "project_paths": [
+                "hash/sha",
+                "aes/aes",
+                "mac/mac",
+                "dsa/dsa",
+                "ecdh/ecdh",
+                "trng/trng",
+                "aes_hash/aes_hash"
+            ]
+        },
+        "dspic33akv512gms510": {
+            "ip": "CAM_05346",
+            "project_paths": [
+                "hash/sha",
+                "aes/aes",
+                "mac/mac",
+                "dsa/dsa",
+                "ecdh/ecdh",
+                "trng/trng",
+                "aes_hash/aes_hash"
+            ]
+        },
+        "dspic33ak256mps306": {
+            "ip": "CAM_06048",
+            "project_paths": [
+                "hash/hash"
+            ]
+        }
+    },
+    "common_crypto_files": {
+        "hash": [
+            "hash"
+        ],
+        "aes": [
+            "sym_cipher",
+            "aead_cipher"
+        ],
+        "mac": [
+            "hash",
+            "aead_cipher"
+        ],
+        "dsa": [
+            "hash",
+            "aead_cipher",
+            "mac_cipher"
+        ],
+        "ecdh": [
+            "digsign"
+        ],
+        "trng": [
+            "rng"
+        ],
+        "aes_hash": [
+            "hash",
+            "sym_cipher",
+            "mac_cipher",
+            "aead_cipher"
+        ]   
+    },
+    "cam_files": {
+        "hash": [
+            "hash_cam",
+            "cam"
+        ],
+         "aes": [
+            "sym_cam",
+            "aead_cam",
+            "cam"
+        ],
+        "mac": [
+            "hash_cam",
+            "aead_cam",
+            "mac_cam",
+            "cam"
+        ],
+        "dsa": [
+            "digisign_cam",
+            "cam"
+        ],
+        "ecdh": [
+            "kas_cam",
+            "cam"
+        ],
+        "trng": [
+            "rng_cam",
+            "cam"
+        ],
+        "aes_hash": [
+            "hash_cam",
+            "sym_cam",
+            "mac_cam",
+            "aead_cam",
+            "cam"
+        ]   
+    }
+}

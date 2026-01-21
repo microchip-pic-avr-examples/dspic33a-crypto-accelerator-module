@@ -33,8 +33,8 @@ Then, launch the `generateFiles.py` script with the desired arguments:
       -g GIT, --git GIT     fetch the CryptoV4 repository from this Git link
       -b BRANCH, --branch BRANCH
                             if cloning/updating, branch name for checkout
-      -i IPNAME, --ipname IPNAME
-                            CAM IP to use
+      -i JSON, --json JSON
+                            path to configuration JSON file
 
 * If specified, the repository must already exist.
 * If specified, the script may clone the repository and use the specified branch.  An existing repository will be updated.
@@ -66,10 +66,10 @@ The script will copy the CAM header and library files to the appropriate locatio
 
 ## Example Parameters
 ### Generating with Cloning the CryptoV4 Repository, With Branch 'dev'
-    python generateFiles.py -c -b dev -i CAM_05346
+    python generateFiles.py -c -b dev -j json\generationConfig.json
 
 ### Generating Using an Existing Repository
-    python generateFiles.py -r ..\..\crypto_v4 -i CAM_05346
+    python generateFiles.py -r ..\..\crypto_v4 -j json\generationConfig.json
 
 ### Fetching the CAM Library Files From an Existing Repository
     python fetchLibrary.py -i ..\..\crypto_cam_src
