@@ -33,7 +33,7 @@ Then, launch the `generateFiles.py` script with the desired arguments:
       -g GIT, --git GIT     fetch the CryptoV4 repository from this Git link
       -b BRANCH, --branch BRANCH
                             if cloning/updating, branch name for checkout
-      -i JSON, --json JSON
+      -j JSON, --json JSON
                             path to configuration JSON file
 
 * If specified, the repository must already exist.
