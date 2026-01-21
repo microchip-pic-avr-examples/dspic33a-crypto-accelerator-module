@@ -70,6 +70,22 @@ typedef enum {
 	CRYPTO_HANDLER_MAX
 }crypto_HandlerType_E;
 
+//This needs to be taken care when no using any AES algorithm variant
+typedef enum
+{
+    CRYPTO_AESKEYSIZE_128 = 16, //Enum used for AES key size of 128 bits
+    CRYPTO_AESKEYSIZE_192 = 24, //Enum used for AES key size of 192 bits
+    CRYPTO_AESKEYSIZE_256 = 32  //Enum used for AES key size of 256 bits        
+}crypto_AesKeySize_E;
+
+//This needs to be taken care when no using any Sym or Asym algorithm variant
+typedef enum
+{
+    CRYPTO_CIOP_INVALID = 0,    //INVALID to define Min. range for Enum
+    CRYPTO_CIOP_ENCRYPT = 1,    //Enum used for Encryption cipher operation
+    CRYPTO_CIOP_DECRYPT = 2,    //Enum used for Decryption cipher operation
+    CRYPTO_CIOP_MAX,            //Max. to check Enum value range
+}crypto_CipherOper_E;
 
 /* Curve Types */
 typedef enum 
