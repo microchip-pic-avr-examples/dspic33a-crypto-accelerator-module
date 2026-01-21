@@ -95,6 +95,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, 
         switch(shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Digest((void*)ptr_data, dataLen, ptr_digest, shaAlgorithm_en);
                 break;
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
@@ -129,6 +130,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Init(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st,
         switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Init((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_shaCtx_st->shaAlgo_en);
                 break;
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
@@ -155,6 +157,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Update(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_s
         switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Update((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_data, dataLen);
                 break;
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
@@ -181,6 +184,7 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Final(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st
         switch(ptr_shaCtx_st->shaHandler_en)
         {
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Final((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_digest);
                 break;
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;

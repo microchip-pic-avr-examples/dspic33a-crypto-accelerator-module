@@ -58,7 +58,7 @@ Microchip or any third party.
 // *****************************************************************************
 
 /**
- * @brief Initialize the CAM library's AES interrupt handlers.
+ * @brief Initialize the CAM library's HASH interrupt handlers.
  */
 static void lDRV_CRYPTO_HASH_InterruptSetup(void)
 {
