@@ -105,7 +105,7 @@ typedef enum HASHCON_MODE
     MODE_SHA384 = 4,     /**< SHA2-384 hashing mode */
     MODE_SHA512 = 5,     /**< SHA2-512 hashing mode */
 
-    #if (CAM_HW_VERSION == CAM_06048)
+    #if defined(CAM_HW_VERSION) && (CAM_HW_VERSION == CAM_06048)
 
     MODE_SHA3_224 = 6,   /**< SHA3-224 hashing mode */
     MODE_SHA3_256 = 7,   /**< SHA3-256 hashing mode */

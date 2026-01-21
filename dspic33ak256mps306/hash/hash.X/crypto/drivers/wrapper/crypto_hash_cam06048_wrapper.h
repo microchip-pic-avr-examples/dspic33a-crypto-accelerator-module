@@ -69,11 +69,11 @@ Microchip or any third party.
 // *****************************************************************************
 
 // The minimum size to store a CAM library HASH context data block.
-#define MINIMUM_HASH_CONTEXT_DATA_SIZE        (5000UL)
+#define MINIMUM_HASH_CONTEXT_DATA_SIZE        (788UL)
 
 /* The minimum size to store a CAM library HASH single-step digest context.
  * A single-step digest operation doesn't need state, cache or padding space. */
-#define MINIMUM_HASH_DIGEST_CONTEXT_DATA_SIZE (5000UL)
+#define MINIMUM_HASH_DIGEST_CONTEXT_DATA_SIZE (420UL)
 
 typedef struct
 {
