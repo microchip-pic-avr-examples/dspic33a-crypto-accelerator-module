@@ -16,10 +16,11 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - OFB
 - CMAC
 - GCM
+- CCM
 - XTS
 
 ## Software Tool Versions
-- dsPIC33AK-MP_DEV_DFP v1.1.124
+- dsPIC33AK-MP_DFP v1.2.135
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
 - MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
 
@@ -65,7 +66,7 @@ The following information will be printed on the COM port for symmetric AES algo
 
 <img src="./images/dspic33ak512mps512_ccv4_aes_sym_demo.png" alt="AES Symmetric Demo Output" width="750"/>
 
-### AES GCM Results
+### AES GCM, CCM Results
 The following information will be printed on the COM port for the AES AEAD algorithms:
 1. A header is displayed showing the used AES algorithm and input data length.
 2. The key data is printed out.
@@ -81,6 +82,9 @@ The following information will be printed on the COM port for the AES AEAD algor
     2. The decrypted data is printed out.
     3. The decrypted data and original input data are compared.
     4. Pass or Fail is printed out depending on the comparison result.
+
+**FOR GCM ONLY**
+
 6. The data is encrypted using the multi-step API.
     1. The input data is printed out.
     2. The encrypted data is printed out.
@@ -195,7 +199,34 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(
 );
 ```
 
-### AES GCM APIs
+### AES AEAD APIs
+
+```c
+crypto_Aead_Status_E Crypto_Aead_AesCcm_Init(
+    st_Crypto_Aead_AesCcm_ctx *ptr_aesCcmCtx_st,     // configuration context for AES CCM support
+    crypto_HandlerType_E handlerType_en,             // configure Crypto API to use hardware acceleration
+    uint8_t *ptr_key,                                // pointer to the key data array to be used
+    uint32_t keyLen,                                 // length of the key data array
+    uint32_t sessionID                               // session ID for use by the Crypto API (maximum of 1)
+);
+```
+
+```c
+crypto_Aead_Status_E Crypto_Aead_AesCcm_Cipher(
+    st_Crypto_Aead_AesCcm_ctx *ptr_aesCcmCtx_st,     // configuration context for AES CCM support 
+    crypto_CipherOper_E cipherOper_en,               // configure AES to encrypt or decrypt 
+    uint8_t *ptr_inputData,                          // pointer to the input data array to be used
+    uint32_t dataLen,                                // length of the input data array
+    uint8_t *ptr_outData,                            // pointer to the data array for encrypted output to be stored
+    uint8_t *ptr_nonce,                              // pointer to the nonce array to be used
+    uint32_t nonceLen,                               // length of the nonce array 
+    uint8_t *ptr_authTag,                            // pointer to the authentication tag data array to be used
+    uint32_t authTagLen,                             // length of the authentication tag data array 
+    uint8_t *ptr_aad,                                // pointer to the aad data array to be used 
+    uint32_t aadLen                                  // length of the aad data array
+);
+```
+
 ```c
 crypto_Aead_Status_E Crypto_Aead_AesGcm_Init(
     st_Crypto_Aead_AesGcm_ctx *ptr_aesGcmCtx_st,     // configuration context for AES GCM support
@@ -206,7 +237,7 @@ crypto_Aead_Status_E Crypto_Aead_AesGcm_Init(
     uint8_t *ptr_initVect,                           // pointer to the initialization vector data array to be used
     uint32_t initVectLen,                            // length of the initialization vector data array
     uint32_t sessionID                               // session ID for use by the Crypto API (maximum of 1)
-    );
+);
 ```
 
 ```c
