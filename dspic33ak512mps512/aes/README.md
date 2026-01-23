@@ -16,10 +16,11 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - OFB
 - CMAC
 - GCM
+- CCM
 - XTS
 
 ## Software Tool Versions
-- dsPIC33AK-MP_DEV_DFP v1.1.124
+- dsPIC33AK-MP_DFP v1.0.81
 - MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
 - MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
 
