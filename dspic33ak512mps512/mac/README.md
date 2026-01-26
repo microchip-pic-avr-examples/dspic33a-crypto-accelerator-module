@@ -13,10 +13,10 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - HMAC
 - AES-GMAC
 
-## Software Tool Versions
+## Software Tool Versions Used
 - dsPIC33AK-MP_DEV_DFP v1.2.135
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30 or newer](https://www.microchip.com/xcdsc)
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
