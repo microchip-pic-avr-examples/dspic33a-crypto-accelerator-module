@@ -421,6 +421,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |AES-CFB128|12,140|74|324|
 |AES-OFB|12,140|74|324|
 |AES-GCM|13,232|106|336|
+|AES-CCM|13,196|590|116|
 |AES-XTS|11,616|62|324|
 
 #### Multi Step
@@ -433,7 +434,6 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 |AES-CFB128|12,192|2,022|56|
 |AES-OFB|12,192|2,022|56|
 |AES-GCM|13,324|646|56|
-|AES-CCM|13,196|590|116|
 |AES-XTS|11,676|2,010|56|
 
 ## ACVP
