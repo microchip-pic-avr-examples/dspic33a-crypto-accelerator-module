@@ -427,7 +427,7 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 #### Multi Step
 
 |AES Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
-|----|----|----|----|----|
+|----|----|----|----|
 |AES-ECB|11,844|2,022|56|
 |AES-CTR|11,864|2,022|56|
 |AES-CBC|12,192|2,022|56|
