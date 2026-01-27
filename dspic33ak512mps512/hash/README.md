@@ -101,7 +101,7 @@ The following benchmarking results were obtained with the device clock speed set
 #### Single Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
-|----|----|----|----|----|
+|----|----|----|----|
 |SHA-1|10,492|74|280|
 |SHA-224|10,500|74|280|
 |SHA-256|10,504|74|280|
@@ -111,7 +111,7 @@ The following benchmarking results were obtained with the device clock speed set
 #### Multi Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
-|----|----|----|----|----|
+|----|----|----|----|
 |SHA-1|11,144|74|52|
 |SHA-224|11,156|74|52|
 |SHA-256|11,160|74|52|
