@@ -56,6 +56,15 @@ uint32_t get_ecb_test_vector_count(void);
 TEST_VECTOR * get_ctr_test_vectors(void);
 uint32_t get_ctr_test_vector_count(void);
 
+TEST_VECTOR * get_cbc_test_vectors(void);
+uint32_t get_cbc_test_vector_count(void);
+
+TEST_VECTOR * get_cfb128_test_vectors(void);
+uint32_t get_cfb128_test_vector_count(void);
+
+TEST_VECTOR * get_ofb_test_vectors(void);
+uint32_t get_ofb_test_vector_count(void);
+
 TEST_VECTOR * get_xts_test_vectors(void);
 uint32_t get_xts_test_vector_count(void);
 

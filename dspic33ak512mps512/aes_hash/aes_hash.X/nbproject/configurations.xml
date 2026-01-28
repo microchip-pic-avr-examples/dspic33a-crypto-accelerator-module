@@ -61,10 +61,10 @@
       <logicalFolder name="test_vectors"
                      displayName="test_vectors"
                      projectFiles="true">
-        <itemPath>test_vectors/gcm_test_vector.h</itemPath>
         <itemPath>test_vectors/mac_test_vector.h</itemPath>
         <itemPath>test_vectors/test_vectors_sha512.h</itemPath>
         <itemPath>test_vectors/sym_test_vector.h</itemPath>
+        <itemPath>test_vectors/aead_test_vector.h</itemPath>
       </logicalFolder>
       <itemPath>app_aes_hash.h</itemPath>
     </logicalFolder>
@@ -146,6 +146,7 @@
           <itemPath>test_vectors/src/test_vectors_sha512.c</itemPath>
           <itemPath>test_vectors/src/sym_test_vector.c</itemPath>
           <itemPath>test_vectors/src/xts_test_vector.c</itemPath>
+          <itemPath>test_vectors/src/ccm_test_vector.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
@@ -167,11 +168,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
-        <languageToolchainVersion>3.21</languageToolchainVersion>
+        <languageToolchainVersion>3.30</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.0.81"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.2.135"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

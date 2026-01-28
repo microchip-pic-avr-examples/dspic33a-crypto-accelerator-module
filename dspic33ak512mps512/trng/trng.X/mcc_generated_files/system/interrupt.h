@@ -7,7 +7,7 @@
  *            
  * @brief     Interrupt Priority configuration driver using dsPIC MCUs.            
  *
- * @skipline @version   PLIB Version 1.1.0
+ * @skipline @version   PLIB Version 1.1.2
  *            
  * @skipline  Device : dsPIC33AK512MPS512
 */

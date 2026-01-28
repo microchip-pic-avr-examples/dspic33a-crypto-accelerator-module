@@ -135,15 +135,20 @@ void aes_test_sym(void)
     aes_sym_ctr_test();
     #endif
 
+    #ifdef RUN_SYM_CBC_TEST
+    aes_sym_cbc_test();
+    #endif
+
+    #ifdef RUN_SYM_CFB_TEST
+    aes_sym_cfb_test();
+    #endif
+
+    #ifdef RUN_SYM_OFB_TEST
+    aes_sym_ofb_test();
+    #endif
+
     #ifdef RUN_SYM_XTS_TEST
     aes_sym_xts_test();
-    #endif
-}
-
-void aes_test_mac(void)
-{
-    #ifdef RUN_MAC_CMAC_TEST
-    aes_mac_cmac_test();
     #endif
 }
 
@@ -151,5 +156,9 @@ void aes_test_aead(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
     aes_aead_gcm_test();
+    #endif
+
+    #ifdef RUN_AEAD_CCM_TEST
+    aes_aead_ccm_test();
     #endif
 }

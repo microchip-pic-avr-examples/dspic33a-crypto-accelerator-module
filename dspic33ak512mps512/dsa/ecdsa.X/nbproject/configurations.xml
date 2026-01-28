@@ -4,6 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="app" displayName="app" projectFiles="true">
+        <itemPath>app/app_ecdsa.h</itemPath>
+        <itemPath>app/app_util.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
@@ -46,7 +50,11 @@
           <itemPath>mcc_generated_files/uart/uart_types.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <itemPath>app_ecdsa.h</itemPath>
+      <logicalFolder name="test_vectors"
+                     displayName="test_vectors"
+                     projectFiles="true">
+        <itemPath>test_vectors/test_vector.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -61,6 +69,12 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="app" displayName="app" projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>app/src/app_ecdsa.c</itemPath>
+          <itemPath>app/src/app_util.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
@@ -70,8 +84,6 @@
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-          <logicalFolder name="library" displayName="library" projectFiles="true">
-          </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
               <itemPath>crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
@@ -103,8 +115,17 @@
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="test_vectors"
+                     displayName="test_vectors"
+                     projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>test_vectors/src/test_vector_P192.c</itemPath>
+          <itemPath>test_vectors/src/test_vector_P256.c</itemPath>
+          <itemPath>test_vectors/src/test_vector_P384.c</itemPath>
+          <itemPath>test_vectors/src/test_vector_P521.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>app_ecdsa.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -121,11 +142,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
-        <languageToolchainVersion>3.21</languageToolchainVersion>
+        <languageToolchainVersion>3.30</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.0.81"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.2.135"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -172,7 +193,8 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../ecdsa.X"/>
+        <property key="extra-include-directories"
+                  value="../ecdsa.X;./app;./test_vectors"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>

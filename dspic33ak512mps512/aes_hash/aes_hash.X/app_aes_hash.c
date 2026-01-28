@@ -240,11 +240,11 @@ void printOperationStep(const char *step, const char *op, TEST_MODE testMode, ui
 {
     if (true == printSize)
     {
-        (void) printf("\r\n %-12s %-8s %-8s OPERATION (%-3lu BYTES)... ", step, op, getTestMode(testMode), size);
+        (void) printf("\r\n %-12s %-10s %-8s OPERATION (%-3lu BYTES)... ", step, op, getTestMode(testMode), size);
     }
     else
     {
-        (void) printf("\r\n %-12s %-8s %-8s OPERATION... ", step, op, getTestMode(testMode));
+        (void) printf("\r\n %-12s %-10s %-8s OPERATION... ", step, op, getTestMode(testMode));
     }
 }
 
@@ -331,6 +331,102 @@ void aes_test_ctr(void)
 }
 #endif
 
+#ifdef RUN_SYM_CBC_TEST
+void aes_test_cbc(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CBC);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CBC);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
+#ifdef RUN_SYM_CTR_TEST
+void aes_test_cfb128(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CFB128 mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CFB128);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CFB128);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
+#ifdef RUN_SYM_CTR_TEST
+void aes_test_ofb(void)
+{
+    TEST_CONTEXT context;
+    TEST_RESULT result;
+
+    (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-OFB mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) sym_test_init(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_OFB);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) sym_test_init(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_OFB);
+    do
+    {
+        do
+        {
+            result = sym_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+}
+#endif
+
 #ifdef RUN_SYM_XTS_TEST
 void aes_test_xts(void)
 {
@@ -371,6 +467,18 @@ void aes_test_sym(void)
 
 #ifdef RUN_SYM_CTR_TEST
     aes_test_ctr();
+#endif
+
+#ifdef RUN_SYM_CBC_TEST
+    aes_test_cbc();
+#endif
+
+#ifdef RUN_SYM_CFB128_TEST
+    aes_test_cfb128();
+#endif
+
+#ifdef RUN_SYM_OFB_TEST
+    aes_test_ofb();
 #endif
 
 #ifdef RUN_SYM_XTS_TEST
@@ -418,10 +526,12 @@ void aes_test_mac(void)
 
 void aes_test_aead(void)
 {
-#ifdef RUN_AEAD_GCM_TEST
+#if defined(RUN_AEAD_GCM_TEST) || defined(RUN_AEAD_CCM_TEST)
     TEST_CONTEXT context;
     TEST_RESULT result;
+#endif
 
+#ifdef RUN_AEAD_GCM_TEST
     (void) printf(BLUE "\r\n\r\n Starting AEAD AES-GCM mode test\r\n" RESET_COLOR);
 
     // Run encryption operations.
@@ -445,7 +555,32 @@ void aes_test_aead(void)
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
+#endif
 
+#ifdef RUN_AEAD_CCM_TEST
+    (void) printf(BLUE "\r\n\r\n Starting AEAD AES-CCM mode test\r\n" RESET_COLOR);
+
+    // Run encryption operations.
+    (void) aead_test_init(&context, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_CCM);
+    do
+    {
+        do
+        {
+            result = aead_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
+
+    // Run decryption operations.
+    (void) aead_test_init(&context, TEST_MODE_DECRYPT, AEAD_OPER_MODE_AES_CCM);
+    do
+    {
+        do
+        {
+            result = aead_test_advance(&context);
+        } while (result == TEST_RESULT_SUCCESS);
+
+    } while (result != TEST_RESULT_ALL_TESTS_DONE);
 #endif
 }
 
@@ -509,6 +644,7 @@ void test_concurrent(void)
     TEST_MODE aeadTestMode = TEST_MODE_ENCRYPT;
     TEST_MODE symTestMode = TEST_MODE_ENCRYPT;
     SYM_OPER_MODE symOperMode = SYM_OPER_MODE_AES_ECB;
+    AEAD_OPER_MODE aeadOperMode = AEAD_OPER_MODE_AES_GCM;
 
     // Hash block sizes for iterative testing of arbitrary input sizes.
     const uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
@@ -527,7 +663,7 @@ void test_concurrent(void)
 
         // Initialize one of each context.
         symResult = sym_test_init(&symContext, TEST_MODE_ENCRYPT, symOperMode);
-        aeadResult = aead_test_init(&aeadContext, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_GCM);
+        aeadResult = aead_test_init(&aeadContext, TEST_MODE_ENCRYPT, aeadOperMode);
         macResult = mac_cmac_test_init(&macContext, TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
         hashResult = hash_test_init(&hashContext, TEST_MODE_HASH, CRYPTO_HASH_SHA2_512, hashBlockSize);
 
@@ -571,8 +707,23 @@ void test_concurrent(void)
             if (aeadResult == TEST_RESULT_ALL_TESTS_DONE)
             {
                 // Flip AEAD test mode.
-                aeadTestMode = (aeadTestMode == TEST_MODE_ENCRYPT) ? TEST_MODE_DECRYPT : TEST_MODE_ENCRYPT;
-                (void)aead_test_init(&aeadContext, aeadTestMode, AEAD_OPER_MODE_AES_GCM);
+                if (aeadTestMode == TEST_MODE_ENCRYPT)
+                {
+                    // Flip symmetric test mode.
+                    aeadTestMode = TEST_MODE_DECRYPT;
+                }
+                else
+                {
+                    // Flip AEAD test mode and operations mode.
+                    aeadTestMode = TEST_MODE_ENCRYPT;
+                    aeadOperMode++;
+                    if (aeadOperMode == AEAD_OPER_MODE_COUNT)
+                    {
+                        aeadOperMode = 0;
+                    }
+                }
+
+                (void)aead_test_init(&aeadContext, aeadTestMode, aeadOperMode);
             }
 
             if (macResult == TEST_RESULT_ALL_TESTS_DONE)

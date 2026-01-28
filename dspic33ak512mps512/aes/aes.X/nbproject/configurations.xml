@@ -6,7 +6,6 @@
                    projectFiles="true">
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <itemPath>app/app_aead.h</itemPath>
-        <itemPath>app/app_mac.h</itemPath>
         <itemPath>app/app_sym.h</itemPath>
       </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
@@ -15,7 +14,6 @@
                        projectFiles="true">
           <itemPath>crypto/common_crypto/crypto_aead_cipher.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_mac_cipher.h</itemPath>
           <itemPath>crypto/common_crypto/crypto_sym_cipher.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
@@ -26,7 +24,6 @@
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <itemPath>crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_mac_cam05346_wrapper.h</itemPath>
             <itemPath>crypto/drivers/wrapper/crypto_sym_cam05346_wrapper.h</itemPath>
             <itemPath>crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
           </logicalFolder>
@@ -58,8 +55,8 @@
                      displayName="test_vectors"
                      projectFiles="true">
         <itemPath>test_vectors/gcm_test_vector.h</itemPath>
-        <itemPath>test_vectors/mac_test_vector.h</itemPath>
         <itemPath>test_vectors/xts_test_vector.h</itemPath>
+        <itemPath>test_vectors/ccm_test_vector.h</itemPath>
       </logicalFolder>
       <itemPath>app_aes.h</itemPath>
     </logicalFolder>
@@ -79,7 +76,6 @@
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>app/src/app_aead.c</itemPath>
-          <itemPath>app/src/app_mac.c</itemPath>
           <itemPath>app/src/app_sym.c</itemPath>
           <itemPath>app/src/app_sym_xts.c</itemPath>
         </logicalFolder>
@@ -90,7 +86,6 @@
                        projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
             <itemPath>crypto/common_crypto/src/crypto_aead_cipher.c</itemPath>
-            <itemPath>crypto/common_crypto/src/crypto_mac_cipher.c</itemPath>
             <itemPath>crypto/common_crypto/src/crypto_sym_cipher.c</itemPath>
           </logicalFolder>
         </logicalFolder>
@@ -98,7 +93,6 @@
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
               <itemPath>crypto/drivers/wrapper/src/crypto_aead_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_mac_cam05346_wrapper.c</itemPath>
               <itemPath>crypto/drivers/wrapper/src/crypto_sym_cam05346_wrapper.c</itemPath>
               <itemPath>crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
             </logicalFolder>
@@ -133,8 +127,8 @@
                      projectFiles="true">
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>test_vectors/src/gcm_test_vector.c</itemPath>
-          <itemPath>test_vectors/src/mac_test_vector.c</itemPath>
           <itemPath>test_vectors/src/xts_test_vector.c</itemPath>
+          <itemPath>test_vectors/src/ccm_test_vector.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
@@ -156,11 +150,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
-        <languageToolchainVersion>3.21</languageToolchainVersion>
+        <languageToolchainVersion>3.30</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.0.81"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.2.135"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

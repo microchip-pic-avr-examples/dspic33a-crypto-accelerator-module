@@ -10,10 +10,10 @@
 ## Description
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
 
-## Software Tool Versions
-- dsPIC33AK-MP_DEV_DFP v1.0.81
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+## Software Tool Versions Used
+- dsPIC33AK-MP_DEV_DFP v1.2.135
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -60,14 +60,14 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 |TRNG Size (bytes)|Crypto_Rng_Generate Performance (µs)|
 |---|---|
 |192|66.250|
-|256|76.917|
-|384|98.583|
-|521|122.667|
+|256|77.083|
+|384|98.750|
+|521|122.833|
 
 ### Memory Size Benchmarking
 
 The below sizes are for the process of getting 521 bytes (8-bit words).
 
-|RAM (bytes)|FLASH (bytes)|
-|---|---|
-|56|4,612|
+|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|---|---|---|
+|4,840|594|160|

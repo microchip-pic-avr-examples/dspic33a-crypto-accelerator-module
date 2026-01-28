@@ -15,10 +15,10 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - SHA-384
 - SHA-512
 
-## Software Tool Versions
-- dsPIC33AK-MP_DFP v1.0.81
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+## Software Tool Versions Used
+- dsPIC33AK-MP_DFP v1.2.135
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -90,33 +90,33 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|8,192|982.99|
-|SHA-224|8,192|1160.75|
-|SHA-256|8,192|1160.55|
-|SHA-384|8,192|1394.09|
-|SHA-512|8,192|1395.27|
+|SHA-1|8,192|1056.69|
+|SHA-224|8,192|1264.44|
+|SHA-256|8,192|1264.69|
+|SHA-384|8,192|1524.80|
+|SHA-512|8,192|1525.16|
 
 ### Memory Size Benchmarking
 
 #### Single Step
 
-|Hash Algorithm|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|SHA-1|58|10,708|
-|SHA-224|58|10,708|
-|SHA-256|58|10,708|
-|SHA-384|58|10,708|
-|SHA-512|58|10,708|
+|Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|----|----|----|----|
+|SHA-1|10,492|74|280|
+|SHA-224|10,500|74|280|
+|SHA-256|10,504|74|280|
+|SHA-384|10,520|74|280|
+|SHA-512|10,536|74|280|
 
 #### Multi Step
 
-|Hash Algorithm|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|SHA-1|58|10,756|
-|SHA-224|58|10,756|
-|SHA-256|58|10,756|
-|SHA-384|58|10,756|
-|SHA-512|58|10,756|
+|Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|----|----|----|----|
+|SHA-1|11,144|74|52|
+|SHA-224|11,156|74|52|
+|SHA-256|11,160|74|52|
+|SHA-384|11,176|74|52|
+|SHA-512|11,192|74|52|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
