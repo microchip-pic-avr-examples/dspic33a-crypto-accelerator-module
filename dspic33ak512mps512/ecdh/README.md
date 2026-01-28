@@ -16,10 +16,10 @@ The ECDH Shared Secret Generation use NIST defined public and private keys for t
 - P-384
 - P-521
 
-## Software Tool Versions
-- dsPIC33AK-MP_DFP v1.0.81
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+## Software Tool Versions Used
+- dsPIC33AK-MP_DFP v1.2.135
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -79,20 +79,20 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |ECC Curve|Crypto_Kas_Ecdh_SharedSecret Performance (ms)|
 |----|----|
-|P-192|3.770|
-|P-256|7.207|
-|P-384|19.400|
-|P-521|41.473|
+|P-192|3.760|
+|P-256|7.160|
+|P-384|19.360|
+|P-521|41.400|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
-|ECC Curve|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|P-192|4,152|10,744|
-|P-256|4,152|10,788|
-|P-384|4,152|10,856|
-|P-521|4,152|10,928|
+|ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|----|----|----|----|
+|P-192|11,588|4,168|308|
+|P-256|11,604|4,168|308|
+|P-384|11,684|4,168|308|
+|P-521|11,780|4,168|308|
 
 ## ACVP
 The ECDH Shared Secret API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

@@ -7,7 +7,7 @@
  *            
  * @brief     Clock configurator driver for System and Peripheral Clock using dsPIC MCUs.
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.2.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
@@ -104,13 +104,13 @@ inline static uint32_t CLOCK_GeneratorFrequencyGet(enum CLOCK_GENERATOR generato
     switch(generator)
     {
         case CLOCK_GENERATOR_1:
-                genFrequency = 200000000UL;
+                genFrequency = 200000000U;
                 break;
         case CLOCK_GENERATOR_2:
-                genFrequency = 8000000UL;
+                genFrequency = 8000000U;
                 break;
         case CLOCK_GENERATOR_3:
-                genFrequency = 8000000UL;
+                genFrequency = 8000000U;
                 break;
         default:
                 break;

@@ -15,15 +15,16 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - AES
 - ECDH Shared Secret
 - Concurrent AES+HASH (to demonstrate context safety)
+- MAC generation 
 
 The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM Hardware Driver.
 
 # Prerequisites
 
-## Software Tools
-- dsPIC33AK-MP_DFP v1.0.81
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+## Software Tool Versions Used
+- dsPIC33AK-MP_DFP v1.2.135
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Hardware Tools
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -40,6 +41,7 @@ Each folder contains a README describing the example application in more detail.
 | aes        | Example application project for AES                 |
 | ecdh       | Example application project for ECDH                |
 | aes_hash   | Example application project for concurrent AES+HASH |
+| mac        | Example application project for CMAC, HMAC and GMAC |
 
 # Crypto Accelerator Module APIs
 
@@ -50,6 +52,16 @@ The pre-compiled CAM Hardware Driver can function independently by utilizing the
 A MISRA scan has been conducted on the pre-compiled CAM Hardware Driver source files. The source files are MISRA compliant for Required and Mandatory rules.
 
 # Benchmarking
+## Benchmarking Setup
+The benchmarking results are obtained by modifying the demo projects to remove overheads such as:
+- UART peripheral and print out statements.
+- Isolation to use one algorithm at a time.
+- Store input data in flash memory to benchmark RAM usage for CAM Hardware Driver
+
+The benchmarking projects are configured to use the following:
+- Optimization level -Os
+- Tools and versions as listed in the Software Tools section above
+
 
 ### Performance Benchmarking
 The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled Hardware Driver.
@@ -58,33 +70,55 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Algorithm|Performance|Parameters (sizes are in bytes)|
 |----|----|----|
-|SHA-1 (Digest)|982.99 Mbps|Message Size: 8,192|
-|SHA-224 (Digest)|1160.75 Mbps|Message Size: 8,192|
-|SHA-256 (Digest)|1160.55 Mbps|Message Size: 8,192|
-|SHA-384 (Digest)|1394.09 Mbps|Message Size: 8,192|
-|SHA-512 (Digest)|1395.27 Mbps|Message Size: 8,192|
-|AES-ECB (Encrypt)|435.48 Mbps|Key Size: 128, Plaintext Size: 8,192|
-|AES-ECB (Decrypt)|434.36 Mbps|Key Size: 128, Ciphertext Size: 8,192|
-|AES-CTR (Encrypt)|435.26 Mbps|Key Size: 128, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CTR (Decrypt)|435.35 Mbps|Key Size: 128, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-GCM (Encrypt)|420.99 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
-|AES-GCM (Decrypt)|417.59 Mbps|Key Size: 128, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
-|AES-XTS (Encrypt)|429.99 Mbps|Key Size: 128, Tweak Size: 16, Plaintext Size: 8,192|
-|AES-XTS (Decrypt)|429.20 Mbps|Key Size: 128, Tweak Size: 16, Ciphertext Size: 8,192|
-|AES-CMAC (Direct)|21.56 Mbps|Key Size: 128, Plaintext Size: 8,192, MAC Size: 16|
-|ECDSA (Sign)|3.913 ms|Curve: P-192|
-|ECDSA (Verify)|5.129 ms|Curve: P-192|
-|ECDSA (Sign)|7.396 ms|Curve: P-256|
-|ECDSA (Verify)|9.882 ms|Curve: P-256|
-|ECDSA (Sign)|19.759 ms|Curve: P-384|
-|ECDSA (Verify)|27.006 ms|Curve: P-384|
-|ECDSA (Sign)|42.057 ms|Curve: P-521|
-|ECDSA (Verify)|58.281 ms|Curve: P-521|
+|SHA-1 (Digest)|1056.69 Mbps|Message Size: 8,192|
+|SHA-224 (Digest)|1264.44 Mbps|Message Size: 8,192|
+|SHA-256 (Digest)|1264.69 Mbps|Message Size: 8,192|
+|SHA-384 (Digest)|1524.80 Mbps|Message Size: 8,192|
+|SHA-512 (Digest)|1525.16 Mbps|Message Size: 8,192|
+|HMAC SHA-1 (Direct)|139.77 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-224 (Direct)|140.49 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-256 (Direct)|140.50 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-384 (Direct)|230.63 Mbps|Key Size: 16, Message Size: 8,192|
+|HMAC SHA-512 (Direct)|230.70 Mbps|Key Size: 16, Message Size: 8,192|
+|AES-ECB (Encrypt)|436.88 Mbps|Key Size: 16, Plaintext Size: 8,192|
+|AES-ECB (Decrypt)|436.24 Mbps|Key Size: 16, Ciphertext Size: 8,192|
+|AES-CTR (Encrypt)|436.94 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CTR (Decrypt)|437.09 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-CBC (Encrypt)|436.94 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CBC (Decrypt)|436.16 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-CFB128 (Encrypt)|436.74 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-CFB128 (Decrypt)|436.89 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-OFB (Encrypt)|437.00 Mbps|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
+|AES-OFB (Decrypt)|437.21 Mbps|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
+|AES-GCM (Encrypt)|423.29 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
+|AES-GCM (Decrypt)|421.18 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
+|AES-CCM (Encrypt)|303.17 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
+|AES-CCM (Decrypt)|304.32 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
+|AES-XTS (Encrypt)|431.77 Mbps|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
+|AES-XTS (Decrypt)|430.98 Mbps|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
+|AES-CMAC (Direct)|26.76 Mbps|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
+|AES-GMAC (Direct)|424.89 Mbps|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
+|ECDSA Sign   (Blocking)|3.88 ms|Curve: P-192|
+|ECDSA Verify (Blocking)|5.12 ms|Curve: P-192|
+|ECDSA Sign   (Blocking)|7.36 ms|Curve: P-256|
+|ECDSA Verify (Blocking)|9.84 ms|Curve: P-256|
+|ECDSA Sign   (Blocking)|19.64 ms|Curve: P-384|
+|ECDSA Verify (Blocking)|26.92 ms|Curve: P-384|
+|ECDSA Sign   (Blocking)|41.88 ms|Curve: P-521|
+|ECDSA Verify (Blocking)|58.08 ms|Curve: P-521|
+|ECDSA Sign   (Non-blocking)|3.92 ms|Curve: P-192|
+|ECDSA Verify (Non-blocking)|5.20 ms|Curve: P-192|
+|ECDSA Sign   (Non-blocking)|7.48 ms|Curve: P-256|
+|ECDSA Verify (Non-blocking)|10.12 ms|Curve: P-256|
+|ECDSA Sign   (Non-blocking)|20.24 ms|Curve: P-384|
+|ECDSA Verify (Non-blocking)|27.52 ms|Curve: P-384|
+|ECDSA Sign   (Non-blocking)|43.16 ms|Curve: P-521|
+|ECDSA Verify (Non-blocking)|59.92 ms|Curve: P-521|
 |TRNG (Generate)|122.667 µs|Output Size: 521|
-|ECDH (Shared Secret Generate)|3.770 ms|Curve: P-192|
-|ECDH (Shared Secret Generate)|7.207 ms|Curve: P-256|
-|ECDH (Shared Secret Generate)|19.400 ms|Curve: P-384|
-|ECDH (Shared Secret Generate)|41.473 ms|Curve: P-521|
+|ECDH (Shared Secret Generate)|3.760 ms|Curve: P-192|
+|ECDH (Shared Secret Generate)|7.160 ms|Curve: P-256|
+|ECDH (Shared Secret Generate)|19.360 ms|Curve: P-384|
+|ECDH (Shared Secret Generate)|41.400 ms|Curve: P-521|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
@@ -94,34 +128,57 @@ All projects have the following compiler options:
 - Isolate each function in a section - unchecked
 - Remove unused sections - unchecked
 
-|Algorithm|RAM (bytes)|FLASH (bytes)|
-|----|----|----|
-|SHA-1 (Digest)|58|10,708|
-|SHA-1 (Init, Update, and Final)|58|10,756|
-|SHA-224 (Digest)|58|10,708|
-|SHA-224 (Init, Update, and Final)|58|10,756|
-|SHA-256 (Digest)|58|10,708|
-|SHA-256 (Init, Update, and Final)|58|10,756|
-|SHA-384 (Digest)|58|10,708|
-|SHA-384 (Init, Update, and Final)|58|10,756|
-|SHA-512 (Digest)|58|10,708|
-|SHA-512 (Init, Update, and Final)|58|10,756|
-|AES-ECB (Encrypt and Decrypt)|58|11,788|
-|AES-ECB (Init and Cipher)|2,006|11,852|
-|AES-CTR (Encrypt and Decrypt)|58|11,828|
-|AES-CTR (Init and Cipher)|2,006|11,896|
-|AES-GCM (Encrypt and Decrypt)|58|12,204|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|598|12,328|
-|AES-XTS (Encrypt and Decrypt)|58|11,828|
-|AES-XTS (Init and Cipher)|2,006|11,896|
-|AES-CMAC (Direct)|58|10,736|
-|AES-CMAC (Init, Cipher, and Final)|586|10,792|
-|ECDSA (Sign and Verify (P-192))|4,152|11,360|
-|ECDSA (Sign and Verify (P-256))|4,152|11,404|
-|ECDSA (Sign and Verify (P-384))|4,152|11,472|
-|ECDSA (Sign and Verify (P-521))|4,152|11,552|
-|TRNG (Generate)|56|4,612|
-|ECDH (Shared Secret (P-192))|4,152|10,744|
-|ECDH (Shared Secret (P-256))|4,152|10,788|
-|ECDH (Shared Secret (P-384))|4,152|10,856|
-|ECDH (Shared Secret (P-521))|4,152|10,928|
+| Algorithm | FLASH (bytes) | RAM Static (bytes) | RAM Stack (bytes)|
+|----|----|----|----|
+|SHA-1 (Digest)|10,492|74|280|
+|SHA-1 (Init, Update, and Final)|11,144|74|52|
+|SHA-224 (Digest)|10,500|74|280|
+|SHA-224 (Init, Update, and Final)|11,156|74|52|
+|SHA-256 (Digest)|10,504|74|280|
+|SHA-256 (Init, Update, and Final)|11,160|74|52|
+|SHA-384 (Digest)|10,520|74|280|
+|SHA-384 (Init, Update, and Final)|11,176|74|52|
+|SHA-512 (Digest)|10,536|74|280|
+|SHA-512 (Init, Update, and Final)|11,192|74|52|
+|HMAC SHA-1 (Direct)|18,728|74|856|
+|HMAC SHA-1 (Init, Cipher, and Final)|19,540|74|128|
+|HMAC SHA-224 (Direct)|18,736|74|856|
+|HMAC SHA-224 (Init, Cipher, and Final)|19,548|74|128|
+|HMAC SHA-256 (Direct)|18,740|74|856|
+|HMAC SHA-256 (Init, Cipher, and Final)|19,552|74|128|
+|HMAC SHA-384 (Direct)|18,756|74|856|
+|HMAC SHA-384 (Init, Cipher, and Final)|19,568|74|128|
+|HMAC SHA-512 (Direct)|18,772|74|856|
+|HMAC SHA-512 (Init, Cipher, and Final)|19,584|74|128|
+|AES-ECB (Encrypt and Decrypt)|11,788|74|324|
+|AES-ECB (Init and Cipher)|11,844|2,022|56|
+|AES-CTR (Encrypt and Decrypt)|11,812|74|324|
+|AES-CTR (Init and Cipher)|11,864|2,022|56|
+|AES-CBC (Encrypt and Decrypt)|12,140|74|324|
+|AES-CBC (Init and Cipher)|12,192|2,022|56|
+|AES-CFB128 (Encrypt and Decrypt)|12,140|74|324|
+|AES-CFB128 (Init and Cipher)|12,192|2,022|56|
+|AES-OFB (Encrypt and Decrypt)|12,140|74|324|
+|AES-OFB (Init and Cipher)|12,192|2,022|56|
+|AES-GCM (Encrypt and Decrypt)|13,232|106|336|
+|AES-GCM (Init, AddAadData, Cipher, and Final)|13,324|646|56|
+|AES-CCM (Init and Cipher)|13,196|590|116|
+|AES-XTS (Encrypt and Decrypt)|11,616|62|324|
+|AES-XTS (Init and Cipher)|11,676|2,010|56|
+|AES-CMAC (Direct)|18,744|74|292|
+|AES-CMAC (Init, Cipher, and Final)|19,308|74|56|
+|AES-GMAC (Direct)|18,772|74|312|
+|AES-GMAC (Init and Cipher)|19,320|74|44|
+|ECDSA Blocking (Sign and Verify (P-192))|13,404|4,220|324|
+|ECDSA Blocking (Sign and Verify (P-256))|13,440|4,236|324|
+|ECDSA Blocking (Sign and Verify (P-384))|13,504|4,268|324|
+|ECDSA Blocking (Sign and Verify (P-521))|13,576|4,304|324|
+|ECDSA Non-blocking (Sign and Verify (P-192))|13,444|4,220|316|
+|ECDSA Non-blocking (Sign and Verify (P-256))|13,468|4,236|316|
+|ECDSA Non-blocking (Sign and Verify (P-384))|13,532|4,268|316|
+|ECDSA Non-blocking (Sign and Verify (P-521))|13,604|4,304|316|
+|TRNG (Generate)|4,840|594|160|
+|ECDH (Shared Secret (P-192))|11,588|4,168|308|
+|ECDH (Shared Secret (P-256))|11,604|4,168|308|
+|ECDH (Shared Secret (P-384))|11,684|4,168|308|
+|ECDH (Shared Secret (P-521))|11,780|4,168|308|
