@@ -8,7 +8,7 @@
     app_utils.c
 
   Summary:
-    This source file provides utility functions for SHA and SHAKE demos.
+    This source file provides utility functions for the SHA demo.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
