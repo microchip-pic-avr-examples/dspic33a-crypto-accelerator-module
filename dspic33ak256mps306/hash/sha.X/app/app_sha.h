@@ -60,7 +60,7 @@ extern "C" {
 
 #define SINGLE_STEP        (0U)
 #define MULTI_STEP         (1U)
-#define TEST_VECTOR_4  (4U)
+#define TEST_VECTOR_4      (4U)
 
 #define SESSION_ID         (1U)
 
