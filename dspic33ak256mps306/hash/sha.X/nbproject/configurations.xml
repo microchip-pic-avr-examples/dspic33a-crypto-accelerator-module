@@ -4,6 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="app" projectFiles="true">
+        <itemPath>app/app_sha.h</itemPath>
+        <itemPath>app/app_utils.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
           <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
@@ -53,7 +57,6 @@
         <itemPath>test_vectors/test_vectors_sha_512.h</itemPath>
         <itemPath>test_vectors/test_vectors_sha_1.h</itemPath>
       </logicalFolder>
-      <itemPath>app_sha.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -68,6 +71,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="app" projectFiles="true">
+        <itemPath>app/src/app_sha.c</itemPath>
+        <itemPath>app/src/app_utils.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
           <itemPath>crypto/common_crypto/src/crypto_hash.c</itemPath>
@@ -114,7 +121,6 @@
         <itemPath>test_vectors/src/test_vectors_sha_512.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>app_sha.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

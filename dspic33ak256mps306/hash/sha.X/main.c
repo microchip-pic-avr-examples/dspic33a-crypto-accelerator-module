@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -52,7 +52,7 @@ Microchip or any third party.
 #include <stdlib.h>
 #include <stdint.h>
 #include "mcc_generated_files/system/system.h"
-#include "app_sha.h"
+#include "app/app_sha.h"
 
 
 // *****************************************************************************
@@ -66,7 +66,7 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
+    (void) printf("___________________________________________________________________________________________________ \r\n");
     (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
 
     SHA_1_Digest();
@@ -82,7 +82,7 @@ int main(void)
     SHA3_512_Digest();
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
+    (void) printf("___________________________________________________________________________________________________ \r\n");
 
     while(1)
     {

@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -37,7 +37,7 @@ static const uint8_t sha_384_0_bytes_digest[SHA_384_DIGEST_LEN_BYTES] = {
     0x27, 0x4E, 0xDE, 0xBF, 0xE7, 0x6F, 0x65, 0xFB, 0xD5, 0x1A, 0xD2, 0xF1, 0x48, 0x98, 0xB9, 0x5B
 };
 static const TEST_VECTOR sha_384_0_bytes_vector = {
-    (uint8_t*) 0U,
+    (uint8_t[]) {},
     0U,
     sha_384_0_bytes_digest
 };
