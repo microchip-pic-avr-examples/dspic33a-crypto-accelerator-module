@@ -59,7 +59,7 @@
                    displayName="Important Files"
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
-      <itemPath>hash.mc3</itemPath>
+      <itemPath>sha.mc3</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -134,7 +134,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DEV_DFP" vendor="Microchip" version="0.2.67"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.3.184"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -181,7 +181,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../hash.X"/>
+        <property key="extra-include-directories" value="../sha.X"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
