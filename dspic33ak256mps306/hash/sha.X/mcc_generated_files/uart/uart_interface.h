@@ -7,7 +7,7 @@
  *            
  * @brief     Universal Asynchronous Receiver Transmitter driver using dsPIC MCUs
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.1.3
  *            
  * @skipline  Device : dsPIC33AK256MPS306
 */

@@ -7,7 +7,7 @@
  *            
  * @brief     Device Configuration Bits using dsPIC MCUs
  *
- * @version   PLIB Version 1.1.2-dev.4
+ * @version   PLIB Version 1.1.2
  *
  * @skipline  Device : dsPIC33AK256MPS306
 */
@@ -212,7 +212,7 @@
 #pragma config FBOOT_BTMODE = SINGLE    //Device Boot Mode Configuration bits->Device is in Single Boot mode
 #pragma config FBOOT_PROG = OFF    //Boot mode configuration word programmed bit->Boot Mode Configuration Word Not Programmed
 
-#pragma message("This generated MCC Melody content with device json version 5.14.0 is most compatible with dsPIC33AK-MP_DEV_DFP v0.2.71.")
+#pragma message("This generated MCC Melody content with device json version 5.14.0 is most compatible with dsPIC33AK-MP_DFP v1.3.184.")
 
 /**
  End of File
