@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -36,7 +36,7 @@ static const uint8_t sha3_224_0_bytes_digest[SHA_224_DIGEST_LEN_BYTES] = {
     0xD4, 0x59, 0x7F, 0x9A, 0x1B, 0x07, 0x8E, 0x3F, 0x5B, 0x5A, 0x6B, 0xC7
 };
 static const TEST_VECTOR sha3_224_0_bytes_vector = {
-    (uint8_t*) 0U,
+    (uint8_t[]) {},
     0U,
     sha3_224_0_bytes_digest
 };
@@ -84,9 +84,9 @@ static const uint8_t sha3_224_48_bytes_digest[SHA_224_DIGEST_LEN_BYTES] = {
     0x58, 0xB7, 0xB2, 0x94, 0x81, 0x0F, 0xB2, 0xBE, 0xCE, 0x43, 0x14, 0x0E
 };
 static const TEST_VECTOR sha3_224_48_bytes_vector = {
-    (uint8_t*) &sha3_224_48_bytes,
+    sha3_224_48_bytes,
     sizeof(sha3_224_48_bytes),
-    (uint8_t*) &sha3_224_48_bytes_digest
+    sha3_224_48_bytes_digest
 };
 
 // SHA3-224 64 Bytes Test Vector
@@ -101,9 +101,9 @@ static const uint8_t sha3_224_64_bytes_digest[SHA_224_DIGEST_LEN_BYTES] = {
     0xC7, 0x80, 0xBB, 0x75, 0x9C, 0x17, 0x76, 0x84, 0x0D, 0xD7, 0x2C, 0xE5
 };
 static const TEST_VECTOR sha3_224_64_bytes_vector = {
-    (uint8_t*) &sha3_224_64_bytes,
+    sha3_224_64_bytes,
     sizeof(sha3_224_64_bytes),
-    (uint8_t*) &sha3_224_64_bytes_digest
+    sha3_224_64_bytes_digest
 };
 
 // SHA3-224 128 Bytes Test Vector
@@ -122,9 +122,9 @@ static const uint8_t sha3_224_128_bytes_digest[SHA_224_DIGEST_LEN_BYTES] = {
     0x7E, 0xF1, 0x34, 0xFB, 0x90, 0x79, 0x54, 0x14, 0x6A, 0x2E, 0xAE, 0x1A
 };
 static const TEST_VECTOR sha3_224_128_bytes_vector = {
-    (uint8_t*) &sha3_224_128_bytes,
+    sha3_224_128_bytes,
     sizeof(sha3_224_128_bytes),
-    (uint8_t*) &sha3_224_128_bytes_digest
+    sha3_224_128_bytes_digest
 };
 
 TEST_VECTOR sha3_224_test_vectors[NUMBER_OF_SHA3_224_VECTORS] = {

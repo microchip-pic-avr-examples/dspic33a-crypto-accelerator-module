@@ -5,15 +5,15 @@
     Microchip Technology Inc.
 
   File Name:
-    app_sha.h
+    app_utils.h
 
   Summary:
-    This header file provides prototypes and definitions for the SHA application.
+    This header file provides prototypes and definitions utility functions used in the SHA and SHAKE demos.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -36,12 +36,16 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef APP_SHA_H
-#define	APP_SHA_H
+#ifndef APP_UTILS_H
+#define	APP_UTILS_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+#include <stdint.h>
+#include <stddef.h>
+#include "crypto/common_crypto/crypto_hash.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -57,45 +61,22 @@ extern "C" {
 #define MAG "\x1B""[1;35m"
 #define CYAN "\x1B""[1;36m"
 
-#define BLOCK_SIZE_144     (144UL)
-#define BLOCK_SIZE_128     (128UL)
-#define BLOCK_SIZE_64      (64UL)
-#define BLOCK_SIZE_32      (32UL)
-#define BLOCK_SIZE_16      (16UL)
-#define BLOCK_SIZE_13      (13UL)
-#define BLOCK_SIZE_8       (8UL)
-#define BLOCK_SIZE_7       (7UL)
-
-#define SINGLE_STEP        (0U)
-#define MULTI_STEP         (1U)
-#define SHA_TEST_VECTOR_4  (4U)
-
-#define SESSION_ID         (1U)
-
-// Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
-#define RUN_ALL_VECTORS
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
 
-void SHA_1_Digest(void);
+void hexArrayPrint(const char* label, const uint8_t* data, uint32_t size);
+void arrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size);
+uint32_t shaDigestLengthGet(crypto_Hash_Algo_E algorithm);
+const char* algorithmNameGet(crypto_Hash_Algo_E algorithm);
+const char* headerPaddingGet(crypto_Hash_Algo_E algorithm);
+void headerPrint(crypto_Hash_Algo_E algorithm, const char* shaType, uint32_t dataLength);
 
-void SHA_224_Digest(void);
-void SHA_256_Digest(void);
-void SHA_384_Digest(void);
-void SHA_512_Digest(void);
-
-void SHA3_224_Digest(void);
-void SHA3_256_Digest(void);
-void SHA3_384_Digest(void);
-void SHA3_512_Digest(void);
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* APP_SHA_H */
-
+#endif	/* APP_UTILS_H */
