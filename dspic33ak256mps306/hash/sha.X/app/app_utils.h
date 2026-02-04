@@ -8,7 +8,7 @@
     app_utils.h
 
   Summary:
-    This header file provides prototypes and definitions utility functions used in the SHA and SHAKE demos.
+    This header file provides prototypes and definitions for utility functions used in the SHA demo.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
