@@ -216,7 +216,8 @@ def generate_files(ip_name: str, root_folder: str, fmpp_config_name: str) -> boo
 
         FMPP_CMD = [['fmpp',
                     '-C', os.path.join(curdir, FMPP_ROOT, ip_name, root_folder, f"{fmpp_config_name}.fmpp"),
-                    '-S', os.path.join(curdir, INPUT_ROOT)]
+                    '-S', os.path.join(curdir, INPUT_ROOT),
+                    '-O', os.path.join(curdir, OUTPUT_ROOT)]
                 ]
 
         try:

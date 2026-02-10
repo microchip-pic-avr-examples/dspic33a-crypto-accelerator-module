@@ -1,5 +1,4 @@
-# sourceRoot is handled as parameter within generateFiles.py (CryptoV4 repository path)
-outputRoot: ../../build/output
+# sourceRoot and outputRoot are handled as parameters within generateFiles.py (CryptoV4 repository path)
 removeExtensions: ftl
 
 sources: [
