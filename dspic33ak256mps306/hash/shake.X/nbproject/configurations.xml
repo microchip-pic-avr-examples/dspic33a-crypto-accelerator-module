@@ -134,7 +134,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.3.184"/>
+        <pack name="dsPIC33AK-MP_DFP" vendor="Microchip" version="1.3.185"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
