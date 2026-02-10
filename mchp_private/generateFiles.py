@@ -41,6 +41,8 @@ def run_commands(cmds, capture_output=False):
     captured_output=[]
     for c in cmds:
         try:
+            result = True
+            
             # If the command is already a list, use it as-is.
             if type(c) is list:
                 cmd = c
@@ -50,29 +52,34 @@ def run_commands(cmds, capture_output=False):
             if SHOW_COMMANDS is True:
                 print(CYAN + f"\nRunning command '{' '.join(cmd)}'" + NORMAL)
 
-            with subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                shell=True
-            ) as process:
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
-                # Poll output until done.
-                while True:
-                    output = process.stdout.readline()
-                    if output:
-                        if capture_output is True:
-                            captured_output.append(output)
-                        else:
-                            print(output.strip().decode("utf-8"))
-                    # Check if process has ended and no more output
-                    if output == b'' and process.poll() is not None:
-                        break
+            # Pull output until done.
+            while True:
+                output = proc.stdout.readline()
+                if proc.poll() is not None:
+                    break
 
-            # Get the return code
-            return_code = process.returncode
-            if return_code:
-                raise Exception(f"Command '{' '.join(cmd)}' failed with result code {return_code}")
+                # Print and log the output.
+                if output:
+                    decoded_line = output.strip().decode("utf-8")
+
+                    # Workaround: FMPP JAR returns code 0 even on failure, so check output for failure instead
+                    if "Failed" in decoded_line:
+                        result = False
+
+                    if capture_output:
+                        captured_output.append(decoded_line)
+                    else:
+                        print(decoded_line)
+
+            if result is False:
+                raise Exception(f"Command '{' '.join(cmd)}' failed")
+            else:
+                # Get the return code...
+                retcode = proc.poll()
+                if retcode:
+                    raise Exception(f"Command '{' '.join(cmd)}' failed with result code {retcode}")
 
         except OSError:
             raise Exception(f"Failed to start execution of command '{' '.join(cmd)}'")
@@ -380,6 +387,8 @@ if __name__ == "__main__":
                     # Ensure input directory is empty
                     if os.path.exists(INPUT_ROOT):
                         shutil.rmtree(INPUT_ROOT)
+                    if os.path.exists(OUTPUT_ROOT):
+                        shutil.rmtree(OUTPUT_ROOT)
 
                     result = copy_input_files()
 
@@ -397,7 +406,7 @@ if __name__ == "__main__":
                             print(CYAN + f"  crypto_v4 repo: {options.repository}" + NORMAL)
 
                             if options.clone is True:
-                                print(CYAN + f"   branch: {options.branch}" + NORMAL)
+                                print(CYAN + f"    branch: {options.branch}" + NORMAL)
 
                             print(CYAN + f"  ip: {ip_name}" + NORMAL)
                             print(CYAN + f"  fmpp config: {fmpp_config}" + NORMAL)
@@ -410,15 +419,18 @@ if __name__ == "__main__":
                                 while os.path.exists(OUTPUT_ROOT):
                                     time.sleep(0.1)
                             
-                            if result is True:
-                                result = generate_files(ip_name, root_folder, fmpp_config)
-                            else:
-                                print(RED + "Failed to generate files!" + NORMAL)
+                            result = generate_files(ip_name, root_folder, fmpp_config)
 
                             if result is True:
                                 result = copy_generated_files(ip_name, device_name, project, root_folder, common_crypto_files, cam_files)
+
+                                if result is not True:
+                                    print(RED + "Failed to copy generated files!" + NORMAL)
                             else:
-                                print(RED + "Failed to copy generated files!" + NORMAL)
+                                print(RED + "Failed to generate files!" + NORMAL)
+
+                            # Sleep for a moment and allow the OS indexing to catch up
+                            time.sleep(0.1)
                 else:
                     skipped = True
                     print(YELLOW + f"Skipping {device_name} generation as cannot find {ip_name} IP in CryptoV4 repository." + NORMAL)
