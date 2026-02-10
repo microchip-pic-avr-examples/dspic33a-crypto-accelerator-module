@@ -378,7 +378,7 @@ if __name__ == "__main__":
                 # if ip exists for device, begin generation and copying to projects
                 if result is True:
 
-                    # Ensure input directory is empty
+                    # Ensure input/output directories are empty
                     if os.path.exists(INPUT_ROOT):
                         shutil.rmtree(INPUT_ROOT)
                     if os.path.exists(OUTPUT_ROOT):
@@ -404,14 +404,6 @@ if __name__ == "__main__":
 
                             print(CYAN + f"  ip: {ip_name}" + NORMAL)
                             print(CYAN + f"  fmpp config: {fmpp_config}" + NORMAL)
-
-                            # Clear previous generation if present
-                            if os.path.exists(OUTPUT_ROOT):
-                                shutil.rmtree(OUTPUT_ROOT)
-        
-                                # Windows can cause a "race condition" and hold onto the directory. Sleep for a moment and allow the OS indexing to catch up.
-                                while os.path.exists(OUTPUT_ROOT):
-                                    time.sleep(0.1)
                             
                             result = generate_files(ip_name, root_folder, fmpp_config)
 
