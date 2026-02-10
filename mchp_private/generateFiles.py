@@ -248,52 +248,45 @@ def copy_generated_files(ip_name: str, device: str, project_name: str, project_r
             print(traceback.format_exc())
             return False
         
-        file_copies = []
-
         apps_root = os.path.join('..', device)
-
         project_dir_path = os.path.join(apps_root, project_root_dir, f"{project_name}.X", CRYPTO_FIRMWARE_PATH)
-        file_copies.append((project_root_dir, project_dir_path, common_crypto_files, cam_files))
 
-        for c in file_copies:
-            project, dir, p1, p2 = c
+        CRYPTO_DIR = os.path.join(project_dir_path, 'common_crypto')
+        CRYPTO_SDIR = os.path.join(project_dir_path, 'common_crypto', 'src')
 
-            CRYPTO_DIR = os.path.join(dir, 'common_crypto')
-            CRYPTO_SDIR = os.path.join(dir, 'common_crypto', 'src')
+        DRIVERS_DIR = os.path.join(project_dir_path, 'drivers', 'wrapper')
+        DRIVERS_SDIR = os.path.join(project_dir_path, 'drivers', 'wrapper', 'src')
 
-            DRIVERS_DIR = os.path.join(dir, 'drivers', 'wrapper')
-            DRIVERS_SDIR = os.path.join(dir, 'drivers', 'wrapper', 'src')
+        print(YELLOW + f"\nCopying files for '{project_name.upper()}'..." + NORMAL)
+        print(YELLOW + f"\n  Processing files for {' and '.join(common_crypto_files)}..." + NORMAL)
 
-            print(YELLOW + f"\nCopying files for '{project.upper()}'..." + NORMAL)
-            print(YELLOW + f"\n  Processing files for {' and '.join(p1)}..." + NORMAL)
+        print(YELLOW + "  Creating directories..." + NORMAL)
+        DIRS = [CRYPTO_SDIR, DRIVERS_SDIR]
+        for d in DIRS:
+            if not os.path.exists(d):
+                os.makedirs(d)
 
-            print(YELLOW + "  Creating directories..." + NORMAL)
-            DIRS = [CRYPTO_SDIR, DRIVERS_SDIR]
-            for d in DIRS:
-                if not os.path.exists(d):
-                    os.makedirs(d)
+        print(YELLOW + "  Copying files..." + NORMAL)
+        FILES = [
+                    (os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'crypto_common.h'), CRYPTO_DIR),
+                ]
 
-            print(YELLOW + "  Copying files..." + NORMAL)
-            FILES = [
-                     (os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'crypto_common.h'), CRYPTO_DIR),
-                    ]
+        # Add all subcomponents to copy.
+        # common crypto files (.c/.h)
+        for p in common_crypto_files:
+            FILES.append((os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'crypto_%s.h' % p), CRYPTO_DIR))
+            FILES.append((os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'src', 'crypto_%s.c' % p), CRYPTO_SDIR))
 
-            # Add all subcomponents to copy.
-            # p1: common crypto files (.c/.h)
-            for p in p1:
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'crypto_%s.h' % p), CRYPTO_DIR))
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, 'common_crypto', 'src', 'crypto_%s.c' % p), CRYPTO_SDIR))
+        # CAM wrapper files (.c/.h)
+        for p in cam_files:
+            FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'crypto_%s%s_wrapper.h' % (p, ipvalue)), DRIVERS_DIR))
+            FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'src', 'crypto_%s%s_wrapper.c' % (p, ipvalue)), DRIVERS_SDIR))
 
-            # p2: CAM wrapper files (.c/.h)
-            for p in p2:
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'crypto_%s%s_wrapper.h' % (p, ipvalue)), DRIVERS_DIR))
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'src', 'crypto_%s%s_wrapper.c' % (p, ipvalue)), DRIVERS_SDIR))
-
-            # Copy the generated files.
-            for f in FILES:
-                s, d = f
-                print(CYAN + "    %s -> %s" % (s.replace(curdir + os.sep, ''), d))
-                shutil.copy(s, d)
+        # Copy the generated files.
+        for f in FILES:
+            s, d = f
+            print(CYAN + "    %s -> %s" % (s.replace(curdir + os.sep, ''), d))
+            shutil.copy(s, d)
 
     except Exception as ex:
         print(RED + f"\nUnable to copy generated files: {str(ex)}" + NORMAL)
