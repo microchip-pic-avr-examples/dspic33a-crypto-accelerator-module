@@ -1,7 +1,9 @@
 #!/bin/python3
 
+import json
 import argparse, os, sys, traceback, subprocess
 import shutil
+from typing import List
 
 NORMAL  = "\x1B""[0m"
 RED     = "\x1B""[1;31m"
@@ -20,32 +22,12 @@ TEMPLATE_ROOT = os.path.join(INPUT_ROOT, 'templates')
 
 OUTPUT_ROOT = os.path.join(BUILD_ROOT, 'output')
 
-APPS_ROOT = os.path.join('..', 'dspic33ak512mps512')
-
 CRYPTO_V4_REPOSITORY_NAME = 'crypto_v4'
 CRYPTO_V4_REPOSITORY_DEFAULT_PATH = os.path.join(BUILD_ROOT, CRYPTO_V4_REPOSITORY_NAME)
 CRYPTO_V4_REPOSITORY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/mh3/%s.git' % CRYPTO_V4_REPOSITORY_NAME
 
 # Common target crypto firmware path.
 CRYPTO_FIRMWARE_PATH = os.path.join('crypto')
-
-
-HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'hash', 'sha.X', CRYPTO_FIRMWARE_PATH)
-AES_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes', 'aes.X', CRYPTO_FIRMWARE_PATH)
-MAC_CRYPTO_DIR = os.path.join(APPS_ROOT, 'mac', 'mac.X', CRYPTO_FIRMWARE_PATH)
-ECDSA_CRYPTO_DIR = os.path.join(APPS_ROOT, 'dsa', 'ecdsa.X', CRYPTO_FIRMWARE_PATH)
-ECDH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'ecdh', 'ecdh.X', CRYPTO_FIRMWARE_PATH)
-TRNG_CRYPTO_DIR = os.path.join(APPS_ROOT, 'trng', 'trng.X', CRYPTO_FIRMWARE_PATH)
-AES_HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes_hash', 'aes_hash.X', CRYPTO_FIRMWARE_PATH)
-
-# Format of each entry is a quadruple: (project-name, target-dir, [list-of-common-crypto-files], [list-of-cam-files])
-FILE_COPIES = [('hash', HASH_CRYPTO_DIR, ['hash'], ['hash_cam', 'cam']),
-               ('aes', AES_CRYPTO_DIR, ['sym_cipher', 'aead_cipher'], ['sym_cam', 'aead_cam', 'cam']),
-               ('mac', MAC_CRYPTO_DIR, ['hash', 'aead_cipher', 'mac_cipher'], ['hash_cam', 'aead_cam', 'mac_cam', 'cam']),
-               ('dsa', ECDSA_CRYPTO_DIR, ['digsign'], ['digisign_cam', 'cam']),
-               ('ecdh', ECDH_CRYPTO_DIR, ['kas'], ['kas_cam', 'cam']),
-               ('trng', TRNG_CRYPTO_DIR, ['rng'], ['rng_cam', 'cam']),
-               ('aes+hash', AES_HASH_CRYPTO_DIR, ['hash', 'sym_cipher', 'mac_cipher', 'aead_cipher'], ['hash_cam', 'sym_cam', 'mac_cam', 'aead_cam', 'cam'])]
 
 # Set to show the commands being executed.
 SHOW_COMMANDS = True
@@ -65,7 +47,7 @@ def run_commands(cmds, capture_output=False):
                 cmd = c.split(' ')
 
             if SHOW_COMMANDS is True:
-                print(f"\nRunning command '{' '.join(cmd)}'")
+                print(CYAN + f"\nRunning command '{' '.join(cmd)}'" + NORMAL)
 
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
@@ -97,19 +79,19 @@ def run_commands(cmds, capture_output=False):
 
 
 # Check if the given IP is present in the repository.
-def check_for_ip(repodir, ipname):
+def check_for_ip(repodir, ip_name: str):
     result = True
 
-    ipdir = os.path.join(repodir, 'module_crypto', 'src', 'drivers', ipname)
+    ipdir = os.path.join(repodir, 'module_crypto', 'src', 'drivers', ip_name)
     if not os.path.exists(ipdir):
-        print(RED + f"\nIP '{ipname}' does not exist in the repository at '{repodir}'." + NORMAL)
+        print(RED + f"\nIP '{ip_name}' does not exist in the repository at '{repodir}'." + NORMAL)
         result = False
 
     return result
 
 
 # Clone / update the repository.
-def update_clone(options):
+def update_clone(options) -> bool:
     result = True
 
     # Path is relative to the script's location.
@@ -131,18 +113,17 @@ def update_clone(options):
 
         run_commands(GIT_CMDS)
 
-        result = check_for_ip(repodir, options.ipname)
-
     except Exception as ex:
         print(RED + f"\nFailed to clone repository: {str(ex)}" + NORMAL)
         result = False
 
     os.chdir(curdir)
+
     return result
 
 
 # Create all directories.
-def create_directories(options):
+def create_directories(ip_name: str) -> bool:
     result = True
 
     # Path is relative to the script's location.
@@ -152,7 +133,7 @@ def create_directories(options):
         print(YELLOW + "\nCreating directories..." + NORMAL)
 
         inputdir = os.path.join(curdir, INPUT_ROOT)
-        ipdir = os.path.join(curdir, inputdir, options.ipname)
+        ipdir = os.path.join(curdir, inputdir, ip_name)
         ccdir = os.path.join(curdir, COMMON_CRYPTO_ROOT)
         templatedir = os.path.join(curdir, TEMPLATE_ROOT)
         outputdir = os.path.join(curdir, OUTPUT_ROOT)
@@ -170,15 +151,15 @@ def create_directories(options):
 
 
 # Copy and generate the output files.
-def generate_files(options):
+def generate_files(ip_name: str) -> bool:
     result = True
 
     # Path is relative to the script's location.
     curdir = os.path.dirname(os.path.abspath(__file__))
 
     try:
-        ipsrcdir = os.path.join(curdir, options.repository, 'module_crypto', 'src', 'drivers', options.ipname)
-        ipdstdir = os.path.join(curdir, INPUT_ROOT, options.ipname)
+        ipsrcdir = os.path.join(curdir, options.repository, 'module_crypto', 'src', 'drivers', ip_name)
+        ipdstdir = os.path.join(curdir, INPUT_ROOT, ip_name)
 
         ccsrcdir = os.path.join(curdir, options.repository, 'module_crypto', 'src', 'common_crypto')
         ccdstdir = os.path.join(curdir, COMMON_CRYPTO_ROOT)
@@ -200,7 +181,7 @@ def generate_files(options):
                 if os.path.exists(dstdir):
                     shutil.rmtree(dstdir)
 
-                print("  %s -> %s" % (srcdir.replace(curdir + os.sep, ''), dstdir.replace(curdir + os.sep, '')))
+                print(CYAN + "  %s -> %s" % (srcdir.replace(curdir + os.sep, ''), dstdir.replace(curdir + os.sep, '')))
                 shutil.copytree(srcdir, dstdir)
 
             except Exception as ex:
@@ -213,7 +194,7 @@ def generate_files(options):
         if result is True:
             print(YELLOW + "\nGenerating files..." + NORMAL)
             FMPP_CMD = [['fmpp',
-                        '-C', os.path.join(curdir, FMPP_ROOT, 'config.fmpp'),
+                        '-C', os.path.join(curdir, FMPP_ROOT, ip_name, 'config.fmpp'),
                         '-S', os.path.join(curdir, INPUT_ROOT),
                         '-O', os.path.join(curdir, OUTPUT_ROOT)]
                     ]
@@ -232,7 +213,7 @@ def generate_files(options):
 
 
 # Copy the generated files to their target.
-def copy_generated_files(options):
+def copy_generated_files(ip_name: str, device: str, project_paths: List[str], common_crypto_files: List[str], cam_files: List[str]) -> bool:
     result = True
 
     # Path is relative to the script's location.
@@ -242,14 +223,25 @@ def copy_generated_files(options):
         print(YELLOW + "\nCopying output files..." + NORMAL)
 
         try:
-            _, ipvalue = options.ipname.split('_', 1)
+            _, ipvalue = ip_name.split('_', 1)
 
         except Exception as ex:
-            print(RED + f"Unable to determine IP value from '{options.ipname}': {str(ex)}" + NORMAL)
+            print(RED + f"Unable to determine IP value from '{ip_name}': {str(ex)}" + NORMAL)
             print(traceback.format_exc())
             return False
+        
+        file_copies = []
 
-        for c in FILE_COPIES:
+        apps_root = os.path.join('..', device)
+
+        for project_path in project_paths:
+            project_root_dir = project_path.split("/")[0]
+            project_name = project_path.split("/")[1]
+            
+            project_dir_path = os.path.join(apps_root, project_root_dir, f"{project_name}.X", CRYPTO_FIRMWARE_PATH)
+            file_copies.append((project_root_dir, project_dir_path, common_crypto_files[project_root_dir], cam_files[project_root_dir]))
+
+        for c in file_copies:
             project, dir, p1, p2 = c
 
             CRYPTO_DIR = os.path.join(dir, 'common_crypto')
@@ -280,13 +272,13 @@ def copy_generated_files(options):
 
             # p2: CAM wrapper files (.c/.h)
             for p in p2:
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, options.ipname, 'wrapper', 'crypto_%s%s_wrapper.h' % (p, ipvalue)), DRIVERS_DIR))
-                FILES.append((os.path.join(curdir, OUTPUT_ROOT, options.ipname, 'wrapper', 'src', 'crypto_%s%s_wrapper.c' % (p, ipvalue)), DRIVERS_SDIR))
+                FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'crypto_%s%s_wrapper.h' % (p, ipvalue)), DRIVERS_DIR))
+                FILES.append((os.path.join(curdir, OUTPUT_ROOT, ip_name, 'wrapper', 'src', 'crypto_%s%s_wrapper.c' % (p, ipvalue)), DRIVERS_SDIR))
 
             # Copy the generated files.
             for f in FILES:
                 s, d = f
-                print("    %s -> %s" % (s.replace(curdir + os.sep, ''), d))
+                print(CYAN + "    %s -> %s" % (s.replace(curdir + os.sep, ''), d))
                 shutil.copy(s, d)
 
     except Exception as ex:
@@ -314,12 +306,9 @@ if __name__ == "__main__":
         parser.add_argument('-c', '--clone', help='attempt to clone/update the repository', action="store_true")
         parser.add_argument('-g', '--git', help='fetch the CryptoV4 repository from this Git link', type=str)
         parser.add_argument('-b', '--branch', help='if cloning/updating, branch name for checkout', type=str)
-        parser.add_argument('-i', '--ipname', help='CAM IP to use', type=str, required=True)
+        parser.add_argument('-j', '--json', help='path to json configuration file', type=str, required=True)
 
         options = parser.parse_args()
-
-        # Convert IP to lowercase by convention
-        options.ipname = options.ipname.lower()
 
         if options.repository is not None:
             if options.clone is True or options.git is not None:
@@ -339,43 +328,82 @@ if __name__ == "__main__":
         else:
              options.git = CRYPTO_V4_REPOSITORY_DEFAULT_GIT
 
-
         result = True
-
+        skipped = False
         curdir = os.getcwd()
+
+        # Read in configuration JSON file
+        if options.json is not None:
+            json_path = os.path.join(curdir, options.json)
+            if os.path.exists(json_path):
+                with open(json_path, 'r') as file:
+                    generation_config = json.load(file)
+            else:
+                raise RuntimeError("JSON file not found at provided path")
+        else:
+            parser.error(f"Please provide a path to a configuration JSON file")
+
+        # Create the build directory if it doesn't exist
         builddir = os.path.join(curdir, BUILD_ROOT)
         if not os.path.exists(builddir):
             os.makedirs(builddir)
 
-        # Clone the repo if required.
+        # Clone the repo if required
         if options.clone is True:
             if options.branch is None:
                 parser.error("Must specify a branch name if cloning the repository.")
 
             result = update_clone(options)
-        else:
-            result = check_for_ip(options.repository, options.ipname)
-
+        
         if result is True:
-            result = create_directories(options)
+            for device_name in generation_config["devices"].keys():
+                device_object = generation_config["devices"][device_name]
 
-        if result is True:
-            print(YELLOW + "\nGenerating files with options:" + NORMAL)
-            print(f"  crypto_v4 repo: {options.repository}")
+                ip_name = device_object["ip"].lower()
+                result = check_for_ip(options.repository, ip_name)
 
-            if options.clone is True:
-                print(f"          branch: {options.branch}")
+                # if ip exists for device, begin generation and copying to project
+                if result is True:
+                    print(YELLOW + f"\nGenerating files for {device_name} with options:" + NORMAL)
+                    print(CYAN + f"  crypto_v4 repo: {options.repository}" + NORMAL)
 
-            print(f"              ip: {options.ipname}")
-            print("")
+                    if options.clone is True:
+                        print(CYAN + f"   branch: {options.branch}" + NORMAL)
 
-            result = generate_files(options)
+                    print(CYAN + f"  ip: {ip_name}" + NORMAL)
 
-        if result is True:
-            result = copy_generated_files(options)
+                    # Clear previous generation if present
+                    if os.path.exists(INPUT_ROOT):
+                        shutil.rmtree(INPUT_ROOT)
+                    if os.path.exists(OUTPUT_ROOT):
+                        shutil.rmtree(OUTPUT_ROOT)
+
+                    if result is True:
+                        result = create_directories(ip_name)
+                    else:
+                        print(RED + "Failed to create directories!" + NORMAL)
+                    
+                    if result is True:
+                        result = generate_files(ip_name)
+                    else:
+                        print(RED + "Failed to generate files!" + NORMAL)
+
+                    if result is True:
+                        project_paths: List[str] = generation_config["devices"][device_name]["project_paths"]
+                        common_crypto_files = generation_config["common_crypto_files"]
+                        cam_files = generation_config["cam_files"]
+
+                        result = copy_generated_files(ip_name, device_name, project_paths, common_crypto_files, cam_files)
+                    else:
+                        print(RED + "Failed to copy generated files!" + NORMAL)
+                else:
+                    skipped = True
+                    print(YELLOW + f"Skipping {device_name} generation as cannot find {ip_name} IP in CryptoV4 repository." + NORMAL)
 
         if result is True:
             print(GREEN + "Generation complete." + NORMAL)
+        elif result is False and skipped is True:
+            print(BLUE + "Generation complete, but with errors. Review log." + NORMAL)
         else:
             print(RED + "Generation failed!" + NORMAL)
 
