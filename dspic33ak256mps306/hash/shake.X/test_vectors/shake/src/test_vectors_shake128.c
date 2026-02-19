@@ -31,7 +31,7 @@ Microchip or any third party.
 */
 
 // SHAKE128 0 Bytes Test Vector
-static uint8_t shake128_0_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+static const uint8_t shake128_0_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
     0x7F, 0x9C, 0x2B, 0xA4, 0xE8, 0x8F, 0x82, 0x7D, 0x61, 0x60, 0x45, 0x50, 0x76, 0x05, 0x85, 0x3E
 };
 static const TEST_VECTOR shake128_0_bytes_vector = {
