@@ -34,7 +34,7 @@ extern "C" {
 
 typedef struct
 {
-    const uint8_t* inputData;
+    uint8_t* inputData;
     uint32_t inputDataLen;
     const uint8_t* expectedDigest;
 } TEST_VECTOR;
