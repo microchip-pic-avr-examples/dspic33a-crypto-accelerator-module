@@ -60,25 +60,15 @@ extern TEST_VECTOR shake256_test_vectors[NUMBER_OF_SHAKE256_VECTORS];
 // *****************************************************************************
 
 static crypto_Hash_Status_E SHAKE_DigestGenerate(bool multistep, uint32_t blockSize, crypto_Hash_Algo_E algorithm,
-        const uint8_t* data, const uint32_t dataLength, uint8_t* digestResult, uint32_t digestLength)
+        uint8_t* data, uint32_t dataLength, uint8_t* digestResult, uint32_t digestLength)
 {
     crypto_Hash_Status_E status;
 
-    /* cppcheck-suppress misra-c2012-18.8
-    *
-    *  (Rule 18.8) REQUIRED: Variable-length array types shall not be used
-    *
-    *  Reasoning: Using a variable-length array allows the demo test vectors to be
-    *               adjusted independent of the application code.
-    */
-    uint8_t localData[dataLength];
-    uint8_t* localData_ptr = (uint8_t*) &localData;
-
-    (void )memcpy(localData, data, dataLength);
+    uint8_t* localData = data;
 
     if (multistep)
     {
-        st_Crypto_Hash_Shake_Ctx context;
+        static st_Crypto_Hash_Shake_Ctx context;
 
         (void) printf(CYAN"\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"RESET_COLOR, blockSize);
 
@@ -91,10 +81,10 @@ static crypto_Hash_Status_E SHAKE_DigestGenerate(bool multistep, uint32_t blockS
             {
                 uint32_t length = (localLength > blockSize)
                         ? blockSize : localLength;
-                status = Crypto_Hash_Shake_Update(&context, localData_ptr, length);
+                status = Crypto_Hash_Shake_Update(&context, localData, length);
 
                 localLength -= length;
-                localData_ptr = &localData_ptr[length];
+                localData = &localData[length];
 
             } while ((localLength > 0U) && (status == CRYPTO_HASH_SUCCESS));
         }
@@ -107,13 +97,13 @@ static crypto_Hash_Status_E SHAKE_DigestGenerate(bool multistep, uint32_t blockS
     else
     {
         (void) printf(CYAN"\r\n\r\n SINGLE-STEP TEST"RESET_COLOR);
-        status = Crypto_Hash_Shake_Digest(CRYPTO_HANDLER_HW_INTERNAL, algorithm, localData_ptr, dataLength, digestResult, digestLength, SESSION_ID);
+        status = Crypto_Hash_Shake_Digest(CRYPTO_HANDLER_HW_INTERNAL, algorithm, localData, dataLength, digestResult, digestLength, SESSION_ID);
     }
 
     return status;
 }
 
-static void SHAKE_Digest(crypto_Hash_Algo_E algorithm, const uint8_t* data, uint32_t dataLength, const uint8_t* expectedDigest, uint32_t digestLength)
+static void SHAKE_Digest(crypto_Hash_Algo_E algorithm, uint8_t* data, uint32_t dataLength, const uint8_t* expectedDigest, uint32_t digestLength)
 {
     const char *inputHeader =    "Input Data     ";
     const char *outputHeader =   "Output Digest  ";
@@ -157,7 +147,7 @@ static void SHAKE_Digest(crypto_Hash_Algo_E algorithm, const uint8_t* data, uint
     }
 
     // Test multiple iterations of the update() call with different block sizes to show that arbitrary sizes are accepted.
-    uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
+    const uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
 
     for (uint32_t index = 0; index < (sizeof(blockSizes) / sizeof(blockSizes[0])); index++)
     {
