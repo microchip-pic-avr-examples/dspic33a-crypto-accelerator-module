@@ -20,32 +20,15 @@ TEMPLATE_ROOT = os.path.join(INPUT_ROOT, 'templates')
 
 OUTPUT_ROOT = os.path.join(BUILD_ROOT, 'output')
 
-APPS_ROOT = os.path.join('..', 'dspic33ak512mps512')
-
 CRYPTO_V4_REPOSITORY_NAME = 'crypto_v4'
 CRYPTO_V4_REPOSITORY_DEFAULT_PATH = os.path.join(BUILD_ROOT, CRYPTO_V4_REPOSITORY_NAME)
 CRYPTO_V4_REPOSITORY_DEFAULT_GIT = 'https://bitbucket.microchip.com/scm/mh3/%s.git' % CRYPTO_V4_REPOSITORY_NAME
 
-# Common target crypto firmware path.
-CRYPTO_FIRMWARE_PATH = os.path.join('crypto')
-
-
-HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'hash', 'sha.X', CRYPTO_FIRMWARE_PATH)
-AES_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes', 'aes.X', CRYPTO_FIRMWARE_PATH)
-MAC_CRYPTO_DIR = os.path.join(APPS_ROOT, 'mac', 'mac.X', CRYPTO_FIRMWARE_PATH)
-ECDSA_CRYPTO_DIR = os.path.join(APPS_ROOT, 'dsa', 'ecdsa.X', CRYPTO_FIRMWARE_PATH)
-ECDH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'ecdh', 'ecdh.X', CRYPTO_FIRMWARE_PATH)
-TRNG_CRYPTO_DIR = os.path.join(APPS_ROOT, 'trng', 'trng.X', CRYPTO_FIRMWARE_PATH)
-AES_HASH_CRYPTO_DIR = os.path.join(APPS_ROOT, 'aes_hash', 'aes_hash.X', CRYPTO_FIRMWARE_PATH)
+CRYPTO_DIR = os.path.join('..', 'crypto')
 
 # Format of each entry is a quadruple: (project-name, target-dir, [list-of-common-crypto-files], [list-of-cam-files])
-FILE_COPIES = [('hash', HASH_CRYPTO_DIR, ['hash'], ['hash_cam', 'cam']),
-               ('aes', AES_CRYPTO_DIR, ['sym_cipher', 'aead_cipher'], ['sym_cam', 'aead_cam', 'cam']),
-               ('mac', MAC_CRYPTO_DIR, ['hash', 'aead_cipher', 'mac_cipher'], ['hash_cam', 'aead_cam', 'mac_cam', 'cam']),
-               ('dsa', ECDSA_CRYPTO_DIR, ['digsign'], ['digisign_cam', 'cam']),
-               ('ecdh', ECDH_CRYPTO_DIR, ['kas'], ['kas_cam', 'cam']),
-               ('trng', TRNG_CRYPTO_DIR, ['rng'], ['rng_cam', 'cam']),
-               ('aes+hash', AES_HASH_CRYPTO_DIR, ['hash', 'sym_cipher', 'mac_cipher', 'aead_cipher'], ['hash_cam', 'sym_cam', 'mac_cam', 'aead_cam', 'cam'])]
+FILE_COPIES = [('CAM05346', CRYPTO_DIR, ['hash', 'sym_cipher', 'aead_cipher', 'mac_cipher', 'digsign', 'kas', 'rng'], ['hash_cam', 'cam', 'sym_cam', 'aead_cam', 'hash_cam', 'mac_cam', 'digisign_cam', 'kas_cam', 'rng_cam', 'cam'])
+               ]
 
 # Set to show the commands being executed.
 SHOW_COMMANDS = True
@@ -125,12 +108,18 @@ def update_clone(options):
         os.chdir(repodir)
 
         print(YELLOW + f"\nUpdating repository at '{repodir}'..." + NORMAL)
-        GIT_CMDS = ['git fetch',
-                    'git checkout %s' % options.branch,
-                    'git pull']
 
-        run_commands(GIT_CMDS)
+        if options.branch is not None:
+            GIT_CMDS = ['git fetch',
+                        'git checkout %s' % options.branch,
+                        'git pull']
 
+            run_commands(GIT_CMDS)
+        if options.tag is not None:
+            GIT_CMDS = ['git fetch',
+                    'git checkout %s' % options.tag]
+
+            run_commands(GIT_CMDS)
         result = check_for_ip(repodir, options.ipname)
 
     except Exception as ex:
@@ -259,7 +248,6 @@ def copy_generated_files(options):
             DRIVERS_SDIR = os.path.join(dir, 'drivers', 'wrapper', 'src')
 
             print(YELLOW + f"\nCopying files for '{project}'..." + NORMAL)
-            print(YELLOW + f"\n  Processing files for {' and '.join(p1)}..." + NORMAL)
 
             print(YELLOW + "  Creating directories..." + NORMAL)
             DIRS = [CRYPTO_SDIR, DRIVERS_SDIR]
@@ -314,6 +302,7 @@ if __name__ == "__main__":
         parser.add_argument('-c', '--clone', help='attempt to clone/update the repository', action="store_true")
         parser.add_argument('-g', '--git', help='fetch the CryptoV4 repository from this Git link', type=str)
         parser.add_argument('-b', '--branch', help='if cloning/updating, branch name for checkout', type=str)
+        parser.add_argument('-t', '--tag', help='if cloning/updating, tag or commit hash value for checkout', type=str)
         parser.add_argument('-i', '--ipname', help='CAM IP to use', type=str, required=True)
 
         options = parser.parse_args()
@@ -349,7 +338,7 @@ if __name__ == "__main__":
 
         # Clone the repo if required.
         if options.clone is True:
-            if options.branch is None:
+            if options.branch is None and options.tag is None:
                 parser.error("Must specify a branch name if cloning the repository.")
 
             result = update_clone(options)
