@@ -1,0 +1,32 @@
+{
+    "dspic33ak512mps512": {
+        "aes": {
+            "rootFolder": "aes",
+            "projectName": "aes"
+        },
+        "aes_hash": {
+            "rootFolder": "aes_hash",
+            "projectName": "aes_hash"
+        },
+        "ecdsa": {
+            "rootFolder": "dsa",
+            "projectName": "ecdsa"
+        },
+        "ecdh": {
+            "rootFolder": "ecdh",
+            "projectName": "ecdh"
+        },
+        "sha": {
+            "rootFolder": "hash",
+            "projectName": "sha"
+        },
+        "mac": {
+            "rootFolder": "mac",
+            "projectName": "mac"
+        },
+        "trng": {
+            "rootFolder": "trng",
+            "projectName": "trng"
+        }
+    }
+}
