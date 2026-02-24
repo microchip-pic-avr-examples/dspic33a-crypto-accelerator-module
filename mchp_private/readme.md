@@ -35,6 +35,8 @@ Then, launch the `generateFiles.py` script with the desired arguments:
                             if cloning/updating, branch name for checkout
       -i IPNAME, --ipname IPNAME
                             CAM IP to use
+      -t TAG / COMMIT HASH, --tag TAG / COMMIT HASH    
+                            if cloning/updating, tag or commit hash value for checkout
 
 * If specified, the repository must already exist.
 * If specified, the script may clone the repository and use the specified branch.  An existing repository will be updated.
@@ -49,7 +51,7 @@ The CAM library must be built before installation can proceed.
 Open a Command prompt or Unix terminal and navigate to the `mchp_private` directory of the repository.<br>
 Then, launch the `fetchLibrary.py` script with the desired arguments:
 
-    usage: fetchLibrary.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] [-i INSTALL]
+    usage: fetchLibrary.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] [-i INSTALL] [-t TAG / COMMIT HASH]
 
     options:
       -h, --help            show this help message and exit
@@ -61,6 +63,8 @@ Then, launch the `fetchLibrary.py` script with the desired arguments:
                             if cloning/updating, branch name for checkout
       -i INSTALL, --install INSTALL
                             install libraries from pre-existing library directory
+      -t TAG / COMMIT HASH, --tag TAG / COMMIT HASH    
+                            if cloning/updating, tag or commit hash value for checkout
 
 The script will copy the CAM header and library files to the appropriate locations in each demonstration MPLAB® X project.
 
