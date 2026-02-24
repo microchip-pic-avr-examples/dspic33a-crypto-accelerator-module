@@ -12,20 +12,19 @@
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
                        projectFiles="true">
-          <itemPath>crypto/common_crypto/crypto_aead_cipher.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_sym_cipher.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_aead_cipher.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_common.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_sym_cipher.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="library" displayName="library" projectFiles="true">
-            <itemPath>crypto/drivers/library/cam_aes.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_version.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_device.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_aes.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_device.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
-            <itemPath>crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_sym_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_sym_cam05346_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -85,16 +84,16 @@
                        displayName="common_crypto"
                        projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
-            <itemPath>crypto/common_crypto/src/crypto_aead_cipher.c</itemPath>
-            <itemPath>crypto/common_crypto/src/crypto_sym_cipher.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_aead_cipher.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_sym_cipher.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
-              <itemPath>crypto/drivers/wrapper/src/crypto_aead_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_sym_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_aead_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_sym_cam05346_wrapper.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -139,6 +138,7 @@
     <Elem>../src</Elem>
     <Elem>.</Elem>
     <Elem>../../../../crypto_cam_src/driver</Elem>
+    <Elem>../../../crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -161,7 +161,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -201,7 +201,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../aes.X"/>
+        <property key="extra-include-directories" value="../aes.X;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
@@ -257,11 +257,14 @@
         <property key="boot-flash" value="no_flash"/>
         <property key="boot-ram" value="no_ram"/>
         <property key="boot-write-protect" value="no_write_protect"/>
+        <property key="create-vtable" value="true"/>
         <property key="enable-check-sections" value="false"/>
         <property key="enable-data-init" value="true"/>
-        <property key="enable-default-isr" value="true"/>
         <property key="enable-handles" value="true"/>
         <property key="enable-pack-data" value="true"/>
+        <property key="enable-vtable-1" value="false"/>
+        <property key="enable-vtable-2" value="false"/>
+        <property key="enable-vtable-3" value="false"/>
         <property key="extra-lib-directories" value=""/>
         <property key="fill-flash-options-addr" value=""/>
         <property key="fill-flash-options-const" value=""/>
@@ -270,6 +273,7 @@
         <property key="fill-flash-options-increment" value=""/>
         <property key="fill-flash-options-seq" value=""/>
         <property key="fill-flash-options-what" value="0"/>
+        <property key="fill-vtable" value="true"/>
         <property key="general-code-protect" value="no_code_protect"/>
         <property key="general-write-protect" value="no_write_protect"/>
         <property key="generate-cross-reference-file" value="false"/>
@@ -296,6 +300,15 @@
         <property key="stack-size" value="16"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
+        <property key="vtable-address-1" value=""/>
+        <property key="vtable-address-2" value=""/>
+        <property key="vtable-address-3" value=""/>
+        <property key="vtable-number-1" value="1"/>
+        <property key="vtable-number-2" value="0"/>
+        <property key="vtable-number-3" value="0"/>
+        <property key="vtable-type-1" value="--ivt="/>
+        <property key="vtable-type-2" value="--ivt="/>
+        <property key="vtable-type-3" value="--ivt="/>
         <property key="warn-section-align" value="false"/>
       </C30-LD>
       <C30Global>
