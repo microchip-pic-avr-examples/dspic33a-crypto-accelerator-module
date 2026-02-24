@@ -216,7 +216,9 @@ if __name__ == "__main__":
         # Clone the repo if requested.
         if options.clone is True:
             if options.branch is None and options.tag is None:
-                parser.error("Must specify a branch name if cloning the repository.")
+                parser.error("Must specify a branch or tag name if cloning the repository.")
+            elif options.branch is not None and options.tag is not None:
+                parser.error("Must specify a branch or tag name not both.")
 
             result = update_clone(options)
             if result is False:
