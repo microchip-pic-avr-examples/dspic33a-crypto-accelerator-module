@@ -9,6 +9,7 @@
         <itemPath>app/app_mac.h</itemPath>
         <itemPath>app/app_sym.h</itemPath>
         <itemPath>app/app_sha.h</itemPath>
+        <itemPath>app/app_aes_hash.h</itemPath>
       </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
         <logicalFolder name="common_crypto"
@@ -66,7 +67,6 @@
         <itemPath>test_vectors/sym_test_vector.h</itemPath>
         <itemPath>test_vectors/aead_test_vector.h</itemPath>
       </logicalFolder>
-      <itemPath>app_aes_hash.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -87,6 +87,7 @@
           <itemPath>app/src/app_mac.c</itemPath>
           <itemPath>app/src/app_sym.c</itemPath>
           <itemPath>app/src/app_sha.c</itemPath>
+          <itemPath>app/src/app_aes_hash.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
@@ -150,7 +151,6 @@
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>app_aes_hash.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

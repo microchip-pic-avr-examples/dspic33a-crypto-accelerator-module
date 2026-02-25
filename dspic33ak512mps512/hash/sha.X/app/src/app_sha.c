@@ -44,7 +44,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include "crypto/common_crypto/crypto_hash.h"
-#include "app_sha.h"
+#include "app/app_sha.h"
 #include "test_vectors/test_vectors_sha1.h"
 #include "test_vectors/test_vectors_sha224.h"
 #include "test_vectors/test_vectors_sha256.h"

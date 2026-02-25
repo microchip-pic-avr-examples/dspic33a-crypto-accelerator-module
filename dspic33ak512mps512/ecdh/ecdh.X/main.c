@@ -41,7 +41,7 @@ Microchip or any third party.
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
-#include "app_ecdh.h"
+#include "app/app_ecdh.h"
 #include "mcc_generated_files/system/system.h"
 
 int main( void ) {

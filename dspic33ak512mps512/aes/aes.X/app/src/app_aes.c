@@ -47,7 +47,7 @@ Microchip or any third party.
 #include <stdint.h>
 #include <string.h>
 #include "crypto/common_crypto/crypto_common.h"
-#include "app_aes.h"
+#include "app/app_aes.h"
 
 uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {

@@ -44,7 +44,7 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include "./app_mac.h"
+#include "app/app_mac.h"
 
 #ifdef RUN_MAC_CMAC_TEST
 
