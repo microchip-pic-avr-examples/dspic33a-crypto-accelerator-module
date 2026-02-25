@@ -109,6 +109,7 @@
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem>.</Elem>
+    <Elem>../../../crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
