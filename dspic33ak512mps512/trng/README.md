@@ -11,7 +11,7 @@
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DEV_DFP v1.2.135
+- dsPIC33AK-MP_DFP v1.2.135
 - MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
 - MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
