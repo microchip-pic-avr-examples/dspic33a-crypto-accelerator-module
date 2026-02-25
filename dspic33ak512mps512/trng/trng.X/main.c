@@ -43,7 +43,7 @@ Microchip or any third party.
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "app_trng.h"
+#include "app/app_trng.h"
 #include "mcc_generated_files/system/system.h"
 
 int main(void) 

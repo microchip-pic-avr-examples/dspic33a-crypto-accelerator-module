@@ -45,7 +45,7 @@ Microchip or any third party.
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include "app_aes.h"
+#include "app/app_aes.h"
 #include "app/app_sym.h"
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
