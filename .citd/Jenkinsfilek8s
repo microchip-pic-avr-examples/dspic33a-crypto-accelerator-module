@@ -327,12 +327,14 @@ def getMisraIncludeFlags(projectPath) {
 
 def getMisraSuppressionFlags(projectPath) {
     return  [ 
-                "--suppress=*:${projectPath}/mcc_generated_files/*"
+                "--suppress=*:${projectPath}/mcc_generated_files/*",
+                '--suppress=*:crypto/common_crypto/*'
             ]
 }
 
 def getMisraExcludePatterns() {
     return  [ 
-                '**/mcc_generated_files/**'
+                '**/mcc_generated_files/**',
+                '**/crypto/common_crypto/**'
             ].join(',')
 }
