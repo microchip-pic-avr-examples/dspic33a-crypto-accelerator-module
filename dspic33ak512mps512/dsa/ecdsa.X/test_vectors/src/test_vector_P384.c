@@ -19,7 +19,7 @@
     THIS SOFTWARE.
 */
 
-#include "test_vector.h"
+#include "test_vectors/test_vector.h"
 
 static uint8_t privateKey[] = {
     0x53, 0x94, 0xf7, 0x97, 0x3e, 0xa8, 0x68, 0xc5, 

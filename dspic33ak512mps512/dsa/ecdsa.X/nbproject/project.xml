@@ -11,6 +11,7 @@
             <sourceRootList>
                 <sourceRootElem>../src</sourceRootElem>
                 <sourceRootElem/>
+                <sourceRootElem>../../../crypto</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

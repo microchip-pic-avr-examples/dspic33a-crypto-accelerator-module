@@ -15,25 +15,25 @@
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
                        projectFiles="true">
-          <itemPath>crypto/common_crypto/crypto_aead_cipher.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_mac_cipher.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_sym_cipher.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_hash.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_aead_cipher.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_common.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_mac_cipher.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_sym_cipher.h</itemPath>
+          <itemPath>../../../crypto/common_crypto/crypto_hash.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="library" displayName="library" projectFiles="true">
-            <itemPath>crypto/drivers/library/cam_aes.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_version.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_hash.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_device.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_aes.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_version.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_hash.h</itemPath>
+            <itemPath>../../../crypto/drivers/library/cam_device.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
-            <itemPath>crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_mac_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_sym_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_hash_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_aead_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_mac_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_sym_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../crypto/drivers/wrapper/crypto_hash_cam05346_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -95,10 +95,10 @@
                        displayName="common_crypto"
                        projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
-            <itemPath>crypto/common_crypto/src/crypto_aead_cipher.c</itemPath>
-            <itemPath>crypto/common_crypto/src/crypto_mac_cipher.c</itemPath>
-            <itemPath>crypto/common_crypto/src/crypto_sym_cipher.c</itemPath>
-            <itemPath>crypto/common_crypto/src/crypto_hash.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_aead_cipher.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_mac_cipher.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_sym_cipher.c</itemPath>
+            <itemPath>../../../crypto/common_crypto/src/crypto_hash.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
@@ -106,11 +106,11 @@
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
-              <itemPath>crypto/drivers/wrapper/src/crypto_aead_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_mac_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_sym_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
-              <itemPath>crypto/drivers/wrapper/src/crypto_hash_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_aead_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_mac_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_sym_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../crypto/drivers/wrapper/src/crypto_hash_cam05346_wrapper.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -156,7 +156,7 @@
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem>.</Elem>
-    <Elem>../../../../crypto_cam_src/driver</Elem>
+    <Elem>../../../crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -179,7 +179,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -219,7 +219,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../aes_hash.X"/>
+        <property key="extra-include-directories" value="../aes_hash.X;../../.."/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
@@ -647,7 +647,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -687,7 +687,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../aes_hash.X"/>
+        <property key="extra-include-directories" value="../aes_hash.X;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
