@@ -320,9 +320,8 @@ def getMisraFlags(projectPath) {
 
 def getMisraIncludeFlags(projectPath) {
     return  [
-                "-I${projectPath}",
-                "-I${projectPath}/app",
-                "-I${projectPath}/test_vectors"
+                '-I.',
+                "-I${projectPath}"
             ]
 }
 
