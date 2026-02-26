@@ -43,7 +43,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include <xc.h>
-#include "app_ecdsa.h"
+#include "app/app_ecdsa.h"
 #include "crypto/common_crypto/crypto_digsign.h"
 #include "mcc_generated_files/system/clock.h"
 #include "mcc_generated_files/system/pins.h"
