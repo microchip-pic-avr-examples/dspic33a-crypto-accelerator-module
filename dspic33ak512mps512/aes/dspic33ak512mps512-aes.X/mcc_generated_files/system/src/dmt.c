@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver source file for DMT driver
  *
- * @skipline @version   PLIB Version 1.0.2
+ * @skipline @version   PLIB Version 1.0.3
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */

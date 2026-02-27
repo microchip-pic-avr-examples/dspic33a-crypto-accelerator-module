@@ -7,7 +7,7 @@
  *  
  * @brief       This is the generated driver source file for the UART1 driver
  *
- * @skipline @version     PLIB Version 1.1.0
+ * @skipline @version     PLIB Version 1.1.3
  *
  * @skipline    Device : dsPIC33AK512MPS512
 */
@@ -265,10 +265,16 @@ bool UART1_IsTxReady(void)
     
     if (txTail < snapshot_txHead)
     {
+        /* cppcheck-suppress misra-c2012-18.4
+        *   Subtracting two pointers to get no of bytes transmit
+        */
         size = (snapshot_txHead - txTail - 1);
     }
     else
     {
+        /* cppcheck-suppress misra-c2012-18.4
+        *   Subtracting two pointers to get no of bytes transmit
+        */
         size = ( UART1_CONFIG_TX_BYTEQ_LENGTH - (txTail - snapshot_txHead) - (uint16_t)1 );
     }
     
@@ -457,7 +463,15 @@ void __attribute__ ((weak)) UART1_ParityErrorCallback(void)
 
 } 
 
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1TXInterrupt(void)
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
+void __attribute__ ( ( interrupt ) ) _U1TXInterrupt(void)
 {
 
     if(txHead == txTail)
@@ -491,7 +505,15 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1TXInterrupt(void)
     }
 }
 
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1RXInterrupt(void)
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
+void __attribute__ ( ( interrupt ) ) _U1RXInterrupt(void)
 {
     size_t rxQueueSize;
     uint8_t *rxTailPtr = NULL;
@@ -529,7 +551,15 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1RXInterrupt(void)
     }
 }
 
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1EInterrupt(void)
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
+void __attribute__ ( ( interrupt ) ) _U1EInterrupt(void)
 {
     if (U1STATbits.ABDOVIF == 1)
     {
@@ -581,7 +611,15 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1EInterrupt(void)
 }
 
 /* ISR for UART Event Interrupt */
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _U1EVTInterrupt(void)
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
+void __attribute__ ( ( interrupt ) ) _U1EVTInterrupt(void)
 {
     U1UIRbits.ABDIF = false;
     IFS3bits.U1EVTIF = false;
