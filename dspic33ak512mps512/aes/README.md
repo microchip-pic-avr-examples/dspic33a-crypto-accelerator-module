@@ -34,8 +34,8 @@ This example application utilizes the Crypto Library that interacts with the Pre
 <img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
-1. Within MPLAB® X IDE, open the aes.x application project in aes/firmware.
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 77 in aes/aes.X/app_aes.h
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes.X` application project.
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 77 in dspic33ak512mps512-aes.X/app/app_aes.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
