@@ -42,7 +42,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include <stdint.h>
-#include "app_trng.h"
+#include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
 
 static const char * caption = "Random";

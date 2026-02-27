@@ -43,7 +43,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include "crypto/common_crypto/crypto_kas.h"
-#include "app_ecdh.h"
+#include "app/app_ecdh.h"
 
 #define RESET_COLOR     "\033""[0m"
 #define RED             "\033""[1;31m"

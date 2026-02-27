@@ -47,7 +47,7 @@ Microchip or any third party.
 #include <stdint.h>
 #include <string.h>
 #include "crypto/common_crypto/crypto_common.h"
-#include "app_mac.h"
+#include "app/app_mac.h"
 #include "app/app_cmac.h"
 #include "app/app_hmac.h"
 #include "app/app_gmac.h"

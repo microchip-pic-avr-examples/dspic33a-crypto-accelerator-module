@@ -45,7 +45,7 @@ Microchip or any third party.
 #include <stdio.h>
 #include <string.h>
 
-#include "app_aes_hash.h"
+#include "app/app_aes_hash.h"
 #include "app/app_sha.h"
 
 #include "test_vectors/test_vectors_sha512.h"
