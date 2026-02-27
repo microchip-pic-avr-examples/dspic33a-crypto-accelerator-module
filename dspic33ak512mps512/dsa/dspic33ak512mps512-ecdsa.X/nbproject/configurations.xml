@@ -60,7 +60,7 @@
                    displayName="Important Files"
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
-      <itemPath>ecdsa.mc3</itemPath>
+      <itemPath>dspic33ak512mps512-ecdsa.mc3</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
