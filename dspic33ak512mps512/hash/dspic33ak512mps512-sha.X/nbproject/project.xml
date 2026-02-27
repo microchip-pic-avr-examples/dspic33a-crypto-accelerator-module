@@ -3,14 +3,14 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>ecdsa</name>
+            <name>dspic33ak512mps512-sha</name>
             <creation-uuid>13b0713b-8942-4e20-a1ea-d5ccc25be1a0</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../src</sourceRootElem>
-                <sourceRootElem/>
+                <sourceRootElem>.</sourceRootElem>
                 <sourceRootElem>../../../crypto</sourceRootElem>
             </sourceRootList>
             <confList>
