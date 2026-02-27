@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for PINS driver.
  *
- * @skipline @version   PLIB Version 1.0.4
+ * @skipline @version   PLIB Version 1.0.5
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */

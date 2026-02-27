@@ -43,6 +43,7 @@
           <itemPath>mcc_generated_files/system/dmt.h</itemPath>
           <itemPath>mcc_generated_files/system/watchdog.h</itemPath>
           <itemPath>mcc_generated_files/system/reset.h</itemPath>
+          <itemPath>mcc_generated_files/system/system_types.h</itemPath>
         </logicalFolder>
         <logicalFolder name="uart" displayName="uart" projectFiles="true">
           <itemPath>mcc_generated_files/uart/uart1.h</itemPath>

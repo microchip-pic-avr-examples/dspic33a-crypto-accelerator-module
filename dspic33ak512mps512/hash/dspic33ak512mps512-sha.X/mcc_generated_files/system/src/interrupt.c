@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for INTERRUPT driver          
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.1.4
  *            
  * @skipline  Device : dsPIC33AK512MPS512
 */

@@ -8,7 +8,7 @@
  *            
  * @brief     This is the generated source file for CLOCK driver
  *
- * @version   PLIB Version 1.2.1
+ * @version   PLIB Version 1.3.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */

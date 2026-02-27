@@ -9,7 +9,7 @@
  *            is to interrupt the processor in the event of a software 
  *            malfunction.
  *
- * @skipline @version   PLIB Version 1.0.2
+ * @skipline @version   PLIB Version 1.0.3
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */

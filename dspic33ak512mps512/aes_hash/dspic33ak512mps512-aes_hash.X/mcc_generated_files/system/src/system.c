@@ -31,6 +31,7 @@
 */
 
 #include "../system.h"
+#include "../system_types.h"
 #include "../clock.h"
 #include "../pins.h"
 #include "../dmt.h"
