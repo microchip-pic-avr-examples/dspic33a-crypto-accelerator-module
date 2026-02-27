@@ -3,8 +3,8 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>trng</name>
-            <creation-uuid>e48782dd-04be-4d64-a21c-5257e616e589</creation-uuid>
+            <name>dspic33ak512mps512-ecdh</name>
+            <creation-uuid>13b0713b-8942-4e20-a1ea-d5ccc25be1a0</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
