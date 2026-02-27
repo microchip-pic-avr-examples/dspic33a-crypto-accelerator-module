@@ -291,7 +291,8 @@
       </C30-LD>
       <C30Global>
         <property key="combine-sourcefiles" value="false"/>
-        <property key="common-include-directories" value="../trng.X;../../../"/>
+        <property key="common-include-directories"
+                  value="../dspic33ak512mps512-trng.X;../../../"/>
         <property key="dual-boot-partition" value="0"/>
         <property key="fast-math" value="false"/>
         <property key="generic-16-bit" value="false"/>

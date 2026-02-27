@@ -220,7 +220,8 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../aes_hash.X;../../.."/>
+        <property key="extra-include-directories"
+                  value="../dspic33ak512mps512-aes_hash.X;../../.."/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
@@ -635,7 +636,7 @@
         <targetDevice>dsPIC33AK512MPS512</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XCDSC</languageToolchain>
         <languageToolchainVersion>3.31.00</languageToolchainVersion>
         <platform>3</platform>
@@ -688,7 +689,8 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../aes_hash.X;../../../"/>
+        <property key="extra-include-directories"
+                  value="../dspic33ak512mps512-aes_hash.X;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
