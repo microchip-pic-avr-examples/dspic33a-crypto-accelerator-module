@@ -28,7 +28,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 <img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
-1. Within MPLAB® X IDE, open the `aes_hash.X` application project in the `aes_hash/` directory.
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes_hash.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 4. The application first executes each algorithm independently to demonstrate basic function is successful, and then runs a concurrent execution test to demonstrate concurrent operations are also successful.
