@@ -57,7 +57,7 @@ Microchip or any third party.
 #include <string.h>
 #include <stdarg.h>
 
-#include "app_aes_hash.h"
+#include "app/app_aes_hash.h"
 
 #include "app/app_sym.h"
 #include "app/app_mac.h"

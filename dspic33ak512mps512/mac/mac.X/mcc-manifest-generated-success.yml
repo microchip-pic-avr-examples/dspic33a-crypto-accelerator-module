@@ -2,15 +2,15 @@
 
 manifest_file_version: 1.0.0
 project: mac
-creation_date: 2025-11-25T13:55:35.358-07:00[America/Phoenix]
+creation_date: 2026-02-25T13:45:00.005-07:00[America/Phoenix]
 operating_system: Windows 11
 mcc_mode: IDE
-mcc_mode_version: v6.25
+mcc_mode_version: v6.30
 device_name: dsPIC33AK512MPS512
 compiler: XCDSC 3.30
-mcc_version: 5.6.3
-mcc_core_version: 5.8.3
-content_manager_version: 6.0.3
+mcc_version: 5.6.4
+mcc_core_version: 5.8.4
+content_manager_version: 6.0.4
 is_mcc_offline: false
 is_using_prerelease_versions: false
 mcc_content_registries: https://registry.npmjs.org/

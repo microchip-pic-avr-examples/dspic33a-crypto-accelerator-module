@@ -46,7 +46,7 @@ Microchip or any third party.
 #include <stdint.h>
 #include <string.h>
 #include "app/app_aead.h"
-#include "./app_aes.h"
+#include "app/app_aes.h"
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 #include "test_vectors/gcm_test_vector.h"

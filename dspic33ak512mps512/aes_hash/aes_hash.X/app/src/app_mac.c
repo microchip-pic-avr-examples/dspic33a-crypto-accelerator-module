@@ -45,7 +45,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include <string.h>
-#include "./app_aes_hash.h"
+#include "app/app_aes_hash.h"
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 #include "crypto/common_crypto/crypto_common.h"
 #include "test_vectors/mac_test_vector.h"
