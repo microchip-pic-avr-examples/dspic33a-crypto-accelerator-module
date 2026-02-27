@@ -2,31 +2,31 @@
     "dspic33ak512mps512": {
         "aes": {
             "rootFolder": "aes",
-            "projectName": "aes"
+            "projectName": "dspic33ak512mps512-aes"
         },
         "aes_hash": {
             "rootFolder": "aes_hash",
-            "projectName": "aes_hash"
+            "projectName": "dspic33ak512mps512-aes_hash"
         },
         "ecdsa": {
             "rootFolder": "dsa",
-            "projectName": "ecdsa"
+            "projectName": "dspic33ak512mps512-ecdsa"
         },
         "ecdh": {
             "rootFolder": "ecdh",
-            "projectName": "ecdh"
+            "projectName": "dspic33ak512mps512-ecdh"
         },
         "sha": {
             "rootFolder": "hash",
-            "projectName": "sha"
+            "projectName": "dspic33ak512mps512-sha"
         },
         "mac": {
             "rootFolder": "mac",
-            "projectName": "mac"
+            "projectName": "dspic33ak512mps512-mac"
         },
         "trng": {
             "rootFolder": "trng",
-            "projectName": "trng"
+            "projectName": "dspic33ak512mps512-trng"
         }
     }
 }

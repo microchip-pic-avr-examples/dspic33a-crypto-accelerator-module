@@ -30,8 +30,8 @@ This example application utilizes the Crypto Library that interacts with the Pre
 <img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
-1. Within MPLAB® X IDE, open the hash.x application project in hash/firmware. 
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 61 in hash/sha.X/app_sha.h
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-sha.X` application project. 
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 61 in dspic33ak512mps512-sha.X/app/app_sha.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
