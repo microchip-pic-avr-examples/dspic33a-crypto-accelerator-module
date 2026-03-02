@@ -36,7 +36,6 @@ extern "C" {
 #define CCM_TEST_VECTOR_SIZE    (96u)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
-#define KEY_TYPE_AES192_SIZE    (24UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)
 #define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 

@@ -166,7 +166,7 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
 static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t dataLen,
         uint8_t* key, uint32_t keyLen, uint8_t* initializationVector)
 {
-    unsigned long keyBitLen = keyLen * 8U;
+    unsigned long keyBitLen = keyLen * 8UL;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
     uint8_t encryptedDirectResult[48];
