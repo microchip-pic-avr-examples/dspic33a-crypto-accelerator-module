@@ -105,7 +105,7 @@ static void mac_hmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %u BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
     printHmacTestHeader(testWrapper, keyBitLen, "HMAC (DIRECT)",
                         mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
@@ -138,7 +138,7 @@ static void mac_hmac_step_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %u BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
     printHmacTestHeader(testWrapper, keyBitLen, "HMAC (STEPWISE)",
             mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);

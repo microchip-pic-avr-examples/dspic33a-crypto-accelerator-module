@@ -69,7 +69,7 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", CMAC: %u BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
     printCmacTestHeader(testWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
@@ -100,7 +100,7 @@ static void mac_cmac_step_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", CMAC: %u BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
     printCmacTestHeader(testWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 

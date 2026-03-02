@@ -40,7 +40,7 @@ static uint8_t cmac_128_0_bytes_cmac[] = {
 };
 
 static const TEST_VECTOR cmac_128_0_bytes_vector = {
-    (uint8_t*) 0,
+    (uint8_t*) NULL,
     0,
     (uint8_t*) &cmac_128_0_bytes_key, 
     sizeof(cmac_128_0_bytes_key),
@@ -144,7 +144,7 @@ static uint8_t cmac_192_0_bytes_cmac[] = {
 };
 
 static const TEST_VECTOR cmac_192_0_bytes_vector = {
-    (uint8_t*) 0,
+    (uint8_t*) NULL,
     0,
     (uint8_t*) &cmac_192_0_bytes_key, 
     sizeof(cmac_192_0_bytes_key),
@@ -249,7 +249,7 @@ static uint8_t cmac_256_0_bytes_cmac[] = {
 };
 
 static const TEST_VECTOR cmac_256_0_bytes_vector = {
-    (uint8_t*) 0,
+    (uint8_t*) NULL,
     0,
     (uint8_t*) &cmac_256_0_bytes_key, 
     sizeof(cmac_256_0_bytes_key),
