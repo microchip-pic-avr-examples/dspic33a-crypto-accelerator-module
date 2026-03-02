@@ -47,7 +47,7 @@ static uint8_t hash[] = {
     0xb4, 0x10, 0xff, 0x61, 0xf2, 0x00, 0x15, 0xad
 };
 
-static char curveInformation[] = "P-256";
+static const char curveInformation[] = "P-256";
 
 TEST_VECTOR ecdsa_p256 = {
     (uint8_t *)&privateKey,

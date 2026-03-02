@@ -50,9 +50,9 @@ Microchip or any third party.
 #include "test_vectors/test_vector.h"
 #include "app/app_util.h"
 
-uint8_t signature[P521Length] = {0};
-volatile bool signComplete = false;
-volatile bool verifyComplete = false;
+static uint8_t signature[P521Length] = {0};
+static volatile bool signComplete = false;
+static volatile bool verifyComplete = false;
 
 static void clearCompleteStates(void)
 {
@@ -60,12 +60,12 @@ static void clearCompleteStates(void)
     verifyComplete = false;
 }
 
-void signOperationComplete(void)
+static void signOperationComplete(void)
 {
     signComplete = true;
 }
 
-void verifyOperationComplete(void)
+static void verifyOperationComplete(void)
 {
     verifyComplete = true;
 }
@@ -75,7 +75,7 @@ static void runBlockingHardwareTest(TEST_VECTOR* testVector)
     uint8_t signatureLength = signatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     printTestHeader(testVector->curveInformation, "BLOCKING");
-    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     
     clearCompleteStates();
     ////Crypto Library ECDSA SIGN API***********************************************************************************************************************
@@ -84,7 +84,7 @@ static void runBlockingHardwareTest(TEST_VECTOR* testVector)
     printHexArray(signaturePrint, signature, signatureLength);
     printStatus(status, signingPrint);
     printSplitter();
-    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
+    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
     
     int8_t hashStatus = 0;   
     clearCompleteStates();          
@@ -100,7 +100,7 @@ static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     printTestHeader(testVector->curveInformation, "NON-BLOCKING");
     
-    printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     clearCompleteStates();  
     //Crypto Library ECDSA SIGN Non-Blocking API***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, testVector->privateKeyData, testVector->privateKeyLen, testVector->curveType, SESSION_ID);
@@ -114,7 +114,7 @@ static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
     printStatus(status, signingPrint);
     printSplitter();
     
-    printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
+    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
     clearCompleteStates();
     ////Crypto Library ECDSA VERIFY Non-Blocking API*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify_Start(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, signature, signatureLength, testVector->publicKeyData, testVector->publicKeyLen, testVector->curveType, SESSION_ID);

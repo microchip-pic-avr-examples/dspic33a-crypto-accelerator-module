@@ -47,10 +47,10 @@ Microchip or any third party.
 #define MAG             "\033""[1;35m"
 #define CYAN            "\033""[1;36m"
 #define SESSION_ID      0x1U
-#define P192Length      48
-#define P256Length      64
-#define P384Length      96
-#define P521Length      132
+#define P192Length      48U
+#define P256Length      64U
+#define P384Length      96U
+#define P521Length      132U
 #define signaturePrint  "Signature : \t"
 #define signingPrint    "SIGN"
 #define verifyingPrint  "VERIFY"
