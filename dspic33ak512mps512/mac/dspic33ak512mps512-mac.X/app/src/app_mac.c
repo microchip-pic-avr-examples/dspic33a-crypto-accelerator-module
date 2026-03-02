@@ -87,11 +87,11 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
 }
 
 
-void printHexArray(const char* label, void* data, uint32_t size)
+void printHexArray(const char* label, uint8_t* data, uint32_t size)
 {
     if (size > 0U)
     {
-        const uint8_t *ldata = (uint8_t *) data;
+        const uint8_t *ldata = data;
 
         (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
         (void) printf("\r\n %s  : ", label);

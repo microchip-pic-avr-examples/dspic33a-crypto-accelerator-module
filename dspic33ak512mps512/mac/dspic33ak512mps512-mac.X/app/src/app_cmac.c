@@ -56,9 +56,6 @@ Microchip or any third party.
 #define TEST_SESSION_ID     0x1
 #define MAC_TEST_VECTOR_3   3
 
-// Context for CMAC calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
 static const char* testWrapper = "MAC";
 
 extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
@@ -95,10 +92,12 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 
 static void mac_cmac_step_test(TEST_VECTOR* testVector)
 {
+    // Context for CMAC calculations when running individual steps.
+    // This is too large to put on the stack.
+    static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedCmac[16] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
-
 
     char dataInfo[20];
     (void)sprintf(dataInfo, ", CMAC: %lu BYTES", testVector->expectedMacLen);
