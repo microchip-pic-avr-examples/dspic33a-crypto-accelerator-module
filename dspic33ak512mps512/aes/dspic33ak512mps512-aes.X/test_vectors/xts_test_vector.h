@@ -33,8 +33,8 @@ extern "C" {
 #include <stdint.h>
 
 // Maximum test vector data size.
-#define XTS_TEST_VECTOR_SIZE    (96u)
-#define XTS_TWEAK_SIZE          (16u)
+#define XTS_TEST_VECTOR_SIZE    (96U)
+#define XTS_TWEAK_SIZE          (16U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)

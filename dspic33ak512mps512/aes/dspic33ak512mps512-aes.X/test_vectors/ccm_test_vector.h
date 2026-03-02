@@ -33,7 +33,7 @@ extern "C" {
 #include <stdint.h>
 
 // Maximum test vector data size.
-#define CCM_TEST_VECTOR_SIZE    (96u)
+#define CCM_TEST_VECTOR_SIZE    (96U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)
