@@ -69,7 +69,7 @@ static void mac_gmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", GMAC: %u BYTES", testVector->expectedMacLen);
 
     printGmacTestHeader(testWrapper, keyBitLen, "GMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
@@ -104,7 +104,7 @@ static void mac_gmac_step_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", GMAC: %u BYTES", testVector->expectedMacLen);
 
     printGmacTestHeader(testWrapper, keyBitLen, "GMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
