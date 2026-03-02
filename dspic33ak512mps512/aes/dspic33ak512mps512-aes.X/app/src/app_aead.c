@@ -54,11 +54,6 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID 0x1
 
-// Context for AES calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Aead_AesGcm_ctx aesGcmCtx __attribute__((aligned(4)));
-static st_Crypto_Aead_AesCcm_ctx aesCcmCtx __attribute__((aligned(4)));
-
 static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
         uint8_t* iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
@@ -114,6 +109,10 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
     uint8_t* result, uint8_t* tag)
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
+
+    // Context for AES calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Aead_AesGcm_ctx aesGcmCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
@@ -195,6 +194,10 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
 
+    // Context for AES calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Aead_AesCcm_ctx aesCcmCtx __attribute__((aligned(4)));
+
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
         (void) printf("\r\n\r\n ENCRYPTING...");
@@ -246,7 +249,7 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void checkEncryptionAndTag(uint8_t *text, uint8_t *result, uint32_t length, uint8_t *tag, uint8_t *tagResult, uint32_t tagLength)
+static void checkEncryptionAndTag(const uint8_t *text, const uint8_t *result, uint32_t length, const uint8_t *tag, const uint8_t *tagResult, uint32_t tagLength)
 {
     (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
 
@@ -296,10 +299,10 @@ void aes_aead_gcm_test(void)
     const char* emptyString = "";
 
 #ifdef RUN_ALL_VECTORS
-    TEST_VECTOR *test = get_gcm_test_vectors();
+    GCM_TEST_VECTOR *test = get_gcm_test_vectors();
     uint32_t testCount = get_gcm_test_count();
 #else
-    TEST_VECTOR *test = &get_gcm_test_vectors()[22];
+    GCM_TEST_VECTOR *test = &get_gcm_test_vectors()[22];
     uint32_t testCount = 1;
 #endif
 
@@ -309,13 +312,13 @@ void aes_aead_gcm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keylength * 8UL), testType, test->ptlength, emptyString);
+        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textLength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keylength);
+        printHexArray("Key                  ", test->key, test->keyLength);
 
-        if(test->ivlength != 0UL)
+        if(test->ivLength != 0UL)
         {
-            printHexArray("Initialization Vector", test->iv, test->ivlength);
+            printHexArray("Initialization Vector", test->iv, test->ivLength);
         }
         else
         {
@@ -323,9 +326,9 @@ void aes_aead_gcm_test(void)
             (void) printf("\r\n%s", " Initialization Vector  :  None");
         }
 
-        if(test->aadlength != 0UL)
+        if(test->aadLength != 0UL)
         {
-            printHexArray("Authentication Data  ", test->aad, test->aadlength);
+            printHexArray("Authentication Data  ", test->aad, test->aadLength);
         }
         else
         {
@@ -333,33 +336,33 @@ void aes_aead_gcm_test(void)
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
-        pt = (test->ptlength > 0UL) ? test->pt : NULL;
-        aad = (test->aadlength > 0UL) ? test->aad : NULL;
-        ct = (test->ptlength > 0UL) ? encryptedDirectResult : NULL;
+        pt = (test->textLength > 0UL) ? test->plaintext : NULL;
+        aad = (test->aadLength > 0UL) ? test->aad : NULL;
+        ct = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = aead_gcm_test_direct(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keylength,
-                                      test->iv, test->ivlength, aad, test->aadlength, ct, tagDirectResult);
+        status = aead_gcm_test_direct(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
+                                      test->iv, test->ivLength, aad, test->aadLength, ct, tagDirectResult);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keylength * 8UL), testType, "Encrypt", status);
+            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
         }
         else
         {
-            checkEncryptionAndTag(test->ct, ct, test->ptlength, test->tag, tagDirectResult, test->taglength);
+            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagDirectResult, test->tagLength);
 
-            if (test->ptlength > 0UL)
+            if (test->textLength > 0UL)
             {
-                status = aead_gcm_test_direct(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keylength,
-                                              test->iv, test->ivlength, aad, test->aadlength, decryptedDirectResult, tagDirectResult);
+                status = aead_gcm_test_direct(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
+                                              test->iv, test->ivLength, aad, test->aadLength, decryptedDirectResult, tagDirectResult);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", status);
+                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
                 }
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    printArrayEqualityResult(test->pt, decryptedDirectResult, test->ptlength);
+                    printArrayEqualityResult(test->plaintext, decryptedDirectResult, test->textLength);
                 }
             }
         }
@@ -367,32 +370,32 @@ void aes_aead_gcm_test(void)
         (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
         (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
 
-        ct = (test->ptlength > 0UL) ? encryptedStepsResult : NULL;
+        ct = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
-        statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_ENCRYPT, pt, test->ptlength, test->key, test->keylength,
-                                          test->iv, test->ivlength, aad, test->aadlength, ct, tagStepsResult);
+        statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
+                                          test->iv, test->ivLength, aad, test->aadLength, ct, tagStepsResult);
 
         if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keylength * 8UL), testType, "Encrypt", statusSteps);
+            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", statusSteps);
         }
         else
         {
-            checkEncryptionAndTag(test->ct, ct, test->ptlength, test->tag, tagStepsResult, test->taglength);
+            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagStepsResult, test->tagLength);
 
-            if (test->ptlength > 0UL)
+            if (test->textLength > 0UL)
             {
-                statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_DECRYPT, ct, test->ptlength, test->key, test->keylength,
-                                                  test->iv, test->ivlength, aad, test->aadlength, decryptedStepsResult, tagStepsResult);
+                statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
+                                                  test->iv, test->ivLength, aad, test->aadLength, decryptedStepsResult, tagStepsResult);
 
                 if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", statusSteps);
+                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", statusSteps);
                 }
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    printArrayEqualityResult(test->pt, decryptedStepsResult, test->ptlength);
+                    printArrayEqualityResult(test->plaintext, decryptedStepsResult, test->textLength);
                 }
             }
         }
@@ -404,11 +407,11 @@ void aes_aead_gcm_test(void)
             // Verify the direct and stepwise tests generate the same result.
             (void) printf("\r\n\r\n COMPARING TESTS...");
 
-            if (test->ptlength > 0UL)
+            if (test->textLength > 0UL)
             {
-                printHexArray("Direct Encryption    ", encryptedDirectResult, test->ptlength);
-                printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->ptlength);
-                printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->ptlength);
+                printHexArray("Direct Encryption    ", encryptedDirectResult, test->textLength);
+                printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->textLength);
+                printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->textLength);
             }
 
             printHexArray("Direct Tag           ", tagDirectResult, AES_GCM_TAG_LENGTH);
@@ -426,11 +429,9 @@ void aes_aead_gcm_test(void)
 
 void aes_aead_ccm_test(void)
 {
-    crypto_Aead_Status_E status;
-
-    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE];
-    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE];
-    uint8_t tagResult[AES_CCM_TAG_LENGTH];
+    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
+    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
+    uint8_t tagResult[AES_CCM_TAG_LENGTH] = {0};
 
     const char* testWrapper = "AEAD";
     const char* testType = "CCM";
@@ -445,13 +446,13 @@ void aes_aead_ccm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keylength * 8UL), testType, test->textlength, emptyString);
+        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textLength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keylength);
+        printHexArray("Key                  ", test->key, test->keyLength);
 
-        if(test->noncelength != 0UL)
+        if(test->nonceLength != 0UL)
         {
-            printHexArray("Nonce                ", test->nonce, test->noncelength);
+            printHexArray("Nonce                ", test->nonce, test->nonceLength);
         }
         else
         {
@@ -459,9 +460,9 @@ void aes_aead_ccm_test(void)
             (void) printf("\r\n%s", " Nonce                  :  None");
         }
 
-        if(test->aadlength != 0UL)
+        if(test->aadLength != 0UL)
         {
-            printHexArray("Authentication Data  ", test->aad, test->aadlength);
+            printHexArray("Authentication Data  ", test->aad, test->aadLength);
         }
         else
         {
@@ -469,33 +470,33 @@ void aes_aead_ccm_test(void)
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
-        pt = (test->textlength > 0UL) ? test->pt : NULL;
-        aad = (test->aadlength > 0UL) ? test->aad : NULL;
-        ct = (test->textlength > 0UL) ? encryptedResult : NULL;
+        pt = (test->textLength > 0UL) ? test->plaintext : NULL;
+        aad = (test->aadLength > 0UL) ? test->aad : NULL;
+        ct = (test->textLength > 0UL) ? encryptedResult : NULL;
 
-        status = aead_ccm_test(CRYPTO_CIOP_ENCRYPT, pt, test->textlength, test->key, test->keylength,
-                               test->nonce, test->noncelength, aad, test->aadlength, ct, tagResult, test->taglength);
+        crypto_Aead_Status_E status = aead_ccm_test(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
+                               test->nonce, test->nonceLength, aad, test->aadLength, ct, tagResult, test->tagLength);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printCryptoError((test->keylength * 8UL), testType, "Encrypt", status);
+            printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
         }
         else
         {
-            checkEncryptionAndTag(test->ct, ct, test->textlength, test->tag, tagResult, test->taglength);
+            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagResult, test->tagLength);
 
-            if (test->textlength > 0UL)
+            if (test->textLength > 0UL)
             {
-                status = aead_ccm_test(CRYPTO_CIOP_DECRYPT, ct, test->textlength, test->key, test->keylength,
-                                       test->nonce, test->noncelength, aad, test->aadlength, decryptedResult, tagResult, test->taglength);
+                status = aead_ccm_test(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
+                                       test->nonce, test->nonceLength, aad, test->aadLength, decryptedResult, tagResult, test->tagLength);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
-                    printCryptoError((test->keylength * 8UL), testType, "Decrypt", status);
+                    printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
                 }
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    printArrayEqualityResult(test->pt, decryptedResult, test->textlength);
+                    printArrayEqualityResult(test->plaintext, decryptedResult, test->textLength);
                 }
             }
         }
