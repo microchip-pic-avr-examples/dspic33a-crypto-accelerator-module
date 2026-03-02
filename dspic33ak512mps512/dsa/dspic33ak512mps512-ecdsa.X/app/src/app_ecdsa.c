@@ -127,28 +127,24 @@ static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
     printStatus(status, verifyingPrint);
 }
 
-extern TEST_VECTOR ecdsa_p192;
 static void TEST_ECDSA_p192(void) 
 {    
     runBlockingHardwareTest(&ecdsa_p192);
     runNonBlockingHardwareTest(&ecdsa_p192);
 }
 
-extern TEST_VECTOR ecdsa_p256;
 static void TEST_ECDSA_p256(void) 
 {    
     runBlockingHardwareTest(&ecdsa_p256);
     runNonBlockingHardwareTest(&ecdsa_p256);
 }
 
-extern TEST_VECTOR ecdsa_p384;
 static void TEST_ECDSA_p384(void) 
 {
     runBlockingHardwareTest(&ecdsa_p384);
     runNonBlockingHardwareTest(&ecdsa_p384);
 }
 
-extern TEST_VECTOR ecdsa_p521;
 static void TEST_ECDSA_p521(void) 
 {        
     runBlockingHardwareTest(&ecdsa_p521);
