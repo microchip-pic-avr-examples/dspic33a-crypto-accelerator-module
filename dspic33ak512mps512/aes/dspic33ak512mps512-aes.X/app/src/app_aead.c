@@ -286,12 +286,12 @@ void aes_aead_gcm_test(void)
     crypto_Aead_Status_E status;
     crypto_Aead_Status_E statusSteps;
 
-    uint8_t encryptedDirectResult[GCM_TEST_VECTOR_SZ];
-    uint8_t decryptedDirectResult[GCM_TEST_VECTOR_SZ];
+    uint8_t encryptedDirectResult[GCM_TEST_VECTOR_SIZE];
+    uint8_t decryptedDirectResult[GCM_TEST_VECTOR_SIZE];
     uint8_t tagDirectResult[AES_GCM_TAG_LENGTH];
 
-    uint8_t encryptedStepsResult[GCM_TEST_VECTOR_SZ];
-    uint8_t decryptedStepsResult[GCM_TEST_VECTOR_SZ];
+    uint8_t encryptedStepsResult[GCM_TEST_VECTOR_SIZE];
+    uint8_t decryptedStepsResult[GCM_TEST_VECTOR_SIZE];
     uint8_t tagStepsResult[AES_GCM_TAG_LENGTH];
 
     const char* testWrapper = "AEAD";

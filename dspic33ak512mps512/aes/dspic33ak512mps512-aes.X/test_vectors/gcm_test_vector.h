@@ -33,7 +33,7 @@ extern "C" {
 #include <stdint.h>
 
 // Maximum test vector data size.
-#define GCM_TEST_VECTOR_SZ      (96u)
+#define GCM_TEST_VECTOR_SIZE    (96U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
 #define KEY_TYPE_AES192_SIZE    (24UL)

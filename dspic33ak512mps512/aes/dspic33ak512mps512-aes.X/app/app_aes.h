@@ -71,7 +71,7 @@ extern "C" {
 #define RUN_AEAD_TEST
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
-//#define RUN_ALL_VECTORS
+// #define RUN_ALL_VECTORS
 
 // *****************************************************************************
 // *****************************************************************************
