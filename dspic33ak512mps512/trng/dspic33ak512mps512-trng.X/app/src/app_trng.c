@@ -65,7 +65,7 @@ static void trngRun(uint8_t* randArray, uint32_t randLen)
     const char * caption = "Random";
     
     (void) printf(MAG"\r\n\r\n *********************************************************************************************"RESET_COLOR);
-    (void) printf(CYAN"\r\n *************************************** TRNG Size %u ***************************************"RESET_COLOR, randLen);
+    (void) printf(CYAN"\r\n *************************************** TRNG Size %lu ***************************************"RESET_COLOR, (unsigned long)randLen);
     (void) printf(MAG"\r\n *********************************************************************************************"RESET_COLOR);
     
     (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randArray, randLen, NULL, 0, 1);
