@@ -52,7 +52,11 @@ extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
 extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
 
 #define NUMBER_OF_HMAC_VECTORS 2
+extern TEST_VECTOR hmac_1_test_vectors[NUMBER_OF_HMAC_VECTORS];
+extern TEST_VECTOR hmac_224_test_vectors[NUMBER_OF_HMAC_VECTORS];
 extern TEST_VECTOR hmac_256_test_vectors[NUMBER_OF_HMAC_VECTORS];
+extern TEST_VECTOR hmac_384_test_vectors[NUMBER_OF_HMAC_VECTORS];
+extern TEST_VECTOR hmac_512_test_vectors[NUMBER_OF_HMAC_VECTORS];
 
 #define NUMBER_OF_GMAC_VECTORS 4
 extern TEST_VECTOR gmac_test_vectors[NUMBER_OF_GMAC_VECTORS];
