@@ -1,5 +1,5 @@
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -47,12 +47,12 @@ static uint8_t hash_p192[] = {
 static const char curveInformation_p192[] = "P-192";
 
 TEST_VECTOR ecdsa_p192 = {
-    (uint8_t *)&privateKey_p192,
+    privateKey_p192,
     sizeof(privateKey_p192),
-    (uint8_t *)&publicKey_p192,
+    publicKey_p192,
     sizeof(publicKey_p192),
-    (uint8_t *)&hash_p192,
+    hash_p192,
     sizeof(hash_p192),
-    (const char*) curveInformation_p192,
+    curveInformation_p192,
     CRYPTO_ECC_CURVE_P192,
 };
