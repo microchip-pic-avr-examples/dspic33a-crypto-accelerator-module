@@ -30,16 +30,14 @@ Microchip or any third party.
  https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/secure-hashing
 */ 
 
-
 // SHA-256 0 Bytes Test Vector
-static uint8_t sha_256_0_bytes[0];
 static uint8_t sha_256_0_bytes_digest[SHA256_DIGEST_LEN_BYTES] = {
     0xE3, 0xB0, 0xC4, 0x42, 0x98, 0xFC, 0x1C, 0x14, 0x9A, 0xFB, 0xF4, 0xC8, 0x99, 0x6F, 0xB9, 0x24,
     0x27, 0xAE, 0x41, 0xE4, 0x64, 0x9B, 0x93, 0x4C, 0xA4, 0x95, 0x99, 0x1B, 0x78, 0x52, 0xB8, 0x55
 };
 static const TEST_VECTOR sha_256_0_bytes_vector = {
-    (uint8_t*) sha_256_0_bytes, 
-    sizeof(sha_256_0_bytes),
+    (uint8_t[]) {},
+    0U,
     (uint8_t*) &sha_256_0_bytes_digest
 };
 
