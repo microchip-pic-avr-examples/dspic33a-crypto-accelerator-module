@@ -56,11 +56,7 @@ Microchip or any third party.
 #define TEST_SESSION_ID     0x1
 #define MAC_TEST_VECTOR_3   3
 
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
+static const char* cmacTestWrapper = "MAC";
 
 static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 {
@@ -71,7 +67,7 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(cmacTestWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
@@ -102,7 +98,7 @@ static void mac_cmac_step_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(cmacTestWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);

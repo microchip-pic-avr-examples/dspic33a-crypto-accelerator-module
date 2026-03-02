@@ -57,10 +57,7 @@ Microchip or any third party.
 #define TEST_SESSION_ID     0x1
 #define MAC_TEST_VECTOR_0   0
 
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR gmac_test_vectors[NUMBER_OF_GMAC_VECTORS];
-
+static const char* gmacTestWrapper = "MAC";
 
 static void mac_gmac_direct_test(TEST_VECTOR* testVector)
 {
@@ -71,7 +68,7 @@ static void mac_gmac_direct_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", GMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printGmacTestHeader(testWrapper, keyBitLen, "GMAC (DIRECT)", testVector->inputDataLen, dataInfo);
+    printGmacTestHeader(gmacTestWrapper, keyBitLen, "GMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
@@ -106,7 +103,7 @@ static void mac_gmac_step_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", GMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printGmacTestHeader(testWrapper, keyBitLen, "GMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
+    printGmacTestHeader(gmacTestWrapper, keyBitLen, "GMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);

@@ -57,13 +57,7 @@ Microchip or any third party.
 #define TEST_SESSION_ID     0x1
 #define MAC_TEST_VECTOR_0   0
 
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR hmac_1_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_224_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_256_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_384_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_512_test_vectors[NUMBER_OF_HMAC_VECTORS];
+static const char* hmacTestWrapper = "MAC";
 
 static const char *mac_hmac_get_algorithm_string(crypto_Hash_Algo_E hashAlgorithm)
 {
@@ -107,7 +101,7 @@ static void mac_hmac_direct_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printHmacTestHeader(testWrapper, keyBitLen, "HMAC (DIRECT)",
+    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (DIRECT)",
                         mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
@@ -140,7 +134,7 @@ static void mac_hmac_step_test(TEST_VECTOR* testVector)
     char dataInfo[20];
     (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printHmacTestHeader(testWrapper, keyBitLen, "HMAC (STEPWISE)",
+    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (STEPWISE)",
             mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
