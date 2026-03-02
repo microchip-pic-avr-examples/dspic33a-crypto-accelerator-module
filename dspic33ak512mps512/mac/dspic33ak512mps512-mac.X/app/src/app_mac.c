@@ -112,7 +112,7 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
 void printCmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %u BYTES%s", wrapperType, keyBitLen, testType, dataLen, additionalInfo);
+    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
@@ -134,7 +134,7 @@ void printCmacCryptoError(unsigned long keyBitLen, const char* testType, const c
 void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, const char *shaType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s %s SHA-%s TEST - KEY: %lu BITS, DATA: %u BYTES%s", wrapperType, testType, shaType, keyBitLen, dataLen, additionalInfo);
+    (void) sprintf(header, " %s %s SHA-%s TEST - KEY: %lu BITS, DATA: %lu BYTES%s", wrapperType, testType, shaType, keyBitLen, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
@@ -156,7 +156,7 @@ void printHmacCryptoError(const char* testType, const char* description, int sta
 void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %u BYTES%s", wrapperType, keyBitLen, testType, dataLen, additionalInfo);
+    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
