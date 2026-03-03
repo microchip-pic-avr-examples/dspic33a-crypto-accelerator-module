@@ -35,6 +35,12 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
+/* cppcheck-suppress misra-c2012-21.6
+* 
+*  (Rule 21.6) Required: The standard library input/output functions shall not be used
+* 
+*  Reasoning: This demo uses printf to print out information to a terminal.
+*/
 #include <stdio.h>
 #include <xc.h>
 #include "app/app_util.h"
