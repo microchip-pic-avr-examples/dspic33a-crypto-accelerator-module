@@ -53,11 +53,6 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID 0x1
 
-// Context for AES calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
-
-
 static crypto_Sym_Status_E aes_sym_xts_test_direct(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
         uint8_t* tweak, uint8_t* result)
@@ -110,6 +105,10 @@ static crypto_Sym_Status_E aes_sym_xts_test_steps(crypto_CipherOper_E encrypt,
         uint8_t* tweak, uint8_t* result)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
+
+    // Context for AES calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
@@ -186,8 +185,6 @@ static void checkEncryption(uint8_t *text, uint8_t *result, uint32_t length)
 
 void aes_sym_xts_test(void)
 {
-    crypto_Sym_Status_E status;
-
     uint8_t encryptedDirectResult[XTS_TEST_VECTOR_SIZE];
     uint8_t decryptedDirectResult[XTS_TEST_VECTOR_SIZE];
 
@@ -210,8 +207,8 @@ void aes_sym_xts_test(void)
         printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textLength, "");
 
         printHexArray("Key                  ", test->key, test->keyLength);
-        printHexArray("Key2                 ", &test->key2, test->keyLength);
-        printHexArray("Tweak                ", &test->tweak, XTS_TWEAK_SIZE);
+        printHexArray("Key2                 ", test->key2, test->keyLength);
+        printHexArray("Tweak                ", test->tweak, XTS_TWEAK_SIZE);
 
         (void)memcpy(xtsKey, test->key, test->keyLength);
         (void)memcpy(&xtsKey[test->keyLength], test->key2, test->keyLength);
@@ -219,7 +216,7 @@ void aes_sym_xts_test(void)
         plaintext = (test->textLength > 0UL) ? test->plaintext : NULL;
         ciphertext = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = aes_sym_xts_test_direct(CRYPTO_CIOP_ENCRYPT, plaintext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, encryptedDirectResult);
+        crypto_Sym_Status_E status = aes_sym_xts_test_direct(CRYPTO_CIOP_ENCRYPT, plaintext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, encryptedDirectResult);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
             printCryptoError((test->keyLength * 8UL), testType, "Encrypt", status);
@@ -230,7 +227,7 @@ void aes_sym_xts_test(void)
 
             if (test->textLength > 0UL)
             {
-                status = aes_sym_xts_test_direct(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedDirectResult);
+                status = aes_sym_xts_test_direct(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, decryptedDirectResult);
                 if (status != CRYPTO_SYM_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
@@ -259,7 +256,7 @@ void aes_sym_xts_test(void)
 
             if (test->textLength > 0UL)
             {
-                status = aes_sym_xts_test_steps(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2), test->tweak, decryptedStepsResult);
+                status = aes_sym_xts_test_steps(CRYPTO_CIOP_DECRYPT, ciphertext, test->textLength, xtsKey, (test->keyLength * 2U), test->tweak, decryptedStepsResult);
                 if (status != CRYPTO_SYM_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);

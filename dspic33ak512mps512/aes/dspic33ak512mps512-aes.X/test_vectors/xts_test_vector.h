@@ -33,19 +33,19 @@ extern "C" {
 #include <stdint.h>
 
 // Maximum test vector data size.
-#define XTS_TEST_VECTOR_SIZE    (96u)
-#define XTS_TWEAK_SIZE          (16u)
+#define XTS_TEST_VECTOR_SIZE    (96U)
+#define XTS_TWEAK_SIZE          (16U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)
 #define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 
 typedef struct XTS_TEST_VECTOR {
-    uint8_t key[KEY_TYPE_MAX_SIZE];
-    uint8_t key2[KEY_TYPE_MAX_SIZE];
-    uint8_t plaintext[XTS_TEST_VECTOR_SIZE];
-    uint8_t ciphertext[XTS_TEST_VECTOR_SIZE];
-    uint8_t tweak[XTS_TWEAK_SIZE];
+    uint8_t* key;
+    uint8_t* key2;
+    uint8_t* plaintext;
+    uint8_t* ciphertext;
+    uint8_t* tweak;
 
     uint32_t keyLength;
     uint32_t textLength;
