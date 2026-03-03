@@ -36,8 +36,8 @@ static uint8_t sha_224_0_bytes_digest[SHA224_DIGEST_LEN_BYTES] = {
     0x15, 0xA2, 0xB0, 0x1F, 0x82, 0x8E, 0xA6, 0x2A, 0xC5, 0xB3, 0xE4, 0x2F    
 };
 static const TEST_VECTOR sha_224_0_bytes_vector = {
-    (uint8_t*) 0, 
-    0,
+    (uint8_t[]) {},
+    0U,
     (uint8_t*) &sha_224_0_bytes_digest
 };
 
