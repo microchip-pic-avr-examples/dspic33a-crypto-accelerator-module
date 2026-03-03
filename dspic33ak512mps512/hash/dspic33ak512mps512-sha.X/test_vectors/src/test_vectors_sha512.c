@@ -38,8 +38,8 @@ static uint8_t sha_512_0_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x63, 0xB9, 0x31, 0xBD, 0x47, 0x41, 0x7A, 0x81, 0xA5, 0x38, 0x32, 0x7A, 0xF9, 0x27, 0xDA, 0x3E
 };
 static const TEST_VECTOR sha_512_0_bytes_vector = {
-    (uint8_t*) 0, 
-    0,
+    (uint8_t[]) {},
+    0U,
     (uint8_t*) &sha_512_0_bytes_digest
 };
 
