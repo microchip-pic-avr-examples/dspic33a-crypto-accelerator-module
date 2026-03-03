@@ -9,6 +9,7 @@ data: {
     crypto_aead_cam05346_wrapper_h_ftl_flag: true,
     crypto_rng_cam05346_wrapper_h_ftl_flag: true,
     crypto_kas_cam05346_wrapper_h_ftl_flag:true,
+    crypto_mac_cam05346_wrapper_h_ftl_flag:true,
 	CRYPTO_HW_RNG_TRNG: true,
     driver_defines: "HAVE_CRYPTO_HW_CAM_05346_DRIVER, \
 		HAVE_CRYPTO_HW_TRNG_05346_DRIVER, \
