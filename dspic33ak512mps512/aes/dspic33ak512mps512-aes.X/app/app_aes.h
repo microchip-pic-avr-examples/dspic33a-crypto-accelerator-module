@@ -57,7 +57,6 @@ extern "C" {
 #define RESET_COLOR "\x1B""[0m"
 #define RED "\x1B""[1;31m"
 #define GREEN "\x1B""[1;32m"
-#define YELLOW "\x1B""[1;33m"
 #define BLUE "\x1B""[1;34m"
 #define MAG "\x1B""[1;35m"
 #define CYAN "\x1B""[1;36m"
@@ -72,7 +71,7 @@ extern "C" {
 #define RUN_AEAD_TEST
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
-//#define RUN_ALL_VECTORS
+// #define RUN_ALL_VECTORS
 
 // *****************************************************************************
 // *****************************************************************************
@@ -84,7 +83,7 @@ uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
 
 void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
 
-void printHexArray(const char* label, void* data, uint32_t size);
+void printHexArray(const char* label, uint8_t* data, uint32_t size);
 
 void printTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* dataInfo);
 

@@ -72,11 +72,6 @@ static uint8_t keyData[32] = {
 
 #define TEST_SESSION_ID 0x1
 
-// Context for AES calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
-
-
 static crypto_Sym_Status_E aes_sym_test_direct(crypto_CipherOper_E encrypt, crypto_Sym_OpModes_E opMode,
         uint8_t* data, uint32_t dataLen, uint8_t* key, uint32_t keyLen,
         uint8_t* result, uint8_t* initializationVector)
@@ -121,6 +116,10 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
         uint8_t* result, uint8_t* initializationVector)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
+
+    // Context for AES calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
     {
@@ -167,7 +166,7 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
 static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t dataLen,
         uint8_t* key, uint32_t keyLen, uint8_t* initializationVector)
 {
-    unsigned long keyBitLen = keyLen * 8U;
+    unsigned long keyBitLen = keyLen * 8UL;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
     uint8_t encryptedDirectResult[48];
@@ -179,7 +178,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
     const char* testWrapper = "SYMMETRIC";
     const char* testType = "???";
     const char* emptyString = "";
-    
+
     switch(opMode)
     {
         case CRYPTO_SYM_OPMODE_ECB:
