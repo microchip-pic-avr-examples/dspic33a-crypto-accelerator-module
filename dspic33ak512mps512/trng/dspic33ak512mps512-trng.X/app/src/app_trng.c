@@ -45,16 +45,14 @@ Microchip or any third party.
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
 
-static const char * caption = "Random";
-
-static inline void printHexArray(const char* label, void* Data, uint32_t size) 
+static inline void printHexArray(const char* label, uint8_t* Data, uint32_t size) 
 {
     (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
     const uint8_t *ldata = (uint8_t *) Data;
     (void) printf("\r\n  %s   :  ", label);
     for (uint32_t i = 0; i < size; i++) 
     {
-        if (i % 16U == 0U && i != 0U) 
+        if (((i % 16U) == 0U) && (i != 0U)) 
         {
             (void) printf("\r\n              ");
         }
@@ -64,8 +62,10 @@ static inline void printHexArray(const char* label, void* Data, uint32_t size)
 
 static void trngRun(uint8_t* randArray, uint32_t randLen)
 {
+    const char * caption = "Random";
+    
     (void) printf(MAG"\r\n\r\n *********************************************************************************************"RESET_COLOR);
-    (void) printf(CYAN"\r\n *************************************** TRNG Size %ld ***************************************"RESET_COLOR, randLen);
+    (void) printf(CYAN"\r\n *************************************** TRNG Size %lu ***************************************"RESET_COLOR, (unsigned long)randLen);
     (void) printf(MAG"\r\n *********************************************************************************************"RESET_COLOR);
     
     (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randArray, randLen, NULL, 0, 1);
