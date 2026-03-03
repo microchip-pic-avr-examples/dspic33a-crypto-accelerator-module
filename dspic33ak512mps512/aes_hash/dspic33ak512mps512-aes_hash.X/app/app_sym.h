@@ -45,7 +45,32 @@ extern "C" {
 #endif
 
 #include "app_aes_hash.h"
+#include "test_vectors/sym_test_vector.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+// Maximum size of the result data.
+#define DATA_RESULT_SIZE    (48U)
+
+typedef struct SYM_TEST_CONTEXT {
+    // Pointer to current test vector data.
+    SYM_TEST_VECTOR *           test;
+
+    // Contains the data result.
+    uint8_t                 dataResult[DATA_RESULT_SIZE];
+
+    // The test mode (encrypt/decrypt).
+    TEST_MODE               testMode;
+
+    // The symmetric encryption type.
+    crypto_Sym_OpModes_E    opMode;
+
+} SYM_TEST_CONTEXT;
 
 // *****************************************************************************
 // *****************************************************************************

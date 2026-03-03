@@ -74,86 +74,86 @@ static uint8_t ctdata_256_48bytes[48] = {0xc7, 0x32, 0x56, 0x87, 0x0c, 0xc2, 0xf
                                          0x76, 0x91, 0x2a, 0x12, 0x8b, 0xc1, 0xf7, 0x7d, 0x72, 0xcd, 0xeb, 0xbf, 0x27, 0x00, 0x44, 0xb7,
                                          0xa4, 0x3c, 0xee, 0xd2, 0x90, 0x25, 0xe1, 0xe8, 0xbe, 0x21, 0x1f, 0xa3, 0xc3, 0xed, 0x00, 0x2d};
 
-static const TEST_VECTOR xts_16byte = {
+static const SYM_TEST_VECTOR xts_16byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_16bytes,
     ctdata_16bytes,
     16,
     key_16bytes,
-    CRYPTO_AESKEYSIZE_128 * 2UL,
+    (uint32_t) CRYPTO_AESKEYSIZE_128 * 2UL,
     tweak_16bytes,
     TWEAK_SIZE,
     NULL,
     0
 };
 
-static const TEST_VECTOR xts_25byte = {
+static const SYM_TEST_VECTOR xts_25byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_25bytes,
     ctdata_25bytes,
     25,
     key_25bytes,
-    CRYPTO_AESKEYSIZE_128 * 2UL,
+    (uint32_t) CRYPTO_AESKEYSIZE_128 * 2UL,
     tweak_25bytes,
     TWEAK_SIZE,
     NULL,
     0
 };
 
-static const TEST_VECTOR xts_32byte = {
+static const SYM_TEST_VECTOR xts_32byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_32bytes,
     ctdata_32bytes,
     32,
     key_32bytes,
-    CRYPTO_AESKEYSIZE_128 * 2UL,
+    (uint32_t) CRYPTO_AESKEYSIZE_128 * 2UL,
     tweak_32bytes,
     TWEAK_SIZE,
     NULL,
     0
 };
 
-static const TEST_VECTOR xts_256_32byte = {
+static const SYM_TEST_VECTOR xts_256_32byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_256_32bytes,
     ctdata_256_32bytes,
     32,
     key_256_32bytes,
-    CRYPTO_AESKEYSIZE_256 * 2UL,
+    (uint32_t) CRYPTO_AESKEYSIZE_256 * 2UL,
     tweak_256_32bytes,
     TWEAK_SIZE,
     NULL,
     0
 };
 
-static const TEST_VECTOR xts_256_48byte = {
+static const SYM_TEST_VECTOR xts_256_48byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_256_48bytes,
     ctdata_256_48bytes,
     48,
     key_256_48bytes,
-    CRYPTO_AESKEYSIZE_256 * 2UL,
+    (uint32_t) CRYPTO_AESKEYSIZE_256 * 2UL,
     tweak_256_48bytes,
     TWEAK_SIZE,
     NULL,
     0
 };
 
-TEST_VECTOR xts_test_vectors[] = {
-    xts_16byte,
-    xts_25byte,
-    xts_32byte,
-    xts_256_32byte,
-    xts_256_48byte,
+static SYM_TEST_VECTOR xts_test_vectors[5] = {
+    [0] = xts_16byte,
+    [1] = xts_25byte,
+    [2] = xts_32byte,
+    [3] = xts_256_32byte,
+    [4] = xts_256_48byte,
 };
 
 
-TEST_VECTOR * get_xts_test_vectors(void)
+SYM_TEST_VECTOR * get_xts_test_vectors(void)
 {
     // Set test IDs.
     for (uint32_t i = 0; i < get_xts_test_vector_count(); i++)

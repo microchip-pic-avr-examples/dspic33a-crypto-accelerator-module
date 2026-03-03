@@ -48,38 +48,8 @@ Microchip or any third party.
 #include "app/app_aes_hash.h"
 #include "app/app_sha.h"
 
-#include "test_vectors/test_vectors_sha512.h"
-
 // Only one test context at a time is supported.
 #define TEST_SESSION_ID     (0x1)
-
-
-/**
- * @brief test context data for AES symmetric tests.
- */
-typedef struct SYM_TEST_CONTEXT {
-    // Pointer to current test vector data.
-    TEST_VECTOR *           test;
-
-    // Contains the data result.
-    uint8_t                 dataResult[SHA512_DIGEST_LEN_BYTES];
-
-    // The test mode (hash).
-    TEST_MODE               testMode;
-
-    // The hash algorithm type.
-    crypto_Hash_Algo_E      algorithm;
-
-    // The size of the hash data to use each time the hash is executed.
-    uint16_t                blockSize;
-
-    // The number of bytes hashed.
-    uint16_t                bytesHashed;
-
-    // The length of the resulting digest.
-    uint32_t                digestLen;
-
-} HASH_TEST_CONTEXT;
 
 // The SHA hash context.
 static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
@@ -145,14 +115,20 @@ static const char *getTestOpMode(crypto_Hash_Algo_E algorithm)
  */
 static TEST_RESULT sha_hash_test_init(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    HASH_TEST_VECTOR *test = testContext->test;
 
     crypto_Hash_Status_E status = CRYPTO_HASH_ERROR_NOTSUPPTED;
     TEST_RESULT result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s Test %ld", getTestMode(testContext->testMode), test->id);
+    (void) printf(BLUE "\r\n\r\n %s Test %lu", getTestMode(testContext->testMode), (unsigned long) test->id);
 
     printSeparator(BLUE, '-');
     printHexArray("Data (Input)", test->inputData, test->inputDataLength);
@@ -178,8 +154,14 @@ static TEST_RESULT sha_hash_test_init(void *context)
  */
 static TEST_RESULT sha_hash_test_hash(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    HASH_TEST_VECTOR *test = testContext->test;
     uint32_t bytesLeft = test->inputDataLength - testContext->bytesHashed;
     uint32_t dataLength = (bytesLeft >= testContext->blockSize) ? testContext->blockSize : bytesLeft;
 
@@ -206,8 +188,14 @@ static TEST_RESULT sha_hash_test_hash(void *context)
  */
 static TEST_RESULT sha_hash_test_final(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    HASH_TEST_VECTOR *test = testContext->test;
 
     crypto_Hash_Status_E status = CRYPTO_HASH_ERROR_NOTSUPPTED;
     TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
@@ -256,29 +244,26 @@ static TEST_RESULT sha_hash_test_final(void *context)
 /**
  * @brief Defines the states for a HASH test.
  */
-typedef enum HASH_TEST_STEPS {
+enum {
     HASH_TEST_STEP_INIT = 0,
     HASH_TEST_STEP_HASH = 1,
     HASH_TEST_STEP_FINAL = 2,
     HASH_TEST_STEP_NUMBER_OF_STEPS
-} HASH_TEST_STEPS;
-
-/**
- * @brief Defines the state functions for a HASH test.
- */
-TEST_STATE_FN hash_test_states[] =
-{
-    sha_hash_test_init,
-    sha_hash_test_hash,
-    sha_hash_test_final,
 };
-
 
 TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Algo_E algorithm, uint32_t blockSize)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context->testContext;
     TEST_RESULT result = TEST_RESULT_SUCCESS;
 
     (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    context->testContext = testContext;
 
     switch (algorithm)
     {
@@ -299,6 +284,13 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
 
     if (TEST_RESULT_SUCCESS == result)
     {
+        static TEST_STATE_FN hash_test_states[] =
+        {
+            sha_hash_test_init,
+            sha_hash_test_hash,
+            sha_hash_test_final,
+        };
+
         context->states = hash_test_states;
         context->testMode = mode;
 
@@ -306,14 +298,20 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
         context->stepCount = sizeof(hash_test_states) / sizeof(hash_test_states[0]);
         context->step = HASH_TEST_STEP_INIT;
 
-        HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context->testContext;
         testContext->testMode = context->testMode;
         testContext->algorithm = algorithm;
         testContext->blockSize = blockSize;
         testContext->digestLen = getDigestLength(algorithm);
 
+        /* cppcheck-suppress misra-c2012-11.5
+         *
+         *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+         *
+         *  Reasoning: A generic pointer allows support for various algorithm test context types.
+         */
+        HASH_TEST_VECTOR *tests = (HASH_TEST_VECTOR *)context->tests;
+
         // Start at the first test.
-        TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
         testContext->test = &tests[context->test];
     }
 
@@ -323,6 +321,12 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
 
 TEST_RESULT hash_test_advance(TEST_CONTEXT *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     HASH_TEST_CONTEXT *testContext = (HASH_TEST_CONTEXT *)context->testContext;
 
     if (context->test < context->testCount)
@@ -363,7 +367,13 @@ TEST_RESULT hash_test_advance(TEST_CONTEXT *context)
 
                     testContext->bytesHashed = 0;
 
-                    TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
+                    /* cppcheck-suppress misra-c2012-11.5
+                     *
+                     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+                     *
+                     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+                     */
+                    HASH_TEST_VECTOR *tests = (HASH_TEST_VECTOR *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

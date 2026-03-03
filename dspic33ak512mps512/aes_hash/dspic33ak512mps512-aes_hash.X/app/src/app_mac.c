@@ -48,45 +48,20 @@ Microchip or any third party.
 #include "app/app_aes_hash.h"
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 #include "crypto/common_crypto/crypto_common.h"
-#include "test_vectors/mac_test_vector.h"
 #include "app/app_mac.h"
 
 // Only one test context at a time is supported.
 #define TEST_SESSION_ID         (0x1)
 
-// Maximum size of the CMAC.
-#define CMAC_RESULT_SIZE        (16U)
-
-
-/**
- * @brief test context data for AES CMAC tests.
- */
-typedef struct AES_CMAC_TEST_CONTEXT {
-    // Pointer to current test vector data.
-    TEST_VECTOR *   test;
-
-    // Contains the data result.
-    uint8_t         dataResult[CMAC_RESULT_SIZE];
-
-    // The test mode (encrypt/decrypt).
-    TEST_MODE       testMode;
-
-    // The CMAC test operation mode.
-    MAC_OPER_MODE   opMode;
-
-} AES_CMAC_TEST_CONTEXT;
-
-
 // Context for CMAC calculations.
 static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
-
 
 /**
  * @brief Get the test operation mode string based on the mode.
  * @param opMode The MAC operations mode.
  * @return Pointer to string.
  */
-static const char *getTestOpMode(MAC_OPER_MODE opMode)
+static const char *getMacTestOpMode(MAC_OPER_MODE opMode)
 {
     const char* opModeStr = "???";
 
@@ -117,14 +92,20 @@ static const char *getTestOpMode(MAC_OPER_MODE opMode)
  */
 static TEST_RESULT aes_cmac_test_init(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    MAC_TEST_VECTOR *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     TEST_RESULT result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s %s Test %ld", getTestOpMode(testContext->opMode), getTestMode(testContext->testMode), test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu", getMacTestOpMode(testContext->opMode), getTestMode(testContext->testMode), (unsigned long) test->id);
 
     printSeparator(BLUE, '-');
     printHexArray("Key", test->inputKey, test->inputKeyLength);
@@ -137,7 +118,7 @@ static TEST_RESULT aes_cmac_test_init(void *context)
     result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("INITIALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("INITIALIZING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
     printCryptoResult(result, status);
 
     return result;
@@ -150,14 +131,20 @@ static TEST_RESULT aes_cmac_test_init(void *context)
  */
 static TEST_RESULT aes_cmac_test_cipher(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    MAC_TEST_VECTOR *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     TEST_RESULT result;
 
     (void) printf(MAG);
-    printOperationStep("CIPHERING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("CIPHERING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
 
     status = Crypto_Mac_AesCmac_Cipher(&macCtx, test->inputData, test->inputDataLength);
     result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
@@ -175,14 +162,20 @@ static TEST_RESULT aes_cmac_test_cipher(void *context)
  */
 static TEST_RESULT aes_cmac_test_final(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    MAC_TEST_VECTOR *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("FINALIZING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
 
     status = Crypto_Mac_AesCmac_Final(&macCtx, testContext->dataResult, test->expectedMacLength);
     result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
@@ -198,7 +191,7 @@ static TEST_RESULT aes_cmac_test_final(void *context)
         printSeparator(BLUE, '-');
 #endif
         (void) printf(MAG);
-        printOperationStep("VERIFYING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+        printOperationStep("VERIFYING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
 
         if (true == checkArrayEquality(testContext->dataResult, test->expectedMac, test->expectedMacLength))
         {
@@ -227,23 +220,12 @@ static TEST_RESULT aes_cmac_test_final(void *context)
 /**
  * @brief Defines the states for a AES CMAC test.
  */
-typedef enum AES_CMAC_TEST_STEPS {
+enum {
     AES_CMAC_TEST_STEP_INIT = 0,
     AES_CMAC_TEST_STEP_CIPHER = 1,
     AES_CMAC_TEST_STEP_FINAL = 2,
     AES_CMAC_TEST_STEP_NUMBER_OF_STEPS
-} AES_CMAC_TEST_STEPS;
-
-/**
- * @brief Defines the state functions for an AES CMAC test.
- */
-static TEST_STATE_FN aes_cmac_test_states[] =
-{
-    aes_cmac_test_init,
-    aes_cmac_test_cipher,
-    aes_cmac_test_final,
 };
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -253,10 +235,24 @@ static TEST_STATE_FN aes_cmac_test_states[] =
 
 TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OPER_MODE opMode)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
     TEST_RESULT result = TEST_RESULT_SUCCESS;
 
+    static TEST_STATE_FN aes_cmac_test_states[] =
+    {
+        aes_cmac_test_init,
+        aes_cmac_test_cipher,
+        aes_cmac_test_final,
+    };
+
     (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    context->testContext = testContext;
 
     switch (opMode)
     {
@@ -286,8 +282,15 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
         context->test = 0;
         context->step = 0;
 
+        /* cppcheck-suppress misra-c2012-11.5
+         *
+         *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+         *
+         *  Reasoning: A generic pointer allows support for various algorithm test context types.
+         */
+        MAC_TEST_VECTOR *tests = (MAC_TEST_VECTOR *)context->tests;
+
         // Start at the first test.
-        TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
         testContext->test = &tests[context->test];
     }
 
@@ -297,6 +300,12 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
 
 TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
 
     if (context->test < context->testCount)
@@ -331,7 +340,13 @@ TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
                 {
                     context->step = AES_CMAC_TEST_STEP_INIT;
 
-                    TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
+                    /* cppcheck-suppress misra-c2012-11.5
+                     *
+                     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+                     *
+                     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+                     */
+                    MAC_TEST_VECTOR *tests = (MAC_TEST_VECTOR *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

@@ -39,14 +39,12 @@ extern "C" {
 #define AEAD_TEST_VECTOR_SZ     (96U)
 
 #define KEY_TYPE_AES128_SIZE    (16UL)
-#define KEY_TYPE_AES192_SIZE    (24UL)
 #define KEY_TYPE_AES256_SIZE    (32UL)
-#define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 
 #define AES_AEAD_IV_LENGTH      (12UL)
 #define AES_AEAD_TAG_LENGTH     (16UL)
 
-typedef struct TEST_VECTOR {
+typedef struct AEAD_TEST_VECTOR {
     uint32_t    id;
 
     uint8_t *   inputKey;
@@ -64,13 +62,13 @@ typedef struct TEST_VECTOR {
 
     uint8_t *   authTag;
     uint32_t    authTagLength;
-} TEST_VECTOR;
+} AEAD_TEST_VECTOR;
 
 
-TEST_VECTOR * get_gcm_test_vectors(void);
+AEAD_TEST_VECTOR * get_gcm_test_vectors(void);
 uint32_t get_gcm_test_vector_count(void);
 
-TEST_VECTOR * get_ccm_test_vectors(void);
+AEAD_TEST_VECTOR * get_ccm_test_vectors(void);
 uint32_t get_ccm_test_vector_count(void);
 
 #ifdef	__cplusplus

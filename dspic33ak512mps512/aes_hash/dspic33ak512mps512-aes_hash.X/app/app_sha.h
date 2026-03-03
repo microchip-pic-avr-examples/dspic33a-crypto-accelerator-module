@@ -45,6 +45,37 @@ extern "C" {
 
 #include "app_aes_hash.h"
 #include "crypto/common_crypto/crypto_hash.h"
+#include "test_vectors/test_vectors_sha512.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+typedef struct HASH_TEST_CONTEXT {
+    // Pointer to current test vector data.
+    HASH_TEST_VECTOR *           test;
+
+    // Contains the data result.
+    uint8_t                 dataResult[SHA512_DIGEST_LEN_BYTES];
+
+    // The test mode (hash).
+    TEST_MODE               testMode;
+
+    // The hash algorithm type.
+    crypto_Hash_Algo_E      algorithm;
+
+    // The size of the hash data to use each time the hash is executed.
+    uint16_t                blockSize;
+
+    // The number of bytes hashed.
+    uint16_t                bytesHashed;
+
+    // The length of the resulting digest.
+    uint32_t                digestLen;
+
+} HASH_TEST_CONTEXT;
 
 // *****************************************************************************
 // *****************************************************************************

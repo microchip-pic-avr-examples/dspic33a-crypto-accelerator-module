@@ -52,37 +52,12 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 
-#include "test_vectors/aead_test_vector.h"
-
 // Only one test context at a time is supported.
 #define TEST_SESSION_ID         (0x1)
-
 
 // Context for AES calculations.
 static st_Crypto_Aead_AesGcm_ctx aeadGcmCtx __attribute__((aligned(4)));
 static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
-
-/**
- * @brief test context data for AES AEAD tests.
- */
-typedef struct AEAD_TEST_CONTEXT {
-    // Pointer to current test vector data.
-    TEST_VECTOR *   test;
-
-    // Contains the data result.
-    uint8_t         dataResult[AEAD_TEST_VECTOR_SZ];
-
-    // Contains the authTag result.
-    uint8_t         authTagResult[AES_AEAD_TAG_LENGTH];
-
-    // The test mode (encrypt/decrypt).
-    TEST_MODE       testMode;
-
-    // The AES operation (GCM, CCM, etc.)
-    AEAD_OPER_MODE  opMode;
-
-} AEAD_TEST_CONTEXT;
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -187,7 +162,7 @@ static TEST_RESULT checkDecryption(uint8_t *expected, uint8_t *result, uint32_t 
  * @param opMode The AES AEAD operations mode.
  * @return Pointer to string.
  */
-static const char *getTestOpMode(AEAD_OPER_MODE opMode)
+static const char *getAeadTestOpMode(AEAD_OPER_MODE opMode)
 {
     const char* opModeStr = "???";
 
@@ -222,8 +197,14 @@ static const char *getTestOpMode(AEAD_OPER_MODE opMode)
  */
 static TEST_RESULT aes_aead_test_init(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    AEAD_TEST_VECTOR *test = testContext->test;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     TEST_RESULT result;
@@ -231,7 +212,7 @@ static TEST_RESULT aes_aead_test_init(void *context)
 #ifdef SHOW_TEST_DATA
     uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
 
-    (void) printf(BLUE "\r\n\r\n %s %s Test %ld", getTestOpMode(testContext->opMode), getTestMode(testContext->testMode), test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu", getAeadTestOpMode(testContext->opMode), getTestMode(testContext->testMode), (unsigned long) test->id);
 
     printSeparator(BLUE, '-');
     printHexArray("Key", test->inputKey, test->inputKeyLength);
@@ -252,7 +233,7 @@ static TEST_RESULT aes_aead_test_init(void *context)
 #endif
 
     (void) printf(YELLOW);
-    printOperationStep("INITIALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("INITIALIZING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
     switch(testContext->opMode)
     {
@@ -290,15 +271,21 @@ static TEST_RESULT aes_aead_test_init(void *context)
  */
 static TEST_RESULT aes_aead_test_add_aad(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    AEAD_TEST_VECTOR *test = testContext->test;
     uint8_t *aad = (test->aadLength > 0UL) ? test->aad : NULL;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     TEST_RESULT result;
 
     (void) printf(YELLOW);
-    printOperationStep("ADDING AAD", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("ADDING AAD", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
     status = Crypto_Aead_AesGcm_AddAadData(&aeadGcmCtx, aad, test->aadLength);
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_ADD_AAD_FAILED;
@@ -316,17 +303,23 @@ static TEST_RESULT aes_aead_test_add_aad(void *context)
  */
 static TEST_RESULT aes_aead_test_cipher(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    AEAD_TEST_VECTOR *test = testContext->test;
 
     uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
-    uint8_t *resultData = (test->dataLength > 0) ? testContext->dataResult : NULL;
+    uint8_t *resultData = (test->dataLength > 0U) ? testContext->dataResult : NULL;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     TEST_RESULT result;
 
     (void) printf(YELLOW);
-    printOperationStep("CIPHERING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("CIPHERING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
     status = Crypto_Aead_AesGcm_Cipher(&aeadGcmCtx, data, test->dataLength, resultData);
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
@@ -345,14 +338,20 @@ static TEST_RESULT aes_aead_test_cipher(void *context)
  */
 static TEST_RESULT aes_aead_test_final(void *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    AEAD_TEST_VECTOR *test = testContext->test;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(YELLOW);
-    printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("FINALIZING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
     switch(testContext->opMode)
     {
@@ -366,7 +365,7 @@ static TEST_RESULT aes_aead_test_final(void *context)
         {
             crypto_CipherOper_E oper = (testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
             uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
-            uint8_t *resultData = (test->dataLength > 0) ? testContext->dataResult : NULL;
+            uint8_t *resultData = (test->dataLength > 0U) ? testContext->dataResult : NULL;
 
             status = Crypto_Aead_AesCcm_Cipher(&aeadCcmCtx, oper,
                                                 data, test->dataLength, resultData,
@@ -400,7 +399,7 @@ static TEST_RESULT aes_aead_test_final(void *context)
 #endif
 
         (void) printf(YELLOW);
-        printOperationStep("VERIFYING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+        printOperationStep("VERIFYING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
 
         // These calls also print out the test result...
         if (testContext->testMode == TEST_MODE_ENCRYPT)
@@ -416,27 +415,15 @@ static TEST_RESULT aes_aead_test_final(void *context)
     return result;
 }
 
-
 /**
  * @brief Defines the states for a AEAD test.
  */
-typedef enum AEAD_TEST_STEPS {
+enum {
     AEAD_TEST_STEP_INIT = 0,
     AEAD_TEST_STEP_ADD_AAD = 1,
     AEAD_TEST_STEP_CIPHER = 2,
     AEAD_TEST_STEP_FINAL = 3,
     AEAD_TEST_STEP_NUMBER_OF_STEPS
-} AEAD_TEST_STEPS;
-
-/**
- * @brief Defines the state functions for AEAD tests.
- */
-static TEST_STATE_FN aead_test_states[] =
-{
-    aes_aead_test_init,
-    aes_aead_test_add_aad,
-    aes_aead_test_cipher,
-    aes_aead_test_final,
 };
 
 // *****************************************************************************
@@ -447,10 +434,25 @@ static TEST_STATE_FN aead_test_states[] =
 
 TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_MODE opMode)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context->testContext;
     TEST_RESULT result = TEST_RESULT_SUCCESS;
 
     (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    context->testContext = testContext;
+
+    static TEST_STATE_FN aead_test_states[] =
+    {
+        aes_aead_test_init,
+        aes_aead_test_add_aad,
+        aes_aead_test_cipher,
+        aes_aead_test_final,
+    };
 
     // Select the AES AEAD operation mode.
     switch (opMode)
@@ -492,8 +494,15 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
         context->test = 0;
         context->step = 0;
 
+        /* cppcheck-suppress misra-c2012-11.5
+         *
+         *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+         *
+         *  Reasoning: A generic pointer allows support for various test vector types.
+         */
+        AEAD_TEST_VECTOR *tests = (AEAD_TEST_VECTOR *)context->tests;
+
         // Start at the first test.
-        TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
         testContext->test = &tests[context->test];
     }
 
@@ -503,6 +512,12 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
 
 TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
 {
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
     AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context->testContext;
 
     if (context->test < context->testCount)
@@ -554,7 +569,13 @@ TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
                 {
                     context->step = AEAD_TEST_STEP_INIT;
 
-                    TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
+                    /* cppcheck-suppress misra-c2012-11.5
+                     *
+                     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+                     *
+                     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+                     */
+                    AEAD_TEST_VECTOR *tests = (AEAD_TEST_VECTOR *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

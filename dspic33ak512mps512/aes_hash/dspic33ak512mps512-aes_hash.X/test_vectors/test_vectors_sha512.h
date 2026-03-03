@@ -36,7 +36,7 @@ extern "C" {
 // Size of a SHA-512 digest.
 #define SHA512_DIGEST_LEN_BYTES     (64U)
 
-typedef struct
+typedef struct HASH_TEST_VECTOR
 {
     uint32_t    id;
 
@@ -45,9 +45,9 @@ typedef struct
 
     uint8_t *   expectedDigest;
     uint32_t    expectedDigestLength;
-} TEST_VECTOR;
+} HASH_TEST_VECTOR;
 
-TEST_VECTOR * get_sha_512_test_vectors(void);
+HASH_TEST_VECTOR * get_sha_512_test_vectors(void);
 uint32_t get_sha_512_test_vector_count(void);
 
 #ifdef	__cplusplus
