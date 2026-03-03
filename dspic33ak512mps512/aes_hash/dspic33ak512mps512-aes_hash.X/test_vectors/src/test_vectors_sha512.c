@@ -37,11 +37,11 @@ static uint8_t sha_512_0_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x47, 0xD0, 0xD1, 0x3C, 0x5D, 0x85, 0xF2, 0xB0, 0xFF, 0x83, 0x18, 0xD2, 0x87, 0x7E, 0xEC, 0x2F,
     0x63, 0xB9, 0x31, 0xBD, 0x47, 0x41, 0x7A, 0x81, 0xA5, 0x38, 0x32, 0x7A, 0xF9, 0x27, 0xDA, 0x3E
 };
- static const TEST_VECTOR sha_512_0_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_0_bytes_vector = {
     0UL,
-    (uint8_t*) 0,
-    0,
-    (uint8_t*) &sha_512_0_bytes_digest,
+    (uint8_t[]) {},
+    0U,
+    sha_512_0_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -57,11 +57,11 @@ static uint8_t sha_512_35_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x9F, 0x1D, 0x27, 0xE6, 0xCC, 0xD0, 0xD7, 0x05, 0x24, 0x02, 0x81, 0xE8, 0xFB, 0xF3, 0xDB, 0x75,
     0xB9, 0xB3, 0x20, 0x5C, 0x14, 0x13, 0x43, 0x6D, 0x3B, 0x5D, 0x14, 0x00, 0x04, 0xB8, 0xCC, 0xA1
 };
- static const TEST_VECTOR sha_512_35_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_35_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_35_bytes,
+    sha_512_35_bytes,
     sizeof(sha_512_35_bytes),
-    (uint8_t*) &sha_512_35_bytes_digest,
+    sha_512_35_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -77,11 +77,11 @@ static uint8_t sha_512_41_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x94, 0x0B, 0xCC, 0x30, 0x99, 0x82, 0x76, 0x86, 0x09, 0x43, 0xAB, 0x03, 0x89, 0x02, 0x89, 0x6D,
     0x0F, 0xBF, 0x59, 0xB8, 0x8B, 0x07, 0xC8, 0x0D, 0xE9, 0x27, 0x03, 0x70, 0x97, 0x15, 0x0C, 0x40
 };
- static const TEST_VECTOR sha_512_41_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_41_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_41_bytes,
+    sha_512_41_bytes,
     sizeof(sha_512_41_bytes),
-    (uint8_t*) &sha_512_41_bytes_digest,
+    sha_512_41_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -97,11 +97,11 @@ static uint8_t sha_512_48_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x06, 0xFC, 0xDC, 0x98, 0x1C, 0x89, 0x3A, 0x42, 0x5D, 0x05, 0xE2, 0xF9, 0x9F, 0xE1, 0x98, 0xE4,
     0xDB, 0x50, 0xA0, 0x88, 0xAE, 0xE2, 0xBF, 0x12, 0x63, 0x21, 0x21, 0x10, 0xEF, 0xED, 0x42, 0x2C
 };
- static const TEST_VECTOR sha_512_48_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_48_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_48_bytes,
+    sha_512_48_bytes,
     sizeof(sha_512_48_bytes),
-    (uint8_t*) &sha_512_48_bytes_digest,
+    sha_512_48_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -118,11 +118,11 @@ static uint8_t sha_512_64_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x25, 0x74, 0x70, 0xC3, 0x4D, 0x19, 0x78, 0x20, 0x72, 0x50, 0xC1, 0xD4, 0x43, 0xF8, 0xF9, 0xE4,
     0x7F, 0x3D, 0xE7, 0xBF, 0x44, 0x2D, 0x28, 0xC7, 0xFA, 0xA2, 0xB0, 0xCE, 0x0E, 0xBE, 0x47, 0xC9
 };
- static const TEST_VECTOR sha_512_64_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_64_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_64_bytes,
+    sha_512_64_bytes,
     sizeof(sha_512_64_bytes),
-    (uint8_t*) &sha_512_64_bytes_digest,
+    sha_512_64_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -143,11 +143,11 @@ static uint8_t sha_512_128_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0xBB, 0x87, 0xC1, 0xB4, 0x63, 0x85, 0x2A, 0x62, 0x4F, 0xFB, 0x08, 0x4F, 0xEB, 0xCC, 0x5D, 0x68,
     0x94, 0xFA, 0x07, 0x6B, 0x62, 0x08, 0xF4, 0x4A, 0xB7, 0xF7, 0x05, 0xE3, 0x7D, 0x59, 0x38, 0x8A,
 };
- static const TEST_VECTOR sha_512_128_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_128_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_128_bytes,
+    sha_512_128_bytes,
     sizeof(sha_512_128_bytes),
-    (uint8_t*) &sha_512_128_bytes_digest,
+    sha_512_128_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -192,11 +192,11 @@ static uint8_t sha_512_512_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0xCC, 0xF9, 0xD0, 0xA6, 0x1F, 0x76, 0x13, 0xEA, 0xAE, 0x61, 0xDB, 0xB4, 0xE9, 0xDF, 0xB0, 0xB1,
     0x23, 0x5F, 0xA1, 0xE2, 0x17, 0x12, 0x68, 0xBF, 0xDA, 0x15, 0x08, 0xBF, 0xB3, 0xA8, 0x8A, 0x21,
 };
- static const TEST_VECTOR sha_512_512_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_512_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_512_bytes,
+    sha_512_512_bytes,
     sizeof(sha_512_512_bytes),
-    (uint8_t*) &sha_512_512_bytes_digest,
+    sha_512_512_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
@@ -262,27 +262,26 @@ static uint8_t sha_512_840_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {
     0x2D, 0xF3, 0x6E, 0xB8, 0x73, 0x25, 0x16, 0x81, 0x2C, 0x28, 0xD1, 0x1F, 0x41, 0x5D, 0x9B, 0xB2,
     0x59, 0x56, 0x03, 0x31, 0x13, 0x63, 0x55, 0x6B, 0x59, 0x98, 0xC3, 0x10, 0xC1, 0x9A, 0x79, 0x3E
 };
- static const TEST_VECTOR sha_512_840_bytes_vector = {
+ static const HASH_TEST_VECTOR sha_512_840_bytes_vector = {
     0UL,
-    (uint8_t*) &sha_512_840_bytes,
+    sha_512_840_bytes,
     sizeof(sha_512_840_bytes),
-    (uint8_t*) &sha_512_840_bytes_digest,
+    sha_512_840_bytes_digest,
     SHA512_DIGEST_LEN_BYTES
 };
 
-TEST_VECTOR sha_512_test_vectors[] = {
-    sha_512_0_bytes_vector,
-    sha_512_35_bytes_vector,
-    sha_512_41_bytes_vector,
-    sha_512_48_bytes_vector,
-    sha_512_64_bytes_vector,
-    sha_512_128_bytes_vector,
-    sha_512_512_bytes_vector,
-    sha_512_840_bytes_vector,
+static HASH_TEST_VECTOR sha_512_test_vectors[8] = {
+    [0] = sha_512_0_bytes_vector,
+    [1] = sha_512_35_bytes_vector,
+    [2] = sha_512_41_bytes_vector,
+    [3] = sha_512_48_bytes_vector,
+    [4] = sha_512_64_bytes_vector,
+    [5] = sha_512_128_bytes_vector,
+    [6] = sha_512_512_bytes_vector,
+    [7] = sha_512_840_bytes_vector,
 };
 
-
-TEST_VECTOR * get_sha_512_test_vectors(void)
+HASH_TEST_VECTOR * get_sha_512_test_vectors(void)
 {
     // Set test IDs.
     for (uint32_t i = 0; i < get_sha_512_test_vector_count(); i++)

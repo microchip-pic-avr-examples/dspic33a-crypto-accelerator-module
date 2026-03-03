@@ -32,7 +32,7 @@ extern "C" {
 
 #include <stdint.h>
 
-typedef struct TEST_VECTOR {
+typedef struct SYM_TEST_VECTOR {
     uint32_t    id;
     uint32_t    mode;
 
@@ -48,24 +48,24 @@ typedef struct TEST_VECTOR {
 
     uint8_t *   initializationVector;
     uint32_t    initializationVectorLength;
-} TEST_VECTOR;
+} SYM_TEST_VECTOR;
 
-TEST_VECTOR * get_ecb_test_vectors(void);
+SYM_TEST_VECTOR * get_ecb_test_vectors(void);
 uint32_t get_ecb_test_vector_count(void);
 
-TEST_VECTOR * get_ctr_test_vectors(void);
+SYM_TEST_VECTOR * get_ctr_test_vectors(void);
 uint32_t get_ctr_test_vector_count(void);
 
-TEST_VECTOR * get_cbc_test_vectors(void);
+SYM_TEST_VECTOR * get_cbc_test_vectors(void);
 uint32_t get_cbc_test_vector_count(void);
 
-TEST_VECTOR * get_cfb128_test_vectors(void);
+SYM_TEST_VECTOR * get_cfb128_test_vectors(void);
 uint32_t get_cfb128_test_vector_count(void);
 
-TEST_VECTOR * get_ofb_test_vectors(void);
+SYM_TEST_VECTOR * get_ofb_test_vectors(void);
 uint32_t get_ofb_test_vector_count(void);
 
-TEST_VECTOR * get_xts_test_vectors(void);
+SYM_TEST_VECTOR * get_xts_test_vectors(void);
 uint32_t get_xts_test_vector_count(void);
 
 #ifdef	__cplusplus

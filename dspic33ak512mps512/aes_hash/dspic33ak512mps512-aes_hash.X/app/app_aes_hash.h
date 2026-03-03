@@ -71,7 +71,6 @@ extern "C" {
 // *****************************************************************************
 
 #define RESET_COLOR "\x1B""[0m"     // Reset the print output to default
-#define GRAY        "\x1B""[1;30m"  // Set output to bold black
 #define RED         "\x1B""[1;31m"  // Set output to bold red
 #define GREEN       "\x1B""[1;32m"  // Set output to bold green
 #define YELLOW      "\x1B""[1;33m"  // Set output to bold yellow
@@ -79,7 +78,6 @@ extern "C" {
 #define MAG         "\x1B""[1;35m"  // set output to bold magenta
 #define CYAN        "\x1B""[1;36m"  // Set output to bold cyan
 #define WHITE       "\x1B""[1;37m"  // Set output to bold white
-
 
 /**
  * @brief Defines the test operation mode (encrypt/hash/decrypt).
@@ -111,12 +109,6 @@ typedef enum TEST_RESULT {
  */
 typedef TEST_RESULT (*TEST_STATE_FN)(void *);
 
-/// Size of the context data space to provide to tests.
-#define MODULE_TEST_CONTEXT_SIZE    (128U)
-
-// Return key length in bits.
-#define KEY_LENGTH_IN_BITS(len) ((len) * 8U)
-
 /**
  * Defines a test context.
  */
@@ -125,7 +117,7 @@ typedef struct TEST_CONTEXT
     // Pointer to next test context to process.
     struct TEST_CONTEXT *next;
 
-    uint8_t *tests;         // Pointer to module-specific test contents.
+    void *tests;         // Pointer to module-specific test contents.
     TEST_STATE_FN *states;  // Pointer to test states.
 
     uint8_t testCount;      // Number of tests to execute for the subsystem.
@@ -136,7 +128,7 @@ typedef struct TEST_CONTEXT
     TEST_MODE testMode;     // Test operation mode (encrypt/decrypt/hash/etc.)
 
     // Pointer to module specific test context data.
-    uint8_t testContext[MODULE_TEST_CONTEXT_SIZE] __attribute__((aligned(4)));
+    void *testContext;
 
     TEST_RESULT lastResult; // Last test result
 
@@ -180,7 +172,7 @@ void printWithLabel(const char* label, const char* format, ...);
  * @param data The array data to print.
  * @param size The length of the data to print.
  */
-void printHexArray(const char* label, void* data, uint32_t size);
+void printHexArray(const char* label, uint8_t* data, uint32_t size);
 
 
 /**
@@ -189,13 +181,6 @@ void printHexArray(const char* label, void* data, uint32_t size);
  * @return A string representing the test mode.
  */
 const char *getTestMode(TEST_MODE testMode);
-
-/**
- * @brief Get the error string corresponding to the error code.
- * @param result The test result error code.
- * @return Pointer to string.
- */
-const char * getTestError(TEST_RESULT result);
 
 /**
  * @brief Print the current operation step.

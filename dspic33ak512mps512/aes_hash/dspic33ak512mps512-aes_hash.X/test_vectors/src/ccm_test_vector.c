@@ -69,58 +69,58 @@ static uint8_t aes_ccm_authtag_8bytes[8] = {
 };
 
 
-static const TEST_VECTOR aes_ccm_128_4_bytes_vector = {
+static const AEAD_TEST_VECTOR aes_ccm_128_4_bytes_vector = {
     .id = 0,
-    .inputKey = (uint8_t *)&aes_ccm_key,
+    .inputKey = aes_ccm_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
-    .initializationVector = (uint8_t *)&aes_ccm_nonce,
+    .initializationVector = aes_ccm_nonce,
     .initializationVectorLength = 7,
-    .aad = (uint8_t *)&aes_ccm_aad,
+    .aad = aes_ccm_aad,
     .aadLength = 8,
-    .plaintextData = (uint8_t *)&aes_ccm_plaintext,
-    .ciphertextData = (uint8_t *)&aes_ccm_ciphertext_4bytes,
+    .plaintextData = aes_ccm_plaintext,
+    .ciphertextData = aes_ccm_ciphertext_4bytes,
     .dataLength = 4,
-    .authTag = (uint8_t *)&aes_ccm_authtag_4bytes,
+    .authTag = aes_ccm_authtag_4bytes,
     .authTagLength = 4
 };
 
-static const TEST_VECTOR aes_ccm_128_16_bytes_vector = {
+static const AEAD_TEST_VECTOR aes_ccm_128_16_bytes_vector = {
     .id = 0,
-    .inputKey = (uint8_t *)&aes_ccm_key,
+    .inputKey = aes_ccm_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
-    .initializationVector = (uint8_t *)&aes_ccm_nonce,
+    .initializationVector = aes_ccm_nonce,
     .initializationVectorLength = 8,
-    .aad = (uint8_t *)&aes_ccm_aad,
+    .aad = aes_ccm_aad,
     .aadLength = 16,
-    .plaintextData = (uint8_t *)&aes_ccm_plaintext,
-    .ciphertextData = (uint8_t *)&aes_ccm_ciphertext_16bytes,
+    .plaintextData = aes_ccm_plaintext,
+    .ciphertextData = aes_ccm_ciphertext_16bytes,
     .dataLength = 16,
-    .authTag = (uint8_t *)&aes_ccm_authtag_6bytes,
+    .authTag = aes_ccm_authtag_6bytes,
     .authTagLength = 6
 };
 
-static const TEST_VECTOR aes_ccm_128_24_bytes_vector = {
+static const AEAD_TEST_VECTOR aes_ccm_128_24_bytes_vector = {
     .id = 0,
-    .inputKey = (uint8_t *)&aes_ccm_key,
+    .inputKey = aes_ccm_key,
     .inputKeyLength = KEY_TYPE_AES128_SIZE,
-    .initializationVector = (uint8_t *)&aes_ccm_nonce,
+    .initializationVector = aes_ccm_nonce,
     .initializationVectorLength = 12,
-    .aad = (uint8_t *)&aes_ccm_aad,
+    .aad = aes_ccm_aad,
     .aadLength = 20,
-    .plaintextData = (uint8_t *)&aes_ccm_plaintext,
-    .ciphertextData = (uint8_t *)&aes_ccm_ciphertext_24bytes,
+    .plaintextData = aes_ccm_plaintext,
+    .ciphertextData = aes_ccm_ciphertext_24bytes,
     .dataLength = 24,
-    .authTag = (uint8_t *)&aes_ccm_authtag_8bytes,
+    .authTag = aes_ccm_authtag_8bytes,
     .authTagLength = 8
 };
 
-TEST_VECTOR aes_ccm_test_vectors[] = {
-    aes_ccm_128_4_bytes_vector,
-    aes_ccm_128_16_bytes_vector,
-    aes_ccm_128_24_bytes_vector,
+static AEAD_TEST_VECTOR aes_ccm_test_vectors[3] = {
+    [0] = aes_ccm_128_4_bytes_vector,
+    [1] = aes_ccm_128_16_bytes_vector,
+    [2] = aes_ccm_128_24_bytes_vector,
 };
 
-TEST_VECTOR * get_ccm_test_vectors(void)
+AEAD_TEST_VECTOR * get_ccm_test_vectors(void)
 {
     // Set test IDs.
     for (uint32_t i = 0; i < get_ccm_test_vector_count(); i++)

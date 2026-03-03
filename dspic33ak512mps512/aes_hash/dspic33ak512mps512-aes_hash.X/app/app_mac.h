@@ -44,7 +44,11 @@ Microchip or any third party.
 extern "C" {
 #endif
 
+#include "test_vectors/mac_test_vector.h"
 #include "app_aes_hash.h"
+
+// Maximum size of the CMAC.
+#define CMAC_RESULT_SIZE    (16U)
 
 // *****************************************************************************
 // *****************************************************************************
@@ -61,11 +65,30 @@ typedef enum MAC_OPER_MODE
 
 // *****************************************************************************
 // *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+typedef struct AES_CMAC_TEST_CONTEXT {
+    // Pointer to current test vector data.
+    MAC_TEST_VECTOR *   test;
+
+    // Contains the data result.
+    uint8_t         dataResult[CMAC_RESULT_SIZE];
+
+    // The test mode (encrypt/decrypt).
+    TEST_MODE       testMode;
+
+    // The CMAC test operation mode.
+    MAC_OPER_MODE   opMode;
+
+} AES_CMAC_TEST_CONTEXT;
+
+// *****************************************************************************
+// *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-
 
 /**
  * @brief Initialize an AES CMAC text context.

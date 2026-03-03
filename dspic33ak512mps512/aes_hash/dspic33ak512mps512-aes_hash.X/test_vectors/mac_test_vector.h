@@ -32,7 +32,7 @@ extern "C" {
 
 #include <stdint.h>
 
-typedef struct
+typedef struct MAC_TEST_VECTOR
 {
     uint32_t    id;
 
@@ -44,9 +44,9 @@ typedef struct
 
     uint8_t *   expectedMac;
     uint32_t    expectedMacLength;
-} TEST_VECTOR;
+} MAC_TEST_VECTOR;
 
-TEST_VECTOR * get_cmac_test_vectors(void);
+MAC_TEST_VECTOR * get_cmac_test_vectors(void);
 uint32_t get_cmac_test_vector_count(void);
 
 #ifdef	__cplusplus

@@ -44,6 +44,7 @@ Microchip or any third party.
 extern "C" {
 #endif
 
+#include "test_vectors/aead_test_vector.h"
 #include "app_aes_hash.h"
 
 // *****************************************************************************
@@ -67,6 +68,24 @@ typedef enum AEAD_OPER_MODE
   AEAD_OPER_MODE_AES_CCM = 1,
   AEAD_OPER_MODE_COUNT = 2,
 } AEAD_OPER_MODE;
+
+typedef struct AEAD_TEST_CONTEXT {
+    // Pointer to current test vector data.
+    AEAD_TEST_VECTOR *   test;
+
+    // Contains the data result.
+    uint8_t         dataResult[AEAD_TEST_VECTOR_SZ];
+
+    // Contains the authTag result.
+    uint8_t         authTagResult[AES_AEAD_TAG_LENGTH];
+
+    // The test mode (encrypt/decrypt).
+    TEST_MODE       testMode;
+
+    // The AES operation (GCM, CCM, etc.)
+    AEAD_OPER_MODE  opMode;
+
+} AEAD_TEST_CONTEXT;
 
 // *****************************************************************************
 // *****************************************************************************
