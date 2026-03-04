@@ -89,7 +89,7 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 static void mac_cmac_step_test(TEST_VECTOR* testVector)
 {
     // Context for CMAC calculations when running individual steps.
-    // This is too large to put on the stack.
+    // This is non-reentrant as it is too large to put on the stack.
     static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedCmac[16] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
