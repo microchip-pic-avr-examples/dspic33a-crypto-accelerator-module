@@ -52,7 +52,7 @@ Microchip or any third party.
 #include "app/app_hmac.h"
 #include "app/app_gmac.h"
 
-uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+static uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
     uint8_t result = 0;
 
