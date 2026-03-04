@@ -56,12 +56,13 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID     0x1
 
-/* cppcheck-suppress misra-c2012-2.5
+/*
 *
 *  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
 *
 *  Reasoning: This macro is in sections that are not defined by default, but are needed.
 */
+/* cppcheck-suppress misra-c2012-2.5 */
 #define MAC_TEST_VECTOR_0   0
 
 static const char* gmacTestWrapper = "MAC";

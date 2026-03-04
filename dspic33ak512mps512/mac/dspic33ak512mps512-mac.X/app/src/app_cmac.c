@@ -61,6 +61,7 @@ Microchip or any third party.
 *
 *  Reasoning: This macro is in sections that are not defined by default, but are needed.
 */
+/* cppcheck-suppress misra-c2012-2.5 */
 #define MAC_TEST_VECTOR_3   3
 
 static const char* cmacTestWrapper = "MAC";
