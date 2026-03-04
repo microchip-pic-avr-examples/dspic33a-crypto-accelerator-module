@@ -55,7 +55,10 @@ Microchip or any third party.
 #include "app/app_hmac.h"
 
 #define TEST_SESSION_ID     0x1
+
+#ifndef RUN_ALL_VECTORS
 #define MAC_TEST_VECTOR_0   0
+#endif
 
 static const char* hmacTestWrapper = "MAC";
 

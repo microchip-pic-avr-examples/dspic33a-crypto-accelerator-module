@@ -56,15 +56,9 @@ Microchip or any third party.
 #define MULTI_STEP          1
 #define SHA_TEST_VECTOR_5   5
 
-extern TEST_VECTOR sha_1_test_vectors[NUMBER_OF_SHA1_VECTORS];
-extern TEST_VECTOR sha_224_test_vectors[NUMBER_OF_SHA224_VECTORS];
-extern TEST_VECTOR sha_256_test_vectors[NUMBER_OF_SHA256_VECTORS];
-extern TEST_VECTOR sha_384_test_vectors[NUMBER_OF_SHA384_VECTORS];
-extern TEST_VECTOR sha_512_test_vectors[NUMBER_OF_SHA512_VECTORS];
-
-static void printHexArray(const char* label, const void* data, uint32_t size)
+static void printHexArray(const char* label, const uint8_t* data, uint32_t size)
 {
-    const uint8_t *ldata = (const uint8_t *) data;
+    const uint8_t *ldata = data;
 
     (void) printf(BLUE"\r\n -------------------------------------------------------------------------------------------------"RESET_COLOR);
     (void) printf("\r\n %s  : ", label);
@@ -82,7 +76,6 @@ static void printHexArray(const char* label, const void* data, uint32_t size)
 
 static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
-    const char *expectedHeader = "Expected Digest";
 	const uint8_t *tempa = a;
 	const uint8_t *tempb = b;
 	uint8_t result = 0;
@@ -98,6 +91,7 @@ static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
     }
     else
     {
+        const char *expectedHeader = "Expected Digest";
         (void) printf(RED" \r\n FAIL - Data Mismatch"RESET_COLOR);
         printHexArray(expectedHeader, b, size);
     }
@@ -118,7 +112,7 @@ static crypto_Hash_Status_E sha_test_digest(bool multistep, uint32_t blockSize, 
     {
         st_Crypto_Hash_Sha_Ctx context;
 
-        (void) printf(CYAN"\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %ld"RESET_COLOR, blockSize);
+        (void) printf(CYAN"\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"RESET_COLOR, (unsigned long)blockSize);
 
         status = Crypto_Hash_Sha_Init(&context, algo, CRYPTO_HANDLER_HW_INTERNAL, 1);
 
@@ -131,7 +125,7 @@ static crypto_Hash_Status_E sha_test_digest(bool multistep, uint32_t blockSize, 
                 status = Crypto_Hash_Sha_Update(&context, localData, dl);
 
                 localLen -= dl;
-                localData += (uint8_t)dl;
+                localData = &localData[dl];
 
             } while ((localLen > 0U) && (status == CRYPTO_HASH_SUCCESS));
         }
@@ -184,8 +178,8 @@ static void sha_test(crypto_Hash_Algo_E algo, uint8_t* data, uint32_t dataLen, c
 
     (void) printf(MAG"\r\n\r\n **************************************************************************************");
     (void) printf(CYAN"\r\n ************************* HASH SHA-%lu TEST - INPUT SIZE %lu **************************%s",
-            (digestBitLen == 160U) ? 1U : digestBitLen,
-            dataLen,
+            (unsigned long)((digestBitLen == 160U) ? 1U : digestBitLen),
+            (unsigned long)dataLen,
             (digestBitLen == 160U) ? "**" : "");
     (void) printf(MAG"\r\n **************************************************************************************"RESET_COLOR);
 
@@ -203,7 +197,7 @@ static void sha_test(crypto_Hash_Algo_E algo, uint8_t* data, uint32_t dataLen, c
 
     // Test with a single update() call, using the data length as the block size.
     status = sha_test_digest(SINGLE_STEP, dataLen, algo, data, dataLen, (uint8_t*) &digestResult);
-    printHexArray(outputHeader, &digestResult, digestLen);
+    printHexArray(outputHeader, (const uint8_t *)&digestResult, digestLen);
 
     if (status != CRYPTO_HASH_SUCCESS)
     {
@@ -235,7 +229,7 @@ static void sha_test(crypto_Hash_Algo_E algo, uint8_t* data, uint32_t dataLen, c
         }
         else
         {
-            printHexArray(outputHeader, &digestResult, digestLen);
+            printHexArray(outputHeader, (const uint8_t *)&digestResult, digestLen);
             checkArrayEquality((uint8_t*) &digestResult, expectedDigest, digestLen);
         }
     }
