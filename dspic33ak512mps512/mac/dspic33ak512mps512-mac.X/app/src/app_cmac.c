@@ -55,7 +55,7 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID     0x1
 
-/* cppcheck-suppress misra-c2012-2.5
+/*
 *
 *  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
 *
