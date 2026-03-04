@@ -94,7 +94,7 @@ static void mac_gmac_direct_test(TEST_VECTOR* testVector)
 static void mac_gmac_step_test(TEST_VECTOR* testVector)
 {
     // Context for HMAC calculations when running individual steps.
-    // This is too large to put on the stack.
+    // This is non-reentrant as it is too large to put on the stack.
     static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedGmac[CRYPTO_AESKEYSIZE_256] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
