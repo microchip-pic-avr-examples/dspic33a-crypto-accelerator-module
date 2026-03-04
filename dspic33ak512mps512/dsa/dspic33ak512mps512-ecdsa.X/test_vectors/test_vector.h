@@ -45,6 +45,11 @@ typedef struct
     crypto_EccCurveType_E curveType;
 } TEST_VECTOR;
 
+extern TEST_VECTOR ecdsa_p192;
+extern TEST_VECTOR ecdsa_p256;
+extern TEST_VECTOR ecdsa_p384;
+extern TEST_VECTOR ecdsa_p521;
+
 #ifdef	__cplusplus
 }
 #endif

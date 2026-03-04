@@ -1,5 +1,5 @@
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+ï¿½ [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -21,7 +21,7 @@
 
 #include "test_vectors/test_vector.h"
 
-static uint8_t privateKey[] = {
+static uint8_t privateKey_p521[] = {
     0x01, 0x84, 0x25, 0x8e, 0xa6, 0x67, 0xab, 0x99,
     0xd0, 0x9d, 0x43, 0x63, 0xb3, 0xf5, 0x13, 0x84, 
     0xfc, 0x0a, 0xcd, 0x2f, 0x3b, 0x66, 0x25, 0x8e,
@@ -33,7 +33,7 @@ static uint8_t privateKey[] = {
     0x3c, 0xff
 };
 
-static uint8_t publicKey[] = {
+static uint8_t publicKey_p521[] = {
     0x04, 0x01, 0x9e, 0xe8, 0x18, 0x04, 0x8f, 0x86,
     0xad, 0xa6, 0xdb, 0x86, 0x6b, 0x7e, 0x49, 0xa9, 
     0xb5, 0x35, 0x75, 0x0c, 0x36, 0x73, 0xcb, 0x61, 
@@ -53,7 +53,7 @@ static uint8_t publicKey[] = {
     0x48, 0x81, 0xa2, 0x38, 0xf7
 };
 
-static uint8_t hash[] = {
+static uint8_t hash_p521[] = {
     0xdd, 0xaf, 0x35, 0xa1, 0x93, 0x61, 0x7a, 0xba,
     0xcc, 0x41, 0x73, 0x49, 0xae, 0x20, 0x41, 0x31,
     0x12, 0xe6, 0xfa, 0x4e, 0x89, 0xa9, 0x7e, 0xa2,
@@ -64,17 +64,15 @@ static uint8_t hash[] = {
     0x2a, 0x9a, 0xc9, 0x4f, 0xa5, 0x4c, 0xa4, 0x9f
 };
 
-static char curveInformation[] = "P-521";
+static const char curveInformation_p521[] = "P-521";
 
 TEST_VECTOR ecdsa_p521 = {
-    (uint8_t *)&privateKey,
-    sizeof(privateKey),
-    (uint8_t *)&publicKey,
-    sizeof(publicKey),
-    (uint8_t *)&hash,
-    sizeof(hash),
-    (const char*) curveInformation,
+    privateKey_p521,
+    sizeof(privateKey_p521),
+    publicKey_p521,
+    sizeof(publicKey_p521),
+    hash_p521,
+    sizeof(hash_p521),
+    curveInformation_p521,
     CRYPTO_ECC_CURVE_P521,
 };
-
-extern TEST_VECTOR ecdsa_p521;
