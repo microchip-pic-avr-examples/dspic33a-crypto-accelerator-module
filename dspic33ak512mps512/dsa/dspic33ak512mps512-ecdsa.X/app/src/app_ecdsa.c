@@ -49,7 +49,7 @@ Microchip or any third party.
 #include "test_vectors/test_vector.h"
 #include "app/app_util.h"
 
-static uint8_t signature[P521_LENGTH] = {0};
+static uint8_t signature[P521_LENGTH] = {0U};
 static volatile bool signComplete = false;
 static volatile bool verifyComplete = false;
 

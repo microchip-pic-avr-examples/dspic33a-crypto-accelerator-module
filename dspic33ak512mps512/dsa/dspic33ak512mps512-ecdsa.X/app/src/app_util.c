@@ -80,24 +80,23 @@ void UTIL_TestHeaderPrint(const char *curve, const char *blocking)
         RESET_COLOR);
 }
 
-void UTIL_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
+void UTIL_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size)
 {
-    uint8_t const *ldata = data;
     (void)printf("\r\n\r\n\t%s", label);
-    for (uint32_t i = 0; i < size; i++)
+    for (uint32_t i = 0U; i < size; i++)
     {
         if ((0U == (i % 16U)) && (0U != i))
         {
             (void)printf("\r\n\t\t\t");
         }
 
-        (void)printf(" 0x%02X", ldata[i]);
+        (void)printf(" 0x%02X", data[i]);
     }
 }
 
 uint8_t UTIL_SignatureLengthGet(crypto_EccCurveType_E curve)
 {
-    uint8_t length = 0;
+    uint8_t length = 0U;
 
     switch (curve)
     {
