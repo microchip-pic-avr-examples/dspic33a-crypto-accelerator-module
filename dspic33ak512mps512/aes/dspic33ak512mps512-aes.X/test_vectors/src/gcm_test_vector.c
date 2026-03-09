@@ -814,7 +814,7 @@ static uint8_t gcm_test_vector23_tag[16] =
     0x76, 0xFC, 0x6E, 0xCE, 0x0F, 0x4E, 0x17, 0x68, 0xCD, 0xDF, 0x88, 0x53, 0xBB, 0x2D, 0x55, 0x1B
 };
 
-static GCM_TEST_VECTOR gcm_test_vectors[] =
+static gcm_test_vector_t gcm_test_vectors[] =
 {
     {
         .key = gcm_test_vector0_key,
@@ -1130,7 +1130,7 @@ static GCM_TEST_VECTOR gcm_test_vectors[] =
     }
 };
 
-GCM_TEST_VECTOR * get_gcm_test_vectors(void)
+gcm_test_vector_t *get_gcm_test_vectors(void)
 {
     return gcm_test_vectors;
 }

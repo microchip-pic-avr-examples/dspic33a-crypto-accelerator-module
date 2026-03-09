@@ -81,13 +81,17 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
     }
 }
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size)
+void printHexArray(const char *label, uint8_t *data,
+        uint32_t size)
 {
     if (size > 0U)
     {
         const uint8_t *ldata = data;
 
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+            "\r\n -----------------------------------"
+            "--------------------------------------------------"
+            RESET_COLOR);
         (void) printf("\r\n %s  : ", label);
 
         for (uint32_t index = 0U; index < size; index++)
@@ -102,24 +106,39 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
     }
 }
 
-void printTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
+void printTestHeader(const char *wrapperType,
+        unsigned long keyBitLen, const char *testType,
+        uint32_t dataLen, const char *additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long) dataLen, additionalInfo);
+    (void) sprintf(header,
+        " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
+        wrapperType, keyBitLen, testType,
+        (unsigned long) dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
-    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
-    (void) printf(CYAN"\r\n ");
+    (void) printf(MAG
+        "\r\n\r\n ************************************"
+        "******************************************");
+    (void) printf(CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
     (void) printf("%s", header);
     (void) printf("%*c", padding, ' ');
-    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+    (void) printf(MAG
+        "\r\n ************************************"
+        "******************************************"
+        RESET_COLOR);
 }
 
-void printCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status)
+void printCryptoError(unsigned long keyBitLen,
+        const char *testType, const char *description,
+        int status)
 {
-    (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
+    (void) printf(RED
+        "\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"
+        RESET_COLOR, keyBitLen, testType,
+        description, status);
 }
 
 void aes_test_sym(void)
