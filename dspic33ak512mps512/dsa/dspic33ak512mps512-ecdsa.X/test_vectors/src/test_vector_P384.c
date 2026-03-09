@@ -21,6 +21,12 @@
 
 #include "test_vectors/test_vector.h"
 
+/*
+ * Test vectors from NIST Digital Signature Standard (DSS) FIPS 186-4:
+ * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/digital-signatures
+ */
+
+// ECDSA P-384
 static uint8_t privateKeyP384[] =
 {
     0x53, 0x94, 0xf7, 0x97, 0x3e, 0xa8, 0x68, 0xc5, 0x2b, 0xf3, 0xff, 0x8d, 0x8c, 0xee, 0xb4, 0xdb,

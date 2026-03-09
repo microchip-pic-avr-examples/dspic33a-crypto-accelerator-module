@@ -5,10 +5,10 @@
     Microchip Technology Inc.
 
   File Name:
-    app_ecdsa.h
+    app_util.h
 
   Summary:
-    This header file provide a prototype for the ECDSA test application.
+    This header file provides prototypes and definitions for ECDSA utility functions.
 *******************************************************************************/
 
 /*
