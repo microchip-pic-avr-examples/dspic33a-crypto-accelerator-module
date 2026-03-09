@@ -73,11 +73,11 @@ int main(void)
         "\r\n\n\n\n Starting CRYPTO AES program \r\n");
 
     #ifdef RUN_SYM_TEST
-    aes_test_sym();
+    AES_SymTestRun();
     #endif
 
     #ifdef RUN_AEAD_TEST
-    aes_test_aead();
+    AES_AeadTestRun();
     #endif
 
     (void) printf("\n\n\n\r\n ");
