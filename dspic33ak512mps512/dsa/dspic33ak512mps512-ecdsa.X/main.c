@@ -34,18 +34,19 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
+#include <stdbool.h>
 #include "app/app_ecdsa.h"
 #include "mcc_generated_files/system/system.h"
 
-int main( void ) {
-    
+int main(void)
+{
     SYSTEM_Initialize();
 
     test_ecdsa();
-    
-    while (1)
+
+    while (true)
     {
     }
-    
+
     return 0;
 }

@@ -35,7 +35,7 @@ Microchip or any third party.
 */
 
 #ifndef APP_UTIL_H
-#define	APP_UTIL_H
+#define APP_UTIL_H
 
 #include "crypto/common_crypto/crypto_digsign.h"
 
@@ -63,9 +63,10 @@ void printStatus(crypto_DigiSign_Status_E status, const char *type);
 
 void printSplitter(void);
 
-void printTestHeader(const char* curve, const char* blocking);
+void printTestHeader(const char *curve, const char *blocking);
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size);
+void printHexArray(const char *label, uint8_t *data, uint32_t size);
 
 uint8_t signatureLengthGet(crypto_EccCurveType_E curve);
-#endif	/* APP_UTIL_H */
+
+#endif /* APP_UTIL_H */

@@ -1,4 +1,3 @@
-
 /*******************************************************************************
   Application Source File
 
@@ -62,24 +61,24 @@ void printSplitter(void)
     (void)printf("\r\n\n ______________________________________________________________________________________________________ \r\n");
 }
 
-void printTestHeader(const char* curve, const char* blocking)
+void printTestHeader(const char *curve, const char *blocking)
 {
     (void)printf(MAG"\r\n\r\n ************************************************************************************");
     (void)printf(CYAN"\r\n\t ******************** %s ECDSA %s ********************", curve, blocking);
     (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
 }
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size) 
+void printHexArray(const char *label, uint8_t *data, uint32_t size)
 {
     uint8_t const *ldata = data;
     (void)printf("\r\n\r\n\t%s", label);
-    for (uint32_t i = 0; i < size; i++) 
+    for (uint32_t i = 0; i < size; i++)
     {
-        if ((0U == (i % 16U)) && (0U != i)) 
+        if ((0U == (i % 16U)) && (0U != i))
         {
             (void)printf("\r\n\t\t\t");
         }
-        
+
         (void)printf(" 0x%02X", ldata[i]);
     }
 }
@@ -87,8 +86,8 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
 uint8_t signatureLengthGet(crypto_EccCurveType_E curve)
 {
     uint8_t length = 0;
-    
-    switch(curve)
+
+    switch (curve)
     {
         case CRYPTO_ECC_CURVE_P192:
             length = P192Length;
