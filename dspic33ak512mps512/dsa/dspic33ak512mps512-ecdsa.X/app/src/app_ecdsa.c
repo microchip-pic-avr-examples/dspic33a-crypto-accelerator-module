@@ -1,4 +1,3 @@
-
 /*******************************************************************************
   Application Source File
 
@@ -70,42 +69,43 @@ static void verifyOperationComplete(void)
     verifyComplete = true;
 }
 
-static void runBlockingHardwareTest(TEST_VECTOR* testVector)
+static void runBlockingHardwareTest(TEST_VECTOR *testVector)
 {
     uint8_t signatureLength = signatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     printTestHeader(testVector->curveInformation, "BLOCKING");
     (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
-    
+
     clearCompleteStates();
     ////Crypto Library ECDSA SIGN API***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, signature, signatureLength, testVector->privateKeyData, testVector->privateKeyLen, testVector->curveType, SESSION_ID);
- 
+
     printHexArray(signaturePrint, signature, signatureLength);
     printStatus(status, signingPrint);
     printSplitter();
-    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
-    
-    int8_t hashStatus = 0;   
-    clearCompleteStates();          
+    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
+
+    int8_t hashStatus = 0;
+    clearCompleteStates();
     ////Crypto Library ECDSA VERIFY API*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, signature, signatureLength, testVector->publicKeyData, testVector->publicKeyLen, &hashStatus, testVector->curveType, SESSION_ID);
-    
+
     printStatus(status, verifyingPrint);
 }
 
-static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
+static void runNonBlockingHardwareTest(TEST_VECTOR *testVector)
 {
     uint8_t signatureLength = signatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     printTestHeader(testVector->curveInformation, "NON-BLOCKING");
-    
+
     (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
-    clearCompleteStates();  
+    clearCompleteStates();
     //Crypto Library ECDSA SIGN Non-Blocking API***********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Sign_Start(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, testVector->privateKeyData, testVector->privateKeyLen, testVector->curveType, SESSION_ID);
-    if(status == CRYPTO_DIGISIGN_SUCCESS){
-        while(!signComplete)
+    if (status == CRYPTO_DIGISIGN_SUCCESS)
+    {
+        while (!signComplete)
         {
         }
         status = Crypto_DigiSign_Ecdsa_Sign_GetResult(signature, signatureLength);
@@ -113,13 +113,14 @@ static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
     printHexArray(signaturePrint, signature, signatureLength);
     printStatus(status, signingPrint);
     printSplitter();
-    
-    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);  
+
+    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
     clearCompleteStates();
     ////Crypto Library ECDSA VERIFY Non-Blocking API*********************************************************************************************************************
     status = Crypto_DigiSign_Ecdsa_Verify_Start(CRYPTO_HANDLER_HW_INTERNAL, testVector->hashData, testVector->hashLen, signature, signatureLength, testVector->publicKeyData, testVector->publicKeyLen, testVector->curveType, SESSION_ID);
-    if(status == CRYPTO_DIGISIGN_SUCCESS){
-        while(!verifyComplete)
+    if (status == CRYPTO_DIGISIGN_SUCCESS)
+    {
+        while (!verifyComplete)
         {
         }
         status = Crypto_DigiSign_Ecdsa_Verify_GetResult();
@@ -127,26 +128,26 @@ static void runNonBlockingHardwareTest(TEST_VECTOR* testVector)
     printStatus(status, verifyingPrint);
 }
 
-static void TEST_ECDSA_p192(void) 
-{    
+static void TEST_ECDSA_p192(void)
+{
     runBlockingHardwareTest(&ecdsa_p192);
     runNonBlockingHardwareTest(&ecdsa_p192);
 }
 
-static void TEST_ECDSA_p256(void) 
-{    
+static void TEST_ECDSA_p256(void)
+{
     runBlockingHardwareTest(&ecdsa_p256);
     runNonBlockingHardwareTest(&ecdsa_p256);
 }
 
-static void TEST_ECDSA_p384(void) 
+static void TEST_ECDSA_p384(void)
 {
     runBlockingHardwareTest(&ecdsa_p384);
     runNonBlockingHardwareTest(&ecdsa_p384);
 }
 
-static void TEST_ECDSA_p521(void) 
-{        
+static void TEST_ECDSA_p521(void)
+{
     runBlockingHardwareTest(&ecdsa_p521);
     runNonBlockingHardwareTest(&ecdsa_p521);
 }

@@ -27,32 +27,35 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 
 #ifndef TEST_VECTOR_H
-#define	TEST_VECTOR_H
+#define TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct 
+typedef struct
 {
-    uint8_t* privateKeyData;
+    uint8_t *privateKeyData;
     uint8_t privateKeyLen;
-    uint8_t* publicKeyData;
+    uint8_t *publicKeyData;
     uint8_t publicKeyLen;
-    uint8_t* hashData;
+    uint8_t *hashData;
     uint8_t hashLen;
-    const char* curveInformation;
+    const char *curveInformation;
     crypto_EccCurveType_E curveType;
 } TEST_VECTOR;
 
 extern TEST_VECTOR ecdsa_p192;
+
 extern TEST_VECTOR ecdsa_p256;
+
 extern TEST_VECTOR ecdsa_p384;
+
 extern TEST_VECTOR ecdsa_p521;
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTOR_H */
+#endif /* TEST_VECTOR_H */
 
