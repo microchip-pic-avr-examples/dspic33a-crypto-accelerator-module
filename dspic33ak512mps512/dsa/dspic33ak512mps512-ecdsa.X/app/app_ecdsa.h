@@ -8,7 +8,7 @@
     app_ecdsa.h
 
   Summary:
-    This header file provide a prototype for the ECDSA test application.
+    This header file provides a prototype for the ECDSA test application.
 *******************************************************************************/
 
 /*
