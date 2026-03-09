@@ -83,7 +83,7 @@ uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
 
 void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
 
-void printHexArray(const char *label, uint8_t *data,
+void printHexArray(const char *label, const uint8_t *data,
         uint32_t size);
 
 void printTestHeader(const char *wrapperType,

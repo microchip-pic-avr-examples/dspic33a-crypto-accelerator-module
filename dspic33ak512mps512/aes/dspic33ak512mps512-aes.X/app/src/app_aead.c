@@ -55,9 +55,9 @@ Microchip or any third party.
 #define TEST_SESSION_ID (0x1)
 
 static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
-        uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
-        uint8_t* iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
-        uint8_t* result, uint8_t* tag)
+        uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
+        uint8_t *iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
+        uint8_t *result, uint8_t *tag)
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
 
@@ -298,7 +298,7 @@ static void checkEncryptionAndTag(
 
     if (length > 0UL)
     {
-        if (0u == checkArrayEquality(result, text, length))
+        if (0U == checkArrayEquality(result, text, length))
         {
             (void)printf(GREEN"\r\n Encryption: PASS    "RESET_COLOR );
         }
@@ -308,7 +308,7 @@ static void checkEncryptionAndTag(
         }
     }
 
-    if (0u == checkArrayEquality(tagResult, tag, tagLength))
+    if (0U == checkArrayEquality(tagResult, tag, tagLength))
     {
         (void)printf(GREEN"\r\n Authentication Tag: PASS"RESET_COLOR);
     }
@@ -349,7 +349,7 @@ void aes_aead_gcm_test(void)
     uint32_t testCount = 1;
 #endif
 
-    for (uint32_t i = 0; i < testCount; i++)
+    for (uint32_t i = 0U; i < testCount; i++)
     {
         uint8_t *pt;
         uint8_t *ct;
@@ -533,9 +533,9 @@ void aes_aead_gcm_test(void)
 
 void aes_aead_ccm_test(void)
 {
-    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
-    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
-    uint8_t tagResult[AES_CCM_TAG_LENGTH] = {0};
+    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
+    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
+    uint8_t tagResult[AES_CCM_TAG_LENGTH] = {0U};
 
     const char* testWrapper = "AEAD";
     const char* testType = "CCM";
@@ -544,7 +544,7 @@ void aes_aead_ccm_test(void)
     ccm_test_vector_t *test = get_ccm_test_vectors();
     uint32_t testCount = get_ccm_test_count();
 
-    for (uint32_t i = 0; i < testCount; i++)
+    for (uint32_t i = 0U; i < testCount; i++)
     {
         uint8_t *pt;
         uint8_t *ct;

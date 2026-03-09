@@ -346,7 +346,7 @@ static ccm_test_vector_t ccm_test_vectors[] =
         .aad = NULL,
         .tag = ccm_test_vector1_tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
-        .aadLength = 0,
+        .aadLength = 0U,
         .nonceLength = sizeof(ccm_test_vector1_nonce),
         .textLength = sizeof(ccm_test_vector1_plaintext),
         .tagLength = sizeof(ccm_test_vector1_tag)
@@ -398,9 +398,9 @@ static ccm_test_vector_t ccm_test_vectors[] =
         .aad = NULL,
         .tag = ccm_test_vector5_tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
-        .aadLength = 0,
+        .aadLength = 0U,
         .nonceLength = sizeof(ccm_test_vector5_nonce),
-        .textLength = 0,
+        .textLength = 0U,
         .tagLength = sizeof(ccm_test_vector5_tag)
     },
     {
@@ -413,7 +413,7 @@ static ccm_test_vector_t ccm_test_vectors[] =
         .keyLength = KEY_TYPE_AES256_SIZE,
         .aadLength = sizeof(ccm_test_vector6_aad),
         .nonceLength = sizeof(ccm_test_vector6_nonce),
-        .textLength = 0,
+        .textLength = 0U,
         .tagLength = sizeof(ccm_test_vector6_tag)
     },
     {
@@ -424,7 +424,7 @@ static ccm_test_vector_t ccm_test_vectors[] =
         .aad = NULL,
         .tag = ccm_test_vector7_tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
-        .aadLength = 0,
+        .aadLength = 0U,
         .nonceLength = sizeof(ccm_test_vector7_nonce),
         .textLength = sizeof(ccm_test_vector7_plaintext),
         .tagLength = sizeof(ccm_test_vector7_tag)
