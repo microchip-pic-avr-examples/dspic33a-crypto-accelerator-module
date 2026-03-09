@@ -26,443 +26,449 @@ Microchip or any third party.
 #include <stddef.h>
 #include "../ccm_test_vector.h"
 
-/* ---------------- Vector 0 ---------------- */
-static uint8_t ccm_test_vector0_key[16] =
+/*
+ * Test vectors from NIST AES-CCM SP 800-38C validation:
+ * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/block-ciphers
+ */
+
+// Vector 0: AES-128 CCM, 32-byte plaintext, 32-byte AAD, 4-byte tag, 13-byte nonce
+static uint8_t ccmTestVector0Key[16] =
 {
     0x2E, 0x62, 0xEF, 0x18, 0x72, 0x0A, 0x31, 0xE2, 0xD0, 0x1B, 0x7A, 0xD2, 0xA7, 0xD5, 0x2B, 0x8F
 };
 
-static uint8_t ccm_test_vector0_nonce[13] =
+static uint8_t ccmTestVector0Nonce[13] =
 {
     0x7B, 0xA3, 0x86, 0xEB, 0xA4, 0xEB, 0x81, 0x99, 0x29, 0x6F, 0x64, 0xDC, 0x6A
 };
 
-static uint8_t ccm_test_vector0_plaintext[32] =
+static uint8_t ccmTestVector0Plaintext[32] =
 {
     0x4F, 0xAF, 0x99, 0x54, 0x54, 0x05, 0x3C, 0x0F, 0x56, 0xE0, 0x38, 0x2B, 0x99, 0xF2, 0x83, 0x7F,
     0x73, 0x48, 0xB5, 0x61, 0xE8, 0x42, 0x4E, 0x55, 0x90, 0xF2, 0x81, 0xE0, 0x95, 0x42, 0x84, 0x23
 };
 
-static uint8_t ccm_test_vector0_ciphertext[32] =
+static uint8_t ccmTestVector0Ciphertext[32] =
 {
     0xD1, 0xFC, 0xC1, 0xD2, 0xCD, 0xD1, 0x29, 0xD4, 0x96, 0xB4, 0x3D, 0x55, 0x3B, 0xBE, 0xDB, 0xD3,
     0x9B, 0xBF, 0xEC, 0x4F, 0x25, 0xA3, 0x57, 0x18, 0xA3, 0xB0, 0x5D, 0x95, 0xEA, 0x61, 0x04, 0x2B
 };
 
-static uint8_t ccm_test_vector0_aad[32] =
+static uint8_t ccmTestVector0Aad[32] =
 {
     0xF3, 0xE7, 0x03, 0xEA, 0xA9, 0xF6, 0x26, 0x3F, 0x34, 0x77, 0xEA, 0xD7, 0xD9, 0x1F, 0x3E, 0x6E,
     0x2E, 0xF9, 0xB6, 0x21, 0x68, 0x05, 0xA0, 0xA1, 0xDF, 0x35, 0x58, 0xF3, 0x9F, 0xBC, 0x3C, 0x9D
 };
 
-static uint8_t ccm_test_vector0_tag[4] =
+static uint8_t ccmTestVector0Tag[4] =
 {
     0xCC, 0x16, 0xE4, 0xCB
 };
 
-/* ---------------- Vector 1 ---------------- */
-static uint8_t ccm_test_vector1_key[16] =
+// Vector 1: AES-128 CCM, 32-byte plaintext, no AAD, 16-byte tag, 13-byte nonce
+static uint8_t ccmTestVector1Key[16] =
 {
     0xB4, 0xCE, 0x71, 0xA0, 0x1A, 0x78, 0x3C, 0x78, 0x51, 0xD1, 0x91, 0x32, 0xB3, 0xB0, 0x6E, 0x9A
 };
 
-static uint8_t ccm_test_vector1_nonce[13] =
+static uint8_t ccmTestVector1Nonce[13] =
 {
     0x73, 0xD7, 0xBC, 0xBA, 0x71, 0x0C, 0x10, 0x99, 0x45, 0xF7, 0x93, 0x6C, 0xD4
 };
 
-static uint8_t ccm_test_vector1_plaintext[32] =
+static uint8_t ccmTestVector1Plaintext[32] =
 {
     0x41, 0xE2, 0xC1, 0x25, 0xD4, 0x1E, 0x37, 0x2D, 0xA9, 0xA4, 0x78, 0x6D, 0x22, 0xA1, 0x0B, 0xA4,
     0xB0, 0x4C, 0x34, 0x67, 0x45, 0x4D, 0xA0, 0xB4, 0xB8, 0xC6, 0x92, 0x0F, 0xEA, 0x64, 0x15, 0x85
 };
 
-static uint8_t ccm_test_vector1_ciphertext[32] =
+static uint8_t ccmTestVector1Ciphertext[32] =
 {
     0xCA, 0xF3, 0x1B, 0x08, 0x3F, 0xD6, 0xEF, 0x06, 0x41, 0x71, 0x3E, 0xB4, 0x9F, 0x28, 0xF1, 0xCD,
     0xB6, 0xFB, 0xB1, 0x38, 0x25, 0x1D, 0xB9, 0x4F, 0x6F, 0xC5, 0x9B, 0xCC, 0xDF, 0x0E, 0x23, 0x09
 };
 
-static uint8_t ccm_test_vector1_tag[16] =
+static uint8_t ccmTestVector1Tag[16] =
 {
     0x2C, 0xCD, 0x1C, 0x20, 0x25, 0x26, 0x87, 0x3D, 0x0C, 0xCD, 0x60, 0x53, 0xC7, 0x9A, 0xEE, 0xAF
 };
 
-/* ---------------- Vector 2 ---------------- */
-static uint8_t ccm_test_vector2_key[16] =
+// Vector 2: AES-128 CCM, 4-byte plaintext, 8-byte AAD, 4-byte tag, 7-byte nonce
+static uint8_t ccmTestVector2Key[16] =
 {
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F
 };
 
-static uint8_t ccm_test_vector2_nonce[7] =
+static uint8_t ccmTestVector2Nonce[7] =
 {
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
 };
 
-static uint8_t ccm_test_vector2_plaintext[4] =
+static uint8_t ccmTestVector2Plaintext[4] =
 {
     0x20, 0x21, 0x22, 0x23
 };
 
-static uint8_t ccm_test_vector2_ciphertext[4] =
+static uint8_t ccmTestVector2Ciphertext[4] =
 {
     0x71, 0x62, 0x01, 0x5B
 };
 
-static uint8_t ccm_test_vector2_aad[8] =
+static uint8_t ccmTestVector2Aad[8] =
 {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07
 };
 
-static uint8_t ccm_test_vector2_tag[4] =
+static uint8_t ccmTestVector2Tag[4] =
 {
     0x4D, 0xAC, 0x25, 0x5D
 };
 
-/* ---------------- Vector 3 ---------------- */
-static uint8_t ccm_test_vector3_key[16] =
+// Vector 3: AES-128 CCM, 16-byte plaintext, 16-byte AAD, 6-byte tag, 8-byte nonce
+static uint8_t ccmTestVector3Key[16] =
 {
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F
 };
 
-static uint8_t ccm_test_vector3_nonce[8] =
+static uint8_t ccmTestVector3Nonce[8] =
 {
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17
 };
 
-static uint8_t ccm_test_vector3_plaintext[16] =
+static uint8_t ccmTestVector3Plaintext[16] =
 {
     0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F
 };
 
-static uint8_t ccm_test_vector3_ciphertext[16] =
+static uint8_t ccmTestVector3Ciphertext[16] =
 {
     0xD2, 0xA1, 0xF0, 0xE0, 0x51, 0xEA, 0x5F, 0x62, 0x08, 0x1A, 0x77, 0x92, 0x07, 0x3D, 0x59, 0x3D
 };
 
-static uint8_t ccm_test_vector3_aad[16] =
+static uint8_t ccmTestVector3Aad[16] =
 {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
 };
 
-static uint8_t ccm_test_vector3_tag[6] =
+static uint8_t ccmTestVector3Tag[6] =
 {
     0x1F, 0xC6, 0x4F, 0xBF, 0xAC, 0xCD
 };
 
-/* ---------------- Vector 4 ---------------- */
-static uint8_t ccm_test_vector4_key[16] =
+// Vector 4: AES-128 CCM, 24-byte plaintext, 20-byte AAD, 8-byte tag, 12-byte nonce
+static uint8_t ccmTestVector4Key[16] =
 {
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F
 };
 
-static uint8_t ccm_test_vector4_nonce[12] =
+static uint8_t ccmTestVector4Nonce[12] =
 {
     0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B
 };
 
-static uint8_t ccm_test_vector4_plaintext[24] =
+static uint8_t ccmTestVector4Plaintext[24] =
 {
     0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
     0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37
 };
 
-static uint8_t ccm_test_vector4_ciphertext[24] =
+static uint8_t ccmTestVector4Ciphertext[24] =
 {
     0xE3, 0xB2, 0x01, 0xA9, 0xF5, 0xB7, 0x1A, 0x7A, 0x9B, 0x1C, 0xEA, 0xEC, 0xCD, 0x97, 0xE7, 0x0B,
     0x61, 0x76, 0xAA, 0xD9, 0xA4, 0x42, 0x8A, 0xA5
 };
 
-static uint8_t ccm_test_vector4_aad[20] =
+static uint8_t ccmTestVector4Aad[20] =
 {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
     0x10, 0x11, 0x12, 0x13
 };
 
-static uint8_t ccm_test_vector4_tag[8] =
+static uint8_t ccmTestVector4Tag[8] =
 {
     0x48, 0x43, 0x92, 0xFB, 0xC1, 0xB0, 0x99, 0x51
 };
 
-/* ---------------- Vector 5 ---------------- */
-static uint8_t ccm_test_vector5_key[32] =
+// Vector 5: AES-256 CCM, no plaintext, no AAD, 8-byte tag, 12-byte nonce
+static uint8_t ccmTestVector5Key[32] =
 {
     0x92, 0xBD, 0x6F, 0xC8, 0x00, 0xE8, 0x0F, 0x4B, 0xD2, 0x95, 0xB8, 0x87, 0x3F, 0x28, 0x83, 0xEB,
     0x97, 0xA7, 0xF2, 0x51, 0x18, 0x20, 0x80, 0xA8, 0xAA, 0x6B, 0x43, 0x74, 0x0F, 0xAE, 0x80, 0x56
 };
 
-static uint8_t ccm_test_vector5_nonce[12] =
+static uint8_t ccmTestVector5Nonce[12] =
 {
     0x16, 0xDB, 0xA1, 0x59, 0x4C, 0xCF, 0xFD, 0x19, 0x8E, 0xB5, 0xBA, 0x14
 };
 
-static uint8_t ccm_test_vector5_tag[8] =
+static uint8_t ccmTestVector5Tag[8] =
 {
     0xC0, 0xB7, 0x2A, 0xB7, 0x15, 0x9F, 0x70, 0xD6
 };
 
-/* ---------------- Vector 6 ---------------- */
-static uint8_t ccm_test_vector6_key[32] =
+// Vector 6: AES-256 CCM, no plaintext, 32-byte AAD, 6-byte tag, 12-byte nonce
+static uint8_t ccmTestVector6Key[32] =
 {
     0x00, 0x52, 0xB3, 0x94, 0x70, 0x1E, 0xB1, 0xE0, 0xE1, 0xD7, 0xC1, 0xC8, 0x8D, 0xE7, 0xBD, 0x62,
     0x8C, 0xD2, 0x7D, 0x41, 0x71, 0x85, 0x00, 0xEA, 0x93, 0x6A, 0x7B, 0x48, 0x87, 0x3E, 0x4F, 0x42
 };
 
-static uint8_t ccm_test_vector6_nonce[12] =
+static uint8_t ccmTestVector6Nonce[12] =
 {
     0x75, 0xBA, 0x38, 0xE3, 0xF2, 0xC4, 0xFC, 0xE6, 0xF2, 0x04, 0xA2, 0x90
 };
 
-static uint8_t ccm_test_vector6_aad[32] =
+static uint8_t ccmTestVector6Aad[32] =
 {
     0x90, 0xA9, 0xF4, 0xF9, 0x65, 0xA6, 0xE0, 0x78, 0x9F, 0xE0, 0x84, 0xAD, 0x37, 0xFE, 0xFA, 0x5D,
     0x96, 0xA7, 0x5C, 0x78, 0x80, 0xF6, 0x34, 0xCF, 0x8A, 0xFC, 0xDD, 0xC9, 0xB3, 0x6A, 0x59, 0x28
 };
 
-static uint8_t ccm_test_vector6_tag[6] =
+static uint8_t ccmTestVector6Tag[6] =
 {
     0x97, 0x0D, 0xAF, 0x20, 0xB1, 0x30
 };
 
-/* ---------------- Vector 7 ---------------- */
-static uint8_t ccm_test_vector7_key[32] =
+// Vector 7: AES-256 CCM, 32-byte plaintext, no AAD, 14-byte tag, 12-byte nonce
+static uint8_t ccmTestVector7Key[32] =
 {
     0xED, 0xE0, 0x8C, 0x7F, 0xC6, 0x18, 0xF1, 0xDE, 0x29, 0x45, 0x96, 0xD4, 0xFC, 0xD0, 0xED, 0x6E,
     0xD0, 0xE2, 0x24, 0x84, 0xFA, 0x77, 0xE7, 0xFC, 0x53, 0x7F, 0x24, 0x67, 0x8F, 0xAF, 0xE6, 0xB5
 };
 
-static uint8_t ccm_test_vector7_nonce[12] =
+static uint8_t ccmTestVector7Nonce[12] =
 {
     0x99, 0x25, 0x40, 0x8C, 0xC6, 0xFF, 0x31, 0x25, 0x18, 0x1A, 0xEE, 0xB8
 };
 
-static uint8_t ccm_test_vector7_plaintext[32] =
+static uint8_t ccmTestVector7Plaintext[32] =
 {
     0x6F, 0x20, 0x53, 0xA2, 0x51, 0xDA, 0x27, 0x8A, 0x4F, 0xE3, 0xA4, 0x81, 0x21, 0x93, 0x0B, 0xEB,
     0x67, 0xC0, 0xD4, 0xFE, 0xD0, 0x5D, 0xD8, 0x40, 0x83, 0xDD, 0x5A, 0xEE, 0xA3, 0x41, 0xC2, 0xCE
 };
 
-static uint8_t ccm_test_vector7_ciphertext[32] =
+static uint8_t ccmTestVector7Ciphertext[32] =
 {
     0x7B, 0x0A, 0x24, 0xD9, 0x56, 0x0E, 0x0C, 0x27, 0x26, 0x22, 0x7B, 0x50, 0x9D, 0xDC, 0xA0, 0x9D,
     0x75, 0xBD, 0xF9, 0x90, 0xC5, 0x13, 0x14, 0xF7, 0xC7, 0x79, 0xA5, 0x8D, 0x26, 0x85, 0x38, 0xF2
 };
 
-static uint8_t ccm_test_vector7_tag[14] =
+static uint8_t ccmTestVector7Tag[14] =
 {
     0x20, 0x1C, 0x69, 0xD0, 0x8F, 0xA0, 0x4E, 0x2A, 0xF0, 0x1E, 0x08, 0xDF, 0x55, 0x95
 };
 
-/* ---------------- Vector 8 ---------------- */
-static uint8_t ccm_test_vector8_key[32] =
+// Vector 8: AES-256 CCM, 32-byte plaintext, 32-byte AAD, 12-byte tag, 12-byte nonce
+static uint8_t ccmTestVector8Key[32] =
 {
     0xD8, 0x2E, 0x5D, 0xAA, 0x19, 0x97, 0x60, 0xD6, 0xF2, 0x91, 0xC1, 0xD6, 0x31, 0x94, 0x4A, 0x5B,
     0x43, 0xAE, 0x52, 0xC5, 0x8D, 0x0D, 0x63, 0xB8, 0xEB, 0x2F, 0x93, 0xC6, 0x0B, 0xE1, 0x46, 0xB3
 };
 
-static uint8_t ccm_test_vector8_nonce[12] =
+static uint8_t ccmTestVector8Nonce[12] =
 {
     0x58, 0x8A, 0xBA, 0x80, 0x6D, 0x4E, 0xB0, 0x70, 0x9E, 0x42, 0xC1, 0x58
 };
 
-static uint8_t ccm_test_vector8_plaintext[32] =
+static uint8_t ccmTestVector8Plaintext[32] =
 {
     0xE6, 0xB5, 0x40, 0xC8, 0xF3, 0x0A, 0x2B, 0x27, 0x45, 0x10, 0xBB, 0xBB, 0x43, 0xA6, 0xB0, 0x01,
     0x14, 0xBC, 0x51, 0xE4, 0xF5, 0xA7, 0x0E, 0x19, 0xF6, 0x51, 0xB5, 0x45, 0xBE, 0xA6, 0xE6, 0xAD
 };
 
-static uint8_t ccm_test_vector8_ciphertext[32] =
+static uint8_t ccmTestVector8Ciphertext[32] =
 {
     0xA2, 0xBC, 0x64, 0xA6, 0x89, 0xDA, 0xC0, 0x11, 0x8A, 0xB2, 0x28, 0x1A, 0x39, 0x5A, 0x82, 0x7D,
     0x9A, 0x60, 0xD4, 0x17, 0x64, 0x07, 0xD4, 0xB7, 0xF6, 0x4B, 0x42, 0xC2, 0xC2, 0x20, 0x56, 0x1E
 };
 
-static uint8_t ccm_test_vector8_aad[32] =
+static uint8_t ccmTestVector8Aad[32] =
 {
     0x1C, 0xB1, 0x27, 0xFB, 0xAA, 0xD3, 0x10, 0x0F, 0x04, 0x34, 0x35, 0x34, 0x5A, 0x41, 0x16, 0xFB,
     0x65, 0x35, 0xEF, 0xB4, 0xF1, 0x10, 0x83, 0xAB, 0x7E, 0x98, 0xC6, 0x7D, 0xD5, 0x80, 0x83, 0xAE
 };
 
-static uint8_t ccm_test_vector8_tag[12] =
+static uint8_t ccmTestVector8Tag[12] =
 {
     0x18, 0x60, 0x94, 0x24, 0x88, 0xC1, 0x59, 0x62, 0xE3, 0xEA, 0x1A, 0x3F
 };
 
-/* ---------------- Vector 9 ---------------- */
-static uint8_t ccm_test_vector9_key[32] =
+// Vector 9: AES-256 CCM, 32-byte plaintext, 32-byte AAD, 14-byte tag, 12-byte nonce
+static uint8_t ccmTestVector9Key[32] =
 {
     0xBC, 0x3C, 0xC9, 0xE1, 0xBE, 0x83, 0xB0, 0xB9, 0x07, 0x4C, 0x31, 0xF8, 0xAE, 0xFA, 0xA4, 0xB1,
     0x57, 0x65, 0x97, 0x70, 0xD8, 0xAE, 0xC3, 0x06, 0xF4, 0x29, 0x81, 0xC9, 0x98, 0xBD, 0xD4, 0x1E
 };
 
-static uint8_t ccm_test_vector9_nonce[12] =
+static uint8_t ccmTestVector9Nonce[12] =
 {
     0xFC, 0x08, 0xA1, 0x44, 0x08, 0xE3, 0x82, 0xE9, 0x5A, 0x0E, 0x04, 0x54
 };
 
-static uint8_t ccm_test_vector9_plaintext[32] =
+static uint8_t ccmTestVector9Plaintext[32] =
 {
     0x60, 0xEF, 0x7B, 0x51, 0xC9, 0xC3, 0xED, 0x5B, 0xB5, 0x3D, 0xFA, 0xC0, 0x0E, 0x96, 0x6E, 0x8A,
     0xAC, 0x1A, 0xA7, 0x2F, 0x2C, 0x65, 0x43, 0x37, 0x8D, 0x93, 0xA4, 0xAC, 0xDE, 0x65, 0xF7, 0x02
 };
 
-static uint8_t ccm_test_vector9_ciphertext[32] =
+static uint8_t ccmTestVector9Ciphertext[32] =
 {
     0x35, 0x46, 0x3E, 0x3D, 0xF4, 0x35, 0x15, 0x7A, 0x79, 0x63, 0x28, 0x8A, 0xE0, 0xFF, 0x1D, 0x39,
     0x87, 0xB2, 0x7F, 0xD2, 0x98, 0x73, 0xF4, 0x9F, 0x87, 0xC3, 0xB8, 0xDF, 0xDC, 0xFB, 0xC4, 0x74
 };
 
-static uint8_t ccm_test_vector9_aad[32] =
+static uint8_t ccmTestVector9Aad[32] =
 {
     0x57, 0x69, 0xF1, 0xC1, 0x2F, 0x6D, 0x0A, 0x89, 0x6B, 0x83, 0xF2, 0x87, 0x3C, 0x13, 0x6B, 0xFD,
     0x19, 0xDE, 0xB5, 0x88, 0xEC, 0x68, 0x40, 0x80, 0xAD, 0x18, 0x6B, 0x88, 0xC3, 0x44, 0x64, 0x4B
 };
 
-static uint8_t ccm_test_vector9_tag[14] =
+static uint8_t ccmTestVector9Tag[14] =
 {
     0xE4, 0xD6, 0x30, 0xE3, 0xEE, 0xEC, 0xA0, 0xA5, 0xD3, 0x76, 0x18, 0xE4, 0x62, 0x07
 };
 
-static ccm_test_vector_t ccm_test_vectors[] =
+// 10 CCM test vectors: vectors 0-4 AES-128, vectors 5-9 AES-256
+static ccm_test_vector_t ccmTestVectors[] =
 {
     {
-        .key = ccm_test_vector0_key,
-        .nonce = ccm_test_vector0_nonce,
-        .plaintext = ccm_test_vector0_plaintext,
-        .ciphertext = ccm_test_vector0_ciphertext,
-        .aad = ccm_test_vector0_aad,
-        .tag = ccm_test_vector0_tag,
+        .key = ccmTestVector0Key,
+        .nonce = ccmTestVector0Nonce,
+        .plaintext = ccmTestVector0Plaintext,
+        .ciphertext = ccmTestVector0Ciphertext,
+        .aad = ccmTestVector0Aad,
+        .tag = ccmTestVector0Tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
-        .aadLength = sizeof(ccm_test_vector0_aad),
-        .nonceLength = sizeof(ccm_test_vector0_nonce),
-        .textLength = sizeof(ccm_test_vector0_plaintext),
-        .tagLength = sizeof(ccm_test_vector0_tag)
+        .aadLength = sizeof(ccmTestVector0Aad),
+        .nonceLength = sizeof(ccmTestVector0Nonce),
+        .textLength = sizeof(ccmTestVector0Plaintext),
+        .tagLength = sizeof(ccmTestVector0Tag)
     },
     {
-        .key = ccm_test_vector1_key,
-        .nonce = ccm_test_vector1_nonce,
-        .plaintext = ccm_test_vector1_plaintext,
-        .ciphertext = ccm_test_vector1_ciphertext,
+        .key = ccmTestVector1Key,
+        .nonce = ccmTestVector1Nonce,
+        .plaintext = ccmTestVector1Plaintext,
+        .ciphertext = ccmTestVector1Ciphertext,
         .aad = NULL,
-        .tag = ccm_test_vector1_tag,
+        .tag = ccmTestVector1Tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
         .aadLength = 0U,
-        .nonceLength = sizeof(ccm_test_vector1_nonce),
-        .textLength = sizeof(ccm_test_vector1_plaintext),
-        .tagLength = sizeof(ccm_test_vector1_tag)
+        .nonceLength = sizeof(ccmTestVector1Nonce),
+        .textLength = sizeof(ccmTestVector1Plaintext),
+        .tagLength = sizeof(ccmTestVector1Tag)
     },
     {
-        .key = ccm_test_vector2_key,
-        .nonce = ccm_test_vector2_nonce,
-        .plaintext = ccm_test_vector2_plaintext,
-        .ciphertext = ccm_test_vector2_ciphertext,
-        .aad = ccm_test_vector2_aad,
-        .tag = ccm_test_vector2_tag,
+        .key = ccmTestVector2Key,
+        .nonce = ccmTestVector2Nonce,
+        .plaintext = ccmTestVector2Plaintext,
+        .ciphertext = ccmTestVector2Ciphertext,
+        .aad = ccmTestVector2Aad,
+        .tag = ccmTestVector2Tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
-        .aadLength = sizeof(ccm_test_vector2_aad),
-        .nonceLength = sizeof(ccm_test_vector2_nonce),
-        .textLength = sizeof(ccm_test_vector2_plaintext),
-        .tagLength = sizeof(ccm_test_vector2_tag)
+        .aadLength = sizeof(ccmTestVector2Aad),
+        .nonceLength = sizeof(ccmTestVector2Nonce),
+        .textLength = sizeof(ccmTestVector2Plaintext),
+        .tagLength = sizeof(ccmTestVector2Tag)
     },
     {
-        .key = ccm_test_vector3_key,
-        .nonce = ccm_test_vector3_nonce,
-        .plaintext = ccm_test_vector3_plaintext,
-        .ciphertext = ccm_test_vector3_ciphertext,
-        .aad = ccm_test_vector3_aad,
-        .tag = ccm_test_vector3_tag,
+        .key = ccmTestVector3Key,
+        .nonce = ccmTestVector3Nonce,
+        .plaintext = ccmTestVector3Plaintext,
+        .ciphertext = ccmTestVector3Ciphertext,
+        .aad = ccmTestVector3Aad,
+        .tag = ccmTestVector3Tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
-        .aadLength = sizeof(ccm_test_vector3_aad),
-        .nonceLength = sizeof(ccm_test_vector3_nonce),
-        .textLength = sizeof(ccm_test_vector3_plaintext),
-        .tagLength = sizeof(ccm_test_vector3_tag)
+        .aadLength = sizeof(ccmTestVector3Aad),
+        .nonceLength = sizeof(ccmTestVector3Nonce),
+        .textLength = sizeof(ccmTestVector3Plaintext),
+        .tagLength = sizeof(ccmTestVector3Tag)
     },
     {
-        .key = ccm_test_vector4_key,
-        .nonce = ccm_test_vector4_nonce,
-        .plaintext = ccm_test_vector4_plaintext,
-        .ciphertext = ccm_test_vector4_ciphertext,
-        .aad = ccm_test_vector4_aad,
-        .tag = ccm_test_vector4_tag,
+        .key = ccmTestVector4Key,
+        .nonce = ccmTestVector4Nonce,
+        .plaintext = ccmTestVector4Plaintext,
+        .ciphertext = ccmTestVector4Ciphertext,
+        .aad = ccmTestVector4Aad,
+        .tag = ccmTestVector4Tag,
         .keyLength = KEY_TYPE_AES128_SIZE,
-        .aadLength = sizeof(ccm_test_vector4_aad),
-        .nonceLength = sizeof(ccm_test_vector4_nonce),
-        .textLength = sizeof(ccm_test_vector4_plaintext),
-        .tagLength = sizeof(ccm_test_vector4_tag)
+        .aadLength = sizeof(ccmTestVector4Aad),
+        .nonceLength = sizeof(ccmTestVector4Nonce),
+        .textLength = sizeof(ccmTestVector4Plaintext),
+        .tagLength = sizeof(ccmTestVector4Tag)
     },
     {
-        .key = ccm_test_vector5_key,
-        .nonce = ccm_test_vector5_nonce,
+        .key = ccmTestVector5Key,
+        .nonce = ccmTestVector5Nonce,
         .plaintext = NULL,
         .ciphertext = NULL,
         .aad = NULL,
-        .tag = ccm_test_vector5_tag,
+        .tag = ccmTestVector5Tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
         .aadLength = 0U,
-        .nonceLength = sizeof(ccm_test_vector5_nonce),
+        .nonceLength = sizeof(ccmTestVector5Nonce),
         .textLength = 0U,
-        .tagLength = sizeof(ccm_test_vector5_tag)
+        .tagLength = sizeof(ccmTestVector5Tag)
     },
     {
-        .key = ccm_test_vector6_key,
-        .nonce = ccm_test_vector6_nonce,
+        .key = ccmTestVector6Key,
+        .nonce = ccmTestVector6Nonce,
         .plaintext = NULL,
         .ciphertext = NULL,
-        .aad = ccm_test_vector6_aad,
-        .tag = ccm_test_vector6_tag,
+        .aad = ccmTestVector6Aad,
+        .tag = ccmTestVector6Tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
-        .aadLength = sizeof(ccm_test_vector6_aad),
-        .nonceLength = sizeof(ccm_test_vector6_nonce),
+        .aadLength = sizeof(ccmTestVector6Aad),
+        .nonceLength = sizeof(ccmTestVector6Nonce),
         .textLength = 0U,
-        .tagLength = sizeof(ccm_test_vector6_tag)
+        .tagLength = sizeof(ccmTestVector6Tag)
     },
     {
-        .key = ccm_test_vector7_key,
-        .nonce = ccm_test_vector7_nonce,
-        .plaintext = ccm_test_vector7_plaintext,
-        .ciphertext = ccm_test_vector7_ciphertext,
+        .key = ccmTestVector7Key,
+        .nonce = ccmTestVector7Nonce,
+        .plaintext = ccmTestVector7Plaintext,
+        .ciphertext = ccmTestVector7Ciphertext,
         .aad = NULL,
-        .tag = ccm_test_vector7_tag,
+        .tag = ccmTestVector7Tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
         .aadLength = 0U,
-        .nonceLength = sizeof(ccm_test_vector7_nonce),
-        .textLength = sizeof(ccm_test_vector7_plaintext),
-        .tagLength = sizeof(ccm_test_vector7_tag)
+        .nonceLength = sizeof(ccmTestVector7Nonce),
+        .textLength = sizeof(ccmTestVector7Plaintext),
+        .tagLength = sizeof(ccmTestVector7Tag)
     },
     {
-        .key = ccm_test_vector8_key,
-        .nonce = ccm_test_vector8_nonce,
-        .plaintext = ccm_test_vector8_plaintext,
-        .ciphertext = ccm_test_vector8_ciphertext,
-        .aad = ccm_test_vector8_aad,
-        .tag = ccm_test_vector8_tag,
+        .key = ccmTestVector8Key,
+        .nonce = ccmTestVector8Nonce,
+        .plaintext = ccmTestVector8Plaintext,
+        .ciphertext = ccmTestVector8Ciphertext,
+        .aad = ccmTestVector8Aad,
+        .tag = ccmTestVector8Tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
-        .aadLength = sizeof(ccm_test_vector8_aad),
-        .nonceLength = sizeof(ccm_test_vector8_nonce),
-        .textLength = sizeof(ccm_test_vector8_plaintext),
-        .tagLength = sizeof(ccm_test_vector8_tag)
+        .aadLength = sizeof(ccmTestVector8Aad),
+        .nonceLength = sizeof(ccmTestVector8Nonce),
+        .textLength = sizeof(ccmTestVector8Plaintext),
+        .tagLength = sizeof(ccmTestVector8Tag)
     },
     {
-        .key = ccm_test_vector9_key,
-        .nonce = ccm_test_vector9_nonce,
-        .plaintext = ccm_test_vector9_plaintext,
-        .ciphertext = ccm_test_vector9_ciphertext,
-        .aad = ccm_test_vector9_aad,
-        .tag = ccm_test_vector9_tag,
+        .key = ccmTestVector9Key,
+        .nonce = ccmTestVector9Nonce,
+        .plaintext = ccmTestVector9Plaintext,
+        .ciphertext = ccmTestVector9Ciphertext,
+        .aad = ccmTestVector9Aad,
+        .tag = ccmTestVector9Tag,
         .keyLength = KEY_TYPE_AES256_SIZE,
-        .aadLength = sizeof(ccm_test_vector9_aad),
-        .nonceLength = sizeof(ccm_test_vector9_nonce),
-        .textLength = sizeof(ccm_test_vector9_plaintext),
-        .tagLength = sizeof(ccm_test_vector9_tag)
+        .aadLength = sizeof(ccmTestVector9Aad),
+        .nonceLength = sizeof(ccmTestVector9Nonce),
+        .textLength = sizeof(ccmTestVector9Plaintext),
+        .tagLength = sizeof(ccmTestVector9Tag)
     }
 };
 
-ccm_test_vector_t *get_ccm_test_vectors(void)
+ccm_test_vector_t *TV_CcmTestVectorsGet(void)
 {
-    return ccm_test_vectors;
+    return ccmTestVectors;
 }
 
-uint32_t get_ccm_test_count(void)
+uint32_t TV_CcmTestCountGet(void)
 {
-    return sizeof(ccm_test_vectors) / sizeof(ccm_test_vectors[0]);
+    return sizeof(ccmTestVectors) / sizeof(ccmTestVectors[0]);
 }

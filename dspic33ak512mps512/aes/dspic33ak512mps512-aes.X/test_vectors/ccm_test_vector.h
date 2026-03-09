@@ -58,11 +58,12 @@ typedef struct ccm_test_vector_t
 
 } ccm_test_vector_t;
 
-ccm_test_vector_t *get_ccm_test_vectors(void);
-uint32_t get_ccm_test_count(void);
+ccm_test_vector_t *TV_CcmTestVectorsGet(void);
+
+uint32_t TV_CcmTestCountGet(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* GCM_TEST_VECTOR_H */
+#endif /* CCM_TEST_VECTOR_H */

@@ -214,8 +214,8 @@ void AES_SymXtsTestRun(void)
     const char *testWrapper = "SYMMETRIC";
     const char *testType = "XTS";
 
-    xts_test_vector_t *test = get_xts_test_vectors();
-    uint32_t testCount = get_xts_test_count();
+    xts_test_vector_t *test = TV_XtsTestVectorsGet();
+    uint32_t testCount = TV_XtsTestCountGet();
 
     for (uint32_t i = 0U; i < testCount; i++)
     {

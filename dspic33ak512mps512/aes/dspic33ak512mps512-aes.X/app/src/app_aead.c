@@ -342,10 +342,10 @@ void AES_AeadGcmTestRun(void)
     const char *emptyString = "";
 
 #ifdef RUN_ALL_VECTORS
-    gcm_test_vector_t *test = get_gcm_test_vectors();
-    uint32_t testCount = get_gcm_test_count();
+    gcm_test_vector_t *test = TV_GcmTestVectorsGet();
+    uint32_t testCount = TV_GcmTestCountGet();
 #else
-    gcm_test_vector_t *test = &get_gcm_test_vectors()[22];
+    gcm_test_vector_t *test = &TV_GcmTestVectorsGet()[22];
     uint32_t testCount = 1U;
 #endif
 
@@ -541,8 +541,8 @@ void AES_AeadCcmTestRun(void)
     const char *testType = "CCM";
     const char *emptyString = "";
 
-    ccm_test_vector_t *test = get_ccm_test_vectors();
-    uint32_t testCount = get_ccm_test_count();
+    ccm_test_vector_t *test = TV_CcmTestVectorsGet();
+    uint32_t testCount = TV_CcmTestCountGet();
 
     for (uint32_t i = 0U; i < testCount; i++)
     {
