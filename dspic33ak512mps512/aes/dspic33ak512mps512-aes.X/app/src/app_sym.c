@@ -110,7 +110,6 @@ static crypto_Sym_Status_E aes_sym_test_direct(crypto_CipherOper_E encrypt, cryp
     return status;
 }
 
-
 static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypto_Sym_OpModes_E opMode,
         uint8_t* data, uint32_t dataLen, uint8_t* key, uint32_t keyLen,
         uint8_t* result, uint8_t* initializationVector)
@@ -179,7 +178,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
     const char* testType = "???";
     const char* emptyString = "";
 
-    switch(opMode)
+    switch (opMode)
     {
         case CRYPTO_SYM_OPMODE_ECB:
             testType = "ECB";
@@ -205,7 +204,7 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
 
     printHexArray("Key                  ", key, keyLen);
 
-    if(initializationVector != NULL)
+    if (initializationVector != NULL)
     {
         printHexArray("Initialization Vector", initializationVector, INIT_VECTOR_SIZE);
     }

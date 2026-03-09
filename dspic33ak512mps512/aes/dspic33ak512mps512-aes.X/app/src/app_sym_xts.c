@@ -99,7 +99,6 @@ static crypto_Sym_Status_E aes_sym_xts_test_direct(crypto_CipherOper_E encrypt,
     return status;
 }
 
-
 static crypto_Sym_Status_E aes_sym_xts_test_steps(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
         uint8_t* tweak, uint8_t* result)
@@ -157,7 +156,6 @@ static crypto_Sym_Status_E aes_sym_xts_test_steps(crypto_CipherOper_E encrypt,
 
     return status;
 }
-
 
 static void checkEncryption(uint8_t *text, uint8_t *result, uint32_t length)
 {

@@ -38,9 +38,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_AEAD_H
-#define	APP_AEAD_H
+#define APP_AEAD_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -62,9 +62,9 @@ extern "C" {
 void aes_aead_gcm_test(void);
 void aes_aead_ccm_test(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_AEAD_H */
+#endif /* APP_AEAD_H */
 

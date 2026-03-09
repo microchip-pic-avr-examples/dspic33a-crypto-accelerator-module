@@ -24,9 +24,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef XTS_TEST_VECTOR_H
-#define	XTS_TEST_VECTOR_H
+#define XTS_TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -55,8 +55,8 @@ typedef struct XTS_TEST_VECTOR {
 XTS_TEST_VECTOR * get_xts_test_vectors(void);
 uint32_t get_xts_test_count(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* GCM_TEST_VECTOR_H */
+#endif /* GCM_TEST_VECTOR_H */
