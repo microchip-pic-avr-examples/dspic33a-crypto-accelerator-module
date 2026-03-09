@@ -185,11 +185,11 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
     unsigned long keyBitLen = keyLen * 8UL;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
-    uint8_t encryptedDirectResult[48];
-    uint8_t decryptedDirectResult[48];
+    uint8_t encryptedDirectResult[DATA_SIZE];
+    uint8_t decryptedDirectResult[DATA_SIZE];
 
-    uint8_t encryptedStepsResult[48];
-    uint8_t decryptedStepsResult[48];
+    uint8_t encryptedStepsResult[DATA_SIZE];
+    uint8_t decryptedStepsResult[DATA_SIZE];
 
     const char* testWrapper = "SYMMETRIC";
     const char* testType = "???";
@@ -325,10 +325,10 @@ static void aes_sym_128_test(
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    aes_sym_test(opMode, data, 35, key, CRYPTO_AESKEYSIZE_128, initializationVector);
-    aes_sym_test(opMode, data, 41, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    aes_sym_test(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    aes_sym_test(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 #endif
-    aes_sym_test(opMode, data, 48, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    aes_sym_test(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 }
 
 static void aes_sym_192_test(
@@ -336,10 +336,10 @@ static void aes_sym_192_test(
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    aes_sym_test(opMode, data, 35, key, CRYPTO_AESKEYSIZE_192, initializationVector);
-    aes_sym_test(opMode, data, 41, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    aes_sym_test(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    aes_sym_test(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 #endif
-    aes_sym_test(opMode, data, 48, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    aes_sym_test(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 }
 
 static void aes_sym_256_test(
@@ -347,10 +347,10 @@ static void aes_sym_256_test(
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    aes_sym_test(opMode, data, 35, (uint8_t*) key, CRYPTO_AESKEYSIZE_256, initializationVector);
-    aes_sym_test(opMode, data, 41, (uint8_t*) key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    aes_sym_test(opMode, data, 35U, (uint8_t *) key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    aes_sym_test(opMode, data, 41U, (uint8_t *) key, CRYPTO_AESKEYSIZE_256, initializationVector);
 #endif
-    aes_sym_test(opMode, data, 48, (uint8_t*) key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    aes_sym_test(opMode, data, 48U, (uint8_t *) key, CRYPTO_AESKEYSIZE_256, initializationVector);
 }
 
 // *****************************************************************************

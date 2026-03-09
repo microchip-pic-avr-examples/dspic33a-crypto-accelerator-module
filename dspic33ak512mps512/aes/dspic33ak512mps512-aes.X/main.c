@@ -50,6 +50,7 @@ Microchip or any third party.
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes.h"
@@ -83,10 +84,10 @@ int main(void)
     (void) printf("________________________________"
         "______________________________________"
         "________________________________ \r\n");
-    while (1)
+    while (true)
     {
 
-    };
+    }
 
     return EXIT_SUCCESS;
 }

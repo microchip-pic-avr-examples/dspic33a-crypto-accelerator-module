@@ -173,7 +173,7 @@ static crypto_Sym_Status_E aes_sym_xts_test_steps(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void checkEncryption(uint8_t *text, uint8_t *result, uint32_t length)
+static void checkEncryption(const uint8_t *text, const uint8_t *result, uint32_t length)
 {
     (void) printf(BLUE
             "\r\n ---------------------------------"
@@ -217,7 +217,7 @@ void aes_sym_xts_test(void)
     xts_test_vector_t *test = get_xts_test_vectors();
     uint32_t testCount = get_xts_test_count();
 
-    for (uint32_t i = 0; i < testCount; i++)
+    for (uint32_t i = 0U; i < testCount; i++)
     {
         uint8_t *plaintext;
         uint8_t *ciphertext;

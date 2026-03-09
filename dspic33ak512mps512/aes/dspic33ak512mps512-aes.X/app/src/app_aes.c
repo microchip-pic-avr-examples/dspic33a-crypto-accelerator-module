@@ -40,7 +40,8 @@ Microchip or any third party.
 *
 *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
 *
-*  Reasoning: printf is required for printing to the terminal in this code example
+*  Reasoning: printf and sprintf are required for printing to the terminal
+*  in this code example
 */
 #include <stdio.h>
 #include <stdbool.h>
@@ -51,18 +52,14 @@ Microchip or any third party.
 
 uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
-    uint8_t result = 0;
+    uint8_t result = 0U;
 
     if (size > 0U)
     {
-        const uint8_t *tempa = a;
-        const uint8_t *tempb = b;
-
-        for (unsigned int i = 0; i < size; i++)
+        for (size_t i = 0U; i < size; i++)
         {
-            result |= tempa[i] ^ tempb[i];
+            result |= a[i] ^ b[i];
         }
-
     }
     return result;
 }
@@ -81,13 +78,11 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
     }
 }
 
-void printHexArray(const char *label, uint8_t *data,
+void printHexArray(const char *label, const uint8_t *data,
         uint32_t size)
 {
     if (size > 0U)
     {
-        const uint8_t *ldata = data;
-
         (void) printf(BLUE
             "\r\n -----------------------------------"
             "--------------------------------------------------"
@@ -101,7 +96,7 @@ void printHexArray(const char *label, uint8_t *data,
                 (void) printf("\r\n                          ");
             }
 
-            (void) printf(" 0x%02x", ldata[index]);
+            (void) printf(" 0x%02x", data[index]);
         }
     }
 }
@@ -115,7 +110,7 @@ void printTestHeader(const char *wrapperType,
         " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
         wrapperType, keyBitLen, testType,
         (unsigned long) dataLen, additionalInfo);
-    int headerLen = strlen(header);
+    int headerLen = (int) strlen(header);
     int padding = (94 - headerLen) / 2;
 
     (void) printf(MAG
