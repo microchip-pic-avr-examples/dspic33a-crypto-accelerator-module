@@ -36,11 +36,11 @@ extern "C" {
 typedef struct
 {
     uint8_t *privateKeyData;
-    uint8_t privateKeyLen;
+    uint8_t privateKeyLength;
     uint8_t *publicKeyData;
-    uint8_t publicKeyLen;
+    uint8_t publicKeyLength;
     uint8_t *hashData;
-    uint8_t hashLen;
+    uint8_t hashLength;
     const char *curveInformation;
     crypto_EccCurveType_E curveType;
 } test_vector_t;
@@ -58,4 +58,3 @@ extern test_vector_t ecdsaP521;
 #endif
 
 #endif /* TEST_VECTOR_H */
-

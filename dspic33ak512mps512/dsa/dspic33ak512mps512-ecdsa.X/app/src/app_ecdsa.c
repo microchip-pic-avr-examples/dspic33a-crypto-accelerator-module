@@ -35,9 +35,9 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-* 
+*
 *  (Rule 21.6) Required: The standard library input/output functions shall not be used
-* 
+*
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
@@ -74,32 +74,32 @@ static void ECDSA_BlockingHardwareTestRun(test_vector_t *testVector)
     uint8_t signatureLength = UTIL_SignatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     UTIL_TestHeaderPrint(testVector->curveInformation, "BLOCKING");
-    (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    (void) printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
 
     ECDSA_CompleteStatesClear();
     // Crypto Library ECDSA SIGN API
     status = Crypto_DigiSign_Ecdsa_Sign(
         CRYPTO_HANDLER_HW_INTERNAL,
-        testVector->hashData, testVector->hashLen,
+        testVector->hashData, testVector->hashLength,
         signature, signatureLength,
         testVector->privateKeyData,
-        testVector->privateKeyLen,
+        testVector->privateKeyLength,
         testVector->curveType, SESSION_ID);
 
     UTIL_HexArrayPrint(SIGNATURE_PRINT, signature, signatureLength);
     UTIL_StatusPrint(status, SIGNING_PRINT);
     UTIL_SplitterPrint();
-    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
+    (void) printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
 
     int8_t hashStatus = 0;
     ECDSA_CompleteStatesClear();
     // Crypto Library ECDSA VERIFY API
     status = Crypto_DigiSign_Ecdsa_Verify(
         CRYPTO_HANDLER_HW_INTERNAL,
-        testVector->hashData, testVector->hashLen,
+        testVector->hashData, testVector->hashLength,
         signature, signatureLength,
         testVector->publicKeyData,
-        testVector->publicKeyLen,
+        testVector->publicKeyLength,
         &hashStatus, testVector->curveType, SESSION_ID);
 
     UTIL_StatusPrint(status, VERIFYING_PRINT);
@@ -111,14 +111,14 @@ static void ECDSA_NonBlockingHardwareTestRun(test_vector_t *testVector)
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
     UTIL_TestHeaderPrint(testVector->curveInformation, "NON-BLOCKING");
 
-    (void)printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
+    (void) printf(YELLOW"\r\n\r\n Start Signature Generation"RESET_COLOR);
     ECDSA_CompleteStatesClear();
     // Crypto Library ECDSA SIGN Non-Blocking API
     status = Crypto_DigiSign_Ecdsa_Sign_Start(
         CRYPTO_HANDLER_HW_INTERNAL,
-        testVector->hashData, testVector->hashLen,
+        testVector->hashData, testVector->hashLength,
         testVector->privateKeyData,
-        testVector->privateKeyLen,
+        testVector->privateKeyLength,
         testVector->curveType, SESSION_ID);
     if (status == CRYPTO_DIGISIGN_SUCCESS)
     {
@@ -131,15 +131,15 @@ static void ECDSA_NonBlockingHardwareTestRun(test_vector_t *testVector)
     UTIL_StatusPrint(status, SIGNING_PRINT);
     UTIL_SplitterPrint();
 
-    (void)printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
+    (void) printf(YELLOW"\r\n\r\n Start Verification"RESET_COLOR);
     ECDSA_CompleteStatesClear();
     // Crypto Library ECDSA VERIFY Non-Blocking API
     status = Crypto_DigiSign_Ecdsa_Verify_Start(
         CRYPTO_HANDLER_HW_INTERNAL,
-        testVector->hashData, testVector->hashLen,
+        testVector->hashData, testVector->hashLength,
         signature, signatureLength,
         testVector->publicKeyData,
-        testVector->publicKeyLen,
+        testVector->publicKeyLength,
         testVector->curveType, SESSION_ID);
     if (status == CRYPTO_DIGISIGN_SUCCESS)
     {
@@ -180,7 +180,7 @@ void ECDSA_TestRun(void)
     Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(&ECDSA_SignOperationComplete);
     Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(&ECDSA_VerifyOperationComplete);
     UTIL_SplitterPrint();
-    (void)printf("\r\n Starting CRYPTO ECDSA Verify Sign program \r\n");
+    (void) printf("\r\n Starting CRYPTO ECDSA Verify Sign program \r\n");
     ECDSA_P192TestRun();
     ECDSA_P256TestRun();
     ECDSA_P384TestRun();

@@ -35,9 +35,9 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-* 
+*
 *  (Rule 21.6) Required: The standard library input/output functions shall not be used
-* 
+*
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
@@ -48,19 +48,19 @@ void UTIL_StatusPrint(crypto_DigiSign_Status_E status, const char *type)
 {
     if (status != CRYPTO_DIGISIGN_SUCCESS)
     {
-        (void)printf(RED
+        (void) printf(RED
             " \r\n ECDSA %s FAIL:: ErrorCode = 0x%X"
             RESET_COLOR, type, (unsigned int) status);
     }
     else
     {
-        (void)printf(GREEN" \r\n ECDSA %s PASS "RESET_COLOR, type);
+        (void) printf(GREEN" \r\n ECDSA %s PASS "RESET_COLOR, type);
     }
 }
 
 void UTIL_SplitterPrint(void)
 {
-    (void)printf("\r\n\n "
+    (void) printf("\r\n\n "
         "__________________________________________________"
         "__________________________________________________"
         "__ \r\n");
@@ -68,13 +68,13 @@ void UTIL_SplitterPrint(void)
 
 void UTIL_TestHeaderPrint(const char *curve, const char *blocking)
 {
-    (void)printf(MAG
+    (void) printf(MAG
         "\r\n\r\n ******************************************"
         "******************************************");
-    (void)printf(CYAN
+    (void) printf(CYAN
         "\r\n\t ******************** %s ECDSA %s "
         "********************", curve, blocking);
-    (void)printf(MAG
+    (void) printf(MAG
         "\r\n ******************************************"
         "******************************************"
         RESET_COLOR);
@@ -82,15 +82,15 @@ void UTIL_TestHeaderPrint(const char *curve, const char *blocking)
 
 void UTIL_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size)
 {
-    (void)printf("\r\n\r\n\t%s", label);
-    for (uint32_t i = 0U; i < size; i++)
+    (void) printf("\r\n\r\n\t%s", label);
+    for (uint32_t byteIndex = 0U; byteIndex < size; byteIndex++)
     {
-        if ((0U == (i % 16U)) && (0U != i))
+        if ((0U == (byteIndex % 16U)) && (0U != byteIndex))
         {
-            (void)printf("\r\n\t\t\t");
+            (void) printf("\r\n\t\t\t");
         }
 
-        (void)printf(" 0x%02X", data[i]);
+        (void) printf(" 0x%02X", data[byteIndex]);
     }
 }
 
