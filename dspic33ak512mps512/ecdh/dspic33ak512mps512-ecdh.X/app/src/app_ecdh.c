@@ -54,18 +54,18 @@ Microchip or any third party.
 
 static void ECDH_SplitterPrint(void)
 {
-    (void)printf("\r\n\n ________________________________"
+    (void) printf("\r\n\n ________________________________"
         "____________________________________"
         "__________________________________ \r\n");
 }
 
 static void ECDH_TestHeaderPrint(const char *label)
 {
-    (void)printf(MAG "\r\n\r\n ****************************"
+    (void) printf(MAG "\r\n\r\n ****************************"
         "********************************************************");
-    (void)printf(CYAN "\r\n\t\t ******************** "
+    (void) printf(CYAN "\r\n\t\t ******************** "
         "%s ********************", label);
-    (void)printf(MAG "\r\n ****************************"
+    (void) printf(MAG "\r\n ****************************"
         "********************************************************"
         RESET_COLOR);
 }
@@ -73,23 +73,23 @@ static void ECDH_TestHeaderPrint(const char *label)
 static void ECDH_HexArrayPrint(const char *label,
         const uint8_t *data, uint32_t size)
 {
-    (void)printf(BLUE "\r\n ----------------------------"
+    (void) printf(BLUE "\r\n ----------------------------"
         "----------------------------------------------------------------------"
         RESET_COLOR);
-    (void)printf("\r\n %s", label);
+    (void) printf("\r\n %s", label);
     for (uint32_t index = 0U; index < size; index++)
     {
         if ((0U == (index % 16U)) && (0U != index))
         {
-            (void)printf("\r\n\t\t");
+            (void) printf("\r\n\t\t");
         }
 
-        (void)printf(" 0x%02X", data[index]);
+        (void) printf(" 0x%02X", data[index]);
     }
 }
 
-static void ECDH_ArrayEqualityCheck(const uint8_t *a,
-        const uint8_t *b, size_t size)
+static void ECDH_ArrayEqualityCheck(const uint8_t *expected,
+        const uint8_t *actual, size_t size)
 {
     if (size > 0U)
     {
@@ -97,18 +97,18 @@ static void ECDH_ArrayEqualityCheck(const uint8_t *a,
 
         for (unsigned int index = 0U; index < size; index++)
         {
-            result |= a[index] ^ b[index];
+            result |= expected[index] ^ actual[index];
         }
 
         if (result == 0U)
         {
-            (void)printf(GREEN " \r\n\r\n PASS - Generated "
+            (void) printf(GREEN " \r\n\r\n PASS - Generated "
                 "X point matches expected output"
                 RESET_COLOR);
         }
         else
         {
-            (void)printf(RED " \r\n\r\n FAIL - Data Mismatch"
+            (void) printf(RED " \r\n\r\n FAIL - Data Mismatch"
                 RESET_COLOR);
         }
     }
@@ -133,7 +133,7 @@ static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
     }
     else
     {
-        (void)printf(RED"\r\nERROR in driver was thrown\r\n"RESET_COLOR);
+        (void) printf(RED"\r\nERROR in driver was thrown\r\n"RESET_COLOR);
     }
 }
 
@@ -225,6 +225,7 @@ static void ECDH_P384TestRun(void)
         0xEB, 0x8C, 0x38, 0x89, 0x4D, 0x22, 0xE1, 0xB1, 0x56, 0x18, 0xB6, 0x81, 0x8A, 0x66, 0x17, 0x74,
         0xAD, 0x46, 0x3B, 0x20, 0x5D, 0xA8, 0x8C, 0xF6, 0x99, 0xAB, 0x4D, 0x43, 0xC9, 0xCF, 0x98, 0xA1
     };
+
     // NIST Defined Public Key
     uint8_t testPublicKey[97] =
     {
@@ -304,7 +305,7 @@ static void ECDH_P521TestRun(void)
 void ECDH_TestRun(void)
 {
     ECDH_SplitterPrint();
-    (void)printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
+    (void) printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
     ECDH_P192TestRun();
     ECDH_P256TestRun();
     ECDH_P384TestRun();
