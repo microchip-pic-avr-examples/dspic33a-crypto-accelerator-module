@@ -50,23 +50,31 @@ Microchip or any third party.
 #define BLUE            "\033""[1;34m"
 #define MAG             "\033""[1;35m"
 #define CYAN            "\033""[1;36m"
-#define SESSION_ID      0x1U
+#define SESSION_ID      (0x1U)
 
-static void printSplitter(void)
+static void ECDH_SplitterPrint(void)
 {
-    (void)printf("\r\n\n ______________________________________________________________________________________________________ \r\n");
+    (void)printf("\r\n\n ________________________________"
+        "____________________________________"
+        "__________________________________ \r\n");
 }
 
-static void printTestHeader(const char *label)
+static void ECDH_TestHeaderPrint(const char *label)
 {
-    (void)printf(MAG"\r\n\r\n ************************************************************************************");
-    (void)printf(CYAN"\r\n\t\t ******************** %s ********************", label);
-    (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
+    (void)printf(MAG "\r\n\r\n ****************************"
+        "********************************************************");
+    (void)printf(CYAN "\r\n\t\t ******************** "
+        "%s ********************", label);
+    (void)printf(MAG "\r\n ****************************"
+        "********************************************************"
+        RESET_COLOR);
 }
 
-static void printHexArray(const char *label, uint8_t *data, uint32_t size)
+static void ECDH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
 {
-    (void)printf(BLUE"\r\n --------------------------------------------------------------------------------------------------"RESET_COLOR);
+    (void)printf(BLUE "\r\n ----------------------------"
+        "----------------------------------------------------------------------"
+        RESET_COLOR);
     const uint8_t *ldata = data;
     (void)printf("\r\n %s", label);
     for (uint32_t index = 0; index < size; index++)
@@ -80,7 +88,7 @@ static void printHexArray(const char *label, uint8_t *data, uint32_t size)
     }
 }
 
-static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+static void ECDH_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size)
 {
     if (size > 0U)
     {
@@ -96,30 +104,34 @@ static void checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 
         if (result == 0U)
         {
-            (void) printf(GREEN" \r\n\r\n PASS - Generated X point matches expected output"RESET_COLOR);
+            (void)printf(GREEN " \r\n\r\n PASS - Generated "
+                "X point matches expected output"
+                RESET_COLOR);
         }
         else
         {
-            (void) printf(RED" \r\n\r\n FAIL - Data Mismatch"RESET_COLOR);
+            (void)printf(RED " \r\n\r\n FAIL - Data Mismatch"
+                RESET_COLOR);
         }
     }
 }
 
-
-static inline void runHardwareTest(uint8_t *publicKey, uint32_t publicKeyLength,
-        uint8_t *privateKey, uint32_t privateKeyLength,
-        uint8_t *sharedSecret, const uint8_t *expectedOutput, uint32_t expectedOutputLength,
+static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
+        uint32_t publicKeyLength, uint8_t *privateKey,
+        uint32_t privateKeyLength, uint8_t *sharedSecret,
+        const uint8_t *expectedOutput,
+        uint32_t expectedOutputLength,
         crypto_EccCurveType_E eccCurveType)
 {
     crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(CRYPTO_HANDLER_HW_INTERNAL,
             privateKey, privateKeyLength, publicKey, publicKeyLength,
             sharedSecret, expectedOutputLength, eccCurveType, SESSION_ID);
 
-    printHexArray("Shared Secret :", sharedSecret, expectedOutputLength);
+    ECDH_HexArrayPrint("Shared Secret :", sharedSecret, expectedOutputLength);
 
     if (error == CRYPTO_KAS_SUCCESS)
     {
-        checkArrayEquality(expectedOutput, sharedSecret, expectedOutputLength);
+        ECDH_ArrayEqualityCheck(expectedOutput, sharedSecret, expectedOutputLength);
     }
     else
     {
@@ -127,17 +139,17 @@ static inline void runHardwareTest(uint8_t *publicKey, uint32_t publicKeyLength,
     }
 }
 
-static void TEST_ECDH_SHARED_SECRET_p192(void)
+static void ECDH_P192TestRun(void)
 {
-    printTestHeader("P-192 ECDH");
-    ////NIST Defined Private Key********************************************************************************************
+    ECDH_TestHeaderPrint("P-192 ECDH");
+    // NIST Defined Private Key
     uint8_t testPrivateKey[24] =
     {
         0xF1, 0x7D, 0x3F, 0xEA, 0x36, 0x7B, 0x74, 0xD3, 0x40, 0x85, 0x1C, 0xA4, 0x27, 0x0D, 0xCB, 0x24,
         0xC2, 0x71, 0xF4, 0x45, 0xBE, 0xD9, 0xD5, 0x27
     };
 
-    ////NIST Defined Public Key**********************************************************************************************
+    // NIST Defined Public Key
     uint8_t testPublicKey[49] =
     {
         0x04, 0x42, 0xEA, 0x6D, 0xD9, 0x96, 0x9D, 0xD2, 0xA6, 0x1F, 0xEA, 0x1A, 0xAC, 0x7F, 0x8E, 0x98,
@@ -146,7 +158,7 @@ static void TEST_ECDH_SHARED_SECRET_p192(void)
         0x23
     };
 
-    ////NIST Defined Shared Secret**********************************************************************************************
+    // NIST Defined Shared Secret
     uint8_t expectedOutput[24] =
     {
         0x80, 0x3D, 0x8A, 0xB2, 0xE5, 0xB6, 0xE6, 0xFC, 0xA7, 0x15, 0x73, 0x7C, 0x3A, 0x82, 0xF7, 0xCE,
@@ -155,23 +167,25 @@ static void TEST_ECDH_SHARED_SECRET_p192(void)
 
     uint8_t sharedSecret[48];
 
-    runHardwareTest(testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey),
-            sharedSecret, expectedOutput, sizeof(expectedOutput),
+    ECDH_HardwareTestRun(testPublicKey, sizeof(testPublicKey),
+            testPrivateKey, sizeof(testPrivateKey),
+            sharedSecret, expectedOutput,
+            sizeof(expectedOutput),
             CRYPTO_ECC_CURVE_P192);
 }
 
-static void TEST_ECDH_SHARED_SECRET_p256(void)
+static void ECDH_P256TestRun(void)
 {
-    printTestHeader("P-256 ECDH");
+    ECDH_TestHeaderPrint("P-256 ECDH");
 
-    ////NIST Defined Private Key********************************************************************************************
+    // NIST Defined Private Key
     uint8_t testPrivateKey[32] =
     {
         0x7D, 0x7D, 0xC5, 0xF7, 0x1E, 0xB2, 0x9D, 0xDA, 0xF8, 0x0D, 0x62, 0x14, 0x63, 0x2E, 0xEA, 0xE0,
         0x3D, 0x90, 0x58, 0xAF, 0x1F, 0xB6, 0xD2, 0x2E, 0xD8, 0x0B, 0xAD, 0xB6, 0x2B, 0xC1, 0xA5, 0x34
     };
 
-    ////NIST Defined Public Key**********************************************************************************************
+    // NIST Defined Public Key
     uint8_t testPublicKey[65] =
     {
         0x04, 0x70, 0x0C, 0x48, 0xF7, 0x7F, 0x56, 0x58, 0x4C, 0x5C, 0xC6, 0x32, 0xCA, 0x65, 0x64, 0x0D,
@@ -181,7 +195,7 @@ static void TEST_ECDH_SHARED_SECRET_p256(void)
         0xAC
     };
 
-    ////NIST Defined Shared Secret**********************************************************************************************
+    // NIST Defined Shared Secret
     uint8_t expectedOutput[32] =
     {
         0x46, 0xFC, 0x62, 0x10, 0x64, 0x20, 0xFF, 0x01, 0x2E, 0x54, 0xA4, 0x34, 0xFB, 0xDD, 0x2D, 0x25,
@@ -190,23 +204,25 @@ static void TEST_ECDH_SHARED_SECRET_p256(void)
 
     uint8_t sharedSecret[32];
 
-    runHardwareTest(testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey),
-        sharedSecret, expectedOutput, sizeof(expectedOutput),
-        CRYPTO_ECC_CURVE_P256);
+    ECDH_HardwareTestRun(testPublicKey, sizeof(testPublicKey),
+            testPrivateKey, sizeof(testPrivateKey),
+            sharedSecret, expectedOutput,
+            sizeof(expectedOutput),
+            CRYPTO_ECC_CURVE_P256);
 }
 
-static void TEST_ECDH_SHARED_SECRET_p384(void)
+static void ECDH_P384TestRun(void)
 {
-    printTestHeader("P-384 ECDH");
+    ECDH_TestHeaderPrint("P-384 ECDH");
 
-    ////NIST Defined Private Key********************************************************************************************
+    // NIST Defined Private Key
     uint8_t testPrivateKey[48] =
     {
         0x3C, 0xC3, 0x12, 0x2A, 0x68, 0xF0, 0xD9, 0x50, 0x27, 0xAD, 0x38, 0xC0, 0x67, 0x91, 0x6B, 0xA0,
         0xEB, 0x8C, 0x38, 0x89, 0x4D, 0x22, 0xE1, 0xB1, 0x56, 0x18, 0xB6, 0x81, 0x8A, 0x66, 0x17, 0x74,
         0xAD, 0x46, 0x3B, 0x20, 0x5D, 0xA8, 0x8C, 0xF6, 0x99, 0xAB, 0x4D, 0x43, 0xC9, 0xCF, 0x98, 0xA1
     };
-    ////NIST Defined Public Key**********************************************************************************************
+    // NIST Defined Public Key
     uint8_t testPublicKey[97] =
     {
         0x04, 0xA7, 0xC7, 0x6B, 0x97, 0x0C, 0x3B, 0x5F, 0xE8, 0xB0, 0x5D, 0x28, 0x38, 0xAE, 0x04, 0xAB,
@@ -218,7 +234,7 @@ static void TEST_ECDH_SHARED_SECRET_p384(void)
         0x7A
     };
 
-    ////NIST Defined Shared Secret**********************************************************************************************
+    // NIST Defined Shared Secret
     uint8_t expectedOutput[48] =
     {
         0x5F, 0x9D, 0x29, 0xDC, 0x5E, 0x31, 0xA1, 0x63, 0x06, 0x03, 0x56, 0x21, 0x36, 0x69, 0xC8, 0xCE,
@@ -228,16 +244,18 @@ static void TEST_ECDH_SHARED_SECRET_p384(void)
 
     uint8_t sharedSecret[48];
 
-    runHardwareTest(testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey),
-        sharedSecret, expectedOutput, sizeof(expectedOutput),
-        CRYPTO_ECC_CURVE_P384);
+    ECDH_HardwareTestRun(testPublicKey, sizeof(testPublicKey),
+            testPrivateKey, sizeof(testPrivateKey),
+            sharedSecret, expectedOutput,
+            sizeof(expectedOutput),
+            CRYPTO_ECC_CURVE_P384);
 }
 
-static void TEST_ECDH_SHARED_SECRET_p521(void)
+static void ECDH_P521TestRun(void)
 {
-    printTestHeader("P-521 ECDH");
+    ECDH_TestHeaderPrint("P-521 ECDH");
 
-    ////NIST Defined Private Key********************************************************************************************
+    // NIST Defined Private Key
     uint8_t testPrivateKey[66] =
     {
         0x01, 0x7E, 0xEC, 0xC0, 0x7A, 0xB4, 0xB3, 0x29, 0x06, 0x8F, 0xBA, 0x65, 0xE5, 0x6A, 0x1F, 0x88,
@@ -247,7 +265,7 @@ static void TEST_ECDH_SHARED_SECRET_p521(void)
         0xFC, 0x47
     };
 
-    ////NIST Defined Public Key**********************************************************************************************
+    // NIST Defined Public Key
     uint8_t testPublicKey[133] =
     {
         0x04, 0x00, 0x68, 0x5A, 0x48, 0xE8, 0x6C, 0x79, 0xF0, 0xF0, 0x87, 0x5F, 0x7B, 0xC1, 0x8D, 0x25,
@@ -261,7 +279,7 @@ static void TEST_ECDH_SHARED_SECRET_p521(void)
         0xF3, 0xC3, 0x02, 0xF6, 0x76
     };
 
-    ////NIST Defined Shared Secret**********************************************************************************************
+    // NIST Defined Shared Secret
     uint8_t expectedOutput[66] =
     {
         0x00, 0x5F, 0xC7, 0x04, 0x77, 0xC3, 0xE6, 0x3B, 0xC3, 0x95, 0x4B, 0xD0, 0xDF, 0x3E, 0xA0, 0xD1,
@@ -273,18 +291,20 @@ static void TEST_ECDH_SHARED_SECRET_p521(void)
 
     uint8_t sharedSecret[66];
 
-    runHardwareTest(testPublicKey, sizeof(testPublicKey), testPrivateKey, sizeof(testPrivateKey),
-        sharedSecret, expectedOutput, sizeof(expectedOutput),
-        CRYPTO_ECC_CURVE_P521);
+    ECDH_HardwareTestRun(testPublicKey, sizeof(testPublicKey),
+            testPrivateKey, sizeof(testPrivateKey),
+            sharedSecret, expectedOutput,
+            sizeof(expectedOutput),
+            CRYPTO_ECC_CURVE_P521);
 }
 
-void test_ecdh(void)
+void ECDH_TestRun(void)
 {
-    printSplitter();
+    ECDH_SplitterPrint();
     (void)printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
-    TEST_ECDH_SHARED_SECRET_p192();
-    TEST_ECDH_SHARED_SECRET_p256();
-    TEST_ECDH_SHARED_SECRET_p384();
-    TEST_ECDH_SHARED_SECRET_p521();
-    printSplitter();
+    ECDH_P192TestRun();
+    ECDH_P256TestRun();
+    ECDH_P384TestRun();
+    ECDH_P521TestRun();
+    ECDH_SplitterPrint();
 }
