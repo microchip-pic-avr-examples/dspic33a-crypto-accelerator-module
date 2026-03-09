@@ -35,24 +35,24 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-* 
+*
 *  (Rule 21.6) Required: The standard library input/output functions shall not be used
-* 
+*
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
 #include "app/app_ecdh.h"
 #include "mcc_generated_files/system/system.h"
 
-int main( void ) {
-    
+int main(void)
+{
     SYSTEM_Initialize();
-    
+
     test_ecdh();
-    
+
     while (1)
     {
     }
-    
+
     return 0;
 }
