@@ -66,7 +66,7 @@ void UTIL_SplitterPrint(void);
 
 void UTIL_TestHeaderPrint(const char *curve, const char *blocking);
 
-void UTIL_HexArrayPrint(const char *label, uint8_t *data, uint32_t size);
+void UTIL_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size);
 
 uint8_t UTIL_SignatureLengthGet(crypto_EccCurveType_E curve);
 
