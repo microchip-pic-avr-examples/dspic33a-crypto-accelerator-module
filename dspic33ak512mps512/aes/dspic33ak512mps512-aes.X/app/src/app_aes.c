@@ -50,7 +50,7 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app/app_aes.h"
 
-uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+uint8_t AES_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size)
 {
     uint8_t result = 0U;
 
@@ -58,15 +58,15 @@ uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
     {
         for (size_t i = 0U; i < size; i++)
         {
-            result |= a[i] ^ b[i];
+            result |= (uint8_t)(a[i] ^ b[i]);
         }
     }
     return result;
 }
 
-void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
+void AES_ArrayEqualityResultPrint(const uint8_t *a, const uint8_t *b, size_t size)
 {
-    uint8_t result = checkArrayEquality(a, b, size);
+    uint8_t result = AES_ArrayEqualityCheck(a, b, size);
 
     if (result == 0U)
     {
@@ -78,7 +78,7 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
     }
 }
 
-void printHexArray(const char *label, const uint8_t *data,
+void AES_HexArrayPrint(const char *label, const uint8_t *data,
         uint32_t size)
 {
     if (size > 0U)
@@ -101,11 +101,11 @@ void printHexArray(const char *label, const uint8_t *data,
     }
 }
 
-void printTestHeader(const char *wrapperType,
+void AES_TestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLen, const char *testType,
         uint32_t dataLen, const char *additionalInfo)
 {
-    char header[94];
+    char header[94U];
     (void) sprintf(header,
         " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
         wrapperType, keyBitLen, testType,
@@ -126,7 +126,7 @@ void printTestHeader(const char *wrapperType,
         RESET_COLOR);
 }
 
-void printCryptoError(unsigned long keyBitLen,
+void AES_CryptoErrorPrint(unsigned long keyBitLen,
         const char *testType, const char *description,
         int status)
 {
@@ -136,40 +136,40 @@ void printCryptoError(unsigned long keyBitLen,
         description, status);
 }
 
-void aes_test_sym(void)
+void AES_SymTestRun(void)
 {
     #ifdef RUN_SYM_ECB_TEST
-    aes_sym_ecb_test();
+    AES_SymEcbTestRun();
     #endif
 
     #ifdef RUN_SYM_CTR_TEST
-    aes_sym_ctr_test();
+    AES_SymCtrTestRun();
     #endif
 
     #ifdef RUN_SYM_CBC_TEST
-    aes_sym_cbc_test();
+    AES_SymCbcTestRun();
     #endif
 
     #ifdef RUN_SYM_CFB_TEST
-    aes_sym_cfb_test();
+    AES_SymCfbTestRun();
     #endif
 
     #ifdef RUN_SYM_OFB_TEST
-    aes_sym_ofb_test();
+    AES_SymOfbTestRun();
     #endif
 
     #ifdef RUN_SYM_XTS_TEST
-    aes_sym_xts_test();
+    AES_SymXtsTestRun();
     #endif
 }
 
-void aes_test_aead(void)
+void AES_AeadTestRun(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
-    aes_aead_gcm_test();
+    AES_AeadGcmTestRun();
     #endif
 
     #ifdef RUN_AEAD_CCM_TEST
-    aes_aead_ccm_test();
+    AES_AeadCcmTestRun();
     #endif
 }

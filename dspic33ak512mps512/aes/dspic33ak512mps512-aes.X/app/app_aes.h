@@ -54,12 +54,12 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-#define RESET_COLOR "\x1B""[0m"
-#define RED "\x1B""[1;31m"
-#define GREEN "\x1B""[1;32m"
-#define BLUE "\x1B""[1;34m"
-#define MAG "\x1B""[1;35m"
-#define CYAN "\x1B""[1;36m"
+#define RESET_COLOR     "\x1B""[0m"
+#define RED             "\x1B""[1;31m"
+#define GREEN           "\x1B""[1;32m"
+#define BLUE            "\x1B""[1;34m"
+#define MAG             "\x1B""[1;35m"
+#define CYAN            "\x1B""[1;36m"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -79,24 +79,24 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
+uint8_t AES_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size);
 
-void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
+void AES_ArrayEqualityResultPrint(const uint8_t *a, const uint8_t *b, size_t size);
 
-void printHexArray(const char *label, const uint8_t *data,
+void AES_HexArrayPrint(const char *label, const uint8_t *data,
         uint32_t size);
 
-void printTestHeader(const char *wrapperType,
+void AES_TestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLen, const char *testType,
         uint32_t dataLen, const char *dataInfo);
 
-void printCryptoError(unsigned long keyBitLen,
+void AES_CryptoErrorPrint(unsigned long keyBitLen,
         const char *testType, const char *description,
         int status);
 
-void aes_test_sym(void);
+void AES_SymTestRun(void);
 
-void aes_test_aead(void);
+void AES_AeadTestRun(void);
 
 #ifdef __cplusplus
 }
