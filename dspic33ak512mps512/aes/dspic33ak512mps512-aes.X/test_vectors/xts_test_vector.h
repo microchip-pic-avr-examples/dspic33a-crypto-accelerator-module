@@ -53,11 +53,12 @@ typedef struct xts_test_vector_t
 
 } xts_test_vector_t;
 
-xts_test_vector_t *get_xts_test_vectors(void);
-uint32_t get_xts_test_count(void);
+xts_test_vector_t *TV_XtsTestVectorsGet(void);
+
+uint32_t TV_XtsTestCountGet(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* GCM_TEST_VECTOR_H */
+#endif /* XTS_TEST_VECTOR_H */

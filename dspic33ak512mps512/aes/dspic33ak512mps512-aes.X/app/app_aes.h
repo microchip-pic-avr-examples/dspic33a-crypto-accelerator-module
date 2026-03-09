@@ -8,7 +8,8 @@
     app_aes.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for AES utility
+    functions, test runners, and terminal output formatting.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -50,7 +51,7 @@ extern "C" {
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Type Definitions
+// Section: Macro Definitions
 // *****************************************************************************
 // *****************************************************************************
 
