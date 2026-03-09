@@ -70,36 +70,34 @@ static void ECDH_TestHeaderPrint(const char *label)
         RESET_COLOR);
 }
 
-static void ECDH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
+static void ECDH_HexArrayPrint(const char *label,
+        const uint8_t *data, uint32_t size)
 {
     (void)printf(BLUE "\r\n ----------------------------"
         "----------------------------------------------------------------------"
         RESET_COLOR);
-    const uint8_t *ldata = data;
     (void)printf("\r\n %s", label);
-    for (uint32_t index = 0; index < size; index++)
+    for (uint32_t index = 0U; index < size; index++)
     {
         if ((0U == (index % 16U)) && (0U != index))
         {
             (void)printf("\r\n\t\t");
         }
 
-        (void)printf(" 0x%02X", ldata[index]);
+        (void)printf(" 0x%02X", data[index]);
     }
 }
 
-static void ECDH_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size)
+static void ECDH_ArrayEqualityCheck(const uint8_t *a,
+        const uint8_t *b, size_t size)
 {
     if (size > 0U)
     {
-        uint8_t result = 0;
+        uint8_t result = 0U;
 
-        const uint8_t *tempA = a;
-        const uint8_t *tempB = b;
-
-        for (unsigned int index = 0; index < size; index++)
+        for (unsigned int index = 0U; index < size; index++)
         {
-            result |= tempA[index] ^ tempB[index];
+            result |= a[index] ^ b[index];
         }
 
         if (result == 0U)
