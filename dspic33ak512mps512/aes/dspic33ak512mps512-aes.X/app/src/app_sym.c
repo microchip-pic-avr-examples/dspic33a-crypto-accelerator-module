@@ -69,11 +69,11 @@ static uint8_t keyData[32U] =
 
 #define TEST_SESSION_ID (0x1U)
 
-static crypto_Sym_Status_E AES_SymDirectTestRun(
+static crypto_Sym_Status_E SYM_DirectTestRun(
         crypto_CipherOper_E encrypt,
         crypto_Sym_OpModes_E opMode,
-        uint8_t *data, uint32_t dataLen,
-        uint8_t *key, uint32_t keyLen,
+        uint8_t *data, uint32_t dataLength,
+        uint8_t *key, uint32_t keyLength,
         uint8_t *result, uint8_t *initializationVector)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
@@ -82,39 +82,39 @@ static crypto_Sym_Status_E AES_SymDirectTestRun(
     {
         (void) printf("\r\n\r\n ENCRYPTING (DIRECT)...");
 
-        AES_HexArrayPrint("Data (Input)         ", data, dataLen);
+        AES_HexArrayPrint("Data (Input)         ", data, dataLength);
 
         status = Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL,
-                opMode, data, dataLen, result, key, keyLen, initializationVector, TEST_SESSION_ID);
+                opMode, data, dataLength, result, key, keyLength, initializationVector, TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_HexArrayPrint("Data (Encrypted)     ", result, dataLen);
+            AES_HexArrayPrint("Data (Encrypted)     ", result, dataLength);
         }
     }
     else
     {
         (void) printf("\r\n\r\n DECRYPTING (DIRECT)...");
 
-        AES_HexArrayPrint("Data (Input)         ", data, dataLen);
+        AES_HexArrayPrint("Data (Input)         ", data, dataLength);
 
         status = Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL,
-                opMode, data, dataLen, result, key, keyLen, initializationVector, TEST_SESSION_ID);
+                opMode, data, dataLength, result, key, keyLength, initializationVector, TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_HexArrayPrint("Data (Decrypted)     ", result, dataLen);
+            AES_HexArrayPrint("Data (Decrypted)     ", result, dataLength);
         }
     }
 
     return status;
 }
 
-static crypto_Sym_Status_E AES_SymStepsTestRun(
+static crypto_Sym_Status_E SYM_StepsTestRun(
         crypto_CipherOper_E encrypt,
         crypto_Sym_OpModes_E opMode,
-        uint8_t *data, uint32_t dataLen,
-        uint8_t *key, uint32_t keyLen,
+        uint8_t *data, uint32_t dataLength,
+        uint8_t *key, uint32_t keyLength,
         uint8_t *result, uint8_t *initializationVector)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
@@ -129,54 +129,54 @@ static crypto_Sym_Status_E AES_SymStepsTestRun(
     {
         (void) printf("\r\n\r\n ENCRYPTING (STEPS)...");
 
-        AES_HexArrayPrint("Data (Input)         ", data, dataLen);
+        AES_HexArrayPrint("Data (Input)         ", data, dataLength);
 
         status = Crypto_Sym_Aes_Init(
                 &aesCtx, CRYPTO_HANDLER_HW_INTERNAL,
                 CRYPTO_CIOP_ENCRYPT, opMode, key,
-                keyLen, initializationVector,
+                keyLength, initializationVector,
                 TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            status = Crypto_Sym_Aes_Cipher(&aesCtx, data, dataLen, result);
+            status = Crypto_Sym_Aes_Cipher(&aesCtx, data, dataLength, result);
         }
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_HexArrayPrint("Data (Encrypted)     ", result, dataLen);
+            AES_HexArrayPrint("Data (Encrypted)     ", result, dataLength);
         }
     }
     else
     {
         (void) printf("\r\n\r\n DECRYPTING (STEPS)...");
 
-        AES_HexArrayPrint("Data (Input)         ", data, dataLen);
+        AES_HexArrayPrint("Data (Input)         ", data, dataLength);
 
         status = Crypto_Sym_Aes_Init(
                 &aesCtx, CRYPTO_HANDLER_HW_INTERNAL,
                 CRYPTO_CIOP_DECRYPT, opMode, key,
-                keyLen, initializationVector,
+                keyLength, initializationVector,
                 TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            status = Crypto_Sym_Aes_Cipher(&aesCtx, data, dataLen, result);
+            status = Crypto_Sym_Aes_Cipher(&aesCtx, data, dataLength, result);
         }
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_HexArrayPrint("Data (Decrypted)     ", result, dataLen);
+            AES_HexArrayPrint("Data (Decrypted)     ", result, dataLength);
         }
     }
 
     return status;
 }
 
-static void AES_SymModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t dataLen,
-        uint8_t *key, uint32_t keyLen, uint8_t *initializationVector)
+static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t dataLength,
+        uint8_t *key, uint32_t keyLength, uint8_t *initializationVector)
 {
-    unsigned long keyBitLen = keyLen * 8UL;
+    unsigned long keyBitLength = keyLength * 8UL;
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
     uint8_t encryptedDirectResult[DATA_SIZE];
@@ -211,9 +211,9 @@ static void AES_SymModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint3
             break;
     }
 
-    AES_TestHeaderPrint(testWrapper, keyBitLen, testType, dataLen, emptyString);
+    AES_TestHeaderPrint(testWrapper, keyBitLength, testType, dataLength, emptyString);
 
-    AES_HexArrayPrint("Key                  ", key, keyLen);
+    AES_HexArrayPrint("Key                  ", key, keyLength);
 
     if (initializationVector != NULL)
     {
@@ -229,30 +229,30 @@ static void AES_SymModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint3
         (void) printf("\r\n%s", " Initialization Vector  :  None");
     }
 
-    status = AES_SymDirectTestRun(CRYPTO_CIOP_ENCRYPT,
-            opMode, data, dataLen, key, keyLen,
+    status = SYM_DirectTestRun(CRYPTO_CIOP_ENCRYPT,
+            opMode, data, dataLength, key, keyLength,
             encryptedDirectResult,
             initializationVector);
     if (status != CRYPTO_SYM_CIPHER_SUCCESS)
     {
-        AES_CryptoErrorPrint(keyBitLen, testType, "Encrypt", status);
+        AES_CryptoErrorPrint(keyBitLength, testType, "Encrypt", status);
     }
     else
     {
-        status = AES_SymDirectTestRun(
+        status = SYM_DirectTestRun(
                 CRYPTO_CIOP_DECRYPT, opMode,
                 encryptedDirectResult,
-                dataLen, key, keyLen,
+                dataLength, key, keyLength,
                 decryptedDirectResult,
                 initializationVector);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_CryptoErrorPrint(keyBitLen, testType, "Decrypt", status);
+            AES_CryptoErrorPrint(keyBitLength, testType, "Decrypt", status);
         }
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            AES_ArrayEqualityResultPrint(data, decryptedDirectResult, dataLen);
+            AES_ArrayEqualityResultPrint(data, decryptedDirectResult, dataLength);
         }
     }
 
@@ -267,30 +267,30 @@ static void AES_SymModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint3
             "--------------"
             RESET_COLOR);
 
-    status = AES_SymStepsTestRun(CRYPTO_CIOP_ENCRYPT,
-            opMode, data, dataLen, key, keyLen,
+    status = SYM_StepsTestRun(CRYPTO_CIOP_ENCRYPT,
+            opMode, data, dataLength, key, keyLength,
             encryptedStepsResult,
             initializationVector);
     if (status != CRYPTO_SYM_CIPHER_SUCCESS)
     {
-        AES_CryptoErrorPrint(keyBitLen, testType, "Encrypt", status);
+        AES_CryptoErrorPrint(keyBitLength, testType, "Encrypt", status);
     }
     else
     {
-        status = AES_SymStepsTestRun(
+        status = SYM_StepsTestRun(
                 CRYPTO_CIOP_DECRYPT, opMode,
                 encryptedStepsResult,
-                dataLen, key, keyLen,
+                dataLength, key, keyLength,
                 decryptedStepsResult,
                 initializationVector);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
-            AES_CryptoErrorPrint(keyBitLen, testType, "Decrypt", status);
+            AES_CryptoErrorPrint(keyBitLength, testType, "Decrypt", status);
         }
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            AES_ArrayEqualityResultPrint(data, decryptedStepsResult, dataLen);
+            AES_ArrayEqualityResultPrint(data, decryptedStepsResult, dataLength);
         }
     }
 
@@ -307,83 +307,83 @@ static void AES_SymModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint3
     (void) printf("\r\n\r\n COMPARING TESTS...");
 
     // Verify the direct and stepwise tests generate the same result.
-    AES_HexArrayPrint("Direct Encryption    ", encryptedDirectResult, dataLen);
-    AES_HexArrayPrint("Stepwise Encryption  ", encryptedStepsResult, dataLen);
+    AES_HexArrayPrint("Direct Encryption    ", encryptedDirectResult, dataLength);
+    AES_HexArrayPrint("Stepwise Encryption  ", encryptedStepsResult, dataLength);
 
-    AES_ArrayEqualityResultPrint(encryptedDirectResult, encryptedStepsResult, dataLen);
+    AES_ArrayEqualityResultPrint(encryptedDirectResult, encryptedStepsResult, dataLength);
 
 }
 
-static void AES_Sym128TestRun(
+static void SYM_128TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    AES_SymModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
-    AES_SymModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    SYM_ModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    SYM_ModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 #endif
-    AES_SymModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
+    SYM_ModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 }
 
-static void AES_Sym192TestRun(
+static void SYM_192TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    AES_SymModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
-    AES_SymModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    SYM_ModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    SYM_ModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 #endif
-    AES_SymModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
+    SYM_ModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 }
 
-static void AES_Sym256TestRun(
+static void SYM_256TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
-    AES_SymModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
-    AES_SymModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    SYM_ModeTestRun(opMode, data, 35U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    SYM_ModeTestRun(opMode, data, 41U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
 #endif
-    AES_SymModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
+    SYM_ModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_256, initializationVector);
 }
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES Test Functions
+// Section: Symmetric Test Functions
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_SymEcbTestRun(void)
+void SYM_EcbTestRun(void)
 {
-    AES_Sym128TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
-    AES_Sym192TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
-    AES_Sym256TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
+    SYM_128TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
+    SYM_192TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
+    SYM_256TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
 }
 
-void AES_SymCtrTestRun(void)
+void SYM_CtrTestRun(void)
 {
-    AES_Sym128TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
-    AES_Sym192TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
-    AES_Sym256TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
+    SYM_128TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
+    SYM_192TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
+    SYM_256TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
 }
 
-void AES_SymCbcTestRun(void)
+void SYM_CbcTestRun(void)
 {
-    AES_Sym128TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
-    AES_Sym192TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
-    AES_Sym256TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+    SYM_128TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+    SYM_192TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
+    SYM_256TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
 }
 
-void AES_SymCfbTestRun(void)
+void SYM_CfbTestRun(void)
 {
-    AES_Sym128TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
-    AES_Sym192TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
-    AES_Sym256TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
+    SYM_128TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
+    SYM_192TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
+    SYM_256TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
 }
 
-void AES_SymOfbTestRun(void)
+void SYM_OfbTestRun(void)
 {
-    AES_Sym128TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
-    AES_Sym192TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
-    AES_Sym256TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
+    SYM_128TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
+    SYM_192TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
+    SYM_256TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
 }

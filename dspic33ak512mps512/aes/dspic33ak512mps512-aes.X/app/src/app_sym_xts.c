@@ -53,7 +53,7 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID (0x1U)
 
-static crypto_Sym_Status_E AES_SymXtsDirectTestRun(crypto_CipherOper_E encrypt,
+static crypto_Sym_Status_E SYM_XtsDirectTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *tweak, uint8_t *result)
 {
@@ -109,7 +109,7 @@ static crypto_Sym_Status_E AES_SymXtsDirectTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static crypto_Sym_Status_E AES_SymXtsStepsTestRun(crypto_CipherOper_E encrypt,
+static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *tweak, uint8_t *result)
 {
@@ -173,7 +173,7 @@ static crypto_Sym_Status_E AES_SymXtsStepsTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void AES_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint32_t length)
+static void SYM_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint32_t length)
 {
     (void) printf(BLUE
             "\r\n ---------------------------------"
@@ -185,23 +185,23 @@ static void AES_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint
     {
         if (0 == memcmp(result, text, length))
         {
-            (void)printf(GREEN"\r\n Encryption: PASS    "RESET_COLOR );
+            (void) printf(GREEN"\r\n Encryption: PASS    "RESET_COLOR );
         }
         else
         {
             AES_HexArrayPrint("Expected Data        ", text, length);
-            (void)printf(RED"\r\n Encryption: FAILED  "RESET_COLOR);
+            (void) printf(RED"\r\n Encryption: FAILED  "RESET_COLOR);
         }
     }
 }
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES Test Functions
+// Section: Symmetric XTS Test Functions
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_SymXtsTestRun(void)
+void SYM_XtsTestRun(void)
 {
     uint8_t encryptedDirectResult[XTS_TEST_VECTOR_SIZE];
     uint8_t decryptedDirectResult[XTS_TEST_VECTOR_SIZE];
@@ -217,7 +217,7 @@ void AES_SymXtsTestRun(void)
     xts_test_vector_t *test = TV_XtsTestVectorsGet();
     uint32_t testCount = TV_XtsTestCountGet();
 
-    for (uint32_t i = 0U; i < testCount; i++)
+    for (uint32_t vectorIndex = 0U; vectorIndex < testCount; vectorIndex++)
     {
         uint8_t *plaintext;
         uint8_t *ciphertext;
@@ -228,14 +228,14 @@ void AES_SymXtsTestRun(void)
         AES_HexArrayPrint("Key2                 ", test->key2, test->keyLength);
         AES_HexArrayPrint("Tweak                ", test->tweak, XTS_TWEAK_SIZE);
 
-        (void)memcpy(xtsKey, test->key, test->keyLength);
-        (void)memcpy(&xtsKey[test->keyLength], test->key2, test->keyLength);
+        (void) memcpy(xtsKey, test->key, test->keyLength);
+        (void) memcpy(&xtsKey[test->keyLength], test->key2, test->keyLength);
 
         plaintext = (test->textLength > 0UL) ? test->plaintext : NULL;
         ciphertext = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
         crypto_Sym_Status_E status =
-                AES_SymXtsDirectTestRun(
+                SYM_XtsDirectTestRun(
                 CRYPTO_CIOP_ENCRYPT, plaintext,
                 test->textLength, xtsKey,
                 (test->keyLength * 2U), test->tweak,
@@ -246,11 +246,11 @@ void AES_SymXtsTestRun(void)
         }
         else
         {
-            AES_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
+            SYM_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
 
             if (test->textLength > 0UL)
             {
-                status = AES_SymXtsDirectTestRun(
+                status = SYM_XtsDirectTestRun(
                         CRYPTO_CIOP_DECRYPT, ciphertext,
                         test->textLength, xtsKey,
                         (test->keyLength * 2U),
@@ -284,7 +284,7 @@ void AES_SymXtsTestRun(void)
 
         ciphertext = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
-        status = AES_SymXtsStepsTestRun(
+        status = SYM_XtsStepsTestRun(
                 CRYPTO_CIOP_ENCRYPT, plaintext,
                 test->textLength, xtsKey,
                 (test->keyLength * 2U), test->tweak,
@@ -295,11 +295,11 @@ void AES_SymXtsTestRun(void)
         }
         else
         {
-            AES_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
+            SYM_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
 
             if (test->textLength > 0UL)
             {
-                status = AES_SymXtsStepsTestRun(
+                status = SYM_XtsStepsTestRun(
                         CRYPTO_CIOP_DECRYPT, ciphertext,
                         test->textLength, xtsKey,
                         (test->keyLength * 2U),
