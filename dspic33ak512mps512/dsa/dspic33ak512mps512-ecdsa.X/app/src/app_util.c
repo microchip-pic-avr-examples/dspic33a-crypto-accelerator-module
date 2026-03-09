@@ -44,11 +44,13 @@ Microchip or any third party.
 #include <xc.h>
 #include "app/app_util.h"
 
-void printStatus(crypto_DigiSign_Status_E status, const char *type)
+void UTIL_StatusPrint(crypto_DigiSign_Status_E status, const char *type)
 {
     if (status != CRYPTO_DIGISIGN_SUCCESS)
     {
-        (void)printf(RED" \r\n ECDSA %s FAIL:: ErrorCode = 0x%X"RESET_COLOR, type, (unsigned int) status);
+        (void)printf(RED
+            " \r\n ECDSA %s FAIL:: ErrorCode = 0x%X"
+            RESET_COLOR, type, (unsigned int) status);
     }
     else
     {
@@ -56,19 +58,29 @@ void printStatus(crypto_DigiSign_Status_E status, const char *type)
     }
 }
 
-void printSplitter(void)
+void UTIL_SplitterPrint(void)
 {
-    (void)printf("\r\n\n ______________________________________________________________________________________________________ \r\n");
+    (void)printf("\r\n\n "
+        "__________________________________________________"
+        "__________________________________________________"
+        "__ \r\n");
 }
 
-void printTestHeader(const char *curve, const char *blocking)
+void UTIL_TestHeaderPrint(const char *curve, const char *blocking)
 {
-    (void)printf(MAG"\r\n\r\n ************************************************************************************");
-    (void)printf(CYAN"\r\n\t ******************** %s ECDSA %s ********************", curve, blocking);
-    (void)printf(MAG"\r\n ************************************************************************************"RESET_COLOR);
+    (void)printf(MAG
+        "\r\n\r\n ******************************************"
+        "******************************************");
+    (void)printf(CYAN
+        "\r\n\t ******************** %s ECDSA %s "
+        "********************", curve, blocking);
+    (void)printf(MAG
+        "\r\n ******************************************"
+        "******************************************"
+        RESET_COLOR);
 }
 
-void printHexArray(const char *label, uint8_t *data, uint32_t size)
+void UTIL_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
 {
     uint8_t const *ldata = data;
     (void)printf("\r\n\r\n\t%s", label);
@@ -83,23 +95,23 @@ void printHexArray(const char *label, uint8_t *data, uint32_t size)
     }
 }
 
-uint8_t signatureLengthGet(crypto_EccCurveType_E curve)
+uint8_t UTIL_SignatureLengthGet(crypto_EccCurveType_E curve)
 {
     uint8_t length = 0;
 
     switch (curve)
     {
         case CRYPTO_ECC_CURVE_P192:
-            length = P192Length;
+            length = P192_LENGTH;
             break;
         case CRYPTO_ECC_CURVE_P256:
-            length = P256Length;
+            length = P256_LENGTH;
             break;
         case CRYPTO_ECC_CURVE_P384:
-            length = P384Length;
+            length = P384_LENGTH;
             break;
         case CRYPTO_ECC_CURVE_P521:
-            length = P521Length;
+            length = P521_LENGTH;
             break;
         default:
             break;

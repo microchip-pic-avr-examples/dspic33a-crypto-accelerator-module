@@ -23,11 +23,11 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#include <stdint.h>
-#include "crypto/common_crypto/crypto_common.h"
-
 #ifndef TEST_VECTOR_H
 #define TEST_VECTOR_H
+
+#include <stdint.h>
+#include "crypto/common_crypto/crypto_common.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,15 +43,15 @@ typedef struct
     uint8_t hashLen;
     const char *curveInformation;
     crypto_EccCurveType_E curveType;
-} TEST_VECTOR;
+} test_vector_t;
 
-extern TEST_VECTOR ecdsa_p192;
+extern test_vector_t ecdsaP192;
 
-extern TEST_VECTOR ecdsa_p256;
+extern test_vector_t ecdsaP256;
 
-extern TEST_VECTOR ecdsa_p384;
+extern test_vector_t ecdsaP384;
 
-extern TEST_VECTOR ecdsa_p521;
+extern test_vector_t ecdsaP521;
 
 #ifdef __cplusplus
 }

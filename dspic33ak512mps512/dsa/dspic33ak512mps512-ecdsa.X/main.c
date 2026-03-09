@@ -42,7 +42,7 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    test_ecdsa();
+    ECDSA_TestRun();
 
     while (true)
     {
