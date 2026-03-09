@@ -50,23 +50,23 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app/app_aes.h"
 
-uint8_t AES_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size)
+uint8_t AES_ArrayEqualityCheck(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
     uint8_t result = 0U;
 
     if (size > 0U)
     {
-        for (size_t i = 0U; i < size; i++)
+        for (size_t byteIndex = 0U; byteIndex < size; byteIndex++)
         {
-            result |= (uint8_t)(a[i] ^ b[i]);
+            result |= (uint8_t)(expected[byteIndex] ^ actual[byteIndex]);
         }
     }
     return result;
 }
 
-void AES_ArrayEqualityResultPrint(const uint8_t *a, const uint8_t *b, size_t size)
+void AES_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
-    uint8_t result = AES_ArrayEqualityCheck(a, b, size);
+    uint8_t result = AES_ArrayEqualityCheck(expected, actual, size);
 
     if (result == 0U)
     {
@@ -102,16 +102,16 @@ void AES_HexArrayPrint(const char *label, const uint8_t *data,
 }
 
 void AES_TestHeaderPrint(const char *wrapperType,
-        unsigned long keyBitLen, const char *testType,
-        uint32_t dataLen, const char *additionalInfo)
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *additionalInfo)
 {
     char header[94U];
     (void) sprintf(header,
         " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
-        wrapperType, keyBitLen, testType,
-        (unsigned long) dataLen, additionalInfo);
-    int headerLen = (int) strlen(header);
-    int padding = (94 - headerLen) / 2;
+        wrapperType, keyBitLength, testType,
+        (unsigned long) dataLength, additionalInfo);
+    int headerLength = (int) strlen(header);
+    int padding = (94 - headerLength) / 2;
 
     (void) printf(MAG
         "\r\n\r\n ************************************"
@@ -126,50 +126,50 @@ void AES_TestHeaderPrint(const char *wrapperType,
         RESET_COLOR);
 }
 
-void AES_CryptoErrorPrint(unsigned long keyBitLen,
+void AES_CryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status)
 {
     (void) printf(RED
         "\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"
-        RESET_COLOR, keyBitLen, testType,
+        RESET_COLOR, keyBitLength, testType,
         description, status);
 }
 
 void AES_SymTestRun(void)
 {
     #ifdef RUN_SYM_ECB_TEST
-    AES_SymEcbTestRun();
+    SYM_EcbTestRun();
     #endif
 
     #ifdef RUN_SYM_CTR_TEST
-    AES_SymCtrTestRun();
+    SYM_CtrTestRun();
     #endif
 
     #ifdef RUN_SYM_CBC_TEST
-    AES_SymCbcTestRun();
+    SYM_CbcTestRun();
     #endif
 
     #ifdef RUN_SYM_CFB_TEST
-    AES_SymCfbTestRun();
+    SYM_CfbTestRun();
     #endif
 
     #ifdef RUN_SYM_OFB_TEST
-    AES_SymOfbTestRun();
+    SYM_OfbTestRun();
     #endif
 
     #ifdef RUN_SYM_XTS_TEST
-    AES_SymXtsTestRun();
+    SYM_XtsTestRun();
     #endif
 }
 
 void AES_AeadTestRun(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
-    AES_AeadGcmTestRun();
+    AEAD_GcmTestRun();
     #endif
 
     #ifdef RUN_AEAD_CCM_TEST
-    AES_AeadCcmTestRun();
+    AEAD_CcmTestRun();
     #endif
 }

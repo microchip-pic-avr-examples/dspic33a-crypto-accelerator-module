@@ -49,7 +49,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include "mcc_generated_files/system/system.h"
@@ -89,5 +88,5 @@ int main(void)
 
     }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

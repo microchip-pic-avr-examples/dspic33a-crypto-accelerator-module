@@ -54,7 +54,7 @@ Microchip or any third party.
 
 #define TEST_SESSION_ID (0x1U)
 
-static crypto_Aead_Status_E AES_AeadGcmDirectTestRun(crypto_CipherOper_E encrypt,
+static crypto_Aead_Status_E AEAD_GcmDirectTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
         uint8_t *result, uint8_t *tag)
@@ -114,7 +114,7 @@ static crypto_Aead_Status_E AES_AeadGcmDirectTestRun(crypto_CipherOper_E encrypt
     return status;
 }
 
-static crypto_Aead_Status_E AES_AeadGcmStepsTestRun(crypto_CipherOper_E encrypt,
+static crypto_Aead_Status_E AEAD_GcmStepsTestRun(crypto_CipherOper_E encrypt,
     uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
     uint8_t *iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
     uint8_t *result, uint8_t *tag)
@@ -208,7 +208,7 @@ static crypto_Aead_Status_E AES_AeadGcmStepsTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static crypto_Aead_Status_E AES_AeadCcmCipherRun(crypto_CipherOper_E encrypt,
+static crypto_Aead_Status_E AEAD_CcmCipherRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *nonce, uint32_t nonceLength, uint8_t *aad, uint32_t aadLength,
         uint8_t *result, uint8_t *tag, uint32_t tagLength)
@@ -285,7 +285,7 @@ static crypto_Aead_Status_E AES_AeadCcmCipherRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void AES_EncryptionAndTagCheck(
+static void AEAD_EncryptionAndTagCheck(
         const uint8_t *text, const uint8_t *result,
         uint32_t length, const uint8_t *tag,
         const uint8_t *tagResult, uint32_t tagLength)
@@ -320,11 +320,11 @@ static void AES_EncryptionAndTagCheck(
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES Test Functions
+// Section: AEAD Test Functions
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_AeadGcmTestRun(void)
+void AEAD_GcmTestRun(void)
 {
     crypto_Aead_Status_E status;
     crypto_Aead_Status_E statusSteps;
@@ -349,7 +349,7 @@ void AES_AeadGcmTestRun(void)
     uint32_t testCount = 1U;
 #endif
 
-    for (uint32_t i = 0U; i < testCount; i++)
+    for (uint32_t vectorIndex = 0U; vectorIndex < testCount; vectorIndex++)
     {
         uint8_t *pt;
         uint8_t *ct;
@@ -395,7 +395,7 @@ void AES_AeadGcmTestRun(void)
         aad = (test->aadLength > 0UL) ? test->aad : NULL;
         ct = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = AES_AeadGcmDirectTestRun(
+        status = AEAD_GcmDirectTestRun(
                 CRYPTO_CIOP_ENCRYPT, pt,
                 test->textLength, test->key,
                 test->keyLength, test->iv,
@@ -408,13 +408,13 @@ void AES_AeadGcmTestRun(void)
         }
         else
         {
-            AES_EncryptionAndTagCheck(test->ciphertext,
+            AEAD_EncryptionAndTagCheck(test->ciphertext,
                     ct, test->textLength, test->tag,
                     tagDirectResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                status = AES_AeadGcmDirectTestRun(
+                status = AEAD_GcmDirectTestRun(
                         CRYPTO_CIOP_DECRYPT, ct,
                         test->textLength, test->key,
                         test->keyLength, test->iv,
@@ -450,7 +450,7 @@ void AES_AeadGcmTestRun(void)
 
         ct = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
-        statusSteps = AES_AeadGcmStepsTestRun(
+        statusSteps = AEAD_GcmStepsTestRun(
                 CRYPTO_CIOP_ENCRYPT, pt,
                 test->textLength, test->key,
                 test->keyLength, test->iv,
@@ -463,13 +463,13 @@ void AES_AeadGcmTestRun(void)
         }
         else
         {
-            AES_EncryptionAndTagCheck(test->ciphertext,
+            AEAD_EncryptionAndTagCheck(test->ciphertext,
                     ct, test->textLength, test->tag,
                     tagStepsResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                statusSteps = AES_AeadGcmStepsTestRun(
+                statusSteps = AEAD_GcmStepsTestRun(
                         CRYPTO_CIOP_DECRYPT, ct,
                         test->textLength, test->key,
                         test->keyLength, test->iv,
@@ -531,7 +531,7 @@ void AES_AeadGcmTestRun(void)
     }
 }
 
-void AES_AeadCcmTestRun(void)
+void AEAD_CcmTestRun(void)
 {
     uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
     uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
@@ -544,7 +544,7 @@ void AES_AeadCcmTestRun(void)
     ccm_test_vector_t *test = TV_CcmTestVectorsGet();
     uint32_t testCount = TV_CcmTestCountGet();
 
-    for (uint32_t i = 0U; i < testCount; i++)
+    for (uint32_t vectorIndex = 0U; vectorIndex < testCount; vectorIndex++)
     {
         uint8_t *pt;
         uint8_t *ct;
@@ -589,7 +589,7 @@ void AES_AeadCcmTestRun(void)
         aad = (test->aadLength > 0UL) ? test->aad : NULL;
         ct = (test->textLength > 0UL) ? encryptedResult : NULL;
 
-        crypto_Aead_Status_E status = AES_AeadCcmCipherRun(
+        crypto_Aead_Status_E status = AEAD_CcmCipherRun(
                 CRYPTO_CIOP_ENCRYPT, pt,
                 test->textLength, test->key,
                 test->keyLength, test->nonce,
@@ -603,13 +603,13 @@ void AES_AeadCcmTestRun(void)
         }
         else
         {
-            AES_EncryptionAndTagCheck(test->ciphertext,
+            AEAD_EncryptionAndTagCheck(test->ciphertext,
                     ct, test->textLength, test->tag,
                     tagResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                status = AES_AeadCcmCipherRun(
+                status = AEAD_CcmCipherRun(
                         CRYPTO_CIOP_DECRYPT, ct,
                         test->textLength, test->key,
                         test->keyLength, test->nonce,

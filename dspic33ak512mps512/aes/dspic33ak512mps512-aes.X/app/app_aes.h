@@ -80,18 +80,18 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-uint8_t AES_ArrayEqualityCheck(const uint8_t *a, const uint8_t *b, size_t size);
+uint8_t AES_ArrayEqualityCheck(const uint8_t *expected, const uint8_t *actual, size_t size);
 
-void AES_ArrayEqualityResultPrint(const uint8_t *a, const uint8_t *b, size_t size);
+void AES_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size);
 
 void AES_HexArrayPrint(const char *label, const uint8_t *data,
         uint32_t size);
 
 void AES_TestHeaderPrint(const char *wrapperType,
-        unsigned long keyBitLen, const char *testType,
-        uint32_t dataLen, const char *dataInfo);
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *additionalInfo);
 
-void AES_CryptoErrorPrint(unsigned long keyBitLen,
+void AES_CryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status);
 

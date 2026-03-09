@@ -59,13 +59,12 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_AeadGcmTestRun(void);
+void AEAD_GcmTestRun(void);
 
-void AES_AeadCcmTestRun(void);
+void AEAD_CcmTestRun(void);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* APP_AEAD_H */
-
