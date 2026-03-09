@@ -137,6 +137,11 @@ static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
     }
 }
 
+/*
+ * Test vectors from NIST SP 800-56A (ECDH) validation:
+ * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/key-management
+ */
+
 static void ECDH_P192TestRun(void)
 {
     ECDH_TestHeaderPrint("P-192 ECDH");
