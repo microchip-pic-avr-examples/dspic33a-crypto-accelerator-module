@@ -41,13 +41,14 @@ extern "C" {
 
 #define AES_CCM_TAG_LENGTH      (32UL)
 
-typedef struct CCM_TEST_VECTOR {
-    uint8_t* key;
-    uint8_t* nonce;
-    uint8_t* aad;
-    uint8_t* plaintext;
-    uint8_t* ciphertext;
-    uint8_t* tag;
+typedef struct ccm_test_vector_t
+{
+    uint8_t *key;
+    uint8_t *nonce;
+    uint8_t *aad;
+    uint8_t *plaintext;
+    uint8_t *ciphertext;
+    uint8_t *tag;
 
     uint32_t keyLength;
     uint32_t textLength;
@@ -55,9 +56,9 @@ typedef struct CCM_TEST_VECTOR {
     uint32_t aadLength;
     uint32_t tagLength;
 
-} CCM_TEST_VECTOR;
+} ccm_test_vector_t;
 
-CCM_TEST_VECTOR * get_ccm_test_vectors(void);
+ccm_test_vector_t *get_ccm_test_vectors(void);
 uint32_t get_ccm_test_count(void);
 
 #ifdef __cplusplus

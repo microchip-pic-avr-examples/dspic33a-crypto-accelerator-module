@@ -41,13 +41,14 @@ extern "C" {
 
 #define AES_GCM_TAG_LENGTH      (16UL)
 
-typedef struct GCM_TEST_VECTOR {
-    uint8_t* key;
-    uint8_t* iv;
-    uint8_t* aad;
-    uint8_t* plaintext;
-    uint8_t* ciphertext;
-    uint8_t* tag;
+typedef struct gcm_test_vector_t
+{
+    uint8_t *key;
+    uint8_t *iv;
+    uint8_t *aad;
+    uint8_t *plaintext;
+    uint8_t *ciphertext;
+    uint8_t *tag;
 
     uint32_t keyLength;
     uint32_t textLength;
@@ -55,9 +56,9 @@ typedef struct GCM_TEST_VECTOR {
     uint32_t aadLength;
     uint32_t tagLength;
 
-} GCM_TEST_VECTOR;
+} gcm_test_vector_t;
 
-GCM_TEST_VECTOR * get_gcm_test_vectors(void);
+gcm_test_vector_t *get_gcm_test_vectors(void);
 uint32_t get_gcm_test_count(void);
 
 #ifdef __cplusplus

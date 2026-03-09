@@ -57,8 +57,8 @@ extern "C" {
 #define RUN_SYM_OFB_TEST
 #define RUN_SYM_XTS_TEST
 
-#define DATA_SIZE 48
-#define INIT_VECTOR_SIZE 16
+#define DATA_SIZE           (48U)
+#define INIT_VECTOR_SIZE    (16U)
 
 // *****************************************************************************
 // *****************************************************************************

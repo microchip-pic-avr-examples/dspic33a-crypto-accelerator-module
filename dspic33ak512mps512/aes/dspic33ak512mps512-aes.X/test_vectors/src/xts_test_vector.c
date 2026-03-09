@@ -169,7 +169,7 @@ static uint8_t xts_test_vector4_ciphertext[48] =
     0xA4, 0x3C, 0xEE, 0xD2, 0x90, 0x25, 0xE1, 0xE8, 0xBE, 0x21, 0x1F, 0xA3, 0xC3, 0xED, 0x00, 0x2D
 };
 
-static XTS_TEST_VECTOR xts_test_vectors[] =
+static xts_test_vector_t xts_test_vectors[] =
 {
     {
         .key = xts_test_vector0_key,
@@ -218,7 +218,7 @@ static XTS_TEST_VECTOR xts_test_vectors[] =
     }
 };
 
-XTS_TEST_VECTOR * get_xts_test_vectors(void)
+xts_test_vector_t *get_xts_test_vectors(void)
 {
     return xts_test_vectors;
 }

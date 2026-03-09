@@ -83,11 +83,16 @@ uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
 
 void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size);
+void printHexArray(const char *label, uint8_t *data,
+        uint32_t size);
 
-void printTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* dataInfo);
+void printTestHeader(const char *wrapperType,
+        unsigned long keyBitLen, const char *testType,
+        uint32_t dataLen, const char *dataInfo);
 
-void printCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status);
+void printCryptoError(unsigned long keyBitLen,
+        const char *testType, const char *description,
+        int status);
 
 void aes_test_sym(void);
 

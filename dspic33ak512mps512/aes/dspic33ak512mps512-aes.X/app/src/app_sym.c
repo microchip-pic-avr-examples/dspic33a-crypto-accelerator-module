@@ -49,7 +49,8 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
-static uint8_t data[DATA_SIZE] = {
+static uint8_t data[DATA_SIZE] =
+{
     0x22, 0x23, 0x34, 0x45, 0x56, 0x67, 0x78, 0x89,
     0x9A, 0xAB, 0xBC, 0xCD, 0xDE, 0xEF, 0xF1, 0x1F,
     0x12, 0x32, 0x43, 0x54, 0x65, 0x76, 0x87, 0x98,
@@ -58,23 +59,28 @@ static uint8_t data[DATA_SIZE] = {
     0x99, 0xAA, 0xBB, 0xCC, 0x99, 0xAA, 0xBB, 0xCC
 };
 
-static uint8_t initializationVector[INIT_VECTOR_SIZE] = {
+static uint8_t initializationVector[INIT_VECTOR_SIZE] =
+{
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10,
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10
 };
 
-static uint8_t keyData[32] = {
+static uint8_t keyData[32] =
+{
     0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88,
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10,
     0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
     0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x20
 };
 
-#define TEST_SESSION_ID 0x1
+#define TEST_SESSION_ID (0x1)
 
-static crypto_Sym_Status_E aes_sym_test_direct(crypto_CipherOper_E encrypt, crypto_Sym_OpModes_E opMode,
-        uint8_t* data, uint32_t dataLen, uint8_t* key, uint32_t keyLen,
-        uint8_t* result, uint8_t* initializationVector)
+static crypto_Sym_Status_E aes_sym_test_direct(
+        crypto_CipherOper_E encrypt,
+        crypto_Sym_OpModes_E opMode,
+        uint8_t *data, uint32_t dataLen,
+        uint8_t *key, uint32_t keyLen,
+        uint8_t *result, uint8_t *initializationVector)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
@@ -110,14 +116,19 @@ static crypto_Sym_Status_E aes_sym_test_direct(crypto_CipherOper_E encrypt, cryp
     return status;
 }
 
-static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypto_Sym_OpModes_E opMode,
-        uint8_t* data, uint32_t dataLen, uint8_t* key, uint32_t keyLen,
-        uint8_t* result, uint8_t* initializationVector)
+static crypto_Sym_Status_E aes_sym_test_steps(
+        crypto_CipherOper_E encrypt,
+        crypto_Sym_OpModes_E opMode,
+        uint8_t *data, uint32_t dataLen,
+        uint8_t *key, uint32_t keyLen,
+        uint8_t *result, uint8_t *initializationVector)
 {
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPFAIL;
 
-    // Context for AES calculations when running individual steps.
-    // This is non-reentrant as it is too large to put on the stack.
+    /*
+     * Context for AES calculations when running individual steps.
+     * This is non-reentrant as it is too large to put on the stack.
+     */
     static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
@@ -126,8 +137,11 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
 
         printHexArray("Data (Input)         ", data, dataLen);
 
-        status = Crypto_Sym_Aes_Init(&aesCtx, CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_CIOP_ENCRYPT,
-                                                    opMode, key, keyLen, initializationVector, TEST_SESSION_ID);
+        status = Crypto_Sym_Aes_Init(
+                &aesCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_CIOP_ENCRYPT, opMode, key,
+                keyLen, initializationVector,
+                TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
@@ -145,8 +159,11 @@ static crypto_Sym_Status_E aes_sym_test_steps(crypto_CipherOper_E encrypt, crypt
 
         printHexArray("Data (Input)         ", data, dataLen);
 
-        status = Crypto_Sym_Aes_Init(&aesCtx, CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_CIOP_DECRYPT,
-                                                    opMode, key, keyLen, initializationVector, TEST_SESSION_ID);
+        status = Crypto_Sym_Aes_Init(
+                &aesCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_CIOP_DECRYPT, opMode, key,
+                keyLen, initializationVector,
+                TEST_SESSION_ID);
 
         if (status == CRYPTO_SYM_CIPHER_SUCCESS)
         {
@@ -210,18 +227,30 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
     }
     else
     {
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
         (void) printf("\r\n%s", " Initialization Vector  :  None");
     }
 
-    status = aes_sym_test_direct(CRYPTO_CIOP_ENCRYPT, opMode, data, dataLen, key, keyLen, (uint8_t*) &encryptedDirectResult, initializationVector);
+    status = aes_sym_test_direct(CRYPTO_CIOP_ENCRYPT,
+            opMode, data, dataLen, key, keyLen,
+            (uint8_t *) &encryptedDirectResult,
+            initializationVector);
     if (status != CRYPTO_SYM_CIPHER_SUCCESS)
     {
         printCryptoError(keyBitLen, testType, "Encrypt", status);
     }
     else
     {
-        status = aes_sym_test_direct(CRYPTO_CIOP_DECRYPT, opMode, (uint8_t*) &encryptedDirectResult, dataLen, key, keyLen, (uint8_t*) &decryptedDirectResult, initializationVector);
+        status = aes_sym_test_direct(
+                CRYPTO_CIOP_DECRYPT, opMode,
+                (uint8_t *) &encryptedDirectResult,
+                dataLen, key, keyLen,
+                (uint8_t *) &decryptedDirectResult,
+                initializationVector);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
             printCryptoError(keyBitLen, testType, "Decrypt", status);
@@ -233,17 +262,33 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
         }
     }
 
-    (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-    (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n\r\n ---------------------------------"
+            "----------------------------------------------"
+            "--------------"
+            RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n ---------------------------------"
+            "----------------------------------------------"
+            "--------------"
+            RESET_COLOR);
 
-    status = aes_sym_test_steps(CRYPTO_CIOP_ENCRYPT, opMode, data, dataLen, key, keyLen, (uint8_t*) &encryptedStepsResult, initializationVector);
+    status = aes_sym_test_steps(CRYPTO_CIOP_ENCRYPT,
+            opMode, data, dataLen, key, keyLen,
+            (uint8_t *) &encryptedStepsResult,
+            initializationVector);
     if (status != CRYPTO_SYM_CIPHER_SUCCESS)
     {
         printCryptoError(keyBitLen, testType, "Encrypt", status);
     }
     else
     {
-        status = aes_sym_test_steps(CRYPTO_CIOP_DECRYPT, opMode, (uint8_t*) &encryptedStepsResult, dataLen, key, keyLen, (uint8_t*) &decryptedStepsResult, initializationVector);
+        status = aes_sym_test_steps(
+                CRYPTO_CIOP_DECRYPT, opMode,
+                (uint8_t *) &encryptedStepsResult,
+                dataLen, key, keyLen,
+                (uint8_t *) &decryptedStepsResult,
+                initializationVector);
         if (status != CRYPTO_SYM_CIPHER_SUCCESS)
         {
             printCryptoError(keyBitLen, testType, "Decrypt", status);
@@ -255,8 +300,16 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
         }
     }
 
-    (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-    (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n\r\n ---------------------------------"
+            "----------------------------------------------"
+            "--------------"
+            RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n ---------------------------------"
+            "----------------------------------------------"
+            "--------------"
+            RESET_COLOR);
     (void) printf("\r\n\r\n COMPARING TESTS...");
 
     // Verify the direct and stepwise tests generate the same result.
@@ -267,7 +320,9 @@ static void aes_sym_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint32_t da
 
 }
 
-static void aes_sym_128_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint8_t* key, uint8_t* initializationVector)
+static void aes_sym_128_test(
+        crypto_Sym_OpModes_E opMode, uint8_t *data,
+        uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
     aes_sym_test(opMode, data, 35, key, CRYPTO_AESKEYSIZE_128, initializationVector);
@@ -276,7 +331,9 @@ static void aes_sym_128_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint8_t
     aes_sym_test(opMode, data, 48, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 }
 
-static void aes_sym_192_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint8_t* key, uint8_t* initializationVector)
+static void aes_sym_192_test(
+        crypto_Sym_OpModes_E opMode, uint8_t *data,
+        uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
     aes_sym_test(opMode, data, 35, key, CRYPTO_AESKEYSIZE_192, initializationVector);
@@ -285,7 +342,9 @@ static void aes_sym_192_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint8_t
     aes_sym_test(opMode, data, 48, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 }
 
-static void aes_sym_256_test(crypto_Sym_OpModes_E opMode, uint8_t* data, uint8_t* key, uint8_t* initializationVector)
+static void aes_sym_256_test(
+        crypto_Sym_OpModes_E opMode, uint8_t *data,
+        uint8_t *key, uint8_t *initializationVector)
 {
 #ifdef RUN_ALL_VECTORS
     aes_sym_test(opMode, data, 35, (uint8_t*) key, CRYPTO_AESKEYSIZE_256, initializationVector);

@@ -52,7 +52,7 @@ Microchip or any third party.
 #include "test_vectors/gcm_test_vector.h"
 #include "test_vectors/ccm_test_vector.h"
 
-#define TEST_SESSION_ID 0x1
+#define TEST_SESSION_ID (0x1)
 
 static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
         uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
@@ -71,12 +71,20 @@ static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
-        status = Crypto_Aead_AesGcm_EncryptAuthDirect(CRYPTO_HANDLER_HW_INTERNAL,
-                data, dataLength, result, key, keyLength, iv, ivLength, aad, aadLength, tag, AES_GCM_TAG_LENGTH, TEST_SESSION_ID);
+        status = Crypto_Aead_AesGcm_EncryptAuthDirect(
+                CRYPTO_HANDLER_HW_INTERNAL,
+                data, dataLength, result,
+                key, keyLength, iv, ivLength,
+                aad, aadLength, tag,
+                AES_GCM_TAG_LENGTH, TEST_SESSION_ID);
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -90,8 +98,12 @@ static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
 
         printHexArray("Data (Input)         ", data, dataLength);
 
-        status = Crypto_Aead_AesGcm_DecryptAuthDirect(CRYPTO_HANDLER_HW_INTERNAL,
-            data, dataLength, result, key, keyLength, iv, ivLength, aad, aadLength, tag, AES_GCM_TAG_LENGTH, TEST_SESSION_ID);
+        status = Crypto_Aead_AesGcm_DecryptAuthDirect(
+                CRYPTO_HANDLER_HW_INTERNAL,
+                data, dataLength, result,
+                key, keyLength, iv, ivLength,
+                aad, aadLength, tag,
+                AES_GCM_TAG_LENGTH, TEST_SESSION_ID);
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -109,8 +121,10 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
 
-    // Context for AES calculations when running individual steps.
-    // This is non-reentrant as it is too large to put on the stack.
+    /*
+     * Context for AES calculations when running individual steps.
+     * This is non-reentrant as it is too large to put on the stack.
+     */
     static st_Crypto_Aead_AesGcm_ctx aesGcmCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
@@ -123,12 +137,18 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
-        status = Crypto_Aead_AesGcm_Init(&aesGcmCtx, CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_CIOP_ENCRYPT,
-                                            key, keyLength, iv, ivLength, TEST_SESSION_ID);
+        status = Crypto_Aead_AesGcm_Init(
+                &aesGcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_CIOP_ENCRYPT, key, keyLength,
+                iv, ivLength, TEST_SESSION_ID);
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -158,8 +178,10 @@ static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
         printHexArray("Data (Input)         ", data, dataLength);
         printHexArray("Authentication Tag   ", tag, AES_GCM_TAG_LENGTH);
 
-        status = Crypto_Aead_AesGcm_Init(&aesGcmCtx, CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_CIOP_DECRYPT,
-                                            key, keyLength, iv, ivLength, TEST_SESSION_ID);
+        status = Crypto_Aead_AesGcm_Init(
+                &aesGcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                CRYPTO_CIOP_DECRYPT, key, keyLength,
+                iv, ivLength, TEST_SESSION_ID);
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -193,8 +215,10 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
 {
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
 
-    // Context for AES calculations when running individual steps.
-    // This is non-reentrant as it is too large to put on the stack.
+    /*
+     * Context for AES calculations when running individual steps.
+     * This is non-reentrant as it is too large to put on the stack.
+     */
     static st_Crypto_Aead_AesCcm_ctx aesCcmCtx __attribute__((aligned(4)));
 
     if (encrypt == CRYPTO_CIOP_ENCRYPT)
@@ -207,31 +231,44 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
-        status = Crypto_Aead_AesCcm_Init(&aesCcmCtx, CRYPTO_HANDLER_HW_INTERNAL, key, keyLength, TEST_SESSION_ID);
+        status = Crypto_Aead_AesCcm_Init(
+                &aesCcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                key, keyLength, TEST_SESSION_ID);
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            status = Crypto_Aead_AesCcm_Cipher(&aesCcmCtx, encrypt,
-                                                data, dataLength, result, nonce, nonceLength,
-                                                tag, tagLength, aad, aadLength);
+            status = Crypto_Aead_AesCcm_Cipher(
+                    &aesCcmCtx, encrypt,
+                    data, dataLength, result,
+                    nonce, nonceLength,
+                    tag, tagLength, aad, aadLength);
         }
 
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            printHexArray("Data (Encrypted)     ", result, dataLength);
-            printHexArray("Authentication Tag   ", tag, tagLength);
+            printHexArray("Data (Encrypted)     ",
+                    result, dataLength);
+            printHexArray("Authentication Tag   ",
+                    tag, tagLength);
         }
     }
     else
     {
         (void) printf("\r\n\r\n DECRYPTING...");
 
-        printHexArray("Data (Input)         ", data, dataLength);
+        printHexArray("Data (Input)         ",
+                data, dataLength);
 
-        status = Crypto_Aead_AesCcm_Init(&aesCcmCtx, CRYPTO_HANDLER_HW_INTERNAL, key, keyLength, TEST_SESSION_ID);
+        status = Crypto_Aead_AesCcm_Init(
+                &aesCcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
+                key, keyLength, TEST_SESSION_ID);
         if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
         {
             status = Crypto_Aead_AesCcm_Cipher(&aesCcmCtx, encrypt,
@@ -248,9 +285,16 @@ static crypto_Aead_Status_E aead_ccm_test(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void checkEncryptionAndTag(const uint8_t *text, const uint8_t *result, uint32_t length, const uint8_t *tag, const uint8_t *tagResult, uint32_t tagLength)
+static void checkEncryptionAndTag(
+        const uint8_t *text, const uint8_t *result,
+        uint32_t length, const uint8_t *tag,
+        const uint8_t *tagResult, uint32_t tagLength)
 {
-    (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n ---------------------------------"
+            "----------------------------------------------"
+            "--------------"
+            RESET_COLOR);
 
     if (length > 0UL)
     {
@@ -298,10 +342,10 @@ void aes_aead_gcm_test(void)
     const char* emptyString = "";
 
 #ifdef RUN_ALL_VECTORS
-    GCM_TEST_VECTOR *test = get_gcm_test_vectors();
+    gcm_test_vector_t *test = get_gcm_test_vectors();
     uint32_t testCount = get_gcm_test_count();
 #else
-    GCM_TEST_VECTOR *test = &get_gcm_test_vectors()[22];
+    gcm_test_vector_t *test = &get_gcm_test_vectors()[22];
     uint32_t testCount = 1;
 #endif
 
@@ -311,17 +355,25 @@ void aes_aead_gcm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textLength, emptyString);
+        printTestHeader(testWrapper,
+                (test->keyLength * 8UL), testType,
+                test->textLength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keyLength);
+        printHexArray("Key                  ",
+                test->key, test->keyLength);
 
         if (test->ivLength != 0UL)
         {
-            printHexArray("Initialization Vector", test->iv, test->ivLength);
+            printHexArray("Initialization Vector",
+                    test->iv, test->ivLength);
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Initialization Vector  :  None");
         }
 
@@ -331,7 +383,11 @@ void aes_aead_gcm_test(void)
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
@@ -339,8 +395,12 @@ void aes_aead_gcm_test(void)
         aad = (test->aadLength > 0UL) ? test->aad : NULL;
         ct = (test->textLength > 0UL) ? encryptedDirectResult : NULL;
 
-        status = aead_gcm_test_direct(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
-                                      test->iv, test->ivLength, aad, test->aadLength, ct, tagDirectResult);
+        status = aead_gcm_test_direct(
+                CRYPTO_CIOP_ENCRYPT, pt,
+                test->textLength, test->key,
+                test->keyLength, test->iv,
+                test->ivLength, aad,
+                test->aadLength, ct, tagDirectResult);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -348,12 +408,20 @@ void aes_aead_gcm_test(void)
         }
         else
         {
-            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagDirectResult, test->tagLength);
+            checkEncryptionAndTag(test->ciphertext,
+                    ct, test->textLength, test->tag,
+                    tagDirectResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                status = aead_gcm_test_direct(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
-                                              test->iv, test->ivLength, aad, test->aadLength, decryptedDirectResult, tagDirectResult);
+                status = aead_gcm_test_direct(
+                        CRYPTO_CIOP_DECRYPT, ct,
+                        test->textLength, test->key,
+                        test->keyLength, test->iv,
+                        test->ivLength, aad,
+                        test->aadLength,
+                        decryptedDirectResult,
+                        tagDirectResult);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
@@ -361,18 +429,33 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    printArrayEqualityResult(test->plaintext, decryptedDirectResult, test->textLength);
+                    printArrayEqualityResult(
+                            test->plaintext,
+                            decryptedDirectResult,
+                            test->textLength);
                 }
             }
         }
 
-        (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
 
         ct = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
-        statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
-                                          test->iv, test->ivLength, aad, test->aadLength, ct, tagStepsResult);
+        statusSteps = aead_gcm_test_steps(
+                CRYPTO_CIOP_ENCRYPT, pt,
+                test->textLength, test->key,
+                test->keyLength, test->iv,
+                test->ivLength, aad,
+                test->aadLength, ct, tagStepsResult);
 
         if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -380,12 +463,20 @@ void aes_aead_gcm_test(void)
         }
         else
         {
-            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagStepsResult, test->tagLength);
+            checkEncryptionAndTag(test->ciphertext,
+                    ct, test->textLength, test->tag,
+                    tagStepsResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                statusSteps = aead_gcm_test_steps(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
-                                                  test->iv, test->ivLength, aad, test->aadLength, decryptedStepsResult, tagStepsResult);
+                statusSteps = aead_gcm_test_steps(
+                        CRYPTO_CIOP_DECRYPT, ct,
+                        test->textLength, test->key,
+                        test->keyLength, test->iv,
+                        test->ivLength, aad,
+                        test->aadLength,
+                        decryptedStepsResult,
+                        tagStepsResult);
 
                 if (statusSteps != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
@@ -394,13 +485,24 @@ void aes_aead_gcm_test(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    printArrayEqualityResult(test->plaintext, decryptedStepsResult, test->textLength);
+                    printArrayEqualityResult(
+                            test->plaintext,
+                            decryptedStepsResult,
+                            test->textLength);
                 }
             }
         }
 
-        (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
         if ((status == CRYPTO_AEAD_CIPHER_SUCCESS) && (statusSteps == CRYPTO_AEAD_CIPHER_SUCCESS))
         {
             // Verify the direct and stepwise tests generate the same result.
@@ -410,7 +512,10 @@ void aes_aead_gcm_test(void)
             {
                 printHexArray("Direct Encryption    ", encryptedDirectResult, test->textLength);
                 printHexArray("Stepwise Encryption  ", encryptedStepsResult, test->textLength);
-                printArrayEqualityResult(encryptedDirectResult, encryptedStepsResult, test->textLength);
+                printArrayEqualityResult(
+                        encryptedDirectResult,
+                        encryptedStepsResult,
+                        test->textLength);
             }
 
             printHexArray("Direct Tag           ", tagDirectResult, AES_GCM_TAG_LENGTH);
@@ -436,7 +541,7 @@ void aes_aead_ccm_test(void)
     const char* testType = "CCM";
     const char* emptyString = "";
 
-    CCM_TEST_VECTOR *test = get_ccm_test_vectors();
+    ccm_test_vector_t *test = get_ccm_test_vectors();
     uint32_t testCount = get_ccm_test_count();
 
     for (uint32_t i = 0; i < testCount; i++)
@@ -445,9 +550,12 @@ void aes_aead_ccm_test(void)
         uint8_t *ct;
         uint8_t *aad;
 
-        printTestHeader(testWrapper, (test->keyLength * 8UL), testType, test->textLength, emptyString);
+        printTestHeader(testWrapper,
+                (test->keyLength * 8UL), testType,
+                test->textLength, emptyString);
 
-        printHexArray("Key                  ", test->key, test->keyLength);
+        printHexArray("Key                  ",
+                test->key, test->keyLength);
 
         if (test->nonceLength != 0UL)
         {
@@ -455,7 +563,11 @@ void aes_aead_ccm_test(void)
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Nonce                  :  None");
         }
 
@@ -465,7 +577,11 @@ void aes_aead_ccm_test(void)
         }
         else
         {
-            (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+            (void) printf(BLUE
+                    "\r\n ---------------------------------"
+                    "----------------------------------------------"
+                    "--------------"
+                    RESET_COLOR);
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
@@ -473,8 +589,13 @@ void aes_aead_ccm_test(void)
         aad = (test->aadLength > 0UL) ? test->aad : NULL;
         ct = (test->textLength > 0UL) ? encryptedResult : NULL;
 
-        crypto_Aead_Status_E status = aead_ccm_test(CRYPTO_CIOP_ENCRYPT, pt, test->textLength, test->key, test->keyLength,
-                               test->nonce, test->nonceLength, aad, test->aadLength, ct, tagResult, test->tagLength);
+        crypto_Aead_Status_E status = aead_ccm_test(
+                CRYPTO_CIOP_ENCRYPT, pt,
+                test->textLength, test->key,
+                test->keyLength, test->nonce,
+                test->nonceLength, aad,
+                test->aadLength, ct, tagResult,
+                test->tagLength);
 
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
@@ -482,12 +603,19 @@ void aes_aead_ccm_test(void)
         }
         else
         {
-            checkEncryptionAndTag(test->ciphertext, ct, test->textLength, test->tag, tagResult, test->tagLength);
+            checkEncryptionAndTag(test->ciphertext,
+                    ct, test->textLength, test->tag,
+                    tagResult, test->tagLength);
 
             if (test->textLength > 0UL)
             {
-                status = aead_ccm_test(CRYPTO_CIOP_DECRYPT, ct, test->textLength, test->key, test->keyLength,
-                                       test->nonce, test->nonceLength, aad, test->aadLength, decryptedResult, tagResult, test->tagLength);
+                status = aead_ccm_test(
+                        CRYPTO_CIOP_DECRYPT, ct,
+                        test->textLength, test->key,
+                        test->keyLength, test->nonce,
+                        test->nonceLength, aad,
+                        test->aadLength, decryptedResult,
+                        tagResult, test->tagLength);
                 if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
                 {
                     printCryptoError((test->keyLength * 8UL), testType, "Decrypt", status);
@@ -500,8 +628,16 @@ void aes_aead_ccm_test(void)
             }
         }
 
-        (void) printf(BLUE"\r\n\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
+        (void) printf(BLUE
+                "\r\n ---------------------------------"
+                "----------------------------------------------"
+                "--------------"
+                RESET_COLOR);
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
             (void) printf(RED"\r\nTEST FAILED"RESET_COLOR);

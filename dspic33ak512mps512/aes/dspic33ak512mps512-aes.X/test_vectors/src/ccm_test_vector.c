@@ -323,7 +323,7 @@ static uint8_t ccm_test_vector9_tag[14] =
     0xE4, 0xD6, 0x30, 0xE3, 0xEE, 0xEC, 0xA0, 0xA5, 0xD3, 0x76, 0x18, 0xE4, 0x62, 0x07
 };
 
-static CCM_TEST_VECTOR ccm_test_vectors[] =
+static ccm_test_vector_t ccm_test_vectors[] =
 {
     {
         .key = ccm_test_vector0_key,
@@ -457,7 +457,7 @@ static CCM_TEST_VECTOR ccm_test_vectors[] =
     }
 };
 
-CCM_TEST_VECTOR * get_ccm_test_vectors(void)
+ccm_test_vector_t *get_ccm_test_vectors(void)
 {
     return ccm_test_vectors;
 }
