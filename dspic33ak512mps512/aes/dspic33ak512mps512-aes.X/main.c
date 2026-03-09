@@ -54,7 +54,6 @@ Microchip or any third party.
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes.h"
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -67,7 +66,7 @@ int main(void)
 
     (void) printf("\n\n\n\r\n ");
     (void) printf("______________________________________________________________________________________________________ \r\n");
-    (void )printf("\r\n\n\n\n Starting CRYPTO AES program \r\n");
+    (void) printf("\r\n\n\n\n Starting CRYPTO AES program \r\n");
 
     #ifdef RUN_SYM_TEST
     aes_test_sym();
@@ -79,7 +78,7 @@ int main(void)
 
     (void) printf("\n\n\n\r\n ");
     (void) printf("______________________________________________________________________________________________________ \r\n");
-    while(1)
+    while (1)
     {
 
     };

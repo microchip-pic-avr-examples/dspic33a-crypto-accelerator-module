@@ -102,7 +102,6 @@ static crypto_Aead_Status_E aead_gcm_test_direct(crypto_CipherOper_E encrypt,
     return status;
 }
 
-
 static crypto_Aead_Status_E aead_gcm_test_steps(crypto_CipherOper_E encrypt,
     uint8_t* data, uint32_t dataLength, uint8_t* key, uint32_t keyLength,
     uint8_t* iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
@@ -316,7 +315,7 @@ void aes_aead_gcm_test(void)
 
         printHexArray("Key                  ", test->key, test->keyLength);
 
-        if(test->ivLength != 0UL)
+        if (test->ivLength != 0UL)
         {
             printHexArray("Initialization Vector", test->iv, test->ivLength);
         }
@@ -326,7 +325,7 @@ void aes_aead_gcm_test(void)
             (void) printf("\r\n%s", " Initialization Vector  :  None");
         }
 
-        if(test->aadLength != 0UL)
+        if (test->aadLength != 0UL)
         {
             printHexArray("Authentication Data  ", test->aad, test->aadLength);
         }
@@ -450,7 +449,7 @@ void aes_aead_ccm_test(void)
 
         printHexArray("Key                  ", test->key, test->keyLength);
 
-        if(test->nonceLength != 0UL)
+        if (test->nonceLength != 0UL)
         {
             printHexArray("Nonce                ", test->nonce, test->nonceLength);
         }
@@ -460,7 +459,7 @@ void aes_aead_ccm_test(void)
             (void) printf("\r\n%s", " Nonce                  :  None");
         }
 
-        if(test->aadLength != 0UL)
+        if (test->aadLength != 0UL)
         {
             printHexArray("Authentication Data  ", test->aad, test->aadLength);
         }

@@ -67,13 +67,11 @@ uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
     return result;
 }
 
-
-
 void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
 {
-	uint8_t result = checkArrayEquality(a, b, size);
+    uint8_t result = checkArrayEquality(a, b, size);
 
-    if(result == 0U)
+    if (result == 0U)
     {
         (void) printf(GREEN" \r\n\r\n PASS "RESET_COLOR);
     }
@@ -82,7 +80,6 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
         (void) printf(RED" \r\n\r\n FAIL - Data Mismatch"RESET_COLOR);
     }
 }
-
 
 void printHexArray(const char* label, uint8_t* data, uint32_t size)
 {
