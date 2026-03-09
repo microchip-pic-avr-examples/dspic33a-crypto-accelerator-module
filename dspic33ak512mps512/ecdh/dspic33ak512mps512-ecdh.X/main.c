@@ -40,8 +40,8 @@ Microchip or any third party.
 *
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "app/app_ecdh.h"
 #include "mcc_generated_files/system/system.h"
 
