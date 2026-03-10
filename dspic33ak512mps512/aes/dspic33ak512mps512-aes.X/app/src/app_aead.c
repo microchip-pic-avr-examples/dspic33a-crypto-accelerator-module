@@ -342,10 +342,10 @@ void AEAD_GcmTestRun(void)
     const char *emptyString = "";
 
 #ifdef RUN_ALL_VECTORS
-    gcm_test_vector_t *test = TV_GcmTestVectorsGet();
-    uint32_t testCount = TV_GcmTestCountGet();
+    gcm_test_vector_t *test = VECTOR_GcmTestVectorsGet();
+    uint32_t testCount = VECTOR_GcmTestCountGet();
 #else
-    gcm_test_vector_t *test = &TV_GcmTestVectorsGet()[22];
+    gcm_test_vector_t *test = &VECTOR_GcmTestVectorsGet()[22];
     uint32_t testCount = 1U;
 #endif
 
@@ -541,8 +541,8 @@ void AEAD_CcmTestRun(void)
     const char *testType = "CCM";
     const char *emptyString = "";
 
-    ccm_test_vector_t *test = TV_CcmTestVectorsGet();
-    uint32_t testCount = TV_CcmTestCountGet();
+    ccm_test_vector_t *test = VECTOR_CcmTestVectorsGet();
+    uint32_t testCount = VECTOR_CcmTestCountGet();
 
     for (uint32_t vectorIndex = 0U; vectorIndex < testCount; vectorIndex++)
     {

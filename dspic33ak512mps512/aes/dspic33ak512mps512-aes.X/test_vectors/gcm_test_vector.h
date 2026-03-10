@@ -58,9 +58,9 @@ typedef struct gcm_test_vector_t
 
 } gcm_test_vector_t;
 
-gcm_test_vector_t *TV_GcmTestVectorsGet(void);
+gcm_test_vector_t *VECTOR_GcmTestVectorsGet(void);
 
-uint32_t TV_GcmTestCountGet(void);
+uint32_t VECTOR_GcmTestCountGet(void);
 
 #ifdef __cplusplus
 }

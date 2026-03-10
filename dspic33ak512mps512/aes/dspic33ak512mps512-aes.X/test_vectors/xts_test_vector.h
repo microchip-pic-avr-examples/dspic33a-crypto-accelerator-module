@@ -53,9 +53,9 @@ typedef struct xts_test_vector_t
 
 } xts_test_vector_t;
 
-xts_test_vector_t *TV_XtsTestVectorsGet(void);
+xts_test_vector_t *VECTOR_XtsTestVectorsGet(void);
 
-uint32_t TV_XtsTestCountGet(void);
+uint32_t VECTOR_XtsTestCountGet(void);
 
 #ifdef __cplusplus
 }

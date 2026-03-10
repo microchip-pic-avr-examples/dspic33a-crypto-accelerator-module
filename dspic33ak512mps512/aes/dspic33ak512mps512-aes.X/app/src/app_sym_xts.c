@@ -214,8 +214,8 @@ void SYM_XtsTestRun(void)
     const char *testWrapper = "SYMMETRIC";
     const char *testType = "XTS";
 
-    xts_test_vector_t *test = TV_XtsTestVectorsGet();
-    uint32_t testCount = TV_XtsTestCountGet();
+    xts_test_vector_t *test = VECTOR_XtsTestVectorsGet();
+    uint32_t testCount = VECTOR_XtsTestCountGet();
 
     for (uint32_t vectorIndex = 0U; vectorIndex < testCount; vectorIndex++)
     {
