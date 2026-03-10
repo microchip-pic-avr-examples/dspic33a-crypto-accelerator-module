@@ -46,19 +46,19 @@ typedef struct
     crypto_Hash_Algo_E hashAlgorithm;
 } test_vector_t;
 
-#define NUMBER_OF_CMAC_VECTORS 4
+#define NUMBER_OF_CMAC_VECTORS (4)
 extern test_vector_t cmac128TestVectors[NUMBER_OF_CMAC_VECTORS];
 extern test_vector_t cmac192TestVectors[NUMBER_OF_CMAC_VECTORS];
 extern test_vector_t cmac256TestVectors[NUMBER_OF_CMAC_VECTORS];
 
-#define NUMBER_OF_HMAC_VECTORS 2
+#define NUMBER_OF_HMAC_VECTORS (2)
 extern test_vector_t hmac1TestVectors[NUMBER_OF_HMAC_VECTORS];
 extern test_vector_t hmac224TestVectors[NUMBER_OF_HMAC_VECTORS];
 extern test_vector_t hmac256TestVectors[NUMBER_OF_HMAC_VECTORS];
 extern test_vector_t hmac384TestVectors[NUMBER_OF_HMAC_VECTORS];
 extern test_vector_t hmac512TestVectors[NUMBER_OF_HMAC_VECTORS];
 
-#define NUMBER_OF_GMAC_VECTORS 4
+#define NUMBER_OF_GMAC_VECTORS (4)
 extern test_vector_t gmacTestVectors[NUMBER_OF_GMAC_VECTORS];
 
 #ifdef __cplusplus
