@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app.c
+    app_sha.c
 
   Summary:
     This source file handles the running of the Hashing examples.
@@ -56,7 +56,7 @@ static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: HASH Test Functions
+// Section: SHA Hash Test Functions
 // *****************************************************************************
 // *****************************************************************************
 

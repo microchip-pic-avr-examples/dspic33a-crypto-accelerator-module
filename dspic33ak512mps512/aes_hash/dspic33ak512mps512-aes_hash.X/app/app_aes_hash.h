@@ -8,7 +8,8 @@
     app_aes_hash.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for AES and
+    hash test orchestration in the application.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
