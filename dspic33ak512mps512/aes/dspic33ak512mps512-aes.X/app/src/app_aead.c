@@ -533,9 +533,9 @@ void AEAD_GcmTestRun(void)
 
 void AEAD_CcmTestRun(void)
 {
-    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
-    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0U};
-    uint8_t tagResult[AES_CCM_TAG_LENGTH] = {0U};
+    uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
+    uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
+    uint8_t tagResult[AES_CCM_TAG_LENGTH] = {0};
 
     const char *testWrapper = "AEAD";
     const char *testType = "CCM";
