@@ -81,9 +81,9 @@ static void SHA_ArrayEqualityCheck(const uint8_t *expected,
 {
     uint8_t result = 0U;
 
-    for (unsigned int byteIndex = 0U; byteIndex < size; byteIndex++)
+    for (size_t byteIndex = 0U; byteIndex < size; byteIndex++)
     {
-        result |= expected[byteIndex] ^ actual[byteIndex];
+        result |= (uint8_t)(expected[byteIndex] ^ actual[byteIndex]);
     }
 
     if (result == 0U)
@@ -222,9 +222,9 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
     // Test with a single update() call, using the data length as the block size.
     status = SHA_TestDigestRun(SINGLE_STEP, dataLength, algo,
-            data, dataLength, (uint8_t *) &digestResult);
+            data, dataLength, digestResult);
 
-    SHA_HexArrayPrint(outputHeader, (const uint8_t *)&digestResult, digestLength);
+    SHA_HexArrayPrint(outputHeader, digestResult, digestLength);
 
     if (status != CRYPTO_HASH_SUCCESS)
     {
@@ -235,7 +235,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     else
     {
         SHA_ArrayEqualityCheck(
-                (uint8_t *) &digestResult, expectedDigest, digestLength);
+                digestResult, expectedDigest, digestLength);
     }
 
     /*
@@ -261,7 +261,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
             blockIndex++)
     {
         status = SHA_TestDigestRun(MULTI_STEP, blockSizes[blockIndex],
-                algo, data, dataLength, (uint8_t *) &digestResult);
+                algo, data, dataLength, digestResult);
 
         if (status != CRYPTO_HASH_SUCCESS)
         {
@@ -272,10 +272,10 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
         else
         {
             SHA_HexArrayPrint(outputHeader,
-                    (const uint8_t *)&digestResult, digestLength);
+                    digestResult, digestLength);
 
             SHA_ArrayEqualityCheck(
-                    (uint8_t *) &digestResult, expectedDigest, digestLength);
+                    digestResult, expectedDigest, digestLength);
         }
     }
 }
