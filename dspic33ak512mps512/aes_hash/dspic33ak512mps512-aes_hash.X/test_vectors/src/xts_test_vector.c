@@ -27,7 +27,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
-
 #define TWEAK_SIZE  16
 
 static uint8_t key_16bytes[32]    = {0xa1, 0xb9, 0x0c, 0xba, 0x3f, 0x06, 0xac, 0x35, 0x3b, 0x2c, 0x34, 0x38, 0x76, 0x08, 0x17, 0x62,
@@ -151,7 +150,6 @@ static SYM_TEST_VECTOR xts_test_vectors[5] = {
     [3] = xts_256_32byte,
     [4] = xts_256_48byte,
 };
-
 
 SYM_TEST_VECTOR * get_xts_test_vectors(void)
 {

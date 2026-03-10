@@ -68,7 +68,6 @@ static uint8_t aes_ccm_authtag_8bytes[8] = {
     0x48, 0x43, 0x92, 0xfb, 0xc1, 0xb0, 0x99, 0x51
 };
 
-
 static const AEAD_TEST_VECTOR aes_ccm_128_4_bytes_vector = {
     .id = 0,
     .inputKey = aes_ccm_key,

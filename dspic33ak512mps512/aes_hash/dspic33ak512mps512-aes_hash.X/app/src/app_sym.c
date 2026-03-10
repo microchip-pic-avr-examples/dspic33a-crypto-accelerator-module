@@ -59,7 +59,6 @@ Microchip or any third party.
 // Context for AES calculations.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: File level Functions
@@ -88,7 +87,6 @@ static TEST_RESULT checkResult(uint8_t *expected, uint8_t *result, uint32_t leng
     return retval;
 }
 
-
 /**
  * @brief Get the test operation mode string based on the mode.
  * @param opMode The AES symmetric operations mode.
@@ -96,7 +94,7 @@ static TEST_RESULT checkResult(uint8_t *expected, uint8_t *result, uint32_t leng
  */
 static const char *getSymTestOpMode(crypto_Sym_OpModes_E opMode)
 {
-    const char* opModeStr = "???";
+    const char *opModeStr = "???";
 
     switch(opMode)
     {
@@ -130,7 +128,6 @@ static const char *getSymTestOpMode(crypto_Sym_OpModes_E opMode)
 
     return opModeStr;
 }
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -373,7 +370,6 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
 
     return result;
 }
-
 
 TEST_RESULT sym_test_advance(TEST_CONTEXT *context)
 {

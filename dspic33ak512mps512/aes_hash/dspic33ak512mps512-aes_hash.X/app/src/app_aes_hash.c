@@ -66,7 +66,6 @@ Microchip or any third party.
 
 #include "crypto/common_crypto/crypto_common.h"
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Type Definitions
@@ -84,7 +83,6 @@ Microchip or any third party.
 #define BLOCK_SIZE_7                7UL
 #define BLOCK_SIZE_ITERATION_COUNT  7
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
@@ -93,7 +91,7 @@ Microchip or any third party.
 
 bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
-	uint8_t result = 0U;
+    uint8_t result = 0U;
     bool success = false;
 
     if (size > 0U)
@@ -174,7 +172,6 @@ static const char * getTestError(TEST_RESULT result)
     return testErrorString;
 }
 
-
 #define HEADER_STR_SZ (105)
 void printSeparator(const char *color, char sep)
 {
@@ -191,8 +188,7 @@ void printSeparator(const char *color, char sep)
     (void) printf("\r\n %s%s" RESET_COLOR, color, header);
 }
 
-
-void printWithLabel(const char* label, const char* format, ...)
+void printWithLabel(const char *label, const char *format, ...)
 {
     // cppcheck-suppress misra-c2012-17.1
     va_list args;
@@ -207,8 +203,7 @@ void printWithLabel(const char* label, const char* format, ...)
     va_end(args);
 }
 
-
-void printHexArray(const char* label, uint8_t* data, uint32_t size)
+void printHexArray(const char *label, uint8_t *data, uint32_t size)
 {
     (void) printf("\r\n %-22s :", label);
 
@@ -232,7 +227,6 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
     }
 }
 
-
 void printOperationStep(const char *step, const char *op, TEST_MODE testMode, uint32_t size, bool printSize)
 {
     if (true == printSize)
@@ -244,7 +238,6 @@ void printOperationStep(const char *step, const char *op, TEST_MODE testMode, ui
         (void) printf("\r\n %-12s %-10s %-8s OPERATION... ", step, op, getTestMode(testMode));
     }
 }
-
 
 void printCryptoResult(TEST_RESULT result, int status)
 {
@@ -258,7 +251,6 @@ void printCryptoResult(TEST_RESULT result, int status)
     }
 }
 
-
 /*******************************************************************************
  * Symmetric tests
  *******************************************************************************/
@@ -270,7 +262,7 @@ static void aes_test_ecb(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT ecbTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &ecbTestContext
+        .testContext = (void *) &ecbTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-ECB mode test\r\n" RESET_COLOR);
 
@@ -304,7 +296,7 @@ static void aes_test_ctr(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT ctrTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &ctrTestContext
+        .testContext = (void *) &ctrTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CTR mode test\r\n" RESET_COLOR);
 
@@ -338,7 +330,7 @@ static void aes_test_cbc(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT cbcTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &cbcTestContext
+        .testContext = (void *) &cbcTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" RESET_COLOR);
 
@@ -372,7 +364,7 @@ static void aes_test_cfb128(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT cfb128TestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &cfb128TestContext
+        .testContext = (void *) &cfb128TestContext
     };
 
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CFB128 mode test\r\n" RESET_COLOR);
@@ -407,7 +399,7 @@ static void aes_test_ofb(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT ofbTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &ofbTestContext
+        .testContext = (void *) &ofbTestContext
     };
 
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-OFB mode test\r\n" RESET_COLOR);
@@ -442,7 +434,7 @@ static void aes_test_xts(void)
     TEST_RESULT result;
     SYM_TEST_CONTEXT xtsTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &xtsTestContext
+        .testContext = (void *) &xtsTestContext
     };
 
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-XTS mode test\r\n" RESET_COLOR);
@@ -500,7 +492,6 @@ void aes_test_sym(void)
 
 #endif // RUN_SYM_TEST
 
-
 /*******************************************************************************
  * MAC tests
  *******************************************************************************/
@@ -512,7 +503,7 @@ void aes_test_mac(void)
     TEST_RESULT result;
     AES_CMAC_TEST_CONTEXT macTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &macTestContext
+        .testContext = (void *) &macTestContext
     };
 
     (void) printf(BLUE "\r\n\r\n Starting MAC AES-CMAC mode test\r\n" RESET_COLOR);
@@ -533,7 +524,6 @@ void aes_test_mac(void)
 
 #endif // RUN_MAC_TEST
 
-
 /*******************************************************************************
  * AEAD tests
  *******************************************************************************/
@@ -545,7 +535,7 @@ void aes_test_aead(void)
     TEST_RESULT result;
     AEAD_TEST_CONTEXT aeadTestContext = {0};
     TEST_CONTEXT context = {
-        .testContext = (void*) &aeadTestContext
+        .testContext = (void *) &aeadTestContext
     };
 #endif
 
@@ -604,7 +594,6 @@ void aes_test_aead(void)
 
 #endif // RUN_AEAD_TEST
 
-
 /*******************************************************************************
  * HASH tests
  *******************************************************************************/
@@ -628,7 +617,7 @@ void test_hash(void)
         (void) printf(BLUE "\r\n\r\n Test Iteration %d: Hash Block Size %lu" RESET_COLOR, (iter + 1), (unsigned long) hashBlockSize);
 
         HASH_TEST_CONTEXT hashTestContext = {0};
-        context.testContext = (void*) &hashTestContext;
+        context.testContext = (void *) &hashTestContext;
 
         // Run hash operations.
         (void) hash_test_init(&context, TEST_MODE_HASH, CRYPTO_HASH_SHA2_512, hashBlockSize);
@@ -659,17 +648,17 @@ void test_concurrent(void)
 
     SYM_TEST_CONTEXT symTestContext = {0};
     TEST_CONTEXT symContext = {
-        .testContext = (void*) &symTestContext
+        .testContext = (void *) &symTestContext
     };
 
     AEAD_TEST_CONTEXT aeadTestContext = {0};
     TEST_CONTEXT aeadContext = {
-        .testContext = (void*) &aeadTestContext
+        .testContext = (void *) &aeadTestContext
     };
 
     AES_CMAC_TEST_CONTEXT macTestContext = {0};
     TEST_CONTEXT macContext = {
-        .testContext = (void*) &macTestContext
+        .testContext = (void *) &macTestContext
     };
 
     TEST_CONTEXT hashContext = {0};
@@ -701,7 +690,7 @@ void test_concurrent(void)
         macResult = mac_cmac_test_init(&macContext, TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
 
         HASH_TEST_CONTEXT hashTestContext = {0};
-        hashContext.testContext = (void*) &hashTestContext;
+        hashContext.testContext = (void *) &hashTestContext;
 
         hashResult = hash_test_init(&hashContext, TEST_MODE_HASH, CRYPTO_HASH_SHA2_512, hashBlockSize);
 
