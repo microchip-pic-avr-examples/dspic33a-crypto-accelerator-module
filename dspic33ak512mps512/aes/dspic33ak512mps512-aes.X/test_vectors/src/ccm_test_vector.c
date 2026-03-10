@@ -463,12 +463,12 @@ static ccm_test_vector_t ccmTestVectors[] =
     }
 };
 
-ccm_test_vector_t *TV_CcmTestVectorsGet(void)
+ccm_test_vector_t *VECTOR_CcmTestVectorsGet(void)
 {
     return ccmTestVectors;
 }
 
-uint32_t TV_CcmTestCountGet(void)
+uint32_t VECTOR_CcmTestCountGet(void)
 {
     return sizeof(ccmTestVectors) / sizeof(ccmTestVectors[0]);
 }

@@ -1136,12 +1136,12 @@ static gcm_test_vector_t gcmTestVectors[] =
     }
 };
 
-gcm_test_vector_t *TV_GcmTestVectorsGet(void)
+gcm_test_vector_t *VECTOR_GcmTestVectorsGet(void)
 {
     return gcmTestVectors;
 }
 
-uint32_t TV_GcmTestCountGet(void)
+uint32_t VECTOR_GcmTestCountGet(void)
 {
     return sizeof(gcmTestVectors) / sizeof(gcmTestVectors[0]);
 }

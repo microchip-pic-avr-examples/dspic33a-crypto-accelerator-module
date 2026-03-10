@@ -224,12 +224,12 @@ static xts_test_vector_t xtsTestVectors[] =
     }
 };
 
-xts_test_vector_t *TV_XtsTestVectorsGet(void)
+xts_test_vector_t *VECTOR_XtsTestVectorsGet(void)
 {
     return xtsTestVectors;
 }
 
-uint32_t TV_XtsTestCountGet(void)
+uint32_t VECTOR_XtsTestCountGet(void)
 {
     return sizeof(xtsTestVectors) / sizeof(xtsTestVectors[0]);
 }
