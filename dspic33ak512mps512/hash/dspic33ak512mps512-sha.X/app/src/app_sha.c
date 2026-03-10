@@ -166,22 +166,22 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     switch (algo)
     {
         case CRYPTO_HASH_SHA1:
-            digestLength = SHA1_DIGEST_LEN_BYTES;
+            digestLength = SHA1_DIGEST_LENGTH_BYTES;
             break;
         case CRYPTO_HASH_SHA2_224:
-            digestLength = SHA224_DIGEST_LEN_BYTES;
+            digestLength = SHA224_DIGEST_LENGTH_BYTES;
             break;
         case CRYPTO_HASH_SHA2_256:
-            digestLength = SHA256_DIGEST_LEN_BYTES;
+            digestLength = SHA256_DIGEST_LENGTH_BYTES;
             break;
         case CRYPTO_HASH_SHA2_384:
-            digestLength = SHA384_DIGEST_LEN_BYTES;
+            digestLength = SHA384_DIGEST_LENGTH_BYTES;
             break;
         case CRYPTO_HASH_SHA2_512:
-            digestLength = SHA512_DIGEST_LEN_BYTES;
+            digestLength = SHA512_DIGEST_LENGTH_BYTES;
             break;
         default:
-            digestLength = SHA256_DIGEST_LEN_BYTES;
+            digestLength = SHA256_DIGEST_LENGTH_BYTES;
             break;
     }
 

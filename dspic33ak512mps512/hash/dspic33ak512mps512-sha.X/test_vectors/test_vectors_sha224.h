@@ -23,16 +23,16 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#include "test_vector.h"
-
 #ifndef TEST_VECTORS_SHA224_H
 #define TEST_VECTORS_SHA224_H
+
+#include "test_vector.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define SHA224_DIGEST_LEN_BYTES    (28U)
+#define SHA224_DIGEST_LENGTH_BYTES    (28U)
 #define NUMBER_OF_SHA224_VECTORS   (8U)
 
 extern test_vector_t sha224TestVectors[NUMBER_OF_SHA224_VECTORS];
