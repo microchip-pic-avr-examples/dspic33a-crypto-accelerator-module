@@ -148,7 +148,7 @@ sym_test_vector_t * TV_EcbTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_EcbTestVectorCountGet(); index++)
     {
-        ecbTestVectors[i].id = (index + 1UL);
+        ecbTestVectors[index].id = (index + 1UL);
     }
 
     return ecbTestVectors;
@@ -220,7 +220,7 @@ sym_test_vector_t * TV_CtrTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_CtrTestVectorCountGet(); index++)
     {
-        ctrTestVectors[i].id = (index + 1UL);
+        ctrTestVectors[index].id = (index + 1UL);
     }
 
     return ctrTestVectors;
@@ -292,7 +292,7 @@ sym_test_vector_t * TV_CbcTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_CbcTestVectorCountGet(); index++)
     {
-        cbcTestVectors[i].id = (index + 1UL);
+        cbcTestVectors[index].id = (index + 1UL);
     }
 
     return cbcTestVectors;
@@ -364,7 +364,7 @@ sym_test_vector_t * TV_Cfb128TestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_Cfb128TestVectorCountGet(); index++)
     {
-        cfb128TestVectors[i].id = (index + 1UL);
+        cfb128TestVectors[index].id = (index + 1UL);
     }
 
     return cfb128TestVectors;
@@ -436,7 +436,7 @@ sym_test_vector_t * TV_OfbTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_OfbTestVectorCountGet(); index++)
     {
-        ofbTestVectors[i].id = (index + 1UL);
+        ofbTestVectors[index].id = (index + 1UL);
     }
 
     return ofbTestVectors;

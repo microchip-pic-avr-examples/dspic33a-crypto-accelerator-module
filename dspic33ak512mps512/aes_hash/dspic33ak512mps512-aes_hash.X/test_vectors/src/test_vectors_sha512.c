@@ -311,7 +311,7 @@ hash_test_vector_t * TV_Sha512TestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_Sha512TestVectorCountGet(); index++)
     {
-        sha512TestVectors[i].id = (index + 1UL);
+        sha512TestVectors[index].id = (index + 1UL);
     }
 
     return sha512TestVectors;

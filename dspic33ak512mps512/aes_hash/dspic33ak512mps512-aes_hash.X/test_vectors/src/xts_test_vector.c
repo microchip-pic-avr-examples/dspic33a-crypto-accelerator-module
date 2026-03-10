@@ -233,7 +233,7 @@ sym_test_vector_t * TV_XtsTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_XtsTestVectorCountGet(); index++)
     {
-        xtsTestVectors[i].id = (index + 1UL);
+        xtsTestVectors[index].id = (index + 1UL);
     }
 
     return xtsTestVectors;
