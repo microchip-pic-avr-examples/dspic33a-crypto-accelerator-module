@@ -8,7 +8,7 @@
     app_sha.c
 
   Summary:
-    This source file handles the running of the Hashing examples.
+    This source file handles the running of the SHA hashing examples.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
