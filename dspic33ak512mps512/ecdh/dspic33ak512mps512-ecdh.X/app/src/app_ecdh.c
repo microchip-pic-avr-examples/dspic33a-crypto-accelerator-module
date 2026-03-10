@@ -95,9 +95,9 @@ static void ECDH_ArrayEqualityCheck(const uint8_t *expected,
     {
         uint8_t result = 0U;
 
-        for (unsigned int index = 0U; index < size; index++)
+        for (size_t index = 0U; index < size; index++)
         {
-            result |= expected[index] ^ actual[index];
+            result |= (uint8_t)(expected[index] ^ actual[index]);
         }
 
         if (result == 0U)
