@@ -41,7 +41,8 @@ Microchip or any third party.
 #define APP_MAC_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "test_vectors/mac_test_vector.h"
@@ -58,10 +59,10 @@ extern "C" {
 
 #define RUN_MAC_CMAC_TEST
 
-typedef enum MAC_OPER_MODE
+typedef enum
 {
-  MAC_OPER_MODE_AES_CMAC = 0
-} MAC_OPER_MODE;
+    MAC_OPER_MODE_AES_CMAC = 0
+} mac_oper_mode_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -69,20 +70,21 @@ typedef enum MAC_OPER_MODE
 // *****************************************************************************
 // *****************************************************************************
 
-typedef struct AES_CMAC_TEST_CONTEXT {
+typedef struct
+{
     // Pointer to current test vector data.
-    MAC_TEST_VECTOR *   test;
+    mac_test_vector_t *test;
 
     // Contains the data result.
-    uint8_t         dataResult[CMAC_RESULT_SIZE];
+    uint8_t dataResult[CMAC_RESULT_SIZE];
 
     // The test mode (encrypt/decrypt).
-    TEST_MODE       testMode;
+    test_mode_t testMode;
 
     // The CMAC test operation mode.
-    MAC_OPER_MODE   opMode;
+    mac_oper_mode_t opMode;
 
-} AES_CMAC_TEST_CONTEXT;
+} aes_cmac_test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,7 +100,8 @@ typedef struct AES_CMAC_TEST_CONTEXT {
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE mode, MAC_OPER_MODE opMode);
+test_result_t mac_cmac_test_init(test_context_t *context, test_mode_t mode,
+        mac_oper_mode_t opMode);
 
 /**
  * @brief Advance the AES CMAC test state machine.
@@ -107,7 +110,7 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE mode, MAC_OPER_M
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context);
+test_result_t mac_cmac_test_advance(test_context_t *context);
 
 #ifdef __cplusplus
 }

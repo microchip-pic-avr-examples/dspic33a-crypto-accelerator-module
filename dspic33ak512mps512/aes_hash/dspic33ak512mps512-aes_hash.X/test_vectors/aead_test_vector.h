@@ -27,7 +27,8 @@ Microchip or any third party.
 #define AEAD_TEST_VECTOR_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdint.h>
@@ -44,7 +45,8 @@ extern "C" {
 #define AES_AEAD_IV_LENGTH      (12UL)
 #define AES_AEAD_TAG_LENGTH     (16UL)
 
-typedef struct AEAD_TEST_VECTOR {
+typedef struct
+{
     uint32_t    id;
 
     uint8_t *   inputKey;
@@ -62,12 +64,12 @@ typedef struct AEAD_TEST_VECTOR {
 
     uint8_t *   authTag;
     uint32_t    authTagLength;
-} AEAD_TEST_VECTOR;
+} aead_test_vector_t;
 
-AEAD_TEST_VECTOR * get_gcm_test_vectors(void);
+aead_test_vector_t *get_gcm_test_vectors(void);
 uint32_t get_gcm_test_vector_count(void);
 
-AEAD_TEST_VECTOR * get_ccm_test_vectors(void);
+aead_test_vector_t *get_ccm_test_vectors(void);
 uint32_t get_ccm_test_vector_count(void);
 
 #ifdef __cplusplus

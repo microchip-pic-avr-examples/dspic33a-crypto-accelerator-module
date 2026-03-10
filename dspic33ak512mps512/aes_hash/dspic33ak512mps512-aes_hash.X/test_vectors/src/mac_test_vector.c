@@ -40,7 +40,7 @@ static uint8_t cmac_256_0_bytes_cmac[8] = {
     0xB9, 0xB5, 0xAF, 0x31, 0xCE, 0x4A, 0x8E, 0x8F
 };
 
-static const MAC_TEST_VECTOR cmac_256_0_bytes_vector = {
+static const mac_test_vector_t cmac_256_0_bytes_vector = {
     0,
     (uint8_t[]) {},
     0U,
@@ -64,7 +64,7 @@ static uint8_t cmac_256_15_bytes_cmac[10] = {
     0x1b, 0x58, 0x18, 0xe1, 0x3a, 0x62, 0x9c, 0xaf, 0x72, 0x8b
 };
 
-static const MAC_TEST_VECTOR cmac_256_15_bytes_vector = {
+static const mac_test_vector_t cmac_256_15_bytes_vector = {
     0,
     cmac_256_15_bytes_message,
     sizeof(cmac_256_15_bytes_message),
@@ -88,7 +88,7 @@ static uint8_t cmac_256_16_bytes_cmac[10] = {
     0x95, 0x6f, 0x17, 0xe8, 0x30, 0x94, 0xb9, 0xd7, 0x62, 0xca
 };
 
-static const MAC_TEST_VECTOR cmac_256_16_bytes_vector = {
+static const mac_test_vector_t cmac_256_16_bytes_vector = {
     0,
     cmac_256_16_bytes_message,
     sizeof(cmac_256_16_bytes_message),
@@ -114,7 +114,7 @@ static uint8_t cmac_256_48_bytes_cmac[5] = {
     0x81, 0x62, 0x82, 0xfb, 0x33
 };
 
-static const MAC_TEST_VECTOR cmac_256_48_bytes_vector = {
+static const mac_test_vector_t cmac_256_48_bytes_vector = {
     0,
     cmac_256_48_bytes_message,
     sizeof(cmac_256_48_bytes_message),
@@ -124,14 +124,14 @@ static const MAC_TEST_VECTOR cmac_256_48_bytes_vector = {
     sizeof(cmac_256_48_bytes_cmac)
 };
 
-static MAC_TEST_VECTOR cmac_test_vectors[4] = {
+static mac_test_vector_t cmac_test_vectors[4] = {
     [0] = cmac_256_0_bytes_vector,
     [1] = cmac_256_15_bytes_vector,
     [2] = cmac_256_16_bytes_vector,
     [3] = cmac_256_48_bytes_vector,
 };
 
-MAC_TEST_VECTOR * get_cmac_test_vectors(void)
+mac_test_vector_t * get_cmac_test_vectors(void)
 {
     // Set test IDs.
     for (uint32_t i = 0; i < get_cmac_test_vector_count(); i++)

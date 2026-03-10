@@ -27,12 +27,14 @@ Microchip or any third party.
 #define SYM_TEST_VECTOR_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdint.h>
 
-typedef struct SYM_TEST_VECTOR {
+typedef struct
+{
     uint32_t    id;
     uint32_t    mode;
 
@@ -48,24 +50,24 @@ typedef struct SYM_TEST_VECTOR {
 
     uint8_t *   initializationVector;
     uint32_t    initializationVectorLength;
-} SYM_TEST_VECTOR;
+} sym_test_vector_t;
 
-SYM_TEST_VECTOR * get_ecb_test_vectors(void);
+sym_test_vector_t *get_ecb_test_vectors(void);
 uint32_t get_ecb_test_vector_count(void);
 
-SYM_TEST_VECTOR * get_ctr_test_vectors(void);
+sym_test_vector_t *get_ctr_test_vectors(void);
 uint32_t get_ctr_test_vector_count(void);
 
-SYM_TEST_VECTOR * get_cbc_test_vectors(void);
+sym_test_vector_t *get_cbc_test_vectors(void);
 uint32_t get_cbc_test_vector_count(void);
 
-SYM_TEST_VECTOR * get_cfb128_test_vectors(void);
+sym_test_vector_t *get_cfb128_test_vectors(void);
 uint32_t get_cfb128_test_vector_count(void);
 
-SYM_TEST_VECTOR * get_ofb_test_vectors(void);
+sym_test_vector_t *get_ofb_test_vectors(void);
 uint32_t get_ofb_test_vector_count(void);
 
-SYM_TEST_VECTOR * get_xts_test_vectors(void);
+sym_test_vector_t *get_xts_test_vectors(void);
 uint32_t get_xts_test_vector_count(void);
 
 #ifdef __cplusplus

@@ -75,12 +75,15 @@ static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static TEST_RESULT checkEncryptionAndTag(uint8_t *expected, uint8_t *result, uint32_t length, uint8_t *authTag, uint8_t *authTagResult, uint32_t authTagLength)
+static test_result_t checkEncryptionAndTag(uint8_t *expected,
+        uint8_t *result, uint32_t length,
+        uint8_t *authTag, uint8_t *authTagResult,
+        uint32_t authTagLength)
 {
-    TEST_RESULT dataRetval = TEST_RESULT_SUCCESS;
-    TEST_RESULT tagRetval = TEST_RESULT_SUCCESS;
+    test_result_t dataRetval = TEST_RESULT_SUCCESS;
+    test_result_t tagRetval = TEST_RESULT_SUCCESS;
 
-    (void)(void) printf(RESET_COLOR " DATA");
+    (void) printf(RESET_COLOR " DATA");
 
     if (length > 0UL)
     {
@@ -92,7 +95,7 @@ static TEST_RESULT checkEncryptionAndTag(uint8_t *expected, uint8_t *result, uin
 
     printCryptoResult(dataRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
 
-    (void)(void) printf(RESET_COLOR " AUTHTAG");
+    (void) printf(RESET_COLOR " AUTHTAG");
 
     if (0 != memcmp(authTagResult, authTag, authTagLength))
     {
@@ -130,9 +133,9 @@ static TEST_RESULT checkEncryptionAndTag(uint8_t *expected, uint8_t *result, uin
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static TEST_RESULT checkDecryption(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t checkDecryption(uint8_t *expected, uint8_t *result, uint32_t length)
 {
-    TEST_RESULT retval = TEST_RESULT_SUCCESS;
+    test_result_t retval = TEST_RESULT_SUCCESS;
 
     if (length > 0UL)
     {
@@ -161,11 +164,11 @@ static TEST_RESULT checkDecryption(uint8_t *expected, uint8_t *result, uint32_t 
  * @param opMode The AES AEAD operations mode.
  * @return Pointer to string.
  */
-static const char *getAeadTestOpMode(AEAD_OPER_MODE opMode)
+static const char *getAeadTestOpMode(aead_oper_mode_t opMode)
 {
     const char *opModeStr = "???";
 
-    switch(opMode)
+    switch (opMode)
     {
         case AEAD_OPER_MODE_AES_GCM:
             opModeStr = "AES-GCM";
@@ -193,7 +196,7 @@ static const char *getAeadTestOpMode(AEAD_OPER_MODE opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static TEST_RESULT aes_aead_test_init(void *context)
+static test_result_t aes_aead_test_init(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -201,21 +204,27 @@ static TEST_RESULT aes_aead_test_init(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    AEAD_TEST_VECTOR *test = testContext->test;
+    aead_test_context_t *testContext = (aead_test_context_t *)context;
+    aead_test_vector_t *test = testContext->test;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
-    TEST_RESULT result;
+    test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
+    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
+            ? test->plaintextData : test->ciphertextData;
 
-    (void) printf(BLUE "\r\n\r\n %s %s Test %lu", getAeadTestOpMode(testContext->opMode), getTestMode(testContext->testMode), (unsigned long) test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+            getAeadTestOpMode(testContext->opMode),
+            getTestMode(testContext->testMode),
+            (unsigned long) test->id);
 
     printSeparator(BLUE, '-');
     printHexArray("Key", test->inputKey, test->inputKeyLength);
     printSeparator(BLUE, '-');
-    printHexArray("Initialization Vector", test->initializationVector, test->initializationVectorLength);
+    printHexArray("Initialization Vector",
+            test->initializationVector,
+            test->initializationVectorLength);
     printSeparator(BLUE, '-');
     printHexArray("Authentication Data", test->aad, test->aadLength);
     printSeparator(BLUE, '-');
@@ -231,15 +240,23 @@ static TEST_RESULT aes_aead_test_init(void *context)
 #endif
 
     (void) printf(YELLOW);
-    printOperationStep("INITIALIZING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("INITIALIZING",
+            getAeadTestOpMode(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
 
-    switch(testContext->opMode)
+    switch (testContext->opMode)
     {
         case AEAD_OPER_MODE_AES_GCM:
         {
-            crypto_CipherOper_E oper = (testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
-            status = Crypto_Aead_AesGcm_Init(&aeadGcmCtx, CRYPTO_HANDLER_HW_INTERNAL, oper,
-                                            test->inputKey, test->inputKeyLength, test->initializationVector, test->initializationVectorLength, TEST_SESSION_ID);
+            crypto_CipherOper_E oper =
+                    (testContext->testMode == TEST_MODE_ENCRYPT)
+                    ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
+            status = Crypto_Aead_AesGcm_Init(&aeadGcmCtx,
+                    CRYPTO_HANDLER_HW_INTERNAL, oper,
+                    test->inputKey, test->inputKeyLength,
+                    test->initializationVector,
+                    test->initializationVectorLength,
+                    TEST_SESSION_ID);
         }
         break;
 
@@ -266,7 +283,7 @@ static TEST_RESULT aes_aead_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_ADD_AAD_FAILED on failure.
  */
-static TEST_RESULT aes_aead_test_add_aad(void *context)
+static test_result_t aes_aead_test_add_aad(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -274,18 +291,22 @@ static TEST_RESULT aes_aead_test_add_aad(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    AEAD_TEST_VECTOR *test = testContext->test;
+    aead_test_context_t *testContext = (aead_test_context_t *)context;
+    aead_test_vector_t *test = testContext->test;
     uint8_t *aad = (test->aadLength > 0UL) ? test->aad : NULL;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
-    TEST_RESULT result;
+    test_result_t result;
 
     (void) printf(YELLOW);
-    printOperationStep("ADDING AAD", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("ADDING AAD",
+            getAeadTestOpMode(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_AddAadData(&aeadGcmCtx, aad, test->aadLength);
-    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_ADD_AAD_FAILED;
+    status = Crypto_Aead_AesGcm_AddAadData(&aeadGcmCtx,
+            aad, test->aadLength);
+    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_ADD_AAD_FAILED;
 
     printCryptoResult(result, status);
 
@@ -297,7 +318,7 @@ static TEST_RESULT aes_aead_test_add_aad(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static TEST_RESULT aes_aead_test_cipher(void *context)
+static test_result_t aes_aead_test_cipher(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -305,20 +326,26 @@ static TEST_RESULT aes_aead_test_cipher(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    AEAD_TEST_VECTOR *test = testContext->test;
+    aead_test_context_t *testContext = (aead_test_context_t *)context;
+    aead_test_vector_t *test = testContext->test;
 
-    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
-    uint8_t *resultData = (test->dataLength > 0U) ? testContext->dataResult : NULL;
+    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
+            ? test->plaintextData : test->ciphertextData;
+    uint8_t *resultData = (test->dataLength > 0U)
+            ? testContext->dataResult : NULL;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
-    TEST_RESULT result;
+    test_result_t result;
 
     (void) printf(YELLOW);
-    printOperationStep("CIPHERING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("CIPHERING",
+            getAeadTestOpMode(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
 
-    status = Crypto_Aead_AesGcm_Cipher(&aeadGcmCtx, data, test->dataLength, resultData);
-    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
+    status = Crypto_Aead_AesGcm_Cipher(&aeadGcmCtx, data,
+            test->dataLength, resultData);
+    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
     printCryptoResult(result, status);
 
@@ -331,7 +358,7 @@ static TEST_RESULT aes_aead_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static TEST_RESULT aes_aead_test_final(void *context)
+static test_result_t aes_aead_test_final(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -339,34 +366,46 @@ static TEST_RESULT aes_aead_test_final(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context;
-    AEAD_TEST_VECTOR *test = testContext->test;
+    aead_test_context_t *testContext = (aead_test_context_t *)context;
+    aead_test_vector_t *test = testContext->test;
 
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
-    TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
+    test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(YELLOW);
-    printOperationStep("FINALIZING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    printOperationStep("FINALIZING",
+            getAeadTestOpMode(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
 
-    switch(testContext->opMode)
+    switch (testContext->opMode)
     {
         case AEAD_OPER_MODE_AES_GCM:
         {
-            status = Crypto_Aead_AesGcm_Final(&aeadGcmCtx, testContext->authTagResult, test->authTagLength);
+            status = Crypto_Aead_AesGcm_Final(&aeadGcmCtx,
+                    testContext->authTagResult,
+                    test->authTagLength);
         }
         break;
 
         case AEAD_OPER_MODE_AES_CCM:
         {
-            crypto_CipherOper_E oper = (testContext->testMode == TEST_MODE_ENCRYPT) ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
-            uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT) ? test->plaintextData : test->ciphertextData;
-            uint8_t *resultData = (test->dataLength > 0U) ? testContext->dataResult : NULL;
+            crypto_CipherOper_E oper =
+                    (testContext->testMode == TEST_MODE_ENCRYPT)
+                    ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
+            uint8_t *data =
+                    (testContext->testMode == TEST_MODE_ENCRYPT)
+                    ? test->plaintextData
+                    : test->ciphertextData;
+            uint8_t *resultData = (test->dataLength > 0U)
+                    ? testContext->dataResult : NULL;
 
-            status = Crypto_Aead_AesCcm_Cipher(&aeadCcmCtx, oper,
-                                                data, test->dataLength, resultData,
-                                                test->initializationVector, test->initializationVectorLength,
-                                                testContext->authTagResult, test->authTagLength,
-                                                test->aad, test->aadLength);
+            status = Crypto_Aead_AesCcm_Cipher(&aeadCcmCtx,
+                    oper, data, test->dataLength, resultData,
+                    test->initializationVector,
+                    test->initializationVectorLength,
+                    testContext->authTagResult,
+                    test->authTagLength,
+                    test->aad, test->aadLength);
         }
         break;
 
@@ -374,7 +413,9 @@ static TEST_RESULT aes_aead_test_final(void *context)
             break;
     }
 
-    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
+    result = (status == CRYPTO_AEAD_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS
+            : TEST_RESULT_FINALIZE_FAILED;
 
     printCryptoResult(result, status);
 
@@ -394,16 +435,25 @@ static TEST_RESULT aes_aead_test_final(void *context)
 #endif
 
         (void) printf(YELLOW);
-        printOperationStep("VERIFYING", getAeadTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+        printOperationStep("VERIFYING",
+                getAeadTestOpMode(testContext->opMode),
+                testContext->testMode, test->dataLength, true);
 
         // These calls also print out the test result...
         if (testContext->testMode == TEST_MODE_ENCRYPT)
         {
-            result = checkEncryptionAndTag(test->ciphertextData, testContext->dataResult, test->dataLength, test->authTag, testContext->authTagResult, test->authTagLength);
+            result = checkEncryptionAndTag(
+                    test->ciphertextData,
+                    testContext->dataResult,
+                    test->dataLength,
+                    test->authTag,
+                    testContext->authTagResult,
+                    test->authTagLength);
         }
         else
         {
-            result = checkDecryption(test->plaintextData, testContext->dataResult, test->dataLength);
+            result = checkDecryption(test->plaintextData,
+                    testContext->dataResult, test->dataLength);
         }
     }
 
@@ -413,7 +463,8 @@ static TEST_RESULT aes_aead_test_final(void *context)
 /**
  * @brief Defines the states for a AEAD test.
  */
-enum {
+enum
+{
     AEAD_TEST_STEP_INIT = 0,
     AEAD_TEST_STEP_ADD_AAD = 1,
     AEAD_TEST_STEP_CIPHER = 2,
@@ -427,7 +478,7 @@ enum {
 // *****************************************************************************
 // *****************************************************************************
 
-TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_MODE opMode)
+test_result_t aead_test_init(test_context_t *context, test_mode_t testMode, aead_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -435,13 +486,13 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context->testContext;
-    TEST_RESULT result = TEST_RESULT_SUCCESS;
+    aead_test_context_t *testContext = (aead_test_context_t *)context->testContext;
+    test_result_t result = TEST_RESULT_SUCCESS;
 
-    (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    (void) memset(context, 0, sizeof(test_context_t));
     context->testContext = testContext;
 
-    static TEST_STATE_FN aead_test_states[] =
+    static test_state_fn_t aead_test_states[] =
     {
         aes_aead_test_init,
         aes_aead_test_add_aad,
@@ -495,7 +546,7 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
          *
          *  Reasoning: A generic pointer allows support for various test vector types.
          */
-        AEAD_TEST_VECTOR *tests = (AEAD_TEST_VECTOR *)context->tests;
+        aead_test_vector_t *tests = (aead_test_vector_t *)context->tests;
 
         // Start at the first test.
         testContext->test = &tests[context->test];
@@ -504,7 +555,7 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
     return result;
 }
 
-TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
+test_result_t aead_test_advance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -512,7 +563,7 @@ TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AEAD_TEST_CONTEXT *testContext = (AEAD_TEST_CONTEXT *)context->testContext;
+    aead_test_context_t *testContext = (aead_test_context_t *)context->testContext;
 
     if (context->test < context->testCount)
     {
@@ -569,7 +620,7 @@ TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
                      *
                      *  Reasoning: A generic pointer allows support for various algorithm test context types.
                      */
-                    AEAD_TEST_VECTOR *tests = (AEAD_TEST_VECTOR *)context->tests;
+                    aead_test_vector_t *tests = (aead_test_vector_t *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

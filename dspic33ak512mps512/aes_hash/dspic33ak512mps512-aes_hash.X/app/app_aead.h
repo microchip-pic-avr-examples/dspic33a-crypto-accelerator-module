@@ -41,7 +41,8 @@ Microchip or any third party.
 #define APP_AEAD_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "test_vectors/aead_test_vector.h"
@@ -62,30 +63,31 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-typedef enum AEAD_OPER_MODE
+typedef enum
 {
-  AEAD_OPER_MODE_AES_GCM = 0,
-  AEAD_OPER_MODE_AES_CCM = 1,
-  AEAD_OPER_MODE_COUNT = 2,
-} AEAD_OPER_MODE;
+    AEAD_OPER_MODE_AES_GCM = 0,
+    AEAD_OPER_MODE_AES_CCM = 1,
+    AEAD_OPER_MODE_COUNT = 2,
+} aead_oper_mode_t;
 
-typedef struct AEAD_TEST_CONTEXT {
+typedef struct
+{
     // Pointer to current test vector data.
-    AEAD_TEST_VECTOR *   test;
+    aead_test_vector_t *test;
 
     // Contains the data result.
-    uint8_t         dataResult[AEAD_TEST_VECTOR_SZ];
+    uint8_t dataResult[AEAD_TEST_VECTOR_SZ];
 
     // Contains the authTag result.
-    uint8_t         authTagResult[AES_AEAD_TAG_LENGTH];
+    uint8_t authTagResult[AES_AEAD_TAG_LENGTH];
 
     // The test mode (encrypt/decrypt).
-    TEST_MODE       testMode;
+    test_mode_t testMode;
 
     // The AES operation (GCM, CCM, etc.)
-    AEAD_OPER_MODE  opMode;
+    aead_oper_mode_t opMode;
 
-} AEAD_TEST_CONTEXT;
+} aead_test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -101,7 +103,8 @@ typedef struct AEAD_TEST_CONTEXT {
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE mode, AEAD_OPER_MODE opMode);
+test_result_t aead_test_init(test_context_t *context, test_mode_t mode,
+        aead_oper_mode_t opMode);
 
 /**
  * @brief Advance the AEAD test state machine.
@@ -110,7 +113,7 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE mode, AEAD_OPER_MODE
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-TEST_RESULT aead_test_advance(TEST_CONTEXT *context);
+test_result_t aead_test_advance(test_context_t *context);
 
 #ifdef __cplusplus
 }

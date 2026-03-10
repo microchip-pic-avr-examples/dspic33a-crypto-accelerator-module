@@ -27,7 +27,7 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
-#define TWEAK_SIZE  16
+#define TWEAK_SIZE  (16)
 
 static uint8_t key_16bytes[32]    = {0xa1, 0xb9, 0x0c, 0xba, 0x3f, 0x06, 0xac, 0x35, 0x3b, 0x2c, 0x34, 0x38, 0x76, 0x08, 0x17, 0x62,
                                      0x09, 0x09, 0x23, 0x02, 0x6e, 0x91, 0x77, 0x18, 0x15, 0xf2, 0x9d, 0xab, 0x01, 0x93, 0x2f, 0x2f};
@@ -73,7 +73,7 @@ static uint8_t ctdata_256_48bytes[48] = {0xc7, 0x32, 0x56, 0x87, 0x0c, 0xc2, 0xf
                                          0x76, 0x91, 0x2a, 0x12, 0x8b, 0xc1, 0xf7, 0x7d, 0x72, 0xcd, 0xeb, 0xbf, 0x27, 0x00, 0x44, 0xb7,
                                          0xa4, 0x3c, 0xee, 0xd2, 0x90, 0x25, 0xe1, 0xe8, 0xbe, 0x21, 0x1f, 0xa3, 0xc3, 0xed, 0x00, 0x2d};
 
-static const SYM_TEST_VECTOR xts_16byte = {
+static const sym_test_vector_t xts_16byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_16bytes,
@@ -87,7 +87,7 @@ static const SYM_TEST_VECTOR xts_16byte = {
     0
 };
 
-static const SYM_TEST_VECTOR xts_25byte = {
+static const sym_test_vector_t xts_25byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_25bytes,
@@ -101,7 +101,7 @@ static const SYM_TEST_VECTOR xts_25byte = {
     0
 };
 
-static const SYM_TEST_VECTOR xts_32byte = {
+static const sym_test_vector_t xts_32byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_32bytes,
@@ -115,7 +115,7 @@ static const SYM_TEST_VECTOR xts_32byte = {
     0
 };
 
-static const SYM_TEST_VECTOR xts_256_32byte = {
+static const sym_test_vector_t xts_256_32byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_256_32bytes,
@@ -129,7 +129,7 @@ static const SYM_TEST_VECTOR xts_256_32byte = {
     0
 };
 
-static const SYM_TEST_VECTOR xts_256_48byte = {
+static const sym_test_vector_t xts_256_48byte = {
     0,
     CRYPTO_SYM_OPMODE_XTS,
     ptdata_256_48bytes,
@@ -143,7 +143,7 @@ static const SYM_TEST_VECTOR xts_256_48byte = {
     0
 };
 
-static SYM_TEST_VECTOR xts_test_vectors[5] = {
+static sym_test_vector_t xts_test_vectors[5] = {
     [0] = xts_16byte,
     [1] = xts_25byte,
     [2] = xts_32byte,
@@ -151,7 +151,7 @@ static SYM_TEST_VECTOR xts_test_vectors[5] = {
     [4] = xts_256_48byte,
 };
 
-SYM_TEST_VECTOR * get_xts_test_vectors(void)
+sym_test_vector_t * get_xts_test_vectors(void)
 {
     // Set test IDs.
     for (uint32_t i = 0; i < get_xts_test_vector_count(); i++)
