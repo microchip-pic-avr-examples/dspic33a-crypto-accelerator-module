@@ -93,15 +93,15 @@ static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
 
 void TRNG_TestRun(void)
 {
-    uint8_t randomArray1[192] = {0U};
+    uint8_t randomArray1[192] = {0};
     TRNG_Run(randomArray1, 192U);
 
-    uint8_t randomArray2[256] = {0U};
+    uint8_t randomArray2[256] = {0};
     TRNG_Run(randomArray2, 256U);
 
-    uint8_t randomArray3[384] = {0U};
+    uint8_t randomArray3[384] = {0};
     TRNG_Run(randomArray3, 384U);
 
-    uint8_t randomArray4[521] = {0U};
+    uint8_t randomArray4[521] = {0};
     TRNG_Run(randomArray4, 521U);
 }
