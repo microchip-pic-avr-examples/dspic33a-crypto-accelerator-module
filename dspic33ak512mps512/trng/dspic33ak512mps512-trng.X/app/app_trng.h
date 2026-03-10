@@ -65,4 +65,3 @@ void TRNG_TestRun(void);
 #endif
 
 #endif /* APP_TRNG_H */
-

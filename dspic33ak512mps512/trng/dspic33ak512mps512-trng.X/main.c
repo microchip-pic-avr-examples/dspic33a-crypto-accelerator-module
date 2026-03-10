@@ -35,11 +35,11 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-*
-*  (Rule 21.6) Required: The standard library input/output functions shall not be used
-*
-*  Reasoning: This demo uses printf to print out information to a terminal.
-*/
+ *
+ *  (Rule 21.6) Required: The standard library input/output functions shall not be used
+ *
+ *  Reasoning: This demo uses printf to print out information to a terminal.
+ */
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -51,17 +51,21 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\n\n\n\r\n ");
+
     (void) printf("______________________________________"
             "____________________________________"
             "_________________________ \r\n");
+
     (void) printf("\r\n\n\n\n Starting CRYPTO TRNG program \r\n");
 
     TRNG_TestRun();
 
     (void) printf("\n\n\n\r\n ");
+
     (void) printf("______________________________________"
             "____________________________________"
             "_________________________ \r\n");
+
     while (true)
     {
     }

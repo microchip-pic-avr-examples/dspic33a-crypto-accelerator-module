@@ -35,11 +35,11 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-*
-*  (Rule 21.6) Required: The standard library input/output functions shall not be used
-*
-*  Reasoning: This demo uses printf to print out information to a terminal.
-*/
+ *
+ *  (Rule 21.6) Required: The standard library input/output functions shall not be used
+ *
+ *  Reasoning: This demo uses printf to print out information to a terminal.
+ */
 #include <stdio.h>
 #include <stdint.h>
 #include "app/app_trng.h"
@@ -52,7 +52,9 @@ static void TRNG_HexArrayPrint(const char *label,
             "---------------------------------------------"
             "------------------------------------------------"
             RESET_COLOR);
+
     (void) printf("\r\n  %s   :  ", label);
+
     for (uint32_t byteIndex = 0U; byteIndex < size; byteIndex++)
     {
         if (((byteIndex % 16U) == 0U) && (byteIndex != 0U))
@@ -71,10 +73,12 @@ static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
             "*********************************************"
             "************************************************"
             RESET_COLOR);
+
     (void) printf(CYAN "\r\n "
             "*************************************** TRNG"
             " Size %lu ***************************************"
             RESET_COLOR, (unsigned long) randomLength);
+
     (void) printf(MAG "\r\n "
             "*********************************************"
             "************************************************"
