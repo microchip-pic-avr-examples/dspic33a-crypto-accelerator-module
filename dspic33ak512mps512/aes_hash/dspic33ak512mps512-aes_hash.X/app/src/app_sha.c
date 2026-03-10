@@ -65,7 +65,7 @@ static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
  * @param opmode The algorithm to use.
  * @return The length of the digest in bytes.
  */
-static uint32_t getDigestLength(crypto_Hash_Algo_E algorithm)
+static uint32_t SHA_DigestLengthGet(crypto_Hash_Algo_E algorithm)
 {
     uint32_t digestLength = 0;
 
@@ -89,21 +89,21 @@ static uint32_t getDigestLength(crypto_Hash_Algo_E algorithm)
  * @param algorithm The hash algorithm.
  * @return Pointer to string.
  */
-static const char *getTestOpMode(crypto_Hash_Algo_E algorithm)
+static const char *SHA_TestOpModeGet(crypto_Hash_Algo_E algorithm)
 {
-    const char *opModeStr = "???";
+    const char *opModeString = "???";
 
     switch (algorithm)
     {
         case CRYPTO_HASH_SHA2_512:
-            opModeStr = "SHA-512";
+            opModeString = "SHA-512";
         break;
 
         default:
         break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
 /**
@@ -111,7 +111,7 @@ static const char *getTestOpMode(crypto_Hash_Algo_E algorithm)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static test_result_t sha_hash_test_init(void *context)
+static test_result_t SHA_HashTestStepInit(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -127,27 +127,27 @@ static test_result_t sha_hash_test_init(void *context)
 
 #ifdef SHOW_TEST_DATA
     (void) printf(BLUE "\r\n\r\n %s Test %lu",
-            getTestMode(testContext->testMode),
+            AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", test->inputData,
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", test->inputData,
             test->inputDataLength);
-    printWithLabel("Input Data Size", "%d bytes",
+    AESHASH_LabelPrint("Input Data Size", "%d bytes",
             testContext->blockSize);
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
     (void) printf(WHITE);
-    printOperationStep("INITIALIZING",
-            getTestOpMode(testContext->algorithm),
+    AESHASH_OperationStepPrint("INITIALIZING",
+            SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode,
             test->inputDataLength, true);
 
     status = Crypto_Hash_Sha_Init(&shaCtx, testContext->algorithm, CRYPTO_HANDLER_HW_INTERNAL, 1);
     result = (status == CRYPTO_HASH_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -157,7 +157,7 @@ static test_result_t sha_hash_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static test_result_t sha_hash_test_hash(void *context)
+static test_result_t SHA_HashTestHashRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -175,8 +175,8 @@ static test_result_t sha_hash_test_hash(void *context)
     test_result_t result;
 
     (void) printf(WHITE);
-    printOperationStep("HASHING",
-            getTestOpMode(testContext->algorithm),
+    AESHASH_OperationStepPrint("HASHING",
+            SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode, dataLength, true);
 
     status = Crypto_Hash_Sha_Update(&shaCtx,
@@ -184,7 +184,7 @@ static test_result_t sha_hash_test_hash(void *context)
             dataLength);
     result = (status == CRYPTO_HASH_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -195,7 +195,7 @@ static test_result_t sha_hash_test_hash(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static test_result_t sha_hash_test_final(void *context)
+static test_result_t SHA_HashTestFinalizeRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -210,8 +210,8 @@ static test_result_t sha_hash_test_final(void *context)
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(WHITE);
-    printOperationStep("FINALIZING",
-            getTestOpMode(testContext->algorithm),
+    AESHASH_OperationStepPrint("FINALIZING",
+            SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode,
             test->inputDataLength, true);
 
@@ -221,42 +221,42 @@ static test_result_t sha_hash_test_final(void *context)
             ? TEST_RESULT_SUCCESS
             : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_HASH_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printWithLabel("Digest Length", "%d bytes",
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_LabelPrint("Digest Length", "%d bytes",
                 test->expectedDigestLength);
-        printHexArray("Data (Result)", testContext->dataResult,
+        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult,
                 test->expectedDigestLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
         (void) printf(WHITE);
-        printOperationStep("VERIFYING",
-                getTestOpMode(testContext->algorithm),
+        AESHASH_OperationStepPrint("VERIFYING",
+                SHA_TestOpModeGet(testContext->algorithm),
                 testContext->testMode,
                 test->inputDataLength, true);
 
-        if (true == checkArrayEquality(testContext->dataResult,
+        if (true == AESHASH_ArrayEqualityCheck(testContext->dataResult,
                 test->expectedDigest,
                 test->expectedDigestLength))
         {
             result = TEST_RESULT_SUCCESS;
-            printCryptoResult(result, status);
+            AESHASH_CryptoResultPrint(result, status);
         }
         else
         {
             result = TEST_RESULT_DATA_COMPARE_FAILED;
-            printCryptoResult(result, status);
+            AESHASH_CryptoResultPrint(result, status);
 
-            printSeparator(BLUE, '-');
-            printHexArray("Expected:", test->expectedDigest, test->expectedDigestLength);
-            printSeparator(BLUE, '-');
-            printHexArray("Result:", testContext->dataResult, test->expectedDigestLength);
-            printSeparator(BLUE, '-');
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Expected:", test->expectedDigest, test->expectedDigestLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Result:", testContext->dataResult, test->expectedDigestLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
         }
     }
 
@@ -274,7 +274,7 @@ enum
     HASH_TEST_STEP_NUMBER_OF_STEPS
 };
 
-test_result_t hash_test_init(test_context_t *context,
+test_result_t SHA_ContextInit(test_context_t *context,
         test_mode_t mode, crypto_Hash_Algo_E algorithm,
         uint32_t blockSize)
 {
@@ -294,8 +294,8 @@ test_result_t hash_test_init(test_context_t *context,
     {
         case CRYPTO_HASH_SHA2_512:
         {
-            context->tests = (uint8_t *)get_sha_512_test_vectors();
-            context->testCount = get_sha_512_test_vector_count();
+            context->tests = (uint8_t *)TV_Sha512TestVectorsGet();
+            context->testCount = TV_Sha512TestVectorCountGet();
         }
         break;
 
@@ -311,9 +311,9 @@ test_result_t hash_test_init(test_context_t *context,
     {
         static test_state_fn_t hash_test_states[] =
         {
-            sha_hash_test_init,
-            sha_hash_test_hash,
-            sha_hash_test_final,
+            SHA_HashTestStepInit,
+            SHA_HashTestHashRun,
+            SHA_HashTestFinalizeRun,
         };
 
         context->states = hash_test_states;
@@ -326,7 +326,7 @@ test_result_t hash_test_init(test_context_t *context,
         testContext->testMode = context->testMode;
         testContext->algorithm = algorithm;
         testContext->blockSize = blockSize;
-        testContext->digestLength = getDigestLength(algorithm);
+        testContext->digestLength = SHA_DigestLengthGet(algorithm);
 
         /* cppcheck-suppress misra-c2012-11.5
          *
@@ -343,7 +343,7 @@ test_result_t hash_test_init(test_context_t *context,
     return result;
 }
 
-test_result_t hash_test_advance(test_context_t *context)
+test_result_t SHA_HashTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

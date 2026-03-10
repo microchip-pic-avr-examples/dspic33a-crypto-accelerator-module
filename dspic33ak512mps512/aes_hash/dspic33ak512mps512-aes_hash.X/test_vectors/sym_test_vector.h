@@ -52,23 +52,23 @@ typedef struct
     uint32_t    initializationVectorLength;
 } sym_test_vector_t;
 
-sym_test_vector_t *get_ecb_test_vectors(void);
-uint32_t get_ecb_test_vector_count(void);
+sym_test_vector_t *TV_EcbTestVectorsGet(void);
+uint32_t TV_EcbTestVectorCountGet(void);
 
-sym_test_vector_t *get_ctr_test_vectors(void);
-uint32_t get_ctr_test_vector_count(void);
+sym_test_vector_t *TV_CtrTestVectorsGet(void);
+uint32_t TV_CtrTestVectorCountGet(void);
 
-sym_test_vector_t *get_cbc_test_vectors(void);
-uint32_t get_cbc_test_vector_count(void);
+sym_test_vector_t *TV_CbcTestVectorsGet(void);
+uint32_t TV_CbcTestVectorCountGet(void);
 
-sym_test_vector_t *get_cfb128_test_vectors(void);
-uint32_t get_cfb128_test_vector_count(void);
+sym_test_vector_t *TV_Cfb128TestVectorsGet(void);
+uint32_t TV_Cfb128TestVectorCountGet(void);
 
-sym_test_vector_t *get_ofb_test_vectors(void);
-uint32_t get_ofb_test_vector_count(void);
+sym_test_vector_t *TV_OfbTestVectorsGet(void);
+uint32_t TV_OfbTestVectorCountGet(void);
 
-sym_test_vector_t *get_xts_test_vectors(void);
-uint32_t get_xts_test_vector_count(void);
+sym_test_vector_t *TV_XtsTestVectorsGet(void);
+uint32_t TV_XtsTestVectorCountGet(void);
 
 #ifdef __cplusplus
 }

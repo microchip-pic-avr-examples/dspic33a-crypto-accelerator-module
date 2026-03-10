@@ -60,21 +60,21 @@ static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
  * @param opMode The MAC operations mode.
  * @return Pointer to string.
  */
-static const char *getMacTestOpMode(mac_oper_mode_t opMode)
+static const char *MAC_TestOpModeGet(mac_oper_mode_t opMode)
 {
-    const char *opModeStr = "???";
+    const char *opModeString = "???";
 
     switch (opMode)
     {
         case MAC_OPER_MODE_AES_CMAC:
-            opModeStr = "AES-CMAC";
+            opModeString = "AES-CMAC";
             break;
 
         default:
             break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
 // *****************************************************************************
@@ -88,7 +88,7 @@ static const char *getMacTestOpMode(mac_oper_mode_t opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static test_result_t aes_cmac_test_init(void *context)
+static test_result_t MAC_CmacTestStepInit(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -104,16 +104,16 @@ static test_result_t aes_cmac_test_init(void *context)
 
 #ifdef SHOW_TEST_DATA
     (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
-            getMacTestOpMode(testContext->opMode),
-            getTestMode(testContext->testMode),
+            MAC_TestOpModeGet(testContext->opMode),
+            AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Key", test->inputKey, test->inputKeyLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", test->inputData,
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", test->inputData,
             test->inputDataLength);
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
     status = Crypto_Mac_AesCmac_Init(&macCtx,
@@ -123,11 +123,11 @@ static test_result_t aes_cmac_test_init(void *context)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("INITIALIZING",
-            getMacTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("INITIALIZING",
+            MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
             test->inputDataLength, true);
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -137,7 +137,7 @@ static test_result_t aes_cmac_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static test_result_t aes_cmac_test_cipher(void *context)
+static test_result_t MAC_CmacTestCipherRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -152,8 +152,8 @@ static test_result_t aes_cmac_test_cipher(void *context)
     test_result_t result;
 
     (void) printf(MAG);
-    printOperationStep("CIPHERING",
-            getMacTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("CIPHERING",
+            MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
             test->inputDataLength, true);
 
@@ -162,7 +162,7 @@ static test_result_t aes_cmac_test_cipher(void *context)
     result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -173,7 +173,7 @@ static test_result_t aes_cmac_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static test_result_t aes_cmac_test_final(void *context)
+static test_result_t MAC_CmacTestFinalizeRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -188,8 +188,8 @@ static test_result_t aes_cmac_test_final(void *context)
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("FINALIZING",
-            getMacTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("FINALIZING",
+            MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
             test->inputDataLength, true);
 
@@ -200,23 +200,23 @@ static test_result_t aes_cmac_test_final(void *context)
             ? TEST_RESULT_SUCCESS
             : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printWithLabel("Result Length", "%d bytes", test->expectedMacLength);
-        printHexArray("Data (Result)", testContext->dataResult, test->expectedMacLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_LabelPrint("Result Length", "%d bytes", test->expectedMacLength);
+        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult, test->expectedMacLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
         (void) printf(MAG);
-        printOperationStep("VERIFYING",
-                getMacTestOpMode(testContext->opMode),
+        AESHASH_OperationStepPrint("VERIFYING",
+                MAC_TestOpModeGet(testContext->opMode),
                 testContext->testMode,
                 test->inputDataLength, true);
 
-        if (true == checkArrayEquality(testContext->dataResult,
+        if (true == AESHASH_ArrayEqualityCheck(testContext->dataResult,
                 test->expectedMac,
                 test->expectedMacLength))
         {
@@ -227,15 +227,15 @@ static test_result_t aes_cmac_test_final(void *context)
             result = TEST_RESULT_DATA_COMPARE_FAILED;
         }
 
-        printCryptoResult(result, status);
+        AESHASH_CryptoResultPrint(result, status);
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            printSeparator(BLUE, '-');
-            printHexArray("Expected:", test->expectedMac, test->expectedMacLength);
-            printSeparator(BLUE, '-');
-            printHexArray("Result:", testContext->dataResult, test->expectedMacLength);
-            printSeparator(BLUE, '-');
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Expected:", test->expectedMac, test->expectedMacLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Result:", testContext->dataResult, test->expectedMacLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
         }
     }
 
@@ -259,7 +259,7 @@ enum
 // *****************************************************************************
 // *****************************************************************************
 
-test_result_t mac_cmac_test_init(test_context_t *context,
+test_result_t MAC_CmacContextInit(test_context_t *context,
         test_mode_t testMode, mac_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
@@ -273,9 +273,9 @@ test_result_t mac_cmac_test_init(test_context_t *context,
 
     static test_state_fn_t aes_cmac_test_states[] =
     {
-        aes_cmac_test_init,
-        aes_cmac_test_cipher,
-        aes_cmac_test_final,
+        MAC_CmacTestStepInit,
+        MAC_CmacTestCipherRun,
+        MAC_CmacTestFinalizeRun,
     };
 
     (void) memset(context, 0, sizeof(test_context_t));
@@ -286,8 +286,8 @@ test_result_t mac_cmac_test_init(test_context_t *context,
         case MAC_OPER_MODE_AES_CMAC:
         {
             context->states = aes_cmac_test_states;
-            context->tests = (uint8_t *)get_cmac_test_vectors();
-            context->testCount = get_cmac_test_vector_count();
+            context->tests = (uint8_t *)TV_CmacTestVectorsGet();
+            context->testCount = TV_CmacTestVectorCountGet();
             context->stepCount = sizeof(aes_cmac_test_states) / sizeof(aes_cmac_test_states[0]);
         }
         break;
@@ -324,7 +324,7 @@ test_result_t mac_cmac_test_init(test_context_t *context,
     return result;
 }
 
-test_result_t mac_cmac_test_advance(test_context_t *context)
+test_result_t MAC_CmacTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

@@ -47,8 +47,8 @@ typedef struct
     uint32_t    expectedMacLength;
 } mac_test_vector_t;
 
-mac_test_vector_t *get_cmac_test_vectors(void);
-uint32_t get_cmac_test_vector_count(void);
+mac_test_vector_t *TV_CmacTestVectorsGet(void);
+uint32_t TV_CmacTestVectorCountGet(void);
 
 #ifdef __cplusplus
 }
