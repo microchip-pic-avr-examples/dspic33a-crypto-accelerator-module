@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app.c
+    app_sha.c
 
   Summary:
     This source file handles the running of the Hashing examples.

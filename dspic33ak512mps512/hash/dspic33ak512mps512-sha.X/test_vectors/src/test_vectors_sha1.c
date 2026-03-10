@@ -26,11 +26,11 @@ Microchip or any third party.
 #include "../test_vectors_sha1.h"
 
 /*
- * The following test vectors were pulled from NIST's Secure Hash Standard (SHS) FIPS 180-4 validation:
+ * Test vectors from NIST Secure Hash Standard (SHS) FIPS 180-4 validation:
  * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/secure-hashing
  */
 
-// SHA-1 0 Bytes Test Vector
+// SHA-1, 0-byte input
 static uint8_t sha1Digest0Bytes[SHA1_DIGEST_LEN_BYTES] =
 {
     0xDA, 0x39, 0xA3, 0xEE, 0x5E, 0x6B, 0x4B, 0x0D, 0x32, 0x55, 0xBF, 0xEF, 0x95, 0x60, 0x18, 0x90,
@@ -43,7 +43,7 @@ static const test_vector_t sha1Vector0Bytes =
     .expectedDigest = sha1Digest0Bytes
 };
 
-// SHA-1 35 Bytes Test Vector
+// SHA-1, 35-byte input
 static uint8_t sha1Input35Bytes[35] =
 {
     0x6F, 0xDA, 0x97, 0x52, 0x7A, 0x66, 0x25, 0x52, 0xBE, 0x15, 0xEF, 0xAE, 0xBA, 0x32, 0xA3, 0xAE,
@@ -62,7 +62,7 @@ static const test_vector_t sha1Vector35Bytes =
     .expectedDigest = sha1Digest35Bytes
 };
 
-// SHA-1 41 Bytes Test Vector
+// SHA-1, 41-byte input
 static uint8_t sha1Input41Bytes[41] =
 {
     0x7D, 0xE4, 0xBA, 0x85, 0xEC, 0x54, 0x74, 0x7C, 0xDC, 0x42, 0xB1, 0xF2, 0x35, 0x46, 0xB7, 0xE4,
@@ -81,7 +81,7 @@ static const test_vector_t sha1Vector41Bytes =
     .expectedDigest = sha1Digest41Bytes
 };
 
-// SHA-1 48 Bytes Test Vector
+// SHA-1, 48-byte input
 static uint8_t sha1Input48Bytes[48] =
 {
     0x57, 0xE8, 0x96, 0x59, 0xD8, 0x78, 0xF3, 0x60, 0xAF, 0x6D, 0xE4, 0x5A, 0x9A, 0x5E, 0x37, 0x2E,
@@ -100,7 +100,7 @@ static const test_vector_t sha1Vector48Bytes =
     .expectedDigest = sha1Digest48Bytes
 };
 
-// SHA-1 64 Bytes Test Vector
+// SHA-1, 64-byte input
 static uint8_t sha1Input64Bytes[64] =
 {
     0x49, 0xD9, 0xBF, 0xD2, 0x26, 0xB3, 0x78, 0x17, 0x52, 0x62, 0x19, 0x65, 0xA6, 0xC6, 0x96, 0x53,
@@ -120,7 +120,7 @@ static const test_vector_t sha1Vector64Bytes =
     .expectedDigest = sha1Digest64Bytes
 };
 
-// SHA-1 128 Bytes Test Vector
+// SHA-1, 128-byte input
 static uint8_t sha1Input128Bytes[128] =
 {
     0x44, 0x04, 0x6A, 0x05, 0xFE, 0x10, 0x5F, 0x72, 0x64, 0x65, 0xB2, 0x8D, 0x18, 0x2C, 0x17, 0x4E,
@@ -145,7 +145,7 @@ static const test_vector_t sha1Vector128Bytes =
     .expectedDigest = sha1Digest128Bytes
 };
 
-// SHA-1 512 Bytes Test Vector
+// SHA-1, 512-byte input
 static uint8_t sha1Input512Bytes[512] =
 {
     0xB3, 0x80, 0xEE, 0x3B, 0xBC, 0xFE, 0x80, 0x64, 0xF3, 0x20, 0x2C, 0x86, 0xD1, 0x19, 0x61, 0x77,
@@ -193,7 +193,7 @@ static const test_vector_t sha1Vector512Bytes =
     .expectedDigest = sha1Digest512Bytes
 };
 
-// SHA-1 835 Bytes Test Vector
+// SHA-1, 835-byte input
 static uint8_t sha1Input835Bytes[835] =
 {
     0xF4, 0xE9, 0xFF, 0xF4, 0xA2, 0xE1, 0x8B, 0xA0, 0xB6, 0x18, 0x34, 0xC4, 0x30, 0x36, 0x28, 0x1F,
@@ -262,6 +262,7 @@ static const test_vector_t sha1Vector835Bytes =
     .expectedDigest = sha1Digest835Bytes
 };
 
+// 8 SHA-1 test vectors (0-byte to 835-byte inputs)
 test_vector_t sha1TestVectors[NUMBER_OF_SHA1_VECTORS] =
 {
     [0] = sha1Vector0Bytes,
