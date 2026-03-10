@@ -39,7 +39,7 @@ static uint8_t sha256Digest0Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector0Bytes =
 {
     .inputData = NULL,
-    .inputDataLen = 0U,
+    .inputDataLength = 0U,
     .expectedDigest = sha256Digest0Bytes
 };
 
@@ -58,7 +58,7 @@ static uint8_t sha256Digest35Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector35Bytes =
 {
     .inputData = sha256Input35Bytes,
-    .inputDataLen = 35U,
+    .inputDataLength = 35U,
     .expectedDigest = sha256Digest35Bytes
 };
 
@@ -77,7 +77,7 @@ static uint8_t sha256Digest41Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector41Bytes =
 {
     .inputData = sha256Input41Bytes,
-    .inputDataLen = 41U,
+    .inputDataLength = 41U,
     .expectedDigest = sha256Digest41Bytes
 };
 
@@ -96,7 +96,7 @@ static uint8_t sha256Digest48Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector48Bytes =
 {
     .inputData = sha256Input48Bytes,
-    .inputDataLen = 48U,
+    .inputDataLength = 48U,
     .expectedDigest = sha256Digest48Bytes
 };
 
@@ -116,7 +116,7 @@ static uint8_t sha256Digest64Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector64Bytes =
 {
     .inputData = sha256Input64Bytes,
-    .inputDataLen = 64U,
+    .inputDataLength = 64U,
     .expectedDigest = sha256Digest64Bytes
 };
 
@@ -140,7 +140,7 @@ static uint8_t sha256Digest128Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector128Bytes =
 {
     .inputData = sha256Input128Bytes,
-    .inputDataLen = 128U,
+    .inputDataLength = 128U,
     .expectedDigest = sha256Digest128Bytes
 };
 
@@ -189,7 +189,7 @@ static uint8_t sha256Digest512Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector512Bytes =
 {
     .inputData = sha256Input512Bytes,
-    .inputDataLen = 512U,
+    .inputDataLength = 512U,
     .expectedDigest = sha256Digest512Bytes
 };
 
@@ -260,7 +260,7 @@ static uint8_t sha256Digest835Bytes[SHA256_DIGEST_LEN_BYTES] =
 static const test_vector_t sha256Vector835Bytes =
 {
     .inputData = sha256Input835Bytes,
-    .inputDataLen = 835U,
+    .inputDataLength = 835U,
     .expectedDigest = sha256Digest835Bytes
 };
 
