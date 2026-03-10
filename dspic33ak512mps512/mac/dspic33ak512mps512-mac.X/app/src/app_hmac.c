@@ -1,4 +1,3 @@
-
 /*******************************************************************************
   Application Source File
 
@@ -6,15 +5,15 @@
     Microchip Technology Inc.
 
   File Name:
-    app_mac.c
+    app_hmac.c
 
   Summary:
-    This source file handles the running of the AES MAC examples.
+    This source file handles the running of the HMAC examples.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -54,15 +53,15 @@ Microchip or any third party.
 #include "test_vectors/mac_test_vector.h"
 #include "app/app_hmac.h"
 
-#define TEST_SESSION_ID     0x1
+#define TEST_SESSION_ID     0x1U
 
 #ifndef RUN_ALL_VECTORS
 #define MAC_TEST_VECTOR_0   0
 #endif
 
-static const char* hmacTestWrapper = "MAC";
+static const char *hmacTestWrapper = "MAC";
 
-static const char *mac_hmac_get_algorithm_string(crypto_Hash_Algo_E hashAlgorithm)
+static const char *HMAC_AlgorithmStringGet(crypto_Hash_Algo_E hashAlgorithm)
 {
     const char *algorithmString = "UNKNOWN";
 
@@ -95,63 +94,96 @@ static const char *mac_hmac_get_algorithm_string(crypto_Hash_Algo_E hashAlgorith
     return algorithmString;
 }
 
-static void mac_hmac_direct_test(TEST_VECTOR* testVector)
+static void HMAC_DirectTestRun(test_vector_t *testVector)
 {
     uint8_t generatedHmac[CRYPTO_HASH_MAX_DIGEST_SIZE] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    unsigned long keyBitLen = testVector->inputKeyLen * 8U;
+    unsigned long keyBitLength = testVector->inputKeyLength * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
+    (void) sprintf(dataInfo, ", HMAC: %lu BYTES",
+        (unsigned long)testVector->expectedMacLength);
 
-    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (DIRECT)",
-                        mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
+    MAC_HmacTestHeaderPrint(hmacTestWrapper, keyBitLength,
+        "HMAC (DIRECT)",
+        HMAC_AlgorithmStringGet(testVector->hashAlgorithm),
+        testVector->inputDataLength, dataInfo);
 
-    printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
-    printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
+    MAC_HexArrayPrint("Key                  ",
+        testVector->inputKey, testVector->inputKeyLength);
 
-    status = Crypto_Mac_Hmac_Direct(CRYPTO_HANDLER_HW_INTERNAL, testVector->inputData, testVector->inputDataLen,
-            generatedHmac, testVector->inputKey, testVector->inputKeyLen, testVector->hashAlgorithm, TEST_SESSION_ID);
+    MAC_HexArrayPrint("Data                 ",
+        testVector->inputData, testVector->inputDataLength);
 
-    if(status == CRYPTO_MAC_CIPHER_SUCCESS)
+    status = Crypto_Mac_Hmac_Direct(
+            CRYPTO_HANDLER_HW_INTERNAL,
+            testVector->inputData,
+            testVector->inputDataLength,
+            generatedHmac,
+            testVector->inputKey,
+            testVector->inputKeyLength,
+            testVector->hashAlgorithm,
+            TEST_SESSION_ID);
+
+    if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        printHexArray("HMAC Output          ", generatedHmac, testVector->expectedMacLen);
-        printHexArray("Expected Output      ", testVector->expectedMac, testVector->expectedMacLen);
-        printArrayEqualityResult(generatedHmac, testVector->expectedMac, testVector->expectedMacLen);
+        MAC_HexArrayPrint("HMAC Output          ",
+            generatedHmac, testVector->expectedMacLength);
+
+        MAC_HexArrayPrint("Expected Output      ",
+            testVector->expectedMac,
+            testVector->expectedMacLength);
+
+        MAC_ArrayEqualityResultPrint(generatedHmac,
+            testVector->expectedMac,
+            testVector->expectedMacLength);
     }
     else
     {
-        printHmacCryptoError("HMAC", "Generation", status);
+        MAC_HmacCryptoErrorPrint("HMAC", "Generation", status);
     }
 }
 
-static void mac_hmac_step_test(TEST_VECTOR* testVector)
+static void HMAC_StepTestRun(test_vector_t *testVector)
 {
     // Context for HMAC calculations when running individual steps.
     // This is non-reentrant as it is too large to put on the stack.
     static st_Crypto_Mac_Hmac_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedHmac[CRYPTO_HASH_MAX_DIGEST_SIZE] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    unsigned long keyBitLen = testVector->inputKeyLen * 8U;
+    unsigned long keyBitLength = testVector->inputKeyLength * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
+    (void) sprintf(dataInfo, ", HMAC: %lu BYTES",
+        (unsigned long)testVector->expectedMacLength);
 
-    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (STEPWISE)",
-            mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
+    MAC_HmacTestHeaderPrint(hmacTestWrapper, keyBitLength,
+        "HMAC (STEPWISE)",
+        HMAC_AlgorithmStringGet(testVector->hashAlgorithm),
+        testVector->inputDataLength, dataInfo);
 
-    printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
-    printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
+    MAC_HexArrayPrint("Key                  ",
+        testVector->inputKey, testVector->inputKeyLength);
 
-    status = Crypto_Mac_Hmac_Init(&macCtx, CRYPTO_HANDLER_HW_INTERNAL, testVector->inputKey, testVector->inputKeyLen, testVector->hashAlgorithm, TEST_SESSION_ID);
+    MAC_HexArrayPrint("Data                 ",
+        testVector->inputData, testVector->inputDataLength);
+
+    status = Crypto_Mac_Hmac_Init(&macCtx,
+            CRYPTO_HANDLER_HW_INTERNAL,
+            testVector->inputKey,
+            testVector->inputKeyLength,
+            testVector->hashAlgorithm,
+            TEST_SESSION_ID);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        status = Crypto_Mac_Hmac_Cipher(&macCtx, testVector->inputData, testVector->inputDataLen);
+        status = Crypto_Mac_Hmac_Cipher(&macCtx,
+                testVector->inputData,
+                testVector->inputDataLength);
     }
     else
     {
-        printHmacCryptoError("HMAC", "Initialization", status);
+        MAC_HmacCryptoErrorPrint("HMAC", "Initialization", status);
     }
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
@@ -160,36 +192,44 @@ static void mac_hmac_step_test(TEST_VECTOR* testVector)
     }
     else
     {
-        printHmacCryptoError("HMAC", "Cipher", status);
+        MAC_HmacCryptoErrorPrint("HMAC", "Cipher", status);
     }
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        printHexArray("HMAC Output          ", generatedHmac, testVector->expectedMacLen);
-        printHexArray("Expected Output      ", testVector->expectedMac, testVector->expectedMacLen);
-        printArrayEqualityResult(generatedHmac, testVector->expectedMac, testVector->expectedMacLen);
+        MAC_HexArrayPrint("HMAC Output          ",
+            generatedHmac, testVector->expectedMacLength);
+
+        MAC_HexArrayPrint("Expected Output      ",
+            testVector->expectedMac,
+            testVector->expectedMacLength);
+
+        MAC_ArrayEqualityResultPrint(generatedHmac,
+            testVector->expectedMac,
+            testVector->expectedMacLength);
     }
     else
     {
-        printHmacCryptoError("HMAC", "Generation", status);
+        MAC_HmacCryptoErrorPrint("HMAC", "Generation",
+            status);
     }
 }
 
-static void mac_hmac_vectors_test(TEST_VECTOR *vectors)
+static void HMAC_VectorsTestRun(test_vector_t *vectors)
 {
 #ifdef RUN_ALL_VECTORS
-    TEST_VECTOR* vectorArrayPtr = &vectors[0];
+    test_vector_t *vectorArrayPtr = &vectors[0];
 
-    while(vectorArrayPtr < &vectors[NUMBER_OF_HMAC_VECTORS])
+    while (vectorArrayPtr < &vectors[NUMBER_OF_HMAC_VECTORS])
     {
-        mac_hmac_direct_test(vectorArrayPtr);
-        mac_hmac_step_test(vectorArrayPtr);
+        HMAC_DirectTestRun(vectorArrayPtr);
+        HMAC_StepTestRun(vectorArrayPtr);
         vectorArrayPtr++;
     }
 #else
-    TEST_VECTOR* vectorArrayPtr = &vectors[MAC_TEST_VECTOR_0];
-    mac_hmac_direct_test(vectorArrayPtr);
-    mac_hmac_step_test(vectorArrayPtr);
+    test_vector_t *vectorArrayPtr = &vectors[MAC_TEST_VECTOR_0];
+    HMAC_DirectTestRun(vectorArrayPtr);
+    HMAC_StepTestRun(vectorArrayPtr);
 #endif
 }
 
@@ -199,13 +239,13 @@ static void mac_hmac_vectors_test(TEST_VECTOR *vectors)
 // *****************************************************************************
 // *****************************************************************************
 
-void mac_hmac_test(void)
+void HMAC_TestRun(void)
 {
-    mac_hmac_vectors_test(&hmac_1_test_vectors[0]);
-    mac_hmac_vectors_test(&hmac_224_test_vectors[0]);
-    mac_hmac_vectors_test(&hmac_256_test_vectors[0]);
-    mac_hmac_vectors_test(&hmac_384_test_vectors[0]);
-    mac_hmac_vectors_test(&hmac_512_test_vectors[0]);
+    HMAC_VectorsTestRun(&hmac1TestVectors[0]);
+    HMAC_VectorsTestRun(&hmac224TestVectors[0]);
+    HMAC_VectorsTestRun(&hmac256TestVectors[0]);
+    HMAC_VectorsTestRun(&hmac384TestVectors[0]);
+    HMAC_VectorsTestRun(&hmac512TestVectors[0]);
 }
 
 #endif // RUN_MAC_HMAC_TEST

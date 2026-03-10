@@ -8,12 +8,12 @@
     main.c
 
   Summary:
-    This source file starts the application to demonstrate AES encryption.
+    This source file starts the application to demonstrate MAC algorithms.
  *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -49,11 +49,10 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_mac.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -66,26 +65,35 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
-    (void )printf("\r\n\n\n\n Starting CRYPTO MAC program \r\n");
+
+    (void) printf(
+        "____________________________________________"
+        "____________________________________________"
+        "__________ \r\n");
+
+    (void) printf("\r\n\n\n\n Starting CRYPTO MAC program \r\n");
 
     #ifdef RUN_MAC_CMAC_TEST
-    mac_test_cmac();
+    MAC_CmacTestRun();
     #endif
 
     #ifdef RUN_MAC_HMAC_TEST
-    mac_test_hmac();
+    MAC_HmacTestRun();
     #endif
     #ifdef RUN_MAC_GMAC_TEST
-    mac_test_gmac();
+    MAC_GmacTestRun();
     #endif
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
-    while(1)
+
+    (void) printf(
+        "____________________________________________"
+        "____________________________________________"
+        "__________ \r\n");
+
+    while (true)
     {
+    }
 
-    };
-
-    return EXIT_SUCCESS;
+    return 0;
 }
