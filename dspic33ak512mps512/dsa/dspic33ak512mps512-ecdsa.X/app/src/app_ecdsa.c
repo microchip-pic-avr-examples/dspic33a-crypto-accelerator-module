@@ -69,7 +69,7 @@ static void ECDSA_VerifyOperationComplete(void)
     verifyComplete = true;
 }
 
-static void ECDSA_BlockingHardwareTestRun(test_vector_t *testVector)
+static void ECDSA_BlockingHardwareTestRun(const test_vector_t *testVector)
 {
     uint8_t signatureLength = UTIL_SignatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;
@@ -105,7 +105,7 @@ static void ECDSA_BlockingHardwareTestRun(test_vector_t *testVector)
     UTIL_StatusPrint(status, VERIFYING_PRINT);
 }
 
-static void ECDSA_NonBlockingHardwareTestRun(test_vector_t *testVector)
+static void ECDSA_NonBlockingHardwareTestRun(const test_vector_t *testVector)
 {
     uint8_t signatureLength = UTIL_SignatureLengthGet(testVector->curveType);
     crypto_DigiSign_Status_E status = CRYPTO_DIGISIGN_SUCCESS;

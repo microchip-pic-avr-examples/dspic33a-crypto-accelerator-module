@@ -9,7 +9,7 @@
 
   Summary:
     This source file starts the application to demonstrate ECDSA sign and verify.
- *******************************************************************************/
+*******************************************************************************/
 
 /*
 Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
