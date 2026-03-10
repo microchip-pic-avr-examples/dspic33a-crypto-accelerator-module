@@ -26,11 +26,11 @@ Microchip or any third party.
 #include "../test_vectors_sha256.h"
 
 /*
- * The following test vectors were pulled from NIST's Secure Hash Standard (SHS) FIPS 180-4 validation:
+ * Test vectors from NIST Secure Hash Standard (SHS) FIPS 180-4 validation:
  * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/secure-hashing
  */
 
-// SHA-256 0 Bytes Test Vector
+// SHA-256, 0-byte input
 static uint8_t sha256Digest0Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0xE3, 0xB0, 0xC4, 0x42, 0x98, 0xFC, 0x1C, 0x14, 0x9A, 0xFB, 0xF4, 0xC8, 0x99, 0x6F, 0xB9, 0x24,
@@ -43,7 +43,7 @@ static const test_vector_t sha256Vector0Bytes =
     .expectedDigest = sha256Digest0Bytes
 };
 
-// SHA-256 35 Bytes Test Vector
+// SHA-256, 35-byte input
 static uint8_t sha256Input35Bytes[35] =
 {
     0xE6, 0x8C, 0xB6, 0xD8, 0xC1, 0x86, 0x6C, 0x0A, 0x71, 0xE7, 0x31, 0x3F, 0x83, 0xDC, 0x11, 0xA5,
@@ -62,7 +62,7 @@ static const test_vector_t sha256Vector35Bytes =
     .expectedDigest = sha256Digest35Bytes
 };
 
-// SHA-256 41 Bytes Test Vector
+// SHA-256, 41-byte input
 static uint8_t sha256Input41Bytes[41] =
 {
     0x6A, 0xC6, 0xC6, 0x3D, 0x61, 0x8E, 0xAF, 0x00, 0xD9, 0x1C, 0x5E, 0x28, 0x07, 0xE8, 0x3C, 0x09,
@@ -81,7 +81,7 @@ static const test_vector_t sha256Vector41Bytes =
     .expectedDigest = sha256Digest41Bytes
 };
 
-// SHA-256 48 Bytes Test Vector
+// SHA-256, 48-byte input
 static uint8_t sha256Input48Bytes[48] =
 {
     0x4E, 0xEF, 0x51, 0x07, 0x45, 0x9B, 0xDD, 0xF8, 0xF2, 0x4F, 0xC7, 0x65, 0x6F, 0xD4, 0x89, 0x6D,
@@ -100,7 +100,7 @@ static const test_vector_t sha256Vector48Bytes =
     .expectedDigest = sha256Digest48Bytes
 };
 
-// SHA-256 64 Bytes Test Vector
+// SHA-256, 64-byte input
 static uint8_t sha256Input64Bytes[64] =
 {
     0x60, 0xF0, 0x1E, 0x1F, 0xFA, 0x5A, 0xF0, 0xDF, 0x6C, 0x5A, 0xED, 0x19, 0x0D, 0x2F, 0x7F, 0x4D,
@@ -120,7 +120,7 @@ static const test_vector_t sha256Vector64Bytes =
     .expectedDigest = sha256Digest64Bytes
 };
 
-// SHA-256 128 Bytes Test Vector
+// SHA-256, 128-byte input
 static uint8_t sha256Input128Bytes[128] =
 {
     0xB0, 0xDF, 0x56, 0x23, 0xCE, 0x7E, 0x51, 0x88, 0xC7, 0x4B, 0xF1, 0x30, 0x2A, 0x29, 0xED, 0x48,
@@ -144,7 +144,7 @@ static const test_vector_t sha256Vector128Bytes =
     .expectedDigest = sha256Digest128Bytes
 };
 
-// SHA-256 512 Bytes Test Vector
+// SHA-256, 512-byte input
 static uint8_t sha256Input512Bytes[512] =
 {
     0xE0, 0x11, 0x3A, 0x46, 0x3D, 0xC4, 0x23, 0x96, 0xBF, 0xF8, 0x99, 0xD4, 0xCC, 0xB7, 0x54, 0x03,
@@ -193,7 +193,7 @@ static const test_vector_t sha256Vector512Bytes =
     .expectedDigest = sha256Digest512Bytes
 };
 
-// SHA-256 835 Bytes Test Vector
+// SHA-256, 835-byte input
 static uint8_t sha256Input835Bytes[835] =
 {
     0x64, 0x3d, 0xbb, 0xc6, 0xd0, 0xff, 0x34, 0x9e, 0xb7, 0x74, 0xae, 0x83, 0x83, 0x3d, 0xd2, 0x65,
@@ -264,6 +264,7 @@ static const test_vector_t sha256Vector835Bytes =
     .expectedDigest = sha256Digest835Bytes
 };
 
+// 8 SHA-256 test vectors (0-byte to 835-byte inputs)
 test_vector_t sha256TestVectors[NUMBER_OF_SHA256_VECTORS] =
 {
     [0] = sha256Vector0Bytes,
