@@ -48,8 +48,8 @@ typedef struct
     uint32_t    expectedDigestLength;
 } hash_test_vector_t;
 
-hash_test_vector_t *TV_Sha512TestVectorsGet(void);
-uint32_t TV_Sha512TestVectorCountGet(void);
+hash_test_vector_t *VECTOR_Sha512TestVectorsGet(void);
+uint32_t VECTOR_Sha512TestVectorCountGet(void);
 
 #ifdef __cplusplus
 }

@@ -512,20 +512,20 @@ test_result_t AEAD_ContextInit(test_context_t *context,
     {
         case AEAD_OPER_MODE_AES_GCM:
         {
-            context->tests = (uint8_t *)TV_GcmTestVectorsGet();
+            context->tests = (uint8_t *)VECTOR_GcmTestVectorsGet();
             context->states = aead_test_states;
 
-            context->testCount = TV_GcmTestVectorCountGet();
+            context->testCount = VECTOR_GcmTestVectorCountGet();
             context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
         }
         break;
 
         case AEAD_OPER_MODE_AES_CCM:
         {
-            context->tests = (uint8_t *)TV_CcmTestVectorsGet();
+            context->tests = (uint8_t *)VECTOR_CcmTestVectorsGet();
             context->states = aead_test_states;
 
-            context->testCount = TV_CcmTestVectorCountGet();
+            context->testCount = VECTOR_CcmTestVectorCountGet();
             context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
         }
         break;

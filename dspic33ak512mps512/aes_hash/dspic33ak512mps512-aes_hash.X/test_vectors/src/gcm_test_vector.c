@@ -284,10 +284,10 @@ static aead_test_vector_t aesGcmTestVectors[8] =
     [7] = aesGcm256Vector64Bytes
 };
 
-aead_test_vector_t * TV_GcmTestVectorsGet(void)
+aead_test_vector_t * VECTOR_GcmTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_GcmTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_GcmTestVectorCountGet(); index++)
     {
         aesGcmTestVectors[index].id = (index + 1UL);
     }
@@ -295,7 +295,7 @@ aead_test_vector_t * TV_GcmTestVectorsGet(void)
     return aesGcmTestVectors;
 }
 
-uint32_t TV_GcmTestVectorCountGet(void)
+uint32_t VECTOR_GcmTestVectorCountGet(void)
 {
     return sizeof(aesGcmTestVectors) / sizeof(aesGcmTestVectors[0]);
 }

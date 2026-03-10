@@ -294,8 +294,8 @@ test_result_t SHA_ContextInit(test_context_t *context,
     {
         case CRYPTO_HASH_SHA2_512:
         {
-            context->tests = (uint8_t *)TV_Sha512TestVectorsGet();
-            context->testCount = TV_Sha512TestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_Sha512TestVectorsGet();
+            context->testCount = VECTOR_Sha512TestVectorCountGet();
         }
         break;
 

@@ -286,8 +286,8 @@ test_result_t MAC_CmacContextInit(test_context_t *context,
         case MAC_OPER_MODE_AES_CMAC:
         {
             context->states = aes_cmac_test_states;
-            context->tests = (uint8_t *)TV_CmacTestVectorsGet();
-            context->testCount = TV_CmacTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_CmacTestVectorsGet();
+            context->testCount = VECTOR_CmacTestVectorCountGet();
             context->stepCount = sizeof(aes_cmac_test_states) / sizeof(aes_cmac_test_states[0]);
         }
         break;
