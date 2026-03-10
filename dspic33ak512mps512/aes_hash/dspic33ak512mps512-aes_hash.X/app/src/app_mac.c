@@ -60,11 +60,11 @@ static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
  * @param opMode The MAC operations mode.
  * @return Pointer to string.
  */
-static const char *getMacTestOpMode(MAC_OPER_MODE opMode)
+static const char *getMacTestOpMode(mac_oper_mode_t opMode)
 {
     const char *opModeStr = "???";
 
-    switch(opMode)
+    switch (opMode)
     {
         case MAC_OPER_MODE_AES_CMAC:
             opModeStr = "AES-CMAC";
@@ -88,7 +88,7 @@ static const char *getMacTestOpMode(MAC_OPER_MODE opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_init(void *context)
+static test_result_t aes_cmac_test_init(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -96,27 +96,37 @@ static TEST_RESULT aes_cmac_test_init(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    MAC_TEST_VECTOR *test = testContext->test;
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result;
+    test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s %s Test %lu", getMacTestOpMode(testContext->opMode), getTestMode(testContext->testMode), (unsigned long) test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+            getMacTestOpMode(testContext->opMode),
+            getTestMode(testContext->testMode),
+            (unsigned long) test->id);
 
     printSeparator(BLUE, '-');
     printHexArray("Key", test->inputKey, test->inputKeyLength);
     printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", test->inputData, test->inputDataLength);
+    printHexArray("Data (Input)", test->inputData,
+            test->inputDataLength);
     printSeparator(BLUE, '-');
 #endif
 
-    status = Crypto_Mac_AesCmac_Init(&macCtx, CRYPTO_HANDLER_HW_INTERNAL, test->inputKey, test->inputKeyLength, TEST_SESSION_ID);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
+    status = Crypto_Mac_AesCmac_Init(&macCtx,
+            CRYPTO_HANDLER_HW_INTERNAL, test->inputKey,
+            test->inputKeyLength, TEST_SESSION_ID);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("INITIALIZING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("INITIALIZING",
+            getMacTestOpMode(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
     printCryptoResult(result, status);
 
     return result;
@@ -127,7 +137,7 @@ static TEST_RESULT aes_cmac_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_cipher(void *context)
+static test_result_t aes_cmac_test_cipher(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -135,17 +145,22 @@ static TEST_RESULT aes_cmac_test_cipher(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    MAC_TEST_VECTOR *test = testContext->test;
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result;
+    test_result_t result;
 
     (void) printf(MAG);
-    printOperationStep("CIPHERING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("CIPHERING",
+            getMacTestOpMode(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
 
-    status = Crypto_Mac_AesCmac_Cipher(&macCtx, test->inputData, test->inputDataLength);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
+    status = Crypto_Mac_AesCmac_Cipher(&macCtx,
+            test->inputData, test->inputDataLength);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
     printCryptoResult(result, status);
 
@@ -158,7 +173,7 @@ static TEST_RESULT aes_cmac_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_final(void *context)
+static test_result_t aes_cmac_test_final(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -166,17 +181,24 @@ static TEST_RESULT aes_cmac_test_final(void *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    MAC_TEST_VECTOR *test = testContext->test;
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
+    test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("FINALIZING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    printOperationStep("FINALIZING",
+            getMacTestOpMode(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
 
-    status = Crypto_Mac_AesCmac_Final(&macCtx, testContext->dataResult, test->expectedMacLength);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
+    status = Crypto_Mac_AesCmac_Final(&macCtx,
+            testContext->dataResult,
+            test->expectedMacLength);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS
+            : TEST_RESULT_FINALIZE_FAILED;
 
     printCryptoResult(result, status);
 
@@ -189,9 +211,14 @@ static TEST_RESULT aes_cmac_test_final(void *context)
         printSeparator(BLUE, '-');
 #endif
         (void) printf(MAG);
-        printOperationStep("VERIFYING", getMacTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+        printOperationStep("VERIFYING",
+                getMacTestOpMode(testContext->opMode),
+                testContext->testMode,
+                test->inputDataLength, true);
 
-        if (true == checkArrayEquality(testContext->dataResult, test->expectedMac, test->expectedMacLength))
+        if (true == checkArrayEquality(testContext->dataResult,
+                test->expectedMac,
+                test->expectedMacLength))
         {
             result = TEST_RESULT_SUCCESS;
         }
@@ -218,7 +245,8 @@ static TEST_RESULT aes_cmac_test_final(void *context)
 /**
  * @brief Defines the states for a AES CMAC test.
  */
-enum {
+enum
+{
     AES_CMAC_TEST_STEP_INIT = 0,
     AES_CMAC_TEST_STEP_CIPHER = 1,
     AES_CMAC_TEST_STEP_FINAL = 2,
@@ -231,7 +259,8 @@ enum {
 // *****************************************************************************
 // *****************************************************************************
 
-TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OPER_MODE opMode)
+test_result_t mac_cmac_test_init(test_context_t *context,
+        test_mode_t testMode, mac_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -239,17 +268,17 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
-    TEST_RESULT result = TEST_RESULT_SUCCESS;
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context->testContext;
+    test_result_t result = TEST_RESULT_SUCCESS;
 
-    static TEST_STATE_FN aes_cmac_test_states[] =
+    static test_state_fn_t aes_cmac_test_states[] =
     {
         aes_cmac_test_init,
         aes_cmac_test_cipher,
         aes_cmac_test_final,
     };
 
-    (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    (void) memset(context, 0, sizeof(test_context_t));
     context->testContext = testContext;
 
     switch (opMode)
@@ -286,7 +315,7 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
          *
          *  Reasoning: A generic pointer allows support for various algorithm test context types.
          */
-        MAC_TEST_VECTOR *tests = (MAC_TEST_VECTOR *)context->tests;
+        mac_test_vector_t *tests = (mac_test_vector_t *)context->tests;
 
         // Start at the first test.
         testContext->test = &tests[context->test];
@@ -295,7 +324,7 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
     return result;
 }
 
-TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
+test_result_t mac_cmac_test_advance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -303,7 +332,7 @@ TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
      *
      *  Reasoning: A generic pointer allows support for various algorithm test context types.
      */
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context->testContext;
 
     if (context->test < context->testCount)
     {
@@ -343,7 +372,7 @@ TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
                      *
                      *  Reasoning: A generic pointer allows support for various algorithm test context types.
                      */
-                    MAC_TEST_VECTOR *tests = (MAC_TEST_VECTOR *)context->tests;
+                    mac_test_vector_t *tests = (mac_test_vector_t *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

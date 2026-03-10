@@ -27,12 +27,13 @@ Microchip or any third party.
 #define MAC_TEST_VECTOR_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdint.h>
 
-typedef struct MAC_TEST_VECTOR
+typedef struct
 {
     uint32_t    id;
 
@@ -44,9 +45,9 @@ typedef struct MAC_TEST_VECTOR
 
     uint8_t *   expectedMac;
     uint32_t    expectedMacLength;
-} MAC_TEST_VECTOR;
+} mac_test_vector_t;
 
-MAC_TEST_VECTOR * get_cmac_test_vectors(void);
+mac_test_vector_t *get_cmac_test_vectors(void);
 uint32_t get_cmac_test_vector_count(void);
 
 #ifdef __cplusplus

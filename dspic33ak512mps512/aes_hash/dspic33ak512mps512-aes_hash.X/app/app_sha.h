@@ -40,7 +40,8 @@ Microchip or any third party.
 #define APP_SHA_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "app_aes_hash.h"
@@ -53,29 +54,30 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-typedef struct HASH_TEST_CONTEXT {
+typedef struct
+{
     // Pointer to current test vector data.
-    HASH_TEST_VECTOR *           test;
+    hash_test_vector_t *test;
 
     // Contains the data result.
-    uint8_t                 dataResult[SHA512_DIGEST_LEN_BYTES];
+    uint8_t dataResult[SHA512_DIGEST_LEN_BYTES];
 
     // The test mode (hash).
-    TEST_MODE               testMode;
+    test_mode_t testMode;
 
     // The hash algorithm type.
-    crypto_Hash_Algo_E      algorithm;
+    crypto_Hash_Algo_E algorithm;
 
     // The size of the hash data to use each time the hash is executed.
-    uint16_t                blockSize;
+    uint16_t blockSize;
 
     // The number of bytes hashed.
-    uint16_t                bytesHashed;
+    uint16_t bytesHashed;
 
     // The length of the resulting digest.
-    uint32_t                digestLen;
+    uint32_t digestLength;
 
-} HASH_TEST_CONTEXT;
+} hash_test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -91,7 +93,9 @@ typedef struct HASH_TEST_CONTEXT {
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Algo_E algorithm, uint32_t blockSize);
+test_result_t hash_test_init(test_context_t *context,
+        test_mode_t mode, crypto_Hash_Algo_E algorithm,
+        uint32_t blockSize);
 
 /**
  * @brief Advance the HASH test state machine.
@@ -100,7 +104,7 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-TEST_RESULT hash_test_advance(TEST_CONTEXT *context);
+test_result_t hash_test_advance(test_context_t *context);
 
 #ifdef __cplusplus
 }

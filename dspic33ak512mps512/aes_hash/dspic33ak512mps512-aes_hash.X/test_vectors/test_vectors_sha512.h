@@ -27,7 +27,8 @@ Microchip or any third party.
 #define TEST_VECTORS_SHA512_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stddef.h>
@@ -36,7 +37,7 @@ extern "C" {
 // Size of a SHA-512 digest.
 #define SHA512_DIGEST_LEN_BYTES     (64U)
 
-typedef struct HASH_TEST_VECTOR
+typedef struct
 {
     uint32_t    id;
 
@@ -45,9 +46,9 @@ typedef struct HASH_TEST_VECTOR
 
     uint8_t *   expectedDigest;
     uint32_t    expectedDigestLength;
-} HASH_TEST_VECTOR;
+} hash_test_vector_t;
 
-HASH_TEST_VECTOR * get_sha_512_test_vectors(void);
+hash_test_vector_t *get_sha_512_test_vectors(void);
 uint32_t get_sha_512_test_vector_count(void);
 
 #ifdef __cplusplus

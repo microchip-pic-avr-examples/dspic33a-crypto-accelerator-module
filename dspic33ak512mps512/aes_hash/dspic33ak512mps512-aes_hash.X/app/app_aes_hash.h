@@ -40,7 +40,8 @@ Microchip or any third party.
 #define APP_AES_HASH_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdint.h>
@@ -81,57 +82,59 @@ extern "C" {
 /**
  * @brief Defines the test operation mode (encrypt/hash/decrypt).
  */
-typedef enum TEST_MODE {
-  TEST_MODE_ENCRYPT = 0,
-  TEST_MODE_DECRYPT = 1,
-  TEST_MODE_HASH = 2,
-} TEST_MODE;
+typedef enum
+{
+    TEST_MODE_ENCRYPT = 0,
+    TEST_MODE_DECRYPT = 1,
+    TEST_MODE_HASH = 2,
+} test_mode_t;
 
 /**
  * @brief Defines test results.
  */
-typedef enum TEST_RESULT {
-  TEST_RESULT_SUCCESS = 0,
-  TEST_RESULT_INIT_FAILED = 1,
-  TEST_RESULT_HASH_FAILED = 2,
-  TEST_RESULT_ADD_AAD_FAILED = 3,
-  TEST_RESULT_CIPHER_FAILED = 4,
-  TEST_RESULT_FINALIZE_FAILED = 5,
-  TEST_RESULT_DATA_COMPARE_FAILED = 6,
-  TEST_RESULT_TAG_COMPARE_FAILED = 7,
+typedef enum
+{
+    TEST_RESULT_SUCCESS = 0,
+    TEST_RESULT_INIT_FAILED = 1,
+    TEST_RESULT_HASH_FAILED = 2,
+    TEST_RESULT_ADD_AAD_FAILED = 3,
+    TEST_RESULT_CIPHER_FAILED = 4,
+    TEST_RESULT_FINALIZE_FAILED = 5,
+    TEST_RESULT_DATA_COMPARE_FAILED = 6,
+    TEST_RESULT_TAG_COMPARE_FAILED = 7,
 
-  TEST_RESULT_ALL_TESTS_DONE = 255
-} TEST_RESULT;
+    TEST_RESULT_ALL_TESTS_DONE = 255
+} test_result_t;
 
 /**
  * @brief Defines a callback for each test step.
  */
-typedef TEST_RESULT (*TEST_STATE_FN)(void *);
+typedef test_result_t (*test_state_fn_t)(void *);
 
 /**
  * Defines a test context.
  */
-typedef struct TEST_CONTEXT
+typedef struct test_context
 {
     // Pointer to next test context to process.
-    struct TEST_CONTEXT *next;
+    struct test_context *next;
 
-    void *tests;         // Pointer to module-specific test contents.
-    TEST_STATE_FN *states;  // Pointer to test states.
+    void *tests;                // Pointer to module-specific test contents.
+    test_state_fn_t *states;    // Pointer to test states.
 
-    uint8_t testCount;      // Number of tests to execute for the subsystem.
-    uint8_t test;           // The current test number.
-    uint8_t stepCount;      // Number of steps in the test state machine.
-    uint8_t step;           // Current step (set to stepCount on failure).
+    uint8_t testCount;          // Number of tests to execute for the subsystem.
+    uint8_t test;               // The current test number.
+    uint8_t stepCount;          // Number of steps in the test state machine.
+    uint8_t step;               // Current step (set to stepCount on failure).
 
-    TEST_MODE testMode;     // Test operation mode (encrypt/decrypt/hash/etc.)
+    test_mode_t testMode;       // Test operation mode (encrypt/decrypt/hash/etc.)
 
     // Pointer to module specific test context data.
     void *testContext;
 
-    TEST_RESULT lastResult; // Last test result
+    test_result_t lastResult;   // Last test result
 
-} TEST_CONTEXT;
+} test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -176,7 +179,7 @@ void printHexArray(const char *label, uint8_t *data, uint32_t size);
  * @param testMode The test mode.
  * @return A string representing the test mode.
  */
-const char *getTestMode(TEST_MODE testMode);
+const char *getTestMode(test_mode_t testMode);
 
 /**
  * @brief Print the current operation step.
@@ -186,14 +189,15 @@ const char *getTestMode(TEST_MODE testMode);
  * @param size The data size in bytes
  * @param printSize If TRUE, print the size.
  */
-void printOperationStep(const char *step, const char *op, TEST_MODE testMode, uint32_t size, bool printSize);
+void printOperationStep(const char *step, const char *op,
+        test_mode_t testMode, uint32_t size, bool printSize);
 
 /**
  * @brief Print out success or error.
  * @param result The test result error code.
  * @param status The status of the operation.
  */
-void printCryptoResult(TEST_RESULT result, int status);
+void printCryptoResult(test_result_t result, int status);
 
 /**
  * @brief Run the symmetric AES tests.

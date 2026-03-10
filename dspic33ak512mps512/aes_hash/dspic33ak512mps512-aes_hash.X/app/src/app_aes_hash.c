@@ -74,14 +74,14 @@ Microchip or any third party.
 
 /* Test multiple iterations of incremental hashing with different block sizes
  * to show that arbitrary sizes are accepted. */
-#define BLOCK_SIZE_128              128UL
-#define BLOCK_SIZE_64               64UL
-#define BLOCK_SIZE_32               32UL
-#define BLOCK_SIZE_16               16UL
-#define BLOCK_SIZE_13               13UL
-#define BLOCK_SIZE_8                8UL
-#define BLOCK_SIZE_7                7UL
-#define BLOCK_SIZE_ITERATION_COUNT  7
+#define BLOCK_SIZE_128              (128UL)
+#define BLOCK_SIZE_64               (64UL)
+#define BLOCK_SIZE_32               (32UL)
+#define BLOCK_SIZE_16               (16UL)
+#define BLOCK_SIZE_13               (13UL)
+#define BLOCK_SIZE_8                (8UL)
+#define BLOCK_SIZE_7                (7UL)
+#define BLOCK_SIZE_ITERATION_COUNT  (7)
 
 // *****************************************************************************
 // *****************************************************************************
@@ -110,7 +110,7 @@ bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
     return success;
 }
 
-const char *getTestMode(TEST_MODE testMode)
+const char *getTestMode(test_mode_t testMode)
 {
     const char *testModeString = "???";
 
@@ -135,14 +135,15 @@ const char *getTestMode(TEST_MODE testMode)
     return testModeString;
 }
 
-typedef struct TEST_MODE_ERROR_STRING {
-    TEST_RESULT value;
-    const char *string;
-} TEST_MODE_ERROR_STRING;
-
-static const char * getTestError(TEST_RESULT result)
+typedef struct
 {
-    static TEST_MODE_ERROR_STRING testModeErrorStrings[] = {
+    test_result_t value;
+    const char *string;
+} test_mode_error_string_t;
+
+static const char *getTestError(test_result_t result)
+{
+    static test_mode_error_string_t testModeErrorStrings[] = {
         {TEST_RESULT_SUCCESS, "SUCCESS"},
         {TEST_RESULT_INIT_FAILED, "INITIALIZE FAILED"},
         {TEST_RESULT_HASH_FAILED, "HASH FAILED"},
@@ -156,7 +157,7 @@ static const char * getTestError(TEST_RESULT result)
     };
 
     const char *testErrorString = "UNKNOWN";
-    TEST_MODE_ERROR_STRING *err = testModeErrorStrings;
+    test_mode_error_string_t *err = testModeErrorStrings;
 
     do
     {
@@ -227,19 +228,23 @@ void printHexArray(const char *label, uint8_t *data, uint32_t size)
     }
 }
 
-void printOperationStep(const char *step, const char *op, TEST_MODE testMode, uint32_t size, bool printSize)
+void printOperationStep(const char *step, const char *op,
+        test_mode_t testMode, uint32_t size, bool printSize)
 {
     if (true == printSize)
     {
-        (void) printf("\r\n %-12s %-10s %-8s OPERATION (%-3lu BYTES)... ", step, op, getTestMode(testMode), (unsigned long) size);
+        (void) printf("\r\n %-12s %-10s %-8s OPERATION (%-3lu BYTES)... ",
+                step, op, getTestMode(testMode),
+                (unsigned long) size);
     }
     else
     {
-        (void) printf("\r\n %-12s %-10s %-8s OPERATION... ", step, op, getTestMode(testMode));
+        (void) printf("\r\n %-12s %-10s %-8s OPERATION... ",
+                step, op, getTestMode(testMode));
     }
 }
 
-void printCryptoResult(TEST_RESULT result, int status)
+void printCryptoResult(test_result_t result, int status)
 {
     if (result == TEST_RESULT_SUCCESS)
     {
@@ -259,9 +264,9 @@ void printCryptoResult(TEST_RESULT result, int status)
 #ifdef RUN_SYM_ECB_TEST
 static void aes_test_ecb(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT ecbTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t ecbTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &ecbTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-ECB mode test\r\n" RESET_COLOR);
@@ -293,9 +298,9 @@ static void aes_test_ecb(void)
 #ifdef RUN_SYM_CTR_TEST
 static void aes_test_ctr(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT ctrTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t ctrTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &ctrTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CTR mode test\r\n" RESET_COLOR);
@@ -327,9 +332,9 @@ static void aes_test_ctr(void)
 #ifdef RUN_SYM_CBC_TEST
 static void aes_test_cbc(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT cbcTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t cbcTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &cbcTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" RESET_COLOR);
@@ -361,9 +366,9 @@ static void aes_test_cbc(void)
 #ifdef RUN_SYM_CFB128_TEST
 static void aes_test_cfb128(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT cfb128TestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t cfb128TestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &cfb128TestContext
     };
 
@@ -396,9 +401,9 @@ static void aes_test_cfb128(void)
 #ifdef RUN_SYM_OFB_TEST
 static void aes_test_ofb(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT ofbTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t ofbTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &ofbTestContext
     };
 
@@ -431,9 +436,9 @@ static void aes_test_ofb(void)
 #ifdef RUN_SYM_XTS_TEST
 static void aes_test_xts(void)
 {
-    TEST_RESULT result;
-    SYM_TEST_CONTEXT xtsTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    sym_test_context_t xtsTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &xtsTestContext
     };
 
@@ -500,9 +505,9 @@ void aes_test_sym(void)
 void aes_test_mac(void)
 {
 #ifdef RUN_MAC_CMAC_TEST
-    TEST_RESULT result;
-    AES_CMAC_TEST_CONTEXT macTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    aes_cmac_test_context_t macTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &macTestContext
     };
 
@@ -532,9 +537,9 @@ void aes_test_mac(void)
 void aes_test_aead(void)
 {
 #if defined(RUN_AEAD_GCM_TEST) || defined(RUN_AEAD_CCM_TEST)
-    TEST_RESULT result;
-    AEAD_TEST_CONTEXT aeadTestContext = {0};
-    TEST_CONTEXT context = {
+    test_result_t result;
+    aead_test_context_t aeadTestContext = {0};
+    test_context_t context = {
         .testContext = (void *) &aeadTestContext
     };
 #endif
@@ -601,22 +606,30 @@ void aes_test_aead(void)
 
 void test_hash(void)
 {
-    TEST_RESULT result;
-    TEST_CONTEXT context;
+    test_result_t result;
+    test_context_t context;
 
-    uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
+    uint32_t blockSizes[] = {
+        BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32,
+        BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8,
+        BLOCK_SIZE_7
+    };
     int iterCount = (sizeof(blockSizes) / sizeof(blockSizes[0]));
 
-    (void) printf(BLUE "\r\n\r\n Starting HASH test\r\n" RESET_COLOR);
+    (void) printf(BLUE
+            "\r\n\r\n Starting HASH test\r\n" RESET_COLOR);
 
     for (int iter = 0; iter < iterCount; iter++)
     {
         uint32_t hashBlockSize = blockSizes[iter];
 
         printSeparator(BLUE, '_');
-        (void) printf(BLUE "\r\n\r\n Test Iteration %d: Hash Block Size %lu" RESET_COLOR, (iter + 1), (unsigned long) hashBlockSize);
+        (void) printf(BLUE
+                "\r\n\r\n Test Iteration %d: Hash Block Size %lu"
+                RESET_COLOR, (iter + 1),
+                (unsigned long) hashBlockSize);
 
-        HASH_TEST_CONTEXT hashTestContext = {0};
+        hash_test_context_t hashTestContext = {0};
         context.testContext = (void *) &hashTestContext;
 
         // Run hash operations.
@@ -637,7 +650,7 @@ void test_hash(void)
 #ifdef RUN_CONCURRENT_TEST
 
 // The number of iterations of the test.  This cannot be more than the number of hash block sizes!
-#define TEST_ITERATIONS 7
+#define TEST_ITERATIONS (7)
 
 #if TEST_ITERATIONS > BLOCK_SIZE_ITERATION_COUNT
 #error TEST_ITERATIONS CANNOT EXCEED BLOCK_SIZE_ITERATION_COUNT.
@@ -646,53 +659,60 @@ void test_hash(void)
 void test_concurrent(void)
 {
 
-    SYM_TEST_CONTEXT symTestContext = {0};
-    TEST_CONTEXT symContext = {
+    sym_test_context_t symTestContext = {0};
+    test_context_t symContext = {
         .testContext = (void *) &symTestContext
     };
 
-    AEAD_TEST_CONTEXT aeadTestContext = {0};
-    TEST_CONTEXT aeadContext = {
+    aead_test_context_t aeadTestContext = {0};
+    test_context_t aeadContext = {
         .testContext = (void *) &aeadTestContext
     };
 
-    AES_CMAC_TEST_CONTEXT macTestContext = {0};
-    TEST_CONTEXT macContext = {
+    aes_cmac_test_context_t macTestContext = {0};
+    test_context_t macContext = {
         .testContext = (void *) &macTestContext
     };
 
-    TEST_CONTEXT hashContext = {0};
+    test_context_t hashContext = {0};
 
-    TEST_MODE macTestMode = TEST_MODE_ENCRYPT;
-    TEST_MODE aeadTestMode = TEST_MODE_ENCRYPT;
-    TEST_MODE symTestMode = TEST_MODE_ENCRYPT;
-    SYM_OPER_MODE symOperMode = SYM_OPER_MODE_AES_ECB;
-    AEAD_OPER_MODE aeadOperMode = AEAD_OPER_MODE_AES_GCM;
+    test_mode_t macTestMode = TEST_MODE_ENCRYPT;
+    test_mode_t aeadTestMode = TEST_MODE_ENCRYPT;
+    test_mode_t symTestMode = TEST_MODE_ENCRYPT;
+    sym_oper_mode_t symOperMode = SYM_OPER_MODE_AES_ECB;
+    aead_oper_mode_t aeadOperMode = AEAD_OPER_MODE_AES_GCM;
 
     // Hash block sizes for iterative testing of arbitrary input sizes.
-    const uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
+    const uint32_t blockSizes[] = {
+        BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32,
+        BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8,
+        BLOCK_SIZE_7
+    };
 
     for (int iter = 0; iter < TEST_ITERATIONS; iter++)
     {
-        TEST_RESULT symResult;
-        TEST_RESULT aeadResult;
-        TEST_RESULT macResult;
-        TEST_RESULT hashResult;
+        test_result_t symResult;
+        test_result_t aeadResult;
+        test_result_t macResult;
+        test_result_t hashResult;
 
         uint32_t hashBlockSize = blockSizes[iter];
 
         printSeparator(BLUE, '_');
-        (void) printf(BLUE "\r\n\r\n Test Iteration %d: Hash Block Size %lu\r\n", (iter + 1), (unsigned long) hashBlockSize);
+        (void) printf(BLUE
+                "\r\n\r\n Test Iteration %d: Hash Block Size %lu\r\n",
+                (iter + 1), (unsigned long) hashBlockSize);
 
         // Initialize one of each context.
         symResult = sym_test_init(&symContext, TEST_MODE_ENCRYPT, symOperMode);
         aeadResult = aead_test_init(&aeadContext, TEST_MODE_ENCRYPT, aeadOperMode);
         macResult = mac_cmac_test_init(&macContext, TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
 
-        HASH_TEST_CONTEXT hashTestContext = {0};
+        hash_test_context_t hashTestContext = {0};
         hashContext.testContext = (void *) &hashTestContext;
 
-        hashResult = hash_test_init(&hashContext, TEST_MODE_HASH, CRYPTO_HASH_SHA2_512, hashBlockSize);
+        hashResult = hash_test_init(&hashContext, TEST_MODE_HASH,
+                CRYPTO_HASH_SHA2_512, hashBlockSize);
 
         // If any initializations fail, stop.
         if ((symResult || aeadResult || macResult || hashResult))
@@ -709,7 +729,8 @@ void test_concurrent(void)
             macResult = mac_cmac_test_advance(&macContext);
             hashResult = hash_test_advance(&hashContext);
 
-            // If any but the hash tests finish, restart them.  The hash test has the most iterations.
+            // If any but the hash tests finish, restart them.
+            // The hash test has the most iterations.
             if (symResult == TEST_RESULT_ALL_TESTS_DONE)
             {
                 if (symTestMode == TEST_MODE_ENCRYPT)
