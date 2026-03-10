@@ -75,7 +75,7 @@ static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static test_result_t checkEncryptionAndTag(uint8_t *expected,
+static test_result_t AEAD_EncryptionAndTagCheck(uint8_t *expected,
         uint8_t *result, uint32_t length,
         uint8_t *authTag, uint8_t *authTagResult,
         uint32_t authTagLength)
@@ -93,7 +93,7 @@ static test_result_t checkEncryptionAndTag(uint8_t *expected,
         }
     }
 
-    printCryptoResult(dataRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
+    AESHASH_CryptoResultPrint(dataRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
 
     (void) printf(RESET_COLOR " AUTHTAG");
 
@@ -102,24 +102,24 @@ static test_result_t checkEncryptionAndTag(uint8_t *expected,
         tagRetval = TEST_RESULT_TAG_COMPARE_FAILED;
     }
 
-    printCryptoResult(tagRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
+    AESHASH_CryptoResultPrint(tagRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
 
     if (dataRetval != TEST_RESULT_SUCCESS)
     {
-        printSeparator(BLUE, '-');
-        printHexArray("Expected Data: ", expected, length);
-        printSeparator(BLUE, '-');
-        printHexArray("Result Data: ", result, length);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Expected Data: ", expected, length);
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Result Data: ", result, length);
+        AESHASH_SeparatorPrint(BLUE, '-');
     }
 
     if (tagRetval != TEST_RESULT_SUCCESS)
     {
-        printSeparator(BLUE, '-');
-        printHexArray("Expected Tag: ", authTag, authTagLength);
-        printSeparator(BLUE, '-');
-        printHexArray("Result Tag: ", authTagResult, authTagLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Expected Tag: ", authTag, authTagLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Result Tag: ", authTagResult, authTagLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
     }
 
     return dataRetval | tagRetval;
@@ -133,7 +133,7 @@ static test_result_t checkEncryptionAndTag(uint8_t *expected,
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static test_result_t checkDecryption(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t AEAD_DecryptionCheck(uint8_t *expected, uint8_t *result, uint32_t length)
 {
     test_result_t retval = TEST_RESULT_SUCCESS;
 
@@ -145,15 +145,15 @@ static test_result_t checkDecryption(uint8_t *expected, uint8_t *result, uint32_
         }
     }
 
-    printCryptoResult(retval, CRYPTO_AEAD_CIPHER_SUCCESS);
+    AESHASH_CryptoResultPrint(retval, CRYPTO_AEAD_CIPHER_SUCCESS);
 
     if (retval != TEST_RESULT_SUCCESS)
     {
-        printSeparator(BLUE, '-');
-        printHexArray("Expected: ", expected, length);
-        printSeparator(BLUE, '-');
-        printHexArray("Result: ", result, length);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Expected: ", expected, length);
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Result: ", result, length);
+        AESHASH_SeparatorPrint(BLUE, '-');
     }
 
     return retval;
@@ -164,25 +164,25 @@ static test_result_t checkDecryption(uint8_t *expected, uint8_t *result, uint32_
  * @param opMode The AES AEAD operations mode.
  * @return Pointer to string.
  */
-static const char *getAeadTestOpMode(aead_oper_mode_t opMode)
+static const char *AEAD_TestOpModeGet(aead_oper_mode_t opMode)
 {
-    const char *opModeStr = "???";
+    const char *opModeString = "???";
 
     switch (opMode)
     {
         case AEAD_OPER_MODE_AES_GCM:
-            opModeStr = "AES-GCM";
+            opModeString = "AES-GCM";
             break;
 
         case AEAD_OPER_MODE_AES_CCM:
-            opModeStr = "AES-CCM";
+            opModeString = "AES-CCM";
             break;
 
         default:
             break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
 // *****************************************************************************
@@ -196,7 +196,7 @@ static const char *getAeadTestOpMode(aead_oper_mode_t opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static test_result_t aes_aead_test_init(void *context)
+static test_result_t AEAD_TestStepInit(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -215,33 +215,33 @@ static test_result_t aes_aead_test_init(void *context)
             ? test->plaintextData : test->ciphertextData;
 
     (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
-            getAeadTestOpMode(testContext->opMode),
-            getTestMode(testContext->testMode),
+            AEAD_TestOpModeGet(testContext->opMode),
+            AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Key", test->inputKey, test->inputKeyLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Initialization Vector",
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Initialization Vector",
             test->initializationVector,
             test->initializationVectorLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Authentication Data", test->aad, test->aadLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", data, test->dataLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Authentication Data", test->aad, test->aadLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", data, test->dataLength);
 
     if (testContext->testMode == TEST_MODE_DECRYPT)
     {
-        printSeparator(BLUE, '-');
-        printHexArray("Authentication Tag", test->authTag, test->authTagLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Authentication Tag", test->authTag, test->authTagLength);
     }
 
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
     (void) printf(YELLOW);
-    printOperationStep("INITIALIZING",
-            getAeadTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("INITIALIZING",
+            AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
 
     switch (testContext->opMode)
@@ -273,7 +273,7 @@ static test_result_t aes_aead_test_init(void *context)
 
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -283,7 +283,7 @@ static test_result_t aes_aead_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_ADD_AAD_FAILED on failure.
  */
-static test_result_t aes_aead_test_add_aad(void *context)
+static test_result_t AEAD_TestAadAdd(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -299,8 +299,8 @@ static test_result_t aes_aead_test_add_aad(void *context)
     test_result_t result;
 
     (void) printf(YELLOW);
-    printOperationStep("ADDING AAD",
-            getAeadTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("ADDING AAD",
+            AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
 
     status = Crypto_Aead_AesGcm_AddAadData(&aeadGcmCtx,
@@ -308,7 +308,7 @@ static test_result_t aes_aead_test_add_aad(void *context)
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_ADD_AAD_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -318,7 +318,7 @@ static test_result_t aes_aead_test_add_aad(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static test_result_t aes_aead_test_cipher(void *context)
+static test_result_t AEAD_TestCipherRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -338,8 +338,8 @@ static test_result_t aes_aead_test_cipher(void *context)
     test_result_t result;
 
     (void) printf(YELLOW);
-    printOperationStep("CIPHERING",
-            getAeadTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("CIPHERING",
+            AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
 
     status = Crypto_Aead_AesGcm_Cipher(&aeadGcmCtx, data,
@@ -347,7 +347,7 @@ static test_result_t aes_aead_test_cipher(void *context)
     result = (status == CRYPTO_AEAD_CIPHER_SUCCESS)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -358,7 +358,7 @@ static test_result_t aes_aead_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static test_result_t aes_aead_test_final(void *context)
+static test_result_t AEAD_TestFinalizeRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -373,8 +373,8 @@ static test_result_t aes_aead_test_final(void *context)
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(YELLOW);
-    printOperationStep("FINALIZING",
-            getAeadTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("FINALIZING",
+            AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
 
     switch (testContext->opMode)
@@ -417,32 +417,34 @@ static test_result_t aes_aead_test_final(void *context)
             ? TEST_RESULT_SUCCESS
             : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printHexArray("Data (Result)", testContext->dataResult, test->dataLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult, test->dataLength);
 
         if (testContext->testMode == TEST_MODE_ENCRYPT)
         {
-            printSeparator(BLUE, '-');
-            printHexArray("Authentication Tag", testContext->authTagResult, test->authTagLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Authentication Tag",
+                    testContext->authTagResult,
+                    test->authTagLength);
         }
 
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
         (void) printf(YELLOW);
-        printOperationStep("VERIFYING",
-                getAeadTestOpMode(testContext->opMode),
+        AESHASH_OperationStepPrint("VERIFYING",
+                AEAD_TestOpModeGet(testContext->opMode),
                 testContext->testMode, test->dataLength, true);
 
         // These calls also print out the test result...
         if (testContext->testMode == TEST_MODE_ENCRYPT)
         {
-            result = checkEncryptionAndTag(
+            result = AEAD_EncryptionAndTagCheck(
                     test->ciphertextData,
                     testContext->dataResult,
                     test->dataLength,
@@ -452,7 +454,7 @@ static test_result_t aes_aead_test_final(void *context)
         }
         else
         {
-            result = checkDecryption(test->plaintextData,
+            result = AEAD_DecryptionCheck(test->plaintextData,
                     testContext->dataResult, test->dataLength);
         }
     }
@@ -478,7 +480,8 @@ enum
 // *****************************************************************************
 // *****************************************************************************
 
-test_result_t aead_test_init(test_context_t *context, test_mode_t testMode, aead_oper_mode_t opMode)
+test_result_t AEAD_ContextInit(test_context_t *context,
+        test_mode_t testMode, aead_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -494,10 +497,10 @@ test_result_t aead_test_init(test_context_t *context, test_mode_t testMode, aead
 
     static test_state_fn_t aead_test_states[] =
     {
-        aes_aead_test_init,
-        aes_aead_test_add_aad,
-        aes_aead_test_cipher,
-        aes_aead_test_final,
+        AEAD_TestStepInit,
+        AEAD_TestAadAdd,
+        AEAD_TestCipherRun,
+        AEAD_TestFinalizeRun,
     };
 
     // Select the AES AEAD operation mode.
@@ -505,20 +508,20 @@ test_result_t aead_test_init(test_context_t *context, test_mode_t testMode, aead
     {
         case AEAD_OPER_MODE_AES_GCM:
         {
-            context->tests = (uint8_t *)get_gcm_test_vectors();
+            context->tests = (uint8_t *)TV_GcmTestVectorsGet();
             context->states = aead_test_states;
 
-            context->testCount = get_gcm_test_vector_count();
+            context->testCount = TV_GcmTestVectorCountGet();
             context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
         }
         break;
 
         case AEAD_OPER_MODE_AES_CCM:
         {
-            context->tests = (uint8_t *)get_ccm_test_vectors();
+            context->tests = (uint8_t *)TV_CcmTestVectorsGet();
             context->states = aead_test_states;
 
-            context->testCount = get_ccm_test_vector_count();
+            context->testCount = TV_CcmTestVectorCountGet();
             context->stepCount = sizeof(aead_test_states) / sizeof(aead_test_states[0]);
         }
         break;
@@ -555,7 +558,7 @@ test_result_t aead_test_init(test_context_t *context, test_mode_t testMode, aead
     return result;
 }
 
-test_result_t aead_test_advance(test_context_t *context)
+test_result_t AEAD_TestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

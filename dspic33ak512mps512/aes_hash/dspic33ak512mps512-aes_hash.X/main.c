@@ -68,44 +68,44 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\r\n\r\n\r\n");
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n\r\n Starting CRYPTO AES/HASH MULTI-OPERATION program");
 
 #if RUN_SEPARATE_TESTS
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf(GREEN "\r\n\r\n Executing in SEPARATE mode" RESET_COLOR);
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n");
 
     #ifdef RUN_SYM_TEST
-    printSeparator(BLUE, '_');
-    aes_test_sym();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_SymTestRun();
     #endif
 
     #ifdef RUN_MAC_TEST
-    printSeparator(BLUE, '_');
-    aes_test_mac();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_MacTestRun();
     #endif
 
     #ifdef RUN_AEAD_TEST
-    printSeparator(BLUE, '_');
-    aes_test_aead();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_AeadTestRun();
     #endif
 
     #ifdef RUN_HASH_TEST
-    printSeparator(BLUE, '_');
-    test_hash();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_HashTestRun();
     #endif
 #endif
 
     #ifdef RUN_CONCURRENT_TEST
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf(GREEN "\r\n\r\n Executing in CONCURRENT mode" RESET_COLOR);
 
-    test_concurrent();
+    AESHASH_ConcurrentTestRun();
     #endif
 
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n");
 
     while (1)

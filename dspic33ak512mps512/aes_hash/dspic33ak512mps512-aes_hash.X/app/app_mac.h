@@ -100,7 +100,7 @@ typedef struct
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-test_result_t mac_cmac_test_init(test_context_t *context, test_mode_t mode,
+test_result_t MAC_CmacContextInit(test_context_t *context, test_mode_t mode,
         mac_oper_mode_t opMode);
 
 /**
@@ -110,7 +110,7 @@ test_result_t mac_cmac_test_init(test_context_t *context, test_mode_t mode,
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-test_result_t mac_cmac_test_advance(test_context_t *context);
+test_result_t MAC_CmacTestAdvance(test_context_t *context);
 
 #ifdef __cplusplus
 }

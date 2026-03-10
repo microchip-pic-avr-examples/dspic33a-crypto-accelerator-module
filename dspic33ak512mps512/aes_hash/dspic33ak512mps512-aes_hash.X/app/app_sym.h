@@ -112,7 +112,7 @@ typedef enum
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-test_result_t sym_test_init(test_context_t *context, test_mode_t testMode,
+test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode,
         sym_oper_mode_t opMode);
 
 /**
@@ -122,7 +122,7 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode,
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-test_result_t sym_test_advance(test_context_t *context);
+test_result_t SYM_TestAdvance(test_context_t *context);
 
 #ifdef __cplusplus
 }

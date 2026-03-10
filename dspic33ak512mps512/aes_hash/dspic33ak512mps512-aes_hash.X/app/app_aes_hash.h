@@ -149,14 +149,15 @@ typedef struct test_context
  * @param size The length of the data to check.
  * @return TRUE if equal, FALSE if not.
  */
-bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
+bool AESHASH_ArrayEqualityCheck(const uint8_t *expected,
+        const uint8_t *actual, size_t size);
 
 /**
  * @brief Print a separator line.
  * @param color The color string to print first.
  * @param sep The character to print as the separator.
  */
-void printSeparator(const char *color, char sep);
+void AESHASH_SeparatorPrint(const char *color, char sep);
 
 /**
  * @brief Print to console with a header label.
@@ -164,7 +165,7 @@ void printSeparator(const char *color, char sep);
  * @param format POinter to format string.
  * @param <variable arguments>
  */
-void printWithLabel(const char *label, const char *format, ...);
+void AESHASH_LabelPrint(const char *label, const char *format, ...);
 
 /**
  * @brief Print an array to the console as hex characters.
@@ -172,14 +173,14 @@ void printWithLabel(const char *label, const char *format, ...);
  * @param data The array data to print.
  * @param size The length of the data to print.
  */
-void printHexArray(const char *label, uint8_t *data, uint32_t size);
+void AESHASH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size);
 
 /**
  * @brief Get a string representing the test mode.
  * @param testMode The test mode.
  * @return A string representing the test mode.
  */
-const char *getTestMode(test_mode_t testMode);
+const char *AESHASH_TestModeGet(test_mode_t testMode);
 
 /**
  * @brief Print the current operation step.
@@ -189,7 +190,7 @@ const char *getTestMode(test_mode_t testMode);
  * @param size The data size in bytes
  * @param printSize If TRUE, print the size.
  */
-void printOperationStep(const char *step, const char *op,
+void AESHASH_OperationStepPrint(const char *step, const char *op,
         test_mode_t testMode, uint32_t size, bool printSize);
 
 /**
@@ -197,32 +198,32 @@ void printOperationStep(const char *step, const char *op,
  * @param result The test result error code.
  * @param status The status of the operation.
  */
-void printCryptoResult(test_result_t result, int status);
+void AESHASH_CryptoResultPrint(test_result_t result, int status);
 
 /**
  * @brief Run the symmetric AES tests.
  */
-void aes_test_sym(void);
+void AESHASH_SymTestRun(void);
 
 /**
  * @brief Run the AES MAC tests.
  */
-void aes_test_mac(void);
+void AESHASH_MacTestRun(void);
 
 /**
  * @brief Run the AES AEAD tests.
  */
-void aes_test_aead(void);
+void AESHASH_AeadTestRun(void);
 
 /**
  * @brief Run the HASH tests.
  */
-void test_hash(void);
+void AESHASH_HashTestRun(void);
 
 /**
  * @brief Run the concurrent mode tests.
  */
-void test_concurrent(void);
+void AESHASH_ConcurrentTestRun(void);
 
 #ifdef __cplusplus
 }

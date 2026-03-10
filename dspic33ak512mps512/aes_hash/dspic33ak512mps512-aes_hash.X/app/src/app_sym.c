@@ -72,7 +72,7 @@ static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
  * @param length Length of the data.
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED on failure.
  */
-static test_result_t checkResult(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t SYM_ResultCheck(uint8_t *expected, uint8_t *result, uint32_t length)
 {
     test_result_t retval = TEST_RESULT_SUCCESS;
 
@@ -92,41 +92,41 @@ static test_result_t checkResult(uint8_t *expected, uint8_t *result, uint32_t le
  * @param opMode The AES symmetric operations mode.
  * @return Pointer to string.
  */
-static const char *getSymTestOpMode(crypto_Sym_OpModes_E opMode)
+static const char *SYM_TestOpModeGet(crypto_Sym_OpModes_E opMode)
 {
-    const char *opModeStr = "???";
+    const char *opModeString = "???";
 
     switch (opMode)
     {
         case CRYPTO_SYM_OPMODE_ECB:
-            opModeStr = "AES-ECB";
+            opModeString = "AES-ECB";
             break;
 
         case CRYPTO_SYM_OPMODE_CTR:
-            opModeStr = "AES-CTR";
+            opModeString = "AES-CTR";
             break;
 
         case CRYPTO_SYM_OPMODE_CBC:
-            opModeStr = "AES-CBC";
+            opModeString = "AES-CBC";
             break;
 
         case CRYPTO_SYM_OPMODE_CFB128:
-            opModeStr = "AES-CFB128";
+            opModeString = "AES-CFB128";
             break;
 
         case CRYPTO_SYM_OPMODE_OFB:
-            opModeStr = "AES-OFB";
+            opModeString = "AES-OFB";
             break;
 
         case CRYPTO_SYM_OPMODE_XTS:
-            opModeStr = "AES-XTS";
+            opModeString = "AES-XTS";
             break;
 
         default:
             break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
 // *****************************************************************************
@@ -150,7 +150,7 @@ enum
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static test_result_t aes_sym_test_init(void *context)
+static test_result_t SYM_TestStepInit(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -172,15 +172,15 @@ static test_result_t aes_sym_test_init(void *context)
             ? test->ptData : test->ctData;
 
     (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
-            getSymTestOpMode(testContext->opMode),
-            getTestMode(testContext->testMode),
+            SYM_TestOpModeGet(testContext->opMode),
+            AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Key", test->key, test->keyLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", data, test->dataLength);
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Key", test->key, test->keyLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", data, test->dataLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
     status = Crypto_Sym_Aes_Init(&aesCtx,
@@ -191,10 +191,10 @@ static test_result_t aes_sym_test_init(void *context)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(CYAN);
-    printOperationStep("INITIALIZING",
-            getSymTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("INITIALIZING",
+            SYM_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -204,7 +204,7 @@ static test_result_t aes_sym_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static test_result_t aes_sym_test_final(void *context)
+static test_result_t SYM_TestFinalizeRun(void *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
@@ -221,8 +221,8 @@ static test_result_t aes_sym_test_final(void *context)
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(CYAN);
-    printOperationStep("FINALIZING",
-            getSymTestOpMode(testContext->opMode),
+    AESHASH_OperationStepPrint("FINALIZING",
+            SYM_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
 
     if (test->mode == (uint32_t) CRYPTO_SYM_OPMODE_XTS)
@@ -241,7 +241,7 @@ static test_result_t aes_sym_test_final(void *context)
             ? TEST_RESULT_SUCCESS
             : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_SYM_CIPHER_SUCCESS)
     {
@@ -250,27 +250,27 @@ static test_result_t aes_sym_test_final(void *context)
                 ? test->ctData : test->ptData;
 
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printHexArray("Data (Result)", data, test->dataLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Data (Result)", data, test->dataLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
         (void) printf(CYAN);
-        printOperationStep("VERIFYING",
-                getSymTestOpMode(testContext->opMode),
+        AESHASH_OperationStepPrint("VERIFYING",
+                SYM_TestOpModeGet(testContext->opMode),
                 testContext->testMode,
                 test->dataLength, true);
 
-        result = checkResult(resultData, testContext->dataResult, test->dataLength);
+        result = SYM_ResultCheck(resultData, testContext->dataResult, test->dataLength);
 
-        printCryptoResult(result, status);
+        AESHASH_CryptoResultPrint(result, status);
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            printSeparator(BLUE, '-');
-            printHexArray("Expected:", resultData, test->dataLength);
-            printSeparator(BLUE, '-');
-            printHexArray("Result: ", testContext->dataResult, test->dataLength);
-            printSeparator(BLUE, '-');
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Expected:", resultData, test->dataLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Result: ", testContext->dataResult, test->dataLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
         }
     }
 
@@ -287,7 +287,7 @@ static test_result_t aes_sym_test_final(void *context)
  * @brief Defines the state functions for an AES symmetric cipher test.
  */
 
-test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_oper_mode_t opMode)
+test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym_oper_mode_t opMode)
 {
 
     /* cppcheck-suppress misra-c2012-11.5
@@ -301,8 +301,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
 
     static test_state_fn_t sym_test_states[] =
     {
-        aes_sym_test_init,
-        aes_sym_test_final,
+        SYM_TestStepInit,
+        SYM_TestFinalizeRun,
     };
 
     (void) memset(context, 0, sizeof(test_context_t));
@@ -313,8 +313,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_ECB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ecb_test_vectors();
-            context->testCount = get_ecb_test_vector_count();
+            context->tests = (uint8_t *)TV_EcbTestVectorsGet();
+            context->testCount = TV_EcbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_ECB;
         }
         break;
@@ -322,8 +322,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_CTR:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ctr_test_vectors();
-            context->testCount = get_ctr_test_vector_count();
+            context->tests = (uint8_t *)TV_CtrTestVectorsGet();
+            context->testCount = TV_CtrTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CTR;
         }
         break;
@@ -331,8 +331,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_CBC:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_cbc_test_vectors();
-            context->testCount = get_cbc_test_vector_count();
+            context->tests = (uint8_t *)TV_CbcTestVectorsGet();
+            context->testCount = TV_CbcTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CBC;
         }
         break;
@@ -340,8 +340,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_CFB128:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_cfb128_test_vectors();
-            context->testCount = get_cfb128_test_vector_count();
+            context->tests = (uint8_t *)TV_Cfb128TestVectorsGet();
+            context->testCount = TV_Cfb128TestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CFB128;
         }
         break;
@@ -349,8 +349,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_OFB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ofb_test_vectors();
-            context->testCount = get_ofb_test_vector_count();
+            context->tests = (uint8_t *)TV_OfbTestVectorsGet();
+            context->testCount = TV_OfbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_OFB;
         }
         break;
@@ -358,8 +358,8 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
         case SYM_OPER_MODE_AES_XTS:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_xts_test_vectors();
-            context->testCount = get_xts_test_vector_count();
+            context->tests = (uint8_t *)TV_XtsTestVectorsGet();
+            context->testCount = TV_XtsTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_XTS;
         }
         break;
@@ -399,7 +399,7 @@ test_result_t sym_test_init(test_context_t *context, test_mode_t testMode, sym_o
     return result;
 }
 
-test_result_t sym_test_advance(test_context_t *context)
+test_result_t SYM_TestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
