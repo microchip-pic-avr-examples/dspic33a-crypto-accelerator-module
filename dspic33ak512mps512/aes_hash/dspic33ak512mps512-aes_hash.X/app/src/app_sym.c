@@ -54,7 +54,7 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID     (0x1)
+#define TEST_SESSION_ID     (0x1U)
 
 // Context for AES calculations.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
@@ -72,7 +72,8 @@ static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
  * @param length Length of the data.
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED on failure.
  */
-static test_result_t SYM_ResultCheck(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t SYM_ResultCheck(const uint8_t *expected,
+        const uint8_t *result, uint32_t length)
 {
     test_result_t retval = TEST_RESULT_SUCCESS;
 

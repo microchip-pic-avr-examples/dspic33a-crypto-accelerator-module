@@ -49,7 +49,7 @@ Microchip or any third party.
 #include "app/app_sha.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID     (0x1)
+#define TEST_SESSION_ID     (0x1U)
 
 // The SHA hash context.
 static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
@@ -67,7 +67,7 @@ static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
  */
 static uint32_t SHA_DigestLengthGet(crypto_Hash_Algo_E algorithm)
 {
-    uint32_t digestLength = 0;
+    uint32_t digestLength = 0U;
 
     switch (algorithm)
     {

@@ -50,7 +50,7 @@ Microchip or any third party.
 #include "app/app_mac.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID         (0x1)
+#define TEST_SESSION_ID         (0x1U)
 
 // Context for CMAC calculations.
 static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));

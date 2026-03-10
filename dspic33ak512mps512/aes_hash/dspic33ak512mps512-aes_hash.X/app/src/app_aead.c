@@ -53,7 +53,7 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID         (0x1)
+#define TEST_SESSION_ID         (0x1U)
 
 // Context for AES calculations.
 static st_Crypto_Aead_AesGcm_ctx aeadGcmCtx __attribute__((aligned(4)));
@@ -75,9 +75,11 @@ static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static test_result_t AEAD_EncryptionAndTagCheck(uint8_t *expected,
-        uint8_t *result, uint32_t length,
-        uint8_t *authTag, uint8_t *authTagResult,
+static test_result_t AEAD_EncryptionAndTagCheck(
+        const uint8_t *expected,
+        const uint8_t *result, uint32_t length,
+        const uint8_t *authTag,
+        const uint8_t *authTagResult,
         uint32_t authTagLength)
 {
     test_result_t dataRetval = TEST_RESULT_SUCCESS;
@@ -133,7 +135,9 @@ static test_result_t AEAD_EncryptionAndTagCheck(uint8_t *expected,
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */
-static test_result_t AEAD_DecryptionCheck(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t AEAD_DecryptionCheck(
+        const uint8_t *expected,
+        const uint8_t *result, uint32_t length)
 {
     test_result_t retval = TEST_RESULT_SUCCESS;
 

@@ -100,7 +100,7 @@ bool AESHASH_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *tempExpected = expected;
         const uint8_t *tempActual = actual;
 
-        for (unsigned int byteIndex = 0; byteIndex < size;
+        for (unsigned int byteIndex = 0U; byteIndex < size;
                 byteIndex++)
         {
             result |= tempExpected[byteIndex]
@@ -208,14 +208,13 @@ void AESHASH_LabelPrint(const char *label, const char *format, ...)
     va_end(args);
 }
 
-void AESHASH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
+void AESHASH_HexArrayPrint(const char *label,
+        const uint8_t *data, uint32_t size)
 {
     (void) printf("\r\n %-22s :", label);
 
     if (size > 0U)
     {
-        const uint8_t *ldata = data;
-
         for (uint32_t index = 0U; index < size; index++)
         {
             if (((index % 16U) == 0U) && (index != 0U))
@@ -223,7 +222,7 @@ void AESHASH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
                 (void) printf("\r\n%-25s", "");
             }
 
-            (void) printf(" 0x%02x", ldata[index]);
+            (void) printf(" 0x%02x", data[index]);
         }
     }
     else
@@ -748,10 +747,11 @@ void AESHASH_ConcurrentTestRun(void)
                 {
                     // Flip symmetric test mode and operations mode.
                     symTestMode = TEST_MODE_ENCRYPT;
-                    symOperMode++;
+                    symOperMode = (sym_oper_mode_t)
+                            ((int)symOperMode + 1);
                     if (symOperMode == SYM_OPER_MODE_COUNT)
                     {
-                        symOperMode = 0;
+                        symOperMode = SYM_OPER_MODE_AES_ECB;
                     }
                 }
 
@@ -770,10 +770,11 @@ void AESHASH_ConcurrentTestRun(void)
                 {
                     // Flip AEAD test mode and operations mode.
                     aeadTestMode = TEST_MODE_ENCRYPT;
-                    aeadOperMode++;
+                    aeadOperMode = (aead_oper_mode_t)
+                            ((int)aeadOperMode + 1);
                     if (aeadOperMode == AEAD_OPER_MODE_COUNT)
                     {
-                        aeadOperMode = 0;
+                        aeadOperMode = AEAD_OPER_MODE_AES_GCM;
                     }
                 }
 

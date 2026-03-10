@@ -173,7 +173,8 @@ void AESHASH_LabelPrint(const char *label, const char *format, ...);
  * @param data The array data to print.
  * @param size The length of the data to print.
  */
-void AESHASH_HexArrayPrint(const char *label, uint8_t *data, uint32_t size);
+void AESHASH_HexArrayPrint(const char *label,
+        const uint8_t *data, uint32_t size);
 
 /**
  * @brief Get a string representing the test mode.
