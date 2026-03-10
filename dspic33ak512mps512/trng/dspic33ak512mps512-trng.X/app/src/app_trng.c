@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app.c
+    app_trng.c
 
   Summary:
     This source file handles the running of the TRNG examples.
@@ -35,9 +35,9 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-* 
+*
 *  (Rule 21.6) Required: The standard library input/output functions shall not be used
-* 
+*
 *  Reasoning: This demo uses printf to print out information to a terminal.
 */
 #include <stdio.h>
@@ -45,32 +45,44 @@ Microchip or any third party.
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
 
-static inline void printHexArray(const char* label, uint8_t* Data, uint32_t size) 
+static void TRNG_HexArrayPrint(const char *label,
+        const uint8_t *data, uint32_t size)
 {
-    (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
-    const uint8_t *ldata = (uint8_t *) Data;
+    (void) printf(BLUE "\r\n "
+            "---------------------------------------------"
+            "------------------------------------------------"
+            RESET_COLOR);
     (void) printf("\r\n  %s   :  ", label);
-    for (uint32_t i = 0; i < size; i++) 
+    for (uint32_t byteIndex = 0U; byteIndex < size; byteIndex++)
     {
-        if (((i % 16U) == 0U) && (i != 0U)) 
+        if (((byteIndex % 16U) == 0U) && (byteIndex != 0U))
         {
             (void) printf("\r\n              ");
         }
-        (void) printf(" 0x%02X", ldata[i]);
+        (void) printf(" 0x%02X", data[byteIndex]);
     }
 }
 
-static void trngRun(uint8_t* randArray, uint32_t randLen)
+static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
 {
-    const char * caption = "Random";
-    
-    (void) printf(MAG"\r\n\r\n *********************************************************************************************"RESET_COLOR);
-    (void) printf(CYAN"\r\n *************************************** TRNG Size %lu ***************************************"RESET_COLOR, (unsigned long)randLen);
-    (void) printf(MAG"\r\n *********************************************************************************************"RESET_COLOR);
-    
-    (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randArray, randLen, NULL, 0, 1);
-    
-    printHexArray(caption, randArray, randLen);
+    const char *caption = "Random";
+
+    (void) printf(MAG "\r\n\r\n "
+            "*********************************************"
+            "************************************************"
+            RESET_COLOR);
+    (void) printf(CYAN "\r\n "
+            "*************************************** TRNG"
+            " Size %lu ***************************************"
+            RESET_COLOR, (unsigned long) randomLength);
+    (void) printf(MAG "\r\n "
+            "*********************************************"
+            "************************************************"
+            RESET_COLOR);
+
+    (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randomArray, randomLength, NULL, 0U, 1U);
+
+    TRNG_HexArrayPrint(caption, randomArray, randomLength);
 }
 
 // *****************************************************************************
@@ -79,14 +91,17 @@ static void trngRun(uint8_t* randArray, uint32_t randLen)
 // *****************************************************************************
 // *****************************************************************************
 
-void trngTest(void) 
+void TRNG_TestRun(void)
 {
-    uint8_t randArray1[192] = {0};
-    trngRun(randArray1, 192);
-    uint8_t randArray2[256] = {0};
-    trngRun(randArray2, 256);
-    uint8_t randArray3[384] = {0};
-    trngRun(randArray3, 384);
-    uint8_t randArray4[521] = {0};
-    trngRun(randArray4, 521);
+    uint8_t randomArray1[192] = {0U};
+    TRNG_Run(randomArray1, 192U);
+
+    uint8_t randomArray2[256] = {0U};
+    TRNG_Run(randomArray2, 256U);
+
+    uint8_t randomArray3[384] = {0U};
+    TRNG_Run(randomArray3, 384U);
+
+    uint8_t randomArray4[521] = {0U};
+    TRNG_Run(randomArray4, 521U);
 }
