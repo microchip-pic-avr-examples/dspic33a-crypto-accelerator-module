@@ -52,7 +52,7 @@ Microchip or any third party.
 #include "app/app_hmac.h"
 #include "app/app_gmac.h"
 
-uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+static uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
 {
     uint8_t result = 0;
 
@@ -87,11 +87,11 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
 }
 
 
-void printHexArray(const char* label, void* data, uint32_t size)
+void printHexArray(const char* label, uint8_t* data, uint32_t size)
 {
     if (size > 0U)
     {
-        const uint8_t *ldata = (uint8_t *) data;
+        const uint8_t *ldata = data;
 
         (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
         (void) printf("\r\n %s  : ", label);
@@ -112,7 +112,7 @@ void printHexArray(const char* label, void* data, uint32_t size)
 void printCmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, dataLen, additionalInfo);
+    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
@@ -134,7 +134,7 @@ void printCmacCryptoError(unsigned long keyBitLen, const char* testType, const c
 void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, const char *shaType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s %s SHA-%s TEST - KEY: %lu BITS, DATA: %lu BYTES%s", wrapperType, testType, shaType, keyBitLen, dataLen, additionalInfo);
+    (void) sprintf(header, " %s %s SHA-%s TEST - KEY: %lu BITS, DATA: %lu BYTES%s", wrapperType, testType, shaType, keyBitLen, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 
@@ -156,7 +156,7 @@ void printHmacCryptoError(const char* testType, const char* description, int sta
 void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, dataLen, additionalInfo);
+    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
     int headerLen = strlen(header);
     int padding = (94 - headerLen) / 2;
 

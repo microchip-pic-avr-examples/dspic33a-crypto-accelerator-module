@@ -55,18 +55,12 @@ Microchip or any third party.
 #include "app/app_hmac.h"
 
 #define TEST_SESSION_ID     0x1
+
+#ifndef RUN_ALL_VECTORS
 #define MAC_TEST_VECTOR_0   0
+#endif
 
-// Context for HMAC calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Mac_Hmac_ctx macCtx __attribute__((aligned(4)));
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR hmac_1_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_224_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_256_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_384_test_vectors[NUMBER_OF_HMAC_VECTORS];
-extern TEST_VECTOR hmac_512_test_vectors[NUMBER_OF_HMAC_VECTORS];
+static const char* hmacTestWrapper = "MAC";
 
 static const char *mac_hmac_get_algorithm_string(crypto_Hash_Algo_E hashAlgorithm)
 {
@@ -108,9 +102,9 @@ static void mac_hmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printHmacTestHeader(testWrapper, keyBitLen, "HMAC (DIRECT)",
+    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (DIRECT)",
                         mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
@@ -133,15 +127,17 @@ static void mac_hmac_direct_test(TEST_VECTOR* testVector)
 
 static void mac_hmac_step_test(TEST_VECTOR* testVector)
 {
+    // Context for HMAC calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Mac_Hmac_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedHmac[CRYPTO_HASH_MAX_DIGEST_SIZE] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
-
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", HMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printHmacTestHeader(testWrapper, keyBitLen, "HMAC (STEPWISE)",
+    printHmacTestHeader(hmacTestWrapper, keyBitLen, "HMAC (STEPWISE)",
             mac_hmac_get_algorithm_string(testVector->hashAlgorithm), testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);

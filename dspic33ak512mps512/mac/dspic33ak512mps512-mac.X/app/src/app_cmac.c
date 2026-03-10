@@ -54,16 +54,17 @@ Microchip or any third party.
 #include "app/app_cmac.h"
 
 #define TEST_SESSION_ID     0x1
+
+/*
+*
+*  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
+*
+*  Reasoning: This macro is in sections that are not defined by default, but are needed.
+*/
+/* cppcheck-suppress misra-c2012-2.5 */
 #define MAC_TEST_VECTOR_3   3
 
-// Context for CMAC calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR cmac_128_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_192_test_vectors[NUMBER_OF_CMAC_VECTORS];
-extern TEST_VECTOR cmac_256_test_vectors[NUMBER_OF_CMAC_VECTORS];
+static const char* cmacTestWrapper = "MAC";
 
 static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 {
@@ -72,9 +73,9 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(cmacTestWrapper, keyBitLen, "CMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
@@ -95,15 +96,17 @@ static void mac_cmac_direct_test(TEST_VECTOR* testVector)
 
 static void mac_cmac_step_test(TEST_VECTOR* testVector)
 {
+    // Context for CMAC calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedCmac[16] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
-
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", CMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printCmacTestHeader(testWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
+    printCmacTestHeader(cmacTestWrapper, keyBitLen, "CMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
