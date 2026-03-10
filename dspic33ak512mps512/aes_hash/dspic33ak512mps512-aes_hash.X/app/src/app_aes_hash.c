@@ -761,8 +761,8 @@ void AESHASH_ConcurrentTestRun(void)
                 {
                     // Flip symmetric test mode and operations mode.
                     symTestMode = TEST_MODE_ENCRYPT;
-                    symOperMode = (sym_oper_mode_t)
-                            ((int)symOperMode + 1);
+                    int nextSymMode = (int)symOperMode + 1;
+                    symOperMode = (sym_oper_mode_t)nextSymMode;
                     if (symOperMode == SYM_OPER_MODE_COUNT)
                     {
                         symOperMode = SYM_OPER_MODE_AES_ECB;
@@ -784,8 +784,8 @@ void AESHASH_ConcurrentTestRun(void)
                 {
                     // Flip AEAD test mode and operations mode.
                     aeadTestMode = TEST_MODE_ENCRYPT;
-                    aeadOperMode = (aead_oper_mode_t)
-                            ((int)aeadOperMode + 1);
+                    int nextAeadMode = (int)aeadOperMode + 1;
+                    aeadOperMode = (aead_oper_mode_t)nextAeadMode;
                     if (aeadOperMode == AEAD_OPER_MODE_COUNT)
                     {
                         aeadOperMode = AEAD_OPER_MODE_AES_GCM;

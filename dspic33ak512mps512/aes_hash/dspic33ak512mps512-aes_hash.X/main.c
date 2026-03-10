@@ -43,8 +43,6 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdbool.h>
-
 /* cppcheck-suppress misra-c2012-21.6
 *
 *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
@@ -52,7 +50,7 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdint.h>
+#include <stdbool.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes_hash.h"
 
