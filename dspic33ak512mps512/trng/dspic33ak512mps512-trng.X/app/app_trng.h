@@ -5,10 +5,10 @@
     Microchip Technology Inc.
 
   File Name:
-    app.h
+    app_trng.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for the TRNG application.
 *******************************************************************************/
 
 /*
@@ -35,9 +35,9 @@ Microchip or any third party.
 */
 
 #ifndef APP_TRNG_H
-#define	APP_TRNG_H
+#define APP_TRNG_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -51,18 +51,18 @@ extern "C" {
 #define BLUE "\033""[1;34m"
 #define MAG "\033""[1;35m"
 #define CYAN "\033""[1;36m"
- 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
 
-void trngTest(void);
+void TRNG_TestRun(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_TRNG_H */
+#endif /* APP_TRNG_H */
 
