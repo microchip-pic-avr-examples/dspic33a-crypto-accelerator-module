@@ -32,10 +32,10 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-#define SHA224_DIGEST_LEN_BYTES 28
-#define NUMBER_OF_SHA224_VECTORS 8
+#define SHA224_DIGEST_LEN_BYTES    (28U)
+#define NUMBER_OF_SHA224_VECTORS   (8U)
 
-extern TEST_VECTOR sha_224_test_vectors[NUMBER_OF_SHA224_VECTORS];
+extern test_vector_t sha224TestVectors[NUMBER_OF_SHA224_VECTORS];
 
 #ifdef __cplusplus
 }

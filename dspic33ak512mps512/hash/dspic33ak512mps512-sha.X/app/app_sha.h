@@ -49,12 +49,12 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-#define RESET_COLOR "\x1B""[0m"
-#define RED "\x1B""[1;31m"
-#define GREEN "\x1B""[1;32m"
-#define BLUE "\x1B""[1;34m"
-#define MAG "\x1B""[1;35m"
-#define CYAN "\x1B""[1;36m"
+#define RESET_COLOR  "\x1B""[0m"
+#define RED          "\x1B""[1;31m"
+#define GREEN        "\x1B""[1;32m"
+#define BLUE         "\x1B""[1;34m"
+#define MAG          "\x1B""[1;35m"
+#define CYAN         "\x1B""[1;36m"
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
 //#define RUN_ALL_VECTORS
@@ -65,15 +65,15 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void sha_1_test(void);
+void SHA_Sha1TestRun(void);
 
-void sha_224_test(void);
+void SHA_Sha224TestRun(void);
 
-void sha_256_test(void);
+void SHA_Sha256TestRun(void);
 
-void sha_384_test(void);
+void SHA_Sha384TestRun(void);
 
-void sha_512_test(void);
+void SHA_Sha512TestRun(void);
 
 #ifdef __cplusplus
 }

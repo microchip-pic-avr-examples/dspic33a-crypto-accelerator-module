@@ -34,10 +34,10 @@ extern "C" {
 
 typedef struct
 {
-    uint8_t* inputData;
+    uint8_t *inputData;
     uint32_t inputDataLen;
-    uint8_t* expectedDigest;
-} TEST_VECTOR;
+    uint8_t *expectedDigest;
+} test_vector_t;
 
 #ifdef __cplusplus
 }

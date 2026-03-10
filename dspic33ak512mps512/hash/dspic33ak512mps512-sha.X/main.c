@@ -72,11 +72,11 @@ int main(void)
 
     (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
 
-    sha_1_test();
-    sha_224_test();
-    sha_256_test();
-    sha_384_test();
-    sha_512_test();
+    SHA_Sha1TestRun();
+    SHA_Sha224TestRun();
+    SHA_Sha256TestRun();
+    SHA_Sha384TestRun();
+    SHA_Sha512TestRun();
 
     (void) printf("\n\n\n\r\n ");
 
