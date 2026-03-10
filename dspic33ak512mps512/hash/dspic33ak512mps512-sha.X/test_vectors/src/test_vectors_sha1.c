@@ -39,7 +39,7 @@ static uint8_t sha1Digest0Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector0Bytes =
 {
     .inputData = NULL,
-    .inputDataLen = 0U,
+    .inputDataLength = 0U,
     .expectedDigest = sha1Digest0Bytes
 };
 
@@ -58,7 +58,7 @@ static uint8_t sha1Digest35Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector35Bytes =
 {
     .inputData = sha1Input35Bytes,
-    .inputDataLen = 35U,
+    .inputDataLength = 35U,
     .expectedDigest = sha1Digest35Bytes
 };
 
@@ -77,7 +77,7 @@ static uint8_t sha1Digest41Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector41Bytes =
 {
     .inputData = sha1Input41Bytes,
-    .inputDataLen = 41U,
+    .inputDataLength = 41U,
     .expectedDigest = sha1Digest41Bytes
 };
 
@@ -96,7 +96,7 @@ static uint8_t sha1Digest48Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector48Bytes =
 {
     .inputData = sha1Input48Bytes,
-    .inputDataLen = 48U,
+    .inputDataLength = 48U,
     .expectedDigest = sha1Digest48Bytes
 };
 
@@ -116,7 +116,7 @@ static uint8_t sha1Digest64Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector64Bytes =
 {
     .inputData = sha1Input64Bytes,
-    .inputDataLen = 64U,
+    .inputDataLength = 64U,
     .expectedDigest = sha1Digest64Bytes
 };
 
@@ -141,7 +141,7 @@ static uint8_t sha1Digest128Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector128Bytes =
 {
     .inputData = sha1Input128Bytes,
-    .inputDataLen = 128U,
+    .inputDataLength = 128U,
     .expectedDigest = sha1Digest128Bytes
 };
 
@@ -189,7 +189,7 @@ static uint8_t sha1Digest512Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector512Bytes =
 {
     .inputData = sha1Input512Bytes,
-    .inputDataLen = 512U,
+    .inputDataLength = 512U,
     .expectedDigest = sha1Digest512Bytes
 };
 
@@ -258,7 +258,7 @@ static uint8_t sha1Digest835Bytes[SHA1_DIGEST_LEN_BYTES] =
 static const test_vector_t sha1Vector835Bytes =
 {
     .inputData = sha1Input835Bytes,
-    .inputDataLen = 835U,
+    .inputDataLength = 835U,
     .expectedDigest = sha1Digest835Bytes
 };
 

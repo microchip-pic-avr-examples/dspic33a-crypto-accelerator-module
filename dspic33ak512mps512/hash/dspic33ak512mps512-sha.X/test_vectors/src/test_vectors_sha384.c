@@ -40,7 +40,7 @@ static uint8_t sha384Digest0Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector0Bytes =
 {
     .inputData = NULL,
-    .inputDataLen = 0U,
+    .inputDataLength = 0U,
     .expectedDigest = sha384Digest0Bytes
 };
 
@@ -60,7 +60,7 @@ static uint8_t sha384Digest35Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector35Bytes =
 {
     .inputData = sha384Input35Bytes,
-    .inputDataLen = 35U,
+    .inputDataLength = 35U,
     .expectedDigest = sha384Digest35Bytes
 };
 
@@ -80,7 +80,7 @@ static uint8_t sha384Digest41Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector41Bytes =
 {
     .inputData = sha384Input41Bytes,
-    .inputDataLen = 41U,
+    .inputDataLength = 41U,
     .expectedDigest = sha384Digest41Bytes
 };
 
@@ -100,7 +100,7 @@ static uint8_t sha384Digest48Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector48Bytes =
 {
     .inputData = sha384Input48Bytes,
-    .inputDataLen = 48U,
+    .inputDataLength = 48U,
     .expectedDigest = sha384Digest48Bytes
 };
 
@@ -121,7 +121,7 @@ static uint8_t sha384Digest64Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector64Bytes =
 {
     .inputData = sha384Input64Bytes,
-    .inputDataLen = 64U,
+    .inputDataLength = 64U,
     .expectedDigest = sha384Digest64Bytes
 };
 
@@ -146,7 +146,7 @@ static uint8_t sha384Digest128Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector128Bytes =
 {
     .inputData = sha384Input128Bytes,
-    .inputDataLen = 128U,
+    .inputDataLength = 128U,
     .expectedDigest = sha384Digest128Bytes
 };
 
@@ -195,7 +195,7 @@ static uint8_t sha384Digest512Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector512Bytes =
 {
     .inputData = sha384Input512Bytes,
-    .inputDataLen = 512U,
+    .inputDataLength = 512U,
     .expectedDigest = sha384Digest512Bytes
 };
 
@@ -267,7 +267,7 @@ static uint8_t sha384Digest869Bytes[SHA384_DIGEST_LEN_BYTES] =
 static const test_vector_t sha384Vector869Bytes =
 {
     .inputData = sha384Input869Bytes,
-    .inputDataLen = 869U,
+    .inputDataLength = 869U,
     .expectedDigest = sha384Digest869Bytes
 };
 

@@ -41,7 +41,7 @@ static uint8_t sha512Digest0Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector0Bytes =
 {
     .inputData = NULL,
-    .inputDataLen = 0U,
+    .inputDataLength = 0U,
     .expectedDigest = sha512Digest0Bytes
 };
 
@@ -62,7 +62,7 @@ static uint8_t sha512Digest35Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector35Bytes =
 {
     .inputData = sha512Input35Bytes,
-    .inputDataLen = 35U,
+    .inputDataLength = 35U,
     .expectedDigest = sha512Digest35Bytes
 };
 
@@ -83,7 +83,7 @@ static uint8_t sha512Digest41Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector41Bytes =
 {
     .inputData = sha512Input41Bytes,
-    .inputDataLen = 41U,
+    .inputDataLength = 41U,
     .expectedDigest = sha512Digest41Bytes
 };
 
@@ -104,7 +104,7 @@ static uint8_t sha512Digest48Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector48Bytes =
 {
     .inputData = sha512Input48Bytes,
-    .inputDataLen = 48U,
+    .inputDataLength = 48U,
     .expectedDigest = sha512Digest48Bytes
 };
 
@@ -126,7 +126,7 @@ static uint8_t sha512Digest64Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector64Bytes =
 {
     .inputData = sha512Input64Bytes,
-    .inputDataLen = 64U,
+    .inputDataLength = 64U,
     .expectedDigest = sha512Digest64Bytes
 };
 
@@ -152,7 +152,7 @@ static uint8_t sha512Digest128Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector128Bytes =
 {
     .inputData = sha512Input128Bytes,
-    .inputDataLen = 128U,
+    .inputDataLength = 128U,
     .expectedDigest = sha512Digest128Bytes
 };
 
@@ -202,7 +202,7 @@ static uint8_t sha512Digest512Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector512Bytes =
 {
     .inputData = sha512Input512Bytes,
-    .inputDataLen = 512U,
+    .inputDataLength = 512U,
     .expectedDigest = sha512Digest512Bytes
 };
 
@@ -273,7 +273,7 @@ static uint8_t sha512Digest840Bytes[SHA512_DIGEST_LEN_BYTES] =
 static const test_vector_t sha512Vector840Bytes =
 {
     .inputData = sha512Input840Bytes,
-    .inputDataLen = 840U,
+    .inputDataLength = 840U,
     .expectedDigest = sha512Digest840Bytes
 };
 
