@@ -5,10 +5,11 @@
     Microchip Technology Inc.
 
   File Name:
-    app.h
+    app_sha.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for SHA hash
+    algorithms in the application.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN

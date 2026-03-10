@@ -8,7 +8,8 @@
     main.c
 
   Summary:
-    This source file starts the application to demonstrate AES encryption.
+    This source file starts the application to demonstrate AES and hash
+    operations.
  *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
