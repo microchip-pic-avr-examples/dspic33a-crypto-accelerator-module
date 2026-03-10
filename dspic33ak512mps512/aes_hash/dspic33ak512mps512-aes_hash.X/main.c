@@ -42,6 +42,8 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
+#include <stdbool.h>
+
 /* cppcheck-suppress misra-c2012-21.6
 *
 *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
@@ -108,7 +110,7 @@ int main(void)
     AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n");
 
-    while (1)
+    while (true)
     {
 
     }
