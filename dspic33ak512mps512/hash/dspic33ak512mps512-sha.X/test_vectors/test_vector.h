@@ -26,22 +26,21 @@ Microchip or any third party.
 #include <stdint.h>
 
 #ifndef TEST_VECTOR_H
-#define	TEST_VECTOR_H
+#define TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct 
+typedef struct
 {
     uint8_t* inputData;
     uint32_t inputDataLen;
     uint8_t* expectedDigest;
 } TEST_VECTOR;
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTOR_H */
-
+#endif /* TEST_VECTOR_H */

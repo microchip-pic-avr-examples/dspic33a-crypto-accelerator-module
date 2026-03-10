@@ -37,9 +37,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SHA_H
-#define	APP_SHA_H
+#define APP_SHA_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -58,7 +58,7 @@ extern "C" {
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
 //#define RUN_ALL_VECTORS
-    
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
@@ -66,14 +66,17 @@ extern "C" {
 // *****************************************************************************
 
 void sha_1_test(void);
+
 void sha_224_test(void);
+
 void sha_256_test(void);
+
 void sha_384_test(void);
+
 void sha_512_test(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SHA_H */
-
+#endif /* APP_SHA_H */

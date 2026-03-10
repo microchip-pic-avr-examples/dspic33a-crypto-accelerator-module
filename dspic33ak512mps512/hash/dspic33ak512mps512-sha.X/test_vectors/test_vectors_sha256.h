@@ -26,20 +26,19 @@ Microchip or any third party.
 #include "test_vector.h"
 
 #ifndef TEST_VECTORS_SHA256_H
-#define	TEST_VECTORS_SHA256_H
+#define TEST_VECTORS_SHA256_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 #define SHA256_DIGEST_LEN_BYTES 32
 #define NUMBER_OF_SHA256_VECTORS 8
 
 extern TEST_VECTOR sha_256_test_vectors[NUMBER_OF_SHA256_VECTORS];
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA256_H */
-
+#endif /* TEST_VECTORS_SHA256_H */
