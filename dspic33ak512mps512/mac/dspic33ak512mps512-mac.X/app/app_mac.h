@@ -8,12 +8,12 @@
     app_mac.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for MAC algorithms in the application.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -37,9 +37,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_MAC_H
-#define	APP_MAC_H
+#define APP_MAC_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -78,36 +78,48 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size);
+void MAC_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size);
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size);
+void MAC_HexArrayPrint(const char *label, uint8_t *data, uint32_t size);
 
-void printCmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* dataInfo);
+void MAC_CmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *dataInfo);
 
-void printCmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status);
+void MAC_CmacCryptoErrorPrint(unsigned long keyBitLength,
+        const char *testType, const char *description,
+        int status);
 
-void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, const char *shaType, uint32_t dataLen, const char* additionalInfo);
+void MAC_HmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        const char *shaType, uint32_t dataLength,
+        const char *additionalInfo);
 
-void printHmacCryptoError(const char* testType, const char* description, int status);
+void MAC_HmacCryptoErrorPrint(const char *testType,
+        const char *description, int status);
 
-void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* dataInfo);
+void MAC_GmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *dataInfo);
 
-void printGmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status);
+void MAC_GmacCryptoErrorPrint(unsigned long keyBitLength,
+        const char *testType, const char *description,
+        int status);
 
 #ifdef RUN_MAC_CMAC_TEST
-void mac_test_cmac(void);
+void MAC_CmacTestRun(void);
 #endif
 
 #ifdef RUN_MAC_HMAC_TEST
-void mac_test_hmac(void);
+void MAC_HmacTestRun(void);
 #endif
 
 #ifdef RUN_MAC_GMAC_TEST
-void mac_test_gmac(void);
+void MAC_GmacTestRun(void);
 #endif
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_MAC_H */
+#endif /* APP_MAC_H */

@@ -5,16 +5,16 @@
     Microchip Technology Inc.
 
   File Name:
-    app_mac.h
+    app_cmac.h
 
   Summary:
     This header file provides prototypes and definitions for AES
-    MAC algorithms for the application.
+    CMAC algorithms for the application.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -38,17 +38,16 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_CMAC_H
-#define	APP_CMAC_H
+#define APP_CMAC_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-void mac_cmac_test(void);
+void CMAC_TestRun(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_CMAC_H */
-
+#endif /* APP_CMAC_H */
