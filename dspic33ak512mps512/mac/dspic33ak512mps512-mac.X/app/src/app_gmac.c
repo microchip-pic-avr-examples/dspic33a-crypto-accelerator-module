@@ -53,7 +53,7 @@ Microchip or any third party.
 #include "test_vectors/mac_test_vector.h"
 #include "app/app_gmac.h"
 
-#define TEST_SESSION_ID     0x1U
+#define TEST_SESSION_ID     (0x1U)
 
 /*
 *
@@ -62,7 +62,7 @@ Microchip or any third party.
 *  Reasoning: This macro is in sections that are not defined by default, but are needed.
 */
 /* cppcheck-suppress misra-c2012-2.5 */
-#define MAC_TEST_VECTOR_0   0
+#define MAC_TEST_VECTOR_0   (0)
 
 static const char *gmacTestWrapper = "MAC";
 
