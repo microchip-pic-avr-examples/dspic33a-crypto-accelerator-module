@@ -146,7 +146,8 @@ typedef struct
 
 static const char *AESHASH_TestErrorGet(test_result_t result)
 {
-    static test_mode_error_string_t testModeErrorStrings[] = {
+    static test_mode_error_string_t testModeErrorStrings[] =
+    {
         {TEST_RESULT_SUCCESS, "SUCCESS"},
         {TEST_RESULT_INIT_FAILED, "INITIALIZE FAILED"},
         {TEST_RESULT_HASH_FAILED, "HASH FAILED"},
@@ -271,7 +272,8 @@ static void AESHASH_EcbTestRun(void)
 {
     test_result_t result;
     sym_test_context_t ecbTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &ecbTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-ECB mode test\r\n" RESET_COLOR);
@@ -305,7 +307,8 @@ static void AESHASH_CtrTestRun(void)
 {
     test_result_t result;
     sym_test_context_t ctrTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &ctrTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CTR mode test\r\n" RESET_COLOR);
@@ -339,7 +342,8 @@ static void AESHASH_CbcTestRun(void)
 {
     test_result_t result;
     sym_test_context_t cbcTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &cbcTestContext
     };
     (void) printf(BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" RESET_COLOR);
@@ -373,7 +377,8 @@ static void AESHASH_Cfb128TestRun(void)
 {
     test_result_t result;
     sym_test_context_t cfb128TestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &cfb128TestContext
     };
 
@@ -408,7 +413,8 @@ static void AESHASH_OfbTestRun(void)
 {
     test_result_t result;
     sym_test_context_t ofbTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &ofbTestContext
     };
 
@@ -443,7 +449,8 @@ static void AESHASH_XtsTestRun(void)
 {
     test_result_t result;
     sym_test_context_t xtsTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &xtsTestContext
     };
 
@@ -512,7 +519,8 @@ void AESHASH_MacTestRun(void)
 #ifdef RUN_MAC_CMAC_TEST
     test_result_t result;
     aes_cmac_test_context_t macTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &macTestContext
     };
 
@@ -544,7 +552,8 @@ void AESHASH_AeadTestRun(void)
 #if defined(RUN_AEAD_GCM_TEST) || defined(RUN_AEAD_CCM_TEST)
     test_result_t result;
     aead_test_context_t aeadTestContext = {0};
-    test_context_t context = {
+    test_context_t context =
+    {
         .testContext = (void *) &aeadTestContext
     };
 #endif
@@ -614,7 +623,8 @@ void AESHASH_HashTestRun(void)
     test_result_t result;
     test_context_t context;
 
-    uint32_t blockSizes[] = {
+    uint32_t blockSizes[] =
+    {
         BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32,
         BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8,
         BLOCK_SIZE_7
@@ -665,17 +675,20 @@ void AESHASH_ConcurrentTestRun(void)
 {
 
     sym_test_context_t symTestContext = {0};
-    test_context_t symContext = {
+    test_context_t symContext =
+    {
         .testContext = (void *) &symTestContext
     };
 
     aead_test_context_t aeadTestContext = {0};
-    test_context_t aeadContext = {
+    test_context_t aeadContext =
+    {
         .testContext = (void *) &aeadTestContext
     };
 
     aes_cmac_test_context_t macTestContext = {0};
-    test_context_t macContext = {
+    test_context_t macContext =
+    {
         .testContext = (void *) &macTestContext
     };
 
@@ -688,7 +701,8 @@ void AESHASH_ConcurrentTestRun(void)
     aead_oper_mode_t aeadOperMode = AEAD_OPER_MODE_AES_GCM;
 
     // Hash block sizes for iterative testing of arbitrary input sizes.
-    const uint32_t blockSizes[] = {
+    const uint32_t blockSizes[] =
+    {
         BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32,
         BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8,
         BLOCK_SIZE_7
