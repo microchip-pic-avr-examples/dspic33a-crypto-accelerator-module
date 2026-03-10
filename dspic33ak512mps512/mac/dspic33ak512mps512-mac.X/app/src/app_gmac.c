@@ -55,15 +55,17 @@ Microchip or any third party.
 #include "app/app_gmac.h"
 
 #define TEST_SESSION_ID     0x1
+
+/*
+*
+*  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
+*
+*  Reasoning: This macro is in sections that are not defined by default, but are needed.
+*/
+/* cppcheck-suppress misra-c2012-2.5 */
 #define MAC_TEST_VECTOR_0   0
 
-// Context for HMAC calculations when running individual steps.
-// This is too large to put on the stack.
-static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
-static const char* testWrapper = "MAC";
-
-extern TEST_VECTOR gmac_test_vectors[NUMBER_OF_GMAC_VECTORS];
-
+static const char* gmacTestWrapper = "MAC";
 
 static void mac_gmac_direct_test(TEST_VECTOR* testVector)
 {
@@ -72,9 +74,9 @@ static void mac_gmac_direct_test(TEST_VECTOR* testVector)
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printGmacTestHeader(testWrapper, keyBitLen, "GMAC (DIRECT)", testVector->inputDataLen, dataInfo);
+    printGmacTestHeader(gmacTestWrapper, keyBitLen, "GMAC (DIRECT)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
@@ -99,15 +101,17 @@ static void mac_gmac_direct_test(TEST_VECTOR* testVector)
 
 static void mac_gmac_step_test(TEST_VECTOR* testVector)
 {
+    // Context for HMAC calculations when running individual steps.
+    // This is non-reentrant as it is too large to put on the stack.
+    static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedGmac[CRYPTO_AESKEYSIZE_256] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     unsigned long keyBitLen = testVector->inputKeyLen * 8U;
 
-
     char dataInfo[20];
-    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", testVector->expectedMacLen);
+    (void)sprintf(dataInfo, ", GMAC: %lu BYTES", (unsigned long)testVector->expectedMacLen);
 
-    printGmacTestHeader(testWrapper, keyBitLen, "GMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
+    printGmacTestHeader(gmacTestWrapper, keyBitLen, "GMAC (STEPWISE)", testVector->inputDataLen, dataInfo);
 
     printHexArray("Key                  ", testVector->inputKey, testVector->inputKeyLen);
     printHexArray("Data                 ", testVector->inputData, testVector->inputDataLen);
