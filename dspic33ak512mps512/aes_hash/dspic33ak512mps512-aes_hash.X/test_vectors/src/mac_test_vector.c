@@ -153,7 +153,7 @@ mac_test_vector_t * TV_CmacTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_CmacTestVectorCountGet(); index++)
     {
-        cmacTestVectors[i].id = (index + 1UL);
+        cmacTestVectors[index].id = (index + 1UL);
     }
 
     return cmacTestVectors;

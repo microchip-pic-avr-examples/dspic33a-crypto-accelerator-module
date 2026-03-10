@@ -289,7 +289,7 @@ aead_test_vector_t * TV_GcmTestVectorsGet(void)
     // Set test IDs.
     for (uint32_t index = 0U; index < TV_GcmTestVectorCountGet(); index++)
     {
-        aesGcmTestVectors[i].id = (index + 1UL);
+        aesGcmTestVectors[index].id = (index + 1UL);
     }
 
     return aesGcmTestVectors;
