@@ -54,7 +54,6 @@ Microchip or any third party.
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes_hash.h"
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -108,10 +107,10 @@ int main(void)
     printSeparator(WHITE, '_');
     (void) printf("\r\n");
 
-    while(1)
+    while (1)
     {
 
-    };
+    }
 
     return EXIT_SUCCESS;
 }

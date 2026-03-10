@@ -24,9 +24,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef AEAD_TEST_VECTOR_H
-#define	AEAD_TEST_VECTOR_H
+#define AEAD_TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -64,15 +64,14 @@ typedef struct AEAD_TEST_VECTOR {
     uint32_t    authTagLength;
 } AEAD_TEST_VECTOR;
 
-
 AEAD_TEST_VECTOR * get_gcm_test_vectors(void);
 uint32_t get_gcm_test_vector_count(void);
 
 AEAD_TEST_VECTOR * get_ccm_test_vectors(void);
 uint32_t get_ccm_test_vector_count(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* AEAD_TEST_VECTOR_H */
+#endif /* AEAD_TEST_VECTOR_H */

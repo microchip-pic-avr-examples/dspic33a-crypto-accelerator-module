@@ -1,4 +1,3 @@
-
 /*******************************************************************************
   Application Source File
 
@@ -63,7 +62,7 @@ static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
  */
 static const char *getMacTestOpMode(MAC_OPER_MODE opMode)
 {
-    const char* opModeStr = "???";
+    const char *opModeStr = "???";
 
     switch(opMode)
     {
@@ -77,7 +76,6 @@ static const char *getMacTestOpMode(MAC_OPER_MODE opMode)
 
     return opModeStr;
 }
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -296,7 +294,6 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
 
     return result;
 }
-
 
 TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
 {

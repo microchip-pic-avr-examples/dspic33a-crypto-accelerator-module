@@ -54,7 +54,6 @@ Microchip or any third party.
 // The SHA hash context.
 static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: HASH Test Functions
@@ -92,7 +91,7 @@ static uint32_t getDigestLength(crypto_Hash_Algo_E algorithm)
  */
 static const char *getTestOpMode(crypto_Hash_Algo_E algorithm)
 {
-    const char* opModeStr = "???";
+    const char *opModeStr = "???";
 
     switch(algorithm)
     {
@@ -106,7 +105,6 @@ static const char *getTestOpMode(crypto_Hash_Algo_E algorithm)
 
     return opModeStr;
 }
-
 
 /**
  * @brief The MAC CMAC test init state function.
@@ -178,7 +176,6 @@ static TEST_RESULT sha_hash_test_hash(void *context)
 
     return result;
 }
-
 
 /**
  * @brief The MAC CMAC test finalize/compare state function.
@@ -317,7 +314,6 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
 
     return result;
 }
-
 
 TEST_RESULT hash_test_advance(TEST_CONTEXT *context)
 {

@@ -38,9 +38,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_AEAD_H
-#define	APP_AEAD_H
+#define APP_AEAD_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -112,9 +112,9 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE mode, AEAD_OPER_MODE
  */
 TEST_RESULT aead_test_advance(TEST_CONTEXT *context);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_AEAD_H */
+#endif /* APP_AEAD_H */
 

@@ -24,9 +24,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef MAC_TEST_VECTOR_H
-#define	MAC_TEST_VECTOR_H
+#define MAC_TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -49,8 +49,8 @@ typedef struct MAC_TEST_VECTOR
 MAC_TEST_VECTOR * get_cmac_test_vectors(void);
 uint32_t get_cmac_test_vector_count(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* MAC_TEST_VECTOR_H */
+#endif /* MAC_TEST_VECTOR_H */

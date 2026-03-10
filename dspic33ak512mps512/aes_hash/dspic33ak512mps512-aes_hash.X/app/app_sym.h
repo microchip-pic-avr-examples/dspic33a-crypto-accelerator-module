@@ -38,9 +38,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SYM_H
-#define	APP_SYM_H
+#define APP_SYM_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -121,10 +121,9 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
  */
 TEST_RESULT sym_test_advance(TEST_CONTEXT *context);
 
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SYM_H */
+#endif /* APP_SYM_H */
 

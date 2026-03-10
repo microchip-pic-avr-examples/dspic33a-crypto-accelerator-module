@@ -23,10 +23,10 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef TEST_VECTORS_SHA_H
-#define	TEST_VECTORS_SHA_H
+#ifndef TEST_VECTORS_SHA512_H
+#define TEST_VECTORS_SHA512_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -50,9 +50,9 @@ typedef struct HASH_TEST_VECTOR
 HASH_TEST_VECTOR * get_sha_512_test_vectors(void);
 uint32_t get_sha_512_test_vector_count(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA512_H */
+#endif /* TEST_VECTORS_SHA512_H */
 

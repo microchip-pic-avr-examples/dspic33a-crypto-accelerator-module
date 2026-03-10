@@ -37,16 +37,15 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_AES_HASH_H
-#define	APP_AES_HASH_H
+#define APP_AES_HASH_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -134,7 +133,6 @@ typedef struct TEST_CONTEXT
 
 } TEST_CONTEXT;
 
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
@@ -150,7 +148,6 @@ typedef struct TEST_CONTEXT
  */
 bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
 
-
 /**
  * @brief Print a separator line.
  * @param color The color string to print first.
@@ -164,7 +161,7 @@ void printSeparator(const char *color, char sep);
  * @param format POinter to format string.
  * @param <variable arguments>
  */
-void printWithLabel(const char* label, const char* format, ...);
+void printWithLabel(const char *label, const char *format, ...);
 
 /**
  * @brief Print an array to the console as hex characters.
@@ -172,8 +169,7 @@ void printWithLabel(const char* label, const char* format, ...);
  * @param data The array data to print.
  * @param size The length of the data to print.
  */
-void printHexArray(const char* label, uint8_t* data, uint32_t size);
-
+void printHexArray(const char *label, uint8_t *data, uint32_t size);
 
 /**
  * @brief Get a string representing the test mode.
@@ -191,7 +187,6 @@ const char *getTestMode(TEST_MODE testMode);
  * @param printSize If TRUE, print the size.
  */
 void printOperationStep(const char *step, const char *op, TEST_MODE testMode, uint32_t size, bool printSize);
-
 
 /**
  * @brief Print out success or error.
@@ -225,9 +220,8 @@ void test_hash(void);
  */
 void test_concurrent(void);
 
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_AES_HASH_H */
+#endif /* APP_AES_HASH_H */

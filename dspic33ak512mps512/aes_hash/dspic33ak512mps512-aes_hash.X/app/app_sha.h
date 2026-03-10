@@ -37,9 +37,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SHA_H
-#define	APP_SHA_H
+#define APP_SHA_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -102,9 +102,9 @@ TEST_RESULT hash_test_init(TEST_CONTEXT *context, TEST_MODE mode, crypto_Hash_Al
  */
 TEST_RESULT hash_test_advance(TEST_CONTEXT *context);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SHA_H */
+#endif /* APP_SHA_H */
 

@@ -26,9 +26,9 @@ Microchip or any third party.
 #include "../test_vectors_sha512.h"
 
 /*
- The following test vectors were pulled from NIST's Secure Hash Standard (SHS) FIPS 180-4 validation:
- https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/secure-hashing
-*/
+ * Test vectors from NIST Secure Hash Standard (SHS) FIPS 180-4 validation:
+ * https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/secure-hashing
+ */
 
 // SHA-512 0 Bytes Test Vector
 static uint8_t sha_512_0_bytes_digest[SHA512_DIGEST_LEN_BYTES] = {

@@ -38,9 +38,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_MAC_H
-#define	APP_MAC_H
+#define APP_MAC_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -109,9 +109,9 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE mode, MAC_OPER_M
  */
 TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_MAC_H */
+#endif /* APP_MAC_H */
 

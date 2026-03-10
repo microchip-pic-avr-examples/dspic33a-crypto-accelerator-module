@@ -119,7 +119,6 @@ static TEST_RESULT checkEncryptionAndTag(uint8_t *expected, uint8_t *result, uin
         printSeparator(BLUE, '-');
     }
 
-
     return dataRetval | tagRetval;
 }
 
@@ -164,7 +163,7 @@ static TEST_RESULT checkDecryption(uint8_t *expected, uint8_t *result, uint32_t 
  */
 static const char *getAeadTestOpMode(AEAD_OPER_MODE opMode)
 {
-    const char* opModeStr = "???";
+    const char *opModeStr = "???";
 
     switch(opMode)
     {
@@ -182,7 +181,6 @@ static const char *getAeadTestOpMode(AEAD_OPER_MODE opMode)
 
     return opModeStr;
 }
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -263,7 +261,6 @@ static TEST_RESULT aes_aead_test_init(void *context)
     return result;
 }
 
-
 /**
  * @brief The AES AEAD add AAD state function.
  * @param context Pointer to context block.
@@ -294,7 +291,6 @@ static TEST_RESULT aes_aead_test_add_aad(void *context)
 
     return result;
 }
-
 
 /**
  * @brief The AES AEAD test cipher state function.
@@ -328,7 +324,6 @@ static TEST_RESULT aes_aead_test_cipher(void *context)
 
     return result;
 }
-
 
 /**
  * @brief The AES AEAD test finalize/compare state function.
@@ -508,7 +503,6 @@ TEST_RESULT aead_test_init(TEST_CONTEXT *context, TEST_MODE testMode, AEAD_OPER_
 
     return result;
 }
-
 
 TEST_RESULT aead_test_advance(TEST_CONTEXT *context)
 {
