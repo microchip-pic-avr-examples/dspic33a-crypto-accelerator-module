@@ -32,10 +32,10 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-#define SHA384_DIGEST_LEN_BYTES 48
-#define NUMBER_OF_SHA384_VECTORS 8
+#define SHA384_DIGEST_LEN_BYTES    (48U)
+#define NUMBER_OF_SHA384_VECTORS   (8U)
 
-extern TEST_VECTOR sha_384_test_vectors[NUMBER_OF_SHA384_VECTORS];
+extern test_vector_t sha384TestVectors[NUMBER_OF_SHA384_VECTORS];
 
 #ifdef __cplusplus
 }
