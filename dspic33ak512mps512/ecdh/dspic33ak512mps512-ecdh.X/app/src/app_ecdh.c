@@ -63,8 +63,10 @@ static void ECDH_TestHeaderPrint(const char *label)
 {
     (void) printf(MAG "\r\n\r\n ****************************"
         "********************************************************");
+
     (void) printf(CYAN "\r\n\t\t ******************** "
         "%s ********************", label);
+
     (void) printf(MAG "\r\n ****************************"
         "********************************************************"
         RESET_COLOR);
@@ -76,6 +78,7 @@ static void ECDH_HexArrayPrint(const char *label,
     (void) printf(BLUE "\r\n ----------------------------"
         "----------------------------------------------------------------------"
         RESET_COLOR);
+
     (void) printf("\r\n %s", label);
     for (uint32_t index = 0U; index < size; index++)
     {
@@ -114,7 +117,7 @@ static void ECDH_ArrayEqualityCheck(const uint8_t *expected,
     }
 }
 
-static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
+static void ECDH_HardwareTestRun(uint8_t *publicKey,
         uint32_t publicKeyLength, uint8_t *privateKey,
         uint32_t privateKeyLength, uint8_t *sharedSecret,
         const uint8_t *expectedOutput,
@@ -133,7 +136,7 @@ static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
     }
     else
     {
-        (void) printf(RED"\r\nERROR in driver was thrown\r\n"RESET_COLOR);
+        (void) printf(RED "\r\nERROR in driver was thrown\r\n" RESET_COLOR);
     }
 }
 
@@ -145,6 +148,7 @@ static inline void ECDH_HardwareTestRun(uint8_t *publicKey,
 static void ECDH_P192TestRun(void)
 {
     ECDH_TestHeaderPrint("P-192 ECDH");
+
     // NIST Defined Private Key
     uint8_t testPrivateKey[24] =
     {
