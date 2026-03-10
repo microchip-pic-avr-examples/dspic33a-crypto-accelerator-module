@@ -52,14 +52,12 @@ Microchip or any third party.
 #include "test_vectors/test_vectors_sha512.h"
 
 #define MAX_DIGEST_SIZE     (64U)
-#define SINGLE_STEP         (0)
-#define MULTI_STEP          (1)
+#define SINGLE_STEP         (false)
+#define MULTI_STEP          (true)
 #define SHA_TEST_VECTOR_5   (5)
 
 static void SHA_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size)
 {
-    const uint8_t *localData = data;
-
     (void) printf(BLUE
         "\r\n ------------------------------------------"
         "---------------------------------------------------"
@@ -73,7 +71,7 @@ static void SHA_HexArrayPrint(const char *label, const uint8_t *data, uint32_t s
         {
             (void) printf("\r\n                    ");
         }
-        (void) printf(" 0x%02X", localData[index]);
+        (void) printf(" 0x%02X", data[index]);
     }
 }
 
@@ -81,13 +79,11 @@ static void SHA_HexArrayPrint(const char *label, const uint8_t *data, uint32_t s
 static void SHA_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *actual, size_t size)
 {
-    const uint8_t *tempExpected = expected;
-    const uint8_t *tempActual = actual;
-    uint8_t result = 0;
+    uint8_t result = 0U;
 
-    for (unsigned int byteIndex = 0; byteIndex < size; byteIndex++)
+    for (unsigned int byteIndex = 0U; byteIndex < size; byteIndex++)
     {
-        result |= tempExpected[byteIndex] ^ tempActual[byteIndex];
+        result |= expected[byteIndex] ^ actual[byteIndex];
     }
 
     if (result == 0U)
@@ -124,7 +120,7 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
             "\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"
             RESET_COLOR, (unsigned long)blockSize);
 
-        status = Crypto_Hash_Sha_Init(&context, algo, CRYPTO_HANDLER_HW_INTERNAL, 1);
+        status = Crypto_Hash_Sha_Init(&context, algo, CRYPTO_HANDLER_HW_INTERNAL, 1U);
 
         if (status == CRYPTO_HASH_SUCCESS)
         {
@@ -152,7 +148,7 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
 
         status = Crypto_Hash_Sha_Digest(
                 CRYPTO_HANDLER_HW_INTERNAL, localData,
-                dataLength, digestResult, algo, 1);
+                dataLength, digestResult, algo, 1U);
     }
 
     return status;
@@ -189,7 +185,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
             break;
     }
 
-    unsigned long digestBitLength = digestLength * (uint32_t) 8;
+    unsigned long digestBitLength = digestLength * 8UL;
 
     (void) printf(MAG
         "\r\n\r\n *****************************"
@@ -199,9 +195,9 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
         "\r\n ************************* HASH SHA-%lu"
         " TEST - INPUT SIZE %lu "
         "**************************%s",
-        (unsigned long)((digestBitLength == 160U) ? 1U : digestBitLength),
+        (unsigned long)((digestBitLength == 160UL) ? 1UL : digestBitLength),
         (unsigned long)dataLength,
-        (digestBitLength == 160U) ? "**" : "");
+        (digestBitLength == 160UL) ? "**" : "");
 
     (void) printf(MAG
         "\r\n *****************************"
@@ -260,7 +256,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
         BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7
     };
 
-    for (uint32_t blockIndex = 0;
+    for (uint32_t blockIndex = 0U;
             blockIndex < (sizeof(blockSizes) / sizeof(blockSizes[0]));
             blockIndex++)
     {
