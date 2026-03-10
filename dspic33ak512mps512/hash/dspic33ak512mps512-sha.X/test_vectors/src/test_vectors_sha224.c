@@ -23,6 +23,7 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#include <stddef.h>
 #include "../test_vectors_sha224.h"
 
 /*
@@ -35,12 +36,6 @@ static uint8_t sha224Digest0Bytes[SHA224_DIGEST_LEN_BYTES] =
 {
     0xD1, 0x4A, 0x02, 0x8C, 0x2A, 0x3A, 0x2B, 0xC9, 0x47, 0x61, 0x02, 0xBB, 0x28, 0x82, 0x34, 0xC4,
     0x15, 0xA2, 0xB0, 0x1F, 0x82, 0x8E, 0xA6, 0x2A, 0xC5, 0xB3, 0xE4, 0x2F
-};
-static const test_vector_t sha224Vector0Bytes =
-{
-    .inputData = NULL,
-    .inputDataLength = 0U,
-    .expectedDigest = sha224Digest0Bytes
 };
 
 // SHA-224, 35-byte input
@@ -55,12 +50,6 @@ static uint8_t sha224Digest35Bytes[SHA224_DIGEST_LEN_BYTES] =
     0x48, 0x23, 0x5B, 0x98, 0x20, 0xD6, 0x6D, 0x88, 0x85, 0xFA, 0xAB, 0xF6, 0xA9, 0xED, 0xE6, 0x3B,
     0xA2, 0xA2, 0x1B, 0x61, 0x77, 0xE9, 0x87, 0xA3, 0x32, 0x42, 0x37, 0x3E
 };
-static const test_vector_t sha224Vector35Bytes =
-{
-    .inputData = sha224Input35Bytes,
-    .inputDataLength = 35U,
-    .expectedDigest = sha224Digest35Bytes
-};
 
 // SHA-224, 41-byte input
 static uint8_t sha224Input41Bytes[41] =
@@ -73,12 +62,6 @@ static uint8_t sha224Digest41Bytes[SHA224_DIGEST_LEN_BYTES] =
 {
     0x93, 0x16, 0xD2, 0xF0, 0x21, 0xC2, 0x91, 0x3D, 0x63, 0xA7, 0xE6, 0x69, 0x24, 0xC8, 0x7C, 0x16,
     0x1C, 0x3C, 0xFD, 0xE0, 0xEA, 0x7B, 0xA0, 0x7F, 0x54, 0x77, 0x28, 0x62
-};
-static const test_vector_t sha224Vector41Bytes =
-{
-    .inputData = sha224Input41Bytes,
-    .inputDataLength = 41U,
-    .expectedDigest = sha224Digest41Bytes
 };
 
 // SHA-224, 48-byte input
@@ -93,12 +76,6 @@ static uint8_t sha224Digest48Bytes[SHA224_DIGEST_LEN_BYTES] =
     0x4C, 0x52, 0x62, 0xAC, 0xB4, 0xA2, 0xA4, 0x4E, 0xAA, 0x9B, 0xC6, 0x75, 0x70, 0x24, 0xFB, 0x20,
     0x2E, 0xF4, 0xD5, 0xA7, 0xA1, 0x6F, 0xA3, 0x72, 0x52, 0xA4, 0x22, 0xB5
 };
-static const test_vector_t sha224Vector48Bytes =
-{
-    .inputData = sha224Input48Bytes,
-    .inputDataLength = 48U,
-    .expectedDigest = sha224Digest48Bytes
-};
 
 // SHA-224, 64-byte input
 static uint8_t sha224Input64Bytes[64] =
@@ -112,12 +89,6 @@ static uint8_t sha224Digest64Bytes[SHA224_DIGEST_LEN_BYTES] =
 {
     0x0E, 0xC5, 0xFC, 0x2B, 0x4B, 0x35, 0xE0, 0xB4, 0xED, 0x36, 0xC7, 0x57, 0xBE, 0x34, 0x15, 0x85,
     0x7F, 0x9C, 0x32, 0x7E, 0x89, 0xA7, 0xF4, 0xC3, 0x69, 0x79, 0xC5, 0x7E
-};
-static const test_vector_t sha224Vector64Bytes =
-{
-    .inputData = sha224Input64Bytes,
-    .inputDataLength = 64U,
-    .expectedDigest = sha224Digest64Bytes
 };
 
 // SHA-224, 128-byte input
@@ -136,12 +107,6 @@ static uint8_t sha224Digest128Bytes[SHA224_DIGEST_LEN_BYTES] =
 {
     0x27, 0x14, 0xC8, 0x01, 0x9F, 0xD5, 0x2C, 0x18, 0xE2, 0xCA, 0xC0, 0xEE, 0xEF, 0xEB, 0x75, 0xDB,
     0x69, 0xDD, 0x2C, 0xD6, 0x8F, 0xA0, 0xC9, 0x34, 0xF5, 0x6C, 0x00, 0x25
-};
-static const test_vector_t sha224Vector128Bytes =
-{
-    .inputData = sha224Input128Bytes,
-    .inputDataLength = 128U,
-    .expectedDigest = sha224Digest128Bytes
 };
 
 // SHA-224, 512-byte input
@@ -184,12 +149,6 @@ static uint8_t sha224Digest512Bytes[SHA224_DIGEST_LEN_BYTES] =
 {
     0xDB, 0xE2, 0x11, 0x4A, 0x05, 0xA0, 0x14, 0x5B, 0x8F, 0xDA, 0x94, 0x86, 0x21, 0xC3, 0x1B, 0x46,
     0x42, 0xFD, 0xAF, 0x75, 0xFC, 0x04, 0xBB, 0xB4, 0xA3, 0x62, 0xB9, 0xCA
-};
-static const test_vector_t sha224Vector512Bytes =
-{
-    .inputData = sha224Input512Bytes,
-    .inputDataLength = 512U,
-    .expectedDigest = sha224Digest512Bytes
 };
 
 // SHA-224, 837-byte input
@@ -254,22 +213,16 @@ static uint8_t sha224Digest837Bytes[SHA224_DIGEST_LEN_BYTES] =
     0x82, 0xE4, 0x67, 0xF1, 0x66, 0x2A, 0x1D, 0x59, 0x84, 0xD4, 0x05, 0x2B, 0xD7, 0x59, 0x45, 0x3B,
     0x66, 0x95, 0x3F, 0xB8, 0x38, 0x4A, 0xB8, 0xD9, 0x7D, 0xDA, 0x51, 0x95
 };
-static const test_vector_t sha224Vector837Bytes =
-{
-    .inputData = sha224Input837Bytes,
-    .inputDataLength = 837U,
-    .expectedDigest = sha224Digest837Bytes
-};
 
 // 8 SHA-224 test vectors (0-byte to 837-byte inputs)
 test_vector_t sha224TestVectors[NUMBER_OF_SHA224_VECTORS] =
 {
-    [0] = sha224Vector0Bytes,
-    [1] = sha224Vector35Bytes,
-    [2] = sha224Vector41Bytes,
-    [3] = sha224Vector48Bytes,
-    [4] = sha224Vector64Bytes,
-    [5] = sha224Vector128Bytes,
-    [6] = sha224Vector512Bytes,
-    [7] = sha224Vector837Bytes,
+    { .inputData = NULL, .inputDataLength = 0U, .expectedDigest = sha224Digest0Bytes },
+    { .inputData = sha224Input35Bytes, .inputDataLength = 35U, .expectedDigest = sha224Digest35Bytes },
+    { .inputData = sha224Input41Bytes, .inputDataLength = 41U, .expectedDigest = sha224Digest41Bytes },
+    { .inputData = sha224Input48Bytes, .inputDataLength = 48U, .expectedDigest = sha224Digest48Bytes },
+    { .inputData = sha224Input64Bytes, .inputDataLength = 64U, .expectedDigest = sha224Digest64Bytes },
+    { .inputData = sha224Input128Bytes, .inputDataLength = 128U, .expectedDigest = sha224Digest128Bytes },
+    { .inputData = sha224Input512Bytes, .inputDataLength = 512U, .expectedDigest = sha224Digest512Bytes },
+    { .inputData = sha224Input837Bytes, .inputDataLength = 837U, .expectedDigest = sha224Digest837Bytes },
 };

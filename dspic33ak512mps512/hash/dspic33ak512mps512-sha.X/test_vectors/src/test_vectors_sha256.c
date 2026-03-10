@@ -23,6 +23,7 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#include <stddef.h>
 #include "../test_vectors_sha256.h"
 
 /*
@@ -35,12 +36,6 @@ static uint8_t sha256Digest0Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0xE3, 0xB0, 0xC4, 0x42, 0x98, 0xFC, 0x1C, 0x14, 0x9A, 0xFB, 0xF4, 0xC8, 0x99, 0x6F, 0xB9, 0x24,
     0x27, 0xAE, 0x41, 0xE4, 0x64, 0x9B, 0x93, 0x4C, 0xA4, 0x95, 0x99, 0x1B, 0x78, 0x52, 0xB8, 0x55
-};
-static const test_vector_t sha256Vector0Bytes =
-{
-    .inputData = NULL,
-    .inputDataLength = 0U,
-    .expectedDigest = sha256Digest0Bytes
 };
 
 // SHA-256, 35-byte input
@@ -55,12 +50,6 @@ static uint8_t sha256Digest35Bytes[SHA256_DIGEST_LEN_BYTES] =
     0xc2, 0x68, 0x4c, 0x0d, 0xbb, 0x85, 0xc2, 0x32, 0xb6, 0xda, 0x4f, 0xb5, 0x14, 0x7d, 0xd0, 0x62,
     0x44, 0x29, 0xec, 0x7e, 0x65, 0x79, 0x91, 0xed, 0xd9, 0x5e, 0xda, 0x37, 0xa5, 0x87, 0x26, 0x9e
 };
-static const test_vector_t sha256Vector35Bytes =
-{
-    .inputData = sha256Input35Bytes,
-    .inputDataLength = 35U,
-    .expectedDigest = sha256Digest35Bytes
-};
 
 // SHA-256, 41-byte input
 static uint8_t sha256Input41Bytes[41] =
@@ -73,12 +62,6 @@ static uint8_t sha256Digest41Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0x4B, 0xB3, 0x3E, 0x7C, 0x69, 0x16, 0xE0, 0x8A, 0x9B, 0x3E, 0xD6, 0xBC, 0xEF, 0x79, 0x0A, 0xAA,
     0xEE, 0x0D, 0xCF, 0x2E, 0x7A, 0x01, 0xAF, 0xB0, 0x56, 0x18, 0x2D, 0xEA, 0x2D, 0xAD, 0x7D, 0x63
-};
-static const test_vector_t sha256Vector41Bytes =
-{
-    .inputData = sha256Input41Bytes,
-    .inputDataLength = 41U,
-    .expectedDigest = sha256Digest41Bytes
 };
 
 // SHA-256, 48-byte input
@@ -93,12 +76,6 @@ static uint8_t sha256Digest48Bytes[SHA256_DIGEST_LEN_BYTES] =
     0x7C, 0x5D, 0x14, 0xED, 0x83, 0xDA, 0xB8, 0x75, 0xAC, 0x25, 0xCE, 0x7F, 0xEE, 0xD6, 0xEF, 0x83,
     0x7D, 0x58, 0xE7, 0x9D, 0xC6, 0x01, 0xFB, 0x3C, 0x1F, 0xCA, 0x48, 0xD4, 0x46, 0x4E, 0x8B, 0x83
 };
-static const test_vector_t sha256Vector48Bytes =
-{
-    .inputData = sha256Input48Bytes,
-    .inputDataLength = 48U,
-    .expectedDigest = sha256Digest48Bytes
-};
 
 // SHA-256, 64-byte input
 static uint8_t sha256Input64Bytes[64] =
@@ -112,12 +89,6 @@ static uint8_t sha256Digest64Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0xF0, 0xD9, 0xC1, 0xBE, 0x0A, 0xF7, 0xF2, 0xE1, 0xA5, 0xBE, 0x89, 0x4E, 0x7A, 0x3F, 0x92, 0xA6,
     0x48, 0x0B, 0x86, 0x1E, 0xF4, 0x6C, 0xAC, 0x5E, 0xD3, 0x0D, 0x58, 0xBD, 0xE8, 0x6D, 0x91, 0xB6
-};
-static const test_vector_t sha256Vector64Bytes =
-{
-    .inputData = sha256Input64Bytes,
-    .inputDataLength = 64U,
-    .expectedDigest = sha256Digest64Bytes
 };
 
 // SHA-256, 128-byte input
@@ -136,12 +107,6 @@ static uint8_t sha256Digest128Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0x52, 0x1A, 0x7B, 0x4F, 0xD5, 0x3D, 0x6B, 0x26, 0xE4, 0xF5, 0x79, 0x81, 0x5B, 0x9B, 0xD9, 0x96,
     0x10, 0x83, 0x32, 0x6F, 0x5C, 0xB3, 0xBE, 0x45, 0xE2, 0x69, 0xDD, 0x5E, 0xD5, 0xE3, 0xA2, 0x83
-};
-static const test_vector_t sha256Vector128Bytes =
-{
-    .inputData = sha256Input128Bytes,
-    .inputDataLength = 128U,
-    .expectedDigest = sha256Digest128Bytes
 };
 
 // SHA-256, 512-byte input
@@ -184,13 +149,6 @@ static uint8_t sha256Digest512Bytes[SHA256_DIGEST_LEN_BYTES] =
 {
     0x57, 0xAF, 0xC3, 0x53, 0x58, 0x72, 0x3C, 0x81, 0x60, 0x13, 0x3D, 0x41, 0x19, 0xB0, 0xFC, 0x85,
     0x92, 0x92, 0x52, 0xA4, 0x87, 0x4C, 0xDC, 0x49, 0x45, 0x2D, 0x5A, 0x0A, 0x13, 0x89, 0xCA, 0x24
-};
-
-static const test_vector_t sha256Vector512Bytes =
-{
-    .inputData = sha256Input512Bytes,
-    .inputDataLength = 512U,
-    .expectedDigest = sha256Digest512Bytes
 };
 
 // SHA-256, 835-byte input
@@ -257,22 +215,15 @@ static uint8_t sha256Digest835Bytes[SHA256_DIGEST_LEN_BYTES] =
     0x7C, 0x01, 0x8E, 0x90, 0x55, 0x5D, 0x23, 0x12, 0x5E, 0x7F, 0xD1, 0xBE, 0x96, 0x24, 0x38, 0x73
 };
 
-static const test_vector_t sha256Vector835Bytes =
-{
-    .inputData = sha256Input835Bytes,
-    .inputDataLength = 835U,
-    .expectedDigest = sha256Digest835Bytes
-};
-
 // 8 SHA-256 test vectors (0-byte to 835-byte inputs)
 test_vector_t sha256TestVectors[NUMBER_OF_SHA256_VECTORS] =
 {
-    [0] = sha256Vector0Bytes,
-    [1] = sha256Vector35Bytes,
-    [2] = sha256Vector41Bytes,
-    [3] = sha256Vector48Bytes,
-    [4] = sha256Vector64Bytes,
-    [5] = sha256Vector128Bytes,
-    [6] = sha256Vector512Bytes,
-    [7] = sha256Vector835Bytes,
+    { .inputData = NULL, .inputDataLength = 0U, .expectedDigest = sha256Digest0Bytes },
+    { .inputData = sha256Input35Bytes, .inputDataLength = 35U, .expectedDigest = sha256Digest35Bytes },
+    { .inputData = sha256Input41Bytes, .inputDataLength = 41U, .expectedDigest = sha256Digest41Bytes },
+    { .inputData = sha256Input48Bytes, .inputDataLength = 48U, .expectedDigest = sha256Digest48Bytes },
+    { .inputData = sha256Input64Bytes, .inputDataLength = 64U, .expectedDigest = sha256Digest64Bytes },
+    { .inputData = sha256Input128Bytes, .inputDataLength = 128U, .expectedDigest = sha256Digest128Bytes },
+    { .inputData = sha256Input512Bytes, .inputDataLength = 512U, .expectedDigest = sha256Digest512Bytes },
+    { .inputData = sha256Input835Bytes, .inputDataLength = 835U, .expectedDigest = sha256Digest835Bytes },
 };
