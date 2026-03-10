@@ -148,10 +148,10 @@ static mac_test_vector_t cmacTestVectors[4] =
     [3] = cmac256Vector48Bytes,
 };
 
-mac_test_vector_t * TV_CmacTestVectorsGet(void)
+mac_test_vector_t * VECTOR_CmacTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_CmacTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_CmacTestVectorCountGet(); index++)
     {
         cmacTestVectors[index].id = (index + 1UL);
     }
@@ -159,7 +159,7 @@ mac_test_vector_t * TV_CmacTestVectorsGet(void)
     return cmacTestVectors;
 }
 
-uint32_t TV_CmacTestVectorCountGet(void)
+uint32_t VECTOR_CmacTestVectorCountGet(void)
 {
     return sizeof(cmacTestVectors) / sizeof(cmacTestVectors[0]);
 }

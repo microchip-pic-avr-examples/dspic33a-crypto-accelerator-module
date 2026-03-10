@@ -314,8 +314,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_ECB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_EcbTestVectorsGet();
-            context->testCount = TV_EcbTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_EcbTestVectorsGet();
+            context->testCount = VECTOR_EcbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_ECB;
         }
         break;
@@ -323,8 +323,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_CTR:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_CtrTestVectorsGet();
-            context->testCount = TV_CtrTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_CtrTestVectorsGet();
+            context->testCount = VECTOR_CtrTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CTR;
         }
         break;
@@ -332,8 +332,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_CBC:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_CbcTestVectorsGet();
-            context->testCount = TV_CbcTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_CbcTestVectorsGet();
+            context->testCount = VECTOR_CbcTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CBC;
         }
         break;
@@ -341,8 +341,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_CFB128:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_Cfb128TestVectorsGet();
-            context->testCount = TV_Cfb128TestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_Cfb128TestVectorsGet();
+            context->testCount = VECTOR_Cfb128TestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CFB128;
         }
         break;
@@ -350,8 +350,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_OFB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_OfbTestVectorsGet();
-            context->testCount = TV_OfbTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_OfbTestVectorsGet();
+            context->testCount = VECTOR_OfbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_OFB;
         }
         break;
@@ -359,8 +359,8 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
         case SYM_OPER_MODE_AES_XTS:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)TV_XtsTestVectorsGet();
-            context->testCount = TV_XtsTestVectorCountGet();
+            context->tests = (uint8_t *)VECTOR_XtsTestVectorsGet();
+            context->testCount = VECTOR_XtsTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_XTS;
         }
         break;

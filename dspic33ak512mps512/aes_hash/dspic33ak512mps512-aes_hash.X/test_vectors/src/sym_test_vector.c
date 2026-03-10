@@ -143,10 +143,10 @@ static sym_test_vector_t ecbTestVectors[3] =
     [2] = ecb_256_48_bytes_vector,
 };
 
-sym_test_vector_t * TV_EcbTestVectorsGet(void)
+sym_test_vector_t * VECTOR_EcbTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_EcbTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_EcbTestVectorCountGet(); index++)
     {
         ecbTestVectors[index].id = (index + 1UL);
     }
@@ -154,7 +154,7 @@ sym_test_vector_t * TV_EcbTestVectorsGet(void)
     return ecbTestVectors;
 }
 
-uint32_t TV_EcbTestVectorCountGet(void)
+uint32_t VECTOR_EcbTestVectorCountGet(void)
 {
     return sizeof(ecbTestVectors) / sizeof(ecbTestVectors[0]);
 }
@@ -215,10 +215,10 @@ static sym_test_vector_t ctrTestVectors[3] =
     [2] = ctr_256_48_bytes_vector,
 };
 
-sym_test_vector_t * TV_CtrTestVectorsGet(void)
+sym_test_vector_t * VECTOR_CtrTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_CtrTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_CtrTestVectorCountGet(); index++)
     {
         ctrTestVectors[index].id = (index + 1UL);
     }
@@ -226,7 +226,7 @@ sym_test_vector_t * TV_CtrTestVectorsGet(void)
     return ctrTestVectors;
 }
 
-uint32_t TV_CtrTestVectorCountGet(void)
+uint32_t VECTOR_CtrTestVectorCountGet(void)
 {
     return sizeof(ctrTestVectors) / sizeof(ctrTestVectors[0]);
 }
@@ -287,10 +287,10 @@ static sym_test_vector_t cbcTestVectors[3] =
     [2] = cbc_256_48_bytes_vector,
 };
 
-sym_test_vector_t * TV_CbcTestVectorsGet(void)
+sym_test_vector_t * VECTOR_CbcTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_CbcTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_CbcTestVectorCountGet(); index++)
     {
         cbcTestVectors[index].id = (index + 1UL);
     }
@@ -298,7 +298,7 @@ sym_test_vector_t * TV_CbcTestVectorsGet(void)
     return cbcTestVectors;
 }
 
-uint32_t TV_CbcTestVectorCountGet(void)
+uint32_t VECTOR_CbcTestVectorCountGet(void)
 {
     return sizeof(cbcTestVectors) / sizeof(cbcTestVectors[0]);
 }
@@ -359,10 +359,10 @@ static sym_test_vector_t cfb128TestVectors[3] =
     [2] = cfb128_256_48_bytes_vector,
 };
 
-sym_test_vector_t * TV_Cfb128TestVectorsGet(void)
+sym_test_vector_t * VECTOR_Cfb128TestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_Cfb128TestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_Cfb128TestVectorCountGet(); index++)
     {
         cfb128TestVectors[index].id = (index + 1UL);
     }
@@ -370,7 +370,7 @@ sym_test_vector_t * TV_Cfb128TestVectorsGet(void)
     return cfb128TestVectors;
 }
 
-uint32_t TV_Cfb128TestVectorCountGet(void)
+uint32_t VECTOR_Cfb128TestVectorCountGet(void)
 {
     return sizeof(cfb128TestVectors) / sizeof(cfb128TestVectors[0]);
 }
@@ -431,10 +431,10 @@ static sym_test_vector_t ofbTestVectors[3] =
     [2] = ofb_256_48_bytes_vector,
 };
 
-sym_test_vector_t * TV_OfbTestVectorsGet(void)
+sym_test_vector_t * VECTOR_OfbTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_OfbTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_OfbTestVectorCountGet(); index++)
     {
         ofbTestVectors[index].id = (index + 1UL);
     }
@@ -442,7 +442,7 @@ sym_test_vector_t * TV_OfbTestVectorsGet(void)
     return ofbTestVectors;
 }
 
-uint32_t TV_OfbTestVectorCountGet(void)
+uint32_t VECTOR_OfbTestVectorCountGet(void)
 {
     return sizeof(ofbTestVectors) / sizeof(ofbTestVectors[0]);
 }

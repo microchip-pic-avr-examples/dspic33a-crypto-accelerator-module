@@ -228,10 +228,10 @@ static sym_test_vector_t xtsTestVectors[5] =
     [4] = xts256Vector48Bytes,
 };
 
-sym_test_vector_t * TV_XtsTestVectorsGet(void)
+sym_test_vector_t * VECTOR_XtsTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_XtsTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_XtsTestVectorCountGet(); index++)
     {
         xtsTestVectors[index].id = (index + 1UL);
     }
@@ -239,7 +239,7 @@ sym_test_vector_t * TV_XtsTestVectorsGet(void)
     return xtsTestVectors;
 }
 
-uint32_t TV_XtsTestVectorCountGet(void)
+uint32_t VECTOR_XtsTestVectorCountGet(void)
 {
     return sizeof(xtsTestVectors) / sizeof(xtsTestVectors[0]);
 }

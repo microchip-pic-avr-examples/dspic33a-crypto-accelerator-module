@@ -100,11 +100,11 @@ bool AESHASH_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *tempExpected = expected;
         const uint8_t *tempActual = actual;
 
-        for (unsigned int byteIndex = 0U; byteIndex < size;
+        for (size_t byteIndex = 0U; byteIndex < size;
                 byteIndex++)
         {
-            result |= tempExpected[byteIndex]
-                    ^ tempActual[byteIndex];
+            result |= (uint8_t)(tempExpected[byteIndex]
+                    ^ tempActual[byteIndex]);
         }
     }
 

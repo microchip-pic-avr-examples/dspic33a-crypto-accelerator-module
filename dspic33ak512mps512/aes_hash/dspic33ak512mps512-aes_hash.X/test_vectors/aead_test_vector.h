@@ -66,11 +66,11 @@ typedef struct
     uint32_t    authTagLength;
 } aead_test_vector_t;
 
-aead_test_vector_t *TV_GcmTestVectorsGet(void);
-uint32_t TV_GcmTestVectorCountGet(void);
+aead_test_vector_t *VECTOR_GcmTestVectorsGet(void);
+uint32_t VECTOR_GcmTestVectorCountGet(void);
 
-aead_test_vector_t *TV_CcmTestVectorsGet(void);
-uint32_t TV_CcmTestVectorCountGet(void);
+aead_test_vector_t *VECTOR_CcmTestVectorsGet(void);
+uint32_t VECTOR_CcmTestVectorCountGet(void);
 
 #ifdef __cplusplus
 }

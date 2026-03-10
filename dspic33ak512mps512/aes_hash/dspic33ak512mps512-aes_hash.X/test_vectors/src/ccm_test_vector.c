@@ -142,10 +142,10 @@ static aead_test_vector_t aesCcmTestVectors[3] =
     [2] = aesCcm128Vector24Bytes,
 };
 
-aead_test_vector_t * TV_CcmTestVectorsGet(void)
+aead_test_vector_t * VECTOR_CcmTestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_CcmTestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_CcmTestVectorCountGet(); index++)
     {
         aesCcmTestVectors[index].id = (index + 1UL);
     }
@@ -153,7 +153,7 @@ aead_test_vector_t * TV_CcmTestVectorsGet(void)
     return aesCcmTestVectors;
 }
 
-uint32_t TV_CcmTestVectorCountGet(void)
+uint32_t VECTOR_CcmTestVectorCountGet(void)
 {
     return sizeof(aesCcmTestVectors) / sizeof(aesCcmTestVectors[0]);
 }

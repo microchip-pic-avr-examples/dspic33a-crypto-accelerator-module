@@ -306,10 +306,10 @@ static hash_test_vector_t sha512TestVectors[8] =
     [7] = sha_512_840_bytes_vector,
 };
 
-hash_test_vector_t * TV_Sha512TestVectorsGet(void)
+hash_test_vector_t * VECTOR_Sha512TestVectorsGet(void)
 {
     // Set test IDs.
-    for (uint32_t index = 0U; index < TV_Sha512TestVectorCountGet(); index++)
+    for (uint32_t index = 0U; index < VECTOR_Sha512TestVectorCountGet(); index++)
     {
         sha512TestVectors[index].id = (index + 1UL);
     }
@@ -317,7 +317,7 @@ hash_test_vector_t * TV_Sha512TestVectorsGet(void)
     return sha512TestVectors;
 }
 
-uint32_t TV_Sha512TestVectorCountGet(void)
+uint32_t VECTOR_Sha512TestVectorCountGet(void)
 {
     return sizeof(sha512TestVectors) / sizeof(sha512TestVectors[0]);
 }
