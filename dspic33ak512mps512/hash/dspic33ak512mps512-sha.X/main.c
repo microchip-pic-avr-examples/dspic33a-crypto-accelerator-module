@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -49,11 +49,10 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_sha.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -64,24 +63,31 @@ Microchip or any third party.
 int main(void)
 {
     SYSTEM_Initialize();
-    
+
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
+
+    (void) printf("___________________________________"
+        "___________________________________"
+        "______________________________ \r\n");
+
     (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
-    
-    sha_1_test();
-    sha_224_test();
-    sha_256_test();
-    sha_384_test();
-    sha_512_test();
-   
+
+    SHA_Sha1TestRun();
+    SHA_Sha224TestRun();
+    SHA_Sha256TestRun();
+    SHA_Sha384TestRun();
+    SHA_Sha512TestRun();
+
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
-    
-    while(1)
+
+    (void) printf("___________________________________"
+        "___________________________________"
+        "______________________________ \r\n");
+
+    while (true)
     {
 
-    };
+    }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -23,23 +23,22 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#ifndef TEST_VECTORS_SHA384_H
+#define TEST_VECTORS_SHA384_H
+
 #include "test_vector.h"
 
-#ifndef TEST_VECTORS_SHA384_H
-#define	TEST_VECTORS_SHA384_H
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-#define SHA384_DIGEST_LEN_BYTES 48
-#define NUMBER_OF_SHA384_VECTORS 8
+#define SHA384_DIGEST_LENGTH_BYTES (48U)
+#define NUMBER_OF_SHA384_VECTORS   (8U)
 
-extern TEST_VECTOR sha_384_test_vectors[NUMBER_OF_SHA384_VECTORS];
+extern test_vector_t sha384TestVectors[NUMBER_OF_SHA384_VECTORS];
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA384_H */
-
+#endif /* TEST_VECTORS_SHA384_H */
