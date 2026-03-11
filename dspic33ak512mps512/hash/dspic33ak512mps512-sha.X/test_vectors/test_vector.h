@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -23,25 +23,24 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#ifndef TEST_VECTOR_H
+#define TEST_VECTOR_H
+
 #include <stdint.h>
 
-#ifndef TEST_VECTOR_H
-#define	TEST_VECTOR_H
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct 
+typedef struct
 {
-    uint8_t* inputData;
-    uint32_t inputDataLen;
-    uint8_t* expectedDigest;
-} TEST_VECTOR;
+    uint8_t *inputData;
+    uint32_t inputDataLength;
+    uint8_t *expectedDigest;
+} test_vector_t;
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTOR_H */
-
+#endif /* TEST_VECTOR_H */

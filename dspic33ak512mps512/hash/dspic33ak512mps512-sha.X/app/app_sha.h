@@ -5,15 +5,15 @@
     Microchip Technology Inc.
 
   File Name:
-    app.h
+    app_sha.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for SHA hashing.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -37,9 +37,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SHA_H
-#define	APP_SHA_H
+#define APP_SHA_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -49,31 +49,34 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-#define RESET_COLOR "\x1B""[0m"
-#define RED "\x1B""[1;31m"
-#define GREEN "\x1B""[1;32m"
-#define BLUE "\x1B""[1;34m"
-#define MAG "\x1B""[1;35m"
-#define CYAN "\x1B""[1;36m"
+#define RESET_COLOR  "\x1B""[0m"
+#define RED          "\x1B""[1;31m"
+#define GREEN        "\x1B""[1;32m"
+#define BLUE         "\x1B""[1;34m"
+#define MAG          "\x1B""[1;35m"
+#define CYAN         "\x1B""[1;36m"
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
 //#define RUN_ALL_VECTORS
-    
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
 
-void sha_1_test(void);
-void sha_224_test(void);
-void sha_256_test(void);
-void sha_384_test(void);
-void sha_512_test(void);
+void SHA_Sha1TestRun(void);
 
-#ifdef	__cplusplus
+void SHA_Sha224TestRun(void);
+
+void SHA_Sha256TestRun(void);
+
+void SHA_Sha384TestRun(void);
+
+void SHA_Sha512TestRun(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SHA_H */
-
+#endif /* APP_SHA_H */

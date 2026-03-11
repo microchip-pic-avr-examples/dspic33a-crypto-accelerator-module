@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -23,23 +23,22 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#ifndef TEST_VECTORS_SHA512_H
+#define TEST_VECTORS_SHA512_H
+
 #include "test_vector.h"
 
-#ifndef TEST_VECTORS_SHA512_H
-#define	TEST_VECTORS_SHA512_H
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
-    
-#define SHA512_DIGEST_LEN_BYTES 64
-#define NUMBER_OF_SHA512_VECTORS 8
 
-extern TEST_VECTOR sha_512_test_vectors[NUMBER_OF_SHA512_VECTORS];
+#define SHA512_DIGEST_LENGTH_BYTES (64U)
+#define NUMBER_OF_SHA512_VECTORS   (8U)
 
-#ifdef	__cplusplus
+extern test_vector_t sha512TestVectors[NUMBER_OF_SHA512_VECTORS];
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA512_H */
-
+#endif /* TEST_VECTORS_SHA512_H */
