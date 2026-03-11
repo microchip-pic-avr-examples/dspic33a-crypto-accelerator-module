@@ -68,11 +68,7 @@ static crypto_Aead_Status_E AEAD_GcmDirectTestRun(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
@@ -134,11 +130,7 @@ static crypto_Aead_Status_E AEAD_GcmStepsTestRun(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
@@ -228,11 +220,7 @@ static crypto_Aead_Status_E AEAD_CcmCipherRun(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
@@ -287,31 +275,35 @@ static void AEAD_EncryptionAndTagCheck(
         uint32_t length, const uint8_t *tag,
         const uint8_t *tagResult, uint32_t tagLength)
 {
-    (void) printf(UTILS_BLUE
-            "\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
     if (length > 0UL)
     {
         if (true == UTILS_ArrayEqualityCheck(result, text, length))
         {
-            (void) printf(UTILS_GREEN"\r\n Encryption: PASS    "UTILS_RESET_COLOR );
+            (void) printf(UTILS_GREEN
+                    "\r\n Encryption: PASS"
+                    UTILS_RESET_COLOR);
         }
         else
         {
-            (void) printf(UTILS_RED"\r\n Encryption: FAILED  "UTILS_RESET_COLOR);
+            (void) printf(UTILS_RED
+                    "\r\n Encryption: FAIL"
+                    UTILS_RESET_COLOR);
         }
     }
 
     if (true == UTILS_ArrayEqualityCheck(tagResult, tag, tagLength))
     {
-        (void) printf(UTILS_GREEN"\r\n Authentication Tag: PASS"UTILS_RESET_COLOR);
+        (void) printf(UTILS_GREEN
+                "\r\n Authentication Tag: PASS"
+                UTILS_RESET_COLOR);
     }
     else
     {
-        (void) printf(UTILS_RED"\r\n Authentication Tag: FAILED"UTILS_RESET_COLOR);
+        (void) printf(UTILS_RED
+                "\r\n Authentication Tag: FAIL"
+                UTILS_RESET_COLOR);
     }
 }
 
@@ -366,11 +358,7 @@ void AEAD_GcmTestRun(void)
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Initialization Vector  :  None");
         }
 
@@ -380,11 +368,7 @@ void AEAD_GcmTestRun(void)
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
@@ -434,16 +418,9 @@ void AEAD_GcmTestRun(void)
             }
         }
 
-        (void) printf(UTILS_BLUE
-                "\r\n\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        (void) printf("\r\n");
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
         ct = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
@@ -490,16 +467,9 @@ void AEAD_GcmTestRun(void)
             }
         }
 
-        (void) printf(UTILS_BLUE
-                "\r\n\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        (void) printf("\r\n");
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         if ((status == CRYPTO_AEAD_CIPHER_SUCCESS) && (statusSteps == CRYPTO_AEAD_CIPHER_SUCCESS))
         {
             // Verify the direct and stepwise tests generate the same result.
@@ -524,7 +494,9 @@ void AEAD_GcmTestRun(void)
         }
         else
         {
-            (void) printf(UTILS_RED"\r\nTEST FAILED"UTILS_RESET_COLOR);
+            (void) printf(UTILS_RED
+                    "\r\n\r\n FAIL"
+                    UTILS_RESET_COLOR);
         }
 
         test++;
@@ -563,11 +535,7 @@ void AEAD_CcmTestRun(void)
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Nonce                  :  None");
         }
 
@@ -577,11 +545,7 @@ void AEAD_CcmTestRun(void)
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Authentication Data    :  None");
         }
 
@@ -629,19 +593,14 @@ void AEAD_CcmTestRun(void)
             }
         }
 
-        (void) printf(UTILS_BLUE
-                "\r\n\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        (void) printf("\r\n");
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            (void) printf(UTILS_RED"\r\nTEST FAILED"UTILS_RESET_COLOR);
+            (void) printf(UTILS_RED
+                    "\r\n\r\n FAIL"
+                    UTILS_RESET_COLOR);
         }
 
         test++;

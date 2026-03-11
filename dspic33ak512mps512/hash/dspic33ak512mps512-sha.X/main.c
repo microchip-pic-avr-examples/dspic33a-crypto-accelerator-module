@@ -62,10 +62,10 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n");
+    (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
+    (void) printf("\r\n\r\n Starting CRYPTO SHA program \r\n");
 
     SHA_Sha1TestRun();
     SHA_Sha224TestRun();
@@ -73,7 +73,7 @@ int main(void)
     SHA_Sha384TestRun();
     SHA_Sha512TestRun();
 
-    (void) printf("\n\n\n");
+    (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)

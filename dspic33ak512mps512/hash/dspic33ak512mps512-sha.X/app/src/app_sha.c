@@ -62,13 +62,16 @@ static void SHA_ArrayEqualityCheck(const uint8_t *expected,
 {
     if (true == UTILS_ArrayEqualityCheck(expected, actual, size))
     {
-        (void) printf(UTILS_GREEN " \r\n PASS " UTILS_RESET_COLOR);
+        (void) printf(UTILS_GREEN
+                " \r\n\r\n PASS " UTILS_RESET_COLOR);
     }
     else
     {
-        const char *expectedHeader = "Expected Digest";
-        (void) printf(UTILS_RED " \r\n FAIL - Data Mismatch" UTILS_RESET_COLOR);
-        UTILS_HexArrayPrint(expectedHeader, actual, (uint32_t) size);
+        (void) printf(UTILS_RED
+                " \r\n\r\n FAIL - Data Mismatch"
+                UTILS_RESET_COLOR);
+        UTILS_HexArrayPrint("Expected Digest",
+                actual, (uint32_t) size);
     }
 }
 
@@ -177,10 +180,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     }
     else
     {
-        (void) printf(UTILS_BLUE
-            "\r\n --------------------------------"
-            "-----------------------------------------------------"
-            UTILS_RESET_COLOR);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
         (void) printf("\r\n %s  :  None", inputHeader);
     }

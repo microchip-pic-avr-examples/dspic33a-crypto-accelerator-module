@@ -48,14 +48,14 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n");
+    (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    (void) printf("\r\n\n\n\n Starting CRYPTO TRNG program \r\n");
+    (void) printf("\r\n\r\n Starting CRYPTO TRNG program \r\n");
 
     TRNG_TestRun();
 
-    (void) printf("\n\n\n");
+    (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
