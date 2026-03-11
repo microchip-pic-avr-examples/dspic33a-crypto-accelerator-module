@@ -222,11 +222,7 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
     }
     else
     {
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         (void) printf("\r\n%s", " Initialization Vector  :  None");
     }
 
@@ -257,16 +253,9 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         }
     }
 
-    (void) printf(UTILS_BLUE
-            "\r\n\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
-    (void) printf(UTILS_BLUE
-            "\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
+    (void) printf("\r\n");
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
     status = SYM_StepsTestRun(CRYPTO_CIOP_ENCRYPT,
             opMode, data, dataLength, key, keyLength,
@@ -295,16 +284,9 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         }
     }
 
-    (void) printf(UTILS_BLUE
-            "\r\n\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
-    (void) printf(UTILS_BLUE
-            "\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
+    (void) printf("\r\n");
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
     (void) printf("\r\n\r\n COMPARING TESTS...");
 
     // Verify the direct and stepwise tests generate the same result.

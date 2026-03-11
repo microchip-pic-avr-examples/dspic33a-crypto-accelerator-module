@@ -45,30 +45,6 @@ Microchip or any third party.
 #include "app/app_ecdh.h"
 #include "utils/app_utils.h"
 
-static void ECDH_SplitterPrint(void)
-{
-    UTILS_SplitterPrint();
-}
-
-static void ECDH_ArrayEqualityCheck(const uint8_t *expected,
-        const uint8_t *actual, size_t size)
-{
-    if (size > 0U)
-    {
-        if (true == UTILS_ArrayEqualityCheck(expected, actual, size))
-        {
-            (void) printf(UTILS_GREEN " \r\n\r\n PASS - Generated "
-                "X point matches expected output"
-                UTILS_RESET_COLOR);
-        }
-        else
-        {
-            (void) printf(UTILS_RED " \r\n\r\n FAIL - Data Mismatch"
-                UTILS_RESET_COLOR);
-        }
-    }
-}
-
 static void ECDH_HardwareTestRun(uint8_t *publicKey,
         uint32_t publicKeyLength, uint8_t *privateKey,
         uint32_t privateKeyLength, uint8_t *sharedSecret,
@@ -76,19 +52,25 @@ static void ECDH_HardwareTestRun(uint8_t *publicKey,
         uint32_t expectedOutputLength,
         crypto_EccCurveType_E eccCurveType)
 {
-    crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(CRYPTO_HANDLER_HW_INTERNAL,
-            privateKey, privateKeyLength, publicKey, publicKeyLength,
-            sharedSecret, expectedOutputLength, eccCurveType, UTILS_SESSION_ID);
+    crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(
+            CRYPTO_HANDLER_HW_INTERNAL,
+            privateKey, privateKeyLength,
+            publicKey, publicKeyLength,
+            sharedSecret, expectedOutputLength,
+            eccCurveType, UTILS_SESSION_ID);
 
-    UTILS_HexArrayPrint("Shared Secret :", sharedSecret, expectedOutputLength);
+    UTILS_HexArrayPrint("Shared Secret :",
+            sharedSecret, expectedOutputLength);
 
     if (error == CRYPTO_KAS_SUCCESS)
     {
-        ECDH_ArrayEqualityCheck(expectedOutput, sharedSecret, expectedOutputLength);
+        UTILS_ArrayEqualityResultPrint(expectedOutput,
+                sharedSecret, expectedOutputLength);
     }
     else
     {
-        (void) printf(UTILS_RED "\r\nERROR in driver was thrown\r\n" UTILS_RESET_COLOR);
+        UTILS_CryptoErrorPrint("ECDH Shared Secret",
+                (int) error);
     }
 }
 
@@ -260,11 +242,11 @@ static void ECDH_P521TestRun(void)
 
 void ECDH_TestRun(void)
 {
-    ECDH_SplitterPrint();
+    UTILS_SplitterPrint();
     (void) printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
     ECDH_P192TestRun();
     ECDH_P256TestRun();
     ECDH_P384TestRun();
     ECDH_P521TestRun();
-    ECDH_SplitterPrint();
+    UTILS_SplitterPrint();
 }

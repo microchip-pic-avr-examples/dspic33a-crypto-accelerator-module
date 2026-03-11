@@ -86,7 +86,7 @@ static void ECDSA_StatusPrint(crypto_DigiSign_Status_E status,
     else
     {
         (void) printf(UTILS_GREEN
-                " \r\n ECDSA %s PASS "
+                " \r\n\r\n ECDSA %s PASS "
                 UTILS_RESET_COLOR, type);
     }
 }

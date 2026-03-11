@@ -59,9 +59,9 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-#define UTILS_SEPARATOR_LENGTH  (100)
+#define UTILS_SEPARATOR_LENGTH  (104)
 #define UTILS_HEX_WRAP_COLUMN   (16U)
-#define UTILS_HEADER_WIDTH      (94)
+#define UTILS_HEADER_WIDTH      (104)
 
 // *****************************************************************************
 // *****************************************************************************
@@ -108,10 +108,7 @@ void UTILS_ArrayEqualityResultPrint(const uint8_t *expected,
 void UTILS_HexArrayPrint(const char *label,
         const uint8_t *data, uint32_t size)
 {
-    (void) printf(UTILS_BLUE
-            "\r\n ----------------------------------------"
-            "---------------------------------------------"
-            UTILS_RESET_COLOR);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
     (void) printf("\r\n %-22s :", label);
 
@@ -160,8 +157,9 @@ void UTILS_TestHeaderPrint(const char *header)
     int padding = (UTILS_HEADER_WIDTH - headerLength) / 2;
 
     (void) printf(UTILS_MAG
-            "\r\n\r\n *************************************"
-            "*********************************************************");
+            "\r\n\r\n ****************************************"
+            "****************************************"
+            "************************");
 
     (void) printf(UTILS_CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
@@ -169,8 +167,9 @@ void UTILS_TestHeaderPrint(const char *header)
     (void) printf("%*c", padding, ' ');
 
     (void) printf(UTILS_MAG
-            "\r\n **************************************"
-            "********************************************************"
+            "\r\n ****************************************"
+            "****************************************"
+            "************************"
             UTILS_RESET_COLOR);
 }
 

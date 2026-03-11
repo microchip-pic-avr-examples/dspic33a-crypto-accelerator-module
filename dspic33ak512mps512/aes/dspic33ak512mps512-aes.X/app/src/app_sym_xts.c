@@ -66,11 +66,7 @@ static crypto_Sym_Status_E SYM_XtsDirectTestRun(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
@@ -128,11 +124,7 @@ static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
         }
         else
         {
-            (void) printf(UTILS_BLUE
-                    "\r\n ---------------------------------"
-                    "----------------------------------------------"
-                    "--------------"
-                    UTILS_RESET_COLOR);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n%s", " Data (Input)           :  None");
         }
 
@@ -172,22 +164,23 @@ static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
 
 static void SYM_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint32_t length)
 {
-    (void) printf(UTILS_BLUE
-            "\r\n ---------------------------------"
-            "----------------------------------------------"
-            "--------------"
-            UTILS_RESET_COLOR);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
     if (length > 0UL)
     {
         if (true == UTILS_ArrayEqualityCheck(result, text, length))
         {
-            (void) printf(UTILS_GREEN"\r\n Encryption: PASS    "UTILS_RESET_COLOR );
+            (void) printf(UTILS_GREEN
+                    "\r\n Encryption: PASS"
+                    UTILS_RESET_COLOR);
         }
         else
         {
-            UTILS_HexArrayPrint("Expected Data        ", text, length);
-            (void) printf(UTILS_RED"\r\n Encryption: FAILED  "UTILS_RESET_COLOR);
+            UTILS_HexArrayPrint("Expected Data        ",
+                    text, length);
+            (void) printf(UTILS_RED
+                    "\r\n Encryption: FAIL"
+                    UTILS_RESET_COLOR);
         }
     }
 }
@@ -268,16 +261,9 @@ void SYM_XtsTestRun(void)
             }
         }
 
-        (void) printf(UTILS_BLUE
-                "\r\n\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        (void) printf("\r\n");
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
         ciphertext = (test->textLength > 0UL) ? encryptedStepsResult : NULL;
 
@@ -317,16 +303,9 @@ void SYM_XtsTestRun(void)
             }
         }
 
-        (void) printf(UTILS_BLUE
-                "\r\n\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
-        (void) printf(UTILS_BLUE
-                "\r\n ---------------------------------"
-                "----------------------------------------------"
-                "--------------"
-                UTILS_RESET_COLOR);
+        (void) printf("\r\n");
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         (void) printf("\r\n\r\n COMPARING TESTS...");
 
         // Verify the direct and stepwise tests generate the same result.
