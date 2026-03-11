@@ -12,7 +12,7 @@
 *******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -35,13 +35,14 @@ Microchip or any third party.
 */
 
 #ifndef APP_ECDH_H
-#define	APP_ECDH_H
+#define APP_ECDH_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
-void test_ecdh(void);
 
-#endif	/* APP_ECDH_H */
+void ECDH_TestRun(void);
+
+#endif /* APP_ECDH_H */
