@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -52,48 +52,48 @@ Microchip or any third party.
 #include "app/app_hmac.h"
 #include "app/app_gmac.h"
 
-static uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+static uint8_t MAC_ArrayEqualityCheck(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
     uint8_t result = 0;
 
     if (size > 0U)
     {
-        const uint8_t *tempa = a;
-        const uint8_t *tempb = b;
+        const uint8_t *tempExpected = expected;
+        const uint8_t *tempActual = actual;
 
-        for (unsigned int i = 0; i < size; i++)
+        for (size_t byteIndex = 0U; byteIndex < size; byteIndex++)
         {
-            result |= tempa[i] ^ tempb[i];
+            result |= (uint8_t)(tempExpected[byteIndex] ^ tempActual[byteIndex]);
         }
-
     }
     return result;
 }
 
-
-
-void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
+void MAC_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
-	uint8_t result = checkArrayEquality(a, b, size);
+    uint8_t result = MAC_ArrayEqualityCheck(expected, actual, size);
 
-    if(result == 0U)
+    if (result == 0U)
     {
-        (void) printf(GREEN" \r\n\r\n PASS "RESET_COLOR);
+        (void) printf(GREEN " \r\n\r\n PASS " RESET_COLOR);
     }
     else
     {
-        (void) printf(RED" \r\n\r\n FAIL - Data Mismatch"RESET_COLOR);
+        (void) printf(RED " \r\n\r\n FAIL - Data Mismatch" RESET_COLOR);
     }
 }
 
-
-void printHexArray(const char* label, uint8_t* data, uint32_t size)
+void MAC_HexArrayPrint(const char *label, uint8_t *data, uint32_t size)
 {
     if (size > 0U)
     {
         const uint8_t *ldata = data;
 
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+            "\r\n -----------------------------------------"
+            "--------------------------------------------"
+            "----" RESET_COLOR);
+
         (void) printf("\r\n %s  : ", label);
 
         for (uint32_t index = 0U; index < size; index++)
@@ -109,88 +109,145 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
 }
 
 #ifdef RUN_MAC_CMAC_TEST
-void printCmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
+void MAC_CmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
-    int headerLen = strlen(header);
-    int padding = (94 - headerLen) / 2;
 
-    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
-    (void) printf(CYAN"\r\n ");
+    (void) sprintf(header,
+        " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
+        wrapperType, keyBitLength, testType,
+        (unsigned long)dataLength, additionalInfo);
+
+    int headerLength = (int)strlen(header);
+    int padding = (94 - headerLength) / 2;
+
+    (void) printf(MAG
+        "\r\n\r\n *************************************"
+        "*********************************************************");
+
+    (void) printf(CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
     (void) printf("%s", header);
     (void) printf("%*c", padding, ' ');
-    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+
+    (void) printf(MAG
+        "\r\n **************************************"
+        "********************************************************"
+        RESET_COLOR);
 }
 
-void printCmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status)
+void MAC_CmacCryptoErrorPrint(unsigned long keyBitLength,
+        const char *testType, const char *description,
+        int status)
 {
-    (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
+    (void) printf(RED
+        "\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"
+        RESET_COLOR, keyBitLength, testType,
+        description, status);
 }
 #endif
 
 #ifdef RUN_MAC_HMAC_TEST
-void printHmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, const char *shaType, uint32_t dataLen, const char* additionalInfo)
+void MAC_HmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        const char *shaType, uint32_t dataLength,
+        const char *additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s %s SHA-%s TEST - KEY: %lu BITS, DATA: %lu BYTES%s", wrapperType, testType, shaType, keyBitLen, (unsigned long)dataLen, additionalInfo);
-    int headerLen = strlen(header);
-    int padding = (94 - headerLen) / 2;
 
-    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
-    (void) printf(CYAN"\r\n ");
+    (void) sprintf(header,
+        " %s %s SHA-%s TEST - KEY: %lu BITS,"
+        " DATA: %lu BYTES%s",
+        wrapperType, testType, shaType, keyBitLength,
+        (unsigned long)dataLength, additionalInfo);
+
+    int headerLength = (int)strlen(header);
+    int padding = (94 - headerLength) / 2;
+
+    (void) printf(MAG
+        "\r\n\r\n *************************************"
+        "*********************************************************");
+
+    (void) printf(CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
     (void) printf("%s", header);
     (void) printf("%*c", padding, ' ');
-    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+
+    (void) printf(MAG
+        "\r\n **************************************"
+        "********************************************************"
+        RESET_COLOR);
 }
 
-void printHmacCryptoError(const char* testType, const char* description, int status)
+void MAC_HmacCryptoErrorPrint(const char *testType,
+        const char *description, int status)
 {
-    (void) printf(RED"\r\nCrypto v4 %s %s Result: %d\r\n"RESET_COLOR, testType, description, status);
+    (void) printf(RED
+        "\r\nCrypto v4 %s %s Result: %d\r\n"
+        RESET_COLOR, testType, description, status);
 }
 #endif
 
 #ifdef RUN_MAC_GMAC_TEST
-void printGmacTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
+void MAC_GmacTestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *additionalInfo)
 {
     char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long)dataLen, additionalInfo);
-    int headerLen = strlen(header);
-    int padding = (94 - headerLen) / 2;
 
-    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
-    (void) printf(CYAN"\r\n ");
+    (void) sprintf(header,
+        " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
+        wrapperType, keyBitLength, testType,
+        (unsigned long)dataLength, additionalInfo);
+
+    int headerLength = (int)strlen(header);
+    int padding = (94 - headerLength) / 2;
+
+    (void) printf(MAG
+        "\r\n\r\n *************************************"
+        "*********************************************************");
+
+    (void) printf(CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
     (void) printf("%s", header);
     (void) printf("%*c", padding, ' ');
-    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+
+    (void) printf(MAG
+        "\r\n **************************************"
+        "********************************************************"
+        RESET_COLOR);
 }
 
-void printGmacCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status)
+void MAC_GmacCryptoErrorPrint(unsigned long keyBitLength,
+        const char *testType, const char *description,
+        int status)
 {
-    (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
+    (void) printf(RED
+        "\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"
+        RESET_COLOR, keyBitLength, testType,
+        description, status);
 }
 #endif
 
 #ifdef RUN_MAC_CMAC_TEST
-void mac_test_cmac(void)
+void MAC_CmacTestRun(void)
 {
-    mac_cmac_test();
+    CMAC_TestRun();
 }
 #endif
 
 #ifdef RUN_MAC_HMAC_TEST
-void mac_test_hmac(void)
+void MAC_HmacTestRun(void)
 {
-    mac_hmac_test();
+    HMAC_TestRun();
 }
 #endif
 
 #ifdef RUN_MAC_GMAC_TEST
-void mac_test_gmac(void)
+void MAC_GmacTestRun(void)
 {
-    mac_gmac_test();
+    GMAC_TestRun();
 }
 #endif
