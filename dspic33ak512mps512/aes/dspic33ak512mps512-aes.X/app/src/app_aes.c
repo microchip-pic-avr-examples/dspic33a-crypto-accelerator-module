@@ -44,10 +44,7 @@ Microchip or any third party.
 *  in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include <string.h>
-#include "crypto/common_crypto/crypto_common.h"
 #include "app/app_aes.h"
 
 void AES_TestHeaderPrint(const char *wrapperType,

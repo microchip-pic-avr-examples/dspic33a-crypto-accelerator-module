@@ -41,8 +41,6 @@ Microchip or any third party.
  *  Reasoning: This demo uses printf to print out information to a terminal.
  */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "app/app_trng.h"
 #include "mcc_generated_files/system/system.h"
 

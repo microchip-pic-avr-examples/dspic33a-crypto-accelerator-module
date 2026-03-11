@@ -43,7 +43,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
 
 #include "app/app_aes_hash.h"

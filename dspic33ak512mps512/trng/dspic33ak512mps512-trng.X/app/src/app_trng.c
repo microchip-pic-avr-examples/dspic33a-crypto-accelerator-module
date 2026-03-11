@@ -41,7 +41,6 @@ Microchip or any third party.
  *  Reasoning: This demo uses printf to print out information to a terminal.
  */
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"

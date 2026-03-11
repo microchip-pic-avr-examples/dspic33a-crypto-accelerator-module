@@ -52,8 +52,6 @@ Microchip or any third party.
 */
 
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
 
@@ -63,8 +61,6 @@ Microchip or any third party.
 #include "app/app_mac.h"
 #include "app/app_aead.h"
 #include "app/app_sha.h"
-
-#include "crypto/common_crypto/crypto_common.h"
 
 // *****************************************************************************
 // *****************************************************************************
