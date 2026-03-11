@@ -14,7 +14,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -38,14 +38,41 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SYM_H
-#define	APP_SYM_H
+#define APP_SYM_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #include "app_aes_hash.h"
+#include "test_vectors/sym_test_vector.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Type Definitions
+// *****************************************************************************
+// *****************************************************************************
+
+// Maximum size of the result data.
+#define DATA_RESULT_SIZE    (48U)
+
+typedef struct
+{
+    // Pointer to current test vector data.
+    sym_test_vector_t *test;
+
+    // Contains the data result.
+    uint8_t dataResult[DATA_RESULT_SIZE];
+
+    // The test mode (encrypt/decrypt).
+    test_mode_t testMode;
+
+    // The symmetric encryption type.
+    crypto_Sym_OpModes_E opMode;
+
+} sym_test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -60,16 +87,16 @@ extern "C" {
 #define RUN_SYM_OFB_TEST
 #define RUN_SYM_XTS_TEST
 
-typedef enum SYM_OPER_MODE
+typedef enum
 {
-  SYM_OPER_MODE_AES_ECB = 0,
-  SYM_OPER_MODE_AES_CTR = 1,
-  SYM_OPER_MODE_AES_CBC = 2,
-  SYM_OPER_MODE_AES_CFB128 = 3,
-  SYM_OPER_MODE_AES_OFB = 4,
-  SYM_OPER_MODE_AES_XTS = 5,
-  SYM_OPER_MODE_COUNT = 6
-} SYM_OPER_MODE;
+    SYM_OPER_MODE_AES_ECB = 0,
+    SYM_OPER_MODE_AES_CTR = 1,
+    SYM_OPER_MODE_AES_CBC = 2,
+    SYM_OPER_MODE_AES_CFB128 = 3,
+    SYM_OPER_MODE_AES_OFB = 4,
+    SYM_OPER_MODE_AES_XTS = 5,
+    SYM_OPER_MODE_COUNT = 6
+} sym_oper_mode_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -85,7 +112,8 @@ typedef enum SYM_OPER_MODE
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initiaolization result is a failure.
  */
-TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MODE opMode);
+test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode,
+        sym_oper_mode_t opMode);
 
 /**
  * @brief Advance the AES symmetric test state machine.
@@ -94,12 +122,11 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-TEST_RESULT sym_test_advance(TEST_CONTEXT *context);
+test_result_t SYM_TestAdvance(test_context_t *context);
 
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SYM_H */
+#endif /* APP_SYM_H */
 

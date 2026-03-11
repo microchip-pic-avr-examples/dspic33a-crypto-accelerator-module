@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -24,15 +24,17 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef SYM_TEST_VECTOR_H
-#define	SYM_TEST_VECTOR_H
+#define SYM_TEST_VECTOR_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #include <stdint.h>
 
-typedef struct TEST_VECTOR {
+typedef struct
+{
     uint32_t    id;
     uint32_t    mode;
 
@@ -48,28 +50,28 @@ typedef struct TEST_VECTOR {
 
     uint8_t *   initializationVector;
     uint32_t    initializationVectorLength;
-} TEST_VECTOR;
+} sym_test_vector_t;
 
-TEST_VECTOR * get_ecb_test_vectors(void);
-uint32_t get_ecb_test_vector_count(void);
+sym_test_vector_t *VECTOR_EcbTestVectorsGet(void);
+uint32_t VECTOR_EcbTestVectorCountGet(void);
 
-TEST_VECTOR * get_ctr_test_vectors(void);
-uint32_t get_ctr_test_vector_count(void);
+sym_test_vector_t *VECTOR_CtrTestVectorsGet(void);
+uint32_t VECTOR_CtrTestVectorCountGet(void);
 
-TEST_VECTOR * get_cbc_test_vectors(void);
-uint32_t get_cbc_test_vector_count(void);
+sym_test_vector_t *VECTOR_CbcTestVectorsGet(void);
+uint32_t VECTOR_CbcTestVectorCountGet(void);
 
-TEST_VECTOR * get_cfb128_test_vectors(void);
-uint32_t get_cfb128_test_vector_count(void);
+sym_test_vector_t *VECTOR_Cfb128TestVectorsGet(void);
+uint32_t VECTOR_Cfb128TestVectorCountGet(void);
 
-TEST_VECTOR * get_ofb_test_vectors(void);
-uint32_t get_ofb_test_vector_count(void);
+sym_test_vector_t *VECTOR_OfbTestVectorsGet(void);
+uint32_t VECTOR_OfbTestVectorCountGet(void);
 
-TEST_VECTOR * get_xts_test_vectors(void);
-uint32_t get_xts_test_vector_count(void);
+sym_test_vector_t *VECTOR_XtsTestVectorsGet(void);
+uint32_t VECTOR_XtsTestVectorCountGet(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* MAC_TEST_VECTOR_H */
+#endif /* SYM_TEST_VECTOR_H */

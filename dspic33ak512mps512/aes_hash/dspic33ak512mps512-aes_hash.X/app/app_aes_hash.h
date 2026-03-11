@@ -8,12 +8,13 @@
     app_aes_hash.h
 
   Summary:
-    This header file provides prototypes and definitions for the application.
+    This header file provides prototypes and definitions for AES and
+    hash test orchestration in the application.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -37,16 +38,16 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_AES_HASH_H
-#define	APP_AES_HASH_H
+#define APP_AES_HASH_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -71,7 +72,6 @@ extern "C" {
 // *****************************************************************************
 
 #define RESET_COLOR "\x1B""[0m"     // Reset the print output to default
-#define GRAY        "\x1B""[1;30m"  // Set output to bold black
 #define RED         "\x1B""[1;31m"  // Set output to bold red
 #define GREEN       "\x1B""[1;32m"  // Set output to bold green
 #define YELLOW      "\x1B""[1;33m"  // Set output to bold yellow
@@ -80,68 +80,62 @@ extern "C" {
 #define CYAN        "\x1B""[1;36m"  // Set output to bold cyan
 #define WHITE       "\x1B""[1;37m"  // Set output to bold white
 
-
 /**
  * @brief Defines the test operation mode (encrypt/hash/decrypt).
  */
-typedef enum TEST_MODE {
-  TEST_MODE_ENCRYPT = 0,
-  TEST_MODE_DECRYPT = 1,
-  TEST_MODE_HASH = 2,
-} TEST_MODE;
+typedef enum
+{
+    TEST_MODE_ENCRYPT = 0,
+    TEST_MODE_DECRYPT = 1,
+    TEST_MODE_HASH = 2,
+} test_mode_t;
 
 /**
  * @brief Defines test results.
  */
-typedef enum TEST_RESULT {
-  TEST_RESULT_SUCCESS = 0,
-  TEST_RESULT_INIT_FAILED = 1,
-  TEST_RESULT_HASH_FAILED = 2,
-  TEST_RESULT_ADD_AAD_FAILED = 3,
-  TEST_RESULT_CIPHER_FAILED = 4,
-  TEST_RESULT_FINALIZE_FAILED = 5,
-  TEST_RESULT_DATA_COMPARE_FAILED = 6,
-  TEST_RESULT_TAG_COMPARE_FAILED = 7,
+typedef enum
+{
+    TEST_RESULT_SUCCESS = 0,
+    TEST_RESULT_INIT_FAILED = 1,
+    TEST_RESULT_HASH_FAILED = 2,
+    TEST_RESULT_ADD_AAD_FAILED = 3,
+    TEST_RESULT_CIPHER_FAILED = 4,
+    TEST_RESULT_FINALIZE_FAILED = 5,
+    TEST_RESULT_DATA_COMPARE_FAILED = 6,
+    TEST_RESULT_TAG_COMPARE_FAILED = 7,
 
-  TEST_RESULT_ALL_TESTS_DONE = 255
-} TEST_RESULT;
+    TEST_RESULT_ALL_TESTS_DONE = 255
+} test_result_t;
 
 /**
  * @brief Defines a callback for each test step.
  */
-typedef TEST_RESULT (*TEST_STATE_FN)(void *);
-
-/// Size of the context data space to provide to tests.
-#define MODULE_TEST_CONTEXT_SIZE    (128U)
-
-// Return key length in bits.
-#define KEY_LENGTH_IN_BITS(len) ((len) * 8U)
+typedef test_result_t (*test_state_fn_t)(void *);
 
 /**
  * Defines a test context.
  */
-typedef struct TEST_CONTEXT
+typedef struct test_context
 {
     // Pointer to next test context to process.
-    struct TEST_CONTEXT *next;
+    struct test_context *next;
 
-    uint8_t *tests;         // Pointer to module-specific test contents.
-    TEST_STATE_FN *states;  // Pointer to test states.
+    void *tests;                // Pointer to module-specific test contents.
+    test_state_fn_t *states;    // Pointer to test states.
 
-    uint8_t testCount;      // Number of tests to execute for the subsystem.
-    uint8_t test;           // The current test number.
-    uint8_t stepCount;      // Number of steps in the test state machine.
-    uint8_t step;           // Current step (set to stepCount on failure).
+    uint8_t testCount;          // Number of tests to execute for the subsystem.
+    uint8_t test;               // The current test number.
+    uint8_t stepCount;          // Number of steps in the test state machine.
+    uint8_t step;               // Current step (set to stepCount on failure).
 
-    TEST_MODE testMode;     // Test operation mode (encrypt/decrypt/hash/etc.)
+    test_mode_t testMode;       // Test operation mode (encrypt/decrypt/hash/etc.)
 
     // Pointer to module specific test context data.
-    uint8_t testContext[MODULE_TEST_CONTEXT_SIZE] __attribute__((aligned(4)));
+    void *testContext;
 
-    TEST_RESULT lastResult; // Last test result
+    test_result_t lastResult;   // Last test result
 
-} TEST_CONTEXT;
-
+} test_context_t;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -156,15 +150,15 @@ typedef struct TEST_CONTEXT
  * @param size The length of the data to check.
  * @return TRUE if equal, FALSE if not.
  */
-bool checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size);
-
+bool AESHASH_ArrayEqualityCheck(const uint8_t *expected,
+        const uint8_t *actual, size_t size);
 
 /**
  * @brief Print a separator line.
  * @param color The color string to print first.
  * @param sep The character to print as the separator.
  */
-void printSeparator(const char *color, char sep);
+void AESHASH_SeparatorPrint(const char *color, char sep);
 
 /**
  * @brief Print to console with a header label.
@@ -172,7 +166,7 @@ void printSeparator(const char *color, char sep);
  * @param format POinter to format string.
  * @param <variable arguments>
  */
-void printWithLabel(const char* label, const char* format, ...);
+void AESHASH_LabelPrint(const char *label, const char *format, ...);
 
 /**
  * @brief Print an array to the console as hex characters.
@@ -180,22 +174,15 @@ void printWithLabel(const char* label, const char* format, ...);
  * @param data The array data to print.
  * @param size The length of the data to print.
  */
-void printHexArray(const char* label, void* data, uint32_t size);
-
+void AESHASH_HexArrayPrint(const char *label,
+        const uint8_t *data, uint32_t size);
 
 /**
  * @brief Get a string representing the test mode.
  * @param testMode The test mode.
  * @return A string representing the test mode.
  */
-const char *getTestMode(TEST_MODE testMode);
-
-/**
- * @brief Get the error string corresponding to the error code.
- * @param result The test result error code.
- * @return Pointer to string.
- */
-const char * getTestError(TEST_RESULT result);
+const char *AESHASH_TestModeGet(test_mode_t testMode);
 
 /**
  * @brief Print the current operation step.
@@ -205,44 +192,43 @@ const char * getTestError(TEST_RESULT result);
  * @param size The data size in bytes
  * @param printSize If TRUE, print the size.
  */
-void printOperationStep(const char *step, const char *op, TEST_MODE testMode, uint32_t size, bool printSize);
-
+void AESHASH_OperationStepPrint(const char *step, const char *op,
+        test_mode_t testMode, uint32_t size, bool printSize);
 
 /**
  * @brief Print out success or error.
  * @param result The test result error code.
  * @param status The status of the operation.
  */
-void printCryptoResult(TEST_RESULT result, int status);
+void AESHASH_CryptoResultPrint(test_result_t result, int status);
 
 /**
  * @brief Run the symmetric AES tests.
  */
-void aes_test_sym(void);
+void AESHASH_SymTestRun(void);
 
 /**
  * @brief Run the AES MAC tests.
  */
-void aes_test_mac(void);
+void AESHASH_MacTestRun(void);
 
 /**
  * @brief Run the AES AEAD tests.
  */
-void aes_test_aead(void);
+void AESHASH_AeadTestRun(void);
 
 /**
  * @brief Run the HASH tests.
  */
-void test_hash(void);
+void AESHASH_HashTestRun(void);
 
 /**
  * @brief Run the concurrent mode tests.
  */
-void test_concurrent(void);
+void AESHASH_ConcurrentTestRun(void);
 
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_AES_HASH_H */
+#endif /* APP_AES_HASH_H */

@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -53,37 +53,11 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
-#include "test_vectors/sym_test_vector.h"
-
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID     (0x1)
-
-// Maximum size of the result data.
-#define DATA_RESULT_SIZE    (48U)
-
-
-/**
- * @brief test context data for AES symmetric tests.
- */
-typedef struct SYM_TEST_CONTEXT {
-    // Pointer to current test vector data.
-    TEST_VECTOR *           test;
-
-    // Contains the data result.
-    uint8_t                 dataResult[DATA_RESULT_SIZE];
-
-    // The test mode (encrypt/decrypt).
-    TEST_MODE               testMode;
-
-    // The symmetric encryption type.
-    crypto_Sym_OpModes_E    opMode;
-
-} SYM_TEST_CONTEXT;
-
+#define TEST_SESSION_ID     (0x1U)
 
 // Context for AES calculations.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,9 +72,10 @@ static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
  * @param length Length of the data.
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED on failure.
  */
-static TEST_RESULT checkResult(uint8_t *expected, uint8_t *result, uint32_t length)
+static test_result_t SYM_ResultCheck(const uint8_t *expected,
+        const uint8_t *result, uint32_t length)
 {
-    TEST_RESULT retval = TEST_RESULT_SUCCESS;
+    test_result_t retval = TEST_RESULT_SUCCESS;
 
     if (length > 0UL)
     {
@@ -113,89 +88,114 @@ static TEST_RESULT checkResult(uint8_t *expected, uint8_t *result, uint32_t leng
     return retval;
 }
 
-
 /**
  * @brief Get the test operation mode string based on the mode.
  * @param opMode The AES symmetric operations mode.
  * @return Pointer to string.
  */
-static const char *getTestOpMode(crypto_Sym_OpModes_E opMode)
+static const char *SYM_TestOpModeGet(crypto_Sym_OpModes_E opMode)
 {
-    const char* opModeStr = "???";
+    const char *opModeString = "???";
 
-    switch(opMode)
+    switch (opMode)
     {
         case CRYPTO_SYM_OPMODE_ECB:
-            opModeStr = "AES-ECB";
+            opModeString = "AES-ECB";
             break;
 
         case CRYPTO_SYM_OPMODE_CTR:
-            opModeStr = "AES-CTR";
+            opModeString = "AES-CTR";
             break;
-            
+
         case CRYPTO_SYM_OPMODE_CBC:
-            opModeStr = "AES-CBC";
+            opModeString = "AES-CBC";
             break;
-            
+
         case CRYPTO_SYM_OPMODE_CFB128:
-            opModeStr = "AES-CFB128";
+            opModeString = "AES-CFB128";
             break;
-            
+
         case CRYPTO_SYM_OPMODE_OFB:
-            opModeStr = "AES-OFB";
+            opModeString = "AES-OFB";
             break;
 
         case CRYPTO_SYM_OPMODE_XTS:
-            opModeStr = "AES-XTS";
+            opModeString = "AES-XTS";
             break;
 
         default:
             break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Symmetric AES Test State Machine Functions
+// *****************************************************************************
+// *****************************************************************************
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Symmetric AES test state machine Functions
-// *****************************************************************************
-// *****************************************************************************
+/**
+ * @brief Defines the states for an AES symmetric cipher test.
+ */
+enum
+{
+    SYM_TEST_STEP_INIT = 0,
+    SYM_TEST_STEP_FINAL = 1,
+    SYM_TEST_STEP_NUMBER_OF_STEPS
+};
 
 /**
  * @brief The AES symmetric test init state function.
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static TEST_RESULT aes_sym_test_init(void *context)
+static test_result_t SYM_TestStepInit(void *context)
 {
-    SYM_TEST_CONTEXT *testContext = (SYM_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
-    crypto_CipherOper_E testMode = (testContext->testMode == TEST_MODE_ENCRYPT ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT);
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    sym_test_context_t *testContext = (sym_test_context_t *)context;
+    sym_test_vector_t *test = testContext->test;
+    crypto_CipherOper_E testMode =
+            (testContext->testMode == TEST_MODE_ENCRYPT)
+            ? CRYPTO_CIOP_ENCRYPT : CRYPTO_CIOP_DECRYPT;
 
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result;
+    test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT ? test->ptData : test->ctData);
+    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
+            ? test->ptData : test->ctData;
 
-    (void) printf(BLUE "\r\n\r\n %s %s Test %ld", getTestOpMode(testContext->opMode), getTestMode(testContext->testMode), test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+            SYM_TestOpModeGet(testContext->opMode),
+            AESHASH_TestModeGet(testContext->testMode),
+            (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Key", test->key, test->keyLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", data, test->dataLength);
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Key", test->key, test->keyLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", data, test->dataLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
-    status = Crypto_Sym_Aes_Init(&aesCtx, CRYPTO_HANDLER_HW_INTERNAL, testMode, testContext->opMode, test->key, test->keyLength,
-                                 test->initializationVector, TEST_SESSION_ID);
-    result = (status == CRYPTO_SYM_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
+    status = Crypto_Sym_Aes_Init(&aesCtx,
+            CRYPTO_HANDLER_HW_INTERNAL, testMode,
+            testContext->opMode, test->key, test->keyLength,
+            test->initializationVector, TEST_SESSION_ID);
+    result = (status == CRYPTO_SYM_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(CYAN);
-    printOperationStep("INITIALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
-    printCryptoResult(result, status);
+    AESHASH_OperationStepPrint("INITIALIZING",
+            SYM_TestOpModeGet(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -205,54 +205,73 @@ static TEST_RESULT aes_sym_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static TEST_RESULT aes_sym_test_final(void *context)
+static test_result_t SYM_TestFinalizeRun(void *context)
 {
-    SYM_TEST_CONTEXT *testContext = (SYM_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
-    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT ? test->ptData : test->ctData);
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    sym_test_context_t *testContext = (sym_test_context_t *)context;
+    sym_test_vector_t *test = testContext->test;
+    uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
+            ? test->ptData : test->ctData;
 
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
+    test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(CYAN);
-    printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+    AESHASH_OperationStepPrint("FINALIZING",
+            SYM_TestOpModeGet(testContext->opMode),
+            testContext->testMode, test->dataLength, true);
 
-    if (test->mode == CRYPTO_SYM_OPMODE_XTS)
+    if (test->mode == (uint32_t) CRYPTO_SYM_OPMODE_XTS)
     {
-        status = Crypto_Sym_AesXts_Cipher(&aesCtx, data, test->dataLength, testContext->dataResult, test->tweak);
+        status = Crypto_Sym_AesXts_Cipher(&aesCtx, data,
+                test->dataLength, testContext->dataResult,
+                test->tweak);
     }
     else
     {
-        status = Crypto_Sym_Aes_Cipher(&aesCtx, data, test->dataLength, testContext->dataResult);
+        status = Crypto_Sym_Aes_Cipher(&aesCtx, data,
+                test->dataLength, testContext->dataResult);
     }
 
-    result = (status == CRYPTO_SYM_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
+    result = (status == CRYPTO_SYM_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS
+            : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_SYM_CIPHER_SUCCESS)
     {
-        uint8_t *resultData = (testContext->testMode == TEST_MODE_ENCRYPT ? test->ctData : test->ptData);
+        uint8_t *resultData =
+                (testContext->testMode == TEST_MODE_ENCRYPT)
+                ? test->ctData : test->ptData;
 
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printHexArray("Data (Result)", data, test->dataLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_HexArrayPrint("Data (Result)", data, test->dataLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
         (void) printf(CYAN);
-        printOperationStep("VERIFYING", getTestOpMode(testContext->opMode), testContext->testMode, test->dataLength, true);
+        AESHASH_OperationStepPrint("VERIFYING",
+                SYM_TestOpModeGet(testContext->opMode),
+                testContext->testMode,
+                test->dataLength, true);
 
-        result = checkResult(resultData, testContext->dataResult, test->dataLength);
+        result = SYM_ResultCheck(resultData, testContext->dataResult, test->dataLength);
 
-        printCryptoResult(result, status);
+        AESHASH_CryptoResultPrint(result, status);
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            printSeparator(BLUE, '-');
-            printHexArray("Expected:", resultData, test->dataLength);
-            printSeparator(BLUE, '-');
-            printHexArray("Result: ", testContext->dataResult, test->dataLength);
-            printSeparator(BLUE, '-');
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Expected:", resultData, test->dataLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Result: ", testContext->dataResult, test->dataLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
         }
     }
 
@@ -266,38 +285,37 @@ static TEST_RESULT aes_sym_test_final(void *context)
 // *****************************************************************************
 
 /**
- * @brief Defines the states for an AES symmetric cipher test.
- */
-typedef enum SYM_TEST_STEPS {
-    SYM_TEST_STEP_INIT = 0,
-    SYM_TEST_STEP_FINAL = 1,
-    SYM_TEST_STEP_NUMBER_OF_STEPS
-} SYM_TEST_STEPS;
-
-/**
  * @brief Defines the state functions for an AES symmetric cipher test.
  */
-static TEST_STATE_FN sym_test_states[] =
+
+test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym_oper_mode_t opMode)
 {
-    aes_sym_test_init,
-    aes_sym_test_final,
-};
 
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    sym_test_context_t *testContext = (sym_test_context_t *)context->testContext;
+    test_result_t result = TEST_RESULT_SUCCESS;
 
-TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MODE opMode)
-{
-    SYM_TEST_CONTEXT *testContext = (SYM_TEST_CONTEXT *)context->testContext;
-    TEST_RESULT result = TEST_RESULT_SUCCESS;
+    static test_state_fn_t sym_test_states[] =
+    {
+        SYM_TestStepInit,
+        SYM_TestFinalizeRun,
+    };
 
-    (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    (void) memset(context, 0, sizeof(test_context_t));
+    context->testContext = testContext;
 
     switch (opMode)
     {
         case SYM_OPER_MODE_AES_ECB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ecb_test_vectors();
-            context->testCount = get_ecb_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_EcbTestVectorsGet();
+            context->testCount = VECTOR_EcbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_ECB;
         }
         break;
@@ -305,35 +323,35 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
         case SYM_OPER_MODE_AES_CTR:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ctr_test_vectors();
-            context->testCount = get_ctr_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_CtrTestVectorsGet();
+            context->testCount = VECTOR_CtrTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CTR;
         }
         break;
-        
+
         case SYM_OPER_MODE_AES_CBC:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_cbc_test_vectors();
-            context->testCount = get_cbc_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_CbcTestVectorsGet();
+            context->testCount = VECTOR_CbcTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CBC;
         }
         break;
-        
+
         case SYM_OPER_MODE_AES_CFB128:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_cfb128_test_vectors();
-            context->testCount = get_cfb128_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_Cfb128TestVectorsGet();
+            context->testCount = VECTOR_Cfb128TestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_CFB128;
         }
         break;
-        
+
         case SYM_OPER_MODE_AES_OFB:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_ofb_test_vectors();
-            context->testCount = get_ofb_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_OfbTestVectorsGet();
+            context->testCount = VECTOR_OfbTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_OFB;
         }
         break;
@@ -341,15 +359,18 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
         case SYM_OPER_MODE_AES_XTS:
         {
             context->states = sym_test_states;
-            context->tests = (uint8_t *)get_xts_test_vectors();
-            context->testCount = get_xts_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_XtsTestVectorsGet();
+            context->testCount = VECTOR_XtsTestVectorCountGet();
             testContext->opMode = CRYPTO_SYM_OPMODE_XTS;
         }
         break;
 
         default:
         {
-            (void) printf(RED "\r\n\r\n Unknown symmetric test operation mode %d" RESET_COLOR, opMode);
+            (void) printf(RED
+                    "\r\n\r\n Unknown symmetric test"
+                    " operation mode %d"
+                    RESET_COLOR, opMode);
             result = TEST_RESULT_INIT_FAILED;
         }
         break;
@@ -364,18 +385,30 @@ TEST_RESULT sym_test_init(TEST_CONTEXT *context, TEST_MODE testMode, SYM_OPER_MO
         context->stepCount = sizeof(sym_test_states) / sizeof(sym_test_states[0]);
         context->step = 0;
 
+        /* cppcheck-suppress misra-c2012-11.5
+         *
+         *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+         *
+         *  Reasoning: A generic pointer allows support for various algorithm test context types.
+         */
+        sym_test_vector_t *tests = (sym_test_vector_t *)context->tests;
+
         // Start at the first test.
-        TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
         testContext->test = &tests[context->test];
     }
 
     return result;
 }
 
-
-TEST_RESULT sym_test_advance(TEST_CONTEXT *context)
+test_result_t SYM_TestAdvance(test_context_t *context)
 {
-    SYM_TEST_CONTEXT *testContext = (SYM_TEST_CONTEXT *)context->testContext;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    sym_test_context_t *testContext = (sym_test_context_t *)context->testContext;
 
     if (context->test < context->testCount)
     {
@@ -403,7 +436,13 @@ TEST_RESULT sym_test_advance(TEST_CONTEXT *context)
                 {
                     context->step = SYM_TEST_STEP_INIT;
 
-                    TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
+                    /* cppcheck-suppress misra-c2012-11.5
+                     *
+                     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+                     *
+                     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+                     */
+                    sym_test_vector_t *tests = (sym_test_vector_t *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }
