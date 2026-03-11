@@ -43,10 +43,7 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include <string.h>
-#include "crypto/common_crypto/crypto_common.h"
 #include "app/app_mac.h"
 #include "app/app_cmac.h"
 #include "app/app_hmac.h"

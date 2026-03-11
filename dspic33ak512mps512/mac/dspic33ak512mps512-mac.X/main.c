@@ -49,8 +49,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_mac.h"
 

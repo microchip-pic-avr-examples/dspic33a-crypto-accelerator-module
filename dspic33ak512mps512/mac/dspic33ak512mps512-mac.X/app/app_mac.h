@@ -43,8 +43,6 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stddef.h>
 #include "utils/app_utils.h"
 
 // *****************************************************************************
