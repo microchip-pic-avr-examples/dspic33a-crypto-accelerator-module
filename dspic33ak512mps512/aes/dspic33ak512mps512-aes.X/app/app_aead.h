@@ -14,7 +14,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -38,9 +38,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_AEAD_H
-#define	APP_AEAD_H
+#define APP_AEAD_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -59,12 +59,12 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void aes_aead_gcm_test(void);
-void aes_aead_ccm_test(void);
+void AEAD_GcmTestRun(void);
 
-#ifdef	__cplusplus
+void AEAD_CcmTestRun(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_AEAD_H */
-
+#endif /* APP_AEAD_H */

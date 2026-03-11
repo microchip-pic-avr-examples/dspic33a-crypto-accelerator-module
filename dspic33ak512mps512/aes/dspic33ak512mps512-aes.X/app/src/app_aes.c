@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -40,7 +40,8 @@ Microchip or any third party.
 *
 *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
 *
-*  Reasoning: printf is required for printing to the terminal in this code example
+*  Reasoning: printf and sprintf are required for printing to the terminal
+*  in this code example
 */
 #include <stdio.h>
 #include <stdbool.h>
@@ -49,31 +50,25 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app/app_aes.h"
 
-uint8_t checkArrayEquality(const uint8_t *a, const uint8_t *b, size_t size)
+uint8_t AES_ArrayEqualityCheck(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
-    uint8_t result = 0;
+    uint8_t result = 0U;
 
     if (size > 0U)
     {
-        const uint8_t *tempa = a;
-        const uint8_t *tempb = b;
-
-        for (unsigned int i = 0; i < size; i++)
+        for (size_t byteIndex = 0U; byteIndex < size; byteIndex++)
         {
-            result |= tempa[i] ^ tempb[i];
+            result |= (uint8_t)(expected[byteIndex] ^ actual[byteIndex]);
         }
-
     }
     return result;
 }
 
-
-
-void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
+void AES_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size)
 {
-	uint8_t result = checkArrayEquality(a, b, size);
+    uint8_t result = AES_ArrayEqualityCheck(expected, actual, size);
 
-    if(result == 0U)
+    if (result == 0U)
     {
         (void) printf(GREEN" \r\n\r\n PASS "RESET_COLOR);
     }
@@ -83,14 +78,15 @@ void printArrayEqualityResult(const uint8_t *a, const uint8_t *b, size_t size)
     }
 }
 
-
-void printHexArray(const char* label, uint8_t* data, uint32_t size)
+void AES_HexArrayPrint(const char *label, const uint8_t *data,
+        uint32_t size)
 {
     if (size > 0U)
     {
-        const uint8_t *ldata = data;
-
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------"RESET_COLOR);
+        (void) printf(BLUE
+            "\r\n -----------------------------------"
+            "--------------------------------------------------"
+            RESET_COLOR);
         (void) printf("\r\n %s  : ", label);
 
         for (uint32_t index = 0U; index < size; index++)
@@ -100,65 +96,80 @@ void printHexArray(const char* label, uint8_t* data, uint32_t size)
                 (void) printf("\r\n                          ");
             }
 
-            (void) printf(" 0x%02x", ldata[index]);
+            (void) printf(" 0x%02x", data[index]);
         }
     }
 }
 
-void printTestHeader(const char* wrapperType, unsigned long keyBitLen, const char* testType, uint32_t dataLen, const char* additionalInfo)
+void AES_TestHeaderPrint(const char *wrapperType,
+        unsigned long keyBitLength, const char *testType,
+        uint32_t dataLength, const char *additionalInfo)
 {
-    char header[94];
-    (void) sprintf(header, " %s AES-%lu %s TEST - DATA: %lu BYTES%s", wrapperType, keyBitLen, testType, (unsigned long) dataLen, additionalInfo);
-    int headerLen = strlen(header);
-    int padding = (94 - headerLen) / 2;
+    char header[94U];
+    (void) sprintf(header,
+        " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
+        wrapperType, keyBitLength, testType,
+        (unsigned long) dataLength, additionalInfo);
+    int headerLength = (int) strlen(header);
+    int padding = (94 - headerLength) / 2;
 
-    (void) printf(MAG"\r\n\r\n **********************************************************************************************");
-    (void) printf(CYAN"\r\n ");
+    (void) printf(MAG
+        "\r\n\r\n ************************************"
+        "******************************************");
+    (void) printf(CYAN "\r\n ");
     (void) printf("%*c", padding, ' ');
     (void) printf("%s", header);
     (void) printf("%*c", padding, ' ');
-    (void) printf(MAG"\r\n **********************************************************************************************"RESET_COLOR);
+    (void) printf(MAG
+        "\r\n ************************************"
+        "******************************************"
+        RESET_COLOR);
 }
 
-void printCryptoError(unsigned long keyBitLen, const char* testType, const char* description, int status)
+void AES_CryptoErrorPrint(unsigned long keyBitLength,
+        const char *testType, const char *description,
+        int status)
 {
-    (void) printf(RED"\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"RESET_COLOR, keyBitLen, testType, description, status);
+    (void) printf(RED
+        "\r\nCrypto v4 AES-%lu %s %s Result: %d\r\n"
+        RESET_COLOR, keyBitLength, testType,
+        description, status);
 }
 
-void aes_test_sym(void)
+void AES_SymTestRun(void)
 {
     #ifdef RUN_SYM_ECB_TEST
-    aes_sym_ecb_test();
+    SYM_EcbTestRun();
     #endif
 
     #ifdef RUN_SYM_CTR_TEST
-    aes_sym_ctr_test();
+    SYM_CtrTestRun();
     #endif
 
     #ifdef RUN_SYM_CBC_TEST
-    aes_sym_cbc_test();
+    SYM_CbcTestRun();
     #endif
 
     #ifdef RUN_SYM_CFB_TEST
-    aes_sym_cfb_test();
+    SYM_CfbTestRun();
     #endif
 
     #ifdef RUN_SYM_OFB_TEST
-    aes_sym_ofb_test();
+    SYM_OfbTestRun();
     #endif
 
     #ifdef RUN_SYM_XTS_TEST
-    aes_sym_xts_test();
+    SYM_XtsTestRun();
     #endif
 }
 
-void aes_test_aead(void)
+void AES_AeadTestRun(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
-    aes_aead_gcm_test();
+    AEAD_GcmTestRun();
     #endif
 
     #ifdef RUN_AEAD_CCM_TEST
-    aes_aead_ccm_test();
+    AEAD_CcmTestRun();
     #endif
 }

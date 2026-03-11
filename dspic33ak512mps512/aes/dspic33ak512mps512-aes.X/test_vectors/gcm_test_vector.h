@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -24,9 +24,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef GCM_TEST_VECTOR_H
-#define	GCM_TEST_VECTOR_H
+#define GCM_TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -41,13 +41,14 @@ extern "C" {
 
 #define AES_GCM_TAG_LENGTH      (16UL)
 
-typedef struct GCM_TEST_VECTOR {
-    uint8_t* key;
-    uint8_t* iv;
-    uint8_t* aad;
-    uint8_t* plaintext;
-    uint8_t* ciphertext;
-    uint8_t* tag;
+typedef struct gcm_test_vector_t
+{
+    uint8_t *key;
+    uint8_t *iv;
+    uint8_t *aad;
+    uint8_t *plaintext;
+    uint8_t *ciphertext;
+    uint8_t *tag;
 
     uint32_t keyLength;
     uint32_t textLength;
@@ -55,13 +56,14 @@ typedef struct GCM_TEST_VECTOR {
     uint32_t aadLength;
     uint32_t tagLength;
 
-} GCM_TEST_VECTOR;
+} gcm_test_vector_t;
 
-GCM_TEST_VECTOR * get_gcm_test_vectors(void);
-uint32_t get_gcm_test_count(void);
+gcm_test_vector_t *VECTOR_GcmTestVectorsGet(void);
 
-#ifdef	__cplusplus
+uint32_t VECTOR_GcmTestCountGet(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* GCM_TEST_VECTOR_H */
+#endif /* GCM_TEST_VECTOR_H */
