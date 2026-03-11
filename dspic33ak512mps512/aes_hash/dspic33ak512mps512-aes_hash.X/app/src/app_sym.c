@@ -54,7 +54,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID     (0x1U)
 
 // Context for AES calculations.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
@@ -172,26 +171,26 @@ static test_result_t SYM_TestStepInit(void *context)
     uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
             ? test->ptData : test->ctData;
 
-    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+    (void) printf(UTILS_BLUE "\r\n\r\n %s %s Test %lu",
             SYM_TestOpModeGet(testContext->opMode),
             AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Key", test->key, test->keyLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Data (Input)", data, test->dataLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Key", test->key, test->keyLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Data (Input)", data, test->dataLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
     status = Crypto_Sym_Aes_Init(&aesCtx,
             CRYPTO_HANDLER_HW_INTERNAL, testMode,
             testContext->opMode, test->key, test->keyLength,
-            test->initializationVector, TEST_SESSION_ID);
+            test->initializationVector, UTILS_SESSION_ID);
     result = (status == CRYPTO_SYM_CIPHER_SUCCESS)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
-    (void) printf(CYAN);
+    (void) printf(UTILS_CYAN);
     AESHASH_OperationStepPrint("INITIALIZING",
             SYM_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -221,7 +220,7 @@ static test_result_t SYM_TestFinalizeRun(void *context)
     crypto_Sym_Status_E status = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
-    (void) printf(CYAN);
+    (void) printf(UTILS_CYAN);
     AESHASH_OperationStepPrint("FINALIZING",
             SYM_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -251,11 +250,11 @@ static test_result_t SYM_TestFinalizeRun(void *context)
                 ? test->ctData : test->ptData;
 
 #ifdef SHOW_TEST_DATA
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Data (Result)", data, test->dataLength);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Data (Result)", data, test->dataLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
-        (void) printf(CYAN);
+        (void) printf(UTILS_CYAN);
         AESHASH_OperationStepPrint("VERIFYING",
                 SYM_TestOpModeGet(testContext->opMode),
                 testContext->testMode,
@@ -267,11 +266,11 @@ static test_result_t SYM_TestFinalizeRun(void *context)
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Expected:", resultData, test->dataLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Result: ", testContext->dataResult, test->dataLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Expected:", resultData, test->dataLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Result: ", testContext->dataResult, test->dataLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
         }
     }
 
@@ -367,10 +366,10 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
 
         default:
         {
-            (void) printf(RED
+            (void) printf(UTILS_RED
                     "\r\n\r\n Unknown symmetric test"
                     " operation mode %d"
-                    RESET_COLOR, opMode);
+                    UTILS_RESET_COLOR, opMode);
             result = TEST_RESULT_INIT_FAILED;
         }
         break;

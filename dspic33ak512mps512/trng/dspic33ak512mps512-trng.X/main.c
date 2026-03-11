@@ -50,21 +50,15 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("______________________________________"
-            "____________________________________"
-            "_________________________ \r\n");
+    (void) printf("\n\n\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     (void) printf("\r\n\n\n\n Starting CRYPTO TRNG program \r\n");
 
     TRNG_TestRun();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("______________________________________"
-            "____________________________________"
-            "_________________________ \r\n");
+    (void) printf("\n\n\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {

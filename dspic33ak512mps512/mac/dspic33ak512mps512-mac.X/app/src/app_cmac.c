@@ -52,8 +52,6 @@ Microchip or any third party.
 #include "test_vectors/mac_test_vector.h"
 #include "app/app_cmac.h"
 
-#define TEST_SESSION_ID     (0x1U)
-
 /*
 *
 *  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
@@ -79,8 +77,13 @@ static void CMAC_DirectTestRun(test_vector_t *testVector)
         "CMAC (DIRECT)", testVector->inputDataLength,
         dataInfo);
 
-    MAC_HexArrayPrint("Key                  ", testVector->inputKey, testVector->inputKeyLength);
-    MAC_HexArrayPrint("Data                 ", testVector->inputData, testVector->inputDataLength);
+    UTILS_HexArrayPrint("Key                  ",
+            testVector->inputKey,
+            testVector->inputKeyLength);
+
+    UTILS_HexArrayPrint("Data                 ",
+            testVector->inputData,
+            testVector->inputDataLength);
 
     status = Crypto_Mac_AesCmac_Direct(
             CRYPTO_HANDLER_HW_INTERNAL,
@@ -90,12 +93,12 @@ static void CMAC_DirectTestRun(test_vector_t *testVector)
             testVector->expectedMacLength,
             testVector->inputKey,
             testVector->inputKeyLength,
-            TEST_SESSION_ID);
+            UTILS_SESSION_ID);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        MAC_HexArrayPrint("CMAC Output          ", generatedCmac, testVector->expectedMacLength);
-        MAC_ArrayEqualityResultPrint(generatedCmac,
+        UTILS_HexArrayPrint("CMAC Output          ", generatedCmac, testVector->expectedMacLength);
+        UTILS_ArrayEqualityResultPrint(generatedCmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }
@@ -123,14 +126,19 @@ static void CMAC_StepTestRun(test_vector_t *testVector)
         "CMAC (STEPWISE)", testVector->inputDataLength,
         dataInfo);
 
-    MAC_HexArrayPrint("Key                  ", testVector->inputKey, testVector->inputKeyLength);
-    MAC_HexArrayPrint("Data                 ", testVector->inputData, testVector->inputDataLength);
+    UTILS_HexArrayPrint("Key                  ",
+            testVector->inputKey,
+            testVector->inputKeyLength);
+
+    UTILS_HexArrayPrint("Data                 ",
+            testVector->inputData,
+            testVector->inputDataLength);
 
     status = Crypto_Mac_AesCmac_Init(&macCtx,
             CRYPTO_HANDLER_HW_INTERNAL,
             testVector->inputKey,
             testVector->inputKeyLength,
-            TEST_SESSION_ID);
+            UTILS_SESSION_ID);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
@@ -156,10 +164,10 @@ static void CMAC_StepTestRun(test_vector_t *testVector)
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        MAC_HexArrayPrint("CMAC Output          ",
+        UTILS_HexArrayPrint("CMAC Output          ",
             generatedCmac, testVector->expectedMacLength);
 
-        MAC_ArrayEqualityResultPrint(generatedCmac,
+        UTILS_ArrayEqualityResultPrint(generatedCmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }

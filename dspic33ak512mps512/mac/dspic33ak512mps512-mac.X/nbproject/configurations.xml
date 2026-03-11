@@ -61,6 +61,9 @@
                      projectFiles="true">
         <itemPath>test_vectors/mac_test_vector.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>../../../utils/app_utils.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -134,6 +137,11 @@
           <itemPath>test_vectors/src/hmac_test_vector.c</itemPath>
           <itemPath>test_vectors/src/cmac_test_vector.c</itemPath>
           <itemPath>test_vectors/src/gmac_test_vector.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../../../utils/src/app_utils.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>

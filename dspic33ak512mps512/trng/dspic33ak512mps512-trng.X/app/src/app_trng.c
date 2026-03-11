@@ -42,51 +42,23 @@ Microchip or any third party.
  */
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
-
-static void TRNG_HexArrayPrint(const char *label,
-        const uint8_t *data, uint32_t size)
-{
-    (void) printf(BLUE "\r\n "
-            "---------------------------------------------"
-            "------------------------------------------------"
-            RESET_COLOR);
-
-    (void) printf("\r\n  %s   :  ", label);
-
-    for (uint32_t byteIndex = 0U; byteIndex < size; byteIndex++)
-    {
-        if (((byteIndex % 16U) == 0U) && (byteIndex != 0U))
-        {
-            (void) printf("\r\n              ");
-        }
-        (void) printf(" 0x%02X", data[byteIndex]);
-    }
-}
 
 static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
 {
     const char *caption = "Random";
+    char header[80];
 
-    (void) printf(MAG "\r\n\r\n "
-            "*********************************************"
-            "************************************************"
-            RESET_COLOR);
+    (void) sprintf(header, " TRNG Size %lu",
+            (unsigned long) randomLength);
 
-    (void) printf(CYAN "\r\n "
-            "*************************************** TRNG"
-            " Size %lu ***************************************"
-            RESET_COLOR, (unsigned long) randomLength);
-
-    (void) printf(MAG "\r\n "
-            "*********************************************"
-            "************************************************"
-            RESET_COLOR);
+    UTILS_TestHeaderPrint(header);
 
     (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randomArray, randomLength, NULL, 0U, 1U);
 
-    TRNG_HexArrayPrint(caption, randomArray, randomLength);
+    UTILS_HexArrayPrint(caption, randomArray, randomLength);
 }
 
 // *****************************************************************************
