@@ -64,11 +64,8 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("___________________________________"
-        "___________________________________"
-        "______________________________ \r\n");
+    (void) printf("\n\n\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
 
@@ -78,11 +75,8 @@ int main(void)
     SHA_Sha384TestRun();
     SHA_Sha512TestRun();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("___________________________________"
-        "___________________________________"
-        "______________________________ \r\n");
+    (void) printf("\n\n\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {

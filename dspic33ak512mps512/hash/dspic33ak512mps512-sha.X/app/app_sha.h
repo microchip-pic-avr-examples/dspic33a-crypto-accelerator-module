@@ -49,12 +49,7 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-#define RESET_COLOR  "\x1B""[0m"
-#define RED          "\x1B""[1;31m"
-#define GREEN        "\x1B""[1;32m"
-#define BLUE         "\x1B""[1;34m"
-#define MAG          "\x1B""[1;35m"
-#define CYAN         "\x1B""[1;36m"
+#include "utils/app_utils.h"
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
 //#define RUN_ALL_VECTORS

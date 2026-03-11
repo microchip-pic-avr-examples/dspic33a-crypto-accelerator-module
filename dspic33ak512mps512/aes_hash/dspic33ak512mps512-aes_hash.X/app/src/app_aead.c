@@ -53,7 +53,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID         (0x1U)
 
 // Context for AES calculations.
 static st_Crypto_Aead_AesGcm_ctx aeadGcmCtx __attribute__((aligned(4)));
@@ -85,7 +84,7 @@ static test_result_t AEAD_EncryptionAndTagCheck(
     test_result_t dataRetval = TEST_RESULT_SUCCESS;
     test_result_t tagRetval = TEST_RESULT_SUCCESS;
 
-    (void) printf(RESET_COLOR " DATA");
+    (void) printf(UTILS_RESET_COLOR " DATA");
 
     if (length > 0UL)
     {
@@ -97,7 +96,7 @@ static test_result_t AEAD_EncryptionAndTagCheck(
 
     AESHASH_CryptoResultPrint(dataRetval, CRYPTO_AEAD_CIPHER_SUCCESS);
 
-    (void) printf(RESET_COLOR " AUTHTAG");
+    (void) printf(UTILS_RESET_COLOR " AUTHTAG");
 
     if (0 != memcmp(authTagResult, authTag, authTagLength))
     {
@@ -108,20 +107,20 @@ static test_result_t AEAD_EncryptionAndTagCheck(
 
     if (dataRetval != TEST_RESULT_SUCCESS)
     {
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Expected Data: ", expected, length);
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Result Data: ", result, length);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Expected Data: ", expected, length);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Result Data: ", result, length);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
     }
 
     if (tagRetval != TEST_RESULT_SUCCESS)
     {
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Expected Tag: ", authTag, authTagLength);
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Result Tag: ", authTagResult, authTagLength);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Expected Tag: ", authTag, authTagLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Result Tag: ", authTagResult, authTagLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
     }
 
     return dataRetval | tagRetval;
@@ -153,11 +152,11 @@ static test_result_t AEAD_DecryptionCheck(
 
     if (retval != TEST_RESULT_SUCCESS)
     {
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Expected: ", expected, length);
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Result: ", result, length);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Expected: ", expected, length);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Result: ", result, length);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
     }
 
     return retval;
@@ -218,32 +217,32 @@ static test_result_t AEAD_TestStepInit(void *context)
     uint8_t *data = (testContext->testMode == TEST_MODE_ENCRYPT)
             ? test->plaintextData : test->ciphertextData;
 
-    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+    (void) printf(UTILS_BLUE "\r\n\r\n %s %s Test %lu",
             AEAD_TestOpModeGet(testContext->opMode),
             AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Initialization Vector",
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Initialization Vector",
             test->initializationVector,
             test->initializationVectorLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Authentication Data", test->aad, test->aadLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Data (Input)", data, test->dataLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Authentication Data", test->aad, test->aadLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Data (Input)", data, test->dataLength);
 
     if (testContext->testMode == TEST_MODE_DECRYPT)
     {
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Authentication Tag", test->authTag, test->authTagLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Authentication Tag", test->authTag, test->authTagLength);
     }
 
-    AESHASH_SeparatorPrint(BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
-    (void) printf(YELLOW);
+    (void) printf(UTILS_YELLOW);
     AESHASH_OperationStepPrint("INITIALIZING",
             AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -260,14 +259,14 @@ static test_result_t AEAD_TestStepInit(void *context)
                     test->inputKey, test->inputKeyLength,
                     test->initializationVector,
                     test->initializationVectorLength,
-                    TEST_SESSION_ID);
+                    UTILS_SESSION_ID);
         }
         break;
 
         case AEAD_OPER_MODE_AES_CCM:
         {
             status = Crypto_Aead_AesCcm_Init(&aeadCcmCtx, CRYPTO_HANDLER_HW_INTERNAL,
-                                            test->inputKey, test->inputKeyLength, TEST_SESSION_ID);
+                                            test->inputKey, test->inputKeyLength, UTILS_SESSION_ID);
         }
         break;
 
@@ -302,7 +301,7 @@ static test_result_t AEAD_TestAadAdd(void *context)
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     test_result_t result;
 
-    (void) printf(YELLOW);
+    (void) printf(UTILS_YELLOW);
     AESHASH_OperationStepPrint("ADDING AAD",
             AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -341,7 +340,7 @@ static test_result_t AEAD_TestCipherRun(void *context)
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     test_result_t result;
 
-    (void) printf(YELLOW);
+    (void) printf(UTILS_YELLOW);
     AESHASH_OperationStepPrint("CIPHERING",
             AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -376,7 +375,7 @@ static test_result_t AEAD_TestFinalizeRun(void *context)
     crypto_Aead_Status_E status = CRYPTO_AEAD_ERROR_CIPFAIL;
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
-    (void) printf(YELLOW);
+    (void) printf(UTILS_YELLOW);
     AESHASH_OperationStepPrint("FINALIZING",
             AEAD_TestOpModeGet(testContext->opMode),
             testContext->testMode, test->dataLength, true);
@@ -426,21 +425,21 @@ static test_result_t AEAD_TestFinalizeRun(void *context)
     if (status == CRYPTO_AEAD_CIPHER_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        AESHASH_SeparatorPrint(BLUE, '-');
-        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult, test->dataLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+        UTILS_HexArrayPrint("Data (Result)", testContext->dataResult, test->dataLength);
 
         if (testContext->testMode == TEST_MODE_ENCRYPT)
         {
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Authentication Tag",
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Authentication Tag",
                     testContext->authTagResult,
                     test->authTagLength);
         }
 
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
-        (void) printf(YELLOW);
+        (void) printf(UTILS_YELLOW);
         AESHASH_OperationStepPrint("VERIFYING",
                 AEAD_TestOpModeGet(testContext->opMode),
                 testContext->testMode, test->dataLength, true);
@@ -532,7 +531,9 @@ test_result_t AEAD_ContextInit(test_context_t *context,
 
         default:
         {
-            (void) printf(RED "\r\n\r\n Unknown AEAD test operation mode %d" RESET_COLOR, opMode);
+            (void) printf(UTILS_RED
+                    "\r\n\r\n Unknown AEAD test operation mode %d"
+                    UTILS_RESET_COLOR, opMode);
             result = TEST_RESULT_INIT_FAILED;
         }
         break;

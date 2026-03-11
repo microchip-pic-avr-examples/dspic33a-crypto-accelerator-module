@@ -43,6 +43,7 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
+#include <string.h>
 #include "crypto/common_crypto/crypto_hash.h"
 #include "app/app_sha.h"
 #include "test_vectors/test_vectors_sha1.h"
@@ -56,45 +57,18 @@ Microchip or any third party.
 #define MULTI_STEP          (true)
 #define SHA_TEST_VECTOR_5   (5)
 
-static void SHA_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size)
-{
-    (void) printf(BLUE
-        "\r\n ------------------------------------------"
-        "---------------------------------------------------"
-        RESET_COLOR);
-
-    (void) printf("\r\n %s  : ", label);
-
-    for (uint32_t index = 0U; index < size; index++)
-    {
-        if (((index % 16U) == 0U) && (index != 0U))
-        {
-            (void) printf("\r\n                    ");
-        }
-        (void) printf(" 0x%02X", data[index]);
-    }
-}
-
-
 static void SHA_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *actual, size_t size)
 {
-    uint8_t result = 0U;
-
-    for (size_t byteIndex = 0U; byteIndex < size; byteIndex++)
+    if (true == UTILS_ArrayEqualityCheck(expected, actual, size))
     {
-        result |= (uint8_t)(expected[byteIndex] ^ actual[byteIndex]);
-    }
-
-    if (result == 0U)
-    {
-        (void) printf(GREEN" \r\n PASS "RESET_COLOR);
+        (void) printf(UTILS_GREEN " \r\n PASS " UTILS_RESET_COLOR);
     }
     else
     {
         const char *expectedHeader = "Expected Digest";
-        (void) printf(RED" \r\n FAIL - Data Mismatch"RESET_COLOR);
-        SHA_HexArrayPrint(expectedHeader, actual, size);
+        (void) printf(UTILS_RED " \r\n FAIL - Data Mismatch" UTILS_RESET_COLOR);
+        UTILS_HexArrayPrint(expectedHeader, actual, (uint32_t) size);
     }
 }
 
@@ -116,9 +90,9 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
     {
         st_Crypto_Hash_Sha_Ctx context;
 
-        (void) printf(CYAN
+        (void) printf(UTILS_CYAN
             "\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"
-            RESET_COLOR, (unsigned long)blockSize);
+            UTILS_RESET_COLOR, (unsigned long)blockSize);
 
         status = Crypto_Hash_Sha_Init(&context, algo, CRYPTO_HANDLER_HW_INTERNAL, 1U);
 
@@ -144,7 +118,7 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
     }
     else
     {
-        (void) printf(CYAN"\r\n\r\n SINGLE-STEP TEST"RESET_COLOR);
+        (void) printf(UTILS_CYAN"\r\n\r\n SINGLE-STEP TEST"UTILS_RESET_COLOR);
 
         status = Crypto_Hash_Sha_Digest(
                 CRYPTO_HANDLER_HW_INTERNAL, localData,
@@ -187,33 +161,26 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
     unsigned long digestBitLength = digestLength * 8UL;
 
-    (void) printf(MAG
-        "\r\n\r\n *****************************"
-        "***************************************************");
+    {
+        char header[80];
+        (void) sprintf(header, " HASH SHA-%lu TEST - INPUT SIZE %lu",
+                (unsigned long)((digestBitLength == 160UL)
+                        ? 1UL : digestBitLength),
+                (unsigned long) dataLength);
 
-    (void) printf(CYAN
-        "\r\n ************************* HASH SHA-%lu"
-        " TEST - INPUT SIZE %lu "
-        "**************************%s",
-        (unsigned long)((digestBitLength == 160UL) ? 1UL : digestBitLength),
-        (unsigned long)dataLength,
-        (digestBitLength == 160UL) ? "**" : "");
-
-    (void) printf(MAG
-        "\r\n *****************************"
-        "***************************************************"
-        RESET_COLOR);
+        UTILS_TestHeaderPrint(header);
+    }
 
     if (dataLength > 0UL)
     {
-        SHA_HexArrayPrint(inputHeader, data, dataLength);
+        UTILS_HexArrayPrint(inputHeader, data, dataLength);
     }
     else
     {
-        (void) printf(BLUE
+        (void) printf(UTILS_BLUE
             "\r\n --------------------------------"
             "-----------------------------------------------------"
-            RESET_COLOR);
+            UTILS_RESET_COLOR);
 
         (void) printf("\r\n %s  :  None", inputHeader);
     }
@@ -224,13 +191,13 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     status = SHA_TestDigestRun(SINGLE_STEP, dataLength, algo,
             data, dataLength, digestResult);
 
-    SHA_HexArrayPrint(outputHeader, digestResult, digestLength);
+    UTILS_HexArrayPrint(outputHeader, digestResult, digestLength);
 
     if (status != CRYPTO_HASH_SUCCESS)
     {
-        (void) printf(RED
+        (void) printf(UTILS_RED
             "\r\n Crypto v4 SHA-%lu Error Result: %d\n\r"
-            RESET_COLOR, digestBitLength, status);
+            UTILS_RESET_COLOR, digestBitLength, status);
     }
     else
     {
@@ -265,13 +232,13 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
         if (status != CRYPTO_HASH_SUCCESS)
         {
-            (void) printf(RED
+            (void) printf(UTILS_RED
                 "\r\n Crypto v4 SHA-%lu Error Result: %d\n\r"
-                RESET_COLOR, digestBitLength, status);
+                UTILS_RESET_COLOR, digestBitLength, status);
         }
         else
         {
-            SHA_HexArrayPrint(outputHeader,
+            UTILS_HexArrayPrint(outputHeader,
                     digestResult, digestLength);
 
             SHA_ArrayEqualityCheck(
