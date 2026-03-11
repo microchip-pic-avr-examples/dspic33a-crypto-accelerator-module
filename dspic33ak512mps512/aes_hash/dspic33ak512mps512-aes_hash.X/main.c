@@ -8,12 +8,13 @@
     main.c
 
   Summary:
-    This source file starts the application to demonstrate AES encryption.
+    This source file starts the application to demonstrate AES and hash
+    operations.
  *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -49,11 +50,9 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
+#include <stdbool.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes_hash.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -61,57 +60,59 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-#define RUN_SEPARATE_TESTS (defined(RUN_SYM_TEST) || defined(RUN_MAC_TEST) || defined(RUN_AEAD_TEST) || defined(RUN_HASH_TEST))
+#define RUN_SEPARATE_TESTS \
+    (defined(RUN_SYM_TEST) || defined(RUN_MAC_TEST) \
+    || defined(RUN_AEAD_TEST) || defined(RUN_HASH_TEST))
 
 int main(void)
 {
     SYSTEM_Initialize();
 
     (void) printf("\r\n\r\n\r\n");
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n\r\n Starting CRYPTO AES/HASH MULTI-OPERATION program");
 
 #if RUN_SEPARATE_TESTS
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf(GREEN "\r\n\r\n Executing in SEPARATE mode" RESET_COLOR);
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n");
 
     #ifdef RUN_SYM_TEST
-    printSeparator(BLUE, '_');
-    aes_test_sym();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_SymTestRun();
     #endif
 
     #ifdef RUN_MAC_TEST
-    printSeparator(BLUE, '_');
-    aes_test_mac();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_MacTestRun();
     #endif
 
     #ifdef RUN_AEAD_TEST
-    printSeparator(BLUE, '_');
-    aes_test_aead();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_AeadTestRun();
     #endif
 
     #ifdef RUN_HASH_TEST
-    printSeparator(BLUE, '_');
-    test_hash();
+    AESHASH_SeparatorPrint(BLUE, '_');
+    AESHASH_HashTestRun();
     #endif
 #endif
 
     #ifdef RUN_CONCURRENT_TEST
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf(GREEN "\r\n\r\n Executing in CONCURRENT mode" RESET_COLOR);
 
-    test_concurrent();
+    AESHASH_ConcurrentTestRun();
     #endif
 
-    printSeparator(WHITE, '_');
+    AESHASH_SeparatorPrint(WHITE, '_');
     (void) printf("\r\n");
 
-    while(1)
+    while (true)
     {
 
-    };
+    }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

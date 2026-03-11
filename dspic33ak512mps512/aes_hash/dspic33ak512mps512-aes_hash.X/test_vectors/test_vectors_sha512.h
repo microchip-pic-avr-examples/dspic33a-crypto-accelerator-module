@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -23,11 +23,12 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#ifndef TEST_VECTORS_SHA_H
-#define	TEST_VECTORS_SHA_H
+#ifndef TEST_VECTORS_SHA512_H
+#define TEST_VECTORS_SHA512_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #include <stddef.h>
@@ -45,14 +46,14 @@ typedef struct
 
     uint8_t *   expectedDigest;
     uint32_t    expectedDigestLength;
-} TEST_VECTOR;
+} hash_test_vector_t;
 
-TEST_VECTOR * get_sha_512_test_vectors(void);
-uint32_t get_sha_512_test_vector_count(void);
+hash_test_vector_t *VECTOR_Sha512TestVectorsGet(void);
+uint32_t VECTOR_Sha512TestVectorCountGet(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA512_H */
+#endif /* TEST_VECTORS_SHA512_H */
 

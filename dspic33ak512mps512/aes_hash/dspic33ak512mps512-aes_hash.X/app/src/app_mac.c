@@ -1,4 +1,3 @@
-
 /*******************************************************************************
   Application Source File
 
@@ -14,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -48,65 +47,39 @@ Microchip or any third party.
 #include "app/app_aes_hash.h"
 #include "crypto/common_crypto/crypto_mac_cipher.h"
 #include "crypto/common_crypto/crypto_common.h"
-#include "test_vectors/mac_test_vector.h"
 #include "app/app_mac.h"
 
 // Only one test context at a time is supported.
-#define TEST_SESSION_ID         (0x1)
-
-// Maximum size of the CMAC.
-#define CMAC_RESULT_SIZE        (16U)
-
-
-/**
- * @brief test context data for AES CMAC tests.
- */
-typedef struct AES_CMAC_TEST_CONTEXT {
-    // Pointer to current test vector data.
-    TEST_VECTOR *   test;
-
-    // Contains the data result.
-    uint8_t         dataResult[CMAC_RESULT_SIZE];
-
-    // The test mode (encrypt/decrypt).
-    TEST_MODE       testMode;
-
-    // The CMAC test operation mode.
-    MAC_OPER_MODE   opMode;
-
-} AES_CMAC_TEST_CONTEXT;
-
+#define TEST_SESSION_ID         (0x1U)
 
 // Context for CMAC calculations.
 static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
-
 
 /**
  * @brief Get the test operation mode string based on the mode.
  * @param opMode The MAC operations mode.
  * @return Pointer to string.
  */
-static const char *getTestOpMode(MAC_OPER_MODE opMode)
+static const char *MAC_TestOpModeGet(mac_oper_mode_t opMode)
 {
-    const char* opModeStr = "???";
+    const char *opModeString = "???";
 
-    switch(opMode)
+    switch (opMode)
     {
         case MAC_OPER_MODE_AES_CMAC:
-            opModeStr = "AES-CMAC";
+            opModeString = "AES-CMAC";
             break;
 
         default:
             break;
     }
 
-    return opModeStr;
+    return opModeString;
 }
 
-
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES CMAC test state machine Functions
+// Section: MAC CMAC Test State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
 
@@ -115,30 +88,46 @@ static const char *getTestOpMode(MAC_OPER_MODE opMode)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_init(void *context)
+static test_result_t MAC_CmacTestStepInit(void *context)
 {
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result;
+    test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s %s Test %ld", getTestOpMode(testContext->opMode), getTestMode(testContext->testMode), test->id);
+    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+            MAC_TestOpModeGet(testContext->opMode),
+            AESHASH_TestModeGet(testContext->testMode),
+            (unsigned long) test->id);
 
-    printSeparator(BLUE, '-');
-    printHexArray("Key", test->inputKey, test->inputKeyLength);
-    printSeparator(BLUE, '-');
-    printHexArray("Data (Input)", test->inputData, test->inputDataLength);
-    printSeparator(BLUE, '-');
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
+    AESHASH_HexArrayPrint("Data (Input)", test->inputData,
+            test->inputDataLength);
+    AESHASH_SeparatorPrint(BLUE, '-');
 #endif
 
-    status = Crypto_Mac_AesCmac_Init(&macCtx, CRYPTO_HANDLER_HW_INTERNAL, test->inputKey, test->inputKeyLength, TEST_SESSION_ID);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
+    status = Crypto_Mac_AesCmac_Init(&macCtx,
+            CRYPTO_HANDLER_HW_INTERNAL, test->inputKey,
+            test->inputKeyLength, TEST_SESSION_ID);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("INITIALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
-    printCryptoResult(result, status);
+    AESHASH_OperationStepPrint("INITIALIZING",
+            MAC_TestOpModeGet(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -148,21 +137,32 @@ static TEST_RESULT aes_cmac_test_init(void *context)
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_cipher(void *context)
+static test_result_t MAC_CmacTestCipherRun(void *context)
 {
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result;
+    test_result_t result;
 
     (void) printf(MAG);
-    printOperationStep("CIPHERING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    AESHASH_OperationStepPrint("CIPHERING",
+            MAC_TestOpModeGet(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
 
-    status = Crypto_Mac_AesCmac_Cipher(&macCtx, test->inputData, test->inputDataLength);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
+    status = Crypto_Mac_AesCmac_Cipher(&macCtx,
+            test->inputData, test->inputDataLength);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS : TEST_RESULT_CIPHER_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     return result;
 }
@@ -173,34 +173,52 @@ static TEST_RESULT aes_cmac_test_cipher(void *context)
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  */
-static TEST_RESULT aes_cmac_test_final(void *context)
+static test_result_t MAC_CmacTestFinalizeRun(void *context)
 {
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context;
-    TEST_VECTOR *test = testContext->test;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context;
+    mac_test_vector_t *test = testContext->test;
 
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
-    TEST_RESULT result = TEST_RESULT_FINALIZE_FAILED;
+    test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
     (void) printf(MAG);
-    printOperationStep("FINALIZING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+    AESHASH_OperationStepPrint("FINALIZING",
+            MAC_TestOpModeGet(testContext->opMode),
+            testContext->testMode,
+            test->inputDataLength, true);
 
-    status = Crypto_Mac_AesCmac_Final(&macCtx, testContext->dataResult, test->expectedMacLength);
-    result = (status == CRYPTO_MAC_CIPHER_SUCCESS) ? TEST_RESULT_SUCCESS : TEST_RESULT_FINALIZE_FAILED;
+    status = Crypto_Mac_AesCmac_Final(&macCtx,
+            testContext->dataResult,
+            test->expectedMacLength);
+    result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
+            ? TEST_RESULT_SUCCESS
+            : TEST_RESULT_FINALIZE_FAILED;
 
-    printCryptoResult(result, status);
+    AESHASH_CryptoResultPrint(result, status);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        printSeparator(BLUE, '-');
-        printWithLabel("Result Length", "%d bytes", test->expectedMacLength);
-        printHexArray("Data (Result)", testContext->dataResult, test->expectedMacLength);
-        printSeparator(BLUE, '-');
+        AESHASH_SeparatorPrint(BLUE, '-');
+        AESHASH_LabelPrint("Result Length", "%d bytes", test->expectedMacLength);
+        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult, test->expectedMacLength);
+        AESHASH_SeparatorPrint(BLUE, '-');
 #endif
         (void) printf(MAG);
-        printOperationStep("VERIFYING", getTestOpMode(testContext->opMode), testContext->testMode, test->inputDataLength, true);
+        AESHASH_OperationStepPrint("VERIFYING",
+                MAC_TestOpModeGet(testContext->opMode),
+                testContext->testMode,
+                test->inputDataLength, true);
 
-        if (true == checkArrayEquality(testContext->dataResult, test->expectedMac, test->expectedMacLength))
+        if (true == AESHASH_ArrayEqualityCheck(testContext->dataResult,
+                test->expectedMac,
+                test->expectedMacLength))
         {
             result = TEST_RESULT_SUCCESS;
         }
@@ -209,15 +227,15 @@ static TEST_RESULT aes_cmac_test_final(void *context)
             result = TEST_RESULT_DATA_COMPARE_FAILED;
         }
 
-        printCryptoResult(result, status);
+        AESHASH_CryptoResultPrint(result, status);
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            printSeparator(BLUE, '-');
-            printHexArray("Expected:", test->expectedMac, test->expectedMacLength);
-            printSeparator(BLUE, '-');
-            printHexArray("Result:", testContext->dataResult, test->expectedMacLength);
-            printSeparator(BLUE, '-');
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Expected:", test->expectedMac, test->expectedMacLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
+            AESHASH_HexArrayPrint("Result:", testContext->dataResult, test->expectedMacLength);
+            AESHASH_SeparatorPrint(BLUE, '-');
         }
     }
 
@@ -227,44 +245,49 @@ static TEST_RESULT aes_cmac_test_final(void *context)
 /**
  * @brief Defines the states for a AES CMAC test.
  */
-typedef enum AES_CMAC_TEST_STEPS {
+enum
+{
     AES_CMAC_TEST_STEP_INIT = 0,
     AES_CMAC_TEST_STEP_CIPHER = 1,
     AES_CMAC_TEST_STEP_FINAL = 2,
     AES_CMAC_TEST_STEP_NUMBER_OF_STEPS
-} AES_CMAC_TEST_STEPS;
-
-/**
- * @brief Defines the state functions for an AES CMAC test.
- */
-static TEST_STATE_FN aes_cmac_test_states[] =
-{
-    aes_cmac_test_init,
-    aes_cmac_test_cipher,
-    aes_cmac_test_final,
 };
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: MAC CMAC Test Functions
+// *****************************************************************************
+// *****************************************************************************
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: MAC CMAC test Functions
-// *****************************************************************************
-// *****************************************************************************
-
-TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OPER_MODE opMode)
+test_result_t MAC_CmacContextInit(test_context_t *context,
+        test_mode_t testMode, mac_oper_mode_t opMode)
 {
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
-    TEST_RESULT result = TEST_RESULT_SUCCESS;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context->testContext;
+    test_result_t result = TEST_RESULT_SUCCESS;
 
-    (void) memset(context, 0, sizeof(TEST_CONTEXT));
+    static test_state_fn_t aes_cmac_test_states[] =
+    {
+        MAC_CmacTestStepInit,
+        MAC_CmacTestCipherRun,
+        MAC_CmacTestFinalizeRun,
+    };
+
+    (void) memset(context, 0, sizeof(test_context_t));
+    context->testContext = testContext;
 
     switch (opMode)
     {
         case MAC_OPER_MODE_AES_CMAC:
         {
             context->states = aes_cmac_test_states;
-            context->tests = (uint8_t *)get_cmac_test_vectors();
-            context->testCount = get_cmac_test_vector_count();
+            context->tests = (uint8_t *)VECTOR_CmacTestVectorsGet();
+            context->testCount = VECTOR_CmacTestVectorCountGet();
             context->stepCount = sizeof(aes_cmac_test_states) / sizeof(aes_cmac_test_states[0]);
         }
         break;
@@ -286,18 +309,30 @@ TEST_RESULT mac_cmac_test_init(TEST_CONTEXT *context, TEST_MODE testMode, MAC_OP
         context->test = 0;
         context->step = 0;
 
+        /* cppcheck-suppress misra-c2012-11.5
+         *
+         *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+         *
+         *  Reasoning: A generic pointer allows support for various algorithm test context types.
+         */
+        mac_test_vector_t *tests = (mac_test_vector_t *)context->tests;
+
         // Start at the first test.
-        TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
         testContext->test = &tests[context->test];
     }
 
     return result;
 }
 
-
-TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
+test_result_t MAC_CmacTestAdvance(test_context_t *context)
 {
-    AES_CMAC_TEST_CONTEXT *testContext = (AES_CMAC_TEST_CONTEXT *)context->testContext;
+    /* cppcheck-suppress misra-c2012-11.5
+     *
+     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+     *
+     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+     */
+    aes_cmac_test_context_t *testContext = (aes_cmac_test_context_t *)context->testContext;
 
     if (context->test < context->testCount)
     {
@@ -331,7 +366,13 @@ TEST_RESULT mac_cmac_test_advance(TEST_CONTEXT *context)
                 {
                     context->step = AES_CMAC_TEST_STEP_INIT;
 
-                    TEST_VECTOR *tests = (TEST_VECTOR *)context->tests;
+                    /* cppcheck-suppress misra-c2012-11.5
+                     *
+                     *  (Rule 11.5) Advisory: A conversion should not be performed from pointer to void into pointer to object
+                     *
+                     *  Reasoning: A generic pointer allows support for various algorithm test context types.
+                     */
+                    mac_test_vector_t *tests = (mac_test_vector_t *)context->tests;
                     testContext->test = &tests[context->test];
                 }
             }

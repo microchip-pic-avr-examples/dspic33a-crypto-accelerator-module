@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -24,10 +24,11 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef MAC_TEST_VECTOR_H
-#define	MAC_TEST_VECTOR_H
+#define MAC_TEST_VECTOR_H
 
-#ifdef	__cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #include <stdint.h>
@@ -44,13 +45,13 @@ typedef struct
 
     uint8_t *   expectedMac;
     uint32_t    expectedMacLength;
-} TEST_VECTOR;
+} mac_test_vector_t;
 
-TEST_VECTOR * get_cmac_test_vectors(void);
-uint32_t get_cmac_test_vector_count(void);
+mac_test_vector_t *VECTOR_CmacTestVectorsGet(void);
+uint32_t VECTOR_CmacTestVectorCountGet(void);
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* MAC_TEST_VECTOR_H */
+#endif /* MAC_TEST_VECTOR_H */
