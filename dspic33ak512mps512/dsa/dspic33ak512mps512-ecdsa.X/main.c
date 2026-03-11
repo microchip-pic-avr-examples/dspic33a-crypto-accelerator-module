@@ -9,10 +9,10 @@
 
   Summary:
     This source file starts the application to demonstrate ECDSA sign and verify.
- *******************************************************************************/
+*******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -34,18 +34,19 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
+#include <stdbool.h>
 #include "app/app_ecdsa.h"
 #include "mcc_generated_files/system/system.h"
 
-int main( void ) {
-    
+int main(void)
+{
     SYSTEM_Initialize();
 
-    test_ecdsa();
-    
-    while (1)
+    ECDSA_TestRun();
+
+    while (true)
     {
     }
-    
+
     return 0;
 }

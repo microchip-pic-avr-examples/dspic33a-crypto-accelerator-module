@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -23,36 +23,38 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#ifndef TEST_VECTOR_H
+#define TEST_VECTOR_H
+
 #include <stdint.h>
 #include "crypto/common_crypto/crypto_common.h"
 
-#ifndef TEST_VECTOR_H
-#define	TEST_VECTOR_H
-
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct 
+typedef struct
 {
-    uint8_t* privateKeyData;
-    uint8_t privateKeyLen;
-    uint8_t* publicKeyData;
-    uint8_t publicKeyLen;
-    uint8_t* hashData;
-    uint8_t hashLen;
-    const char* curveInformation;
+    uint8_t *privateKeyData;
+    uint8_t privateKeyLength;
+    uint8_t *publicKeyData;
+    uint8_t publicKeyLength;
+    uint8_t *hashData;
+    uint8_t hashLength;
+    const char *curveInformation;
     crypto_EccCurveType_E curveType;
-} TEST_VECTOR;
+} test_vector_t;
 
-extern TEST_VECTOR ecdsa_p192;
-extern TEST_VECTOR ecdsa_p256;
-extern TEST_VECTOR ecdsa_p384;
-extern TEST_VECTOR ecdsa_p521;
+extern test_vector_t ecdsaP192;
 
-#ifdef	__cplusplus
+extern test_vector_t ecdsaP256;
+
+extern test_vector_t ecdsaP384;
+
+extern test_vector_t ecdsaP521;
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTOR_H */
-
+#endif /* TEST_VECTOR_H */

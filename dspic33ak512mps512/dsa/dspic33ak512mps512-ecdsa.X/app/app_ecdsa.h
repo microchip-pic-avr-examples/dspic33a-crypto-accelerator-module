@@ -8,11 +8,11 @@
     app_ecdsa.h
 
   Summary:
-    This header file provide a prototype for the ECDSA test application.
+    This header file provides a prototype for the ECDSA test application.
 *******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -35,13 +35,14 @@ Microchip or any third party.
 */
 
 #ifndef APP_ECDSA_H
-#define	APP_ECDSA_H
+#define APP_ECDSA_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
-void test_ecdsa(void);
 
-#endif	/* APP_ECDSA_H */
+void ECDSA_TestRun(void);
+
+#endif /* APP_ECDSA_H */

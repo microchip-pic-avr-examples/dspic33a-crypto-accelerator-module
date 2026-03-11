@@ -5,14 +5,14 @@
     Microchip Technology Inc.
 
   File Name:
-    app_ecdsa.h
+    app_util.h
 
   Summary:
-    This header file provide a prototype for the ECDSA test application.
+    This header file provides prototypes and definitions for ECDSA utility functions.
 *******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -35,37 +35,39 @@ Microchip or any third party.
 */
 
 #ifndef APP_UTIL_H
-#define	APP_UTIL_H
+#define APP_UTIL_H
 
 #include "crypto/common_crypto/crypto_digsign.h"
 
-#define RESET_COLOR     "\033""[0m"
-#define RED             "\033""[1;31m"
-#define GREEN           "\033""[1;32m"
-#define YELLOW          "\033""[1;33m"
-#define MAG             "\033""[1;35m"
-#define CYAN            "\033""[1;36m"
-#define SESSION_ID      0x1U
-#define P192Length      48U
-#define P256Length      64U
-#define P384Length      96U
-#define P521Length      132U
-#define signaturePrint  "Signature : \t"
-#define signingPrint    "SIGN"
-#define verifyingPrint  "VERIFY"
+#define RESET_COLOR      "\033""[0m"
+#define RED              "\033""[1;31m"
+#define GREEN            "\033""[1;32m"
+#define YELLOW           "\033""[1;33m"
+#define MAG              "\033""[1;35m"
+#define CYAN             "\033""[1;36m"
+#define SESSION_ID       (0x1U)
+#define P192_LENGTH      (48U)
+#define P256_LENGTH      (64U)
+#define P384_LENGTH      (96U)
+#define P521_LENGTH      (132U)
+#define SIGNATURE_PRINT  "Signature : \t"
+#define SIGNING_PRINT    "SIGN"
+#define VERIFYING_PRINT  "VERIFY"
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
-void printStatus(crypto_DigiSign_Status_E status, const char *type);
 
-void printSplitter(void);
+void UTIL_StatusPrint(crypto_DigiSign_Status_E status, const char *type);
 
-void printTestHeader(const char* curve, const char* blocking);
+void UTIL_SplitterPrint(void);
 
-void printHexArray(const char* label, uint8_t* data, uint32_t size);
+void UTIL_TestHeaderPrint(const char *curve, const char *blocking);
 
-uint8_t signatureLengthGet(crypto_EccCurveType_E curve);
-#endif	/* APP_UTIL_H */
+void UTIL_HexArrayPrint(const char *label, const uint8_t *data, uint32_t size);
+
+uint8_t UTIL_SignatureLengthGet(crypto_EccCurveType_E curve);
+
+#endif /* APP_UTIL_H */
