@@ -13,7 +13,7 @@
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -49,11 +49,10 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -66,23 +65,28 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
-    (void )printf("\r\n\n\n\n Starting CRYPTO AES program \r\n");
+    (void) printf("________________________________"
+        "______________________________________"
+        "________________________________ \r\n");
+    (void) printf(
+        "\r\n\n\n\n Starting CRYPTO AES program \r\n");
 
     #ifdef RUN_SYM_TEST
-    aes_test_sym();
+    AES_SymTestRun();
     #endif
 
     #ifdef RUN_AEAD_TEST
-    aes_test_aead();
+    AES_AeadTestRun();
     #endif
 
     (void) printf("\n\n\n\r\n ");
-    (void) printf("______________________________________________________________________________________________________ \r\n");
-    while(1)
+    (void) printf("________________________________"
+        "______________________________________"
+        "________________________________ \r\n");
+    while (true)
     {
 
-    };
+    }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

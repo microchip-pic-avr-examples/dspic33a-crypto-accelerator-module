@@ -1,6 +1,6 @@
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -24,9 +24,9 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef XTS_TEST_VECTOR_H
-#define	XTS_TEST_VECTOR_H
+#define XTS_TEST_VECTOR_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -40,23 +40,25 @@ extern "C" {
 #define KEY_TYPE_AES256_SIZE    (32UL)
 #define KEY_TYPE_MAX_SIZE       KEY_TYPE_AES256_SIZE
 
-typedef struct XTS_TEST_VECTOR {
-    uint8_t* key;
-    uint8_t* key2;
-    uint8_t* plaintext;
-    uint8_t* ciphertext;
-    uint8_t* tweak;
+typedef struct xts_test_vector_t
+{
+    uint8_t *key;
+    uint8_t *key2;
+    uint8_t *plaintext;
+    uint8_t *ciphertext;
+    uint8_t *tweak;
 
     uint32_t keyLength;
     uint32_t textLength;
 
-} XTS_TEST_VECTOR;
+} xts_test_vector_t;
 
-XTS_TEST_VECTOR * get_xts_test_vectors(void);
-uint32_t get_xts_test_count(void);
+xts_test_vector_t *VECTOR_XtsTestVectorsGet(void);
 
-#ifdef	__cplusplus
+uint32_t VECTOR_XtsTestCountGet(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* GCM_TEST_VECTOR_H */
+#endif /* XTS_TEST_VECTOR_H */
