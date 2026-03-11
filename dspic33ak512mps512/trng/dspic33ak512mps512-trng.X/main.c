@@ -12,7 +12,7 @@
 *******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -35,30 +35,40 @@ Microchip or any third party.
 */
 
 /* cppcheck-suppress misra-c2012-21.6
-* 
-*  (Rule 21.6) Required: The standard library input/output functions shall not be used
-* 
-*  Reasoning: This demo uses printf to print out information to a terminal.
-*/
+ *
+ *  (Rule 21.6) Required: The standard library input/output functions shall not be used
+ *
+ *  Reasoning: This demo uses printf to print out information to a terminal.
+ */
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include "app/app_trng.h"
 #include "mcc_generated_files/system/system.h"
 
-int main(void) 
+int main(void)
 {
     SYSTEM_Initialize();
-    
+
     (void) printf("\n\n\n\r\n ");
-    (void) printf("_____________________________________________________________________________________________ \r\n");
+
+    (void) printf("______________________________________"
+            "____________________________________"
+            "_________________________ \r\n");
+
     (void) printf("\r\n\n\n\n Starting CRYPTO TRNG program \r\n");
-    
-    trngTest();
-    
+
+    TRNG_TestRun();
+
     (void) printf("\n\n\n\r\n ");
-    (void) printf("_____________________________________________________________________________________________ \r\n");
-    while(1) {};
-    
-    return EXIT_SUCCESS;
+
+    (void) printf("______________________________________"
+            "____________________________________"
+            "_________________________ \r\n");
+
+    while (true)
+    {
+    }
+
+    return 0;
 }
