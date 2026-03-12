@@ -223,7 +223,7 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
     else
     {
         UTILS_SeparatorPrint(UTILS_BLUE, '-');
-        (void) printf("\r\n%s", " Initialization Vector  :  None");
+        (void) printf("\r\n%s", " Initialization Vector  : None");
     }
 
     status = SYM_DirectTestRun(CRYPTO_CIOP_ENCRYPT,
@@ -248,9 +248,10 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         }
         else
         {
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n\r\n VERIFYING...");
             UTILS_ArrayEqualityResultPrint(
-                    "AES DECRYPT",
+                    "AES ENCRYPT/DECRYPT",
                     data, decryptedDirectResult, dataLength);
         }
     }
@@ -281,9 +282,10 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         }
         else
         {
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
             (void) printf("\r\n\r\n VERIFYING...");
             UTILS_ArrayEqualityResultPrint(
-                    "AES DECRYPT",
+                    "AES ENCRYPT/DECRYPT",
                     data, decryptedStepsResult, dataLength);
         }
     }

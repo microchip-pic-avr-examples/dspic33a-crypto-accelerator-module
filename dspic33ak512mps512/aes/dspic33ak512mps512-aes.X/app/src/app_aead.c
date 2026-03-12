@@ -68,7 +68,7 @@ static crypto_Aead_Status_E AEAD_GcmDirectTestRun(crypto_CipherOper_E encrypt,
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Data (Input)           :  None");
+            (void) printf("\r\n%s", " Data (Input)           : None");
         }
 
         status = Crypto_Aead_AesGcm_EncryptAuthDirect(
@@ -130,7 +130,7 @@ static crypto_Aead_Status_E AEAD_GcmStepsTestRun(crypto_CipherOper_E encrypt,
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Data (Input)           :  None");
+            (void) printf("\r\n%s", " Data (Input)           : None");
         }
 
         status = Crypto_Aead_AesGcm_Init(
@@ -220,7 +220,7 @@ static crypto_Aead_Status_E AEAD_CcmCipherRun(crypto_CipherOper_E encrypt,
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Data (Input)           :  None");
+            (void) printf("\r\n%s", " Data (Input)           : None");
         }
 
         status = Crypto_Aead_AesCcm_Init(
@@ -275,6 +275,7 @@ static void AEAD_EncryptionAndTagCheck(
         const uint8_t *tagResult, uint32_t tagLength)
 {
     UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    (void) printf("\r\n\r\n VERIFYING...");
 
     if (length > 0UL)
     {
@@ -338,7 +339,7 @@ void AEAD_GcmTestRun(void)
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Initialization Vector  :  None");
+            (void) printf("\r\n%s", " Initialization Vector  : None");
         }
 
         if (test->aadLength != 0UL)
@@ -348,7 +349,7 @@ void AEAD_GcmTestRun(void)
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Authentication Data    :  None");
+            (void) printf("\r\n%s", " Authentication Data    : None");
         }
 
         pt = (test->textLength > 0UL) ? test->plaintext : NULL;
@@ -388,6 +389,7 @@ void AEAD_GcmTestRun(void)
                 }
                 else
                 {
+                    UTILS_SeparatorPrint(UTILS_BLUE, '-');
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
                             "AES DECRYPT",
@@ -438,6 +440,7 @@ void AEAD_GcmTestRun(void)
                 }
                 else
                 {
+                    UTILS_SeparatorPrint(UTILS_BLUE, '-');
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
                             "AES DECRYPT",
@@ -527,7 +530,7 @@ void AEAD_CcmTestRun(void)
         else
         {
             UTILS_SeparatorPrint(UTILS_BLUE, '-');
-            (void) printf("\r\n%s", " Authentication Data    :  None");
+            (void) printf("\r\n%s", " Authentication Data    : None");
         }
 
         pt = (test->textLength > 0UL) ? test->plaintext : NULL;
@@ -567,6 +570,7 @@ void AEAD_CcmTestRun(void)
                 }
                 else
                 {
+                    UTILS_SeparatorPrint(UTILS_BLUE, '-');
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
                             "AES DECRYPT",
