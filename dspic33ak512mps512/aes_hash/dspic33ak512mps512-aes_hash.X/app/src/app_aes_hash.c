@@ -681,8 +681,10 @@ void AESHASH_ConcurrentTestRun(void)
             macResult = MAC_CmacTestAdvance(&macContext);
             hashResult = SHA_HashTestAdvance(&hashContext);
 
-            // If any but the hash tests finish, restart them.
-            // The hash test has the most iterations.
+            /* 
+             * If any but the hash tests finish, restart them.
+             * The hash test has the most iterations.
+             */
             if (symResult == TEST_RESULT_ALL_TESTS_DONE)
             {
                 if (symTestMode == TEST_MODE_ENCRYPT)
@@ -702,7 +704,7 @@ void AESHASH_ConcurrentTestRun(void)
                     }
                 }
 
-                (void)SYM_ContextInit(&symContext, symTestMode, symOperMode);
+                (void) SYM_ContextInit(&symContext, symTestMode, symOperMode);
             }
 
             if (aeadResult == TEST_RESULT_ALL_TESTS_DONE)
@@ -725,12 +727,12 @@ void AESHASH_ConcurrentTestRun(void)
                     }
                 }
 
-                (void)AEAD_ContextInit(&aeadContext, aeadTestMode, aeadOperMode);
+                (void) AEAD_ContextInit(&aeadContext, aeadTestMode, aeadOperMode);
             }
 
             if (macResult == TEST_RESULT_ALL_TESTS_DONE)
             {
-                (void)MAC_CmacContextInit(&macContext, macTestMode, MAC_OPER_MODE_AES_CMAC);
+                (void) MAC_CmacContextInit(&macContext, macTestMode, MAC_OPER_MODE_AES_CMAC);
             }
 
         } while (hashResult != TEST_RESULT_ALL_TESTS_DONE);

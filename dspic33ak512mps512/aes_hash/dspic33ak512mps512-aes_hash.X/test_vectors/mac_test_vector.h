@@ -48,6 +48,7 @@ typedef struct
 } mac_test_vector_t;
 
 mac_test_vector_t *VECTOR_CmacTestVectorsGet(void);
+
 uint32_t VECTOR_CmacTestVectorCountGet(void);
 
 #ifdef __cplusplus
