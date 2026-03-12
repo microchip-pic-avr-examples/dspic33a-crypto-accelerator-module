@@ -93,7 +93,7 @@ bool UTILS_ArrayEqualityCheck(const uint8_t *expected,
 
 /**
  * @brief Compare two arrays and print a labeled PASS or FAIL.
- * @param description Descriptive text printed before PASS/FAIL.
+ * @param description Descriptive text printed after the PASS or FAIL label.
  * @param expected Pointer to the expected data array.
  * @param actual Pointer to the actual data array.
  * @param size The number of bytes to compare.
@@ -127,7 +127,7 @@ void UTILS_TestHeaderPrint(const char *header);
 /**
  * @brief Print a separator line followed by a newline.
  *
- * Prints a reset-color underscore separator and appends a trailing newline.
+ * Print a reset-color underscore separator and append a trailing newline.
  * Convenience wrapper around UTILS_SeparatorPrint for section breaks.
  */
 void UTILS_SplitterPrint(void);
@@ -135,7 +135,7 @@ void UTILS_SplitterPrint(void);
 /**
  * @brief Print a labeled PASS or FAIL status.
  *
- * Prints " \r\n\r\n PASS: description " in green or
+ * Print " \r\n\r\n PASS: description " in green or
  * " \r\n\r\n FAIL: description " in red.
  *
  * @param description Descriptive text printed after PASS/FAIL.
