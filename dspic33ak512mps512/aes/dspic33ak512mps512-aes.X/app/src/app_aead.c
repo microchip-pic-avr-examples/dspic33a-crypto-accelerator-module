@@ -43,7 +43,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <string.h>
 #include "app/app_aead.h"
 #include "app/app_aes.h"
 #include "crypto/common_crypto/crypto_common.h"
@@ -279,32 +278,12 @@ static void AEAD_EncryptionAndTagCheck(
 
     if (length > 0UL)
     {
-        if (true == UTILS_ArrayEqualityCheck(result, text, length))
-        {
-            (void) printf(UTILS_GREEN
-                    "\r\n Encryption: PASS"
-                    UTILS_RESET_COLOR);
-        }
-        else
-        {
-            (void) printf(UTILS_RED
-                    "\r\n Encryption: FAIL"
-                    UTILS_RESET_COLOR);
-        }
+        UTILS_StatusPrint("AES ENCRYPT",
+                UTILS_ArrayEqualityCheck(result, text, length));
     }
 
-    if (true == UTILS_ArrayEqualityCheck(tagResult, tag, tagLength))
-    {
-        (void) printf(UTILS_GREEN
-                "\r\n Authentication Tag: PASS"
-                UTILS_RESET_COLOR);
-    }
-    else
-    {
-        (void) printf(UTILS_RED
-                "\r\n Authentication Tag: FAIL"
-                UTILS_RESET_COLOR);
-    }
+    UTILS_StatusPrint("AES AUTH TAG",
+            UTILS_ArrayEqualityCheck(tagResult, tag, tagLength));
 }
 
 // *****************************************************************************
@@ -411,6 +390,7 @@ void AEAD_GcmTestRun(void)
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
+                            "AES DECRYPT",
                             test->plaintext,
                             decryptedDirectResult,
                             test->textLength);
@@ -460,6 +440,7 @@ void AEAD_GcmTestRun(void)
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
+                            "AES DECRYPT",
                             test->plaintext,
                             decryptedStepsResult,
                             test->textLength);
@@ -483,6 +464,7 @@ void AEAD_GcmTestRun(void)
                 UTILS_HexArrayPrint("Stepwise Encryption  ",
                         encryptedStepsResult, test->textLength);
                 UTILS_ArrayEqualityResultPrint(
+                        "AES DIRECT vs STEPWISE",
                         encryptedDirectResult,
                         encryptedStepsResult,
                         test->textLength);
@@ -490,13 +472,12 @@ void AEAD_GcmTestRun(void)
 
             UTILS_HexArrayPrint("Direct Tag           ", tagDirectResult, AES_GCM_TAG_LENGTH);
             UTILS_HexArrayPrint("Stepwise Tag         ", tagStepsResult, AES_GCM_TAG_LENGTH);
-            UTILS_ArrayEqualityResultPrint(tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
+            UTILS_ArrayEqualityResultPrint("AES TAG COMPARISON",
+                    tagDirectResult, tagStepsResult, AES_GCM_TAG_LENGTH);
         }
         else
         {
-            (void) printf(UTILS_RED
-                    "\r\n\r\n FAIL"
-                    UTILS_RESET_COLOR);
+            UTILS_StatusPrint("AES-GCM OPERATION", false);
         }
 
         test++;
@@ -587,7 +568,9 @@ void AEAD_CcmTestRun(void)
                 else
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
-                    UTILS_ArrayEqualityResultPrint(test->plaintext,
+                    UTILS_ArrayEqualityResultPrint(
+                            "AES DECRYPT",
+                            test->plaintext,
                             decryptedResult, test->textLength);
                 }
             }
@@ -598,9 +581,7 @@ void AEAD_CcmTestRun(void)
         UTILS_SeparatorPrint(UTILS_BLUE, '-');
         if (status != CRYPTO_AEAD_CIPHER_SUCCESS)
         {
-            (void) printf(UTILS_RED
-                    "\r\n\r\n FAIL"
-                    UTILS_RESET_COLOR);
+            UTILS_StatusPrint("AES-CCM OPERATION", false);
         }
 
         test++;

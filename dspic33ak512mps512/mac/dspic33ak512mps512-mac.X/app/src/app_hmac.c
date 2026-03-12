@@ -132,7 +132,9 @@ static void HMAC_DirectTestRun(test_vector_t *testVector)
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        UTILS_ArrayEqualityResultPrint(generatedHmac,
+        UTILS_ArrayEqualityResultPrint(
+            "HMAC OUTPUT",
+            generatedHmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }
@@ -202,7 +204,9 @@ static void HMAC_StepTestRun(test_vector_t *testVector)
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        UTILS_ArrayEqualityResultPrint(generatedHmac,
+        UTILS_ArrayEqualityResultPrint(
+            "HMAC OUTPUT",
+            generatedHmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }

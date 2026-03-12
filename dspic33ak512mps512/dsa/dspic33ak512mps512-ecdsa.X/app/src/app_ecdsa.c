@@ -50,7 +50,7 @@ Microchip or any third party.
 #define P256_LENGTH      (64U)
 #define P384_LENGTH      (96U)
 #define P521_LENGTH      (132U)
-#define SIGNATURE_PRINT  "Signature : \t"
+#define SIGNATURE_PRINT  "Signature            "
 #define SIGNING_PRINT    "SIGN"
 #define VERIFYING_PRINT  "VERIFY"
 
@@ -77,17 +77,16 @@ static void ECDSA_VerifyOperationComplete(void)
 static void ECDSA_StatusPrint(crypto_DigiSign_Status_E status,
         const char *type)
 {
+    char description[80];
+    (void) sprintf(description, "ECDSA %s", type);
+
     if (status != CRYPTO_DIGISIGN_SUCCESS)
     {
-        char errorDesc[80];
-        (void) sprintf(errorDesc, "ECDSA %s", type);
-        UTILS_CryptoErrorPrint(errorDesc, (int) status);
+        UTILS_CryptoErrorPrint(description, (int) status);
     }
     else
     {
-        (void) printf(UTILS_GREEN
-                " \r\n\r\n ECDSA %s PASS "
-                UTILS_RESET_COLOR, type);
+        UTILS_StatusPrint(description, true);
     }
 }
 
@@ -232,11 +231,8 @@ void ECDSA_TestRun(void)
 {
     Crypto_DigiSign_Ecdsa_SignComplete_CallbackRegister(&ECDSA_SignOperationComplete);
     Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(&ECDSA_VerifyOperationComplete);
-    UTILS_SplitterPrint();
-    (void) printf("\r\n Starting CRYPTO ECDSA Verify Sign program \r\n");
     ECDSA_P192TestRun();
     ECDSA_P256TestRun();
     ECDSA_P384TestRun();
     ECDSA_P521TestRun();
-    UTILS_SplitterPrint();
 }

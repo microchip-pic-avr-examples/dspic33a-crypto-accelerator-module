@@ -92,12 +92,14 @@ bool UTILS_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *actual, size_t size);
 
 /**
- * @brief Compare two arrays and print PASS or FAIL to the terminal.
+ * @brief Compare two arrays and print a labeled PASS or FAIL.
+ * @param description Descriptive text printed before PASS/FAIL.
  * @param expected Pointer to the expected data array.
  * @param actual Pointer to the actual data array.
  * @param size The number of bytes to compare.
  */
-void UTILS_ArrayEqualityResultPrint(const uint8_t *expected,
+void UTILS_ArrayEqualityResultPrint(const char *description,
+        const uint8_t *expected,
         const uint8_t *actual, size_t size);
 
 /**
@@ -129,6 +131,17 @@ void UTILS_TestHeaderPrint(const char *header);
  * Convenience wrapper around UTILS_SeparatorPrint for section breaks.
  */
 void UTILS_SplitterPrint(void);
+
+/**
+ * @brief Print a labeled PASS or FAIL status.
+ *
+ * Prints " \r\n\r\n PASS: description " in green or
+ * " \r\n\r\n FAIL: description " in red.
+ *
+ * @param description Descriptive text printed after PASS/FAIL.
+ * @param passed true for PASS, false for FAIL.
+ */
+void UTILS_StatusPrint(const char *description, bool passed);
 
 /**
  * @brief Print a crypto operation error message.

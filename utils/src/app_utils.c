@@ -89,20 +89,12 @@ bool UTILS_ArrayEqualityCheck(const uint8_t *expected,
     return isEqual;
 }
 
-void UTILS_ArrayEqualityResultPrint(const uint8_t *expected,
+void UTILS_ArrayEqualityResultPrint(const char *description,
+        const uint8_t *expected,
         const uint8_t *actual, size_t size)
 {
-    if (true == UTILS_ArrayEqualityCheck(expected, actual, size))
-    {
-        (void) printf(UTILS_GREEN
-                " \r\n\r\n PASS " UTILS_RESET_COLOR);
-    }
-    else
-    {
-        (void) printf(UTILS_RED
-                " \r\n\r\n FAIL - Data Mismatch"
-                UTILS_RESET_COLOR);
-    }
+    bool passed = UTILS_ArrayEqualityCheck(expected, actual, size);
+    UTILS_StatusPrint(description, passed);
 }
 
 void UTILS_HexArrayPrint(const char *label,
@@ -171,6 +163,22 @@ void UTILS_TestHeaderPrint(const char *header)
             "****************************************"
             "************************"
             UTILS_RESET_COLOR);
+}
+
+void UTILS_StatusPrint(const char *description, bool passed)
+{
+    if (passed)
+    {
+        (void) printf(UTILS_GREEN
+                " \r\n\r\n PASS: %s "
+                UTILS_RESET_COLOR, description);
+    }
+    else
+    {
+        (void) printf(UTILS_RED
+                " \r\n\r\n FAIL: %s "
+                UTILS_RESET_COLOR, description);
+    }
 }
 
 void UTILS_CryptoErrorPrint(const char *description, int status)

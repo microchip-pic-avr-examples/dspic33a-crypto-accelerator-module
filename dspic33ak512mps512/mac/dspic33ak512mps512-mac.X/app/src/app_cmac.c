@@ -98,7 +98,9 @@ static void CMAC_DirectTestRun(test_vector_t *testVector)
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
         UTILS_HexArrayPrint("CMAC Output          ", generatedCmac, testVector->expectedMacLength);
-        UTILS_ArrayEqualityResultPrint(generatedCmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-CMAC OUTPUT",
+            generatedCmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }
@@ -167,7 +169,9 @@ static void CMAC_StepTestRun(test_vector_t *testVector)
         UTILS_HexArrayPrint("CMAC Output          ",
             generatedCmac, testVector->expectedMacLength);
 
-        UTILS_ArrayEqualityResultPrint(generatedCmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-CMAC OUTPUT",
+            generatedCmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }

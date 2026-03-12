@@ -34,15 +34,34 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
+/* cppcheck-suppress misra-c2012-21.6
+*
+*  (Rule 21.6) REQUIRED: The standard library input/output functions shall not
+*  be used
+*
+*  Reasoning: printf is required for printing to the terminal in this code
+*  example.
+*/
+#include <stdio.h>
 #include <stdbool.h>
 #include "app/app_ecdh.h"
+#include "utils/app_utils.h"
 #include "mcc_generated_files/system/system.h"
 
 int main(void)
 {
     SYSTEM_Initialize();
 
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
+
+    (void) printf(
+        "\r\n\r\n Starting CRYPTO ECDH program \r\n");
+
     ECDH_TestRun();
+
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {
