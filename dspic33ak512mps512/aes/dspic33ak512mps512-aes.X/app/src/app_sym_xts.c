@@ -162,24 +162,6 @@ static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
-static void SYM_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint32_t length)
-{
-    UTILS_SeparatorPrint(UTILS_BLUE, '-');
-
-    if (length > 0UL)
-    {
-        bool passed = UTILS_ArrayEqualityCheck(result, text, length);
-
-        if (!passed)
-        {
-            UTILS_HexArrayPrint("Expected Data        ",
-                    text, length);
-        }
-
-        UTILS_StatusPrint("AES ENCRYPT", passed);
-    }
-}
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Symmetric XTS Test Functions
@@ -231,7 +213,13 @@ void SYM_XtsTestRun(void)
         }
         else
         {
-            SYM_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            (void) printf("\r\n\r\n VERIFYING...");
+            UTILS_ArrayEqualityResultPrint(
+                    "AES ENCRYPT",
+                    test->ciphertext,
+                    ciphertext,
+                    test->textLength);
 
             if (test->textLength > 0UL)
             {
@@ -247,6 +235,7 @@ void SYM_XtsTestRun(void)
                 }
                 else
                 {
+                    UTILS_SeparatorPrint(UTILS_BLUE, '-');
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
                             "AES DECRYPT",
@@ -274,7 +263,13 @@ void SYM_XtsTestRun(void)
         }
         else
         {
-            SYM_EncryptionCheck(test->ciphertext, ciphertext, test->textLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            (void) printf("\r\n\r\n VERIFYING...");
+            UTILS_ArrayEqualityResultPrint(
+                    "AES ENCRYPT",
+                    test->ciphertext,
+                    ciphertext,
+                    test->textLength);
 
             if (test->textLength > 0UL)
             {
@@ -290,6 +285,7 @@ void SYM_XtsTestRun(void)
                 }
                 else
                 {
+                    UTILS_SeparatorPrint(UTILS_BLUE, '-');
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
                             "AES DECRYPT",
