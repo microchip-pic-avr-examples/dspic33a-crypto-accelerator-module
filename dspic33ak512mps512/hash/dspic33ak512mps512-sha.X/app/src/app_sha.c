@@ -60,16 +60,11 @@ Microchip or any third party.
 static void SHA_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *actual, size_t size)
 {
-    if (true == UTILS_ArrayEqualityCheck(expected, actual, size))
+    bool passed = UTILS_ArrayEqualityCheck(expected, actual, size);
+    UTILS_StatusPrint("SHA DIGEST", passed);
+
+    if (!passed)
     {
-        (void) printf(UTILS_GREEN
-                " \r\n\r\n PASS " UTILS_RESET_COLOR);
-    }
-    else
-    {
-        (void) printf(UTILS_RED
-                " \r\n\r\n FAIL - Data Mismatch"
-                UTILS_RESET_COLOR);
         UTILS_HexArrayPrint("Expected Digest",
                 actual, (uint32_t) size);
     }
@@ -195,9 +190,10 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
     if (status != CRYPTO_HASH_SUCCESS)
     {
-        (void) printf(UTILS_RED
-            "\r\n Crypto v4 SHA-%lu Error Result: %d\n\r"
-            UTILS_RESET_COLOR, digestBitLength, status);
+        char errorDesc[40];
+        (void) sprintf(errorDesc, "SHA-%lu",
+                digestBitLength);
+        UTILS_CryptoErrorPrint(errorDesc, (int) status);
     }
     else
     {
@@ -232,9 +228,10 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
         if (status != CRYPTO_HASH_SUCCESS)
         {
-            (void) printf(UTILS_RED
-                "\r\n Crypto v4 SHA-%lu Error Result: %d\n\r"
-                UTILS_RESET_COLOR, digestBitLength, status);
+            char errorDesc[40];
+            (void) sprintf(errorDesc, "SHA-%lu",
+                    digestBitLength);
+            UTILS_CryptoErrorPrint(errorDesc, (int) status);
         }
         else
         {

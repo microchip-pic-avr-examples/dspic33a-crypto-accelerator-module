@@ -249,7 +249,9 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            UTILS_ArrayEqualityResultPrint(data, decryptedDirectResult, dataLength);
+            UTILS_ArrayEqualityResultPrint(
+                    "AES DECRYPT",
+                    data, decryptedDirectResult, dataLength);
         }
     }
 
@@ -280,7 +282,9 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
         else
         {
             (void) printf("\r\n\r\n VERIFYING...");
-            UTILS_ArrayEqualityResultPrint(data, decryptedStepsResult, dataLength);
+            UTILS_ArrayEqualityResultPrint(
+                    "AES DECRYPT",
+                    data, decryptedStepsResult, dataLength);
         }
     }
 
@@ -293,7 +297,9 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
     UTILS_HexArrayPrint("Direct Encryption    ", encryptedDirectResult, dataLength);
     UTILS_HexArrayPrint("Stepwise Encryption  ", encryptedStepsResult, dataLength);
 
-    UTILS_ArrayEqualityResultPrint(encryptedDirectResult, encryptedStepsResult, dataLength);
+    UTILS_ArrayEqualityResultPrint(
+            "AES DIRECT vs STEPWISE",
+            encryptedDirectResult, encryptedStepsResult, dataLength);
 
 }
 

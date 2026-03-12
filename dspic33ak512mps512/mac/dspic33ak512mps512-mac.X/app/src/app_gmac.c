@@ -107,7 +107,9 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        UTILS_ArrayEqualityResultPrint(generatedGmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-GMAC OUTPUT",
+            generatedGmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }
@@ -175,7 +177,9 @@ static void GMAC_StepTestRun(test_vector_t *testVector)
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        UTILS_ArrayEqualityResultPrint(generatedGmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-GMAC OUTPUT",
+            generatedGmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }

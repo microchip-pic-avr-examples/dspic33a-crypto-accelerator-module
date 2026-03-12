@@ -34,13 +34,6 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
-/* cppcheck-suppress misra-c2012-21.6
-*
-*  (Rule 21.6) Required: The standard library input/output functions shall not be used
-*
-*  Reasoning: This demo uses printf to print out information to a terminal.
-*/
-#include <stdio.h>
 #include "crypto/common_crypto/crypto_kas.h"
 #include "app/app_ecdh.h"
 #include "utils/app_utils.h"
@@ -59,12 +52,14 @@ static void ECDH_HardwareTestRun(uint8_t *publicKey,
             sharedSecret, expectedOutputLength,
             eccCurveType, UTILS_SESSION_ID);
 
-    UTILS_HexArrayPrint("Shared Secret :",
+    UTILS_HexArrayPrint("Shared Secret        ",
             sharedSecret, expectedOutputLength);
 
     if (error == CRYPTO_KAS_SUCCESS)
     {
-        UTILS_ArrayEqualityResultPrint(expectedOutput,
+        UTILS_ArrayEqualityResultPrint(
+                "ECDH SHARED SECRET",
+                expectedOutput,
                 sharedSecret, expectedOutputLength);
     }
     else
@@ -242,11 +237,8 @@ static void ECDH_P521TestRun(void)
 
 void ECDH_TestRun(void)
 {
-    UTILS_SplitterPrint();
-    (void) printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
     ECDH_P192TestRun();
     ECDH_P256TestRun();
     ECDH_P384TestRun();
     ECDH_P521TestRun();
-    UTILS_SplitterPrint();
 }

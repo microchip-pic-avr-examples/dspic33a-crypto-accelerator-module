@@ -168,20 +168,15 @@ static void SYM_EncryptionCheck(const uint8_t *text, const uint8_t *result, uint
 
     if (length > 0UL)
     {
-        if (true == UTILS_ArrayEqualityCheck(result, text, length))
-        {
-            (void) printf(UTILS_GREEN
-                    "\r\n Encryption: PASS"
-                    UTILS_RESET_COLOR);
-        }
-        else
+        bool passed = UTILS_ArrayEqualityCheck(result, text, length);
+
+        if (!passed)
         {
             UTILS_HexArrayPrint("Expected Data        ",
                     text, length);
-            (void) printf(UTILS_RED
-                    "\r\n Encryption: FAIL"
-                    UTILS_RESET_COLOR);
         }
+
+        UTILS_StatusPrint("AES ENCRYPT", passed);
     }
 }
 
@@ -254,6 +249,7 @@ void SYM_XtsTestRun(void)
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
+                            "AES DECRYPT",
                             test->plaintext,
                             decryptedDirectResult,
                             test->textLength);
@@ -296,6 +292,7 @@ void SYM_XtsTestRun(void)
                 {
                     (void) printf("\r\n\r\n VERIFYING...");
                     UTILS_ArrayEqualityResultPrint(
+                            "AES DECRYPT",
                             test->plaintext,
                             decryptedStepsResult,
                             test->textLength);
@@ -313,6 +310,7 @@ void SYM_XtsTestRun(void)
         UTILS_HexArrayPrint("Stepwise Encryption  ", encryptedStepsResult, test->textLength);
 
         UTILS_ArrayEqualityResultPrint(
+                "AES DIRECT vs STEPWISE",
                 encryptedDirectResult,
                 encryptedStepsResult,
                 test->textLength);
