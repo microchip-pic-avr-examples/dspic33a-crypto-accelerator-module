@@ -1,17 +1,4 @@
-/*******************************************************************************
-  ECDH Test Vector Header File
-
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    test_vector.h
-
-  Summary:
-    This header file provides the test vector structure and declarations for
-    ECDH shared secret generation test vectors.
-*******************************************************************************/
-
+//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -34,6 +21,7 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
+//DOM-IGNORE-END
 
 #ifndef TEST_VECTOR_H
 #define TEST_VECTOR_H

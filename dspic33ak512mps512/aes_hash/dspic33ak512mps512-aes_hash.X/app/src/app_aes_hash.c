@@ -681,7 +681,7 @@ void AESHASH_ConcurrentTestRun(void)
             macResult = MAC_CmacTestAdvance(&macContext);
             hashResult = SHA_HashTestAdvance(&hashContext);
 
-            /* 
+            /*
              * If any but the hash tests finish, restart them.
              * The hash test has the most iterations.
              */
