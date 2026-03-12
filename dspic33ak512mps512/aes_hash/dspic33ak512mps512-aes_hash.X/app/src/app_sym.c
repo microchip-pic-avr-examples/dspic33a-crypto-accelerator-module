@@ -52,8 +52,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 
-// Only one test context at a time is supported.
-
 // Context for AES calculations.
 static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 

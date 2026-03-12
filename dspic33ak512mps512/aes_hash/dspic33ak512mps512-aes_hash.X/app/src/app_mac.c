@@ -49,8 +49,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app/app_mac.h"
 
-// Only one test context at a time is supported.
-
 // Context for CMAC calculations.
 static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
 

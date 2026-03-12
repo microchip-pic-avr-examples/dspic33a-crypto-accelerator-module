@@ -51,8 +51,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_aead_cipher.h"
 
-// Only one test context at a time is supported.
-
 // Context for AES calculations.
 static st_Crypto_Aead_AesGcm_ctx aeadGcmCtx __attribute__((aligned(4)));
 static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));

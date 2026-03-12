@@ -48,8 +48,6 @@ Microchip or any third party.
 #include "app/app_aes_hash.h"
 #include "app/app_sha.h"
 
-// Only one test context at a time is supported.
-
 // The SHA hash context.
 static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
 
