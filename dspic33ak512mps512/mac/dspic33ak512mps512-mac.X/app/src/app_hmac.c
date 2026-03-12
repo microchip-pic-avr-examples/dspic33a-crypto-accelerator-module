@@ -146,9 +146,9 @@ static void HMAC_DirectTestRun(test_vector_t *testVector)
 
 static void HMAC_StepTestRun(test_vector_t *testVector)
 {
-    /* 
+    /*
      * Context for HMAC calculations when running individual steps.
-     * This is non-reentrant as it is too large to put on the stack. 
+     * This is non-reentrant as it is too large to put on the stack.
      */
     static st_Crypto_Mac_Hmac_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedHmac[CRYPTO_HASH_MAX_DIGEST_SIZE] = {0};

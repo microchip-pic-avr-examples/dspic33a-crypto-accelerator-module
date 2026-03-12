@@ -1,16 +1,4 @@
-/*******************************************************************************
-  ECDH P-256 Test Vector Source File
-
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    test_vector_P256.c
-
-  Summary:
-    This source file contains the ECDH P-256 test vector data.
-*******************************************************************************/
-
+//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -33,6 +21,7 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
+//DOM-IGNORE-END
 
 #include "test_vectors/test_vector.h"
 

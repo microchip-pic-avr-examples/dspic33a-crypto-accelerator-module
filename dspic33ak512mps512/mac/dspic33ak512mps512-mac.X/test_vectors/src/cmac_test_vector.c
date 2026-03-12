@@ -16,7 +16,7 @@ out of the use of the software and documentation, even if advised of the
 possibility of such damage.
 
 Except as expressly permitted hereunder and subject to the applicable license terms
-for any third-party software incorporated in the software and any a pplicable open
+for any third-party software incorporated in the software and any applicable open
 source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.

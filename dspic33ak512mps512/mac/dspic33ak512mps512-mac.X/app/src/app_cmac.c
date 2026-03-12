@@ -113,9 +113,9 @@ static void CMAC_DirectTestRun(test_vector_t *testVector)
 
 static void CMAC_StepTestRun(test_vector_t *testVector)
 {
-    /* 
+    /*
      * Context for CMAC calculations when running individual steps.
-     * This is non-reentrant as it is too large to put on the stack. 
+     * This is non-reentrant as it is too large to put on the stack.
      */
     static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedCmac[16] = {0};
