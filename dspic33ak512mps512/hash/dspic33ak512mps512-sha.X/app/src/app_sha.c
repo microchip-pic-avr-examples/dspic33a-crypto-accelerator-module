@@ -177,7 +177,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     {
         UTILS_SeparatorPrint(UTILS_BLUE, '-');
 
-        (void) printf("\r\n %s  :  None", inputHeader);
+        (void) printf("\r\n %s        : None", inputHeader);
     }
 
     crypto_Hash_Status_E status;

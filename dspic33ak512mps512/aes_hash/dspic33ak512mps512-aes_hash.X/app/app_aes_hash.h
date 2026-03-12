@@ -59,9 +59,11 @@ extern "C"
 #define RUN_HASH_TEST
 #define RUN_CONCURRENT_TEST
 
-/* Uncomment this to see the test input/result data for each test,
- * or define it as a C macro in the project configuration. */
-//#define SHOW_TEST_DATA
+/*
+ * Uncomment this to see the test input/result data for each test,
+ * or define it as a C macro in the project configuration.
+ */
+#define SHOW_TEST_DATA
 
 // *****************************************************************************
 // *****************************************************************************
