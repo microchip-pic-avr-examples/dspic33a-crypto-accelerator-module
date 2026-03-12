@@ -63,7 +63,7 @@ extern "C"
  * Uncomment this to see the test input/result data for each test,
  * or define it as a C macro in the project configuration.
  */
-#define SHOW_TEST_DATA
+// #define SHOW_TEST_DATA
 
 // *****************************************************************************
 // *****************************************************************************
