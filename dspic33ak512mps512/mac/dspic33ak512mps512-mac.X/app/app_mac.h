@@ -43,21 +43,7 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stddef.h>
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Type Definitions
-// *****************************************************************************
-// *****************************************************************************
-
-#define RESET_COLOR "\x1B""[0m"
-#define RED "\x1B""[1;31m"
-#define GREEN "\x1B""[1;32m"
-#define BLUE "\x1B""[1;34m"
-#define MAG "\x1B""[1;35m"
-#define CYAN "\x1B""[1;36m"
+#include "utils/app_utils.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -77,10 +63,6 @@ extern "C" {
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-void MAC_ArrayEqualityResultPrint(const uint8_t *expected, const uint8_t *actual, size_t size);
-
-void MAC_HexArrayPrint(const char *label, uint8_t *data, uint32_t size);
 
 void MAC_CmacTestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLength, const char *testType,

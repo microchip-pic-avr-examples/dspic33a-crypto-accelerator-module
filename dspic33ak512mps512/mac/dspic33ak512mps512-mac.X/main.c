@@ -49,8 +49,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_mac.h"
 
@@ -64,14 +62,10 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    (void) printf(
-        "____________________________________________"
-        "____________________________________________"
-        "__________ \r\n");
-
-    (void) printf("\r\n\n\n\n Starting CRYPTO MAC program \r\n");
+    (void) printf("\r\n\r\n Starting CRYPTO MAC program \r\n");
 
     #ifdef RUN_MAC_CMAC_TEST
     MAC_CmacTestRun();
@@ -84,12 +78,8 @@ int main(void)
     MAC_GmacTestRun();
     #endif
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf(
-        "____________________________________________"
-        "____________________________________________"
-        "__________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {

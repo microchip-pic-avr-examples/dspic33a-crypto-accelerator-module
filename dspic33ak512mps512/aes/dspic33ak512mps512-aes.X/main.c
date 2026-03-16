@@ -49,8 +49,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes.h"
 
@@ -64,12 +62,10 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("________________________________"
-        "______________________________________"
-        "________________________________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
     (void) printf(
-        "\r\n\n\n\n Starting CRYPTO AES program \r\n");
+        "\r\n\r\n Starting CRYPTO AES program \r\n");
 
     #ifdef RUN_SYM_TEST
     AES_SymTestRun();
@@ -79,10 +75,8 @@ int main(void)
     AES_AeadTestRun();
     #endif
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("________________________________"
-        "______________________________________"
-        "________________________________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
     while (true)
     {
 

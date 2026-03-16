@@ -53,8 +53,6 @@ Microchip or any third party.
 #include "test_vectors/mac_test_vector.h"
 #include "app/app_gmac.h"
 
-#define TEST_SESSION_ID     (0x1U)
-
 /*
 *
 *  (Rule 2.5) ADVISORY: A project should not contain unused macro declarations
@@ -80,10 +78,10 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
         "GMAC (DIRECT)", testVector->inputDataLength,
         dataInfo);
 
-    MAC_HexArrayPrint("Key                  ",
+    UTILS_HexArrayPrint("Key                  ",
         testVector->inputKey, testVector->inputKeyLength);
 
-    MAC_HexArrayPrint("Data                 ",
+    UTILS_HexArrayPrint("Data                 ",
         testVector->inputData,
         testVector->inputDataLength);
 
@@ -97,19 +95,21 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
             testVector->inputKeyLength,
             testVector->inputData,
             testVector->inputDataLength,
-            TEST_SESSION_ID);
+            UTILS_SESSION_ID);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        MAC_HexArrayPrint("GMAC Output          ",
+        UTILS_HexArrayPrint("GMAC Output          ",
             generatedGmac,
             testVector->expectedMacLength);
 
-        MAC_HexArrayPrint("Expected Output      ",
+        UTILS_HexArrayPrint("Expected Output      ",
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        MAC_ArrayEqualityResultPrint(generatedGmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-GMAC OUTPUT",
+            generatedGmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }
@@ -122,8 +122,10 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
 
 static void GMAC_StepTestRun(test_vector_t *testVector)
 {
-    // Context for GMAC calculations when running individual steps.
-    // This is non-reentrant as it is too large to put on the stack.
+    /* 
+     * Context for GMAC calculations when running individual steps.
+     * This is non-reentrant as it is too large to put on the stack.
+     */
     static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
     uint8_t generatedGmac[CRYPTO_AESKEYSIZE_256] = {0};
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
@@ -138,10 +140,10 @@ static void GMAC_StepTestRun(test_vector_t *testVector)
         "GMAC (STEPWISE)", testVector->inputDataLength,
         dataInfo);
 
-    MAC_HexArrayPrint("Key                  ",
+    UTILS_HexArrayPrint("Key                  ",
         testVector->inputKey, testVector->inputKeyLength);
 
-    MAC_HexArrayPrint("Data                 ",
+    UTILS_HexArrayPrint("Data                 ",
         testVector->inputData,
         testVector->inputDataLength);
 
@@ -149,7 +151,7 @@ static void GMAC_StepTestRun(test_vector_t *testVector)
             CRYPTO_HANDLER_HW_INTERNAL,
             testVector->inputKey,
             testVector->inputKeyLength,
-            TEST_SESSION_ID);
+            UTILS_SESSION_ID);
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
@@ -169,15 +171,17 @@ static void GMAC_StepTestRun(test_vector_t *testVector)
 
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
-        MAC_HexArrayPrint("GMAC Output          ",
+        UTILS_HexArrayPrint("GMAC Output          ",
             generatedGmac,
             testVector->expectedMacLength);
 
-        MAC_HexArrayPrint("Expected Output      ",
+        UTILS_HexArrayPrint("Expected Output      ",
             testVector->expectedMac,
             testVector->expectedMacLength);
 
-        MAC_ArrayEqualityResultPrint(generatedGmac,
+        UTILS_ArrayEqualityResultPrint(
+            "AES-GMAC OUTPUT",
+            generatedGmac,
             testVector->expectedMac,
             testVector->expectedMacLength);
     }

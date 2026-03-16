@@ -59,6 +59,9 @@
         <itemPath>test_vectors/test_vectors_sha384.h</itemPath>
         <itemPath>test_vectors/test_vectors_sha512.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>../../../utils/app_utils.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -127,6 +130,11 @@
           <itemPath>test_vectors/src/test_vectors_sha256.c</itemPath>
           <itemPath>test_vectors/src/test_vectors_sha384.c</itemPath>
           <itemPath>test_vectors/src/test_vectors_sha512.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../../../utils/src/app_utils.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>

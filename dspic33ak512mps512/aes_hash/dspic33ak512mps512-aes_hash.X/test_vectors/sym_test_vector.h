@@ -53,21 +53,27 @@ typedef struct
 } sym_test_vector_t;
 
 sym_test_vector_t *VECTOR_EcbTestVectorsGet(void);
+
 uint32_t VECTOR_EcbTestVectorCountGet(void);
 
 sym_test_vector_t *VECTOR_CtrTestVectorsGet(void);
+
 uint32_t VECTOR_CtrTestVectorCountGet(void);
 
 sym_test_vector_t *VECTOR_CbcTestVectorsGet(void);
+
 uint32_t VECTOR_CbcTestVectorCountGet(void);
 
 sym_test_vector_t *VECTOR_Cfb128TestVectorsGet(void);
+
 uint32_t VECTOR_Cfb128TestVectorCountGet(void);
 
 sym_test_vector_t *VECTOR_OfbTestVectorsGet(void);
+
 uint32_t VECTOR_OfbTestVectorCountGet(void);
 
 sym_test_vector_t *VECTOR_XtsTestVectorsGet(void);
+
 uint32_t VECTOR_XtsTestVectorCountGet(void);
 
 #ifdef __cplusplus

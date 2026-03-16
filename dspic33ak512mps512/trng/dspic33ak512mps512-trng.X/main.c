@@ -41,8 +41,6 @@ Microchip or any third party.
  *  Reasoning: This demo uses printf to print out information to a terminal.
  */
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "app/app_trng.h"
 #include "mcc_generated_files/system/system.h"
 
@@ -50,21 +48,15 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    (void) printf("______________________________________"
-            "____________________________________"
-            "_________________________ \r\n");
-
-    (void) printf("\r\n\n\n\n Starting CRYPTO TRNG program \r\n");
+    (void) printf("\r\n\r\n Starting CRYPTO TRNG program \r\n");
 
     TRNG_TestRun();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("______________________________________"
-            "____________________________________"
-            "_________________________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {

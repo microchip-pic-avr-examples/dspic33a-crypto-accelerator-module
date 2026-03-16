@@ -67,9 +67,11 @@ typedef struct
 } aead_test_vector_t;
 
 aead_test_vector_t *VECTOR_GcmTestVectorsGet(void);
+
 uint32_t VECTOR_GcmTestVectorCountGet(void);
 
 aead_test_vector_t *VECTOR_CcmTestVectorsGet(void);
+
 uint32_t VECTOR_CcmTestVectorCountGet(void);
 
 #ifdef __cplusplus

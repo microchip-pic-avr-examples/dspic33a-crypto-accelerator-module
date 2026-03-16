@@ -6,7 +6,6 @@
                    projectFiles="true">
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <itemPath>app/app_ecdsa.h</itemPath>
-        <itemPath>app/app_util.h</itemPath>
       </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
         <logicalFolder name="common_crypto"
@@ -56,6 +55,9 @@
                      projectFiles="true">
         <itemPath>test_vectors/test_vector.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>../../../utils/app_utils.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -73,7 +75,6 @@
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <itemPath>app/src/app_ecdsa.c</itemPath>
-          <itemPath>app/src/app_util.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="crypto" displayName="crypto" projectFiles="true">
@@ -124,6 +125,11 @@
           <itemPath>test_vectors/src/test_vector_P256.c</itemPath>
           <itemPath>test_vectors/src/test_vector_P384.c</itemPath>
           <itemPath>test_vectors/src/test_vector_P521.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../../../utils/src/app_utils.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
