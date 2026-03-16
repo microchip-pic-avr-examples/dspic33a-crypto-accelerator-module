@@ -50,7 +50,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdbool.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_aes_hash.h"
 
@@ -69,44 +68,44 @@ int main(void)
     SYSTEM_Initialize();
 
     (void) printf("\r\n\r\n\r\n");
-    AESHASH_SeparatorPrint(WHITE, '_');
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
     (void) printf("\r\n\r\n Starting CRYPTO AES/HASH MULTI-OPERATION program");
 
 #if RUN_SEPARATE_TESTS
-    AESHASH_SeparatorPrint(WHITE, '_');
-    (void) printf(GREEN "\r\n\r\n Executing in SEPARATE mode" RESET_COLOR);
-    AESHASH_SeparatorPrint(WHITE, '_');
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
+    (void) printf(UTILS_GREEN "\r\n\r\n Executing in SEPARATE mode" UTILS_RESET_COLOR);
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
     (void) printf("\r\n");
 
     #ifdef RUN_SYM_TEST
-    AESHASH_SeparatorPrint(BLUE, '_');
+    UTILS_SeparatorPrint(UTILS_BLUE, '_');
     AESHASH_SymTestRun();
     #endif
 
     #ifdef RUN_MAC_TEST
-    AESHASH_SeparatorPrint(BLUE, '_');
+    UTILS_SeparatorPrint(UTILS_BLUE, '_');
     AESHASH_MacTestRun();
     #endif
 
     #ifdef RUN_AEAD_TEST
-    AESHASH_SeparatorPrint(BLUE, '_');
+    UTILS_SeparatorPrint(UTILS_BLUE, '_');
     AESHASH_AeadTestRun();
     #endif
 
     #ifdef RUN_HASH_TEST
-    AESHASH_SeparatorPrint(BLUE, '_');
+    UTILS_SeparatorPrint(UTILS_BLUE, '_');
     AESHASH_HashTestRun();
     #endif
 #endif
 
     #ifdef RUN_CONCURRENT_TEST
-    AESHASH_SeparatorPrint(WHITE, '_');
-    (void) printf(GREEN "\r\n\r\n Executing in CONCURRENT mode" RESET_COLOR);
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
+    (void) printf(UTILS_GREEN "\r\n\r\n Executing in CONCURRENT mode" UTILS_RESET_COLOR);
 
     AESHASH_ConcurrentTestRun();
     #endif
 
-    AESHASH_SeparatorPrint(WHITE, '_');
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
     (void) printf("\r\n");
 
     while (true)

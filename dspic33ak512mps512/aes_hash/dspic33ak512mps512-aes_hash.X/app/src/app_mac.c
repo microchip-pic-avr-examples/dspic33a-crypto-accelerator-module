@@ -49,9 +49,6 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_common.h"
 #include "app/app_mac.h"
 
-// Only one test context at a time is supported.
-#define TEST_SESSION_ID         (0x1U)
-
 // Context for CMAC calculations.
 static st_Crypto_Mac_Aes_ctx macCtx __attribute__((aligned(4)));
 
@@ -103,26 +100,26 @@ static test_result_t MAC_CmacTestStepInit(void *context)
     test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s %s Test %lu",
+    (void) printf(UTILS_BLUE "\r\n\r\n %s %s Test %lu",
             MAC_TestOpModeGet(testContext->opMode),
             AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Data (Input)", test->inputData,
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Key", test->inputKey, test->inputKeyLength);
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Data (Input)", test->inputData,
             test->inputDataLength);
-    AESHASH_SeparatorPrint(BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
     status = Crypto_Mac_AesCmac_Init(&macCtx,
             CRYPTO_HANDLER_HW_INTERNAL, test->inputKey,
-            test->inputKeyLength, TEST_SESSION_ID);
+            test->inputKeyLength, UTILS_SESSION_ID);
     result = (status == CRYPTO_MAC_CIPHER_SUCCESS)
             ? TEST_RESULT_SUCCESS : TEST_RESULT_INIT_FAILED;
 
-    (void) printf(MAG);
+    (void) printf(UTILS_MAG);
     AESHASH_OperationStepPrint("INITIALIZING",
             MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
@@ -151,7 +148,7 @@ static test_result_t MAC_CmacTestCipherRun(void *context)
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     test_result_t result;
 
-    (void) printf(MAG);
+    (void) printf(UTILS_MAG);
     AESHASH_OperationStepPrint("CIPHERING",
             MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
@@ -187,7 +184,7 @@ static test_result_t MAC_CmacTestFinalizeRun(void *context)
     crypto_Mac_Status_E status = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
-    (void) printf(MAG);
+    (void) printf(UTILS_MAG);
     AESHASH_OperationStepPrint("FINALIZING",
             MAC_TestOpModeGet(testContext->opMode),
             testContext->testMode,
@@ -205,18 +202,18 @@ static test_result_t MAC_CmacTestFinalizeRun(void *context)
     if (status == CRYPTO_MAC_CIPHER_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         AESHASH_LabelPrint("Result Length", "%d bytes", test->expectedMacLength);
-        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult, test->expectedMacLength);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_HexArrayPrint("Data (Result)", testContext->dataResult, test->expectedMacLength);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
-        (void) printf(MAG);
+        (void) printf(UTILS_MAG);
         AESHASH_OperationStepPrint("VERIFYING",
                 MAC_TestOpModeGet(testContext->opMode),
                 testContext->testMode,
                 test->inputDataLength, true);
 
-        if (true == AESHASH_ArrayEqualityCheck(testContext->dataResult,
+        if (true == UTILS_ArrayEqualityCheck(testContext->dataResult,
                 test->expectedMac,
                 test->expectedMacLength))
         {
@@ -231,11 +228,11 @@ static test_result_t MAC_CmacTestFinalizeRun(void *context)
 
         if (result != TEST_RESULT_SUCCESS)
         {
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Expected:", test->expectedMac, test->expectedMacLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Result:", testContext->dataResult, test->expectedMacLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Expected:", test->expectedMac, test->expectedMacLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Result:", testContext->dataResult, test->expectedMacLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
         }
     }
 
@@ -294,7 +291,9 @@ test_result_t MAC_CmacContextInit(test_context_t *context,
 
         default:
         {
-            (void) printf(RED "\r\n\r\n Unknown MAC test operation mode %d" RESET_COLOR, opMode);
+            (void) printf(UTILS_RED
+                    "\r\n\r\n Unknown MAC test operation mode %d"
+                    UTILS_RESET_COLOR, opMode);
             result = TEST_RESULT_INIT_FAILED;
         }
         break;

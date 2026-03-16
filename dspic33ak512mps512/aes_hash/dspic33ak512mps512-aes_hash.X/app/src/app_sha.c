@@ -48,9 +48,6 @@ Microchip or any third party.
 #include "app/app_aes_hash.h"
 #include "app/app_sha.h"
 
-// Only one test context at a time is supported.
-#define TEST_SESSION_ID     (0x1U)
-
 // The SHA hash context.
 static st_Crypto_Hash_Sha_Ctx shaCtx __attribute__((aligned(4)));
 
@@ -126,19 +123,19 @@ static test_result_t SHA_HashTestStepInit(void *context)
     test_result_t result;
 
 #ifdef SHOW_TEST_DATA
-    (void) printf(BLUE "\r\n\r\n %s Test %lu",
+    (void) printf(UTILS_BLUE "\r\n\r\n %s Test %lu",
             AESHASH_TestModeGet(testContext->testMode),
             (unsigned long) test->id);
 
-    AESHASH_SeparatorPrint(BLUE, '-');
-    AESHASH_HexArrayPrint("Data (Input)", test->inputData,
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
+    UTILS_HexArrayPrint("Data (Input)", test->inputData,
             test->inputDataLength);
     AESHASH_LabelPrint("Input Data Size", "%d bytes",
             testContext->blockSize);
-    AESHASH_SeparatorPrint(BLUE, '-');
+    UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
-    (void) printf(WHITE);
+    (void) printf(UTILS_WHITE);
     AESHASH_OperationStepPrint("INITIALIZING",
             SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode,
@@ -174,7 +171,7 @@ static test_result_t SHA_HashTestHashRun(void *context)
     crypto_Hash_Status_E status = CRYPTO_HASH_ERROR_NOTSUPPTED;
     test_result_t result;
 
-    (void) printf(WHITE);
+    (void) printf(UTILS_WHITE);
     AESHASH_OperationStepPrint("HASHING",
             SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode, dataLength, true);
@@ -209,7 +206,7 @@ static test_result_t SHA_HashTestFinalizeRun(void *context)
     crypto_Hash_Status_E status = CRYPTO_HASH_ERROR_NOTSUPPTED;
     test_result_t result = TEST_RESULT_FINALIZE_FAILED;
 
-    (void) printf(WHITE);
+    (void) printf(UTILS_WHITE);
     AESHASH_OperationStepPrint("FINALIZING",
             SHA_TestOpModeGet(testContext->algorithm),
             testContext->testMode,
@@ -226,21 +223,21 @@ static test_result_t SHA_HashTestFinalizeRun(void *context)
     if (status == CRYPTO_HASH_SUCCESS)
     {
 #ifdef SHOW_TEST_DATA
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
         AESHASH_LabelPrint("Digest Length", "%d bytes",
                 test->expectedDigestLength);
-        AESHASH_HexArrayPrint("Data (Result)", testContext->dataResult,
+        UTILS_HexArrayPrint("Data (Result)", testContext->dataResult,
                 test->expectedDigestLength);
-        AESHASH_SeparatorPrint(BLUE, '-');
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
 #endif
 
-        (void) printf(WHITE);
+        (void) printf(UTILS_WHITE);
         AESHASH_OperationStepPrint("VERIFYING",
                 SHA_TestOpModeGet(testContext->algorithm),
                 testContext->testMode,
                 test->inputDataLength, true);
 
-        if (true == AESHASH_ArrayEqualityCheck(testContext->dataResult,
+        if (true == UTILS_ArrayEqualityCheck(testContext->dataResult,
                 test->expectedDigest,
                 test->expectedDigestLength))
         {
@@ -252,11 +249,11 @@ static test_result_t SHA_HashTestFinalizeRun(void *context)
             result = TEST_RESULT_DATA_COMPARE_FAILED;
             AESHASH_CryptoResultPrint(result, status);
 
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Expected:", test->expectedDigest, test->expectedDigestLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
-            AESHASH_HexArrayPrint("Result:", testContext->dataResult, test->expectedDigestLength);
-            AESHASH_SeparatorPrint(BLUE, '-');
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Expected:", test->expectedDigest, test->expectedDigestLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
+            UTILS_HexArrayPrint("Result:", testContext->dataResult, test->expectedDigestLength);
+            UTILS_SeparatorPrint(UTILS_BLUE, '-');
         }
     }
 
@@ -301,7 +298,9 @@ test_result_t SHA_ContextInit(test_context_t *context,
 
         default:
         {
-            (void) printf(RED "\r\n\r\n Unknown hash test algorithm %d" RESET_COLOR, algorithm);
+            (void) printf(UTILS_RED
+                    "\r\n\r\n Unknown hash test algorithm %d"
+                    UTILS_RESET_COLOR, algorithm);
             result = TEST_RESULT_INIT_FAILED;
         }
         break;

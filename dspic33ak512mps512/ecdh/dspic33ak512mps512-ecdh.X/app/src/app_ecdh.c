@@ -34,88 +34,9 @@ implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 
-/* cppcheck-suppress misra-c2012-21.6
-*
-*  (Rule 21.6) Required: The standard library input/output functions shall not be used
-*
-*  Reasoning: This demo uses printf to print out information to a terminal.
-*/
-#include <stdio.h>
 #include "crypto/common_crypto/crypto_kas.h"
 #include "app/app_ecdh.h"
-
-#define RESET_COLOR     "\033""[0m"
-#define RED             "\033""[1;31m"
-#define GREEN           "\033""[1;32m"
-#define BLUE            "\033""[1;34m"
-#define MAG             "\033""[1;35m"
-#define CYAN            "\033""[1;36m"
-#define SESSION_ID      (0x1U)
-
-static void ECDH_SplitterPrint(void)
-{
-    (void) printf("\r\n\n ________________________________"
-        "____________________________________"
-        "__________________________________ \r\n");
-}
-
-static void ECDH_TestHeaderPrint(const char *label)
-{
-    (void) printf(MAG "\r\n\r\n ****************************"
-        "********************************************************");
-
-    (void) printf(CYAN "\r\n\t\t ******************** "
-        "%s ********************", label);
-
-    (void) printf(MAG "\r\n ****************************"
-        "********************************************************"
-        RESET_COLOR);
-}
-
-static void ECDH_HexArrayPrint(const char *label,
-        const uint8_t *data, uint32_t size)
-{
-    (void) printf(BLUE "\r\n ----------------------------"
-        "----------------------------------------------------------------------"
-        RESET_COLOR);
-
-    (void) printf("\r\n %s", label);
-    for (uint32_t index = 0U; index < size; index++)
-    {
-        if ((0U == (index % 16U)) && (0U != index))
-        {
-            (void) printf("\r\n\t\t");
-        }
-
-        (void) printf(" 0x%02X", data[index]);
-    }
-}
-
-static void ECDH_ArrayEqualityCheck(const uint8_t *expected,
-        const uint8_t *actual, size_t size)
-{
-    if (size > 0U)
-    {
-        uint8_t result = 0U;
-
-        for (size_t index = 0U; index < size; index++)
-        {
-            result |= (uint8_t)(expected[index] ^ actual[index]);
-        }
-
-        if (result == 0U)
-        {
-            (void) printf(GREEN " \r\n\r\n PASS - Generated "
-                "X point matches expected output"
-                RESET_COLOR);
-        }
-        else
-        {
-            (void) printf(RED " \r\n\r\n FAIL - Data Mismatch"
-                RESET_COLOR);
-        }
-    }
-}
+#include "utils/app_utils.h"
 
 static void ECDH_HardwareTestRun(uint8_t *publicKey,
         uint32_t publicKeyLength, uint8_t *privateKey,
@@ -124,19 +45,27 @@ static void ECDH_HardwareTestRun(uint8_t *publicKey,
         uint32_t expectedOutputLength,
         crypto_EccCurveType_E eccCurveType)
 {
-    crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(CRYPTO_HANDLER_HW_INTERNAL,
-            privateKey, privateKeyLength, publicKey, publicKeyLength,
-            sharedSecret, expectedOutputLength, eccCurveType, SESSION_ID);
+    crypto_Kas_Status_E error = Crypto_Kas_Ecdh_SharedSecret(
+            CRYPTO_HANDLER_HW_INTERNAL,
+            privateKey, privateKeyLength,
+            publicKey, publicKeyLength,
+            sharedSecret, expectedOutputLength,
+            eccCurveType, UTILS_SESSION_ID);
 
-    ECDH_HexArrayPrint("Shared Secret :", sharedSecret, expectedOutputLength);
+    UTILS_HexArrayPrint("Shared Secret        ",
+            sharedSecret, expectedOutputLength);
 
     if (error == CRYPTO_KAS_SUCCESS)
     {
-        ECDH_ArrayEqualityCheck(expectedOutput, sharedSecret, expectedOutputLength);
+        UTILS_ArrayEqualityResultPrint(
+                "ECDH SHARED SECRET",
+                expectedOutput,
+                sharedSecret, expectedOutputLength);
     }
     else
     {
-        (void) printf(RED "\r\nERROR in driver was thrown\r\n" RESET_COLOR);
+        UTILS_CryptoErrorPrint("ECDH Shared Secret",
+                (int) error);
     }
 }
 
@@ -147,7 +76,7 @@ static void ECDH_HardwareTestRun(uint8_t *publicKey,
 
 static void ECDH_P192TestRun(void)
 {
-    ECDH_TestHeaderPrint("P-192 ECDH");
+    UTILS_TestHeaderPrint("P-192 ECDH");
 
     // NIST Defined Private Key
     uint8_t testPrivateKey[24] =
@@ -183,7 +112,7 @@ static void ECDH_P192TestRun(void)
 
 static void ECDH_P256TestRun(void)
 {
-    ECDH_TestHeaderPrint("P-256 ECDH");
+    UTILS_TestHeaderPrint("P-256 ECDH");
 
     // NIST Defined Private Key
     uint8_t testPrivateKey[32] =
@@ -220,7 +149,7 @@ static void ECDH_P256TestRun(void)
 
 static void ECDH_P384TestRun(void)
 {
-    ECDH_TestHeaderPrint("P-384 ECDH");
+    UTILS_TestHeaderPrint("P-384 ECDH");
 
     // NIST Defined Private Key
     uint8_t testPrivateKey[48] =
@@ -261,7 +190,7 @@ static void ECDH_P384TestRun(void)
 
 static void ECDH_P521TestRun(void)
 {
-    ECDH_TestHeaderPrint("P-521 ECDH");
+    UTILS_TestHeaderPrint("P-521 ECDH");
 
     // NIST Defined Private Key
     uint8_t testPrivateKey[66] =
@@ -308,11 +237,8 @@ static void ECDH_P521TestRun(void)
 
 void ECDH_TestRun(void)
 {
-    ECDH_SplitterPrint();
-    (void) printf("\r\n Starting CRYPTO ECDH Shared Secret program \r\n");
     ECDH_P192TestRun();
     ECDH_P256TestRun();
     ECDH_P384TestRun();
     ECDH_P521TestRun();
-    ECDH_SplitterPrint();
 }

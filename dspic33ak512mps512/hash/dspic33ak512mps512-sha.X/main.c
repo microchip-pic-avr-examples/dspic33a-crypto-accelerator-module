@@ -49,8 +49,6 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_sha.h"
 
@@ -64,13 +62,10 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    (void) printf("___________________________________"
-        "___________________________________"
-        "______________________________ \r\n");
-
-    (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
+    (void) printf("\r\n\r\n Starting CRYPTO SHA program \r\n");
 
     SHA_Sha1TestRun();
     SHA_Sha224TestRun();
@@ -78,11 +73,8 @@ int main(void)
     SHA_Sha384TestRun();
     SHA_Sha512TestRun();
 
-    (void) printf("\n\n\n\r\n ");
-
-    (void) printf("___________________________________"
-        "___________________________________"
-        "______________________________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
     while (true)
     {

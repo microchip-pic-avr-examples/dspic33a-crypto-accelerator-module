@@ -104,7 +104,7 @@ static const sym_test_vector_t ecb256Vector35Bytes =
 };
 
 // AES-256 ECB, 41-byte plaintext
-static const sym_test_vector_t ecb_256_41_bytes_vector =
+static const sym_test_vector_t ecb256Vector41Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_ECB,
@@ -120,7 +120,7 @@ static const sym_test_vector_t ecb_256_41_bytes_vector =
 };
 
 // AES-256 ECB, 48-byte plaintext
-static const sym_test_vector_t ecb_256_48_bytes_vector =
+static const sym_test_vector_t ecb256Vector48Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_ECB,
@@ -139,8 +139,8 @@ static const sym_test_vector_t ecb_256_48_bytes_vector =
 static sym_test_vector_t ecbTestVectors[3] =
 {
     [0] = ecb256Vector35Bytes,
-    [1] = ecb_256_41_bytes_vector,
-    [2] = ecb_256_48_bytes_vector,
+    [1] = ecb256Vector41Bytes,
+    [2] = ecb256Vector48Bytes,
 };
 
 sym_test_vector_t * VECTOR_EcbTestVectorsGet(void)
@@ -160,7 +160,7 @@ uint32_t VECTOR_EcbTestVectorCountGet(void)
 }
 
 // AES-256 CTR, 35-byte plaintext
-static const sym_test_vector_t ctr_256_35_bytes_vector =
+static const sym_test_vector_t ctr256Vector35Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CTR,
@@ -176,7 +176,7 @@ static const sym_test_vector_t ctr_256_35_bytes_vector =
 };
 
 // AES-256 CTR, 41-byte plaintext
-static const sym_test_vector_t ctr_256_41_bytes_vector =
+static const sym_test_vector_t ctr256Vector41Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CTR,
@@ -192,7 +192,7 @@ static const sym_test_vector_t ctr_256_41_bytes_vector =
 };
 
 // AES-256 CTR, 48-byte plaintext
-static const sym_test_vector_t ctr_256_48_bytes_vector =
+static const sym_test_vector_t ctr256Vector48Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CTR,
@@ -210,9 +210,9 @@ static const sym_test_vector_t ctr_256_48_bytes_vector =
 // 3 CTR AES-256 test vectors (35-byte, 41-byte, 48-byte plaintext)
 static sym_test_vector_t ctrTestVectors[3] =
 {
-    [0] = ctr_256_35_bytes_vector,
-    [1] = ctr_256_41_bytes_vector,
-    [2] = ctr_256_48_bytes_vector,
+    [0] = ctr256Vector35Bytes,
+    [1] = ctr256Vector41Bytes,
+    [2] = ctr256Vector48Bytes,
 };
 
 sym_test_vector_t * VECTOR_CtrTestVectorsGet(void)
@@ -232,7 +232,7 @@ uint32_t VECTOR_CtrTestVectorCountGet(void)
 }
 
 // AES-256 CBC, 35-byte plaintext
-static const sym_test_vector_t cbc_256_35_bytes_vector =
+static const sym_test_vector_t cbc256Vector35Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CBC,
@@ -248,7 +248,7 @@ static const sym_test_vector_t cbc_256_35_bytes_vector =
 };
 
 // AES-256 CBC, 41-byte plaintext
-static const sym_test_vector_t cbc_256_41_bytes_vector =
+static const sym_test_vector_t cbc256Vector41Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CBC,
@@ -264,7 +264,7 @@ static const sym_test_vector_t cbc_256_41_bytes_vector =
 };
 
 // AES-256 CBC, 48-byte plaintext
-static const sym_test_vector_t cbc_256_48_bytes_vector =
+static const sym_test_vector_t cbc256Vector48Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CBC,
@@ -282,9 +282,9 @@ static const sym_test_vector_t cbc_256_48_bytes_vector =
 // 3 CBC AES-256 test vectors (35-byte, 41-byte, 48-byte plaintext)
 static sym_test_vector_t cbcTestVectors[3] =
 {
-    [0] = cbc_256_35_bytes_vector,
-    [1] = cbc_256_41_bytes_vector,
-    [2] = cbc_256_48_bytes_vector,
+    [0] = cbc256Vector35Bytes,
+    [1] = cbc256Vector41Bytes,
+    [2] = cbc256Vector48Bytes,
 };
 
 sym_test_vector_t * VECTOR_CbcTestVectorsGet(void)
@@ -304,7 +304,7 @@ uint32_t VECTOR_CbcTestVectorCountGet(void)
 }
 
 // AES-256 CFB128, 35-byte plaintext
-static const sym_test_vector_t cfb128_256_35_bytes_vector =
+static const sym_test_vector_t cfb128Vector35Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CFB128,
@@ -320,7 +320,7 @@ static const sym_test_vector_t cfb128_256_35_bytes_vector =
 };
 
 // AES-256 CFB128, 41-byte plaintext
-static const sym_test_vector_t cfb128_256_41_bytes_vector =
+static const sym_test_vector_t cfb128Vector41Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CFB128,
@@ -336,7 +336,7 @@ static const sym_test_vector_t cfb128_256_41_bytes_vector =
 };
 
 // AES-256 CFB128, 48-byte plaintext
-static const sym_test_vector_t cfb128_256_48_bytes_vector =
+static const sym_test_vector_t cfb128Vector48Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_CFB128,
@@ -354,9 +354,9 @@ static const sym_test_vector_t cfb128_256_48_bytes_vector =
 // 3 CFB128 AES-256 test vectors (35-byte, 41-byte, 48-byte plaintext)
 static sym_test_vector_t cfb128TestVectors[3] =
 {
-    [0] = cfb128_256_35_bytes_vector,
-    [1] = cfb128_256_41_bytes_vector,
-    [2] = cfb128_256_48_bytes_vector,
+    [0] = cfb128Vector35Bytes,
+    [1] = cfb128Vector41Bytes,
+    [2] = cfb128Vector48Bytes,
 };
 
 sym_test_vector_t * VECTOR_Cfb128TestVectorsGet(void)
@@ -376,7 +376,7 @@ uint32_t VECTOR_Cfb128TestVectorCountGet(void)
 }
 
 // AES-256 OFB, 35-byte plaintext
-static const sym_test_vector_t ofb_256_35_bytes_vector =
+static const sym_test_vector_t ofb256Vector35Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_OFB,
@@ -392,7 +392,7 @@ static const sym_test_vector_t ofb_256_35_bytes_vector =
 };
 
 // AES-256 OFB, 41-byte plaintext
-static const sym_test_vector_t ofb_256_41_bytes_vector =
+static const sym_test_vector_t ofb256Vector41Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_OFB,
@@ -408,7 +408,7 @@ static const sym_test_vector_t ofb_256_41_bytes_vector =
 };
 
 // AES-256 OFB, 48-byte plaintext
-static const sym_test_vector_t ofb_256_48_bytes_vector =
+static const sym_test_vector_t ofb256Vector48Bytes =
 {
     0,
     CRYPTO_SYM_OPMODE_OFB,
@@ -426,9 +426,9 @@ static const sym_test_vector_t ofb_256_48_bytes_vector =
 // 3 OFB AES-256 test vectors (35-byte, 41-byte, 48-byte plaintext)
 static sym_test_vector_t ofbTestVectors[3] =
 {
-    [0] = ofb_256_35_bytes_vector,
-    [1] = ofb_256_41_bytes_vector,
-    [2] = ofb_256_48_bytes_vector,
+    [0] = ofb256Vector35Bytes,
+    [1] = ofb256Vector41Bytes,
+    [2] = ofb256Vector48Bytes,
 };
 
 sym_test_vector_t * VECTOR_OfbTestVectorsGet(void)

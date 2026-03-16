@@ -45,9 +45,7 @@ extern "C"
 {
 #endif
 
-#include <stdint.h>
-#include <stddef.h>
-#include <stdbool.h>
+#include "utils/app_utils.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -61,24 +59,17 @@ extern "C"
 #define RUN_HASH_TEST
 #define RUN_CONCURRENT_TEST
 
-/* Uncomment this to see the test input/result data for each test,
- * or define it as a C macro in the project configuration. */
-//#define SHOW_TEST_DATA
+/*
+ * Uncomment this to see the test input/result data for each test,
+ * or define it as a C macro in the project configuration.
+ */
+// #define SHOW_TEST_DATA
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-#define RESET_COLOR "\x1B""[0m"     // Reset the print output to default
-#define RED         "\x1B""[1;31m"  // Set output to bold red
-#define GREEN       "\x1B""[1;32m"  // Set output to bold green
-#define YELLOW      "\x1B""[1;33m"  // Set output to bold yellow
-#define BLUE        "\x1B""[1;34m"  // Set output to bold blue
-#define MAG         "\x1B""[1;35m"  // set output to bold magenta
-#define CYAN        "\x1B""[1;36m"  // Set output to bold cyan
-#define WHITE       "\x1B""[1;37m"  // Set output to bold white
 
 /**
  * @brief Defines the test operation mode (encrypt/hash/decrypt).
@@ -144,38 +135,12 @@ typedef struct test_context
 // *****************************************************************************
 
 /**
- * @brief Check that two arrays are identical to the specified length.
- * @param a Array 1.
- * @param b Array 2.
- * @param size The length of the data to check.
- * @return TRUE if equal, FALSE if not.
- */
-bool AESHASH_ArrayEqualityCheck(const uint8_t *expected,
-        const uint8_t *actual, size_t size);
-
-/**
- * @brief Print a separator line.
- * @param color The color string to print first.
- * @param sep The character to print as the separator.
- */
-void AESHASH_SeparatorPrint(const char *color, char sep);
-
-/**
  * @brief Print to console with a header label.
  * @param label A label to apply to the output.
  * @param format POinter to format string.
  * @param <variable arguments>
  */
 void AESHASH_LabelPrint(const char *label, const char *format, ...);
-
-/**
- * @brief Print an array to the console as hex characters.
- * @param label A label to apply to the output.
- * @param data The array data to print.
- * @param size The length of the data to print.
- */
-void AESHASH_HexArrayPrint(const char *label,
-        const uint8_t *data, uint32_t size);
 
 /**
  * @brief Get a string representing the test mode.
