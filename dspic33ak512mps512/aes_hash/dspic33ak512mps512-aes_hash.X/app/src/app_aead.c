@@ -62,11 +62,11 @@ static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
 // *****************************************************************************
 
 /**
- * @brief Compares the result of an encryption operaton and the generated authTag.
+ * @brief Compares the result of an encryption operation and the generated authTag.
  * @param expected Pointer to expected data value.
  * @param result Pointer to generated data value.
  * @param length Length of the data.
- * @param authTag Pointer to expected authauthTag.
+ * @param authTag Pointer to expected authTag.
  * @param authTagResult Pointer to generated authTag.
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
@@ -124,7 +124,7 @@ static test_result_t AEAD_EncryptionAndTagCheck(
 }
 
 /**
- * @brief Compares the result of an encryption operaton and the generated authTag.
+ * @brief Compares the result of a decryption operation.
  * @param expected Pointer to expected data value.
  * @param result Pointer to generated data value.
  * @param length Length of the data.

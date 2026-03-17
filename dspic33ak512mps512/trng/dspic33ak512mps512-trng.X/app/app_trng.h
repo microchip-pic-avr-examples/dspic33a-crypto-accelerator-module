@@ -11,6 +11,7 @@
     This header file provides prototypes and definitions for the TRNG application.
 *******************************************************************************/
 
+//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -33,6 +34,7 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
+//DOM-IGNORE-END
 
 #ifndef APP_TRNG_H
 #define APP_TRNG_H
