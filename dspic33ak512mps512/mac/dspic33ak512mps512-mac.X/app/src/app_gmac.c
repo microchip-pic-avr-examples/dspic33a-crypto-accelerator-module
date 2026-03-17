@@ -122,7 +122,7 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
 
 static void GMAC_StepTestRun(test_vector_t *testVector)
 {
-    /* 
+    /*
      * Context for GMAC calculations when running individual steps.
      * This is non-reentrant as it is too large to put on the stack.
      */

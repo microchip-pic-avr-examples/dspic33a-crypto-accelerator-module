@@ -11,6 +11,7 @@
     This source file starts the application to demonstrate TRNG.
 *******************************************************************************/
 
+//DOM-IGNORE-BEGIN
 /*
 Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
@@ -33,6 +34,7 @@ source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
+//DOM-IGNORE-END
 
 /* cppcheck-suppress misra-c2012-21.6
  *

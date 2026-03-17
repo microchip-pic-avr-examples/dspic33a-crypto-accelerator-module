@@ -62,7 +62,7 @@ static st_Crypto_Sym_BlockCtx aesCtx __attribute__((aligned(4)));
 // *****************************************************************************
 
 /**
- * @brief Compares the result of an encryption operaton.
+ * @brief Compares the result of an encryption operation.
  * @param expected Pointer to expected data value.
  * @param result Pointer to generated data value.
  * @param length Length of the data.
