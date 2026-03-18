@@ -47,9 +47,9 @@ Microchip or any third party.
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
 
-static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
+static void TRNG_GenerationTestRun(uint8_t *randomArray, uint32_t randomLength)
 {
-    const char *caption = "Random";
+    const char *outputLabel = "Random";
     char header[80];
 
     (void) sprintf(header, " TRNG Size %lu",
@@ -59,7 +59,7 @@ static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
 
     (void) Crypto_Rng_Generate(CRYPTO_HANDLER_HW_INTERNAL, randomArray, randomLength, NULL, 0U, 1U);
 
-    UTILS_HexArrayPrint(caption, randomArray, randomLength);
+    UTILS_HexArrayPrint(outputLabel, randomArray, randomLength);
 }
 
 // *****************************************************************************
@@ -71,14 +71,14 @@ static void TRNG_Run(uint8_t *randomArray, uint32_t randomLength)
 void TRNG_TestRun(void)
 {
     uint8_t randomArray1[192] = {0};
-    TRNG_Run(randomArray1, 192U);
+    TRNG_GenerationTestRun(randomArray1, 192U);
 
     uint8_t randomArray2[256] = {0};
-    TRNG_Run(randomArray2, 256U);
+    TRNG_GenerationTestRun(randomArray2, 256U);
 
     uint8_t randomArray3[384] = {0};
-    TRNG_Run(randomArray3, 384U);
+    TRNG_GenerationTestRun(randomArray3, 384U);
 
     uint8_t randomArray4[521] = {0};
-    TRNG_Run(randomArray4, 521U);
+    TRNG_GenerationTestRun(randomArray4, 521U);
 }
