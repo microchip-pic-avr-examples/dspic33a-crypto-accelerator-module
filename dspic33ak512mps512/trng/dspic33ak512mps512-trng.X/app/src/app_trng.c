@@ -37,11 +37,11 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 /* cppcheck-suppress misra-c2012-21.6
- *
- *  (Rule 21.6) Required: The standard library input/output functions shall not be used
- *
- *  Reasoning: This demo uses printf to print out information to a terminal.
- */
+*
+*  (Rule 21.6) REQUIRED: The standard library input/output functions shall not be used
+*
+*  Reasoning: This demo uses printf to print out information to a terminal.
+*/
 #include <stdio.h>
 #include <string.h>
 #include "app/app_trng.h"

@@ -271,7 +271,7 @@ enum
     HASH_TEST_STEP_NUMBER_OF_STEPS
 };
 
-test_result_t SHA_ContextInit(test_context_t *context,
+test_result_t AESHASH_ShaContextInit(test_context_t *context,
         test_mode_t mode, crypto_Hash_Algo_E algorithm,
         uint32_t blockSize)
 {
@@ -342,7 +342,7 @@ test_result_t SHA_ContextInit(test_context_t *context,
     return result;
 }
 
-test_result_t SHA_HashTestAdvance(test_context_t *context)
+test_result_t AESHASH_ShaTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

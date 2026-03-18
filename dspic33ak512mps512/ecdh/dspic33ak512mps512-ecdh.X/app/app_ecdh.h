@@ -39,6 +39,10 @@ Microchip or any third party.
 #ifndef APP_ECDH_H
 #define APP_ECDH_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
@@ -46,5 +50,9 @@ Microchip or any third party.
 // *****************************************************************************
 
 void ECDH_TestRun(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* APP_ECDH_H */

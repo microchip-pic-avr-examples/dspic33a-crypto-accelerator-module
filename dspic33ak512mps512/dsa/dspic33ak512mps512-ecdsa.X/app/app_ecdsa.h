@@ -39,6 +39,10 @@ Microchip or any third party.
 #ifndef APP_ECDSA_H
 #define APP_ECDSA_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Function Definitions
@@ -46,5 +50,9 @@ Microchip or any third party.
 // *****************************************************************************
 
 void ECDSA_TestRun(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* APP_ECDSA_H */

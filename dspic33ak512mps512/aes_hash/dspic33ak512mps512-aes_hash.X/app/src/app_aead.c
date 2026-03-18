@@ -480,7 +480,7 @@ enum
 // *****************************************************************************
 // *****************************************************************************
 
-test_result_t AEAD_ContextInit(test_context_t *context,
+test_result_t AESHASH_AeadContextInit(test_context_t *context,
         test_mode_t testMode, aead_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
@@ -560,7 +560,7 @@ test_result_t AEAD_ContextInit(test_context_t *context,
     return result;
 }
 
-test_result_t AEAD_TestAdvance(test_context_t *context)
+test_result_t AESHASH_AeadTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

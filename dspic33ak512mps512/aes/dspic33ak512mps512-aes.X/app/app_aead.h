@@ -59,9 +59,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void AEAD_GcmTestRun(void);
+void AES_AeadGcmTestRun(void);
 
-void AEAD_CcmTestRun(void);
+void AES_AeadCcmTestRun(void);
 
 #ifdef __cplusplus
 }
