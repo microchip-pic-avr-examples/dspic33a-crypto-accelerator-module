@@ -45,6 +45,9 @@ Microchip or any third party.
 #include <stdio.h>
 #include <string.h>
 #include "app/app_mac.h"
+#include "app/app_cmac.h"
+#include "app/app_hmac.h"
+#include "app/app_gmac.h"
 
 #ifdef RUN_MAC_CMAC_TEST
 void MAC_CmacTestHeaderPrint(const char *wrapperType,
