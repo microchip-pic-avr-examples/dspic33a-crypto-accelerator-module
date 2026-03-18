@@ -43,7 +43,16 @@ Microchip or any third party.
 extern "C" {
 #endif
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
+
 #include "utils/app_utils.h"
+#include "app/app_cmac.h"
+#include "app/app_hmac.h"
+#include "app/app_gmac.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -88,17 +97,7 @@ void MAC_GmacCryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status);
 
-#ifdef RUN_MAC_CMAC_TEST
-void MAC_CmacTestRun(void);
-#endif
-
-#ifdef RUN_MAC_HMAC_TEST
-void MAC_HmacTestRun(void);
-#endif
-
-#ifdef RUN_MAC_GMAC_TEST
-void MAC_GmacTestRun(void);
-#endif
+void MAC_TestRun(void);
 
 #ifdef __cplusplus
 }

@@ -67,16 +67,7 @@ int main(void)
 
     (void) printf("\r\n\r\n Starting CRYPTO MAC program \r\n");
 
-    #ifdef RUN_MAC_CMAC_TEST
-    MAC_CmacTestRun();
-    #endif
-
-    #ifdef RUN_MAC_HMAC_TEST
-    MAC_HmacTestRun();
-    #endif
-    #ifdef RUN_MAC_GMAC_TEST
-    MAC_GmacTestRun();
-    #endif
+    MAC_TestRun();
 
     (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');

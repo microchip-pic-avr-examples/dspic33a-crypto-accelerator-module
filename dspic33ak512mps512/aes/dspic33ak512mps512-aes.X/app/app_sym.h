@@ -66,17 +66,17 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void SYM_EcbTestRun(void);
+void AES_SymEcbTestRun(void);
 
-void SYM_CtrTestRun(void);
+void AES_SymCtrTestRun(void);
 
-void SYM_CbcTestRun(void);
+void AES_SymCbcTestRun(void);
 
-void SYM_CfbTestRun(void);
+void AES_SymCfbTestRun(void);
 
-void SYM_OfbTestRun(void);
+void AES_SymOfbTestRun(void);
 
-void SYM_XtsTestRun(void);
+void AES_SymXtsTestRun(void);
 
 #ifdef __cplusplus
 }

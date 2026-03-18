@@ -37,13 +37,13 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 /* cppcheck-suppress misra-c2012-21.6
- *
- *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not
- *  be used
- *
- *  Reasoning: sprintf is required for formatting the test header string in
- *  this code example.
- */
+*
+*  (Rule 21.6) REQUIRED: The standard library input/output functions shall not
+*  be used
+*
+*  Reasoning: sprintf is required for formatting the test header string in
+*  this code example.
+*/
 #include <stdio.h>
 #include "crypto/common_crypto/crypto_kas.h"
 #include "app/app_ecdh.h"

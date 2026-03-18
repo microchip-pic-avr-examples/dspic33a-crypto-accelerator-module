@@ -44,7 +44,7 @@ Microchip or any third party.
 extern "C" {
 #endif
 
-void CMAC_TestRun(void);
+void MAC_CmacTestRun(void);
 
 #ifdef __cplusplus
 }
