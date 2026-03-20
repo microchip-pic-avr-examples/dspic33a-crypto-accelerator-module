@@ -244,7 +244,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
     }
 }
 
-void SHA_1TestRun(void)
+void SHA_Sha1TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha1TestVectors[0];
@@ -262,7 +262,7 @@ void SHA_1TestRun(void)
 #endif
 }
 
-void SHA_224TestRun(void)
+void SHA_Sha224TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha224TestVectors[0];
@@ -280,7 +280,7 @@ void SHA_224TestRun(void)
 #endif
 }
 
-void SHA_256TestRun(void)
+void SHA_Sha256TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha256TestVectors[0];
@@ -298,7 +298,7 @@ void SHA_256TestRun(void)
 #endif
 }
 
-void SHA_384TestRun(void)
+void SHA_Sha384TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha384TestVectors[0];
@@ -316,7 +316,7 @@ void SHA_384TestRun(void)
 #endif
 }
 
-void SHA_512TestRun(void)
+void SHA_Sha512TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha512TestVectors[0];

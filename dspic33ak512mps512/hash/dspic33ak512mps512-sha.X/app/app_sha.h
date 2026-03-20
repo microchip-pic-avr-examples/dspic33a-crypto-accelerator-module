@@ -66,15 +66,15 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void SHA_1TestRun(void);
+void SHA_Sha1TestRun(void);
 
-void SHA_224TestRun(void);
+void SHA_Sha224TestRun(void);
 
-void SHA_256TestRun(void);
+void SHA_Sha256TestRun(void);
 
-void SHA_384TestRun(void);
+void SHA_Sha384TestRun(void);
 
-void SHA_512TestRun(void);
+void SHA_Sha512TestRun(void);
 
 #ifdef __cplusplus
 }
