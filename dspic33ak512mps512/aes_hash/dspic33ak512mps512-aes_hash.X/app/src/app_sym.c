@@ -284,7 +284,8 @@ static test_result_t SYM_TestFinalizeRun(void *context)
  * @brief Defines the state functions for an AES symmetric cipher test.
  */
 
-test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym_oper_mode_t opMode)
+test_result_t AESHASH_SymContextInit(test_context_t *context,
+        test_mode_t testMode, sym_oper_mode_t opMode)
 {
 
     /* cppcheck-suppress misra-c2012-11.5
@@ -396,7 +397,7 @@ test_result_t SYM_ContextInit(test_context_t *context, test_mode_t testMode, sym
     return result;
 }
 
-test_result_t SYM_TestAdvance(test_context_t *context)
+test_result_t AESHASH_SymTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *
