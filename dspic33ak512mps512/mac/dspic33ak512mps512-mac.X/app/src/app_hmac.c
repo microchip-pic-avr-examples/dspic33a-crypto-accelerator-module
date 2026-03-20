@@ -243,7 +243,7 @@ static void HMAC_VectorsTestRun(test_vector_t *vectors)
 // *****************************************************************************
 // *****************************************************************************
 
-void HMAC_TestRun(void)
+void MAC_HmacTestRun(void)
 {
     HMAC_VectorsTestRun(&hmac1TestVectors[0]);
     HMAC_VectorsTestRun(&hmac224TestVectors[0]);

@@ -74,37 +74,37 @@ void AES_CryptoErrorPrint(unsigned long keyBitLength,
 void AES_SymTestRun(void)
 {
     #ifdef RUN_SYM_ECB_TEST
-    SYM_EcbTestRun();
+    AES_SymEcbTestRun();
     #endif
 
     #ifdef RUN_SYM_CTR_TEST
-    SYM_CtrTestRun();
+    AES_SymCtrTestRun();
     #endif
 
     #ifdef RUN_SYM_CBC_TEST
-    SYM_CbcTestRun();
+    AES_SymCbcTestRun();
     #endif
 
     #ifdef RUN_SYM_CFB_TEST
-    SYM_CfbTestRun();
+    AES_SymCfbTestRun();
     #endif
 
     #ifdef RUN_SYM_OFB_TEST
-    SYM_OfbTestRun();
+    AES_SymOfbTestRun();
     #endif
 
     #ifdef RUN_SYM_XTS_TEST
-    SYM_XtsTestRun();
+    AES_SymXtsTestRun();
     #endif
 }
 
 void AES_AeadTestRun(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
-    AEAD_GcmTestRun();
+    AES_AeadGcmTestRun();
     #endif
 
     #ifdef RUN_AEAD_CCM_TEST
-    AEAD_CcmTestRun();
+    AES_AeadCcmTestRun();
     #endif
 }

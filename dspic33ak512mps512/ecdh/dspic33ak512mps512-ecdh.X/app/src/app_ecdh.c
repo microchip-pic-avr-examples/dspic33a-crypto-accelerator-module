@@ -37,22 +37,24 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 /* cppcheck-suppress misra-c2012-21.6
- *
- *  (Rule 21.6) REQUIRED: The standard library input/output functions shall not
- *  be used
- *
- *  Reasoning: sprintf is required for formatting the test header string in
- *  this code example.
- */
+*
+*  (Rule 21.6) REQUIRED: The standard library input/output functions shall not
+*  be used
+*
+*  Reasoning: sprintf is required for formatting the test header string in
+*  this code example.
+*/
 #include <stdio.h>
 #include "crypto/common_crypto/crypto_kas.h"
 #include "app/app_ecdh.h"
 #include "test_vectors/test_vector.h"
 #include "utils/app_utils.h"
 
-static void ECDH_HardwareTestRun(ecdh_test_vector_t *vector)
+#define ECDH_MAX_SHARED_SECRET_LENGTH (66U)
+
+static void ECDH_SharedSecretTestRun(ecdh_test_vector_t *vector)
 {
-    uint8_t sharedSecret[66];
+    uint8_t sharedSecret[ECDH_MAX_SHARED_SECRET_LENGTH];
     char header[80];
 
     (void) sprintf(header, " %s ECDH",
@@ -88,8 +90,8 @@ static void ECDH_HardwareTestRun(ecdh_test_vector_t *vector)
 
 void ECDH_TestRun(void)
 {
-    ECDH_HardwareTestRun(&ecdhP192);
-    ECDH_HardwareTestRun(&ecdhP256);
-    ECDH_HardwareTestRun(&ecdhP384);
-    ECDH_HardwareTestRun(&ecdhP521);
+    ECDH_SharedSecretTestRun(&ecdhP192);
+    ECDH_SharedSecretTestRun(&ecdhP256);
+    ECDH_SharedSecretTestRun(&ecdhP384);
+    ECDH_SharedSecretTestRun(&ecdhP521);
 }
