@@ -51,7 +51,7 @@ void AES_TestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLength, const char *testType,
         uint32_t dataLength, const char *additionalInfo)
 {
-    char header[94U];
+    char header[94];
     (void) sprintf(header,
         " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
         wrapperType, keyBitLength, testType,
@@ -64,7 +64,7 @@ void AES_CryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status)
 {
-    char errorDesc[80U];
+    char errorDesc[80];
     (void) sprintf(errorDesc, "AES-%lu %s %s",
             keyBitLength, testType, description);
 
