@@ -69,32 +69,32 @@ extern "C" {
 /**
  * @brief Run the AES-ECB symmetric encryption and decryption tests.
  */
-void AES_SymEcbTestRun(void);
+void SYM_EcbTestRun(void);
 
 /**
  * @brief Run the AES-CTR symmetric encryption and decryption tests.
  */
-void AES_SymCtrTestRun(void);
+void SYM_CtrTestRun(void);
 
 /**
  * @brief Run the AES-CBC symmetric encryption and decryption tests.
  */
-void AES_SymCbcTestRun(void);
+void SYM_CbcTestRun(void);
 
 /**
  * @brief Run the AES-CFB128 symmetric encryption and decryption tests.
  */
-void AES_SymCfbTestRun(void);
+void SYM_CfbTestRun(void);
 
 /**
  * @brief Run the AES-OFB symmetric encryption and decryption tests.
  */
-void AES_SymOfbTestRun(void);
+void SYM_OfbTestRun(void);
 
 /**
  * @brief Run the AES-XTS symmetric encryption and decryption tests.
  */
-void AES_SymXtsTestRun(void);
+void SYM_XtsTestRun(void);
 
 #ifdef __cplusplus
 }

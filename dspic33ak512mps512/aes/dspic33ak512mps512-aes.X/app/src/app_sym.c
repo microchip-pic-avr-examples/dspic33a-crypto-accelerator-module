@@ -398,35 +398,35 @@ static void SYM_256TestRun(
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_SymEcbTestRun(void)
+void SYM_EcbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
 }
 
-void AES_SymCtrTestRun(void)
+void SYM_CtrTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
 }
 
-void AES_SymCbcTestRun(void)
+void SYM_CbcTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
 }
 
-void AES_SymCfbTestRun(void)
+void SYM_CfbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
 }
 
-void AES_SymOfbTestRun(void)
+void SYM_OfbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);

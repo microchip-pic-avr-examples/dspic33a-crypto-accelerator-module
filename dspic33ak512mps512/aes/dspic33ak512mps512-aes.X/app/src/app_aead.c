@@ -348,7 +348,7 @@ static void AEAD_EncryptionAndTagCheck(
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_AeadGcmTestRun(void)
+void AEAD_GcmTestRun(void)
 {
     crypto_Aead_Status_E status;
     crypto_Aead_Status_E statusSteps;
@@ -542,7 +542,7 @@ void AES_AeadGcmTestRun(void)
     }
 }
 
-void AES_AeadCcmTestRun(void)
+void AEAD_CcmTestRun(void)
 {
     uint8_t encryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
     uint8_t decryptedResult[CCM_TEST_VECTOR_SIZE] = {0};
