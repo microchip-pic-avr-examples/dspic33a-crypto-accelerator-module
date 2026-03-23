@@ -218,23 +218,23 @@ static void AESHASH_EcbTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting SYMMETRIC AES-ECB mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_ECB);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_ECB);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_ECB);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_ECB);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -256,23 +256,23 @@ static void AESHASH_CtrTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting SYMMETRIC AES-CTR mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CTR);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CTR);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CTR);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CTR);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -294,23 +294,23 @@ static void AESHASH_CbcTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting SYMMETRIC AES-CBC mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CBC);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CBC);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CBC);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CBC);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -335,23 +335,23 @@ static void AESHASH_Cfb128TestRun(void)
             UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CFB128);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_CFB128);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CFB128);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_CFB128);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -374,23 +374,23 @@ static void AESHASH_OfbTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting SYMMETRIC AES-OFB mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_OFB);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_OFB);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_OFB);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_OFB);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -413,23 +413,23 @@ static void AESHASH_XtsTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting SYMMETRIC AES-XTS mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_XTS);
+    (void) SYM_ContextInit(&context, TEST_MODE_ENCRYPT, SYM_OPER_MODE_AES_XTS);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_SymContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_XTS);
+    (void) SYM_ContextInit(&context, TEST_MODE_DECRYPT, SYM_OPER_MODE_AES_XTS);
     do
     {
         do
         {
-            result = AESHASH_SymTestAdvance(&context);
+            result = SYM_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -483,12 +483,12 @@ void AESHASH_MacTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting MAC AES-CMAC mode test\r\n" UTILS_RESET_COLOR);
 
     // Run CMAC operations.
-    (void) AESHASH_MacCmacContextInit(&context, TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
+    (void) MAC_CmacContextInit(&context, TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
     do
     {
         do
         {
-            result = AESHASH_MacCmacTestAdvance(&context);
+            result = MAC_CmacTestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -518,23 +518,23 @@ void AESHASH_AeadTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting AEAD AES-GCM mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_AeadContextInit(&context, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_GCM);
+    (void) AEAD_ContextInit(&context, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_GCM);
     do
     {
         do
         {
-            result = AESHASH_AeadTestAdvance(&context);
+            result = AEAD_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_AeadContextInit(&context, TEST_MODE_DECRYPT, AEAD_OPER_MODE_AES_GCM);
+    (void) AEAD_ContextInit(&context, TEST_MODE_DECRYPT, AEAD_OPER_MODE_AES_GCM);
     do
     {
         do
         {
-            result = AESHASH_AeadTestAdvance(&context);
+            result = AEAD_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -544,23 +544,23 @@ void AESHASH_AeadTestRun(void)
     (void) printf(UTILS_BLUE "\r\n\r\n Starting AEAD AES-CCM mode test\r\n" UTILS_RESET_COLOR);
 
     // Run encryption operations.
-    (void) AESHASH_AeadContextInit(&context, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_CCM);
+    (void) AEAD_ContextInit(&context, TEST_MODE_ENCRYPT, AEAD_OPER_MODE_AES_CCM);
     do
     {
         do
         {
-            result = AESHASH_AeadTestAdvance(&context);
+            result = AEAD_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
 
     // Run decryption operations.
-    (void) AESHASH_AeadContextInit(&context, TEST_MODE_DECRYPT, AEAD_OPER_MODE_AES_CCM);
+    (void) AEAD_ContextInit(&context, TEST_MODE_DECRYPT, AEAD_OPER_MODE_AES_CCM);
     do
     {
         do
         {
-            result = AESHASH_AeadTestAdvance(&context);
+            result = AEAD_TestAdvance(&context);
         } while (result == TEST_RESULT_SUCCESS);
 
     } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -604,13 +604,13 @@ void AESHASH_HashTestRun(void)
         context.testContext = (void *) &hashTestContext;
 
         // Run hash operations.
-        (void) AESHASH_ShaContextInit(&context, TEST_MODE_HASH,
+        (void) SHA_ContextInit(&context, TEST_MODE_HASH,
                 CRYPTO_HASH_SHA2_512, hashBlockSize);
         do
         {
             do
             {
-                result = AESHASH_ShaTestAdvance(&context);
+                result = SHA_TestAdvance(&context);
             } while (result == TEST_RESULT_SUCCESS);
 
         } while (result != TEST_RESULT_ALL_TESTS_DONE);
@@ -680,15 +680,15 @@ void AESHASH_ConcurrentTestRun(void)
                 (iteration + 1), (unsigned long) hashBlockSize);
 
         // Initialize one of each context.
-        symResult = AESHASH_SymContextInit(&symContext, TEST_MODE_ENCRYPT, symOperMode);
-        aeadResult = AESHASH_AeadContextInit(&aeadContext, TEST_MODE_ENCRYPT, aeadOperMode);
-        macResult = AESHASH_MacCmacContextInit(&macContext,
+        symResult = SYM_ContextInit(&symContext, TEST_MODE_ENCRYPT, symOperMode);
+        aeadResult = AEAD_ContextInit(&aeadContext, TEST_MODE_ENCRYPT, aeadOperMode);
+        macResult = MAC_CmacContextInit(&macContext,
                 TEST_MODE_ENCRYPT, MAC_OPER_MODE_AES_CMAC);
 
         hash_test_context_t hashTestContext = {0};
         hashContext.testContext = (void *) &hashTestContext;
 
-        hashResult = AESHASH_ShaContextInit(&hashContext, TEST_MODE_HASH,
+        hashResult = SHA_ContextInit(&hashContext, TEST_MODE_HASH,
                 CRYPTO_HASH_SHA2_512, hashBlockSize);
 
         // If any initializations fail, stop.
@@ -701,10 +701,10 @@ void AESHASH_ConcurrentTestRun(void)
         // Cycle through the contexts to interleave executing steps of each operation.
         do
         {
-            symResult = AESHASH_SymTestAdvance(&symContext);
-            aeadResult = AESHASH_AeadTestAdvance(&aeadContext);
-            macResult = AESHASH_MacCmacTestAdvance(&macContext);
-            hashResult = AESHASH_ShaTestAdvance(&hashContext);
+            symResult = SYM_TestAdvance(&symContext);
+            aeadResult = AEAD_TestAdvance(&aeadContext);
+            macResult = MAC_CmacTestAdvance(&macContext);
+            hashResult = SHA_TestAdvance(&hashContext);
 
             /*
              * If any but the hash tests finish, restart them.
@@ -729,7 +729,7 @@ void AESHASH_ConcurrentTestRun(void)
                     }
                 }
 
-                (void) AESHASH_SymContextInit(&symContext, symTestMode, symOperMode);
+                (void) SYM_ContextInit(&symContext, symTestMode, symOperMode);
             }
 
             if (aeadResult == TEST_RESULT_ALL_TESTS_DONE)
@@ -752,12 +752,12 @@ void AESHASH_ConcurrentTestRun(void)
                     }
                 }
 
-                (void) AESHASH_AeadContextInit(&aeadContext, aeadTestMode, aeadOperMode);
+                (void) AEAD_ContextInit(&aeadContext, aeadTestMode, aeadOperMode);
             }
 
             if (macResult == TEST_RESULT_ALL_TESTS_DONE)
             {
-                (void) AESHASH_MacCmacContextInit(&macContext, macTestMode, MAC_OPER_MODE_AES_CMAC);
+                (void) MAC_CmacContextInit(&macContext, macTestMode, MAC_OPER_MODE_AES_CMAC);
             }
 
         } while (hashResult != TEST_RESULT_ALL_TESTS_DONE);
@@ -767,9 +767,9 @@ void AESHASH_ConcurrentTestRun(void)
                (aeadResult != TEST_RESULT_ALL_TESTS_DONE) ||
                (macResult != TEST_RESULT_ALL_TESTS_DONE))
         {
-            symResult = AESHASH_SymTestAdvance(&symContext);
-            aeadResult = AESHASH_AeadTestAdvance(&aeadContext);
-            macResult = AESHASH_MacCmacTestAdvance(&macContext);
+            symResult = SYM_TestAdvance(&symContext);
+            aeadResult = AEAD_TestAdvance(&aeadContext);
+            macResult = MAC_CmacTestAdvance(&macContext);
         }
     }
 }
