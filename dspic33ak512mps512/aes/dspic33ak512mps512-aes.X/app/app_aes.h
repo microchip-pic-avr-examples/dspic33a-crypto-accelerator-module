@@ -72,16 +72,37 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Print a formatted AES test header banner to the terminal.
+ * @param wrapperType The wrapper type label (e.g., "SYMMETRIC", "AEAD").
+ * @param keyBitLength The AES key length in bits.
+ * @param testType The test type label (e.g., "ECB", "GCM").
+ * @param dataLength The data length in bytes.
+ * @param additionalInfo Additional text appended to the header.
+ */
 void AES_TestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLength, const char *testType,
         uint32_t dataLength, const char *additionalInfo);
 
+/**
+ * @brief Print a formatted AES crypto error message to the terminal.
+ * @param keyBitLength The AES key length in bits.
+ * @param testType The test type label (e.g., "ECB", "GCM").
+ * @param description Description of the failed operation.
+ * @param status The error status code returned by the crypto API.
+ */
 void AES_CryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status);
 
+/**
+ * @brief Run all enabled symmetric AES cipher mode tests.
+ */
 void AES_SymTestRun(void);
 
+/**
+ * @brief Run all enabled AEAD AES cipher mode tests.
+ */
 void AES_AeadTestRun(void);
 
 #ifdef __cplusplus

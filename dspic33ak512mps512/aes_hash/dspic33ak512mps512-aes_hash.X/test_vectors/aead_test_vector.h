@@ -66,12 +66,28 @@ typedef struct
     uint32_t    authTagLength;
 } aead_test_vector_t;
 
+/**
+ * @brief Get the array of AES-GCM test vectors.
+ * @return Pointer to the first GCM test vector.
+ */
 aead_test_vector_t *VECTOR_GcmTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-GCM test vectors.
+ * @return Number of GCM test vectors.
+ */
 uint32_t VECTOR_GcmTestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-CCM test vectors.
+ * @return Pointer to the first CCM test vector.
+ */
 aead_test_vector_t *VECTOR_CcmTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-CCM test vectors.
+ * @return Number of CCM test vectors.
+ */
 uint32_t VECTOR_CcmTestVectorCountGet(void);
 
 #ifdef __cplusplus

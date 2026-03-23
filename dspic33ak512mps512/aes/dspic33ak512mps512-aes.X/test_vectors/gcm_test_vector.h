@@ -58,8 +58,16 @@ typedef struct gcm_test_vector_t
 
 } gcm_test_vector_t;
 
+/**
+ * @brief Get the array of AES-GCM test vectors.
+ * @return Pointer to the first GCM test vector.
+ */
 gcm_test_vector_t *VECTOR_GcmTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-GCM test vectors.
+ * @return Number of GCM test vectors.
+ */
 uint32_t VECTOR_GcmTestCountGet(void);
 
 #ifdef __cplusplus

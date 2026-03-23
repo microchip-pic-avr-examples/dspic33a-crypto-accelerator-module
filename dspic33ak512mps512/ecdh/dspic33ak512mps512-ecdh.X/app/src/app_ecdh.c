@@ -52,6 +52,10 @@ Microchip or any third party.
 
 #define ECDH_MAX_SHARED_SECRET_LENGTH (66U)
 
+/**
+ * @brief Run an ECDH shared secret generation test for a single curve.
+ * @param vector Pointer to the ECDH test vector containing key and expected data.
+ */
 static void ECDH_SharedSecretTestRun(ecdh_test_vector_t *vector)
 {
     uint8_t sharedSecret[ECDH_MAX_SHARED_SECRET_LENGTH];

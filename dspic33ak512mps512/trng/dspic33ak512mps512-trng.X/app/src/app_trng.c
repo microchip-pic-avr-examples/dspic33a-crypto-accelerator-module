@@ -47,6 +47,11 @@ Microchip or any third party.
 #include "app/app_trng.h"
 #include "crypto/common_crypto/crypto_rng.h"
 
+/**
+ * @brief Generate random data using the TRNG and print the result.
+ * @param randomArray Buffer to receive the generated random data.
+ * @param randomLength Number of random bytes to generate.
+ */
 static void TRNG_GenerationTestRun(uint8_t *randomArray, uint32_t randomLength)
 {
     const char *outputLabel = "Random";

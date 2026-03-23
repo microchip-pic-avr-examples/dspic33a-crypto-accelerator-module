@@ -52,28 +52,76 @@ typedef struct
     uint32_t    initializationVectorLength;
 } sym_test_vector_t;
 
+/**
+ * @brief Get the array of AES-ECB test vectors.
+ * @return Pointer to the first ECB test vector.
+ */
 sym_test_vector_t *VECTOR_EcbTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-ECB test vectors.
+ * @return Number of ECB test vectors.
+ */
 uint32_t VECTOR_EcbTestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-CTR test vectors.
+ * @return Pointer to the first CTR test vector.
+ */
 sym_test_vector_t *VECTOR_CtrTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-CTR test vectors.
+ * @return Number of CTR test vectors.
+ */
 uint32_t VECTOR_CtrTestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-CBC test vectors.
+ * @return Pointer to the first CBC test vector.
+ */
 sym_test_vector_t *VECTOR_CbcTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-CBC test vectors.
+ * @return Number of CBC test vectors.
+ */
 uint32_t VECTOR_CbcTestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-CFB128 test vectors.
+ * @return Pointer to the first CFB128 test vector.
+ */
 sym_test_vector_t *VECTOR_Cfb128TestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-CFB128 test vectors.
+ * @return Number of CFB128 test vectors.
+ */
 uint32_t VECTOR_Cfb128TestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-OFB test vectors.
+ * @return Pointer to the first OFB test vector.
+ */
 sym_test_vector_t *VECTOR_OfbTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-OFB test vectors.
+ * @return Number of OFB test vectors.
+ */
 uint32_t VECTOR_OfbTestVectorCountGet(void);
 
+/**
+ * @brief Get the array of AES-XTS test vectors.
+ * @return Pointer to the first XTS test vector.
+ */
 sym_test_vector_t *VECTOR_XtsTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-XTS test vectors.
+ * @return Number of XTS test vectors.
+ */
 uint32_t VECTOR_XtsTestVectorCountGet(void);
 
 #ifdef __cplusplus

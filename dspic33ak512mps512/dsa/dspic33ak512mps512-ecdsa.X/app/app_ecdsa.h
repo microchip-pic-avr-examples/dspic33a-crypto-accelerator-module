@@ -49,6 +49,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run ECDSA sign and verify tests for all supported curves.
+ */
 void ECDSA_TestRun(void);
 
 #ifdef __cplusplus
