@@ -737,7 +737,7 @@ void AESHASH_ConcurrentTestRun(void)
                 // Flip AEAD test mode.
                 if (aeadTestMode == TEST_MODE_ENCRYPT)
                 {
-                    // Flip symmetric test mode.
+                    // Flip AEAD test mode.
                     aeadTestMode = TEST_MODE_DECRYPT;
                 }
                 else
@@ -762,7 +762,7 @@ void AESHASH_ConcurrentTestRun(void)
 
         } while (hashResult != TEST_RESULT_ALL_TESTS_DONE);
 
-        // Finish any resmining tests.
+        // Finish any remaining tests.
         while ((symResult != TEST_RESULT_ALL_TESTS_DONE) ||
                (aeadResult != TEST_RESULT_ALL_TESTS_DONE) ||
                (macResult != TEST_RESULT_ALL_TESTS_DONE))

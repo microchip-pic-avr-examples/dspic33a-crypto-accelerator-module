@@ -142,7 +142,7 @@ typedef struct test_context
 /**
  * @brief Print to console with a header label.
  * @param label A label to apply to the output.
- * @param format POinter to format string.
+ * @param format Pointer to the format string.
  * @param <variable arguments>
  */
 void AESHASH_LabelPrint(const char *label, const char *format, ...);
