@@ -64,6 +64,10 @@ Microchip or any third party.
 
 static const char *gmacTestWrapper = "MAC";
 
+/**
+ * @brief Run a direct (single-call) AES-GMAC test.
+ * @param testVector Pointer to the GMAC test vector.
+ */
 static void GMAC_DirectTestRun(test_vector_t *testVector)
 {
     uint8_t generatedGmac[CRYPTO_AESKEYSIZE_256] = {0};
@@ -120,6 +124,10 @@ static void GMAC_DirectTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run a stepwise (init/cipher) AES-GMAC test.
+ * @param testVector Pointer to the GMAC test vector.
+ */
 static void GMAC_StepTestRun(test_vector_t *testVector)
 {
     /*
@@ -192,6 +200,10 @@ static void GMAC_StepTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run all GMAC test vectors using both direct and stepwise methods.
+ * @param vectors Pointer to the array of GMAC test vectors.
+ */
 static void GMAC_VectorsTestRun(test_vector_t *vectors)
 {
 #ifdef RUN_ALL_VECTORS

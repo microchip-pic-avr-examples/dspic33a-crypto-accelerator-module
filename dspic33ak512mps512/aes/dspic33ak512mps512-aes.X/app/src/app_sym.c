@@ -66,6 +66,18 @@ static uint8_t keyData[32U] =
     0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x20
 };
 
+/**
+ * @brief Run a direct (single-call) AES symmetric encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param result Pointer to the output buffer.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ * @return Symmetric cipher status code.
+ */
 static crypto_Sym_Status_E SYM_DirectTestRun(
         crypto_CipherOper_E encrypt,
         crypto_Sym_OpModes_E opMode,
@@ -111,6 +123,18 @@ static crypto_Sym_Status_E SYM_DirectTestRun(
     return status;
 }
 
+/**
+ * @brief Run a stepwise (init/cipher) AES symmetric encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param result Pointer to the output buffer.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ * @return Symmetric cipher status code.
+ */
 static crypto_Sym_Status_E SYM_StepsTestRun(
         crypto_CipherOper_E encrypt,
         crypto_Sym_OpModes_E opMode,
@@ -174,6 +198,15 @@ static crypto_Sym_Status_E SYM_StepsTestRun(
     return status;
 }
 
+/**
+ * @brief Run direct and stepwise AES tests for a given mode and compare results.
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ */
 static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t dataLength,
         uint8_t *key, uint32_t keyLength, uint8_t *initializationVector)
 {
@@ -305,6 +338,13 @@ static void SYM_ModeTestRun(crypto_Sym_OpModes_E opMode, uint8_t *data, uint32_t
 
 }
 
+/**
+ * @brief Run AES-128 symmetric tests for the given operation mode.
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param key Pointer to the AES key.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ */
 static void SYM_128TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)
@@ -316,6 +356,13 @@ static void SYM_128TestRun(
     SYM_ModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_128, initializationVector);
 }
 
+/**
+ * @brief Run AES-192 symmetric tests for the given operation mode.
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param key Pointer to the AES key.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ */
 static void SYM_192TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)
@@ -327,6 +374,13 @@ static void SYM_192TestRun(
     SYM_ModeTestRun(opMode, data, 48U, key, CRYPTO_AESKEYSIZE_192, initializationVector);
 }
 
+/**
+ * @brief Run AES-256 symmetric tests for the given operation mode.
+ * @param opMode The AES operation mode (ECB, CTR, CBC, etc.).
+ * @param data Pointer to the input data.
+ * @param key Pointer to the AES key.
+ * @param initializationVector Pointer to the IV (NULL for ECB mode).
+ */
 static void SYM_256TestRun(
         crypto_Sym_OpModes_E opMode, uint8_t *data,
         uint8_t *key, uint8_t *initializationVector)

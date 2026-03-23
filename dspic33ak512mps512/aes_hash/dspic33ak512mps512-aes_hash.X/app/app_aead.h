@@ -106,7 +106,7 @@ typedef struct
  * @param testMode The operation mode (encrypt/decrypt).
  * @param opMode The AEAD test operation mode.
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
- * @note Do not proceed with the test if the initiaolization result is a failure.
+ * @note Do not proceed with the test if the initialization result is a failure.
  */
 test_result_t AESHASH_AeadContextInit(test_context_t *context, test_mode_t mode,
         aead_oper_mode_t opMode);

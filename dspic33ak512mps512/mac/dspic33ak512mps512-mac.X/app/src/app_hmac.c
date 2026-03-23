@@ -59,6 +59,11 @@ Microchip or any third party.
 
 static const char *hmacTestWrapper = "MAC";
 
+/**
+ * @brief Get the SHA algorithm name string.
+ * @param hashAlgorithm The hash algorithm type.
+ * @return Pointer to the algorithm name string.
+ */
 static const char *HMAC_AlgorithmStringGet(crypto_Hash_Algo_E hashAlgorithm)
 {
     const char *algorithmString = "UNKNOWN";
@@ -92,6 +97,10 @@ static const char *HMAC_AlgorithmStringGet(crypto_Hash_Algo_E hashAlgorithm)
     return algorithmString;
 }
 
+/**
+ * @brief Run a direct (single-call) HMAC test.
+ * @param testVector Pointer to the HMAC test vector.
+ */
 static void HMAC_DirectTestRun(test_vector_t *testVector)
 {
     uint8_t generatedHmac[CRYPTO_HASH_MAX_DIGEST_SIZE] = {0};
@@ -144,6 +153,10 @@ static void HMAC_DirectTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run a stepwise (init/cipher/final) HMAC test.
+ * @param testVector Pointer to the HMAC test vector.
+ */
 static void HMAC_StepTestRun(test_vector_t *testVector)
 {
     /*
@@ -219,6 +232,10 @@ static void HMAC_StepTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run all HMAC test vectors using both direct and stepwise methods.
+ * @param vectors Pointer to the array of HMAC test vectors.
+ */
 static void HMAC_VectorsTestRun(test_vector_t *vectors)
 {
 #ifdef RUN_ALL_VECTORS

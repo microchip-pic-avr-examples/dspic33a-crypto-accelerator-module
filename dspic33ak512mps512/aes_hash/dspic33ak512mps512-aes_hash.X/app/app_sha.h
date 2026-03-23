@@ -96,8 +96,9 @@ typedef struct
  * @param context The test context block to use.
  * @param mode The operation mode (hash).
  * @param algorithm The hash algorithm to use.
+ * @param blockSize The block size (in bytes) for the hash operation.
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
- * @note Do not proceed with the test if the initiaolization result is a failure.
+ * @note Do not proceed with the test if the initialization result is a failure.
  */
 test_result_t AESHASH_ShaContextInit(test_context_t *context,
         test_mode_t mode, crypto_Hash_Algo_E algorithm,

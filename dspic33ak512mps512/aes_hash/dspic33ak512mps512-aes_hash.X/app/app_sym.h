@@ -115,7 +115,7 @@ typedef enum
  * @param testMode The operation mode (encrypt/decrypt).
  * @param opMode The symmetric test operation mode.
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
- * @note Do not proceed with the test if the initiaolization result is a failure.
+ * @note Do not proceed with the test if the initialization result is a failure.
  */
 test_result_t AESHASH_SymContextInit(test_context_t *context, test_mode_t testMode,
         sym_oper_mode_t opMode);
