@@ -47,8 +47,16 @@ typedef struct
     uint32_t    expectedMacLength;
 } mac_test_vector_t;
 
+/**
+ * @brief Get the array of AES-CMAC test vectors.
+ * @return Pointer to the first CMAC test vector.
+ */
 mac_test_vector_t *VECTOR_CmacTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-CMAC test vectors.
+ * @return Number of CMAC test vectors.
+ */
 uint32_t VECTOR_CmacTestVectorCountGet(void);
 
 #ifdef __cplusplus

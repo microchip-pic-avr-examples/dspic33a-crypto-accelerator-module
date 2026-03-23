@@ -49,6 +49,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run ECDH shared secret generation tests for all supported curves.
+ */
 void ECDH_TestRun(void);
 
 #ifdef __cplusplus

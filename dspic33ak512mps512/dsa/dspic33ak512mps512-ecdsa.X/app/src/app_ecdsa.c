@@ -60,22 +60,36 @@ static uint8_t signature[P521_LENGTH];
 static volatile bool signComplete = false;
 static volatile bool verifyComplete = false;
 
+/**
+ * @brief Clear the sign and verify completion flags.
+ */
 static void ECDSA_CompleteStatesClear(void)
 {
     signComplete = false;
     verifyComplete = false;
 }
 
+/**
+ * @brief Callback that sets the sign completion flag.
+ */
 static void ECDSA_SignOperationComplete(void)
 {
     signComplete = true;
 }
 
+/**
+ * @brief Callback that sets the verify completion flag.
+ */
 static void ECDSA_VerifyOperationComplete(void)
 {
     verifyComplete = true;
 }
 
+/**
+ * @brief Print the ECDSA operation status to the terminal.
+ * @param status The digital signature status code.
+ * @param type The operation type string (e.g., "SIGN", "VERIFY").
+ */
 static void ECDSA_StatusPrint(crypto_DigiSign_Status_E status,
         const char *type)
 {
@@ -92,6 +106,11 @@ static void ECDSA_StatusPrint(crypto_DigiSign_Status_E status,
     }
 }
 
+/**
+ * @brief Get the signature byte length for the given ECC curve.
+ * @param curve The ECC curve type.
+ * @return Signature length in bytes, or 0 if the curve is unsupported.
+ */
 static uint8_t ECDSA_SignatureLengthGet(crypto_EccCurveType_E curve)
 {
     uint8_t length = 0U;
@@ -117,6 +136,10 @@ static uint8_t ECDSA_SignatureLengthGet(crypto_EccCurveType_E curve)
     return length;
 }
 
+/**
+ * @brief Run blocking ECDSA sign and verify using the hardware accelerator.
+ * @param testVector Pointer to the ECDSA test vector.
+ */
 static void ECDSA_BlockingHardwareTestRun(test_vector_t *testVector)
 {
     uint8_t signatureLength = ECDSA_SignatureLengthGet(testVector->curveType);
@@ -156,6 +179,10 @@ static void ECDSA_BlockingHardwareTestRun(test_vector_t *testVector)
     ECDSA_StatusPrint(status, VERIFYING_PRINT);
 }
 
+/**
+ * @brief Run non-blocking ECDSA sign and verify using the hardware accelerator.
+ * @param testVector Pointer to the ECDSA test vector.
+ */
 static void ECDSA_NonBlockingHardwareTestRun(test_vector_t *testVector)
 {
     uint8_t signatureLength = ECDSA_SignatureLengthGet(testVector->curveType);
@@ -205,24 +232,36 @@ static void ECDSA_NonBlockingHardwareTestRun(test_vector_t *testVector)
     ECDSA_StatusPrint(status, VERIFYING_PRINT);
 }
 
+/**
+ * @brief Run ECDSA tests for the P-192 curve.
+ */
 static void ECDSA_P192TestRun(void)
 {
     ECDSA_BlockingHardwareTestRun(&ecdsaP192);
     ECDSA_NonBlockingHardwareTestRun(&ecdsaP192);
 }
 
+/**
+ * @brief Run ECDSA tests for the P-256 curve.
+ */
 static void ECDSA_P256TestRun(void)
 {
     ECDSA_BlockingHardwareTestRun(&ecdsaP256);
     ECDSA_NonBlockingHardwareTestRun(&ecdsaP256);
 }
 
+/**
+ * @brief Run ECDSA tests for the P-384 curve.
+ */
 static void ECDSA_P384TestRun(void)
 {
     ECDSA_BlockingHardwareTestRun(&ecdsaP384);
     ECDSA_NonBlockingHardwareTestRun(&ecdsaP384);
 }
 
+/**
+ * @brief Run ECDSA tests for the P-521 curve.
+ */
 static void ECDSA_P521TestRun(void)
 {
     ECDSA_BlockingHardwareTestRun(&ecdsaP521);

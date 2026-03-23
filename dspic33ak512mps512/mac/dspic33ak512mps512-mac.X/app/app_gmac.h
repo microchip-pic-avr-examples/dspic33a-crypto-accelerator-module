@@ -44,6 +44,9 @@ Microchip or any third party.
 extern "C" {
 #endif
 
+/**
+ * @brief Run all AES-GMAC test vectors.
+ */
 void MAC_GmacTestRun(void);
 
 #ifdef __cplusplus

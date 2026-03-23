@@ -63,6 +63,10 @@ Microchip or any third party.
 
 static const char *cmacTestWrapper = "MAC";
 
+/**
+ * @brief Run a direct (single-call) AES-CMAC test.
+ * @param testVector Pointer to the CMAC test vector.
+ */
 static void CMAC_DirectTestRun(test_vector_t *testVector)
 {
     uint8_t generatedCmac[16] = {0};
@@ -111,6 +115,10 @@ static void CMAC_DirectTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run a stepwise (init/cipher/final) AES-CMAC test.
+ * @param testVector Pointer to the CMAC test vector.
+ */
 static void CMAC_StepTestRun(test_vector_t *testVector)
 {
     /*
@@ -184,6 +192,9 @@ static void CMAC_StepTestRun(test_vector_t *testVector)
     }
 }
 
+/**
+ * @brief Run AES-128 CMAC test vectors.
+ */
 static void CMAC_128TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
@@ -202,6 +213,9 @@ static void CMAC_128TestRun(void)
 #endif
 }
 
+/**
+ * @brief Run AES-192 CMAC test vectors.
+ */
 static void CMAC_192TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
@@ -220,6 +234,9 @@ static void CMAC_192TestRun(void)
 #endif
 }
 
+/**
+ * @brief Run AES-256 CMAC test vectors.
+ */
 static void CMAC_256TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS

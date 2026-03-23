@@ -104,7 +104,7 @@ static const char *SHA_TestOpModeGet(crypto_Hash_Algo_E algorithm)
 }
 
 /**
- * @brief The MAC CMAC test init state function.
+ * @brief The HASH test init state function.
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_INIT_FAILED on failure.
  */
@@ -150,7 +150,7 @@ static test_result_t SHA_HashTestStepInit(void *context)
 }
 
 /**
- * @brief The MAC CMAC test cipher state function.
+ * @brief The HASH test cipher state function.
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success, TEST_RESULT_CIPHER_FAILED on failure.
  */
@@ -187,7 +187,7 @@ static test_result_t SHA_HashTestHashRun(void *context)
 }
 
 /**
- * @brief The MAC CMAC test finalize/compare state function.
+ * @brief The HASH test finalize/compare state function.
  * @param context Pointer to context block.
  * @return TEST_RESULT_SUCCESS on success,
  *         TEST_RESULT_FINALIZE_FAILED/TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.

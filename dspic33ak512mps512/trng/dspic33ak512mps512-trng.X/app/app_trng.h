@@ -57,6 +57,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run TRNG random number generation tests at various lengths.
+ */
 void TRNG_TestRun(void);
 
 #ifdef __cplusplus

@@ -53,8 +53,16 @@ typedef struct xts_test_vector_t
 
 } xts_test_vector_t;
 
+/**
+ * @brief Get the array of AES-XTS test vectors.
+ * @return Pointer to the first XTS test vector.
+ */
 xts_test_vector_t *VECTOR_XtsTestVectorsGet(void);
 
+/**
+ * @brief Get the number of AES-XTS test vectors.
+ * @return Number of XTS test vectors.
+ */
 uint32_t VECTOR_XtsTestCountGet(void);
 
 #ifdef __cplusplus

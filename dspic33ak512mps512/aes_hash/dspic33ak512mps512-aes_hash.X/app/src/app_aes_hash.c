@@ -115,6 +115,11 @@ typedef struct
     const char *string;
 } test_mode_error_string_t;
 
+/**
+ * @brief Get the error description string for a test result code.
+ * @param result The test result code.
+ * @return Pointer to the error description string.
+ */
 static const char *AESHASH_TestErrorGet(test_result_t result)
 {
     static test_mode_error_string_t testModeErrorStrings[] =
@@ -199,6 +204,9 @@ void AESHASH_CryptoResultPrint(test_result_t result, int status)
 #ifdef RUN_SYM_TEST
 
 #ifdef RUN_SYM_ECB_TEST
+/**
+ * @brief Run AES-ECB symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_EcbTestRun(void)
 {
     test_result_t result;
@@ -234,6 +242,9 @@ static void AESHASH_EcbTestRun(void)
 #endif
 
 #ifdef RUN_SYM_CTR_TEST
+/**
+ * @brief Run AES-CTR symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_CtrTestRun(void)
 {
     test_result_t result;
@@ -269,6 +280,9 @@ static void AESHASH_CtrTestRun(void)
 #endif
 
 #ifdef RUN_SYM_CBC_TEST
+/**
+ * @brief Run AES-CBC symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_CbcTestRun(void)
 {
     test_result_t result;
@@ -304,6 +318,9 @@ static void AESHASH_CbcTestRun(void)
 #endif
 
 #ifdef RUN_SYM_CFB128_TEST
+/**
+ * @brief Run AES-CFB128 symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_Cfb128TestRun(void)
 {
     test_result_t result;
@@ -342,6 +359,9 @@ static void AESHASH_Cfb128TestRun(void)
 #endif
 
 #ifdef RUN_SYM_OFB_TEST
+/**
+ * @brief Run AES-OFB symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_OfbTestRun(void)
 {
     test_result_t result;
@@ -378,6 +398,9 @@ static void AESHASH_OfbTestRun(void)
 #endif
 
 #ifdef RUN_SYM_XTS_TEST
+/**
+ * @brief Run AES-XTS symmetric encrypt and decrypt tests.
+ */
 static void AESHASH_XtsTestRun(void)
 {
     test_result_t result;

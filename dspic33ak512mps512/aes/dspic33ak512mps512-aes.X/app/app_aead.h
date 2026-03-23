@@ -59,8 +59,14 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run the AES-GCM AEAD encryption and decryption tests.
+ */
 void AES_AeadGcmTestRun(void);
 
+/**
+ * @brief Run the AES-CCM AEAD encryption and decryption tests.
+ */
 void AES_AeadCcmTestRun(void);
 
 #ifdef __cplusplus
