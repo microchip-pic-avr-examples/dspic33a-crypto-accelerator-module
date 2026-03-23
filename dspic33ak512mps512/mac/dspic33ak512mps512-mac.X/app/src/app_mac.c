@@ -133,14 +133,14 @@ void MAC_GmacCryptoErrorPrint(unsigned long keyBitLength,
 void MAC_TestRun(void)
 {
     #ifdef RUN_MAC_CMAC_TEST
-    MAC_CmacTestRun();
+    CMAC_TestRun();
     #endif
 
     #ifdef RUN_MAC_HMAC_TEST
-    MAC_HmacTestRun();
+    HMAC_TestRun();
     #endif
 
     #ifdef RUN_MAC_GMAC_TEST
-    MAC_GmacTestRun();
+    GMAC_TestRun();
     #endif
 }

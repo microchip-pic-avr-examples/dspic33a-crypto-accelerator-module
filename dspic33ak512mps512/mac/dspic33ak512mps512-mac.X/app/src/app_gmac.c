@@ -228,7 +228,7 @@ static void GMAC_VectorsTestRun(test_vector_t *vectors)
 // *****************************************************************************
 // *****************************************************************************
 
-void MAC_GmacTestRun(void)
+void GMAC_TestRun(void)
 {
     GMAC_VectorsTestRun(&gmacTestVectors[0]);
 }

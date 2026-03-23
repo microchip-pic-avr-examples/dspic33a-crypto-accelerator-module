@@ -261,7 +261,7 @@ static void CMAC_256TestRun(void)
 // *****************************************************************************
 // *****************************************************************************
 
-void MAC_CmacTestRun(void)
+void CMAC_TestRun(void)
 {
     CMAC_128TestRun();
     CMAC_192TestRun();
