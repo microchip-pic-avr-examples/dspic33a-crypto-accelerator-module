@@ -108,7 +108,7 @@ typedef struct
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initialization result is a failure.
  */
-test_result_t AESHASH_AeadContextInit(test_context_t *context, test_mode_t mode,
+test_result_t AEAD_ContextInit(test_context_t *context, test_mode_t mode,
         aead_oper_mode_t opMode);
 
 /**
@@ -118,7 +118,7 @@ test_result_t AESHASH_AeadContextInit(test_context_t *context, test_mode_t mode,
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-test_result_t AESHASH_AeadTestAdvance(test_context_t *context);
+test_result_t AEAD_TestAdvance(test_context_t *context);
 
 #ifdef __cplusplus
 }

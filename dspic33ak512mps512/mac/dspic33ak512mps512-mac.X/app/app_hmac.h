@@ -47,7 +47,7 @@ extern "C" {
 /**
  * @brief Run all HMAC test vectors for SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512.
  */
-void MAC_HmacTestRun(void);
+void HMAC_TestRun(void);
 
 #ifdef __cplusplus
 }
