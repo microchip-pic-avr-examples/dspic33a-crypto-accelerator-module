@@ -60,7 +60,7 @@ static uint8_t initializationVector[INIT_VECTOR_SIZE] =
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10
 };
 
-static uint8_t keyData[32U] =
+static uint8_t keyData[32] =
 {
     0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10,
     0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x20
@@ -398,35 +398,35 @@ static void SYM_256TestRun(
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_SymEcbTestRun(void)
+void SYM_EcbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_ECB, data, keyData, NULL);
 }
 
-void AES_SymCtrTestRun(void)
+void SYM_CtrTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CTR, data, keyData, initializationVector);
 }
 
-void AES_SymCbcTestRun(void)
+void SYM_CbcTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CBC, data, keyData, initializationVector);
 }
 
-void AES_SymCfbTestRun(void)
+void SYM_CfbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
     SYM_256TestRun(CRYPTO_SYM_OPMODE_CFB128, data, keyData, initializationVector);
 }
 
-void AES_SymOfbTestRun(void)
+void SYM_OfbTestRun(void)
 {
     SYM_128TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);
     SYM_192TestRun(CRYPTO_SYM_OPMODE_OFB, data, keyData, initializationVector);

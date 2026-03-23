@@ -62,12 +62,12 @@ extern "C" {
 /**
  * @brief Run the AES-GCM AEAD encryption and decryption tests.
  */
-void AES_AeadGcmTestRun(void);
+void AEAD_GcmTestRun(void);
 
 /**
  * @brief Run the AES-CCM AEAD encryption and decryption tests.
  */
-void AES_AeadCcmTestRun(void);
+void AEAD_CcmTestRun(void);
 
 #ifdef __cplusplus
 }

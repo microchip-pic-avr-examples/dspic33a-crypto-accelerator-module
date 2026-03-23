@@ -256,7 +256,7 @@ enum
 // *****************************************************************************
 // *****************************************************************************
 
-test_result_t AESHASH_MacCmacContextInit(test_context_t *context,
+test_result_t MAC_CmacContextInit(test_context_t *context,
         test_mode_t testMode, mac_oper_mode_t opMode)
 {
     /* cppcheck-suppress misra-c2012-11.5
@@ -323,7 +323,7 @@ test_result_t AESHASH_MacCmacContextInit(test_context_t *context,
     return result;
 }
 
-test_result_t AESHASH_MacCmacTestAdvance(test_context_t *context)
+test_result_t MAC_CmacTestAdvance(test_context_t *context)
 {
     /* cppcheck-suppress misra-c2012-11.5
      *

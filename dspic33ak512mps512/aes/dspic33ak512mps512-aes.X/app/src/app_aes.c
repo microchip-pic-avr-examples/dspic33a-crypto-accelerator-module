@@ -51,7 +51,7 @@ void AES_TestHeaderPrint(const char *wrapperType,
         unsigned long keyBitLength, const char *testType,
         uint32_t dataLength, const char *additionalInfo)
 {
-    char header[94U];
+    char header[94];
     (void) sprintf(header,
         " %s AES-%lu %s TEST - DATA: %lu BYTES%s",
         wrapperType, keyBitLength, testType,
@@ -64,7 +64,7 @@ void AES_CryptoErrorPrint(unsigned long keyBitLength,
         const char *testType, const char *description,
         int status)
 {
-    char errorDesc[80U];
+    char errorDesc[80];
     (void) sprintf(errorDesc, "AES-%lu %s %s",
             keyBitLength, testType, description);
 
@@ -74,37 +74,37 @@ void AES_CryptoErrorPrint(unsigned long keyBitLength,
 void AES_SymTestRun(void)
 {
     #ifdef RUN_SYM_ECB_TEST
-    AES_SymEcbTestRun();
+    SYM_EcbTestRun();
     #endif
 
     #ifdef RUN_SYM_CTR_TEST
-    AES_SymCtrTestRun();
+    SYM_CtrTestRun();
     #endif
 
     #ifdef RUN_SYM_CBC_TEST
-    AES_SymCbcTestRun();
+    SYM_CbcTestRun();
     #endif
 
     #ifdef RUN_SYM_CFB_TEST
-    AES_SymCfbTestRun();
+    SYM_CfbTestRun();
     #endif
 
     #ifdef RUN_SYM_OFB_TEST
-    AES_SymOfbTestRun();
+    SYM_OfbTestRun();
     #endif
 
     #ifdef RUN_SYM_XTS_TEST
-    AES_SymXtsTestRun();
+    SYM_XtsTestRun();
     #endif
 }
 
 void AES_AeadTestRun(void)
 {
     #ifdef RUN_AEAD_GCM_TEST
-    AES_AeadGcmTestRun();
+    AEAD_GcmTestRun();
     #endif
 
     #ifdef RUN_AEAD_CCM_TEST
-    AES_AeadCcmTestRun();
+    AEAD_CcmTestRun();
     #endif
 }

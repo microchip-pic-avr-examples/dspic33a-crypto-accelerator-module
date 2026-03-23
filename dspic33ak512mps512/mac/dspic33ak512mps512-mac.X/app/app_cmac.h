@@ -47,7 +47,7 @@ extern "C" {
 /**
  * @brief Run all AES-CMAC test vectors for 128, 192, and 256-bit keys.
  */
-void MAC_CmacTestRun(void);
+void CMAC_TestRun(void);
 
 #ifdef __cplusplus
 }

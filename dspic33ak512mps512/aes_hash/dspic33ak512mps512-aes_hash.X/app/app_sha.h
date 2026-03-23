@@ -100,7 +100,7 @@ typedef struct
  * @return TEST_RESULT_SUCCESS if initialized, TEST_RESULT_INIT_FAILED if not.
  * @note Do not proceed with the test if the initialization result is a failure.
  */
-test_result_t AESHASH_ShaContextInit(test_context_t *context,
+test_result_t SHA_ContextInit(test_context_t *context,
         test_mode_t mode, crypto_Hash_Algo_E algorithm,
         uint32_t blockSize);
 
@@ -111,7 +111,7 @@ test_result_t AESHASH_ShaContextInit(test_context_t *context,
  *         and TEST_RESULT_ALL_TESTS_DONE when all tests have been executed (regardless
  *         of success).
  */
-test_result_t AESHASH_ShaTestAdvance(test_context_t *context);
+test_result_t SHA_TestAdvance(test_context_t *context);
 
 #ifdef __cplusplus
 }

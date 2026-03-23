@@ -47,7 +47,7 @@ extern "C" {
 /**
  * @brief Run all AES-GMAC test vectors.
  */
-void MAC_GmacTestRun(void);
+void GMAC_TestRun(void);
 
 #ifdef __cplusplus
 }

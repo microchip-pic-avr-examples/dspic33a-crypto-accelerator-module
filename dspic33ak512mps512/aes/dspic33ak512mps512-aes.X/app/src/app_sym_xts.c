@@ -190,7 +190,7 @@ static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
 // *****************************************************************************
 // *****************************************************************************
 
-void AES_SymXtsTestRun(void)
+void SYM_XtsTestRun(void)
 {
     uint8_t encryptedDirectResult[XTS_TEST_VECTOR_SIZE];
     uint8_t decryptedDirectResult[XTS_TEST_VECTOR_SIZE];
