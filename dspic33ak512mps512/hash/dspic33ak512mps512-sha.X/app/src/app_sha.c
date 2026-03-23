@@ -205,7 +205,7 @@ static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
 
     crypto_Hash_Status_E status;
 
-    // Test with a single update() call, using the data length as the block size.
+    // Test with a single direct digest call.
     status = SHA_TestDigestRun(SINGLE_STEP, dataLength, algo,
             data, dataLength, digestResult);
 
