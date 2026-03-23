@@ -5,6 +5,8 @@
 </picture>
 
 # Crypto Accelerator Module AES/HASH Concurrent Execution Example Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
 ## Description
 This example application utilizes the Crypto Accelerator Module Library to perform concurrent AES and HASH operations to demonstrate context safety of the Crypto Accelerator Module Library.  AES and HASH operations using different sized input vectors are executed in parallel as multi-step (init/cipher/finalize) operations. As this application is not intended to demonstrate complete cryptographic compliance, a limited set of test vectors and algorithms are used.  The following AES and HASH algorithms are used:
 - AES-ECB

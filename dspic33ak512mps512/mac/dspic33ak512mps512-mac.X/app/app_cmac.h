@@ -44,6 +44,9 @@ Microchip or any third party.
 extern "C" {
 #endif
 
+/**
+ * @brief Run all AES-CMAC test vectors for 128, 192, and 256-bit keys.
+ */
 void MAC_CmacTestRun(void);
 
 #ifdef __cplusplus

@@ -68,6 +68,7 @@ static st_Crypto_Aead_AesCcm_ctx aeadCcmCtx __attribute__((aligned(4)));
  * @param length Length of the data.
  * @param authTag Pointer to expected authTag.
  * @param authTagResult Pointer to generated authTag.
+ * @param authTagLength Length of the authentication tag.
  * @return TEST_RESULT_SUCCESS if both pass, TEST_RESULT_DATA_COMPARE_FAILED/TEST_RESULT_TAG_COMPARE_FAILED on failure.
  * @note This function is only called if the caller's operation result was a success.
  */

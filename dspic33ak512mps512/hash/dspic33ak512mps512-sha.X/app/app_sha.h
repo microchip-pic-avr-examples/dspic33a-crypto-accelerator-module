@@ -66,14 +66,29 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run SHA-1 hash digest tests.
+ */
 void SHA_Sha1TestRun(void);
 
+/**
+ * @brief Run SHA-224 hash digest tests.
+ */
 void SHA_Sha224TestRun(void);
 
+/**
+ * @brief Run SHA-256 hash digest tests.
+ */
 void SHA_Sha256TestRun(void);
 
+/**
+ * @brief Run SHA-384 hash digest tests.
+ */
 void SHA_Sha384TestRun(void);
 
+/**
+ * @brief Run SHA-512 hash digest tests.
+ */
 void SHA_Sha512TestRun(void);
 
 #ifdef __cplusplus

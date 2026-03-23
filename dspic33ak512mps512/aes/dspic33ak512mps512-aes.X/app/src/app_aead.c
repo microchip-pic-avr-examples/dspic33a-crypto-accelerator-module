@@ -50,6 +50,21 @@ Microchip or any third party.
 #include "test_vectors/gcm_test_vector.h"
 #include "test_vectors/ccm_test_vector.h"
 
+/**
+ * @brief Run a direct (single-call) AES-GCM encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param iv Pointer to the initialization vector.
+ * @param ivLength Length of the initialization vector in bytes.
+ * @param aad Pointer to the additional authenticated data.
+ * @param aadLength Length of the AAD in bytes.
+ * @param result Pointer to the output buffer for encrypted or decrypted data.
+ * @param tag Pointer to the output buffer for the authentication tag.
+ * @return AEAD cipher status code.
+ */
 static crypto_Aead_Status_E AEAD_GcmDirectTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
@@ -106,6 +121,21 @@ static crypto_Aead_Status_E AEAD_GcmDirectTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
+/**
+ * @brief Run a stepwise (init/aad/cipher/final) AES-GCM encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param iv Pointer to the initialization vector.
+ * @param ivLength Length of the initialization vector in bytes.
+ * @param aad Pointer to the additional authenticated data.
+ * @param aadLength Length of the AAD in bytes.
+ * @param result Pointer to the output buffer for encrypted or decrypted data.
+ * @param tag Pointer to the output buffer for the authentication tag.
+ * @return AEAD cipher status code.
+ */
 static crypto_Aead_Status_E AEAD_GcmStepsTestRun(crypto_CipherOper_E encrypt,
     uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
     uint8_t *iv, uint32_t ivLength, uint8_t *aad, uint32_t aadLength,
@@ -196,6 +226,22 @@ static crypto_Aead_Status_E AEAD_GcmStepsTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
+/**
+ * @brief Run an AES-CCM encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the AES key.
+ * @param keyLength Length of the AES key in bytes.
+ * @param nonce Pointer to the nonce.
+ * @param nonceLength Length of the nonce in bytes.
+ * @param aad Pointer to the additional authenticated data.
+ * @param aadLength Length of the AAD in bytes.
+ * @param result Pointer to the output buffer for encrypted or decrypted data.
+ * @param tag Pointer to the authentication tag buffer.
+ * @param tagLength Length of the authentication tag in bytes.
+ * @return AEAD cipher status code.
+ */
 static crypto_Aead_Status_E AEAD_CcmCipherRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *nonce, uint32_t nonceLength, uint8_t *aad, uint32_t aadLength,
@@ -269,6 +315,15 @@ static crypto_Aead_Status_E AEAD_CcmCipherRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
+/**
+ * @brief Verify the encryption result and authentication tag against expected values.
+ * @param text Pointer to the expected ciphertext.
+ * @param result Pointer to the actual ciphertext result.
+ * @param length Length of the ciphertext in bytes.
+ * @param tag Pointer to the expected authentication tag.
+ * @param tagResult Pointer to the actual authentication tag result.
+ * @param tagLength Length of the authentication tag in bytes.
+ */
 static void AEAD_EncryptionAndTagCheck(
         const uint8_t *text, const uint8_t *result,
         uint32_t length, const uint8_t *tag,

@@ -48,8 +48,16 @@ typedef struct
     uint32_t    expectedDigestLength;
 } hash_test_vector_t;
 
+/**
+ * @brief Get the array of SHA-512 test vectors.
+ * @return Pointer to the first SHA-512 test vector.
+ */
 hash_test_vector_t *VECTOR_Sha512TestVectorsGet(void);
 
+/**
+ * @brief Get the number of SHA-512 test vectors.
+ * @return Number of SHA-512 test vectors.
+ */
 uint32_t VECTOR_Sha512TestVectorCountGet(void);
 
 #ifdef __cplusplus

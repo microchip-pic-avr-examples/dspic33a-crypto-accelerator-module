@@ -57,6 +57,12 @@ Microchip or any third party.
 #define MULTI_STEP          (true)
 #define SHA_TEST_VECTOR_5   (5)
 
+/**
+ * @brief Compare an expected digest with the actual digest and print the result.
+ * @param expected Pointer to the expected digest data.
+ * @param actual Pointer to the actual digest data.
+ * @param size Number of bytes to compare.
+ */
 static void SHA_ArrayEqualityCheck(const uint8_t *expected,
         const uint8_t *actual, size_t size)
 {
@@ -76,6 +82,16 @@ static void SHA_ArrayEqualityCheck(const uint8_t *expected,
 // *****************************************************************************
 // *****************************************************************************
 
+/**
+ * @brief Run a SHA hash digest test in single-step or multi-step mode.
+ * @param multistep true for multi-step (init/update/final), false for single-step.
+ * @param blockSize Block size in bytes for multi-step update calls.
+ * @param algo The SHA algorithm to use.
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param digestResult Pointer to the output buffer for the computed digest.
+ * @return Hash status code.
+ */
 static crypto_Hash_Status_E SHA_TestDigestRun(
         bool multistep, uint32_t blockSize,
         crypto_Hash_Algo_E algo, uint8_t *data,
@@ -126,6 +142,13 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
     return status;
 }
 
+/**
+ * @brief Run a complete SHA test with single-step and multi-step modes.
+ * @param algo The SHA algorithm to use.
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param expectedDigest Pointer to the expected digest for verification.
+ */
 static void SHA_TestRun(crypto_Hash_Algo_E algo, uint8_t *data,
         uint32_t dataLength, const uint8_t *expectedDigest)
 {

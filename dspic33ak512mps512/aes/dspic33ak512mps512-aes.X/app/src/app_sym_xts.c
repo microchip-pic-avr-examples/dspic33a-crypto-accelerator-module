@@ -50,6 +50,17 @@ Microchip or any third party.
 #include "crypto/common_crypto/crypto_sym_cipher.h"
 #include "test_vectors/xts_test_vector.h"
 
+/**
+ * @brief Run a direct (single-call) AES-XTS encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the combined AES-XTS key.
+ * @param keyLength Length of the combined key in bytes.
+ * @param tweak Pointer to the XTS tweak value.
+ * @param result Pointer to the output buffer.
+ * @return Symmetric cipher status code.
+ */
 static crypto_Sym_Status_E SYM_XtsDirectTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *tweak, uint8_t *result)
@@ -102,6 +113,17 @@ static crypto_Sym_Status_E SYM_XtsDirectTestRun(crypto_CipherOper_E encrypt,
     return status;
 }
 
+/**
+ * @brief Run a stepwise (init/cipher) AES-XTS encrypt or decrypt operation.
+ * @param encrypt The cipher operation (encrypt or decrypt).
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param key Pointer to the combined AES-XTS key.
+ * @param keyLength Length of the combined key in bytes.
+ * @param tweak Pointer to the XTS tweak value.
+ * @param result Pointer to the output buffer.
+ * @return Symmetric cipher status code.
+ */
 static crypto_Sym_Status_E SYM_XtsStepsTestRun(crypto_CipherOper_E encrypt,
         uint8_t *data, uint32_t dataLength, uint8_t *key, uint32_t keyLength,
         uint8_t *tweak, uint8_t *result)
