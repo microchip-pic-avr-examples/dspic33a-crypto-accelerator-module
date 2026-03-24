@@ -6,7 +6,6 @@
                    projectFiles="true">
       <logicalFolder name="f3" displayName="app" projectFiles="true">
         <itemPath>app/app_sha.h</itemPath>
-        <itemPath>app/app_utils.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
@@ -58,6 +57,9 @@
         <itemPath>test_vectors/test_vectors_sha_512.h</itemPath>
         <itemPath>test_vectors/test_vectors_sha_1.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f4" displayName="utils" projectFiles="true">
+        <itemPath>../../../utils/app_utils.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -74,7 +76,6 @@
                    projectFiles="true">
       <logicalFolder name="f3" displayName="app" projectFiles="true">
         <itemPath>app/src/app_sha.c</itemPath>
-        <itemPath>app/src/app_utils.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
@@ -121,6 +122,11 @@
         <itemPath>test_vectors/src/test_vectors_sha_256.c</itemPath>
         <itemPath>test_vectors/src/test_vectors_sha_384.c</itemPath>
         <itemPath>test_vectors/src/test_vectors_sha_512.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="utils" projectFiles="true">
+        <logicalFolder name="f5" displayName="src" projectFiles="true">
+          <itemPath>../../../utils/src/app_utils.c</itemPath>
+        </logicalFolder>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -190,7 +196,8 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../sha.X;../../../lib/cam_06048"/>
+        <property key="extra-include-directories"
+                  value="../sha.X;../../../lib/cam_06048;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>

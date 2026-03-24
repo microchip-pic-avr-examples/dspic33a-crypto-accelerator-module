@@ -49,11 +49,8 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_sha.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -65,29 +62,29 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("___________________________________________________________________________________________________ \r\n");
-    (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    SHA_1_Digest();
+    (void) printf("\r\n\r\n Starting CRYPTO SHA program \r\n");
 
-    SHA_224_Digest();
-    SHA_256_Digest();
-    SHA_384_Digest();
-    SHA_512_Digest();
+    SHA_Sha1TestRun();
+    SHA_Sha224TestRun();
+    SHA_Sha256TestRun();
+    SHA_Sha384TestRun();
+    SHA_Sha512TestRun();
 
-    SHA3_224_Digest();
-    SHA3_256_Digest();
-    SHA3_384_Digest();
-    SHA3_512_Digest();
+    SHA_Sha3224TestRun();
+    SHA_Sha3256TestRun();
+    SHA_Sha3384TestRun();
+    SHA_Sha3512TestRun();
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("___________________________________________________________________________________________________ \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    while(1)
+    while (true)
     {
 
-    };
+    }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

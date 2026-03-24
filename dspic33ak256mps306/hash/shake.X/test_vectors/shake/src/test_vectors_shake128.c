@@ -16,101 +16,118 @@ out of the use of the software and documentation, even if advised of the
 possibility of such damage.
 
 Except as expressly permitted hereunder and subject to the applicable license terms
-for any third-party software incorporated in the software and any a pplicable open
+for any third-party software incorporated in the software and any applicable open
 source software license terms, no license or other rights, whether express or
 implied, are granted under any patent or other intellectual property rights of
 Microchip or any third party.
 */
 //DOM-IGNORE-END
 
+#include <stddef.h>
 #include "../test_vectors_shake128.h"
 
 /*
- The following test vectors were pulled from NIST's ACVP-Server example vectors repository:
- https://github.com/usnistgov/ACVP-Server/tree/master/gen-val/json-files/SHAKE-128-1.0
-*/
+ * Test vectors from NIST ACVP-Server example vectors repository:
+ * https://github.com/usnistgov/ACVP-Server/tree/master/gen-val/json-files/SHAKE-128-1.0
+ */
 
-// SHAKE128 0 Bytes Test Vector
-static const uint8_t shake128_0_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+// SHAKE128, 0-byte input
+static const uint8_t shake128Digest0Bytes[SHAKE128_DEFAULT_DIGEST_LENGTH] =
+{
     0x7F, 0x9C, 0x2B, 0xA4, 0xE8, 0x8F, 0x82, 0x7D, 0x61, 0x60, 0x45, 0x50, 0x76, 0x05, 0x85, 0x3E
 };
-static const TEST_VECTOR shake128_0_bytes_vector = {
-    (uint8_t[]) {},
+static const test_vector_t shake128Vector0Bytes =
+{
+    NULL,
     0U,
-    shake128_0_bytes_digest,
-    sizeof(shake128_0_bytes_digest)
+    shake128Digest0Bytes,
+    sizeof(shake128Digest0Bytes)
 };
 
-// SHAKE128 35 Bytes Test Vector
-static uint8_t shake128_35_bytes[35] = {
+// SHAKE128, 35-byte input
+static uint8_t shake128Input35Bytes[35] =
+{
     0x67, 0x6E, 0x1E, 0x97, 0x48, 0x83, 0x97, 0x59, 0x2A, 0x33, 0x63, 0xFB, 0xF4, 0xA9, 0x21, 0x18,
     0xA7, 0x12, 0x6B, 0xD4, 0x72, 0x67, 0x70, 0x96, 0x48, 0x77, 0x11, 0xC9, 0x0B, 0xCB, 0xEA, 0x1C,
     0x9E, 0xB9, 0x63
 };
-static const uint8_t shake128_35_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+static const uint8_t shake128Digest35Bytes[SHAKE128_DEFAULT_DIGEST_LENGTH] =
+{
     0x7E, 0x24, 0x53, 0x5E, 0x7B, 0x8A, 0x50, 0xC8, 0x42, 0xDE, 0xB6, 0x4E, 0x09, 0x57, 0xEF, 0x5A
 };
-static const TEST_VECTOR shake128_35_bytes_vector = {
-    shake128_35_bytes,
-    sizeof(shake128_35_bytes),
-    shake128_35_bytes_digest,
-    sizeof(shake128_35_bytes_digest)
+static const test_vector_t shake128Vector35Bytes =
+{
+    shake128Input35Bytes,
+    sizeof(shake128Input35Bytes),
+    shake128Digest35Bytes,
+    sizeof(shake128Digest35Bytes)
 };
 
-// SHAKE128 41 Bytes Test Vector
-static uint8_t shake128_41_bytes[41] = {
+// SHAKE128, 41-byte input
+static uint8_t shake128Input41Bytes[41] =
+{
     0xA2, 0xD8, 0xEB, 0xEE, 0xF5, 0x58, 0xBC, 0x34, 0x9E, 0x55, 0x0C, 0xA5, 0x59, 0xC7, 0x90, 0xD3,
     0x1A, 0x4A, 0xF0, 0xAB, 0x60, 0x4B, 0x80, 0x59, 0x69, 0x6F, 0x79, 0xAB, 0xE2, 0x71, 0xD4, 0xDE,
     0xBE, 0xF3, 0xE0, 0xD7, 0x1B, 0xA9, 0x08, 0x9A, 0xF8
 };
-static const uint8_t shake128_41_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+static const uint8_t shake128Digest41Bytes[SHAKE128_DEFAULT_DIGEST_LENGTH] =
+{
     0x25, 0xE2, 0x0B, 0x73, 0x18, 0x3D, 0x61, 0x9D, 0x66, 0x0B, 0x4D, 0x86, 0x48, 0x62, 0x0A, 0xA0
 };
-static const TEST_VECTOR shake128_41_bytes_vector = {
-    shake128_41_bytes,
-    sizeof(shake128_41_bytes),
-    shake128_41_bytes_digest,
-    sizeof(shake128_41_bytes_digest)
+static const test_vector_t shake128Vector41Bytes =
+{
+    shake128Input41Bytes,
+    sizeof(shake128Input41Bytes),
+    shake128Digest41Bytes,
+    sizeof(shake128Digest41Bytes)
 };
 
-// SHAKE128 48 Bytes Test Vector
-static uint8_t shake128_48_bytes[48] = {
+// SHAKE128, 48-byte input
+static uint8_t shake128Input48Bytes[48] =
+{
     0xB0, 0x58, 0x20, 0x76, 0xC7, 0xD2, 0xEE, 0xC9, 0x2A, 0x35, 0xB7, 0xA4, 0xDD, 0x1A, 0xE6, 0xE7,
     0x36, 0x9B, 0xC6, 0xC5, 0xFE, 0x7F, 0x0F, 0x56, 0x2A, 0x79, 0x26, 0x6A, 0x0B, 0x36, 0x11, 0xDD,
     0xCC, 0x47, 0x52, 0xF7, 0x58, 0x1F, 0xAB, 0x70, 0xCD, 0xB9, 0xD0, 0xE3, 0x68, 0x50, 0x77, 0x28
 };
-static const uint8_t shake128_48_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+static const uint8_t shake128Digest48Bytes[SHAKE128_DEFAULT_DIGEST_LENGTH] =
+{
     0x08, 0x6E, 0x97, 0x8E, 0x87, 0x41, 0xDA, 0xDD, 0x55, 0x9B, 0x7E, 0xE5, 0xC8, 0xEE, 0x95, 0x23
 };
-static const TEST_VECTOR shake128_48_bytes_vector = {
-    shake128_48_bytes,
-    sizeof(shake128_48_bytes),
-    shake128_48_bytes_digest,
-    sizeof(shake128_48_bytes_digest)
+static const test_vector_t shake128Vector48Bytes =
+{
+    shake128Input48Bytes,
+    sizeof(shake128Input48Bytes),
+    shake128Digest48Bytes,
+    sizeof(shake128Digest48Bytes)
 };
 
-// SHAKE128 64 Bytes Test Vector
-static uint8_t shake128_64_bytes[64] = {
+// SHAKE128, 64-byte input
+static uint8_t shake128Input64Bytes[64] =
+{
     0x34, 0xB5, 0x9A, 0xF7, 0xB6, 0x32, 0x8B, 0xAA, 0x11, 0x7D, 0x34, 0xBB, 0x2D, 0xAB, 0x55, 0x4A,
     0x51, 0x82, 0x68, 0xEE, 0x29, 0xB0, 0x87, 0x25, 0xD8, 0x57, 0xA3, 0xC2, 0x72, 0x3B, 0x17, 0xB0,
     0x84, 0x55, 0x45, 0xC9, 0x0E, 0x93, 0x69, 0x70, 0x61, 0x70, 0x69, 0x92, 0x02, 0xCE, 0x55, 0x70,
     0x86, 0x26, 0xFA, 0x2B, 0x94, 0x33, 0x33, 0x7A, 0x7F, 0xA8, 0x8A, 0x20, 0xA3, 0xED, 0x1B, 0x7B
 };
-static const uint8_t shake128_64_bytes_digest[SHAKE128_DEFAULT_DIGEST_LENGTH] = {
+static const uint8_t shake128Digest64Bytes[SHAKE128_DEFAULT_DIGEST_LENGTH] =
+{
     0xB6, 0x59, 0xF7, 0xC4, 0x44, 0xB0, 0x54, 0x76, 0x00, 0x71, 0x4E, 0x08, 0x6A, 0x73, 0xF4, 0x24
 };
-static const TEST_VECTOR shake128_64_bytes_vector = {
-    shake128_64_bytes,
-    sizeof(shake128_64_bytes),
-    shake128_64_bytes_digest,
-    sizeof(shake128_64_bytes_digest)
+static const test_vector_t shake128Vector64Bytes =
+{
+    shake128Input64Bytes,
+    sizeof(shake128Input64Bytes),
+    shake128Digest64Bytes,
+    sizeof(shake128Digest64Bytes)
 };
 
-// SHAKE128 16 Bytes (139 Byte Output) Test Vector
-static uint8_t shake128_16_bytes_139_byte_output[16] = {
+// SHAKE128, 16-byte input (139-byte output)
+static uint8_t shake128Input16Bytes139ByteOutput[16] =
+{
     0xBC, 0xD5, 0xC8, 0x59, 0x1B, 0xF2, 0x7C, 0xC1, 0xA3, 0x07, 0x2E, 0x70, 0xFC, 0x31, 0x75, 0x17
 };
-static const uint8_t shake128_16_bytes_139_byte_output_digest[139] = {
+static const uint8_t shake128Digest16Bytes139ByteOutput[139] =
+{
     0xD1, 0xC8, 0xC6, 0x85, 0x4A, 0xC3, 0x28, 0xA6, 0xEC, 0x59, 0x9D, 0x39, 0x9E, 0xED, 0x65, 0xA5,
     0x5C, 0x31, 0xB5, 0xC5, 0x27, 0x7E, 0xF7, 0x8D, 0x72, 0xBB, 0xAE, 0x25, 0x53, 0xDD, 0x2E, 0x8E,
     0x14, 0xA4, 0x0C, 0xAD, 0x48, 0xA3, 0xDD, 0x86, 0x33, 0xBC, 0x7F, 0x90, 0x83, 0xD0, 0x97, 0xB2,
@@ -121,18 +138,21 @@ static const uint8_t shake128_16_bytes_139_byte_output_digest[139] = {
     0xC0, 0xDD, 0x32, 0x1C, 0xB1, 0xDF, 0x2E, 0x74, 0x67, 0x19, 0xB9, 0x14, 0x5A, 0x89, 0x1F, 0x12,
     0xA3, 0x19, 0x8E, 0x19, 0x6C, 0xD0, 0xC6, 0x1B, 0x96, 0x40, 0x39
 };
-static const TEST_VECTOR shake128_16_bytes_139_byte_output_vector = {
-    shake128_16_bytes_139_byte_output,
-    sizeof(shake128_16_bytes_139_byte_output),
-    shake128_16_bytes_139_byte_output_digest,
-    sizeof(shake128_16_bytes_139_byte_output_digest)
+static const test_vector_t shake128Vector16Bytes139ByteOutput =
+{
+    shake128Input16Bytes139ByteOutput,
+    sizeof(shake128Input16Bytes139ByteOutput),
+    shake128Digest16Bytes139ByteOutput,
+    sizeof(shake128Digest16Bytes139ByteOutput)
 };
 
-TEST_VECTOR shake128_test_vectors[NUMBER_OF_SHAKE128_VECTORS] = {
-    [0] = shake128_0_bytes_vector,
-    [1] = shake128_35_bytes_vector,
-    [2] = shake128_41_bytes_vector,
-    [3] = shake128_48_bytes_vector,
-    [4] = shake128_64_bytes_vector,
-    [5] = shake128_16_bytes_139_byte_output_vector
+// 6 SHAKE128 test vectors (0-byte to 64-byte inputs)
+test_vector_t shake128TestVectors[NUMBER_OF_SHAKE128_VECTORS] =
+{
+    [0] = shake128Vector0Bytes,
+    [1] = shake128Vector35Bytes,
+    [2] = shake128Vector41Bytes,
+    [3] = shake128Vector48Bytes,
+    [4] = shake128Vector64Bytes,
+    [5] = shake128Vector16Bytes139ByteOutput
 };

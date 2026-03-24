@@ -102,7 +102,7 @@ static crypto_Hash_Status_E SHA_TestDigestRun(
 
     if (multistep)
     {
-        st_Crypto_Hash_Sha_Ctx context;
+        static st_Crypto_Hash_Sha_Ctx context;
 
         (void) printf(UTILS_CYAN
             "\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"

@@ -10,6 +10,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../../../lib/cam_06048/crypto</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
