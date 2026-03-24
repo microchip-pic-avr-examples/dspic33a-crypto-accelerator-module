@@ -92,14 +92,33 @@ pipeline {
             }
         }
 		
-		
 		//MisraCheck code analysis 
         stage('MISRA Check') {
             steps {
                 script {
-				    misraCheck(
-                        sourceProjectPath: "${env.MPLABX_PROJECT_SOURCE}"
-                    )
+                    def projectsLayoutJson = readJSON file: '.citd/projectsLayout.json'
+
+                    for (deviceName in projectsLayoutJson.keySet()) {
+                        def deviceObject = projectsLayoutJson[deviceName]
+
+                        for (algorithm in deviceObject.keySet()) {
+                            def projectObject = deviceObject[algorithm]
+
+                            def rootFolder = projectObject.rootFolder
+                            def projectName = projectObject.projectName
+
+                            def projectPath = "${deviceName}/${rootFolder}/${projectName}.X"
+                            echo("MISRA scanning project: ${projectPath}")
+
+                            misraCheck(
+                                sourceProjectPath: projectPath,
+                                consolidateHtmlReport: false,
+                                excludePattern: "${getMisraExcludePatterns()}",
+                                cppAdditionalArgs: "${getMisraFlags(projectPath)}",
+                                includeArchivePattern: '*.html'
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -286,4 +305,36 @@ pipeline {
             }
         }
     }
+}
+
+def getMisraFlags(projectPath) {
+    def flags = [
+                    '--suppress=missingIncludeSystem'  // Suppress warnings for missing system headers
+                ]
+
+    flags.addAll(getMisraIncludeFlags(projectPath))
+    flags.addAll(getMisraSuppressionFlags(projectPath))
+
+    return flags.join(',')
+}
+
+def getMisraIncludeFlags(projectPath) {
+    return  [
+                '-I.',
+                "-I${projectPath}"
+            ]
+}
+
+def getMisraSuppressionFlags(projectPath) {
+    return  [ 
+                "--suppress=*:${projectPath}/mcc_generated_files/*",
+                '--suppress=*:crypto/common_crypto/*'
+            ]
+}
+
+def getMisraExcludePatterns() {
+    return  [ 
+                '**/mcc_generated_files/**',
+                '**/crypto/common_crypto/**'
+            ].join(',')
 }
