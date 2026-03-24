@@ -33,7 +33,7 @@ data: {
         COVERITY_SUPPRESS_DEVIATION: false
     },
     driver_defines: "HAVE_CRYPTO_HW_CAM_05346_DRIVER",
-    crypto_digisign_cam05346_wrapper_h_ftl_flag,
+    crypto_digisign_cam05346_wrapper_h_ftl_flag: true,
     crypto_hash_cam05346_wrapper_h_ftl_flag: true,
     crypto_aead_cam05346_wrapper_h_ftl_flag: true,
     crypto_mac_cam05346_wrapper_h_ftl_flag: true,

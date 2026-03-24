@@ -10,19 +10,20 @@
       </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
-          <itemPath>crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>crypto/common_crypto/crypto_hash.h</itemPath>
+          <itemPath>../../../lib/cam_06048/crypto/common_crypto/crypto_common.h</itemPath>
+          <itemPath>../../../lib/cam_06048/crypto/common_crypto/crypto_hash.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="drivers" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
-            <itemPath>crypto/drivers/library/cam_device.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_device_ea.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_hash.h</itemPath>
-            <itemPath>crypto/drivers/library/cam_version.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_device.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_device_ea.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_hash.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_version.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f2" displayName="wrapper" projectFiles="true">
-            <itemPath>crypto/drivers/wrapper/crypto_cam06048_wrapper.h</itemPath>
-            <itemPath>crypto/drivers/wrapper/crypto_hash_shake_cam06048_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_cam06048_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_hash_cam06048_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_hash_shake_cam06048_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -76,12 +77,13 @@
       </logicalFolder>
       <logicalFolder name="f1" displayName="crypto" projectFiles="true">
         <logicalFolder name="f1" displayName="common_crypto" projectFiles="true">
-          <itemPath>crypto/common_crypto/src/crypto_hash.c</itemPath>
+          <itemPath>../../../lib/cam_06048/crypto/common_crypto/src/crypto_hash.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="drivers" projectFiles="true">
           <logicalFolder name="f1" displayName="wrapper" projectFiles="true">
-            <itemPath>crypto/drivers/wrapper/src/crypto_cam06048_wrapper.c</itemPath>
-            <itemPath>crypto/drivers/wrapper/src/crypto_hash_shake_cam06048_wrapper.c</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_cam06048_wrapper.c</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_hash_cam06048_wrapper.c</itemPath>
+            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_hash_shake_cam06048_wrapper.c</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -119,6 +121,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../../../lib/cam_06048/crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -141,7 +144,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>crypto/drivers/library/libcam06048-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../lib/cam_06048/crypto/drivers/library/libcam06048-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -181,7 +184,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
-        <property key="extra-include-directories" value="../shake.X"/>
+        <property key="extra-include-directories" value="../shake.X;../../../lib/cam_06048"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>

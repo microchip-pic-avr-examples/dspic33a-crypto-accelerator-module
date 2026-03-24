@@ -56,7 +56,8 @@ data: {
     crypto_sym_cam05346_wrapper_h_ftl_flag: true,
     crypto_aead_cam05346_wrapper_h_ftl_flag: true,
     crypto_rng_cam05346_wrapper_h_ftl_flag: true,
-    crypto_kas_cam05346_wrapper_h_ftl_flag:true,
+    crypto_mac_cam05346_wrapper_h_ftl_flag: true,
+    crypto_kas_cam05346_wrapper_h_ftl_flag: true,
 	CRYPTO_HW_RNG_TRNG: true,
     CRYPTO_HW_ECDSA: true,
     CRYPTO_HW_SHA1: true,
@@ -71,7 +72,7 @@ data: {
     CRYPTO_HW_AES_OFB: true,
     CRYPTO_HW_AES_GCM: true,
     CRYPTO_HW_AES_CCM: true,
-    CRYPTO_HW_AES_XTS: true
+    CRYPTO_HW_AES_XTS: true,
     CRYPTO_HW_AES_CMAC: true,
     CRYPTO_HW_AES_GMAC: true,
     CRYPTO_HW_HMAC: true,

@@ -3,92 +3,26 @@
         "dspic33ak512mps512": {
             "ip": "CAM_05346",
             "projects": {
-                "aes": {
-                    "fmpp_config": "aes_config",
-                    "root_folder": "aes",
-                    "cam_files": [
-                        "sym_cam",
-                        "aead_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "sym_cipher",
-                        "aead_cipher"
-                    ]
-                },
-                "aes_hash": {
-                    "fmpp_config": "aes_hash_config",
-                    "root_folder": "aes_hash",
+                "all_algorithms": {
+                    "fmpp_config": "all_algorithms_config",
+                    "root_folder": ".",
                     "cam_files": [
                         "hash_cam",
                         "sym_cam",
                         "mac_cam",
                         "aead_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "hash",
-                        "sym_cipher",
-                        "mac_cipher",
-                        "aead_cipher"
-                    ]
-                },
-                "ecdsa": {
-                    "fmpp_config": "ecdsa_config",
-                    "root_folder": "dsa",
-                    "cam_files": [
                         "digisign_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "digsign"
-                    ]
-                },
-                "ecdh": {
-                    "fmpp_config": "ecdh_config",
-                    "root_folder": "ecdh",
-                    "cam_files": [
                         "kas_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "kas"
-                    ]
-                },
-                "sha": {
-                    "fmpp_config": "sha_config",
-                    "root_folder": "hash",
-                    "cam_files": [
-                        "hash_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "hash"
-                    ]
-                },
-                "mac": {
-                    "fmpp_config": "mac_config",
-                    "root_folder": "mac",
-                    "cam_files": [
-                        "hash_cam",
-                        "mac_cam",
-                        "aead_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "hash",
-                        "mac_cipher",
-                        "aead_cipher"
-                    ]
-                },
-                "trng": {
-                    "fmpp_config": "trng_config",
-                    "root_folder": "trng",
-                    "cam_files": [
                         "rng_cam",
                         "cam"
                     ],
                     "common_crypto_files": [
+                        "hash",
+                        "sym_cipher",
+                        "mac_cipher",
+                        "aead_cipher",
+                        "digsign",
+                        "kas",
                         "rng"
                     ]
                 }
@@ -97,26 +31,28 @@
         "dspic33ak256mps306": {
             "ip": "CAM_06048",
             "projects": {
-                "sha": {
-                    "fmpp_config": "sha_config",
-                    "root_folder": "hash",
+                "all_algorithms": {
+                    "fmpp_config": "all_algorithms_config",
+                    "root_folder": ".",
                     "cam_files": [
                         "hash_cam",
-                        "cam"
-                    ],
-                    "common_crypto_files": [
-                        "hash"
-                    ]
-                },
-                "shake": {
-                    "fmpp_config": "shake_config",
-                    "root_folder": "hash",
-                    "cam_files": [
                         "hash_shake_cam",
+                        "sym_cam",
+                        "mac_cam",
+                        "aead_cam",
+                        "digisign_cam",
+                        "kas_cam",
+                        "rng_cam",
                         "cam"
                     ],
                     "common_crypto_files": [
-                        "hash"
+                        "hash",
+                        "sym_cipher",
+                        "mac_cipher",
+                        "aead_cipher",
+                        "digsign",
+                        "kas",
+                        "rng"
                     ]
                 }
             }
