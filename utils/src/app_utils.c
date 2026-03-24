@@ -116,7 +116,7 @@ void UTILS_HexArrayPrint(const char *label,
                 (void) printf("\r\n%-25s", "");
             }
 
-            (void) printf(" 0x%02x", data[index]);
+            (void) printf(" 0x%02X", data[index]);
         }
     }
     else
