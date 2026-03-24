@@ -8,7 +8,7 @@
     main.c
 
   Summary:
-    This source file starts the application to demonstrate SHA hashing.
+    This source file starts the application to demonstrate SHAKE hashing.
  *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -49,11 +49,8 @@ Microchip or any third party.
 *  Reasoning: printf is required for printing to the terminal in this code example
 */
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
 #include "mcc_generated_files/system/system.h"
 #include "app/app_shake.h"
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -65,20 +62,21 @@ int main(void)
 {
     SYSTEM_Initialize();
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("___________________________________________________________________________________________________ \r\n");
-    (void) printf("\r\n\n\n\n Starting CRYPTO SHA program \r\n");
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
 
-    SHAKE128_Digest();
-    SHAKE256_Digest();
+    (void) printf("\r\n\r\n Starting CRYPTO SHAKE program \r\n");
 
-    (void) printf("\n\n\n\r\n ");
-    (void) printf("___________________________________________________________________________________________________ \r\n");
+    SHAKE_Shake128TestRun();
+    SHAKE_Shake256TestRun();
 
-    while(1)
+    (void) printf("\r\n\r\n\r\n");
+    UTILS_SeparatorPrint(UTILS_WHITE, '_');
+
+    while (true)
     {
 
-    };
+    }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

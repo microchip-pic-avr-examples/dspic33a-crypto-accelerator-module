@@ -8,7 +8,7 @@
     app_shake.h
 
   Summary:
-    This header file provides prototypes and definitions for the SHAKE application.
+    This header file provides prototypes and definitions for SHAKE hashing.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -37,11 +37,28 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SHAKE_H
-#define	APP_SHAKE_H
+#define APP_SHAKE_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
+
+#include "utils/app_utils.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Configuration Options
+// *****************************************************************************
+// *****************************************************************************
+
+// Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
+// #define RUN_ALL_VECTORS
 
 // *****************************************************************************
 // *****************************************************************************
@@ -49,12 +66,18 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void SHAKE128_Digest(void);
-void SHAKE256_Digest(void);
+/**
+ * @brief Run SHAKE-128 hash digest tests.
+ */
+void SHAKE_Shake128TestRun(void);
 
-#ifdef	__cplusplus
+/**
+ * @brief Run SHAKE-256 hash digest tests.
+ */
+void SHAKE_Shake256TestRun(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SHAKE_H */
-
+#endif /* APP_SHAKE_H */

@@ -8,7 +8,7 @@
     app_sha.h
 
   Summary:
-    This header file provides prototypes and definitions for the SHA application.
+    This header file provides prototypes and definitions for SHA hashing.
 *******************************************************************************/
 
 //DOM-IGNORE-BEGIN
@@ -37,35 +37,28 @@ Microchip or any third party.
 //DOM-IGNORE-END
 
 #ifndef APP_SHA_H
-#define	APP_SHA_H
+#define APP_SHA_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Type Definitions
+// Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#define BLOCK_SIZE_144     (144UL)
-#define BLOCK_SIZE_128     (128UL)
-#define BLOCK_SIZE_64      (64UL)
-#define BLOCK_SIZE_32      (32UL)
-#define BLOCK_SIZE_16      (16UL)
-#define BLOCK_SIZE_13      (13UL)
-#define BLOCK_SIZE_8       (8UL)
-#define BLOCK_SIZE_7       (7UL)
+#include "utils/app_utils.h"
 
-#define SINGLE_STEP        (0U)
-#define MULTI_STEP         (1U)
-#define TEST_VECTOR_4      (4U)
-
-#define SESSION_ID         (1U)
+// *****************************************************************************
+// *****************************************************************************
+// Section: Configuration Options
+// *****************************************************************************
+// *****************************************************************************
 
 // Uncomment the #define RUN_ALL_VECTORS below to run with all defined test vectors
-#define RUN_ALL_VECTORS
+// #define RUN_ALL_VECTORS
 
 // *****************************************************************************
 // *****************************************************************************
@@ -73,21 +66,53 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-void SHA_1_Digest(void);
+/**
+ * @brief Run SHA-1 hash digest tests.
+ */
+void SHA_Sha1TestRun(void);
 
-void SHA_224_Digest(void);
-void SHA_256_Digest(void);
-void SHA_384_Digest(void);
-void SHA_512_Digest(void);
+/**
+ * @brief Run SHA-224 hash digest tests.
+ */
+void SHA_Sha224TestRun(void);
 
-void SHA3_224_Digest(void);
-void SHA3_256_Digest(void);
-void SHA3_384_Digest(void);
-void SHA3_512_Digest(void);
+/**
+ * @brief Run SHA-256 hash digest tests.
+ */
+void SHA_Sha256TestRun(void);
 
-#ifdef	__cplusplus
+/**
+ * @brief Run SHA-384 hash digest tests.
+ */
+void SHA_Sha384TestRun(void);
+
+/**
+ * @brief Run SHA-512 hash digest tests.
+ */
+void SHA_Sha512TestRun(void);
+
+/**
+ * @brief Run SHA3-224 hash digest tests.
+ */
+void SHA_Sha3224TestRun(void);
+
+/**
+ * @brief Run SHA3-256 hash digest tests.
+ */
+void SHA_Sha3256TestRun(void);
+
+/**
+ * @brief Run SHA3-384 hash digest tests.
+ */
+void SHA_Sha3384TestRun(void);
+
+/**
+ * @brief Run SHA3-512 hash digest tests.
+ */
+void SHA_Sha3512TestRun(void);
+
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* APP_SHA_H */
-
+#endif /* APP_SHA_H */

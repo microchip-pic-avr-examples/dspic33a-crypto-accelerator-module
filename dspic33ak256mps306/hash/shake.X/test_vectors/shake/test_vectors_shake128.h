@@ -26,9 +26,9 @@ Microchip or any third party.
 #include "../test_vector.h"
 
 #ifndef TEST_VECTORS_SHAKE128_H
-#define	TEST_VECTORS_SHAKE128_H
+#define TEST_VECTORS_SHAKE128_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -36,11 +36,11 @@ extern "C" {
 
 #define NUMBER_OF_SHAKE128_VECTORS      (6U)
 
-extern TEST_VECTOR shake128_test_vectors[NUMBER_OF_SHAKE128_VECTORS];
+extern test_vector_t shake128TestVectors[NUMBER_OF_SHAKE128_VECTORS];
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHAKE128_H */
+#endif /* TEST_VECTORS_SHAKE128_H */
 

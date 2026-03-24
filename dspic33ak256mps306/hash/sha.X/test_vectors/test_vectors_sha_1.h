@@ -26,9 +26,9 @@ Microchip or any third party.
 #include "test_vector.h"
 
 #ifndef TEST_VECTORS_SHA_1_H
-#define	TEST_VECTORS_SHA_1_H
+#define TEST_VECTORS_SHA_1_H
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -36,11 +36,11 @@ extern "C" {
 
 #define NUMBER_OF_SHA_1_VECTORS  (8U)
 
-extern TEST_VECTOR sha_1_test_vectors[NUMBER_OF_SHA_1_VECTORS];
+extern test_vector_t sha1TestVectors[NUMBER_OF_SHA_1_VECTORS];
 
-#ifdef	__cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif	/* TEST_VECTORS_SHA_1_H */
+#endif /* TEST_VECTORS_SHA_1_H */
 

@@ -46,12 +46,31 @@ Microchip or any third party.
 #include <string.h>
 #include "crypto/common_crypto/crypto_hash.h"
 #include "app/app_shake.h"
-#include "app/app_utils.h"
 #include "test_vectors/shake/test_vectors_shake128.h"
 #include "test_vectors/shake/test_vectors_shake256.h"
 
-extern TEST_VECTOR shake128_test_vectors[NUMBER_OF_SHAKE128_VECTORS];
-extern TEST_VECTOR shake256_test_vectors[NUMBER_OF_SHAKE256_VECTORS];
+#define SINGLE_STEP             (false)
+#define MULTI_STEP              (true)
+#define SHAKE_TEST_VECTOR_5     (5)
+
+/**
+ * @brief Compare an expected digest with the actual digest and print the result.
+ * @param expected Pointer to the expected digest data.
+ * @param actual Pointer to the actual digest data.
+ * @param size Number of bytes to compare.
+ */
+static void SHAKE_ArrayEqualityCheck(const uint8_t *expected,
+        const uint8_t *actual, size_t size)
+{
+    bool passed = UTILS_ArrayEqualityCheck(expected, actual, size);
+    UTILS_StatusPrint("SHAKE DIGEST", passed);
+
+    if (!passed)
+    {
+        UTILS_HexArrayPrint("Expected Digest",
+                actual, (uint32_t) size);
+    }
+}
 
 // *****************************************************************************
 // *****************************************************************************
@@ -59,51 +78,82 @@ extern TEST_VECTOR shake256_test_vectors[NUMBER_OF_SHAKE256_VECTORS];
 // *****************************************************************************
 // *****************************************************************************
 
-static crypto_Hash_Status_E SHAKE_DigestGenerate(bool multistep, uint32_t blockSize, crypto_Hash_Algo_E algorithm,
-        uint8_t* data, uint32_t dataLength, uint8_t* digestResult, uint32_t digestLength)
+/**
+ * @brief Run a SHAKE hash digest test in single-step or multi-step mode.
+ * @param multistep true for multi-step (init/update/final), false for single-step.
+ * @param blockSize Block size in bytes for multi-step update calls.
+ * @param algorithm The SHAKE algorithm to use.
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param digestResult Pointer to the output buffer for the computed digest.
+ * @param digestLength Length of the digest output in bytes.
+ * @return Hash status code.
+ */
+static crypto_Hash_Status_E SHAKE_TestDigestRun(
+        bool multistep, uint32_t blockSize,
+        crypto_Hash_Algo_E algorithm, uint8_t *data,
+        uint32_t dataLength, uint8_t *digestResult,
+        uint32_t digestLength)
 {
     crypto_Hash_Status_E status;
-
-    uint8_t* localData = data;
+    uint8_t *localData = data;
 
     if (multistep)
     {
         static st_Crypto_Hash_Shake_Ctx context;
 
-        (void) printf(CYAN"\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"RESET_COLOR, blockSize);
+        (void) printf(UTILS_CYAN
+            "\r\n\r\n MULTI-STEP TEST BLOCK SIZE: %lu"
+            UTILS_RESET_COLOR, (unsigned long)blockSize);
 
-        status = Crypto_Hash_Shake_Init(&context, algorithm, CRYPTO_HANDLER_HW_INTERNAL, digestLength, SESSION_ID);
+        status = Crypto_Hash_Shake_Init(&context, algorithm,
+                CRYPTO_HANDLER_HW_INTERNAL, digestLength,
+                UTILS_SESSION_ID);
 
-        if(status == CRYPTO_HASH_SUCCESS)
+        if (status == CRYPTO_HASH_SUCCESS)
         {
             uint32_t localLength = dataLength;
             do
             {
-                uint32_t length = (localLength > blockSize)
-                        ? blockSize : localLength;
-                status = Crypto_Hash_Shake_Update(&context, localData, length);
+                uint32_t blockLength =
+                        (localLength > blockSize) ? blockSize : localLength;
+                status = Crypto_Hash_Shake_Update(&context, localData, blockLength);
 
-                localLength -= length;
-                localData = &localData[length];
+                localLength -= blockLength;
+                localData = &localData[blockLength];
 
             } while ((localLength > 0U) && (status == CRYPTO_HASH_SUCCESS));
         }
 
-        if(status == CRYPTO_HASH_SUCCESS)
+        if (status == CRYPTO_HASH_SUCCESS)
         {
             status = Crypto_Hash_Shake_Final(&context, digestResult);
         }
     }
     else
     {
-        (void) printf(CYAN"\r\n\r\n SINGLE-STEP TEST"RESET_COLOR);
-        status = Crypto_Hash_Shake_Digest(CRYPTO_HANDLER_HW_INTERNAL, algorithm, localData, dataLength, digestResult, digestLength, SESSION_ID);
+        (void) printf(UTILS_CYAN"\r\n\r\n SINGLE-STEP TEST"UTILS_RESET_COLOR);
+
+        status = Crypto_Hash_Shake_Digest(
+                CRYPTO_HANDLER_HW_INTERNAL, algorithm, localData,
+                dataLength, digestResult, digestLength,
+                UTILS_SESSION_ID);
     }
 
     return status;
 }
 
-static void SHAKE_Digest(crypto_Hash_Algo_E algorithm, uint8_t* data, uint32_t dataLength, const uint8_t* expectedDigest, uint32_t digestLength)
+/**
+ * @brief Run a complete SHAKE test with single-step and multi-step modes.
+ * @param algorithm The SHAKE algorithm to use.
+ * @param data Pointer to the input data.
+ * @param dataLength Length of the input data in bytes.
+ * @param expectedDigest Pointer to the expected digest for verification.
+ * @param digestLength Length of the digest output in bytes.
+ */
+static void SHAKE_TestRun(crypto_Hash_Algo_E algorithm, uint8_t *data,
+        uint32_t dataLength, const uint8_t *expectedDigest,
+        uint32_t digestLength)
 {
     const char *inputHeader =    "Input Data     ";
     const char *outputHeader =   "Output Digest  ";
@@ -117,90 +167,134 @@ static void SHAKE_Digest(crypto_Hash_Algo_E algorithm, uint8_t* data, uint32_t d
     *                adjusted independent of the application code.
     */
     uint8_t digestResult[digestLength];
-    const char* algorithmName = algorithmNameGet(algorithm);
+    const char *algorithmName;
 
-    headerPrint(algorithmName, dataLength);
+    switch (algorithm)
+    {
+        case CRYPTO_HASH_SHA3_SHAKE128:
+            algorithmName = "SHAKE128";
+            break;
+        case CRYPTO_HASH_SHA3_SHAKE256:
+            algorithmName = "SHAKE256";
+            break;
+        default:
+            algorithmName = "SHAKE";
+            break;
+    }
+
+    {
+        char header[80];
+        (void) sprintf(header, " HASH %s TEST - INPUT SIZE %lu",
+                algorithmName, (unsigned long) dataLength);
+
+        UTILS_TestHeaderPrint(header);
+    }
 
     if (dataLength > 0UL)
     {
-        hexArrayPrint(inputHeader, data, dataLength);
+        UTILS_HexArrayPrint(inputHeader, data, dataLength);
     }
     else
     {
-        (void) printf(BLUE"\r\n ---------------------------------------------------------------------------------------------------"RESET_COLOR);
-        (void) printf("\r\n %s  :  None", inputHeader);
+        UTILS_SeparatorPrint(UTILS_BLUE, '-');
+
+        (void) printf("\r\n %s        : None", inputHeader);
     }
 
     crypto_Hash_Status_E status;
 
-    // Test with a single update() call, using the data length as the block size.
-    status = SHAKE_DigestGenerate(SINGLE_STEP, dataLength, algorithm, data, dataLength, digestResult, digestLength);
-    hexArrayPrint(outputHeader, digestResult, digestLength);
+    // Test with a single direct digest call.
+    status = SHAKE_TestDigestRun(SINGLE_STEP, dataLength, algorithm,
+            data, dataLength, digestResult, digestLength);
+
+    UTILS_HexArrayPrint(outputHeader, digestResult, digestLength);
 
     if (status != CRYPTO_HASH_SUCCESS)
     {
-        (void) printf(RED"\r\n Crypto v4 %s Error Result: %d\n\r"RESET_COLOR, algorithmName, status);
+        UTILS_CryptoErrorPrint(algorithmName, (int) status);
     }
     else
     {
-        arrayEqualityCheck(digestResult, expectedDigest, digestLength);
+        SHAKE_ArrayEqualityCheck(
+                digestResult, expectedDigest, digestLength);
     }
 
-    // Test multiple iterations of the update() call with different block sizes to show that arbitrary sizes are accepted.
-    const uint32_t blockSizes[] = {BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16, BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7};
+    /*
+     * Test multiple iterations of the update() call with
+     * different block sizes to show arbitrary sizes are accepted.
+     */
+    #define BLOCK_SIZE_128 (128UL)
+    #define BLOCK_SIZE_64  (64UL)
+    #define BLOCK_SIZE_32  (32UL)
+    #define BLOCK_SIZE_16  (16UL)
+    #define BLOCK_SIZE_13  (13UL)
+    #define BLOCK_SIZE_8   (8UL)
+    #define BLOCK_SIZE_7   (7UL)
 
-    for (uint32_t index = 0; index < (sizeof(blockSizes) / sizeof(blockSizes[0])); index++)
+    uint32_t blockSizes[] =
     {
-        status = SHAKE_DigestGenerate(MULTI_STEP, blockSizes[index], algorithm, data, dataLength, digestResult, digestLength);
+        BLOCK_SIZE_128, BLOCK_SIZE_64, BLOCK_SIZE_32, BLOCK_SIZE_16,
+        BLOCK_SIZE_13, BLOCK_SIZE_8, BLOCK_SIZE_7
+    };
+
+    for (uint32_t blockIndex = 0U;
+            blockIndex < (sizeof(blockSizes) / sizeof(blockSizes[0]));
+            blockIndex++)
+    {
+        status = SHAKE_TestDigestRun(MULTI_STEP, blockSizes[blockIndex],
+                algorithm, data, dataLength, digestResult, digestLength);
 
         if (status != CRYPTO_HASH_SUCCESS)
         {
-            (void) printf(RED"\r\n Crypto v4 %s Error Result: %d\n\r"RESET_COLOR, algorithmName, status);
+            UTILS_CryptoErrorPrint(algorithmName, (int) status);
         }
         else
         {
-            hexArrayPrint(outputHeader, digestResult, digestLength);
-            arrayEqualityCheck(digestResult, expectedDigest, digestLength);
+            UTILS_HexArrayPrint(outputHeader,
+                    digestResult, digestLength);
+
+            SHAKE_ArrayEqualityCheck(
+                    digestResult, expectedDigest, digestLength);
         }
     }
 }
 
-void SHAKE128_Digest(void)
+void SHAKE_Shake128TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
-    TEST_VECTOR* vectorArrayPtr = shake128_test_vectors;
-    while(vectorArrayPtr < &shake128_test_vectors[NUMBER_OF_SHAKE128_VECTORS])
+    test_vector_t *vectorArrayPtr = &shake128TestVectors[0];
+    while (vectorArrayPtr < &shake128TestVectors[NUMBER_OF_SHAKE128_VECTORS])
     {
-        SHAKE_Digest(CRYPTO_HASH_SHA3_SHAKE128, vectorArrayPtr->inputData,
-            vectorArrayPtr->inputDataLen, vectorArrayPtr->expectedDigest,
+        SHAKE_TestRun(CRYPTO_HASH_SHA3_SHAKE128, vectorArrayPtr->inputData,
+            vectorArrayPtr->inputDataLength, vectorArrayPtr->expectedDigest,
                 vectorArrayPtr->digestLength);
 
         vectorArrayPtr++;
     }
 #else
-    TEST_VECTOR* vectorArrayPtr = &shake128_test_vectors[TEST_VECTOR_4];
-    SHAKE_Digest(CRYPTO_HASH_SHA3_SHAKE128, vectorArrayPtr->inputData,
-            vectorArrayPtr->inputDataLen, vectorArrayPtr->expectedDigest,
+    test_vector_t *vectorArrayPtr = &shake128TestVectors[SHAKE_TEST_VECTOR_5];
+    SHAKE_TestRun(CRYPTO_HASH_SHA3_SHAKE128, vectorArrayPtr->inputData,
+            vectorArrayPtr->inputDataLength, vectorArrayPtr->expectedDigest,
                 vectorArrayPtr->digestLength);
 #endif
 }
 
-void SHAKE256_Digest(void)
+void SHAKE_Shake256TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
-    TEST_VECTOR* vectorArrayPtr = shake256_test_vectors;
-    while(vectorArrayPtr < &shake256_test_vectors[NUMBER_OF_SHAKE256_VECTORS])
+    test_vector_t *vectorArrayPtr = &shake256TestVectors[0];
+    while (vectorArrayPtr < &shake256TestVectors[NUMBER_OF_SHAKE256_VECTORS])
     {
-        SHAKE_Digest(CRYPTO_HASH_SHA3_SHAKE256, vectorArrayPtr->inputData,
-            vectorArrayPtr->inputDataLen, vectorArrayPtr->expectedDigest,
+        SHAKE_TestRun(CRYPTO_HASH_SHA3_SHAKE256, vectorArrayPtr->inputData,
+            vectorArrayPtr->inputDataLength, vectorArrayPtr->expectedDigest,
                 vectorArrayPtr->digestLength);
 
         vectorArrayPtr++;
     }
 #else
-    TEST_VECTOR* vectorArrayPtr = &shake256_test_vectors[TEST_VECTOR_4];
-    SHAKE_Digest(CRYPTO_HASH_SHA3_SHAKE256, vectorArrayPtr->inputData,
-            vectorArrayPtr->inputDataLen, vectorArrayPtr->expectedDigest,
+    test_vector_t *vectorArrayPtr = &shake256TestVectors[SHAKE_TEST_VECTOR_5];
+    SHAKE_TestRun(CRYPTO_HASH_SHA3_SHAKE256, vectorArrayPtr->inputData,
+            vectorArrayPtr->inputDataLength, vectorArrayPtr->expectedDigest,
                 vectorArrayPtr->digestLength);
 #endif
 }
