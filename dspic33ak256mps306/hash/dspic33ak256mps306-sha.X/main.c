@@ -73,10 +73,10 @@ int main(void)
     SHA_Sha384TestRun();
     SHA_Sha512TestRun();
 
-    SHA_Sha3224TestRun();
-    SHA_Sha3256TestRun();
-    SHA_Sha3384TestRun();
-    SHA_Sha3512TestRun();
+    SHA_Sha3_224TestRun();
+    SHA_Sha3_256TestRun();
+    SHA_Sha3_384TestRun();
+    SHA_Sha3_512TestRun();
 
     (void) printf("\r\n\r\n\r\n");
     UTILS_SeparatorPrint(UTILS_WHITE, '_');

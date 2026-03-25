@@ -378,7 +378,7 @@ void SHA_Sha512TestRun(void)
 #endif
 }
 
-void SHA_Sha3224TestRun(void)
+void SHA_Sha3_224TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha3_224TestVectors[0];
@@ -396,7 +396,7 @@ void SHA_Sha3224TestRun(void)
 #endif
 }
 
-void SHA_Sha3256TestRun(void)
+void SHA_Sha3_256TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha3_256TestVectors[0];
@@ -414,7 +414,7 @@ void SHA_Sha3256TestRun(void)
 #endif
 }
 
-void SHA_Sha3384TestRun(void)
+void SHA_Sha3_384TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha3_384TestVectors[0];
@@ -432,7 +432,7 @@ void SHA_Sha3384TestRun(void)
 #endif
 }
 
-void SHA_Sha3512TestRun(void)
+void SHA_Sha3_512TestRun(void)
 {
 #ifdef RUN_ALL_VECTORS
     test_vector_t *vectorArrayPtr = &sha3_512TestVectors[0];
