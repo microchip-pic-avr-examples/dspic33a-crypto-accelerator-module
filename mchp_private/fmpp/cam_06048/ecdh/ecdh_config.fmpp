@@ -24,7 +24,7 @@ data: {
         COMPILER_CHOICE: "dsPIC33",
         COVERITY_SUPPRESS_DEVIATION: false
     },
-    driver_defines: "HAVE_CRYPTO_HW_CAM_06048_DRIVER"
+    driver_defines: "HAVE_CRYPTO_HW_CAM_06048_DRIVER",
     crypto_kas_cam06048_wrapper_h_ftl_flag: true,
     CRYPTO_HW_ECDH: true
 }

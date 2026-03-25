@@ -15,10 +15,10 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - SHA-384
 - SHA-512
 
-## Software Tool Versions
-- dsPIC33AK-MP_DFP v1.0.81
-- MPLAB® X IDE [v6.25 or newer](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.21 or newer](https://www.microchip.com/xcdsc)
+## Software Tool Versions Used
+- dsPIC33AK-MP_DFP v1.2.135
+- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -30,8 +30,8 @@ This example application utilizes the Crypto Library that interacts with the Pre
 <img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
-1. Within MPLAB® X IDE, open the hash.x application project in hash/firmware. 
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 61 in hash/sha.X/app_sha.h
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-sha.X` application project. 
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 61 in dspic33ak512mps512-sha.X/app/app_sha.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
@@ -101,7 +101,7 @@ The following benchmarking results were obtained with the device clock speed set
 #### Single Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
-|----|----|----|----|----|
+|----|----|----|----|
 |SHA-1|10,492|74|280|
 |SHA-224|10,500|74|280|
 |SHA-256|10,504|74|280|
@@ -111,7 +111,7 @@ The following benchmarking results were obtained with the device clock speed set
 #### Multi Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
-|----|----|----|----|----|
+|----|----|----|----|
 |SHA-1|11,144|74|52|
 |SHA-224|11,156|74|52|
 |SHA-256|11,160|74|52|
