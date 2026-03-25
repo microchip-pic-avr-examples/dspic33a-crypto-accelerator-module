@@ -54,8 +54,13 @@ Microchip or any third party.
 
 #include "crypto/common_crypto/crypto_common.h"
 #include "crypto/common_crypto/crypto_hash.h"
+#if defined(ENABLE_CAM_06048_SHA)
 #include "crypto/drivers/wrapper/crypto_hash_cam06048_wrapper.h"
+#endif
+
+#if defined(ENABLE_CAM_06048_SHAKE)
 #include "crypto/drivers/wrapper/crypto_hash_shake_cam06048_wrapper.h"
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -70,6 +75,8 @@ Microchip or any third party.
 // Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
+
+#if defined(ENABLE_CAM_06048_SHA)
 
 //SHA-1, SHA-2 and SHA-3 except SHAKE Algorithm
 crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, uint8_t *ptr_data, uint32_t dataLen,
@@ -196,6 +203,10 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Final(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st
     }
     return ret_shaStat_en;
 }
+
+#endif
+
+#if defined(ENABLE_CAM_06048_SHAKE)
 
 //SHAKE
 crypto_Hash_Status_E Crypto_Hash_Shake_Digest(crypto_HandlerType_E shakeHandlerType_en, crypto_Hash_Algo_E shakeAlgorithm_en,
@@ -328,4 +339,4 @@ crypto_Hash_Status_E Crypto_Hash_Shake_Final(st_Crypto_Hash_Shake_Ctx* ptr_shake
     }
 	return ret_shakeStat_en;
 }
-
+#endif
