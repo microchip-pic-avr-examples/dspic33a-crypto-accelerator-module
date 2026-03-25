@@ -80,8 +80,6 @@
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-          <logicalFolder name="library" displayName="library" projectFiles="true">
-          </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
               <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/src/crypto_rng_cam05346_wrapper.c</itemPath>
