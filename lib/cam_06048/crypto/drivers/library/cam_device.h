@@ -13,12 +13,12 @@
   Description:
     This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
 
-  File created on 2026-03-25t10:52:39
+  File created on 2026-03-25t11:36:06
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
