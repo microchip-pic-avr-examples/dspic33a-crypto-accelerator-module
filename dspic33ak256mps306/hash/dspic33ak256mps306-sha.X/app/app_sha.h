@@ -94,22 +94,22 @@ void SHA_Sha512TestRun(void);
 /**
  * @brief Run SHA3-224 hash digest tests.
  */
-void SHA_Sha3224TestRun(void);
+void SHA_Sha3_224TestRun(void);
 
 /**
  * @brief Run SHA3-256 hash digest tests.
  */
-void SHA_Sha3256TestRun(void);
+void SHA_Sha3_256TestRun(void);
 
 /**
  * @brief Run SHA3-384 hash digest tests.
  */
-void SHA_Sha3384TestRun(void);
+void SHA_Sha3_384TestRun(void);
 
 /**
  * @brief Run SHA3-512 hash digest tests.
  */
-void SHA_Sha3512TestRun(void);
+void SHA_Sha3_512TestRun(void);
 
 #ifdef __cplusplus
 }
