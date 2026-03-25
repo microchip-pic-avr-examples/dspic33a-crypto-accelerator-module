@@ -1,4 +1,14 @@
 {
+    "dspic33ak256mps306": {
+        "sha": {
+            "rootFolder": "hash",
+            "projectName": "dspic33ak256mps306-sha"
+        },
+        "shake": {
+            "rootFolder": "hash",
+            "projectName": "dspic33ak256mps306-shake"
+        }
+    },
     "dspic33ak512mps512": {
         "aes": {
             "rootFolder": "aes",
