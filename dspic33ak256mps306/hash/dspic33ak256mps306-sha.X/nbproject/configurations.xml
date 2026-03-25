@@ -22,7 +22,6 @@
           <logicalFolder name="f2" displayName="wrapper" projectFiles="true">
             <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_cam06048_wrapper.h</itemPath>
             <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_hash_cam06048_wrapper.h</itemPath>
-            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/crypto_hash_shake_cam06048_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -85,7 +84,6 @@
           <logicalFolder name="f1" displayName="wrapper" projectFiles="true">
             <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_cam06048_wrapper.c</itemPath>
             <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_hash_cam06048_wrapper.c</itemPath>
-            <itemPath>../../../lib/cam_06048/crypto/drivers/wrapper/src/crypto_hash_shake_cam06048_wrapper.c</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
