@@ -57,7 +57,7 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-//#define RUN_MAC_CMAC_TEST
+#define RUN_MAC_CMAC_TEST
 #define RUN_MAC_HMAC_TEST
 #define RUN_MAC_GMAC_TEST
 
