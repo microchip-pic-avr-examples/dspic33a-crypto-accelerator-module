@@ -1,5 +1,21 @@
 {
     "dspic33ak256mps306": {
+        "aes": {
+            "rootFolder": "aes",
+            "projectName": "dspic33ak256mps306-aes"
+        },
+        "aes_hash": {
+            "rootFolder": "aes_hash",
+            "projectName": "dspic33ak256mps306-aes_hash"
+        },
+        "ecdsa": {
+            "rootFolder": "dsa",
+            "projectName": "dspic33ak256mps306-ecdsa"
+        },
+        "ecdh": {
+            "rootFolder": "ecdh",
+            "projectName": "dspic33ak256mps306-ecdh"
+        },
         "sha": {
             "rootFolder": "hash",
             "projectName": "dspic33ak256mps306-sha"
@@ -7,6 +23,14 @@
         "shake": {
             "rootFolder": "hash",
             "projectName": "dspic33ak256mps306-shake"
+        },
+        "mac": {
+            "rootFolder": "mac",
+            "projectName": "dspic33ak256mps306-mac"
+        },
+        "trng": {
+            "rootFolder": "trng",
+            "projectName": "dspic33ak256mps306-trng"
         }
     },
     "dspic33ak512mps512": {

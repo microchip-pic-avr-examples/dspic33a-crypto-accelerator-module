@@ -13,12 +13,12 @@
   Description:
     This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
 
-  File created on 2025-11-21t11:23:02
+  File created on 2026-03-25t11:36:06
 **************************************************************************/
 
 //DOM-IGNORE-BEGIN
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -94,6 +94,27 @@ Microchip or any third party.
          * This macro is defined for supported CAM 05346 device families.
          */
         #define CAM_HW_VERSION CAM_05346
+#elif defined(GENERIC_TARGET_CAM_06048) \
+    || defined (__dsPIC33AK256MPS306__) \
+    || defined (__dsPIC33AK256MPS305__) \
+    || defined (__dsPIC33AK256MPS303__) \
+    || defined (__dsPIC33AK128MPS306__) \
+    || defined (__dsPIC33AK128MPS305__) \
+    || defined (__dsPIC33AK128MPS303__) \
+    || defined (__dsPIC33AK256MPS106__) \
+    || defined (__dsPIC33AK256MPS105__) \
+    || defined (__dsPIC33AK256MPS103__) \
+    || defined (__dsPIC33AK128MPS106__) \
+    || defined (__dsPIC33AK128MPS105__) \
+    || defined (__dsPIC33AK128MPS103__)
+         /**
+         * @ingroup device
+         * @def CAM_HW_VERSION
+         * @brief Defines the hardware version for the CAM 06048 target.
+         *
+         * This macro is defined for supported CAM 06048 device families.
+         */
+        #define CAM_HW_VERSION CAM_06048
 #elif defined(GENERIC_TARGET_HSM_LITE_04777) \
     || defined (__PIC32CM5112SG00048__) \
     || defined (__PIC32CM5112SG00064__) \
