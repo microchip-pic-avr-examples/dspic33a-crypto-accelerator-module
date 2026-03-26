@@ -41,7 +41,7 @@ The following extendable-output functions are supported:
 
 <img src="../../images/hardware/dspic33ak256mps306_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
+## Running The Application
 
 ### SHA Project
 1. Within MPLAB® X IDE, open the `dspic33ak256mps306-sha.X` application project. 
