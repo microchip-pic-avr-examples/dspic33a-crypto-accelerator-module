@@ -11,18 +11,18 @@
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
                        projectFiles="true">
-          <itemPath>../../../crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>../../../crypto/common_crypto/crypto_rng.h</itemPath>
+          <itemPath>../../../lib/cam_05346/crypto/common_crypto/crypto_common.h</itemPath>
+          <itemPath>../../../lib/cam_05346/crypto/common_crypto/crypto_rng.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="library" displayName="library" projectFiles="true">
-            <itemPath>../../../crypto/drivers/library/cam_trng.h</itemPath>
-            <itemPath>../../../crypto/drivers/library/cam_version.h</itemPath>
-            <itemPath>../../../crypto/drivers/library/cam_device.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_trng.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_version.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_device.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
-            <itemPath>../../../crypto/drivers/wrapper/crypto_rng_cam05346_wrapper.h</itemPath>
-            <itemPath>../../../crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/crypto_rng_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -76,16 +76,14 @@
                        displayName="common_crypto"
                        projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
-            <itemPath>../../../crypto/common_crypto/src/crypto_rng.c</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/common_crypto/src/crypto_rng.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-          <logicalFolder name="library" displayName="library" projectFiles="true">
-          </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
-              <itemPath>../../../crypto/drivers/wrapper/src/crypto_rng_cam05346_wrapper.c</itemPath>
-              <itemPath>../../../crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/src/crypto_rng_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -124,7 +122,7 @@
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem>.</Elem>
-    <Elem>../../../crypto</Elem>
+    <Elem>../../../lib/cam_05346/crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -147,7 +145,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>../../../crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../lib/cam_05346/crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -188,7 +186,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../dspic33ak512mps512-trng.X;../../../"/>
+                  value="../dspic33ak512mps512-trng.X;../../../lib/cam_05346;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
@@ -301,7 +299,7 @@
       <C30Global>
         <property key="combine-sourcefiles" value="false"/>
         <property key="common-include-directories"
-                  value="../dspic33ak512mps512-trng.X;../../../"/>
+                  value="../dspic33ak512mps512-trng.X;../../../lib/cam_05346;../../../"/>
         <property key="dual-boot-partition" value="0"/>
         <property key="fast-math" value="false"/>
         <property key="generic-16-bit" value="false"/>

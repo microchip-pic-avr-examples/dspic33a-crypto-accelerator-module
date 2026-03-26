@@ -4,7 +4,7 @@
 # dsPIC33A Application Demos File Generation
 
 # Description
-This README describes how to generate the required Commmon Crypto API and wrapper files and install the required Crypto Accelerator Module (CAM) library files.
+This README describes how to generate the required Common Crypto API and wrapper files and install the required Crypto Accelerator Module (CAM) library files.
 
 ## Generating the CryptoV4 wrapper files
 To generate the files for the CryptoV4 module's source code, the following must be installed:
@@ -23,26 +23,24 @@ For Linux, the fmpp and Python installers are installed with the relevant packag
 Once the prerequisites are installed, open a Command prompt or Unix terminal and navigate to the `mchp_private` directory of the repository.<br>
 Then, launch the `generateFiles.py` script with the desired arguments:
 
-    usage: generateFiles.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] -i IPNAME
+    usage: generateFiles.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] [-t TAG] -j JSON
 
     options:
       -h, --help            show this help message and exit
       -r REPOSITORY, --repository REPOSITORY
-                            use this CryptoV4 repository
+                            use this pre-existing CryptoV4 repository
       -c, --clone           attempt to clone/update the repository
       -g GIT, --git GIT     fetch the CryptoV4 repository from this Git link
       -b BRANCH, --branch BRANCH
                             if cloning/updating, branch name for checkout
-      -i IPNAME, --ipname IPNAME
-                            CAM IP to use
-      -t TAG / COMMIT HASH, --tag TAG / COMMIT HASH    
-                            if cloning/updating, tag or commit hash value for checkout
+      -t TAG, --tag TAG     if cloning/updating, tag or commit hash value for checkout
+      -j JSON, --json JSON  path to the generation configuration JSON file
 
 * If specified, the repository must already exist.
 * If specified, the script may clone the repository and use the specified branch.  An existing repository will be updated.
 * The script uses the repository as the source location for the CryptoV4 module source files.
 
-The script uses `fmpp` to generate the CryptoV4 module source files from their Freemarker Template Library (FTL) template files, and places them in the appropriate locations in each demonstration MPLAB® X project.
+The script uses `fmpp` to generate the CryptoV4 module source files from their Freemarker Template Library (FTL) template files, and places them in the per-IP output directories at `lib/<ip_name>/crypto/` under the repository root.
 
 ### Installing the Crypto Accelerator Module Library
 
@@ -51,7 +49,7 @@ The CAM library must be built before installation can proceed.
 Open a Command prompt or Unix terminal and navigate to the `mchp_private` directory of the repository.<br>
 Then, launch the `fetchLibrary.py` script with the desired arguments:
 
-    usage: fetchLibrary.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] [-i INSTALL] [-t TAG / COMMIT HASH]
+    usage: fetchLibrary.py [-h] [-r REPOSITORY] [-c] [-g GIT] [-b BRANCH] [-i INSTALL] [-t TAG]
 
     options:
       -h, --help            show this help message and exit
@@ -63,17 +61,16 @@ Then, launch the `fetchLibrary.py` script with the desired arguments:
                             if cloning/updating, branch name for checkout
       -i INSTALL, --install INSTALL
                             install libraries from pre-existing library directory
-      -t TAG / COMMIT HASH, --tag TAG / COMMIT HASH    
-                            if cloning/updating, tag or commit hash value for checkout
+      -t TAG, --tag TAG     if cloning/updating, tag or commit hash value for checkout
 
-The script will copy the CAM header and library files to the appropriate locations in each demonstration MPLAB® X project.
+The script will copy the CAM header and library files to the per-IP output directories at `lib/<ip_name>/crypto/drivers/library/` under the repository root.
 
 ## Example Parameters
 ### Generating with Cloning the CryptoV4 Repository, With Branch 'dev'
-    python generateFiles.py -c -b dev -i CAM_05346
+    python generateFiles.py -c -b dev -j json\generationConfig.json
 
 ### Generating Using an Existing Repository
-    python generateFiles.py -r ..\..\crypto_v4 -i CAM_05346
+    python generateFiles.py -r ..\..\crypto_v4 -j json\generationConfig.json
 
 ### Fetching the CAM Library Files From an Existing Repository
     python fetchLibrary.py -i ..\..\crypto_cam_src

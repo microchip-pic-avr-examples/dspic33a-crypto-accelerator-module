@@ -1,0 +1,32 @@
+# sourceRoot and outputRoot are handled as parameters within generateFiles.py (CryptoV4 repository path)
+removeExtensions: ftl
+
+sources: [
+    
+    # Common Crypto Source Files
+    common_crypto/src/crypto_hash.c.ftl,
+
+    # Common Crypto Header Files
+    common_crypto/crypto_hash.h.ftl,
+    common_crypto/crypto_common.h.ftl,
+
+    # CAM Wrapper Source Files
+    cam_06048/wrapper/src/crypto_hash_shake_cam06048_wrapper.c.ftl,
+    cam_06048/wrapper/src/crypto_cam06048_wrapper.c.ftl,
+
+    # CAM Wrapper Header Files
+    cam_06048/wrapper/crypto_hash_shake_cam06048_wrapper.h.ftl,
+    cam_06048/wrapper/crypto_cam06048_wrapper.h.ftl
+]
+
+data: {
+    core: {
+        COMPILER_CHOICE: "dsPIC33",
+        COVERITY_SUPPRESS_DEVIATION: false
+    },
+    driver_defines: "HAVE_CRYPTO_HW_CAM_06048_DRIVER, \
+        CRYPTO_HASH_SESSION_MAX (1)",
+    crypto_hash_shake_cam06048_wrapper_h_ftl_flag: true,
+    CRYPTO_HW_SHA3_SHAKE128: true,
+    CRYPTO_HW_SHA3_SHAKE256: true
+}
