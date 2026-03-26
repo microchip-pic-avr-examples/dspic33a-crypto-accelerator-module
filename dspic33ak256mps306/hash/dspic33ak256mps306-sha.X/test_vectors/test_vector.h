@@ -23,10 +23,10 @@ Microchip or any third party.
 */
 //DOM-IGNORE-END
 
-#include <stdint.h>
-
 #ifndef TEST_VECTOR_H
 #define TEST_VECTOR_H
+
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
