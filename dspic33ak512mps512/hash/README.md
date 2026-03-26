@@ -16,9 +16,9 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - SHA-512
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -27,7 +27,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-sha.X` application project. 
@@ -35,15 +35,13 @@ This example application utilizes the Crypto Library that interacts with the Pre
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
-### Application Results
+## Application Results
 The following information will be printed on the COM port for all supported SHA algorithms:
 1. A header is displayed showing the used SHA algorithm and input data length.
 2. The input data is printed out.
 3. The result digest data is printed out using the single-step API.
 4. The result digest data is printed out using the multi-step API. Various block sizes are used.
 5. After each test, an XOR comparison is completed of the result and expected digests. Pass or Fail is printed out depending on the comparison result.
-
-<img src="./images/sha_demo.png" alt="SHA Demo Output" width="750"/>
 
 ## Crypto Library APIs
 crypto_hash.h defines Digest, Init, Update, Final, and GetHashAndHashSize APIs.
@@ -90,11 +88,11 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|8,192|1056.69|
-|SHA-224|8,192|1264.44|
-|SHA-256|8,192|1264.69|
-|SHA-384|8,192|1524.80|
-|SHA-512|8,192|1525.16|
+|SHA-1|8,192|TBD|
+|SHA-224|8,192|TBD|
+|SHA-256|8,192|TBD|
+|SHA-384|8,192|TBD|
+|SHA-512|8,192|TBD|
 
 ### Memory Size Benchmarking
 
@@ -102,21 +100,21 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|10,492|74|280|
-|SHA-224|10,500|74|280|
-|SHA-256|10,504|74|280|
-|SHA-384|10,520|74|280|
-|SHA-512|10,536|74|280|
+|SHA-1|TBD|TBD|TBD|
+|SHA-224|TBD|TBD|TBD|
+|SHA-256|TBD|TBD|TBD|
+|SHA-384|TBD|TBD|TBD|
+|SHA-512|TBD|TBD|TBD|
 
 #### Multi Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|11,144|74|52|
-|SHA-224|11,156|74|52|
-|SHA-256|11,160|74|52|
-|SHA-384|11,176|74|52|
-|SHA-512|11,192|74|52|
+|SHA-1|TBD|TBD|TBD|
+|SHA-224|TBD|TBD|TBD|
+|SHA-256|TBD|TBD|TBD|
+|SHA-384|TBD|TBD|TBD|
+|SHA-512|TBD|TBD|TBD|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

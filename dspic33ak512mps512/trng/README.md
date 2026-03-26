@@ -11,9 +11,9 @@
 This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -22,20 +22,18 @@ This example application utilizes the Crypto Library that interacts with the Pre
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-trng.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
-### Application Results
+## Application Results
 The following information will be printed on the COM port:
 1. A header showing that the generation has begun.
 2. A header for each TRNG result that shows the length in bytes.
 3. The TRNG result data.
-
-<img src=".\images\trng_demo.jpg" alt="TRNG Demo Output" height="750">
 
 ## Crypto Library APIs
 crypto_rng.h defines the Generate API.
@@ -59,10 +57,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |TRNG Size (bytes)|Crypto_Rng_Generate Performance (µs)|
 |---|---|
-|192|66.250|
-|256|77.083|
-|384|98.750|
-|521|122.833|
+|192|TBD|
+|256|TBD|
+|384|TBD|
+|521|TBD|
 
 ### Memory Size Benchmarking
 
@@ -70,4 +68,4 @@ The below sizes are for the process of getting 521 bytes (8-bit words).
 
 |FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |---|---|---|
-|4,840|594|160|
+|TBD|TBD|TBD|
