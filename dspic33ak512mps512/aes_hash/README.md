@@ -29,7 +29,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 
 <img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
+## Running The Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes_hash.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.

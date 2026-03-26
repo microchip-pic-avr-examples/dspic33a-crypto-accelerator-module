@@ -27,7 +27,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 
 <img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
+## Running The Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-mac.X` application project.
     - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 65 in dspic33ak512mps512-mac.X/app/app_mac.h
 2. Build and Program the application using MPLAB® X IDE.
