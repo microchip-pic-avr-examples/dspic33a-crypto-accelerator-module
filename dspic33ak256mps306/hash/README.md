@@ -33,7 +33,7 @@ The following extendable-output functions are supported:
 - MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
-- dsPIC33AK256MPS306 Device ([EV02E57A](https://www.microchip.com/en-us/development-tool/EV02E57A))
+- dsPIC33AK256MPS306 Curiosity GP DIM ([EV02E57A](https://www.microchip.com/en-us/development-tool/EV02E57A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 1. Insert the dsPIC33AK256MPS306 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
