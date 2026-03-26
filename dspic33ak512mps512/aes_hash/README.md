@@ -16,9 +16,9 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 - SHA-512
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DEV_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -27,7 +27,7 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running the Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes_hash.X` application project.
