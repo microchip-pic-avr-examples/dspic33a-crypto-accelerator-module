@@ -11,19 +11,19 @@
         <logicalFolder name="common_crypto"
                        displayName="common_crypto"
                        projectFiles="true">
-          <itemPath>../../../crypto/common_crypto/crypto_common.h</itemPath>
-          <itemPath>../../../crypto/common_crypto/crypto_digsign.h</itemPath>
+          <itemPath>../../../lib/cam_05346/crypto/common_crypto/crypto_common.h</itemPath>
+          <itemPath>../../../lib/cam_05346/crypto/common_crypto/crypto_digsign.h</itemPath>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="library" displayName="library" projectFiles="true">
-            <itemPath>../../../crypto/drivers/library/cam_device.h</itemPath>
-            <itemPath>../../../crypto/drivers/library/cam_ecdsa.h</itemPath>
-            <itemPath>../../../crypto/drivers/library/cam_pke.h</itemPath>
-            <itemPath>../../../crypto/drivers/library/cam_version.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_device.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_ecdsa.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_pke.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/library/cam_version.h</itemPath>
           </logicalFolder>
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
-            <itemPath>../../../crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
-            <itemPath>../../../crypto/drivers/wrapper/crypto_digisign_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/crypto_cam05346_wrapper.h</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/crypto_digisign_cam05346_wrapper.h</itemPath>
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
@@ -82,14 +82,14 @@
                        displayName="common_crypto"
                        projectFiles="true">
           <logicalFolder name="src" displayName="src" projectFiles="true">
-            <itemPath>../../../crypto/common_crypto/src/crypto_digsign.c</itemPath>
+            <itemPath>../../../lib/cam_05346/crypto/common_crypto/src/crypto_digsign.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
           <logicalFolder name="wrapper" displayName="wrapper" projectFiles="true">
             <logicalFolder name="src" displayName="src" projectFiles="true">
-              <itemPath>../../../crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
-              <itemPath>../../../crypto/drivers/wrapper/src/crypto_digisign_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/src/crypto_cam05346_wrapper.c</itemPath>
+              <itemPath>../../../lib/cam_05346/crypto/drivers/wrapper/src/crypto_digisign_cam05346_wrapper.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>
@@ -138,7 +138,7 @@
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem></Elem>
-    <Elem>../../../crypto</Elem>
+    <Elem>../../../lib/cam_05346/crypto</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -161,7 +161,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>../../../crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../lib/cam_05346/crypto/drivers/library/libcam05346-dspic33a.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -202,7 +202,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="expand-pragma-config" value="false"/>
         <property key="extra-include-directories"
-                  value="../dspic33ak512mps512-ecdsa.X;../../../"/>
+                  value="../dspic33ak512mps512-ecdsa.X;../../../lib/cam_05346;../../../"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
