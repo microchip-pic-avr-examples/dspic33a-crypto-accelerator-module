@@ -54,21 +54,21 @@ Microchip or any third party.
 #define SHAKE_TEST_VECTOR_5     (5)
 
 /**
- * @brief Compare an expected digest with the actual digest and print the result.
- * @param expected Pointer to the expected digest data.
- * @param actual Pointer to the actual digest data.
+ * @brief Compare the computed digest with the expected digest and print the result.
+ * @param computed Pointer to the computed digest output.
+ * @param expected Pointer to the expected (reference) digest data.
  * @param size Number of bytes to compare.
  */
-static void SHAKE_ArrayEqualityCheck(const uint8_t *expected,
-        const uint8_t *actual, size_t size)
+static void SHAKE_ArrayEqualityCheck(const uint8_t *computed,
+        const uint8_t *expected, size_t size)
 {
-    bool passed = UTILS_ArrayEqualityCheck(expected, actual, size);
+    bool passed = UTILS_ArrayEqualityCheck(computed, expected, size);
     UTILS_StatusPrint("SHAKE DIGEST", passed);
 
     if (!passed)
     {
         UTILS_HexArrayPrint("Expected Digest",
-                actual, (uint32_t) size);
+                expected, (uint32_t) size);
     }
 }
 
