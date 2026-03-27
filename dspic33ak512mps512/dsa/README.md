@@ -172,10 +172,14 @@ The Crypto Accelerator Module has a lower priority on the BMX RAM access.
 If an empty polling loop is used with the Non-blocking API's there will be an increase in time.
 - The empty polling loop causes the CPU to over-utilize the BMX thereby blocking the Crypto Accelerator Module from accessing RAM.
 
-A possible workaround will be to change the Crypto BMX access to have priority over the CPU. 
+A possible workaround if an empty polling loop is required will be to change the Crypto BMX access to have priority over the CPU. 
 - **Disclaimer: This is not recommended as the crypto operations may restrict critical system functions and cause unexpected behavior.**
 
 Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
+
+For use of the non-blocking ECDSA API's it is recommended to utilize the callback register functions to check if the operation is complete rather than use a polling loop.
+
+Otherwise it may be beneficial to use the blocking API calls if non-blocking is not required. 
 
 #### Blocking API Performance:
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
