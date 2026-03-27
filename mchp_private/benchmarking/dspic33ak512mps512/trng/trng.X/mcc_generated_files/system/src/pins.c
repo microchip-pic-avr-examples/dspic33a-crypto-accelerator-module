@@ -7,13 +7,13 @@
  *            
  * @brief     This is the generated driver source file for PINS driver.
  *
- * @skipline @version   PLIB Version 1.0.1
+ * @skipline @version   PLIB Version 1.0.5
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,20 +40,6 @@
 
 // Section: File specific functions
 
-/**
- * @ingroup  pinsdriver
- * @brief    Locks all the Peripheral Remapping registers and cannot be written.
- * @return   none  
- */
-#define PINS_PPSLock()           (RPCONbits.IOLOCK = 1)
-
-/**
- * @ingroup  pinsdriver
- * @brief    Unlocks all the Peripheral Remapping registers and can be written.
- * @return   none  
- */
-#define PINS_PPSUnlock()         (RPCONbits.IOLOCK = 0)
-
 // Section: Driver Interface Function Definitions
 void PINS_Initialize(void)
 {
@@ -67,7 +53,7 @@ void PINS_Initialize(void)
     LATE = 0x0000UL;
     LATF = 0x0000UL;
     LATG = 0x0000UL;
-    LATH = 0x0002UL;
+    LATH = 0x0000UL;
 
     /****************************************************************************
      * Setting the GPIO Direction SFR(s)
@@ -79,7 +65,7 @@ void PINS_Initialize(void)
     TRISE = 0x07FFUL;
     TRISF = 0x0FEFUL;
     TRISG = 0x03F7UL;
-    TRISH = 0x0005UL;
+    TRISH = 0x0007UL;
 
 
     /****************************************************************************
@@ -123,17 +109,6 @@ void PINS_Initialize(void)
     ANSELB = 0xFFFFUL;
     ANSELE = 0x0003UL;
     ANSELF = 0x0001UL;
-
-    /****************************************************************************
-     * Set the PPS
-     ***************************************************************************/
-      PINS_PPSUnlock(); // unlock PPS
-
-        RPINR13bits.U1RXR = 0x0032UL; //RD1->UART1:U1RX;
-        RPOR28bits.RP114R = 0x0013UL;  //RH1->UART1:U1TX;
-
-      PINS_PPSLock(); // lock PPS
-
 
 }
 
