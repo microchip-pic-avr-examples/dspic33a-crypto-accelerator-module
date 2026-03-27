@@ -7,13 +7,13 @@
  *            
  * @brief     Clock configurator driver for System and Peripheral Clock using dsPIC MCUs.
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.3.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -48,7 +48,7 @@
   @brief    This macro is used to read the System clock (FOSC) Frequency configured in 
             the MCC Melody User Interface
 */
-#define CLOCK_SystemFrequencyGet()        (200000000UL)
+#define CLOCK_SystemFrequencyGet()        (8000000UL)
 
 /** 
   @ingroup  clockdriver
@@ -104,13 +104,13 @@ inline static uint32_t CLOCK_GeneratorFrequencyGet(enum CLOCK_GENERATOR generato
     switch(generator)
     {
         case CLOCK_GENERATOR_1:
-                genFrequency = 200000000UL;
+                genFrequency = 8000000U;
                 break;
         case CLOCK_GENERATOR_2:
-                genFrequency = 8000000UL;
+                genFrequency = 8000000U;
                 break;
         case CLOCK_GENERATOR_3:
-                genFrequency = 8000000UL;
+                genFrequency = 8000000U;
                 break;
         default:
                 break;
