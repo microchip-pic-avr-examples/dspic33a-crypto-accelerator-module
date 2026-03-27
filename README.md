@@ -127,11 +127,12 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDH (Shared Secret Generate)|Curve: P-521|TBD|TBD|
 
 ### Memory Size Benchmarking
-Flash size will vary based on size of the stored data inputs used with the library.
+The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
 
 All projects have the following compiler options:
-- Isolate each algorithm and input type into separately defined sections
-- Remove print statements and modules not required by the algorithm
+- Optimization for size (-Os)
+- Isolate each function in a section - unchecked
+- Remove unused sections - unchecked
 
 <table>
   <tr>
