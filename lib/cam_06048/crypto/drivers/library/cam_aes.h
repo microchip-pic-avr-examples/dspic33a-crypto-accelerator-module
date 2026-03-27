@@ -8,14 +8,14 @@
     cam_aes.h
 
   Summary:
-    Crypto Framework Library interface file for CAM AES.
+    Crypto Framework Library interface file for CAM/HSM-Lite AES.
 
   Description:
-    This header file contains the interface that make up the CAM AES hardware
+    This header file contains the interface that make up the CAM/HSM-Lite AES hardware
     driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -43,7 +43,7 @@ Microchip or any third party.
  * @file cam_aes.h
  * @defgroup  aes AES
  *
- * @brief This header file contains the interface that make up the CAM AES hardware driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
+ * @brief This header file contains the interface that make up the CAM/HSM-Lite AES hardware driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
  *
  */
 
@@ -357,7 +357,7 @@ uint32_t DRV_CRYPTO_AES_GetContextSize(void *contextData);
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: AES CAM Device Support
+// Section: AES CAM/HSM-Lite Device Support
 // *****************************************************************************
 // *****************************************************************************
 

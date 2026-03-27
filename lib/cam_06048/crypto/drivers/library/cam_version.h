@@ -8,13 +8,13 @@
     cam_version.h
 
   Summary:
-    CAM Hardware Driver Version.
+    CAM/HSM-Lite Hardware Driver Version.
 
   Description:
-    This header file contains version information on the CAM Hardware Driver.
+    This header file contains version information on the CAM/HSM-Lite Hardware Driver.
 **************************************************************************/
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -44,7 +44,7 @@ Microchip or any third party.
  * @defgroup  version VERSION
  * @ingroup CAM_HSM_LITE
  *
- * @brief This header file contains version information of the CAM Hardware driver.
+ * @brief This header file contains version information of the CAM/HSM-Lite Hardware driver.
  *
  */
 
@@ -74,7 +74,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_MINOR  3
+#define CAM_LIBRARY_VERSION_MINOR  4
 
 /**
  * @ingroup version

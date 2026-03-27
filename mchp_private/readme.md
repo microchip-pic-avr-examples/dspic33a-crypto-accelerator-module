@@ -73,7 +73,7 @@ The script will copy the CAM header and library files to the per-IP output direc
     python generateFiles.py -r ..\..\crypto_v4 -j json\generationConfig.json
 
 ### Fetching the CAM Library Files From an Existing Repository
-    python fetchLibrary.py -i ..\..\crypto_cam_src
+    python fetchLibrary.py -i ..\..\msec-driver-hsm-lite-cam
 
-### Fetching the CAM Library Files with Cloning the crypto_cam_src Repository, With Branch 'dev'
-    python fetchLibrary.py -c -b dev
+### Fetching the CAM Library Files with Cloning the msec-driver-hsm-lite-cam Repository, With Branch 'develop'
+    python fetchLibrary.py -c -b develop

@@ -8,14 +8,14 @@
     cam_trng.h
 
   Summary:
-    Crypto Framework Library interface file for CAM TRNG.
+    Crypto Framework Library interface file for CAM/HSM-Lite TRNG.
 
   Description:
-    This header file contains the interface that make up the CAM True Random Number Generation (TRNG) hardware 
+    This header file contains the interface that make up the CAM/HSM-Lite True Random Number Generation (TRNG) hardware 
     driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -43,7 +43,7 @@ Microchip or any third party.
  * @file cam_trng.h
  * @defgroup  trng TRNG
  * 
- * @brief This header file contains the interface that make up the CAM True Random Number Generation (TRNG) hardware 
+ * @brief This header file contains the interface that make up the CAM/HSM-Lite True Random Number Generation (TRNG) hardware 
  *  driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
  *
  */
@@ -115,7 +115,7 @@ typedef enum TRNG_BLEND_MODE
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: CAM TRNG Function Definitions 
+// Section: CAM/HSM-Lite TRNG Function Definitions 
 // *****************************************************************************
 // *****************************************************************************
 
@@ -171,7 +171,7 @@ TRNG_ERROR DRV_CRYPTO_TRNG_ReadData(uint8_t* data, uint32_t size) ;
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: TRNG CAM Device Support
+// Section: TRNG CAM/HSM-Lite Device Support
 // *****************************************************************************
 // *****************************************************************************
 

@@ -11,13 +11,13 @@
     Hardware abstraction layer header.
 
   Description:
-    This header file defines the functions and structures for the CAM ECDH
+    This header file defines the functions and structures for the CAM/HSM-Lite ECDH
     driver for Microchip microcontrollers equipped with a Crypto Accelerator Module.
 
 **************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -45,7 +45,7 @@ Microchip or any third party.
  * @file cam_ecdh.h
  * @defgroup  ecdh ECDH
  * 
- * @brief This header file defines the functions and structures for the CAM ECDH driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
+ * @brief This header file defines the functions and structures for the CAM/HSM-Lite ECDH driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
  *
  */
  
@@ -106,7 +106,7 @@ CRYPTO_PKE_RESULT DRV_CRYPTO_ECDH_GetSharedSecret(PKE_CONFIG *eccData, uint8_t *
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: ECDH CAM Device Support
+// Section: ECDH CAM/HSM-Lite Device Support
 // *****************************************************************************
 // *****************************************************************************
 

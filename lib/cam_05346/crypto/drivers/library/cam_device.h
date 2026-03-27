@@ -47,7 +47,7 @@ Microchip or any third party.
  * @file cam_device.h
  * @defgroup  device DEVICE
  *
- * @brief This header file defines supported devices by the CAM Hardware Driver.
+ * @brief This header file defines supported devices by the CAM/HSM-Lite Hardware Driver.
  *
  */
 
@@ -172,7 +172,7 @@ Microchip or any third party.
      * implementation is not available for the selected device.
      */
     #define MPROTO(x) JOIN(x, JOIN(_, no_implementation_available))
-    #error "This CAM library version does not support the selected device. Verify that the device has a CAM peripheral and you are using the latest CAM library release."
+    #error "This CAM/HSM-Lite library version does not support the selected device. Verify that the device has a CAM/HSM-Lite peripheral and you are using the latest CAM/HSM-Lite library release."
 #endif
 /** @endcond **/
 
