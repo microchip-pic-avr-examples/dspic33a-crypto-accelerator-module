@@ -17,7 +17,7 @@ dsPIC33A CAM Hardware Driver and Demos are a collection of MPLAB® X IDE project
 - Concurrent AES+HASH (to demonstrate context safety)
 - MAC generation 
 
-The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library in the crypto/common_crypto folder. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM Hardware Driver.
+The included demonstration projects provide examples of the various CAM features. The application project needs to include the Crypto Library located under the lib directory. The Crypto Library API and associated hardware wrappers invoke the pre-compiled CAM Hardware Driver.
 
 # Prerequisites
 
@@ -28,10 +28,11 @@ The included demonstration projects provide examples of the various CAM features
 
 ## Hardware Tools
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
+- dsPIC33AK256MPS306 Curiosity GP DIM ([EV02E57A](https://www.microchip.com/en-us/development-tool/EV02E57A))
 - Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
 
 # Contents Summary
-Each folder contains a README describing the example application in more detail.
+Example applications are organized by device under the `dspic33ak512mps512` and `dspic33ak256mps306` directories. Each sub-folder contains a README describing the example application in more detail.
 
 | Folder     | Description                                         |
 | ---        | ---                                                 |
@@ -54,131 +55,416 @@ A MISRA scan has been conducted on the pre-compiled CAM Hardware Driver source f
 # Benchmarking
 ## Benchmarking Setup
 The benchmarking results are obtained by modifying the demo projects to remove overheads such as:
-- UART peripheral and print out statements.
-- Isolation to use one algorithm at a time.
+- UART peripheral and print out statements
+- Isolation to use one algorithm at a time
 - Store input data in flash memory to benchmark RAM usage for CAM Hardware Driver
 
 The benchmarking projects are configured to use the following:
 - Optimization level -Os
 - Tools and versions as listed in the Software Tools section above
 
-
 ### Performance Benchmarking
 The following benchmarking results were obtained while testing the Crypto Library APIs that utilize the pre-compiled Hardware Driver.
 
 Benchmarking parameters: Device clock speed set to 200 MHz
 
-|Algorithm|Performance|Parameters (sizes are in bytes)|
-|----|----|----|
-|SHA-1 (Digest)|TBD|Message Size: 8,192|
-|SHA-224 (Digest)|TBD|Message Size: 8,192|
-|SHA-256 (Digest)|TBD|Message Size: 8,192|
-|SHA-384 (Digest)|TBD|Message Size: 8,192|
-|SHA-512 (Digest)|TBD|Message Size: 8,192|
-|HMAC SHA-1 (Direct)|TBD|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-224 (Direct)|TBD|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-256 (Direct)|TBD|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-384 (Direct)|TBD|Key Size: 16, Message Size: 8,192|
-|HMAC SHA-512 (Direct)|TBD|Key Size: 16, Message Size: 8,192|
-|AES-ECB (Encrypt)|TBD|Key Size: 16, Plaintext Size: 8,192|
-|AES-ECB (Decrypt)|TBD|Key Size: 16, Ciphertext Size: 8,192|
-|AES-CTR (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CTR (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-CBC (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CBC (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-CFB128 (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-CFB128 (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-OFB (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|
-|AES-OFB (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|
-|AES-GCM (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
-|AES-GCM (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
-|AES-CCM (Encrypt)|TBD|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|
-|AES-CCM (Decrypt)|TBD|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|
-|AES-XTS (Encrypt)|TBD|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|
-|AES-XTS (Decrypt)|TBD|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|
-|AES-CMAC (Direct)|TBD|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|
-|AES-GMAC (Direct)|TBD|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|
-|ECDSA Sign   (Blocking)|TBD|Curve: P-192|
-|ECDSA Verify (Blocking)|TBD|Curve: P-192|
-|ECDSA Sign   (Blocking)|TBD|Curve: P-256|
-|ECDSA Verify (Blocking)|TBD|Curve: P-256|
-|ECDSA Sign   (Blocking)|TBD|Curve: P-384|
-|ECDSA Verify (Blocking)|TBD|Curve: P-384|
-|ECDSA Sign   (Blocking)|TBD|Curve: P-521|
-|ECDSA Verify (Blocking)|TBD|Curve: P-521|
-|ECDSA Sign   (Non-blocking)|TBD|Curve: P-192|
-|ECDSA Verify (Non-blocking)|TBD|Curve: P-192|
-|ECDSA Sign   (Non-blocking)|TBD|Curve: P-256|
-|ECDSA Verify (Non-blocking)|TBD|Curve: P-256|
-|ECDSA Sign   (Non-blocking)|TBD|Curve: P-384|
-|ECDSA Verify (Non-blocking)|TBD|Curve: P-384|
-|ECDSA Sign   (Non-blocking)|TBD|Curve: P-521|
-|ECDSA Verify (Non-blocking)|TBD|Curve: P-521|
-|TRNG (Generate)|TBD|Output Size: 521|
-|ECDH (Shared Secret Generate)|TBD|Curve: P-192|
-|ECDH (Shared Secret Generate)|TBD|Curve: P-256|
-|ECDH (Shared Secret Generate)|TBD|Curve: P-384|
-|ECDH (Shared Secret Generate)|TBD|Curve: P-521|
+|Algorithm|Parameters (sizes are in bytes)|dsPIC33AK512MPS512 (s)|dsPIC33AK256MPS306 (s)|
+|----|----|----|----|
+|SHA-1 (Digest)|Message Size: 8,192|TBD|TBD|
+|SHA-224 (Digest)|Message Size: 8,192|TBD|TBD|
+|SHA-256 (Digest)|Message Size: 8,192|TBD|TBD|
+|SHA-384 (Digest)|Message Size: 8,192|TBD|TBD|
+|SHA-512 (Digest)|Message Size: 8,192|TBD|TBD|
+|SHA3-224 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHA3-256 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHA3-384 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHA3-512 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHAKE128 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHAKE256 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|HMAC SHA-1 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
+|HMAC SHA-224 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
+|HMAC SHA-256 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
+|HMAC SHA-384 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
+|HMAC SHA-512 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
+|AES-ECB (Encrypt)|Key Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-ECB (Decrypt)|Key Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-CTR (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-CTR (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-CBC (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-CBC (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-CFB128 (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-CFB128 (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-OFB (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-OFB (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-GCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-GCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-CCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-CCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-XTS (Encrypt)|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|TBD|TBD|
+|AES-XTS (Decrypt)|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|TBD|TBD|
+|AES-CMAC (Direct)|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|TBD|TBD|
+|AES-GMAC (Direct)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|TBD|TBD|
+|ECDSA Sign   (Blocking)|Curve: P-192|TBD|TBD|
+|ECDSA Verify (Blocking)|Curve: P-192|TBD|TBD|
+|ECDSA Sign   (Blocking)|Curve: P-256|TBD|TBD|
+|ECDSA Verify (Blocking)|Curve: P-256|TBD|TBD|
+|ECDSA Sign   (Blocking)|Curve: P-384|TBD|TBD|
+|ECDSA Verify (Blocking)|Curve: P-384|TBD|TBD|
+|ECDSA Sign   (Blocking)|Curve: P-521|TBD|TBD|
+|ECDSA Verify (Blocking)|Curve: P-521|TBD|TBD|
+|ECDSA Sign   (Non-blocking)|Curve: P-192|TBD|TBD|
+|ECDSA Verify (Non-blocking)|Curve: P-192|TBD|TBD|
+|ECDSA Sign   (Non-blocking)|Curve: P-256|TBD|TBD|
+|ECDSA Verify (Non-blocking)|Curve: P-256|TBD|TBD|
+|ECDSA Sign   (Non-blocking)|Curve: P-384|TBD|TBD|
+|ECDSA Verify (Non-blocking)|Curve: P-384|TBD|TBD|
+|ECDSA Sign   (Non-blocking)|Curve: P-521|TBD|TBD|
+|ECDSA Verify (Non-blocking)|Curve: P-521|TBD|TBD|
+|TRNG (Generate)|Output Size: 521|TBD|TBD|
+|ECDH (Shared Secret Generate)|Curve: P-192|TBD|TBD|
+|ECDH (Shared Secret Generate)|Curve: P-256|TBD|TBD|
+|ECDH (Shared Secret Generate)|Curve: P-384|TBD|TBD|
+|ECDH (Shared Secret Generate)|Curve: P-521|TBD|TBD|
 
 ### Memory Size Benchmarking
-The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.
+Flash size will vary based on size of the stored data inputs used with the library.
 
 All projects have the following compiler options:
-- Optimization for size (-Os)
-- Isolate each function in a section - unchecked
-- Remove unused sections - unchecked
+- Isolate each algorithm and input type into separately defined sections
+- Remove print statements and modules not required by the algorithm
 
-| Algorithm | FLASH (bytes) | RAM Static (bytes) | RAM Stack (bytes)|
-|----|----|----|----|
-|SHA-1 (Digest)|TBD|TBD|TBD|
-|SHA-1 (Init, Update, and Final)|TBD|TBD|TBD|
-|SHA-224 (Digest)|TBD|TBD|TBD|
-|SHA-224 (Init, Update, and Final)|TBD|TBD|TBD|
-|SHA-256 (Digest)|TBD|TBD|TBD|
-|SHA-256 (Init, Update, and Final)|TBD|TBD|TBD|
-|SHA-384 (Digest)|TBD|TBD|TBD|
-|SHA-384 (Init, Update, and Final)|TBD|TBD|TBD|
-|SHA-512 (Digest)|TBD|TBD|TBD|
-|SHA-512 (Init, Update, and Final)|TBD|TBD|TBD|
-|HMAC SHA-1 (Direct)|TBD|TBD|TBD|
-|HMAC SHA-1 (Init, Cipher, and Final)|TBD|TBD|TBD|
-|HMAC SHA-224 (Direct)|TBD|TBD|TBD|
-|HMAC SHA-224 (Init, Cipher, and Final)|TBD|TBD|TBD|
-|HMAC SHA-256 (Direct)|TBD|TBD|TBD|
-|HMAC SHA-256 (Init, Cipher, and Final)|TBD|TBD|TBD|
-|HMAC SHA-384 (Direct)|TBD|TBD|TBD|
-|HMAC SHA-384 (Init, Cipher, and Final)|TBD|TBD|TBD|
-|HMAC SHA-512 (Direct)|TBD|TBD|TBD|
-|HMAC SHA-512 (Init, Cipher, and Final)|TBD|TBD|TBD|
-|AES-ECB (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-ECB (Init and Cipher)|TBD|TBD|TBD|
-|AES-CTR (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-CTR (Init and Cipher)|TBD|TBD|TBD|
-|AES-CBC (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-CBC (Init and Cipher)|TBD|TBD|TBD|
-|AES-CFB128 (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-CFB128 (Init and Cipher)|TBD|TBD|TBD|
-|AES-OFB (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-OFB (Init and Cipher)|TBD|TBD|TBD|
-|AES-GCM (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-GCM (Init, AddAadData, Cipher, and Final)|TBD|TBD|TBD|
-|AES-CCM (Init and Cipher)|TBD|TBD|TBD|
-|AES-XTS (Encrypt and Decrypt)|TBD|TBD|TBD|
-|AES-XTS (Init and Cipher)|TBD|TBD|TBD|
-|AES-CMAC (Direct)|TBD|TBD|TBD|
-|AES-CMAC (Init, Cipher, and Final)|TBD|TBD|TBD|
-|AES-GMAC (Direct)|TBD|TBD|TBD|
-|AES-GMAC (Init and Cipher)|TBD|TBD|TBD|
-|ECDSA Blocking (Sign and Verify (P-192))|TBD|TBD|TBD|
-|ECDSA Blocking (Sign and Verify (P-256))|TBD|TBD|TBD|
-|ECDSA Blocking (Sign and Verify (P-384))|TBD|TBD|TBD|
-|ECDSA Blocking (Sign and Verify (P-521))|TBD|TBD|TBD|
-|ECDSA Non-blocking (Sign and Verify (P-192))|TBD|TBD|TBD|
-|ECDSA Non-blocking (Sign and Verify (P-256))|TBD|TBD|TBD|
-|ECDSA Non-blocking (Sign and Verify (P-384))|TBD|TBD|TBD|
-|ECDSA Non-blocking (Sign and Verify (P-521))|TBD|TBD|TBD|
-|TRNG (Generate)|TBD|TBD|TBD|
-|ECDH (Shared Secret (P-192))|TBD|TBD|TBD|
-|ECDH (Shared Secret (P-256))|TBD|TBD|TBD|
-|ECDH (Shared Secret (P-384))|TBD|TBD|TBD|
-|ECDH (Shared Secret (P-521))|TBD|TBD|TBD|
+<table>
+  <tr>
+    <th rowspan="2">Algorithm</th>
+    <th colspan="3">dsPIC33AK512MPS512</th>
+    <th colspan="3">dsPIC33AK256MPS306</th>
+  </tr>
+  <tr>
+    <th>FLASH <br>(bytes)</th>
+    <th>RAM <br>Static <br>(bytes)</th>
+    <th>RAM <br>Stack <br>(bytes)</th>
+    <th>FLASH <br>(bytes)</th>
+    <th>RAM <br>Static <br>(bytes)</th>
+    <th>RAM <br>Stack <br>(bytes)</th>
+  </tr>
+  <tr>
+    <td>SHA-1 (Digest)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-1 (Init, Update, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-224 (Digest)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-224 (Init, Update, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-256 (Digest)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-256 (Init, Update, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-384 (Digest)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-384 (Init, Update, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-512 (Digest)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA-512 (Init, Update, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-224 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-224 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-256 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-256 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-384 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-384 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-512 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHA3-512 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHAKE128 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHAKE128 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHAKE256 (Digest)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>SHAKE256 (Init, Update, and Final)</td>
+    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-1 (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-1 (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-224 (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-224 (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-256 (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-256 (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-384 (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-384 (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-512 (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>HMAC SHA-512 (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-ECB (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-ECB (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CTR (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CTR (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CBC (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CBC (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CFB128 (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CFB128 (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-OFB (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-OFB (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-GCM (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-GCM (Init, AddAadData, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CCM (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-XTS (Encrypt and Decrypt)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-XTS (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CMAC (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-CMAC (Init, Cipher, and Final)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-GMAC (Direct)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>AES-GMAC (Init and Cipher)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Blocking (Sign and Verify (P-192))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Blocking (Sign and Verify (P-256))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Blocking (Sign and Verify (P-384))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Blocking (Sign and Verify (P-521))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Non-blocking (Sign and Verify (P-192))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Non-blocking (Sign and Verify (P-256))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Non-blocking (Sign and Verify (P-384))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDSA Non-blocking (Sign and Verify (P-521))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>TRNG (Generate)</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDH (Shared Secret (P-192))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDH (Shared Secret (P-256))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDH (Shared Secret (P-384))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+  <tr>
+    <td>ECDH (Shared Secret (P-521))</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>TBD</td><td>TBD</td><td>TBD</td>
+  </tr>
+</table>
