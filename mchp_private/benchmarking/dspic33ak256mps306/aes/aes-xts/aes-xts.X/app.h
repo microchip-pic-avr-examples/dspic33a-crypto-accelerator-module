@@ -45,13 +45,13 @@ extern "C" {
 
 #include <xc.h>
 
-#define FAIL_setLow()   (_LATD1 = 0)
-#define FAIL_setHigh()  (_LATD1 = 1)
-#define Enable_FAIL()   (_TRISD1 = 0)
+#define FAIL_setLow()   (_LATA2 = 0)
+#define FAIL_setHigh()  (_LATA2 = 1)
+#define Enable_FAIL()   (_TRISA2 = 0)
 
-#define PASS_setLow()   (_LATD0 = 0)
-#define PASS_setHigh()  (_LATD0 = 1)
-#define Enable_PASS()   (_TRISD0 = 0)
+#define PASS_setLow()   (_LATA10 = 0)
+#define PASS_setHigh()  (_LATA10 = 1)
+#define Enable_PASS()   (_TRISA10 = 0)
 
 // *****************************************************************************
 // *****************************************************************************

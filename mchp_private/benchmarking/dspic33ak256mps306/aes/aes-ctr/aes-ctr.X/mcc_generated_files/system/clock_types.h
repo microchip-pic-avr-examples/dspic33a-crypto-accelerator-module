@@ -77,6 +77,7 @@ enum CLOCK_FAIL_STATUS_MASKS
     CLOCK_GEN2_FAIL_MASK = 0x2,    /**< Fail mask for Clock Generator 2 */
     CLOCK_GEN3_FAIL_MASK = 0x4,    /**< Fail mask for Clock Generator 3 */
     CLOCK_GEN4_FAIL_MASK = 0x8,    /**< Fail mask for Clock Generator 4 */
+    CLOCK_PLL1_FAIL_MASK = 0x1000000,    /**< Fail mask for PLL Generator 1 */
 };
 
 /**

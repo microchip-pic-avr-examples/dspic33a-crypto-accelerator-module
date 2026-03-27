@@ -48,7 +48,7 @@
   @brief    This macro is used to read the System clock (FOSC) Frequency configured in 
             the MCC Melody User Interface
 */
-#define CLOCK_SystemFrequencyGet()        (8000000UL)
+#define CLOCK_SystemFrequencyGet()        (200000000UL)
 
 /** 
   @ingroup  clockdriver
@@ -104,7 +104,7 @@ inline static uint32_t CLOCK_GeneratorFrequencyGet(enum CLOCK_GENERATOR generato
     switch(generator)
     {
         case CLOCK_GENERATOR_1:
-                genFrequency = 8000000U;
+                genFrequency = 200000000U;
                 break;
         case CLOCK_GENERATOR_2:
                 genFrequency = 8000000U;
