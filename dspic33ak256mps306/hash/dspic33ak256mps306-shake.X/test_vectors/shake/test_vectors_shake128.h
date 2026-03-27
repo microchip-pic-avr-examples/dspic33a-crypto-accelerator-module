@@ -34,7 +34,7 @@ extern "C" {
 
 #define SHAKE128_DEFAULT_DIGEST_LENGTH  (16U)
 
-#define NUMBER_OF_SHAKE128_VECTORS      (6U)
+#define NUMBER_OF_SHAKE128_VECTORS      (7U)
 
 extern test_vector_t shake128TestVectors[NUMBER_OF_SHAKE128_VECTORS];
 

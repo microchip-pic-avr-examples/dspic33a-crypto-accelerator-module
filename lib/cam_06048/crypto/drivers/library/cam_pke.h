@@ -16,7 +16,7 @@
 **************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -74,7 +74,7 @@ Microchip or any third party.
 /**
  * @ingroup pke
  * @typedef CRYPTO_PKE_RESULT
- * @brief This enumeration represents the result of the CAM PKE operation.
+ * @brief This enumeration represents the result of the CAM/HSM-Lite PKE operation.
  */
 typedef enum {
     CRYPTO_PKE_RESULT_SUCCESS = 0U,             /**< Operation successful  */
@@ -90,7 +90,7 @@ typedef enum {
 /**
  * @ingroup pke
  * @typedef PKE_ECC_CURVE
- * @brief This enumeration represents the ECC curves supported by the CAM PKE driver.
+ * @brief This enumeration represents the ECC curves supported by the CAM/HSM-Lite PKE driver.
  */
 typedef enum
 {
@@ -205,7 +205,7 @@ PKE_OPERATION_TYPE DRV_CRYPTO_PKE_OperationCompleteGet(void);
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: PKE CAM Device Support
+// Section: PKE CAM/HSM-Lite Device Support
 // *****************************************************************************
 // *****************************************************************************
 
@@ -227,7 +227,7 @@ void MPROTO(DRV_CRYPTO_PKE_IsrHelper)(void);
  * This macro generates a function prototype that is specific to the
  * currently defined hardware version. It allows the creation of
  * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
+ * defined CAM/HSM-Lite hardware version.
  */
 #define DRV_CRYPTO_PKE_IsrHelper MPROTO(DRV_CRYPTO_PKE_IsrHelper)
 
@@ -248,7 +248,7 @@ void MPROTO(DRV_CRYPTO_PKE_ClearMemory)(void);
  * This macro generates a function prototype that is specific to the
  * currently defined hardware version. It allows the creation of
  * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
+ * defined CAM/HSM-Lite hardware version.
  */
 #define DRV_CRYPTO_PKE_ClearMemory MPROTO(DRV_CRYPTO_PKE_ClearMemory)
 
@@ -269,7 +269,7 @@ void MPROTO(DRV_CRYPTO_PKE_SetupEngine)(void);
  * This macro generates a function prototype that is specific to the
  * currently defined hardware version. It allows the creation of
  * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
+ * defined CAM/HSM-Lite hardware version.
  */
 #define DRV_CRYPTO_PKE_SetupEngine MPROTO(DRV_CRYPTO_PKE_SetupEngine)
 
@@ -290,7 +290,7 @@ void MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)(void);
  * This macro generates a function prototype that is specific to the
  * currently defined hardware version. It allows the creation of
  * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
+ * defined CAM/HSM-Lite hardware version.
  */
 #define DRV_CRYPTO_PKE_ClearMemory_NoWait MPROTO(DRV_CRYPTO_PKE_ClearMemory_NoWait)
 
@@ -311,7 +311,7 @@ PKE_OPERATION_TYPE MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)(void);
  * This macro generates a function prototype that is specific to the
  * currently defined hardware version. It allows the creation of
  * device-specific implementations of the PKE functions based on the
- * defined CAM hardware version.
+ * defined CAM/HSM-Lite hardware version.
  */
 #define DRV_CRYPTO_PKE_OperationCompleteGet MPROTO(DRV_CRYPTO_PKE_OperationCompleteGet)
 /** @endcond */
