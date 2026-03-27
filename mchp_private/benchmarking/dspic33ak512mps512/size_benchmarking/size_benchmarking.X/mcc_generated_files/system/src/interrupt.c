@@ -7,13 +7,13 @@
  *            
  * @brief     This is the generated driver source file for INTERRUPT driver          
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.1.4
  *            
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,29 +40,9 @@
 
 void INTERRUPT_Initialize(void)
 {
-    // U1EVT: UART 1 event interrupt
-    // Priority: 1
-    IPC12bits.U1EVTIP = 1;
-    
-    // U1E: UART 1 error interrupt
-    // Priority: 1
-    IPC12bits.U1EIP = 1;
-    
-    // U1TX: UART 1 TX interrupt
-    // Priority: 1
-    IPC12bits.U1TXIP = 1;
-    
-    // U1RX: UART 1 RX interrupt
-    // Priority: 1
-    IPC12bits.U1RXIP = 1;
-    
 }
 
 void INTERRUPT_Deinitialize(void)
 {
     //POR default value of priority
-    IPC12bits.U1EVTIP = 4;
-    IPC12bits.U1EIP = 4;
-    IPC12bits.U1TXIP = 4;
-    IPC12bits.U1RXIP = 4;
 }
