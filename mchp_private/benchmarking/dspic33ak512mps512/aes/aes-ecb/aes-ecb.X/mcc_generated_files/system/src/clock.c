@@ -8,13 +8,13 @@
  *            
  * @brief     This is the generated source file for CLOCK driver
  *
- * @version   PLIB Version 1.1.2
+ * @version   PLIB Version 1.3.1
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -51,14 +51,12 @@
 void CLOCK_Initialize(void)
 {
     /*  
-        System Clock Source                             :  PLL1 Out output
-        System/Generator 1 frequency (Fosc)             :  200 MHz
+        System Clock Source                             :  FRC Oscillator
+        System/Generator 1 frequency (Fosc)             :  8 MHz
         
         Clock Generator 2 frequency                     : 8 MHz
         Clock Generator 3 frequency                     : 8 MHz
         
-        PLL 1 frequency                                 : 200 MHz
-        PLL 1 VCO Out frequency                         : 200 MHz
 
     */
     
@@ -73,42 +71,9 @@ void CLOCK_Initialize(void)
 #endif
     }
     
-    // NOSC FRC Oscillator; OE enabled; SIDL disabled; ON enabled; BOSC Serial Test Mode clock (PGC); FSCMEN disabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL disabled; EXTCFEN disabled; FOUTSWEN disabled; RIS disabled; PLLSWEN disabled; 
-    PLL1CON = 0x9100UL;
-    // POSTDIV2 2x divide; POSTDIV1 4x divide; PLLFBDIV 200; PLLPRE 1; 
-    PLL1DIV = 0x100C822UL;
-    //Enable PLL Input and Feedback Divider update
-    PLL1CONbits.PLLSWEN = 1U;
-#ifndef __MPLAB_DEBUGGER_SIMULATOR
-    while (PLL1CONbits.PLLSWEN == 1){};
-#endif
-    PLL1CONbits.FOUTSWEN = 1U;
-#ifndef __MPLAB_DEBUGGER_SIMULATOR
-    while (PLL1CONbits.FOUTSWEN == 1U){};
-#endif
-    //enable clock switching
-    PLL1CONbits.OSWEN = 1U; 
-#ifndef __MPLAB_DEBUGGER_SIMULATOR 
-    //wait for switching
-    while(PLL1CONbits.OSWEN == 1U){}; 
-    //wait for clock to be ready
-    while(OSCCTRLbits.PLL1RDY == 0U){};    
-#endif
     
-    //Configure VCO Divider
-    // INTDIV 4; 
-    VCO1DIV = 0x40000UL;
-    //enable PLL VCO divider
-    PLL1CONbits.DIVSWEN = 1U;
-#ifndef __MPLAB_DEBUGGER_SIMULATOR     
-    //wait for setup complete
-    while(PLL1CONbits.DIVSWEN == 1U){}; 
-#endif
-    //Clearing ON shuts down oscillator when no downstream clkgen or peripheral is requesting the clock
-    PLL1CONbits.ON = 0U;
-    
-    // NOSC PLL1 Out output; OE enabled; SIDL disabled; ON enabled; BOSC Backup FRC Oscillator; FSCMEN enabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL External clock fail detection module #1; EXTCFEN disabled; RIS disabled; SLEEPDLY 8 sys_clk delay; 
-    CLK1CON = 0x129580UL;
+    // NOSC FRC Oscillator; OE enabled; SIDL disabled; ON enabled; BOSC Backup FRC Oscillator; FSCMEN enabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL External clock fail detection module #1; EXTCFEN disabled; RIS disabled; SLEEPDLY 8 sys_clk delay; 
+    CLK1CON = 0x129180UL;
     // FRACDIV 0x0; INTDIV 0x0; 
     CLK1DIV = 0x0UL;
     //enable clock switching
