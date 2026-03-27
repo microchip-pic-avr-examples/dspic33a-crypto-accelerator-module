@@ -29,7 +29,7 @@ This example application utilizes the Crypto Library that interacts with the Pre
 
 ## Running The Application
 1. Within MPLAB® X IDE, open the `dspic33ak256mps306-mac.X` application project.
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 65 in dspic33ak256mps306-mac.X/app/app_mac.h
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition in dspic33ak256mps306-mac.X/app/app_mac.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
