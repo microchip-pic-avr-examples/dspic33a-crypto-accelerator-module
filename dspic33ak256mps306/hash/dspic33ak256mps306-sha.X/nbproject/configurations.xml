@@ -15,7 +15,6 @@
         <logicalFolder name="f2" displayName="drivers" projectFiles="true">
           <logicalFolder name="f1" displayName="library" projectFiles="true">
             <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_device.h</itemPath>
-            <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_device_ea.h</itemPath>
             <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_hash.h</itemPath>
             <itemPath>../../../lib/cam_06048/crypto/drivers/library/cam_version.h</itemPath>
           </logicalFolder>

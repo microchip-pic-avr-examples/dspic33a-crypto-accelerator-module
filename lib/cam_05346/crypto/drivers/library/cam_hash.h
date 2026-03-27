@@ -8,14 +8,14 @@
     cam_hash.h
 
   Summary:
-    Crypto Framework Library interface file for CAM Hashing.
+    Crypto Framework Library interface file for CAM/HSM-Lite Hashing.
 
   Description:
-    This header file contains the interface that make up the CAM Hashing hardware
+    This header file contains the interface that make up the CAM/HSM-Lite Hashing hardware
     driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
 **************************************************************************/
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -42,7 +42,7 @@ Microchip or any third party.
  * 
  * @file cam_hash.h
  * @defgroup  hash HASH
- * @brief This header file contains the interface that make up the CAM Hashing hardware driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
+ * @brief This header file contains the interface that make up the CAM/HSM-Lite Hashing hardware driver for the Microchip microcontrollers equipped with a Crypto Accelerator Module.
  *
  */
 
@@ -313,7 +313,7 @@ uint32_t DRV_CRYPTO_HASH_GetContextSize(void *contextData);
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: SHA CAM Device Support
+// Section: SHA CAM/HSM-Lite Device Support
 // *****************************************************************************
 // *****************************************************************************
 
