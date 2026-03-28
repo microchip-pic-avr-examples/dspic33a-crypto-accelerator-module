@@ -17,9 +17,9 @@ The ECDH Shared Secret Generation use NIST defined public and private keys for t
 - P-521
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -28,21 +28,19 @@ The ECDH Shared Secret Generation use NIST defined public and private keys for t
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running The Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-ecdh.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
-### Application Results
+## Application Results
 The following information will be printed on the COM port for all supported ECC Curve types:
 1. A header section with the ECC curve type name is printed.
 2. The Shared Secret is generated.
 3. Generated Shared Secret is printed out.
 4. This Shared Secret X point value is compared to the expected output from **NIST** and the status is printed out.
-
-<img src="./images/dspic33ak512mps512_ecdh_demo.png" alt="ECDH Demo Output" width="750"/>
 
 ## Crypto Library APIs
 crypto_kas.h defines the Shared Secret Generation function
@@ -63,7 +61,7 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(
 );
 ```
 
-### crypto_EccCurveType_E can be any of the following enum values:
+### crypto_EccCurveType_E can be any of the following enum values
 - CRYPTO_ECC_CURVE_P192
 - CRYPTO_ECC_CURVE_P256
 - CRYPTO_ECC_CURVE_P384
@@ -72,27 +70,27 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(
 ## NIST Vectors
 The input test vectors used in this demo are from NIST Publication: [SP 800-56A ECCCDH Primitive Test Vectors](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/component-testing)
 
-## Benchmarking Results
+## Benchmarking
 
 ### Performance Benchmarking
 Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |ECC Curve|Crypto_Kas_Ecdh_SharedSecret Performance (ms)|
 |----|----|
-|P-192|3.760|
-|P-256|7.160|
-|P-384|19.360|
-|P-521|41.400|
+|P-192|TBD|
+|P-256|TBD|
+|P-384|TBD|
+|P-521|TBD|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|11,588|4,168|308|
-|P-256|11,604|4,168|308|
-|P-384|11,684|4,168|308|
-|P-521|11,780|4,168|308|
+|P-192|TBD|TBD|TBD|
+|P-256|TBD|TBD|TBD|
+|P-384|TBD|TBD|TBD|
+|P-521|TBD|TBD|TBD|
 
 ## ACVP
 The ECDH Shared Secret API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
