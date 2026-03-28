@@ -75,12 +75,12 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |SHA-256 (Digest)|Message Size: 8,192|TBD|TBD|
 |SHA-384 (Digest)|Message Size: 8,192|TBD|TBD|
 |SHA-512 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA3-224 (Digest)|Message Size: 8,192|Unsupported|TBD|
-|SHA3-256 (Digest)|Message Size: 8,192|Unsupported|TBD|
-|SHA3-384 (Digest)|Message Size: 8,192|Unsupported|TBD|
-|SHA3-512 (Digest)|Message Size: 8,192|Unsupported|TBD|
-|SHAKE128 (Digest)|Message Size: 8,192|Unsupported|TBD|
-|SHAKE256 (Digest)|Message Size: 8,192|Unsupported|TBD|
+|SHA3-224 (Digest)|Message Size: 8,192|N/A|TBD|
+|SHA3-256 (Digest)|Message Size: 8,192|N/A|TBD|
+|SHA3-384 (Digest)|Message Size: 8,192|N/A|TBD|
+|SHA3-512 (Digest)|Message Size: 8,192|N/A|TBD|
+|SHAKE128 (Digest)|Message Size: 8,192|N/A|TBD|
+|SHAKE256 (Digest)|Message Size: 8,192|N/A|TBD|
 |HMAC SHA-1 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
 |HMAC SHA-224 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
 |HMAC SHA-256 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
@@ -200,62 +200,62 @@ All projects have the following compiler options:
   </tr>
   <tr>
     <td>SHA3-224 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-224 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-256 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-256 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-384 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-384 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-512 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHA3-512 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHAKE128 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHAKE128 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHAKE256 (Digest)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
     <td>SHAKE256 (Init, Update, and Final)</td>
-    <td>Unsupported</td><td>Unsupported</td><td>Unsupported</td>
+    <td>N/A</td><td>N/A</td><td>N/A</td>
     <td>TBD</td><td>TBD</td><td>TBD</td>
   </tr>
   <tr>
