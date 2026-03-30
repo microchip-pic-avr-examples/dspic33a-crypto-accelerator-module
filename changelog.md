@@ -41,7 +41,7 @@
 		- HMAC-SHA2-384
 		- HMAC-SHA2-512
 		- AES-GMAC
-- Features added to the CAM Hardware Driver:
+- Features added to the CAM Hardware Driver (v1.3.0):
 	- Updates to ECDSA driver:
 		- Support for non-blocking implementations
 	- Updates to Hash driver:
@@ -59,7 +59,7 @@
 - Crypto Algorithms added in this release:
 	- AES
 		- AES-XTS Encrypt and Decrypt
-- Features added to the CAM Hardware Driver:
+- Features added to the CAM Hardware Driver (v1.2.0):
 	- Updates to AES driver:
 		- Context safety
 		- Optimizations
