@@ -60,7 +60,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_DATE
  * @brief This is the date the library was built on.
  */
-#define CAM_LIBRARY_DATE "20251219"
+#define CAM_LIBRARY_DATE "20260327"
 
 /**
  * @ingroup version
@@ -74,7 +74,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_MINOR
  * @brief This number represents the minor version in SemVer format.
  */
-#define CAM_LIBRARY_VERSION_MINOR  4
+#define CAM_LIBRARY_VERSION_MINOR  5
 
 /**
  * @ingroup version
