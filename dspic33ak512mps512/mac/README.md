@@ -14,9 +14,9 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - AES-GMAC
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DEV_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -25,11 +25,11 @@ This example application utilizes the Crypto Library that interacts with the Pre
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
+## Running The Application
 1. Within MPLAB® X IDE, open the `dspic33ak512mps512-mac.X` application project.
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 73 in dspic33ak512mps512-mac.X/app/app_mac.h
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition in dspic33ak512mps512-mac.X/app/app_mac.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
@@ -51,8 +51,6 @@ The following information will be printed on the COM port for AES-CMAC algorithm
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_mac_cmac_demo.png" alt="AES MAC Demo Output" width="750"/>
-
 ### HMAC
 The following information will be printed on the COM port for HMAC algorithms:
 1. A header is displayed showing the used SHA algorithm, key size and input message length.
@@ -69,8 +67,6 @@ The following information will be printed on the COM port for HMAC algorithms:
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_mac_hmac_demo.png" alt="HMAC Demo Output" width="750"/>
-
 ### AES-GMAC
 The following information will be printed on the COM port for GMAC algorithms:
 1. A header is displayed showing the key size and input message length.
@@ -86,8 +82,6 @@ The following information will be printed on the COM port for GMAC algorithms:
     3. The MAC is printed out.
     4. The result MAC and expected MAC are compared.
     5. Pass or Fail is printed out depending on the comparison result.
-
-<img src="./images/dspic33ak512mps512_mac_gmac_demo.png" alt="AES-GMAC Demo Output" width="750"/>
 
 ## Crypto Library APIs
 ### AES-CMAC APIs
@@ -223,25 +217,25 @@ The following benchmarking results were obtained with the device clock speed set
 #### AES-CMAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|16|8,192|16|26.76|
-|24|8,192|16|26.32|
-|32|8,192|16|25.89|
+|16|8,192|16|TBD|
+|24|8,192|16|TBD|
+|32|8,192|16|TBD|
 
 #### HMAC
 |Hash Algorithm|Key Size (bytes)|Message Size (bytes)|HMAC Crypto_Mac_Hmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|SHA-1|16|8,192|139.77|
-|SHA2-224|16|8,192|140.49|
-|SHA2-256|16|8,192|140.50|
-|SHA2-384|16|8,192|230.63|
-|SHA2-512|16|8,192|230.70|
+|SHA-1|16|8,192|TBD|
+|SHA2-224|16|8,192|TBD|
+|SHA2-256|16|8,192|TBD|
+|SHA2-384|16|8,192|TBD|
+|SHA2-512|16|8,192|TBD|
 
 #### AES-GMAC
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
 |----|----|----|----|----|
-|16|12|8,192|16|424.89|
-|24|12|8,192|16|364.32|
-|32|12|8,192|16|318.80|
+|16|12|8,192|16|TBD|
+|24|12|8,192|16|TBD|
+|32|12|8,192|16|TBD|
 
 ### Memory Size Benchmarking
 The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.
@@ -250,25 +244,25 @@ The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash 
 
 |Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-CMAC|18,744|74|292|
-|HMAC SHA-1|18,728|74|856|
-|HMAC SHA-224|18,736|74|856|
-|HMAC SHA-256|18,740|74|856|
-|HMAC SHA-384|18,756|74|856|
-|HMAC SHA-512|18,772|74|856|
-|AES-GMAC|18,772|74|312|
+|AES-CMAC|TBD|TBD|TBD|
+|HMAC SHA-1|TBD|TBD|TBD|
+|HMAC SHA-224|TBD|TBD|TBD|
+|HMAC SHA-256|TBD|TBD|TBD|
+|HMAC SHA-384|TBD|TBD|TBD|
+|HMAC SHA-512|TBD|TBD|TBD|
+|AES-GMAC|TBD|TBD|TBD|
 
 #### Multi Step
 
 |Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-CMAC|19,308|74|56|
-|HMAC SHA-1|19,540|74|128|
-|HMAC SHA-224|19,548|74|128|
-|HMAC SHA-256|19,552|74|128|
-|HMAC SHA-384|19,568|74|128|
-|HMAC SHA-512|19,584|74|128|
-|AES-GMAC|19,320|74|44|
+|AES-CMAC|TBD|TBD|TBD|
+|HMAC SHA-1|TBD|TBD|TBD|
+|HMAC SHA-224|TBD|TBD|TBD|
+|HMAC SHA-256|TBD|TBD|TBD|
+|HMAC SHA-384|TBD|TBD|TBD|
+|HMAC SHA-512|TBD|TBD|TBD|
+|AES-GMAC|TBD|TBD|TBD|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
