@@ -12,7 +12,7 @@
  *******************************************************************************/
 
 /*
-Copyright (C) 2025, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+Copyright (C) 2026 Microchip Technology Inc., and its subsidiaries. All rights reserved.
 
 The software and documentation is provided by microchip and its contributors
 "as is" and any express, implied or statutory warranties, including, but not
@@ -64,6 +64,18 @@ int main( void ) {
     Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_ECB, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_ECB, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     
+    //AES CBC
+    Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CBC, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CBC, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    
+    //AES CFB-128
+    Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CFB128, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CFB128, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    
+    //AES OFB
+    Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_OFB, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_OFB, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    
     //AES CTR
     Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CTR, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     Crypto_Sym_Aes_DecryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_CTR, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -71,6 +83,11 @@ int main( void ) {
     //AES GCM
     Crypto_Aead_AesGcm_EncryptAuthDirect(CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     Crypto_Aead_AesGcm_DecryptAuthDirect(CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    
+    //AES-CCM
+    Crypto_Aead_AesCcm_Init(NULL, CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL);
+    Crypto_Aead_AesCcm_Cipher(NULL, CRYPTO_CIOP_ENCRYPT, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    Crypto_Aead_AesCcm_Cipher(NULL, CRYPTO_CIOP_DECRYPT, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     
     //AES XTS
     Crypto_Sym_Aes_EncryptDirect(CRYPTO_HANDLER_HW_INTERNAL, CRYPTO_SYM_OPMODE_XTS, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -84,6 +101,7 @@ int main( void ) {
     Crypto_DigiSign_Ecdsa_Verify(CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CRYPTO_ECC_CURVE_P521, NULL);
     
     //HASH
+    Crypto_Hash_Sha_Digest(CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL, CRYPTO_HASH_SHA1, NULL);
     Crypto_Hash_Sha_Digest(CRYPTO_HANDLER_HW_INTERNAL, NULL, NULL, NULL, CRYPTO_HASH_SHA2_512, NULL);
 
     //TRNG

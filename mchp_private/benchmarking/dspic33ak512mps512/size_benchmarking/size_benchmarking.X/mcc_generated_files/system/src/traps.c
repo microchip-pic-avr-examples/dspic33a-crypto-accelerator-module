@@ -7,13 +7,13 @@
  *
  * @brief     This is the generated driver source file for TRAPS driver
  *
- * @skipline @version   PLIB Version 1.1.2
+ * @skipline @version   PLIB Version 1.1.4
  *
  * @skipline  Device : dsPIC33AK512MPS512
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,10 +45,10 @@
 /* #define FIND_TRAP_SOURCE */
 
 #ifdef FIND_TRAP_SOURCE
-void __attribute__((interrupt(preprologue("rcall _where_was_i ")), no_auto_psv)) _DefaultInterrupt(void);
+void __attribute__((interrupt(preprologue("rcall _where_was_i ")))) _DefaultInterrupt(void);
 extern unsigned long trapSrcAddr;
 
-void __attribute__((interrupt(preprologue( "rcall _where_was_i ")), no_auto_psv)) _DefaultInterrupt(void)
+void __attribute__((interrupt(preprologue( "rcall _where_was_i ")))) _DefaultInterrupt(void)
 {
    /* _trapSrcAddr variable will have the address of the trap source , print the value using UART or use debug watch */
    while(1)
@@ -57,7 +57,7 @@ void __attribute__((interrupt(preprologue( "rcall _where_was_i ")), no_auto_psv)
    }
 }
 #else
-#define ERROR_HANDLER __attribute__((weak,interrupt,no_auto_psv))
+#define ERROR_HANDLER __attribute__((weak,interrupt))
 #define FAILSAFE_STACK_GUARDSIZE 8
 #define FAILSAFE_STACK_SIZE 32
 
@@ -109,6 +109,14 @@ inline static void use_failsafe_stack(void)
 }
 
 /** Bus error trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _BusErrorTrap(void)
 {
     if(INTCON3bits.CPUBET == 1)
@@ -141,6 +149,14 @@ void ERROR_HANDLER _BusErrorTrap(void)
 }
 
 /** Math error trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _MathErrorTrap(void)
 {
     if(INTCON4bits.OVATE == 1)
@@ -203,6 +219,14 @@ void ERROR_HANDLER _MathErrorTrap(void)
 }
 
 /** Address error trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _AddressErrorTrap(void)
 {
     INTCON1bits.ADDRERR = 0;  //Clear the trap flag
@@ -210,6 +234,14 @@ void ERROR_HANDLER _AddressErrorTrap(void)
 }
 
 /** General error trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _GeneralTrap(void)
 {
     if(INTCON5bits.XPWBDED == 1)
@@ -248,6 +280,14 @@ void ERROR_HANDLER _GeneralTrap(void)
 }
 
 /** Stack error trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _StackErrorTrap(void)
 {
     /* We use a failsafe stack: the presence of a stack-pointer error
@@ -261,6 +301,14 @@ void ERROR_HANDLER _StackErrorTrap(void)
 }
 
 /** Illegal instruction trap**/
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void ERROR_HANDLER _IllegalInstructionTrap(void)
 {
     INTCON1bits.BADOPERR = 0;  //Clear the trap flag
