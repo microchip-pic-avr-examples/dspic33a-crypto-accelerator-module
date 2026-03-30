@@ -60,7 +60,7 @@ Microchip or any third party.
  * @def CAM_LIBRARY_VERSION_DATE
  * @brief This is the date the library was built on.
  */
-#define CAM_LIBRARY_DATE "20260327"
+#define CAM_LIBRARY_DATE "20260330"
 
 /**
  * @ingroup version
