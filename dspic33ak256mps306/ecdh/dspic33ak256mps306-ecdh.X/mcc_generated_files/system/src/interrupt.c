@@ -40,9 +40,29 @@
 
 void INTERRUPT_Initialize(void)
 {
+    // U1EVT: UART 1 event.
+    // Priority: 1
+    IPC12bits.U1EVTIP = 1;
+    
+    // U1E: UART 1 error.
+    // Priority: 1
+    IPC12bits.U1EIP = 1;
+    
+    // U1TX: UART 1 TX.
+    // Priority: 1
+    IPC12bits.U1TXIP = 1;
+    
+    // U1RX: UART 1 RX.
+    // Priority: 1
+    IPC12bits.U1RXIP = 1;
+    
 }
 
 void INTERRUPT_Deinitialize(void)
 {
     //POR default value of priority
+    IPC12bits.U1EVTIP = 4;
+    IPC12bits.U1EIP = 4;
+    IPC12bits.U1TXIP = 4;
+    IPC12bits.U1RXIP = 4;
 }
