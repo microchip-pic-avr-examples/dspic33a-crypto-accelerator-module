@@ -16,7 +16,7 @@
 		- SHA3-512
 		- SHAKE128
 		- SHAKE256
-- Features added to the CAM Hardware Driver:
+- Features added to the CAM Hardware Driver (v1.5.0):
 	- Updates to HASH driver:
 		- Support for SHA-3 and SHAKE
 
