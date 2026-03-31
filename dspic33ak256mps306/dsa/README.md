@@ -178,32 +178,32 @@ Example for the dsPIC33AK256MPS306: `BMXINITPRbits.CRYPTPR = 1`
 #### Blocking API Performance
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|3.99|
+|P-256|7.49|
+|P-384|19.90|
+|P-521|42.31|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|5.11|
+|P-256|9.88|
+|P-384|27.07|
+|P-521|15.18|
 
 #### Non-blocking API Performance
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|4.05|
+|P-256|7.70|
+|P-384|20.56|
+|P-521|43.63|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|5.05|
+|P-256|9.82|
+|P-384|27.01|
+|P-521|15.12|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 

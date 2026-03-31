@@ -182,32 +182,32 @@ Otherwise it may be beneficial to use the blocking API calls if non-blocking is 
 #### Blocking API Performance:
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|3.90|
+|P-256|7.39|
+|P-384|19.76|
+|P-521|42.06|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|5.16|
+|P-256|9.95|
+|P-384|27.15|
+|P-521|58.22|
 
 #### Non-blocking API Performance
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|3.95|
+|P-256|7.57|
+|P-384|20.37|
+|P-521|43.33|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|5.11|
+|P-256|9.90|
+|P-384|27.12|
+|P-521|58.20|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
