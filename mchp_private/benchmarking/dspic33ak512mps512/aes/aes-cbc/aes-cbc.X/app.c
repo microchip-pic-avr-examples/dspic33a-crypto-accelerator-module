@@ -59,7 +59,7 @@ uint8_t symInitializationVector[SYM_INIT_VECTOR_SIZE] __attribute__((space(prog)
     0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x10
 };
 
- #define ENABLE_MULTI_STEP
+// #define ENABLE_MULTI_STEP
 // #define ENABLE_ARRAY_COMPARISON
 
 #ifdef ENABLE_ARRAY_COMPARISON

@@ -409,26 +409,26 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 
 |AES Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-ECB|TBD|TBD|TBD|
-|AES-CTR|TBD|TBD|TBD|
-|AES-CBC|TBD|TBD|TBD|
-|AES-CFB128|TBD|TBD|TBD|
-|AES-OFB|TBD|TBD|TBD|
-|AES-GCM|TBD|TBD|TBD|
-|AES-CCM|TBD|TBD|TBD|
-|AES-XTS|TBD|TBD|TBD|
+|AES-ECB|12,148|74|324|
+|AES-CTR|12,172|74|324|
+|AES-CBC|12,172|74|324|
+|AES-CFB128|12,172|74|324|
+|AES-OFB|12,172|74|324|
+|AES-GCM|13,592|106|340|
+|AES-XTS|12,172|74|324|
 
 #### Multi Step
 
 |AES Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-ECB|TBD|TBD|TBD|
-|AES-CTR|TBD|TBD|TBD|
-|AES-CBC|TBD|TBD|TBD|
-|AES-CFB128|TBD|TBD|TBD|
-|AES-OFB|TBD|TBD|TBD|
-|AES-GCM|TBD|TBD|TBD|
-|AES-XTS|TBD|TBD|TBD|
+|AES-ECB|12,204|2,022|56|
+|AES-CTR|12,224|2,022|56|
+|AES-CBC|12,224|2,022|56|
+|AES-CFB128|12,224|2,022|56|
+|AES-OFB|12,224|2,022|56|
+|AES-GCM|13,684|646|56|
+|AES-CCM|13,688|602|116|
+|AES-XTS|12,232|2,022|56|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

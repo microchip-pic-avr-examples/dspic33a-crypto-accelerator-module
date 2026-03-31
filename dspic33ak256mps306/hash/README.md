@@ -183,33 +183,33 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|TBD|TBD|TBD|
-|SHA-224|TBD|TBD|TBD|
-|SHA-256|TBD|TBD|TBD|
-|SHA-384|TBD|TBD|TBD|
-|SHA-512|TBD|TBD|TBD|
-|SHA3-224|TBD|TBD|TBD|
-|SHA3-256|TBD|TBD|TBD|
-|SHA3-384|TBD|TBD|TBD|
-|SHA3-512|TBD|TBD|TBD|
-|SHAKE-128|TBD|TBD|TBD|
-|SHAKE-256|TBD|TBD|TBD|
+|SHA-1|12,344|74|480|
+|SHA-224|12,344|74|480|
+|SHA-256|12,344|74|480|
+|SHA-384|12,344|74|480|
+|SHA-512|12,344|74|480|
+|SHA3-224|12,344|74|480|
+|SHA3-256|12,344|74|480|
+|SHA3-384|12,344|74|480|
+|SHA3-512|12,344|74|480|
+|SHAKE-128|12,100|74|476|
+|SHAKE-256|12,100|74|476|
 
 #### Multi Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|TBD|TBD|TBD|
-|SHA-224|TBD|TBD|TBD|
-|SHA-256|TBD|TBD|TBD|
-|SHA-384|TBD|TBD|TBD|
-|SHA-512|TBD|TBD|TBD|
-|SHA3-224|TBD|TBD|TBD|
-|SHA3-256|TBD|TBD|TBD|
-|SHA3-384|TBD|TBD|TBD|
-|SHA3-512|TBD|TBD|TBD|
-|SHAKE-128|TBD|TBD|TBD|
-|SHAKE-256|TBD|TBD|TBD|
+|SHA-1|13,184|74|48|
+|SHA-224|13,184|74|48|
+|SHA-256|13,184|74|48|
+|SHA-384|13,184|74|48|
+|SHA-512|13,184|74|48|
+|SHA3-224|13,184|74|48|
+|SHA3-256|13,184|74|48|
+|SHA3-384|13,184|74|48|
+|SHA3-512|13,184|74|48|
+|SHAKE-128|12,944|74|44|
+|SHAKE-256|12,944|74|44|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

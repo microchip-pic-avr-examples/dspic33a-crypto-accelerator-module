@@ -348,6 +348,7 @@
         <property key="ADC5" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="BISS1" value="true"/>
+        <property key="CAM" value="true"/>
         <property key="CAN1" value="true"/>
         <property key="CAN2" value="true"/>
         <property key="CCP 1" value="true"/>
@@ -367,6 +368,7 @@
         <property key="CHANGE NOTICE F" value="true"/>
         <property key="CHANGE NOTICE G" value="true"/>
         <property key="CHANGE NOTICE H" value="true"/>
+        <property key="CIC" value="true"/>
         <property key="CLC" value="true"/>
         <property key="CM1" value="true"/>
         <property key="CM2" value="true"/>
@@ -378,6 +380,7 @@
         <property key="FRZ" value="true"/>
         <property key="Freeze All Other Peripherals" value="true"/>
         <property key="HPC" value="true"/>
+        <property key="I2C 1" value="true"/>
         <property key="I2C1" value="true"/>
         <property key="I2C2" value="true"/>
         <property key="I2C3" value="true"/>
@@ -433,6 +436,7 @@
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
         <property key="UART3" value="true"/>
+        <property key="UART4" value="true"/>
         <property key="communication.interface"
                   value="${communication.interface.default}"/>
         <property key="communication.interface.jtag" value="2wire"/>
@@ -485,29 +489,20 @@
         <property key="ADC1" value="true"/>
         <property key="ADC2" value="true"/>
         <property key="ADC3" value="true"/>
-        <property key="ADC4" value="true"/>
-        <property key="ADC5" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="BISS1" value="true"/>
+        <property key="CAM" value="true"/>
         <property key="CAN1" value="true"/>
-        <property key="CAN2" value="true"/>
         <property key="CCP 1" value="true"/>
         <property key="CCP 2" value="true"/>
         <property key="CCP 3" value="true"/>
         <property key="CCP 4" value="true"/>
         <property key="CCP 5" value="true"/>
-        <property key="CCP 6" value="true"/>
-        <property key="CCP 7" value="true"/>
-        <property key="CCP 8" value="true"/>
-        <property key="CCP 9" value="true"/>
         <property key="CHANGE NOTICE A" value="true"/>
         <property key="CHANGE NOTICE B" value="true"/>
         <property key="CHANGE NOTICE C" value="true"/>
         <property key="CHANGE NOTICE D" value="true"/>
-        <property key="CHANGE NOTICE E" value="true"/>
-        <property key="CHANGE NOTICE F" value="true"/>
-        <property key="CHANGE NOTICE G" value="true"/>
-        <property key="CHANGE NOTICE H" value="true"/>
+        <property key="CIC" value="true"/>
         <property key="CLC" value="true"/>
         <property key="CM1" value="true"/>
         <property key="CM2" value="true"/>
@@ -519,17 +514,10 @@
         <property key="FRZ" value="true"/>
         <property key="Freeze All Other Peripherals" value="true"/>
         <property key="HPC" value="true"/>
+        <property key="I2C 1" value="true"/>
         <property key="I2C1" value="true"/>
         <property key="I2C2" value="true"/>
-        <property key="I2C3" value="true"/>
         <property key="IOIM1" value="true"/>
-        <property key="IOIM10" value="true"/>
-        <property key="IOIM11" value="true"/>
-        <property key="IOIM12" value="true"/>
-        <property key="IOIM13" value="true"/>
-        <property key="IOIM14" value="true"/>
-        <property key="IOIM15" value="true"/>
-        <property key="IOIM16" value="true"/>
         <property key="IOIM2" value="true"/>
         <property key="IOIM3" value="true"/>
         <property key="IOIM4" value="true"/>
@@ -537,22 +525,14 @@
         <property key="IOIM6" value="true"/>
         <property key="IOIM7" value="true"/>
         <property key="IOIM8" value="true"/>
-        <property key="IOIM9" value="true"/>
         <property key="NVMCRC" value="true"/>
         <property key="NVMECC" value="true"/>
         <property key="PG1" value="true"/>
         <property key="PG2" value="true"/>
         <property key="PG3" value="true"/>
         <property key="PG4" value="true"/>
-        <property key="PG5" value="true"/>
-        <property key="PG6" value="true"/>
-        <property key="PG7" value="true"/>
-        <property key="PG8" value="true"/>
         <property key="PTG" value="true"/>
         <property key="QEI1" value="true"/>
-        <property key="QEI2" value="true"/>
-        <property key="QEI3" value="true"/>
-        <property key="QEI4" value="true"/>
         <property key="RAMXECC" value="true"/>
         <property key="RAMYECC" value="true"/>
         <property key="SENT1" value="true"/>
@@ -560,7 +540,6 @@
         <property key="SPI1" value="true"/>
         <property key="SPI2" value="true"/>
         <property key="SPI3" value="true"/>
-        <property key="SPI4" value="true"/>
         <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
         <property key="TIMER1" value="true"/>
         <property key="TIMER2" value="true"/>
@@ -574,6 +553,7 @@
         <property key="UART1" value="true"/>
         <property key="UART2" value="true"/>
         <property key="UART3" value="true"/>
+        <property key="UART4" value="true"/>
         <property key="communication.interface"
                   value="${communication.interface.default}"/>
         <property key="communication.interface.jtag" value="2wire"/>
