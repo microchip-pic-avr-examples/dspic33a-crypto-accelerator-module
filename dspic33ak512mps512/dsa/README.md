@@ -215,18 +215,18 @@ Flash size will vary based on size of the stored data inputs used with the libra
 #### Blocking Memory Usage
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|TBD|TBD|TBD|
-|P-256|TBD|TBD|TBD|
-|P-384|TBD|TBD|TBD|
-|P-521|TBD|TBD|TBD|
+|P-192|14,360|4,252|240|
+|P-256|14,396|4,268|240|
+|P-384|14,460|4,300|240|
+|P-521|14,532|4,336|240|
 
 #### Non-blocking Memory Usage
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|TBD|TBD|TBD|
-|P-256|TBD|TBD|TBD|
-|P-384|TBD|TBD|TBD|
-|P-521|TBD|TBD|TBD|
+|P-192|14,400|4,252|232|
+|P-256|14,424|4,268|232|
+|P-384|14,488|4,300|232|
+|P-521|14,560|4,336|232|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

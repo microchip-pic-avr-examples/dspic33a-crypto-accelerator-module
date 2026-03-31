@@ -211,7 +211,7 @@
       </C30-AS>
       <C30-CO>
         <property key="coverage-enable" value=""/>
-        <property key="stack-guidance" value="false"/>
+        <property key="stack-guidance" value="true"/>
       </C30-CO>
       <C30-LD>
         <property key="additional-options-use-response-files" value="false"/>
@@ -272,7 +272,6 @@
         <property key="vtable-type-2" value="--ivt="/>
         <property key="vtable-type-3" value="--ivt="/>
         <property key="warn-section-align" value="false"/>
-        <appendMe value="-mchp-stack-usage"/>
       </C30-LD>
       <C30Global>
         <property key="combine-sourcefiles" value="false"/>

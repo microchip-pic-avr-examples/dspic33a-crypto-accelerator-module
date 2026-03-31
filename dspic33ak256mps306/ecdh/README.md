@@ -87,10 +87,10 @@ Flash size will vary based on size of the stored data inputs used with the libra
 
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|TBD|TBD|TBD|
-|P-256|TBD|TBD|TBD|
-|P-384|TBD|TBD|TBD|
-|P-521|TBD|TBD|TBD|
+|P-192|13,008|4,200|232|
+|P-256|13,024|4,200|232|
+|P-384|13,104|4,200|232|
+|P-521|13,200|4,200|232|
 
 ## ACVP
 The ECDH Shared Secret API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
