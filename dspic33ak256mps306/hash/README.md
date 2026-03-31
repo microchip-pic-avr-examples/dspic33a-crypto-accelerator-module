@@ -162,20 +162,20 @@ The following benchmarking results were obtained with the device clock speed set
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
 |SHA-1|8,192|1,115.70|
-|SHA-224|8,192|1,350.42|
-|SHA-256|8,192|1,349.03|
-|SHA-384|8,192|1,731.01|
-|SHA-512|8,192|1,727.36|
-|SHA3-224|8,192|2,711.46|
-|SHA3-256|8,192|2,683.70|
+|SHA-224|8,192|1,351.26|
+|SHA-256|8,192|1,349.87|
+|SHA-384|8,192|1,731.92|
+|SHA-512|8,192|1,728.27|
+|SHA3-224|8,192|2,714.83|
+|SHA3-256|8,192|2,687.00|
 |SHA3-384|8,192|2,701.40|
-|SHA3-512|8,192|2,704.75|
+|SHA3-512|8,192|2,705.86|
 
 #### SHAKE
 |Hash Algorithm|Input Size (bytes)|Digest Size (bytes)|Crypto_Hash_Shake_Digest Performance (Mbps)|
 |----|----|----|----|
-|SHAKE-128|8,192|TBD|2,745.54|
-|SHAKE-256|8,192|TBD|2,721.59|
+|SHAKE-128|8,192|TBD|2,743.24|
+|SHAKE-256|8,192|TBD|2,713.71|
 
 ### Memory Size Benchmarking
 
