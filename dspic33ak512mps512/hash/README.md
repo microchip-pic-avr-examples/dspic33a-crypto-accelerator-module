@@ -100,21 +100,21 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|TBD|TBD|TBD|
-|SHA-224|TBD|TBD|TBD|
-|SHA-256|TBD|TBD|TBD|
-|SHA-384|TBD|TBD|TBD|
-|SHA-512|TBD|TBD|TBD|
+|SHA-1|11,024|74|280|
+|SHA-224|11,024|74|280|
+|SHA-256|11,024|74|280|
+|SHA-384|11,024|74|280|
+|SHA-512|11,024|74|280|
 
 #### Multi Step
 
 |Hash Algorithm|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|SHA-1|TBD|TBD|TBD|
-|SHA-224|TBD|TBD|TBD|
-|SHA-256|TBD|TBD|TBD|
-|SHA-384|TBD|TBD|TBD|
-|SHA-512|TBD|TBD|TBD|
+|SHA-1|11,864|74|44|
+|SHA-224|11,864|74|44|
+|SHA-256|11,864|74|44|
+|SHA-384|11,864|74|44|
+|SHA-512|11,864|74|44|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
