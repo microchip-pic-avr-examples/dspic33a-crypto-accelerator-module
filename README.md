@@ -111,7 +111,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA Sign   (Blocking)|19.76 ms|19.90 ms|Curve: P-384|
 |ECDSA Verify (Blocking)|27.15 ms|27.07 ms|Curve: P-384|
 |ECDSA Sign   (Blocking)|42.06 ms|42.31 ms|Curve: P-521|
-|ECDSA Verify (Blocking)|58.22 ms|15.18 ms|Curve: P-521|
+|ECDSA Verify (Blocking)|58.22 ms|58.38 ms|Curve: P-521|
 |ECDSA Sign   (Non-blocking)|3.95 ms|4.05 ms|Curve: P-192|
 |ECDSA Verify (Non-blocking)|5.11 ms|5.05 ms|Curve: P-192|
 |ECDSA Sign   (Non-blocking)|7.57 ms|7.70 ms|Curve: P-256|
@@ -119,7 +119,7 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 |ECDSA Sign   (Non-blocking)|20.37 ms|20.56 ms|Curve: P-384|
 |ECDSA Verify (Non-blocking)|27.12 ms|27.01 ms|Curve: P-384|
 |ECDSA Sign   (Non-blocking)|43.33 ms|43.63 ms|Curve: P-521|
-|ECDSA Verify (Non-blocking)|58.20 ms|15.12 ms|Curve: P-521|
+|ECDSA Verify (Non-blocking)|58.20 ms|58.37 ms|Curve: P-521|
 |TRNG (Generate)|114.00 µs|223.00 µs|Output Size: 521|
 |ECDH (Shared Secret Generate)|3.79 ms|3.74 ms|Curve: P-192|
 |ECDH (Shared Secret Generate)|7.25 ms|7.19 ms|Curve: P-256|
