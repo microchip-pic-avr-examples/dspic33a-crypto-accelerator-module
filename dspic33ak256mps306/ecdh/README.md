@@ -77,10 +77,10 @@ Benchmarking parameters: Device clock speed set to 200 MHz.
 
 |ECC Curve|Crypto_Kas_Ecdh_SharedSecret Performance (ms)|
 |----|----|
-|P-192|TBD|
-|P-256|TBD|
-|P-384|TBD|
-|P-521|TBD|
+|P-192|3.74|
+|P-256|7.19|
+|P-384|19.42|
+|P-521|41.58|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
