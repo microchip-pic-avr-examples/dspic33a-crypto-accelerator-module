@@ -217,25 +217,25 @@ The following benchmarking results were obtained with the device clock speed set
 #### AES-CMAC
 |Key Size (bytes)|Plaintext Size (bytes)|MAC Size (bytes)|AES-CMAC Crypto_Mac_AesCmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|16|8,192|16|TBD|
-|24|8,192|16|TBD|
-|32|8,192|16|TBD|
+|16|8,192|16|25.61|
+|24|8,192|16|25.21|
+|32|8,192|16|25.01|
 
 #### HMAC
 |Hash Algorithm|Key Size (bytes)|Message Size (bytes)|HMAC Crypto_Mac_Hmac_Direct Performance (Mbps)|
 |----|----|----|----|
-|SHA-1|16|8,192|TBD|
-|SHA2-224|16|8,192|TBD|
-|SHA2-256|16|8,192|TBD|
-|SHA2-384|16|8,192|TBD|
-|SHA2-512|16|8,192|TBD|
+|SHA-1|16|8,192|135.76|
+|SHA2-224|16|8,192|138.69|
+|SHA2-256|16|8,192|138.69|
+|SHA2-384|16|8,192|225.89|
+|SHA2-512|16|8,192|226.01|
 
 #### AES-GMAC
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|AES-GMAC Crypto_Mac_AesGmac_Direct Performance (Mbps)|
 |----|----|----|----|----|
-|16|12|8,192|16|TBD|
-|24|12|8,192|16|TBD|
-|32|12|8,192|16|TBD|
+|16|12|8,192|16|424.32|
+|24|12|8,192|16|363.81|
+|32|12|8,192|16|318.35|
 
 ### Memory Size Benchmarking
 The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.

@@ -70,61 +70,61 @@ Benchmarking parameters: Device clock speed set to 200 MHz
 
 |Algorithm|Parameters (sizes are in bytes)|dsPIC33AK512MPS512 (s)|dsPIC33AK256MPS306 (s)|
 |----|----|----|----|
-|SHA-1 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA-224 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA-256 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA-384 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA-512 (Digest)|Message Size: 8,192|TBD|TBD|
-|SHA3-224 (Digest)|Message Size: 8,192|N/A|TBD|
-|SHA3-256 (Digest)|Message Size: 8,192|N/A|TBD|
-|SHA3-384 (Digest)|Message Size: 8,192|N/A|TBD|
-|SHA3-512 (Digest)|Message Size: 8,192|N/A|TBD|
-|SHAKE128 (Digest)|Message Size: 8,192|N/A|TBD|
-|SHAKE256 (Digest)|Message Size: 8,192|N/A|TBD|
-|HMAC SHA-1 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
-|HMAC SHA-224 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
-|HMAC SHA-256 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
-|HMAC SHA-384 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
-|HMAC SHA-512 (Direct)|Key Size: 16, Message Size: 8,192|TBD|TBD|
-|AES-ECB (Encrypt)|Key Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-ECB (Decrypt)|Key Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-CTR (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-CTR (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-CBC (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-CBC (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-CFB128 (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-CFB128 (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-OFB (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-OFB (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-GCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-GCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-CCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-CCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-XTS (Encrypt)|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|TBD|TBD|
-|AES-XTS (Decrypt)|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|TBD|TBD|
-|AES-CMAC (Direct)|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|TBD|TBD|
-|AES-GMAC (Direct)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|TBD|TBD|
-|ECDSA Sign   (Blocking)|Curve: P-192|TBD|TBD|
-|ECDSA Verify (Blocking)|Curve: P-192|TBD|TBD|
-|ECDSA Sign   (Blocking)|Curve: P-256|TBD|TBD|
-|ECDSA Verify (Blocking)|Curve: P-256|TBD|TBD|
-|ECDSA Sign   (Blocking)|Curve: P-384|TBD|TBD|
-|ECDSA Verify (Blocking)|Curve: P-384|TBD|TBD|
-|ECDSA Sign   (Blocking)|Curve: P-521|TBD|TBD|
-|ECDSA Verify (Blocking)|Curve: P-521|TBD|TBD|
-|ECDSA Sign   (Non-blocking)|Curve: P-192|TBD|TBD|
-|ECDSA Verify (Non-blocking)|Curve: P-192|TBD|TBD|
-|ECDSA Sign   (Non-blocking)|Curve: P-256|TBD|TBD|
-|ECDSA Verify (Non-blocking)|Curve: P-256|TBD|TBD|
-|ECDSA Sign   (Non-blocking)|Curve: P-384|TBD|TBD|
-|ECDSA Verify (Non-blocking)|Curve: P-384|TBD|TBD|
-|ECDSA Sign   (Non-blocking)|Curve: P-521|TBD|TBD|
-|ECDSA Verify (Non-blocking)|Curve: P-521|TBD|TBD|
-|TRNG (Generate)|Output Size: 521|TBD|TBD|
-|ECDH (Shared Secret Generate)|Curve: P-192|TBD|TBD|
-|ECDH (Shared Secret Generate)|Curve: P-256|TBD|TBD|
-|ECDH (Shared Secret Generate)|Curve: P-384|TBD|TBD|
-|ECDH (Shared Secret Generate)|Curve: P-521|TBD|TBD|
+|SHA-1 (Digest)|Message Size: 8,192|0.000064|0.000059|
+|SHA-224 (Digest)|Message Size: 8,192|0.000054|0.000049|
+|SHA-256 (Digest)|Message Size: 8,192|0.000054|0.000049|
+|SHA-384 (Digest)|Message Size: 8,192|0.000044|0.000038|
+|SHA-512 (Digest)|Message Size: 8,192|0.000044|0.000038|
+|SHA3-224 (Digest)|Message Size: 8,192|N/A|0.000024|
+|SHA3-256 (Digest)|Message Size: 8,192|N/A|0.000024|
+|SHA3-384 (Digest)|Message Size: 8,192|N/A|0.000024|
+|SHA3-512 (Digest)|Message Size: 8,192|N/A|0.000024|
+|SHAKE128 (Digest)|Message Size: 8,192|N/A|0.000024|
+|SHAKE256 (Digest)|Message Size: 8,192|N/A|0.000024|
+|HMAC SHA-1 (Direct)|Key Size: 16, Message Size: 8,192|0.000483|0.000483|
+|HMAC SHA-224 (Direct)|Key Size: 16, Message Size: 8,192|0.000473|0.000477|
+|HMAC SHA-256 (Direct)|Key Size: 16, Message Size: 8,192|0.000473|0.000477|
+|HMAC SHA-384 (Direct)|Key Size: 16, Message Size: 8,192|0.000290|0.000291|
+|HMAC SHA-512 (Direct)|Key Size: 16, Message Size: 8,192|0.000290|0.000292|
+|AES-ECB (Encrypt)|Key Size: 16, Plaintext Size: 8,192|0.000150|0.000150|
+|AES-ECB (Decrypt)|Key Size: 16, Ciphertext Size: 8,192|0.000150|0.000150|
+|AES-CTR (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|0.000150|0.000150|
+|AES-CTR (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|0.000150|0.000150|
+|AES-CBC (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|0.000150|0.000150|
+|AES-CBC (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|0.000150|0.000151|
+|AES-CFB128 (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|0.000150|0.000150|
+|AES-CFB128 (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|0.000150|0.000150|
+|AES-OFB (Encrypt)|Key Size: 16, Initialization Vector Size: 16, Plaintext Size: 8,192|0.000150|0.000150|
+|AES-OFB (Decrypt)|Key Size: 16, Initialization Vector Size: 16, Ciphertext Size: 8,192|0.000150|0.000150|
+|AES-GCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|0.000156|0.000155|
+|AES-GCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|0.000156|0.000156|
+|AES-CCM (Encrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Plaintext Size: 8,192|0.000303|0.000303|
+|AES-CCM (Decrypt)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 4, Tag Size: 16, Ciphertext Size: 8,192|0.000304|0.000304|
+|AES-XTS (Encrypt)|Key Size: 16, Tweak Size: 16, Plaintext Size: 8,192|0.000152|0.000152|
+|AES-XTS (Decrypt)|Key Size: 16, Tweak Size: 16, Ciphertext Size: 8,192|0.000152|0.000152|
+|AES-CMAC (Direct)|Key Size: 16, Plaintext Size: 8,192, MAC Size: 16|0.002559|0.002324|
+|AES-GMAC (Direct)|Key Size: 16, Initialization Vector Size: 12, Authentication Data Size: 8,192, Tag Size: 16|0.000154|0.000154|
+|ECDSA Sign   (Blocking)|Curve: P-192|0.003901|0.003985|
+|ECDSA Verify (Blocking)|Curve: P-192|0.005163|0.005109|
+|ECDSA Sign   (Blocking)|Curve: P-256|0.007393|0.007489|
+|ECDSA Verify (Blocking)|Curve: P-256|0.009946|0.009881|
+|ECDSA Sign   (Blocking)|Curve: P-384|0.019759|0.019898|
+|ECDSA Verify (Blocking)|Curve: P-384|0.027153|0.027073|
+|ECDSA Sign   (Blocking)|Curve: P-521|0.042061|0.042306|
+|ECDSA Verify (Blocking)|Curve: P-521|0.058225|0.015177|
+|ECDSA Sign   (Non-blocking)|Curve: P-192|0.003952|0.004050|
+|ECDSA Verify (Non-blocking)|Curve: P-192|0.005106|0.005049|
+|ECDSA Sign   (Non-blocking)|Curve: P-256|0.007573|0.007698|
+|ECDSA Verify (Non-blocking)|Curve: P-256|0.009897|0.009821|
+|ECDSA Sign   (Non-blocking)|Curve: P-384|0.020365|0.020556|
+|ECDSA Verify (Non-blocking)|Curve: P-384|0.027118|0.027012|
+|ECDSA Sign   (Non-blocking)|Curve: P-521|0.043332|0.043632|
+|ECDSA Verify (Non-blocking)|Curve: P-521|0.058198|0.015117|
+|TRNG (Generate)|Output Size: 521|0.000114|0.000223|
+|ECDH (Shared Secret Generate)|Curve: P-192|0.003792|0.003740|
+|ECDH (Shared Secret Generate)|Curve: P-256|0.007250|0.007187|
+|ECDH (Shared Secret Generate)|Curve: P-384|0.019503|0.019422|
+|ECDH (Shared Secret Generate)|Curve: P-521|0.041678|0.041575|
 
 ### Memory Size Benchmarking
 The following results include usage of single step and multi step APIs. Flash size will vary based on size of the stored data inputs used with the library.

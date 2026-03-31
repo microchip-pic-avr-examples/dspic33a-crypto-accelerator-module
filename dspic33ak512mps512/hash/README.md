@@ -88,11 +88,11 @@ The following benchmarking results were obtained with the device clock speed set
 
 |Hash Algorithm|Input Size (bytes)|Crypto_Hash_Sha_Digest Performance (Mbps)|
 |----|----|----|
-|SHA-1|8,192|TBD|
-|SHA-224|8,192|TBD|
-|SHA-256|8,192|TBD|
-|SHA-384|8,192|TBD|
-|SHA-512|8,192|TBD|
+|SHA-1|8,192|1,025.44|
+|SHA-224|8,192|1,219.05|
+|SHA-256|8,192|1,219.27|
+|SHA-384|8,192|1,491.83|
+|SHA-512|8,192|1,491.15|
 
 ### Memory Size Benchmarking
 
