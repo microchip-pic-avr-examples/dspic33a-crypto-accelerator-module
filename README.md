@@ -150,322 +150,322 @@ All projects have the following compiler options:
   </tr>
   <tr>
     <td>SHA-1 (Digest)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,024</td><td>74</td><td>280</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA-1 (Init, Update, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,864</td><td>74</td><td>44</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA-224 (Digest)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,024</td><td>74</td><td>280</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA-224 (Init, Update, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,864</td><td>74</td><td>44</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA-256 (Digest)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,024</td><td>74</td><td>280</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA-256 (Init, Update, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,864</td><td>74</td><td>44</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA-384 (Digest)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,024</td><td>74</td><td>280</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA-384 (Init, Update, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,864</td><td>74</td><td>44</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA-512 (Digest)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,024</td><td>74</td><td>280</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA-512 (Init, Update, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>11,864</td><td>74</td><td>44</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA3-224 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA3-224 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA3-256 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA3-256 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA3-384 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA3-384 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHA3-512 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,344</td><td>74</td><td>480</td>
   </tr>
   <tr>
     <td>SHA3-512 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,184</td><td>74</td><td>48</td>
   </tr>
   <tr>
     <td>SHAKE128 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,100</td><td>74</td><td>476</td>
   </tr>
   <tr>
     <td>SHAKE128 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,944</td><td>74</td><td>44</td>
   </tr>
   <tr>
     <td>SHAKE256 (Digest)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,100</td><td>74</td><td>476</td>
   </tr>
   <tr>
     <td>SHAKE256 (Init, Update, and Final)</td>
     <td>N/A</td><td>N/A</td><td>N/A</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,944</td><td>74</td><td>44</td>
   </tr>
   <tr>
     <td>HMAC SHA-1 (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>848</td>
+    <td>19,976</td><td>74</td><td>1,056</td>
   </tr>
   <tr>
     <td>HMAC SHA-1 (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,920</td><td>74</td><td>120</td>
+    <td>20,948</td><td>74</td><td>124</td>
   </tr>
   <tr>
     <td>HMAC SHA-224 (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>848</td>
+    <td>19,976</td><td>74</td><td>1,056</td>
   </tr>
   <tr>
     <td>HMAC SHA-224 (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,920</td><td>74</td><td>120</td>
+    <td>20,948</td><td>74</td><td>124</td>
   </tr>
   <tr>
     <td>HMAC SHA-256 (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>848</td>
+    <td>19,976</td><td>74</td><td>1,056</td>
   </tr>
   <tr>
     <td>HMAC SHA-256 (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,920</td><td>74</td><td>120</td>
+    <td>20,948</td><td>74</td><td>124</td>
   </tr>
   <tr>
     <td>HMAC SHA-384 (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>848</td>
+    <td>19,976</td><td>74</td><td>1,056</td>
   </tr>
   <tr>
     <td>HMAC SHA-384 (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,920</td><td>74</td><td>120</td>
+    <td>20,948</td><td>74</td><td>124</td>
   </tr>
   <tr>
     <td>HMAC SHA-512 (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>848</td>
+    <td>19,976</td><td>74</td><td>1,056</td>
   </tr>
   <tr>
     <td>HMAC SHA-512 (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,920</td><td>74</td><td>120</td>
+    <td>20,948</td><td>74</td><td>124</td>
   </tr>
   <tr>
     <td>AES-ECB (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,004</td><td>74</td><td>324</td>
+    <td>12,148</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-ECB (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,060</td><td>2,022</td><td>56</td>
+    <td>12,204</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-CTR (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,028</td><td>74</td><td>324</td>
+    <td>12,172</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-CTR (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,080</td><td>2,022</td><td>56</td>
+    <td>12,224</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-CBC (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,168</td><td>74</td><td>324</td>
+    <td>12,172</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-CBC (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,220</td><td>2,022</td><td>56</td>
+    <td>12,224</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-CFB128 (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,168</td><td>74</td><td>324</td>
+    <td>12,172</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-CFB128 (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,220</td><td>2,022</td><td>56</td>
+    <td>12,224</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-OFB (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,168</td><td>74</td><td>324</td>
+    <td>12,172</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-OFB (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,220</td><td>2,022</td><td>56</td>
+    <td>12,224</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-GCM (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,448</td><td>106</td><td>340</td>
+    <td>13,592</td><td>106</td><td>340</td>
   </tr>
   <tr>
     <td>AES-GCM (Init, AddAadData, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,540</td><td>646</td><td>56</td>
+    <td>13,684</td><td>646</td><td>56</td>
   </tr>
   <tr>
     <td>AES-CCM (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>13,544</td><td>602</td><td>116</td>
+    <td>13,688</td><td>602</td><td>116</td>
   </tr>
   <tr>
     <td>AES-XTS (Encrypt and Decrypt)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,028</td><td>74</td><td>324</td>
+    <td>12,172</td><td>74</td><td>324</td>
   </tr>
   <tr>
     <td>AES-XTS (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,088</td><td>2,022</td><td>56</td>
+    <td>12,232</td><td>2,022</td><td>56</td>
   </tr>
   <tr>
     <td>AES-CMAC (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,920</td><td>74</td><td>292</td>
+    <td>19,948</td><td>74</td><td>292</td>
   </tr>
   <tr>
     <td>AES-CMAC (Init, Cipher, and Final)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,484</td><td>74</td><td>56</td>
+    <td>20,512</td><td>74</td><td>56</td>
   </tr>
   <tr>
     <td>AES-GMAC (Direct)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>18,948</td><td>74</td><td>312</td>
+    <td>19,976</td><td>74</td><td>312</td>
   </tr>
   <tr>
     <td>AES-GMAC (Init and Cipher)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>19,496</td><td>74</td><td>44</td>
+    <td>20,524</td><td>74</td><td>44</td>
   </tr>
   <tr>
     <td>ECDSA Blocking (Sign and Verify (P-192))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,360</td><td>4,252</td><td>240</td>
+    <td>15,284</td><td>4,252</td><td>248</td>
   </tr>
   <tr>
     <td>ECDSA Blocking (Sign and Verify (P-256))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,396</td><td>4,268</td><td>240</td>
+    <td>15,320</td><td>4,268</td><td>248</td>
   </tr>
   <tr>
     <td>ECDSA Blocking (Sign and Verify (P-384))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,460</td><td>4,300</td><td>240</td>
+    <td>15,384</td><td>4,300</td><td>248</td>
   </tr>
   <tr>
     <td>ECDSA Blocking (Sign and Verify (P-521))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,532</td><td>4,336</td><td>240</td>
+    <td>15,456</td><td>4,336</td><td>248</td>
   </tr>
   <tr>
     <td>ECDSA Non-blocking (Sign and Verify (P-192))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,400</td><td>4,252</td><td>232</td>
+    <td>15,324</td><td>4,252</td><td>240</td>
   </tr>
   <tr>
     <td>ECDSA Non-blocking (Sign and Verify (P-256))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,424</td><td>4,268</td><td>232</td>
+    <td>15,348</td><td>4,268</td><td>240</td>
   </tr>
   <tr>
     <td>ECDSA Non-blocking (Sign and Verify (P-384))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,488</td><td>4,300</td><td>232</td>
+    <td>15,412</td><td>4,300</td><td>240</td>
   </tr>
   <tr>
     <td>ECDSA Non-blocking (Sign and Verify (P-521))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>14,560</td><td>4,336</td><td>232</td>
+    <td>15,484</td><td>4,336</td><td>240</td>
   </tr>
   <tr>
     <td>TRNG (Generate)</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>5,740</td><td>626</td><td>76</td>
+    <td>6,020</td><td>626</td><td>84</td>
   </tr>
   <tr>
     <td>ECDH (Shared Secret (P-192))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,084</td><td>4,200</td><td>224</td>
+    <td>13,008</td><td>4,200</td><td>232</td>
   </tr>
   <tr>
     <td>ECDH (Shared Secret (P-256))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,100</td><td>4,200</td><td>224</td>
+    <td>13,024</td><td>4,200</td><td>232</td>
   </tr>
   <tr>
     <td>ECDH (Shared Secret (P-384))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,180</td><td>4,200</td><td>224</td>
+    <td>13,104</td><td>4,200</td><td>232</td>
   </tr>
   <tr>
     <td>ECDH (Shared Secret (P-521))</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
-    <td>TBD</td><td>TBD</td><td>TBD</td>
+    <td>12,276</td><td>4,200</td><td>224</td>
+    <td>13,200</td><td>4,200</td><td>232</td>
   </tr>
 </table>

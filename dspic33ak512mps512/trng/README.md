@@ -68,4 +68,4 @@ The below sizes are for the process of getting 521 bytes (8-bit words).
 
 |FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |---|---|---|
-|TBD|TBD|TBD|
+|5,740|626|76|
