@@ -244,25 +244,25 @@ The following results include usage of AES-CMAC, HMAC, and AES-GMAC APIs. Flash 
 
 |Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-CMAC|TBD|TBD|TBD|
-|HMAC SHA-1|TBD|TBD|TBD|
-|HMAC SHA-224|TBD|TBD|TBD|
-|HMAC SHA-256|TBD|TBD|TBD|
-|HMAC SHA-384|TBD|TBD|TBD|
-|HMAC SHA-512|TBD|TBD|TBD|
-|AES-GMAC|TBD|TBD|TBD|
+|AES-CMAC|19,948|74|292|
+|HMAC SHA-1|19,976|74|1,056|
+|HMAC SHA-224|19,976|74|1,056|
+|HMAC SHA-256|19,976|74|1,056|
+|HMAC SHA-384|19,976|74|1,056|
+|HMAC SHA-512|19,976|74|1,056|
+|AES-GMAC|19,976|74|312|
 
 #### Multi Step
 
 |Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-CMAC|TBD|TBD|TBD|
-|HMAC SHA-1|TBD|TBD|TBD|
-|HMAC SHA-224|TBD|TBD|TBD|
-|HMAC SHA-256|TBD|TBD|TBD|
-|HMAC SHA-384|TBD|TBD|TBD|
-|HMAC SHA-512|TBD|TBD|TBD|
-|AES-GMAC|TBD|TBD|TBD|
+|AES-CMAC|20,512|74|56|
+|HMAC SHA-1|20,948|74|124|
+|HMAC SHA-224|20,948|74|124|
+|HMAC SHA-256|20,948|74|124|
+|HMAC SHA-384|20,948|74|124|
+|HMAC SHA-512|20,948|74|124|
+|AES-GMAC|20,524|74|44|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
