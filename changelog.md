@@ -1,3 +1,25 @@
+# dspic33a-crypto-accelerator-module v1.4.0
+### Release Highlights
+- Added support for dsPIC33AK256MPS306 device across all demo projects
+	- HASH demo updated to showcase SHA-3 APIs
+	- Added new SHAKE demo project
+- Consolidated crypto library files into a single shared `lib` folder at the repository root
+- Consolidated application utility functions and macros into a single shared `utils` folder at the repository root
+- Aligned demo API naming and formatting
+
+### Features Added\Updated
+- Crypto Algorithms added in this release:
+	- HASH (dsPIC33AK256MPS306 only)
+		- SHA3-224
+		- SHA3-256
+		- SHA3-384
+		- SHA3-512
+		- SHAKE128
+		- SHAKE256
+- Features added to the CAM Hardware Driver (v1.5.0):
+	- Updates to HASH driver:
+		- Support for SHA-3 and SHAKE
+
 # dspic33a-crypto-accelerator-module v1.3.0
 ### Release Highlights
 - AES demo updated to showcase AES-CBC, AES-CFB128, AES-OFB, and AES-CCM Encrypt/Decrypt APIs
@@ -19,7 +41,7 @@
 		- HMAC-SHA2-384
 		- HMAC-SHA2-512
 		- AES-GMAC
-- Features added to the CAM Hardware Driver:
+- Features added to the CAM Hardware Driver (v1.3.0):
 	- Updates to ECDSA driver:
 		- Support for non-blocking implementations
 	- Updates to Hash driver:
@@ -37,7 +59,7 @@
 - Crypto Algorithms added in this release:
 	- AES
 		- AES-XTS Encrypt and Decrypt
-- Features added to the CAM Hardware Driver:
+- Features added to the CAM Hardware Driver (v1.2.0):
 	- Updates to AES driver:
 		- Context safety
 		- Optimizations

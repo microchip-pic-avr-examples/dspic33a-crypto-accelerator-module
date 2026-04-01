@@ -1,0 +1,131 @@
+//DOM-IGNORE-BEGIN
+/*
+Copyright (C) 2026, Microchip Technology Inc., and its subsidiaries. All rights reserved.
+
+The software and documentation is provided by microchip and its contributors
+"as is" and any express, implied or statutory warranties, including, but not
+limited to, the implied warranties of merchantability, fitness for a particular
+purpose and non-infringement of third party intellectual property rights are
+disclaimed to the fullest extent permitted by law. In no event shall microchip
+or its contributors be liable for any direct, indirect, incidental, special,
+exemplary, or consequential damages (including, but not limited to, procurement
+of substitute goods or services; loss of use, data, or profits; or business
+interruption) however caused and on any theory of liability, whether in contract,
+strict liability, or tort (including negligence or otherwise) arising in any way
+out of the use of the software and documentation, even if advised of the
+possibility of such damage.
+
+Except as expressly permitted hereunder and subject to the applicable license terms
+for any third-party software incorporated in the software and any applicable open
+source software license terms, no license or other rights, whether express or
+implied, are granted under any patent or other intellectual property rights of
+Microchip or any third party.
+*/
+//DOM-IGNORE-END
+
+#ifndef SYM_TEST_VECTOR_H
+#define SYM_TEST_VECTOR_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#include <stdint.h>
+
+typedef struct
+{
+    uint32_t    id;
+    uint32_t    mode;
+
+    uint8_t *   ptData;
+    uint8_t *   ctData;
+    uint32_t    dataLength;
+
+    uint8_t *   key;
+    uint32_t    keyLength;
+
+    uint8_t *   tweak;
+    uint32_t    tweakLength;
+
+    uint8_t *   initializationVector;
+    uint32_t    initializationVectorLength;
+} sym_test_vector_t;
+
+/**
+ * @brief Get the array of AES-ECB test vectors.
+ * @return Pointer to the first ECB test vector.
+ */
+sym_test_vector_t *VECTOR_EcbTestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-ECB test vectors.
+ * @return Number of ECB test vectors.
+ */
+uint32_t VECTOR_EcbTestVectorCountGet(void);
+
+/**
+ * @brief Get the array of AES-CTR test vectors.
+ * @return Pointer to the first CTR test vector.
+ */
+sym_test_vector_t *VECTOR_CtrTestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-CTR test vectors.
+ * @return Number of CTR test vectors.
+ */
+uint32_t VECTOR_CtrTestVectorCountGet(void);
+
+/**
+ * @brief Get the array of AES-CBC test vectors.
+ * @return Pointer to the first CBC test vector.
+ */
+sym_test_vector_t *VECTOR_CbcTestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-CBC test vectors.
+ * @return Number of CBC test vectors.
+ */
+uint32_t VECTOR_CbcTestVectorCountGet(void);
+
+/**
+ * @brief Get the array of AES-CFB128 test vectors.
+ * @return Pointer to the first CFB128 test vector.
+ */
+sym_test_vector_t *VECTOR_Cfb128TestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-CFB128 test vectors.
+ * @return Number of CFB128 test vectors.
+ */
+uint32_t VECTOR_Cfb128TestVectorCountGet(void);
+
+/**
+ * @brief Get the array of AES-OFB test vectors.
+ * @return Pointer to the first OFB test vector.
+ */
+sym_test_vector_t *VECTOR_OfbTestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-OFB test vectors.
+ * @return Number of OFB test vectors.
+ */
+uint32_t VECTOR_OfbTestVectorCountGet(void);
+
+/**
+ * @brief Get the array of AES-XTS test vectors.
+ * @return Pointer to the first XTS test vector.
+ */
+sym_test_vector_t *VECTOR_XtsTestVectorsGet(void);
+
+/**
+ * @brief Get the number of AES-XTS test vectors.
+ * @return Number of XTS test vectors.
+ */
+uint32_t VECTOR_XtsTestVectorCountGet(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* SYM_TEST_VECTOR_H */

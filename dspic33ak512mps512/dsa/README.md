@@ -17,9 +17,9 @@ The ECDSA Sign and Verify operations use NIST defined public and private keys fo
 - P-521
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -28,24 +28,22 @@ The ECDSA Sign and Verify operations use NIST defined public and private keys fo
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
 ## Running The Application
-1. Within MPLAB® X IDE, open the dsa.x application project in dsa/firmware.
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-ecdsa.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
-### Application Results
+## Application Results
 The following information will be printed on the COM port for all supported ECC Curve types using the blocking then non-blocking API calls:
 1. A header Section with the ECC curve type name is printed.
 2. The signature is generated. (A status of the Crypto Device will be returned and printed)
 3. Generated signature is printed out.
 4. This signature is then verified and the status is printed out.
 
-<img src="./images/ecdsa_demo.png" alt="ECDSA Demo Output" width="750"/>
-
 ## Crypto Library APIs
-crypto_digisign.h defines sign and verify functions
+crypto_digsign.h defines sign and verify functions
 
 - Inputs to these functions must be **big endian**.
 
@@ -138,7 +136,7 @@ void Crypto_DigiSign_Ecdsa_VerifyComplete_CallbackRegister(
 );
 ```
 
-### crypto_EccCurveType_E can be any of the following enum values:
+### crypto_EccCurveType_E can be any of the following enum values
 - CRYPTO_ECC_CURVE_P192
 - CRYPTO_ECC_CURVE_P256
 - CRYPTO_ECC_CURVE_P384
@@ -161,7 +159,7 @@ The input test vectors used in this demo are from NIST Publication: [FIPS 186-4 
 
 Hash values used in this demo are from NIST [Cryptographic Standards and Guidelines](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines/example-values) and can be found under the Secure Hashing section for all Digest Sizes.
 
-## Benchmarking Results
+## Benchmarking
 
 ### Performance Benchmarking
 Benchmarking parameters: Device clock speed set to 200 MHz.
@@ -172,59 +170,63 @@ The Crypto Accelerator Module has a lower priority on the BMX RAM access.
 If an empty polling loop is used with the Non-blocking API's there will be an increase in time.
 - The empty polling loop causes the CPU to over-utilize the BMX thereby blocking the Crypto Accelerator Module from accessing RAM.
 
-A possible workaround will be to change the Crypto BMX access to have priority over the CPU. 
+A possible workaround if an empty polling loop is required will be to change the Crypto BMX access to have priority over the CPU. 
 - **Disclaimer: This is not recommended as the crypto operations may restrict critical system functions and cause unexpected behavior.**
 
 Example for the dsPIC33AK512MPS512: `BMXINITPRbits.CRYPTPR = 1`
 
+For use of the non-blocking ECDSA API's it is recommended to utilize the callback register functions to check if the operation is complete rather than use a polling loop.
+
+Otherwise it may be beneficial to use the blocking API calls if non-blocking is not required. 
+
 #### Blocking API Performance:
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|3.88|
-|P-256|7.36|
-|P-384|19.64|
-|P-521|41.88|
+|P-192|3.90|
+|P-256|7.39|
+|P-384|19.76|
+|P-521|42.06|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.12|
-|P-256|9.84|
-|P-384|26.92|
-|P-521|58.08|
+|P-192|5.16|
+|P-256|9.95|
+|P-384|27.15|
+|P-521|58.22|
 
-#### Non-blocking API Performance:
+#### Non-blocking API Performance
 |ECC Curve|Crypto_DigiSign_Ecdsa_Sign Performance (ms)|
 |----|----|
-|P-192|3.92|
-|P-256|7.48|
-|P-384|20.24|
-|P-521|43.16|
+|P-192|3.95|
+|P-256|7.57|
+|P-384|20.37|
+|P-521|43.33|
 
 |ECC Curve|Crypto_DigiSign_Ecdsa_Verify Performance (ms)|
 |----|----|
-|P-192|5.20|
-|P-256|10.12|
-|P-384|27.52|
-|P-521|59.92|
+|P-192|5.11|
+|P-256|9.90|
+|P-384|27.12|
+|P-521|58.20|
 
 ### Memory Size Benchmarking
 Flash size will vary based on size of the stored data inputs used with the library. 
 
-#### Blocking Memory Usage:
+#### Blocking Memory Usage
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|13,404|4,220|324|
-|P-256|13,440|4,236|324|
-|P-384|13,504|4,268|324|
-|P-521|13,576|4,304|324|
+|P-192|14,360|4,252|240|
+|P-256|14,396|4,268|240|
+|P-384|14,460|4,300|240|
+|P-521|14,532|4,336|240|
 
-#### Non-blocking Memory Usage:
+#### Non-blocking Memory Usage
 |ECC Curve|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|P-192|13,444|4,220|316|
-|P-256|13,468|4,236|316|
-|P-384|13,532|4,268|316|
-|P-521|13,604|4,304|316|
+|P-192|14,400|4,252|232|
+|P-256|14,424|4,268|232|
+|P-384|14,488|4,300|232|
+|P-521|14,560|4,336|232|
 
 ## ACVP
 The ECDSA Verify API has been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).

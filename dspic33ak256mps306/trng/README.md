@@ -1,0 +1,71 @@
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../images/microchip_logo_white_red.png">
+    <source media="(prefers-color-scheme: light)" srcset="../../images/microchip_logo_black_red.png">
+    <img alt="Microchip Logo." src="../../images/microchip_logo_black_red.png">
+</picture>
+
+# Crypto Accelerator Module TRNG Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
+## Description
+This example application utilizes the Crypto Library that interacts with the Pre-compiled CAM Hardware Driver to perform TRNG.
+
+## Software Tool Versions Used
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
+
+## Setting Up The Hardware
+- dsPIC33AK256MPS306 Curiosity GP DIM ([EV02E57A](https://www.microchip.com/en-us/development-tool/EV02E57A))
+- Curiosity Platform Development Board ([EV74H48A](https://www.microchip.com/EV74H48A))
+
+1. Insert the dsPIC33AK256MPS306 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
+2. Connect the the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
+
+<img src="../../images/hardware/dspic33ak256mps306_dim_board.jpg" alt="Hardware Setup" width="750"/>
+
+## Running The Application
+1. Within MPLAB® X IDE, open the `dspic33ak256mps306-trng.X` application project.
+2. Build and Program the application using MPLAB® X IDE.
+3. The printed information can be found on the serial COM port reading at a speed of 115200.
+
+## Application Results
+The following information will be printed on the COM port:
+1. A header showing that the generation has begun.
+2. A header for each TRNG result that shows the length in bytes.
+3. The TRNG result data.
+
+## Crypto Library APIs
+crypto_rng.h defines the Generate API.
+
+```c
+crypto_Rng_Status_E Crypto_Rng_Prng_Generate(
+    crypto_HandlerType_E rngHandlerType_en, // Determines if hardware or software is used for generation
+    uint8_t* ptr_rngData,                   // The location that the TRNG generated data will be stored
+    uint32_t rngLen,                        // The length of the generated data
+    uint8_t* ptr_nonce,                     // Unused parameter for the CAM implementation, should always be set to NULL
+    uint32_t nonceLen,                      // Unused parameter for the CAM implementation, should always be set to 0
+    uint32_t sessionID                      // Unused parameter for the CAM implementation, should always be set to 1
+);
+```
+
+## Benchmarking
+
+### Performance Benchmarking
+
+Benchmarking parameters: Device clock speed set to 200 MHz.
+
+|TRNG Size (bytes)|Crypto_Rng_Generate Performance (µs)|
+|---|---|
+|192|189.33|
+|256|195.67|
+|384|208.50|
+|521|222.75|
+
+### Memory Size Benchmarking
+
+The below sizes are for the process of getting 521 bytes (8-bit words).
+
+|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
+|---|---|---|
+|6,020|626|84|

@@ -20,9 +20,9 @@ This example application utilizes the Crypto Library that interacts with the Pre
 - XTS
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -31,11 +31,11 @@ This example application utilizes the Crypto Library that interacts with the Pre
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
-1. Within MPLAB® X IDE, open the aes.x application project in aes/firmware.
-    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition on line 77 in aes/aes.X/app_aes.h
+## Running The Application
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes.X` application project.
+    - (Optional) To run all added test vectors uncomment the RUN_ALL_VECTORS definition in dspic33ak512mps512-aes.X/app/app_aes.h
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 
@@ -63,8 +63,6 @@ The following information will be printed on the COM port for symmetric AES algo
     4. Pass or Fail is printed out depending on the comparison result.
 8. The single-step and multi-step encrypted data results are compared.
     1. Pass or Fail is printed out depending on the comparison result.
-
-<img src="./images/dspic33ak512mps512_ccv4_aes_sym_demo.png" alt="AES Symmetric Demo Output" width="750"/>
 
 ### AES GCM, CCM Results
 The following information will be printed on the COM port for the AES AEAD algorithms:
@@ -101,8 +99,6 @@ The following information will be printed on the COM port for the AES AEAD algor
 8. The single-step and multi-step encrypted data results are compared.
     1. Pass or Fail is printed out depending on the comparison result.
 
-<img src="./images/dspic33ak512mps512_ccv4_aes_aead_demo.png" alt="AES AEAD Demo Output" width="750"/>
-
 ### AES XTS Results
 The following information will be printed on the COM port for symmetric AES XTS algorithm:
 1. A header is displayed showing the used AES algorithm and input data length.
@@ -129,8 +125,6 @@ The following information will be printed on the COM port for symmetric AES XTS 
     6. Pass or Fail is printed out depending on the comparison result.
 8. The single-step and multi-step encrypted data results are compared.
     1. Pass or Fail is printed out depending on the comparison result.
-
-<img src="./images/dspic33ak512mps512_ccv4_aes_sym_xts_demo.png" alt="AES XTS Demo Output" width="750"/>
 
 ## Crypto Library APIs
 
@@ -309,104 +303,104 @@ The following benchmarking results were obtained with the device clock speed set
 #### AES-ECB
 |Key Size (bytes)|Plaintext Size (bytes)|AES-ECB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|
-|16|8,192|436.88|
-|24|8,192|373.28|
-|32|8,192|325.71|
+|16|8,192|437.20|
+|24|8,192|373.38|
+|32|8,192|325.86|
 
 |Key Size (bytes)|Ciphertext Size (bytes)|AES-ECB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|
-|16|8,192|436.24|
-|24|8,192|372.64|
-|32|8,192|325.16|
+|16|8,192|436.32|
+|24|8,192|372.70|
+|32|8,192|325.21|
 
 #### AES-CTR
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CTR Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|436.94|
-|24|16|8,192|373.39|
-|32|16|8,192|325.88|
+|16|16|8,192|436.35|
+|24|16|8,192|372.89|
+|32|16|8,192|325.42|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CTR Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|437.09|
-|24|16|8,192|373.45|
-|32|16|8,192|325.92|
+|16|16|8,192|436.35|
+|24|16|8,192|372.89|
+|32|16|8,192|325.42|
 
 #### AES-CBC
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CBC Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|436.94|
-|24|16|8,192|373.41|
-|32|16|8,192|325.89|
+|16|16|8,192|436.38|
+|24|16|8,192|372.91|
+|32|16|8,192|325.43|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CBC Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|436.16|
-|24|16|8,192|372.69|
-|32|16|8,192|325.28|
+|16|16|8,192|435.57|
+|24|16|8,192|372.15|
+|32|16|8,192|324.79|
 
 #### AES-CFB128
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|436.74|
-|24|16|8,192|373.26|
-|32|16|8,192|325.78|
+|16|16|8,192|436.18|
+|24|16|8,192|372.77|
+|32|16|8,192|325.32|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-CFB128 Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|436.89|
-|24|16|8,192|373.30|
-|32|16|8,192|325.81|
+|16|16|8,192|436.15|
+|24|16|8,192|372.74|
+|32|16|8,192|325.31|
 
 #### AES-OFB
 |Key Size (bytes)|Initialization Vector Size (bytes)|Plaintext Size (bytes)|AES-OFB Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|437.00|
-|24|16|8,192|373.45|
-|32|16|8,192|325.92|
+|16|16|8,192|436.44|
+|24|16|8,192|372.96|
+|32|16|8,192|325.47|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Ciphertext Size (bytes)|AES-OFB Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|437.21|
-|24|16|8,192|373.54|
-|32|16|8,192|325.99|
+|16|16|8,192|436.44|
+|24|16|8,192|372.96|
+|32|16|8,192|325.47|
 
 #### AES-CCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-CCM Crypto_Aead_AesCcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8,192|217.01|
-|24|12|4|16|8,192|185.59|
-|32|12|4|16|8,192|162.10|
+|16|12|4|16|8,192|216.22|
+|24|12|4|16|8,192|184.87|
+|32|12|4|16|8,192|161.47|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-CCM Crypto_Aead_AesCcm_DecryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8,192|216.19|
-|24|12|2|16|8,192|184.98|
-|32|12|2|16|8,192|161.63|
+|16|12|4|16|8,192|215.30|
+|24|12|4|16|8,192|184.22|
+|32|12|4|16|8,192|160.97|
 
 #### AES-GCM
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Plaintext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_EncryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8,192|423.29|
-|24|12|4|16|8,192|363.11|
-|32|12|4|16|8,192|317.91|
+|16|12|4|16|8,192|421.45|
+|24|12|4|16|8,192|361.64|
+|32|12|4|16|8,192|316.63|
 
 |Key Size (bytes)|Initialization Vector Size (bytes)|Authentication Data Size (bytes)|Tag Size (bytes)|Ciphertext Size (bytes)|AES-GCM Crypto_Aead_AesGcm_DecryptAuthDirect Performance (Mbps)|
 |----|----|----|----|----|----|
-|16|12|4|16|8,192|421.18|
-|24|12|2|16|8,192|361.55|
-|32|12|2|16|8,192|316.70|
+|16|12|4|16|8,192|419.35|
+|24|12|4|16|8,192|360.01|
+|32|12|4|16|8,192|315.36|
 
 #### AES-XTS
 |Key Size (bytes)|Tweak Size (bytes)|Plaintext Size (bytes)|AES-XTS Crypto_Sym_Aes_EncryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|431.77|
-|32|16|8,192|322.80|
+|16|16|8,192|431.13|
+|32|16|8,192|322.27|
 
 |Key Size (bytes)|Tweak Size (bytes)|Ciphertext Size (bytes)|AES-XTS Crypto_Sym_Aes_DecryptDirect Performance (Mbps)|
 |----|----|----|----|
-|16|16|8,192|430.98|
-|32|16|8,192|322.18|
+|16|16|8,192|430.28|
+|32|16|8,192|321.63|
 
 ### Memory Size Benchmarking
 The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash size will vary based on size of the stored data inputs used with the library.
@@ -415,26 +409,26 @@ The following results include usage of ECB, CTR, GCM, XTS, and CMAC APIs. Flash 
 
 |AES Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-ECB|11,788|74|324|
-|AES-CTR|11,812|74|324|
-|AES-CBC|12,140|74|324|
-|AES-CFB128|12,140|74|324|
-|AES-OFB|12,140|74|324|
-|AES-GCM|13,232|106|336|
-|AES-CCM|13,196|590|116|
-|AES-XTS|11,616|62|324|
+|AES-ECB|12,004|74|324|
+|AES-CTR|12,028|74|324|
+|AES-CBC|12,168|74|324|
+|AES-CFB128|12,168|74|324|
+|AES-OFB|12,168|74|324|
+|AES-GCM|13,448|106|340|
+|AES-XTS|12,028|74|324|
 
 #### Multi Step
 
 |AES Mode|FLASH (bytes)|RAM Static (bytes)|RAM Stack (bytes)|
 |----|----|----|----|
-|AES-ECB|11,844|2,022|56|
-|AES-CTR|11,864|2,022|56|
-|AES-CBC|12,192|2,022|56|
-|AES-CFB128|12,192|2,022|56|
-|AES-OFB|12,192|2,022|56|
-|AES-GCM|13,324|646|56|
-|AES-XTS|11,676|2,010|56|
+|AES-ECB|12,060|2,022|56|
+|AES-CTR|12,080|2,022|56|
+|AES-CBC|12,220|2,022|56|
+|AES-CFB128|12,220|2,022|56|
+|AES-OFB|12,220|2,022|56|
+|AES-GCM|13,540|646|56|
+|AES-CCM|13,544|602|116|
+|AES-XTS|12,088|2,022|56|
 
 ## ACVP
 The APIs have been self-tested according to the NIST ACVP specification and generated test vectors. More information can be found [here](https://pages.nist.gov/ACVP/).
