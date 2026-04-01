@@ -5,6 +5,8 @@
 </picture>
 
 # Crypto Accelerator Module AES/HASH Concurrent Execution Example Application
+- Crypto Accelerator Module will be referred to as CAM throughout the remainder of the document. 
+
 ## Description
 This example application utilizes the Crypto Accelerator Module Library to perform concurrent AES and HASH operations to demonstrate context safety of the Crypto Accelerator Module Library.  AES and HASH operations using different sized input vectors are executed in parallel as multi-step (init/cipher/finalize) operations. As this application is not intended to demonstrate complete cryptographic compliance, a limited set of test vectors and algorithms are used.  The following AES and HASH algorithms are used:
 - AES-ECB
@@ -14,9 +16,9 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 - SHA-512
 
 ## Software Tool Versions Used
-- dsPIC33AK-MP_DEV_DFP v1.2.135
-- MPLAB® X IDE [v6.25](https://www.microchip.com/mplab-x-ide)
-- MPLAB® XC-DSC Compiler [v3.30](https://www.microchip.com/xcdsc)
+- dsPIC33AK-MP_DFP v1.3.185
+- MPLAB® X IDE [v6.30](https://www.microchip.com/mplab-x-ide)
+- MPLAB® XC-DSC Compiler [v3.31](https://www.microchip.com/xcdsc)
 
 ## Setting Up The Hardware
 - dsPIC33AK512MPS512 Curiosity GP DIM ([EV80L65A](https://www.microchip.com/en-us/development-tool/EV80L65A))
@@ -25,10 +27,10 @@ This example application utilizes the Crypto Accelerator Module Library to perfo
 1. Insert the dsPIC33AK512MPS512 DIM into the DIM J1 slot on the Curiosity Platform Development Board.
 2. Connect the board from the J24 USB-C PKoB4 (PICKit™ On-Board 4) to the computer.
 
-<img src="./images/dspic33a_dim_board.jpg" alt="Hardware Setup" width="750"/>
+<img src="../../images/hardware/dspic33ak512mps512_dim_board.jpg" alt="Hardware Setup" width="750"/>
 
-## Running the Application
-1. Within MPLAB® X IDE, open the `aes_hash.X` application project in the `aes_hash/` directory.
+## Running The Application
+1. Within MPLAB® X IDE, open the `dspic33ak512mps512-aes_hash.X` application project.
 2. Build and Program the application using MPLAB® X IDE.
 3. The printed information can be found on the serial COM port reading at a speed of 115200.
 4. The application first executes each algorithm independently to demonstrate basic function is successful, and then runs a concurrent execution test to demonstrate concurrent operations are also successful.

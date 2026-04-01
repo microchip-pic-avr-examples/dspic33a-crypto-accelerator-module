@@ -4,36 +4,48 @@
    "content":{
       "metaDataVersion":"1.3.0",
       "name":"com.microchip.mplabx.project.dspic33a-crypto-accelerator-module",
-      "version":"1.3.0",
+      "version":"1.4.0",
       "displayName":"dsPIC33A Crypto Accelerator Module Hardware Driver and Demos",
       "projectName":"dspic33a-crypto-accelerator-module",
       "shortDescription":"These MPLAB® X IDE demo projects showcase applications built with the Crypto Library which leverages the pre-compiled Crypto Accelerator Module (CAM) Hardware Driver to demonstrate various cryptographic algorithms supported by the CAM",
       "ide":{
          "name":"MPLABX",
-         "semverRange":">=6.25.0"
+         "semverRange":">=6.30.0"
       },
       "compiler":{
          "name":"XCDSC",
-         "semverRange":"^3.21"
+         "semverRange":"^3.31"
       },
       "dfp":{
          "name":"dsPIC33AK-MP_DFP",
-         "semverRange":">=1.0.81"
+         "semverRange":">=1.3.185"
       },
 	  "configurator": {
          "name": "MCC",
-         "semverRange": ">=5.5.2"
+         "semverRange": ">=5.6.4"
       },
-      "device":{
-         "metaDataVersion":"1.0.0",
-         "category":"com.microchip.portal.contentRef",
-         "content":{
+      "device":[
+         {
             "metaDataVersion":"1.0.0",
-            "category":"com.microchip.device",
-            "name":"dsPIC33AK512MPS512",
-            "versionRange":"*"
+            "category":"com.microchip.portal.contentRef",
+            "content":{
+               "metaDataVersion":"1.0.0",
+               "category":"com.microchip.device",
+               "name":"dsPIC33AK512MPS512",
+               "versionRange":"*"
+            }
+         },
+         {
+            "metaDataVersion":"1.0.0",
+            "category":"com.microchip.portal.contentRef",
+            "content":{
+               "metaDataVersion":"1.0.0",
+               "category":"com.microchip.device",
+               "name":"dsPIC33AK256MPS306",
+               "versionRange":"*"
+            }
          }
-      },
+      ],
       "keywords":[
          "CAM",
          "Cryptographic Accelerator Module",
